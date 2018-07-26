@@ -64,7 +64,7 @@ int KFAnim(vector<char*> inputfiles, char* outputfile, int interval){
 		myTime.SetSecondDouble(0.0);             // Starting time
 		myKeyIndex = myAnimCurve->KeyAdd(0); // Add the start key; returns 0
 
-		myAnimCurve->KeySet(0,           // Set the zero’th key
+		myAnimCurve->KeySet(0,           // Set the zeroâ€™th key
 			0,               // Starting time
 			0.0,                 // Starting X value
 			FbxAnimCurveDef::eInterpolationLinear);// Straight line between 2 points

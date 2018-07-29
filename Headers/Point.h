@@ -1,5 +1,5 @@
-class Point{
-	
+class Point
+{
 private:
 	float x;
 	float y;

@@ -152,7 +152,7 @@ void Surf::smoothSurf() {
 	_setPinPout(Pout, Pin);
 	_updateInputPoints(Pout, Pin);
 	runvorn(); //need to import vorn from utils.h
-			   //begin smooth part 2, adding new points between the cpoints
+	//begin smooth part 2, adding new points between the cpoints
 	_updatePoutPin(Pout, Pin);
 	_S2addPoints(Pout, Pin);
 	//begin smooth part 3, running the model, clearing it anf finished
@@ -175,7 +175,7 @@ Surf Surf::createSurf(vector<double[3]> inputpoints, vector<bool> mask, vector<f
 	return surf;
 }
 
-const Mesh Surf::to_mesh(string label) {
+const Mesh Surf::to_mesh(string label, float alpha) {
 	vector<Point> points;
 	size_t counter = 0;
 	map < std::shared_ptr<Point > , size_t > indexes;
@@ -192,15 +192,36 @@ const Mesh Surf::to_mesh(string label) {
 		}
 		faces.push_back(IndexedFace(facePoints, it->color));
 	}
-	return Mesh(points, faces, label);
+	return Mesh(points, faces, label, alpha);
 }
 
 void Surf::exportToObj(string output, string label, float alpha) {
-	Mesh mesh = to_mesh(label);
-	
+	Mesh mesh = to_mesh(label, alpha);
+	mesh.operator<< (output);
 }
 
+static bool comparePoint(double point1[3], double point2[3]) {
+	double max1 = max(max(abs(point1[0]), abs(point1[1])), max(abs(point1[1]), abs(point1[2])));
+	double max2 = max(max(abs(point2[0]), abs(point2[1])), max(abs(point2[1]), abs(point2[2])));
+	return (max(max1, max2));
+}
+bool(*compPoint)(double*, double*) = comparePoint;
 
+static vector<shared_ptr<Point>> convertfromvorn(vector<Vector3D> vornPoints) {
+	vector<shared_ptr<Point>> newVec;
+	for (vector<Vector3D>::iterator it = vornPoints.begin(); it != vornPoints.end(); it++) {;
+		newVec.push_back(shared_ptr<Point> (Point(it->x, it->y, it->z)));
+	}
+	return newVec;
+}
+
+void Surf::runVorn() {
+	//find the box_r
+	double * box_r = { *max_element(this->inputPoints.begin(), this->inputPoints.end(), compPoint) };
+	double box_R = max(max(abs(box_r[0]), abs(box_r[1])), max(abs(box_r[1]), abs(box_r[2])));
+	pair<vector<Vector3D>, vector<vector<size_t>>> vornOut = compute_vornoi(this->inputPoints, box_R * 3);
+	this->vecPoints = convertfromvorn(get<0>(vornOut));
+}
 //surf::surf(vector<double[3]> inputpoints, vector<polyface> vecfaces, vector<point> vecpoints, string label, float alpha) {
 //	this->inputpoints = inputpoints;
 //	this->vecfaces = vecfaces;

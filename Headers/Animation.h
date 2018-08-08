@@ -1,14 +1,13 @@
 #pragma once
+#include "Model.h"
+///need to get all the includes from the src file and put them here.
 
-class Animation{
-    
+class Animation
+{
 public:
-    Animation();
-    int importer(vector<char*> inputFiles);
-    int exportet(char* outputFile);
-    int keyFrameAnimation(vector<char*> inputFiles, char* outputFile);
-    int cameraRotation(double x, double y, double z, int deg);
-    ~Animation();
+	Animation();
+	~Animation();
+	void createKeyFrameAnimation(vector<Model> models, vector<FBXCamera>, int format); // need to check the line
 private:
-    FbxScene* scene;
-}
+
+};

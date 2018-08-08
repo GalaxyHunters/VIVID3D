@@ -4,6 +4,7 @@
 #include <map>
 #include "Mesh.h"
 #include "Surfface.h"
+#include "Utils.h"
 using namespace std;
 
 class Surf{
@@ -14,6 +15,7 @@ private:
 	vector<bool> mask; //for smooth
 	vector<float> quan; // for smooth
 
+	void runVorn();
 	void cleanFaces(vector<bool> mask); // clean the unneaded faces(by mask)
 	void cleanPoints(); // removes all the unused points
 
@@ -27,7 +29,7 @@ private:
 public:	
 	Surf createSurf(vector<double[3]> C_points, vector<bool> mask, vector<float> quan);
 	void smoothSurf();
-	const Mesh to_mesh(string label);
+	const Mesh to_mesh(string label, float alpha);
 	void exportToObj(string output, string label, float alpha);
 
 

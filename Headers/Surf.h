@@ -1,20 +1,32 @@
 #pragma once
-#include <vector>
+
+#ifndef SURF_H
+#define SURF_H
+
+
+#include "Mesh.h"
+#include "SurfFace.h"
+#include "Utils.h"
+
 #include <iostream>
 #include <map>
-#include "Mesh.h"
-#include "Surfface.h"
-#include "Utils.h"
 using namespace std;
 
 class Surf{
 private:
 	vector<std::shared_ptr<Point>> vecPoints;
 	vector<SurfFace> vecFaces;
-	vector<double[3]> inputPoints; // for smooth
+	vector<Point> inputPoints; // for smooth
 	vector<bool> mask; //for smooth
 	vector<float> quan; // for smooth
 
+	inline vector<Point> getInputPoints() { return this->inputPoints; }
+	inline vector<bool> getMask() { return this->mask; }
+	inline vector<float> getQuan() { return this->quan; }
+	inline void setInputPoint(vector<Point> inputPoints) { this->inputPoints = inputPoints; }
+	inline void setMask(vector<bool> mask) { this->mask = mask; }
+	inline void setQuan(vector<float> quan) { this->quan = quan; }
+ 
 	void runVorn();
 	void cleanFaces(vector<bool> mask); // clean the unneaded faces(by mask)
 	void cleanPoints(); // removes all the unused points
@@ -25,34 +37,15 @@ private:
 	void _makeMask(int PoutS, int PinS);
 	void _S2addPoints(vector<int> Pout, vector<int> Pin);
 
-	Surf();
+	
 public:	
-	Surf createSurf(vector<double[3]> C_points, vector<bool> mask, vector<float> quan);
+	Surf();
+	Surf createSurf(vector<Point> InputPoints, vector<bool> mask, vector<float> quan);
 	void smoothSurf();
 	const Mesh to_mesh(string label, float alpha);
 	void exportToObj(string output, string label, float alpha);
 
-
-//private:
-//	
-//	vector<double[3]> inputPoints; // the original points that we got as an input
-//	vector<bool> mask;
-//	vector<float> quan;
-//
-//	Surf(vector<double[3]> inputPoints, vector<PolyFace> vecFaces, vector<Point> vecPoints, string label, float alpha);
-//	void runVorn();
-//	void cleanFaces(vector<bool> mask);
-//	void _setPinPout(vector<int> Pout, vector<int> Pin);
-//	void _updateInputPoints(vector<int> Pout, vector<int> Pin); // update Cpoints in order to run vornoi again(smooth)
-//	void _makeMask(int PoutS, int PinS);
-//	void _S2addPoints(vector<int> Pout, vector<int> Pin);
-//public:
-//	Surf();
-//	Surf createSurf(vector<double[3]> inputPoints, vector<bool> mask, vector<float> quan, string label, float alpha);
-//	void smoothSurf(); //smooth the surf
-//	string getLabel();
-//	void setLabel(string label);
-//	float getAlpha();
-//	void setAlpha(float alpha);
 };
+
+#endif
 	

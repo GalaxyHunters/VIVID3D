@@ -1,15 +1,20 @@
+#pragma once
+
+#ifndef UTILS_H
+#define UTILS_H
+
 #include "Voronoi3D.hpp"
 using namespace std;
 
-static vector<Vector3D> convertToVorn(vector<double[3]> inputPoints) {
+static vector<Vector3D> convertToVorn(vector<Point> inputPoints) {
 	vector<Vector3D> newVec;
-	for (vector<double[3]>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
-		newVec.push_back(Vector3D(*it[0], *it[1], *it[2]));
+	for (vector<Point>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
+		newVec.push_back(Vector3D(it->getX(), it->getY(), it->getZ()));
 	}
 	return newVec;
 }
 
-static pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<double[3]> inputPoints, double box_R) {
+static pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<Point> inputPoints, double box_R) {
 	vector<Vector3D> vornPoints = convertToVorn(inputPoints);
 	Voronoi3D temp(Vector3D(box_R, box_R, box_R), Vector3D(-box_R, -box_R, -box_R));
 	temp.Build(vornPoints);
@@ -32,6 +37,8 @@ static pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<doub
 			}
 		}
 	}
-
-	return pair(vornPoints , faces);
+	pair<vector<Vector3D>, vector<vector<size_t>>> output(vornPoints, faces);
+	return output;
 }
+
+#endif

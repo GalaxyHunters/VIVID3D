@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef SURFFACE_H
+#define SURFFACE_H
+
 #include <vector>
 #include <iostream>
 #include "Point.h"
@@ -10,18 +14,21 @@ public:
 	vector<shared_ptr<Point>> points;
 	float color;
 	pair<size_t, size_t> C_points;
-	SurfFace(vector<shared_ptr<Point>> points, float color);
-	~SurfFace();
+	inline SurfFace(vector<shared_ptr<Point>> points, float color, pair<size_t, size_t> C_points);
+	inline ~SurfFace();
 
 private:
 
 };
 
-SurfFace::SurfFace(vector<shared_ptr<Point>> points, float color) {
+SurfFace::SurfFace(vector<shared_ptr<Point>> points, float color, pair<size_t, size_t> C_points) {
 	this->points = points;
 	this->color = color;
+	this->C_points = C_points;
 }
 
 SurfFace::~SurfFace()
 {
 }
+
+#endif

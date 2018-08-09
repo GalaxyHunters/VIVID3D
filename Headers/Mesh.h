@@ -1,7 +1,16 @@
-#include <vector>
-#include <iostream>
+#pragma once
+
+#ifndef MESH_H
+#define MESH_H
+
 #include "Point.h"
 #include "IndexedFace.h"
+
+#include <iostream>
+#include "boost/algorithm/string/predicate.hpp"
+#include "../../misc/int2str.hpp"
+#include "string"
+#include "fstream"
 
 using namespace std;
 
@@ -25,6 +34,9 @@ public:
 	void setLabel(string label);
 	void setAlpha(float alpha);
 };
+
+
+#endif
 //protected:
 //	vector<Face> vecFaces;
 //	vector<Point> vecPoints;

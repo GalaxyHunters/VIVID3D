@@ -1,6 +1,8 @@
 #pragma once
 #include "Mesh.h"
-#include <vector>
+
+#ifndef MODEL_H
+#define MODEL_H
 
 using namespace std;
 
@@ -16,3 +18,5 @@ public:
 private:
 	vector<Mesh> meshes;
 };
+
+#endif

@@ -1,8 +1,6 @@
-#include "fstream"
+#pragma once
+
 #include "Mesh.h"
-#include "string"
-#include "boost/algorithm/string/predicate.hpp"
-#include "../../misc/int2str.hpp"
 
 using namespace boost::algorithm;
 Mesh::~Mesh() {}
@@ -21,10 +19,10 @@ bool static compareColor(vector<float> color, vector<float> color2) {
 	return (color[0] == color2[0] && color[1] == color2[1] && color[2] == color2[2]);
 }
 
-bool compareQuan(IndexedFace face1, IndexedFace face2) {
+bool static compareQuan(IndexedFace face1, IndexedFace face2) {
 	return (face1.getColor() > face2.getColor());
 }
-bool(*compFace)(IndexedFace, IndexedFace) = compareQuan;
+static bool(*compFace)(IndexedFace, IndexedFace) = compareQuan;
 
 void Mesh::operator<<(string output) { //TODO get the color sorted(a way to convert quan to color)
 	if (ends_with(output, ".obj")) { //check if hte output file ends with .obj, and delete it if it does

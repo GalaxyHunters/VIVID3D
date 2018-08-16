@@ -5,6 +5,8 @@
 using namespace boost::algorithm;
 Mesh::~Mesh() {}
 
+Mesh::Mesh() {}
+
 Mesh::Mesh(vector<Point> points, vector<IndexedFace> faces, string label, float alpha) : points(points), faces(faces), label(label), alpha(alpha) {}
 
 vector<float> static quan2color(float quan) {
@@ -93,7 +95,7 @@ void Mesh::operator<<(string output) { //TODO get the color sorted(a way to conv
 	m.close();
 }
 
-void Mesh::simplify(size_t triangles, size_t vertices, float error) {
+void Mesh::simplify(float verticlePercent, float error) {
 	//TODO sort out the reduse
 
 }

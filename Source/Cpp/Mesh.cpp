@@ -9,9 +9,9 @@ Mesh::Mesh(vector<Point> points, vector<IndexedFace> faces, string label, float 
 
 vector<float> static quan2color(float quan) {
 	vector<float> output;
-	output.push_back(0);
-	output.push_back(0);
-	output.push_back(0);
+	output.push_back(0.8);
+	output.push_back(0.5);
+	output.push_back(0.8);
 	return output;
 }
 
@@ -25,24 +25,24 @@ bool static compareQuan(IndexedFace face1, IndexedFace face2) {
 static bool(*compFace)(IndexedFace, IndexedFace) = compareQuan;
 
 void Mesh::operator<<(string output) { //TODO get the color sorted(a way to convert quan to color)
-	if (ends_with(output, ".obj")) { //check if hte output file ends with .obj, and delete it if it does
+	if (ends_with(output, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		output.erase(output.length() - 4, 4);
 	}
 	ofstream o; // the obj file
 	o.open(output + ".obj");
 	ofstream m; //the mtl file
 	m.open(output + ".mtl");
-	string mtl = output;
-	while (mtl.find('/') != string::npos) {
-		mtl = mtl.substr(mtl.find('/'), string::npos);
+	string mtl = output + ".mtl";
+	while (mtl.find('\\') != string::npos) {
+		mtl = mtl.substr(mtl.find('\\')+1, string::npos);
 	}
 	//write obj file starter
-	o << "# This 3D code was produced by Vivid /n/n/n";
-	o << "mtllib" + mtl + "/n";
-	o << "o" + label + "/n";
+	o << "# This 3D code was produced by Vivid \n\n\n";
+	o << "mtllib " + mtl + "\n";
+	o << "o " + label + "\n";
 	//write points to obj file
 	for (vector<Point>::iterator it = this->points.begin(); it != this->points.end(); it++) {
-		o << "v " + int2str(it->getX()) + " " + int2str(it->getY()) + " " + int2str(it->getZ()) + "/n";
+		o << "v " + to_string(it->getX()) + " " + to_string(it->getY()) + " " + to_string(it->getZ()) + "\n";
 	}
 	//sort vecFaces by color
 	sort(this->faces.begin(), this->faces.end(), compFace); // NlogN
@@ -58,14 +58,15 @@ void Mesh::operator<<(string output) { //TODO get the color sorted(a way to conv
 		"d " + to_string(this->alpha) + "\n" + \
 		"illum 0\n" + \
 		"em 0.000000\n\n\n";
-	o << "usemtl surf_" + int2str(counter) + "/n";
+	o << "usemtl surf_" + int2str(counter) + "\n";
 	for (vector<IndexedFace>::iterator it = this->faces.begin(); it != this->faces.end(); it++) {
 		if (compareColor(color, quan2color(it->getColor()))) { //if true write the face to the obj file
 			o << "f ";
-			for (vector<size_t>::iterator p = it->getPoints().begin(); p != it->getPoints().end(); p++) {
-				o << int2str(*p) + " ";
+			vector<size_t> facePoints = it->getPoints();
+			for (vector<size_t>::iterator point = facePoints.begin(); point != facePoints.end(); point++) {
+				o << int2str(*point + 1) + " ";
 			}
-			o << "/n";
+			o << "\n";
 		}
 		else // we reached a new color, and we need to write it in mtl before using it
 		{
@@ -83,8 +84,9 @@ void Mesh::operator<<(string output) { //TODO get the color sorted(a way to conv
 			o << "usemtl surf_" + int2str(counter) + "/n";
 			// now we can write the face in the obj file
 			o << "f ";
-			for (vector<size_t>::iterator p = it->getPoints().begin(); p != it->getPoints().end(); p++) {
-				o << int2str(*p) + " ";
+			vector<size_t> facePoints = it->getPoints();
+			for (vector<size_t>::iterator point = facePoints.begin(); point != facePoints.end(); point++) {
+				o << int2str(*point + 1) + " ";
 			}
 			o << "/n";
 		}

@@ -32,15 +32,14 @@ private:
 	void cleanPoints(); // removes all the unused points
 
 	//smooth functions:
-	void _setPinPout(vector<int> Pout, vector<int> Pin);
-	void _updateInputPoints(vector<int> Pout, vector<int> Pin);
-	void _makeMask(int PoutS, int PinS);
-	void _S2addPoints(vector<int> Pout, vector<int> Pin);
+	pair<vector<size_t>, vector<size_t>> _setPinPout();
+	void _updateInputPoints(vector<size_t> Pout, vector<size_t> Pin);
+	void _makeMask(size_t PoutS, size_t PinS);
+	pair<vector<size_t>, vector<size_t>> _S2addPoints(vector<size_t> Pout, vector<size_t> Pin);
 
-	
-public:	
 	Surf();
-	Surf createSurf(vector<Point> InputPoints, vector<bool> mask, vector<float> quan);
+public:	
+	static Surf createSurf(vector<Point> InputPoints, vector<bool> mask, vector<float> quan);
 	void smoothSurf();
 	const Mesh to_mesh(string label, float alpha);
 	void exportToObj(string output, string label, float alpha);

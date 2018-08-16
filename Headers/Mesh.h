@@ -37,6 +37,8 @@ public:
 
 
 #endif
+
+
 //protected:
 //	vector<Face> vecFaces;
 //	vector<Point> vecPoints;

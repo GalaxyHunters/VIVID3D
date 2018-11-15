@@ -1,6 +1,6 @@
 #pragma once
 
-#include "surf.h"
+#include "Surf.h"
 
 
 using namespace std;

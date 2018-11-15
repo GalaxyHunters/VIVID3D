@@ -56,14 +56,5 @@ extern "C"
 	void Surf_exportToObj(Surf surf, string output, string label, float alpha) { surf.exportToObj(output, label, alpha); }
 }
 
-//BOOST_PYTHON_MODULE(surf)
-//{
-//	class_<Surf>("Surf")
-//		.def("createSurf", &Surf::createSurf)
-//		.def("smoothSurf", &Surf::smoothSurf)
-//		.def("to_mesh", &Surf::to_mesh)
-//		.def("exportToObj", &Surf::exportToObj)
-//		;
-//}
 #endif
 	

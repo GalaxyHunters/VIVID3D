@@ -28,14 +28,5 @@ extern "C"
 	void Model_addMesh(Model model, Mesh mesh) { model.addMesh(mesh); }
 }
 
-//BOOST_PYTHON_MODULE(model)
-//{
-//	class_<Model>("Model", init<vector<Mesh>>())
-//		.def("<<", &Model::operator<<)
-//		.def("save", &Model::save)
-//		.def("load", &Model::load)
-//		.def("addMesh", &Model::addMesh)
-//		;
-//}
 
 #endif

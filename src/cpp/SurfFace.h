@@ -3,6 +3,7 @@
 #ifndef SURFFACE_H
 #define SURFFACE_H
 
+#include <memory>
 #include <vector>
 #include <iostream>
 #include "Point.h"

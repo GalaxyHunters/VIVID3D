@@ -18,8 +18,7 @@ int main(){
 		}
 	}
 	std::cout << "starting input" << endl;
-	Surf surf;
-	surf = surf.createSurf(points, mask, quan);
+	Surf surf = Surf::createSurf(points, mask, quan);
 	std::cout << "starting output";
 	surf.exportToObj("C:\\Users\\Tomer\\vivid", "vivid_3d_obj", 1.0);
 }

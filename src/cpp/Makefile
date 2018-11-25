@@ -19,29 +19,29 @@ Surf.so: Surf.cpp
 
 
 
-vivid: set_libs_env Point.h IndexedFace.o SurfFace.o Utils.o Surf.o Mesh.o Model.o
-	g++ -Wall Main.cpp Model.o Mesh.o Surf.o IndexedFace.o SurfFace.o Point.o Utils.o -o vivid
+vivid: set_libs_env Point.o IndexedFace.o SurfFace.o Utils.o Surf.o Mesh.o Model.o
+	g++ Main.cpp Model.o Mesh.o Surf.o IndexedFace.o SurfFace.o Point.o Utils.o $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o vivid
 
 Model.o: Model.cpp Model.h
-	g++ Model.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Model.o 
+	g++ Model.cpp $(INCLUDEPATH) $(CPPFLAGS) -o Model.o 
     
 Mesh.o: Mesh.cpp Mesh.h
-	g++ Mesh.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Mesh.o 
+	g++ Mesh.cpp $(INCLUDEPATH) $(CPPFLAGS) -o Mesh.o 
     
 Surf.o: Surf.cpp Surf.h
-	g++ Surf.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Surf.o 
+	g++ Surf.cpp $(INCLUDEPATH) $(CPPFLAGS) -o Surf.o 
     
 IndexedFace.o: IndexedFace.h
-	g++ IndexedFace.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o IndexedFace.o 
+	g++ IndexedFace.h $(INCLUDEPATH) $(CPPFLAGS) -o IndexedFace.o 
     
 SurfFace.o: SurfFace.h
-	g++ SurfFace.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o SurfFace.o 
+	g++ SurfFace.h $(INCLUDEPATH) $(CPPFLAGS) -o SurfFace.o 
     
 Point.o: Point.h
-	g++ Point.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Point.o
+	g++ Point.h $(INCLUDEPATH) $(CPPFLAGS) -o Point.o
     
 Utils.o: Utils.h
-	g++ Utils.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Utils.o 
+	g++ Utils.h $(INCLUDEPATH) $(CPPFLAGS) -o Utils.o 
     
     
 set_libs_env: ../../external_libraries/include/H5Cpp.h ../../external_libraries/boost_dump/boost_1_66_0/boost/container/static_vector.hpp

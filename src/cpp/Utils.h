@@ -3,6 +3,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include "Point.h"
 #include "Voronoi3D.hpp"
 using namespace std;
 

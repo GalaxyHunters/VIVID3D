@@ -5,7 +5,7 @@
 #include "Voronoi3D.hpp"
 using namespace std;
 
-static vector<Vector3D> convertToVorn(vector<Point> inputPoints) {
+inline vector<Vector3D> convertToVorn(vector<Point> inputPoints) {
 	vector<Vector3D> newVec;
 	for (vector<Point>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
 		newVec.push_back(Vector3D(it->getX(), it->getY(), it->getZ()));
@@ -13,7 +13,7 @@ static vector<Vector3D> convertToVorn(vector<Point> inputPoints) {
 	return newVec;
 }
 
-static pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<Point> inputPoints, double box_R) {
+inline pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<Point> inputPoints, double box_R) {
 	vector<Vector3D> vornPoints = convertToVorn(inputPoints);
 	Voronoi3D temp(Vector3D(box_R, box_R, box_R), Vector3D(-box_R, -box_R, -box_R));
 	temp.Build(vornPoints);

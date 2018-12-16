@@ -11,7 +11,7 @@ int main(){
 				points.push_back(Point(i, j, z));
 				quan.push_back(0);
 				mask.push_back(false);
-				if (i == j == z == 0) { 
+				if (i == j && j == z && z == 0) { 
 					mask.back() = true; 
 				}
 			}
@@ -20,5 +20,5 @@ int main(){
 	std::cout << "starting input" << endl;
 	Surf surf = Surf::createSurf(points, mask, quan);
 	std::cout << "starting output";
-	surf.exportToObj("C:\\Users\\Tomer\\vivid", "vivid_3d_obj", 1.0);
+	surf.exportToObj("test_models/", "vivid_3d_obj", 1.0);
 }

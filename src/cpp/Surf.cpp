@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Surf.h"
 
 
@@ -38,10 +36,10 @@ void Surf::cleanPoints() {
 //smooth functions:
 
 void _updatePoutPin(vector<int> Pout, vector<int> Pin) {
-	for (int i = 0; i < Pout.size(); i++) {
+	for (int i = 0; (unsigned)i < Pout.size(); i++) {
 		Pout[i] = i;
 	}
-	for (int i = 0; i < Pin.size(); i++) {
+	for (int i = 0; (unsigned)i < Pin.size(); i++) {
 		Pin[i] = i + Pout.size();
 	}
 }
@@ -126,7 +124,7 @@ void Surf::_S2addPoints(vector<int> Pout, vector<int> Pin) {
 	for (vector<SurfFace>::iterator it = this->vecFaces.begin(); it != this->vecFaces.end(); it++) {
 		cpoint1 = get<0>(it->C_points);
 		cpoint2 = get<1>(it->C_points);
-		if (sizePin > cpoint1 > sizePout && sizePin > cpoint2 > sizePout) { //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+		if ((sizePin > cpoint1 && cpoint1 > sizePout) && (sizePin > cpoint2 && cpoint2 > sizePout)) { //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
 			Pin.push_back(newIndex);
 			x = (this->inputPoints[cpoint1].getX() * 2 + this->inputPoints[cpoint2].getX()) / 3.0;
 			y = (this->inputPoints[cpoint1].getY() * 2 + this->inputPoints[cpoint2].getY()) / 3.0;

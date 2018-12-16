@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef INDEXEDFACE_H
 #define INDEXEDFACE_H
 

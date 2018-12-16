@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef SURF_H
 #define SURF_H
 
@@ -50,10 +48,10 @@ public:
 
 extern "C"
 {
-	Surf Surf_new(vector<Point> InputPoints, vector<bool> mask, vector<float> quan) { return Surf::createSurf(InputPoints, mask, quan); }
-	void Surf_smooth(Surf surf) { surf.smoothSurf(); }
-	const Mesh Surf_to_mesh(Surf surf, string label, float alpha) { surf.to_mesh(label, alpha); }
-	void Surf_exportToObj(Surf surf, string output, string label, float alpha) { surf.exportToObj(output, label, alpha); }
+	inline Surf Surf_new(vector<Point> InputPoints, vector<bool> mask, vector<float> quan) { return Surf::createSurf(InputPoints, mask, quan); }
+	inline void Surf_smooth(Surf surf) { surf.smoothSurf(); }
+	inline const Mesh Surf_to_mesh(Surf surf, string label, float alpha) { return surf.to_mesh(label, alpha); }
+	inline void Surf_exportToObj(Surf surf, string output, string label, float alpha) { surf.exportToObj(output, label, alpha); }
 }
 
 #endif

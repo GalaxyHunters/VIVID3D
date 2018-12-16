@@ -1,8 +1,8 @@
-#pragma once
-#include "Mesh.h"
 
 #ifndef MODEL_H
 #define MODEL_H
+
+#include "Mesh.h"
 
 using namespace std;
 
@@ -21,11 +21,11 @@ private:
 
 extern "C"
 {
-	Model Model_new(vector<Mesh> meshes) { return Model(meshes); }
-	void Model_export(Model model, string output) { model << output; }
-	void Model_save(Model model, string outputFile) { model.save(outputFile); }
-	Mesh Model_load(Model model, string inputFile) { return model.load(inputFile); }
-	void Model_addMesh(Model model, Mesh mesh) { model.addMesh(mesh); }
+	inline Model Model_new(vector<Mesh> meshes) { return Model(meshes); }
+	inline void Model_export(Model model, string output) { model << output; }
+	inline void Model_save(Model model, string outputFile) { model.save(outputFile); }
+	inline Mesh Model_load(Model model, string inputFile) { return model.load(inputFile); }
+	inline void Model_addMesh(Model model, Mesh mesh) { model.addMesh(mesh); }
 }
 
 

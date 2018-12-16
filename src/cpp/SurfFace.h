@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef SURFFACE_H
 #define SURFFACE_H
 

@@ -1,19 +1,18 @@
 CXX = g++ -fPIC
 CCX = g++
-CPPFLAGS = -Wall -std=c++11
+CPPFLAGS = -Wall -std=c++11 -c
 CFLAGS = -Wall -std=c++11 -shared
-LIBLINKEGE = ../../external_libraries/huji_rich/librich.a
+LIBLINKEGE = ../../external_libraries/huji_rich/librich.a #need to put the directory for include for elad code and boost
 INCLUDEPATH = -I../../external_libraries/huji_rich/source/3D/GeometryCommon -I../../external_libraries/boost_dump/boost_1_66_0 -I../../external_libraries/include
 
 
-all: run_vivid
+all: vivid python
 
-
-vivid_lib: set_libs_env Mesh.so Model.so Surf.so
+python: set_libs_env Mesh.so Model.so Surf.so
 
 Mesh.so: Mesh.cpp
 	$(CXX) Mesh.cpp -L../../external_libraries/huji_rich -llibrich.a $(INCLUDEPATH) $(CFLAGS) -o Mesh.so
-
+    
 Model.so: Model.cpp
 	$(CXX) Model.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CFLAGS) -o Model.so
 
@@ -22,20 +21,31 @@ Surf.so: Surf.cpp
 
 
 
-run_vivid: set_libs_env Surf.o Mesh.o Model.o
-	$(CCX) Main.cpp Model.o Mesh.o Surf.o $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o vivid
+vivid: set_libs_env Point.o IndexedFace.o SurfFace.o Utils.o Surf.o Mesh.o Model.o
+	g++ Main.cpp Model.o Mesh.o Surf.o IndexedFace.o SurfFace.o Point.o Utils.o $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o vivid
 
 Model.o: Model.cpp Model.h
-	$(CCX) Model.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Model.o
-
-Mesh.o: Mesh.cpp Mesh.h
-	$(CCX) Mesh.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Mesh.o
-
+	$(CcX) Model.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Model.o 
+    
+Mesh.o: Me.cpp Mesh.h
+	$(CXX) Mesh.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Mesh.o 
+    
 Surf.o: Surf.cpp Surf.h
-	$(CCX) Surf.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Surf.o
-
-
-
+	$(CXX) Surf.cpp $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Surf.o 
+    
+IndexedFace.o: IndexedFace.h
+	$(CXX) IndexedFace.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o IndexedFace.o 
+    
+SurfFace.o: SurfFace.h
+	$(CXX) SurfFace.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o SurfFace.o 
+    
+Point.o: Point.h
+	$(CXX) Point.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Point.o
+    
+Utils.o: Utils.h
+	$(CXX) Utils.h $(LIBLINKEGE) $(INCLUDEPATH) $(CPPFLAGS) -o Utils.o 
+    
+    
 set_libs_env: ../../external_libraries/include/H5Cpp.h ../../external_libraries/boost_dump/boost_1_66_0/boost/container/static_vector.hpp
 
 ../../external_libraries/include/H5Cpp.h: ../../external_libraries/hdf5_dump/hdf5-1.10.3/c++/src/H5Cpp.h

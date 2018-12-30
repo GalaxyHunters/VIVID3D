@@ -28,10 +28,10 @@ run_vivid: set_libs_env Surf.o Mesh.o Model.o
 Model.o: Model.cpp Model.h
 	$(CCX) Model.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Model.o
 
-Mesh.o: Mesh.cpp Mesh.h
+Mesh.o: Mesh.cpp Mesh.h Point.h IndexedFace.h
 	$(CCX) Mesh.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Mesh.o
 
-Surf.o: Surf.cpp Surf.h
+Surf.o: Surf.cpp Surf.h Point.h SurfFace.h Utils.h
 	$(CCX) Surf.cpp $(INCLUDEPATH) $(CPPFLAGS) -c -o Surf.o
 
 

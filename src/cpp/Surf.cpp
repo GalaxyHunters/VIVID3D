@@ -246,6 +246,7 @@ void Surf::runVorn() {
 	double box_R = max(max(abs(box_r.getX()), abs(box_r.getY())), max(abs(box_r.getY()), abs(box_r.getZ())));
 	cout << "start vorn" << endl;
 	pair<vector<Vector3D>, vector<vector<size_t>>> vornOut = compute_vornoi(this->inputPoints, box_R * 3);
+	cout << "vorn done" << endl;
 	//set the points
 	this->vecPoints = convertfromvorn(get<0>(vornOut));
 	//set the faces

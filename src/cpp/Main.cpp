@@ -1,8 +1,8 @@
 #include "Surf.h" // imports Vornoi3D.hpp
 
 
-#define BOX_SIZE 20 
-#define HEIGHT 10
+#define BOX_SIZE 6
+#define HEIGHT 3
 
 int main(){
 	std::cout << "starting program" << endl;
@@ -14,9 +14,9 @@ int main(){
 
 	int a(0);
 
-	for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
-		for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
-			for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
+	for (double i = -BOX_SIZE; i <= BOX_SIZE; i += 2) {
+		for (double j = -BOX_SIZE; j <= BOX_SIZE; j += 2) {
+			for (double z = -BOX_SIZE; z <= BOX_SIZE; z += 2) {
 				points.push_back(Point(i, j, z));
 				if (z >= 0 && HEIGHT >= z) {
 					a = HEIGHT - z;

@@ -1,8 +1,8 @@
 #include "Surf.h" // imports Vornoi3D.hpp
 
 
-#define BOX_SIZE 6
-#define HEIGHT 3
+#define BOX_SIZE 4
+#define HEIGHT 2
 
 int main(){
 	std::cout << "starting program" << endl;

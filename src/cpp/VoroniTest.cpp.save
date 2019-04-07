@@ -1,0 +1,10 @@
+#include "Voronoi3D.hpp"
+
+using namespace std;
+
+int main() {
+#define BOX_SIZE 4
+#define HEIGHT 2
+
+
+}

@@ -1,5 +1,5 @@
-CXX = g++ -fPIC
-CCX = g++
+CXX = g++ -g -fPIC
+CCX = g++ -g
 CPPFLAGS = -Wall -std=c++11
 CFLAGS = -Wall -std=c++11 -shared
 LIBLINKEGE = ../../external_libraries/huji_rich/librich.a

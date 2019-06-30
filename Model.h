@@ -5,27 +5,30 @@
 
 using namespace std;
 
-class Model
+class CModel
 {
 public:
-	Model();
-	Model(vector<Mesh> meshes);
-	~Model();
-	void operator<<(string output);
-	void save(string outputFile);
-	static Mesh load(string inputFile);
-	void addMesh(Mesh mesh);
+	CModel();
+	CModel(vector<CMesh> aMeshes);
+	~CModel();
+	void operator<<(string aOutputFile);
+	static CMesh load(string inputFile); // TODO add a read obj func
+	void AddMesh(CMesh mesh);
 private:
-	vector<Mesh> meshes;
+	vector<CMesh> mMeshes;
+
+	//output functions
+	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * aMesh, size_t * mtl_counter, size_t aPointsCounter);
+	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, float aAlpha);
+	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
 };
 
 extern "C"
 {
-	inline Model Model_new(vector<Mesh> meshes) { return Model(meshes); }
-	inline void Model_export(Model model, string output) { model << output; }
-	inline void Model_save(Model model, string outputFile) { model.save(outputFile); }
-	inline Mesh Model_load(Model model, string inputFile) { return model.load(inputFile); }
-	inline void Model_addMesh(Model model, Mesh mesh) { model.addMesh(mesh); }
+	inline CModel Model_new(vector<CMesh> meshes) { return CModel(meshes); }
+	inline void Model_export(CModel model, string output) { model << output; }
+	inline CMesh Model_load(CModel model, string inputFile) { return model.load(inputFile); }
+	inline void Model_addMesh(CModel model, CMesh mesh) { model.AddMesh(mesh); }
 }
 
 #endif

@@ -8,7 +8,7 @@
 using namespace std;
 int main() {
 	std::cout << "starting program" << endl;
-	vector<Point> points;
+	vector<CPoint> points;
 	vector<bool> mask;
 	vector<float> quan;
 	float Vmin, Vmax;
@@ -19,7 +19,7 @@ int main() {
 	for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
 		for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
 			for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-				points.push_back(Point(i, j, z));
+				points.push_back(CPoint(i, j, z));
 				if (z >= 0 && HEIGHT >= z) {
 					a = HEIGHT - z;
 				}
@@ -61,10 +61,10 @@ int main() {
 	//Vmin = *min_element(quan.begin(), quan.end());
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-	Surf surf = surf.createSurf(points, mask, quan, Vmin, Vmax);
-	surf.smoothSurf();
-	Mesh mesh = surf.to_mesh("vivid_3d_obj", 1.0);
-	mesh.decimation(0.5, 1);
+	CSurf surf = surf.CreateSurf(points, mask, quan, Vmin, Vmax);
+	surf.SmoothSurf();
+	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+	//mesh.decimation(0.5, 1);
 	mesh << ("D:\\alpa\\models\\testCode_decimation_pyramid");
 
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------

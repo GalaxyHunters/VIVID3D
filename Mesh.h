@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "IndexedFace.h"
 #include "Utils.h"
+#include "ColorMap.h"
 
 #include <iostream>
 #include "boost/algorithm/string/predicate.hpp"
@@ -13,40 +14,45 @@
 
 using namespace std;
 
-class Mesh {
+class CMesh {
 
 private:
-	float alpha;
-	string label;
-	vector<Point> points;
-	vector<IndexedFace> faces;
+	float mAlpha;
+	string mLabel;
+	vector<CPoint> mPoints;
+	vector<CIndexedFace> mFaces;
 
-	void triangulation();
+	//output functions
+	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter);
+	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, float aAlpha);
+	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
+
+	void Triangulation();
 
 public:
-	Mesh() {};
-	Mesh(vector<Point> points, vector<IndexedFace> faces, string label, float alpha);
-	~Mesh();
-	void decimation(float verticlePercent, float error);
-	void operator<<(string output);
-	string getLabel();
-	float getAlpha();
-	vector<Point> getPoints();
-	vector<IndexedFace> getFaces();
-	void setLabel(string label);
-	void setAlpha(float alpha);
+	CMesh() {};
+	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, float aAlpha);
+	~CMesh();
+	void Decimation(float aVerticlePercent, float aError);
+	void operator<<(string aOutputFile);
+	string GetLabel();
+	float GetAlpha();
+	vector<CPoint> GetPoints();
+	vector<CIndexedFace> GetFaces();
+	void SetLabel(string aLabel);
+	void SetAlpha(float aAlpha);
 };
 
 extern "C"
 {
 	//Mesh Mesh_new() { return Mesh(); }
-	inline Mesh Mesh_new(vector<Point> points, vector<IndexedFace> faces, string label, float alpha) { return Mesh(points, faces, label, alpha); }
-	inline void Mesh_decimation(Mesh mesh, float verticlePercent, float error) { mesh.decimation(verticlePercent, error); }
-	inline void Mesh_export(Mesh mesh, string output) { mesh << output; }
-	inline string Mesh_getLabel(Mesh mesh) { return mesh.getLabel(); }
-	inline float Mesh_getAlpha(Mesh mesh) { return mesh.getAlpha(); }
-	inline void Mesh_setLabel(Mesh mesh, string label) { mesh.setLabel(label); }
-	inline void Mesh_setAlpha(Mesh mesh, float alpha) { mesh.setAlpha(alpha); }
+	inline CMesh Mesh_new(vector<CPoint> points, vector<CIndexedFace> faces, string label, float alpha) { return CMesh(points, faces, label, alpha); }
+	inline void Mesh_decimation(CMesh mesh, float verticlePercent, float error) { mesh.Decimation(verticlePercent, error); }
+	inline void Mesh_export(CMesh mesh, string output) { mesh << output; }
+	inline string Mesh_getLabel(CMesh mesh) { return mesh.GetLabel(); }
+	inline float Mesh_getAlpha(CMesh mesh) { return mesh.GetAlpha(); }
+	inline void Mesh_setLabel(CMesh mesh, string label) { mesh.SetLabel(label); }
+	inline void Mesh_setAlpha(CMesh mesh, float alpha) { mesh.SetAlpha(alpha); }
 }
 
 #endif

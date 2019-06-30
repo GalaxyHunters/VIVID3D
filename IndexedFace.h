@@ -7,42 +7,42 @@
 
 using namespace std;
 
-class IndexedFace
+class CIndexedFace
 {
 public:
-	inline IndexedFace();
-	inline IndexedFace(vector<size_t> points, float color);
-	inline IndexedFace(size_t point1, size_t point2, size_t point3, float color); // used after triangulation and decimation
-	inline ~IndexedFace();
-	inline vector<size_t> getPoints() { return this->_points; }
-	inline size_t operator[](size_t i) {return this->_points[i];}
-	inline float getColor() { return this->_color; }
-	inline void setColor(float color) { this->_color = color; }
-	inline void setPoints(vector<size_t> points) { this->_points = points; }
+	inline CIndexedFace();
+	inline CIndexedFace(vector<size_t> aPoints, float aColor);
+	inline CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, float aColor); // used after triangulation and decimation
+	inline ~CIndexedFace();
+	inline vector<size_t> GetPoints() { return this->mPoints; }
+	inline size_t operator[](size_t I) {return this->mPoints[I];}
+	inline float GetColor() { return this->mColor; }
+	inline void SetColor(float aColor) { this->mColor = aColor; }
+	inline void SetPoints(vector<size_t> aPoints) { this->mPoints = aPoints; }
 
 private:
-	vector<size_t> _points;
-	float _color;
+	vector<size_t> mPoints;
+	float mColor;
 };
 
-IndexedFace::IndexedFace() : _color(0) {}
+CIndexedFace::CIndexedFace() : mColor(0) {}
 
-IndexedFace::IndexedFace(vector<size_t> points, float color) : _color(color)
+CIndexedFace::CIndexedFace(vector<size_t> aPoints, float aColor) : mColor(aColor)
 {
-	for (vector<size_t>::iterator it = points.begin(); it != points.end(); it++)
+	for (vector<size_t>::iterator it = aPoints.begin(); it != aPoints.end(); it++)
 	{
-		this->_points.push_back(*it);
+		this->mPoints.push_back(*it);
 	}
 }
 
-IndexedFace::IndexedFace(size_t point1, size_t point2, size_t point3, float color) {
-	_points.clear();
-	_points.push_back(point1);
-	_points.push_back(point2);
-	_points.push_back(point3);
-	_color = color;
+CIndexedFace::CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, float aColor) {
+	mPoints.clear();
+	mPoints.push_back(aPoint1);
+	mPoints.push_back(aPoint2);
+	mPoints.push_back(aPoint3);
+	mColor = aColor;
 }
-IndexedFace::~IndexedFace()
+CIndexedFace::~CIndexedFace()
 {
 }
 #endif

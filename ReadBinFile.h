@@ -12,7 +12,7 @@ using namespace std;
 
 class ModelData {
 public:
-	vector<Point> points;
+	vector<CPoint> points;
 	vector<bool> mask;
 	vector<float> quan;
 	inline ModelData() {}
@@ -20,7 +20,7 @@ public:
 
 class ModelDataMultipleMasks {
 public:
-	vector<Point> points;
+	vector<CPoint> points;
 	vector<vector<bool>> mask;
 	vector<float> quan;
 	inline ModelDataMultipleMasks() {}
@@ -40,7 +40,7 @@ inline static ModelData ReadBin(string file_loc) {
 		binFile.read((char*)&x, 4);
 		binFile.read((char*)&y, 4);
 		binFile.read((char*)&z, 4);
-		output.points.push_back(Point(x, y, z));
+		output.points.push_back(CPoint(x, y, z));
 	}
 	for (int i = 0; i < length; i++) { //read the mask values
 		binFile.read((char*)&temp_mask, 1);
@@ -70,7 +70,7 @@ inline static ModelDataMultipleMasks ReadBinMultipleMasks(string file_loc) {
 		binFile.read((char*)&x, 4);
 		binFile.read((char*)&y, 4);
 		binFile.read((char*)&z, 4);
-		output.points.push_back(Point(x, y, z));
+		output.points.push_back(CPoint(x, y, z));
 	}
 	for (int i = 0; i < length; i++) { //read the quan values
 		binFile.read((char*)&temp_quan, 4);

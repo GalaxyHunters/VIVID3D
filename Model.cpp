@@ -1,105 +1,112 @@
 #include "Model.h"
 
+
 using namespace boost::algorithm;
 
-Model::Model() {}
+CModel::CModel() {}
 
-Model::Model(vector<Mesh> meshes) {
-	this->meshes = meshes;
+CModel::CModel(vector<CMesh> aMeshes) {
+	this->mMeshes = aMeshes;
 }
 
-vector<float> static quan2color(float quan) {
-	vector<float> output;
-	output.push_back(0);
-	output.push_back(0);
-	output.push_back(0);
-	return output;
+Color_t static Quan2Color(float aQuan) {
+	ColorMap output;
+	return output.GetColor(aQuan);
 }
 
-bool static compareColor(vector<float> color, vector<float> color2) {
-	return (color[0] == color2[0] && color[1] == color2[1] && color[2] == color2[2]);
+bool static CompareColor(Color_t aColor1, Color_t aColor2) {
+	return (aColor1.R == aColor2.R && aColor1.G == aColor2.G && aColor1.B == aColor2.B);
 }
 
-bool static compareQuan(IndexedFace face1, IndexedFace face2) {
-	return (face1.getColor() > face2.getColor());
+bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
+	return (aFace1.GetColor() > aFace2.GetColor());
 }
-static bool(*compFace)(IndexedFace, IndexedFace) = compareQuan;
+static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
-void Model::operator<<(string output) {
-	if (ends_with(output, ".obj")) { //check if hte output file ends with .obj, and delete it if it does
-		output.erase(output.length() - 4, 4);
+
+void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, Color_t aColor, float aAlpha)
+{
+	aMTLFile << "newmtl surf_" + int2str(*apMtlCounter) + "\n" + \
+		"Ns 96.078\n" + \
+		"Ka 1.000 1.000 1.000 \n" + \
+		"Kd " + to_string(aColor.R) + " " + to_string(aColor.G) + " " + to_string(aColor.B) + "\n" + \
+		"Ks 0.000 0.000 0.000\n" + \
+		"Ni 1.000000\n" + \
+		"d " + to_string(aAlpha) + "\n" + \
+		"illum 0\n" + \
+		"em 0.000000\n\n\n";
+	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "/n";
+}
+
+void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace) 
+{
+	aOBJFile << "f ";
+	vector<size_t> face_points = aFace.GetPoints();
+	for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
+	{
+		aOBJFile << int2str(*ItPoint + 1) + " ";
 	}
-	ofstream o; // the obj file
-	o.open(output + ".obj");
-	ofstream m; //the mtl file
-	m.open(output + ".mtl");
-	string mtl = output;
+	aOBJFile << "\n";
+}
+
+void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter) 
+{
+	aOBJFile << "o" + apMesh->GetLabel() + "/n";
+	//write points to obj file
+	for (vector<CPoint>::iterator it = apMesh->GetPoints().begin(); it != apMesh->GetPoints().end(); it++) 
+	{
+		aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+	}
+	//sort vecFaces by color
+	sort(apMesh->GetFaces().begin(), apMesh->GetFaces().end(), CompFace); // NlogN
+	//write faces to obj file + write colors to mtl file
+	Color_t color = Quan2Color(apMesh->GetFaces()[0].GetColor());
+	WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
+	for (vector<CIndexedFace>::iterator it = apMesh->GetFaces().begin(); it != apMesh->GetFaces().end(); it++) 
+	{
+		if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
+		{
+			WriteNewFace(aOBJFile, *it);
+		}
+		else // we reached a new color, and we need to write it in mtl before using it
+		{
+			color = Quan2Color(it->GetColor());
+			(*apMtlCounter)++;
+			WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
+			// now we can write the face in the obj file
+			WriteNewFace(aOBJFile, *it);
+		}
+	}
+}
+
+void CModel::operator<<(string aOutput) {
+	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
+		aOutput.erase(aOutput.length() - 4, 4);
+	}
+	ofstream OBJFile; // the obj file
+	OBJFile.open(aOutput + ".obj");
+	ofstream MTLObj; //the mtl file
+	MTLObj.open(aOutput + ".mtl");
+	string mtl = aOutput;
 	while (mtl.find('\\') != string::npos) {
 		mtl = mtl.substr(mtl.find('\\'), string::npos);
 	}
 	//write obj file starter
-	o << "# This 3D code was produced by Vivid /n/n/n";
-	o << "mtllib" + mtl + "/n";
+	OBJFile << "# This 3D code was produced by Vivid /n/n/n";
+	OBJFile << "mtllib" + mtl + "/n";
 	
-	size_t mtlCounter = 0; // will be used to count the newmtl
-	size_t pointsCounter = 0; // will be used to count how many points the former obj wrote to the file
-	for (vector<Mesh>::iterator mesh = this->meshes.begin(); mesh != this->meshes.end(); mesh++) {
-		o << "o" + mesh->getLabel() + "/n";
-		//write points to obj file
-		for (vector<Point>::iterator it = mesh->getPoints().begin(); it != mesh->getPoints().end(); it++) {
-			o << "v " + int2str(it->getX()) + " " + int2str(it->getY()) + " " + int2str(it->getZ()) + "/n";
-		}
-		//sort vecFaces by color
-		sort(mesh->getFaces().begin(), mesh->getFaces().end(), compFace); // NlogN
-		//write faces to obj file + write colors to mtl file
-		vector<float> color = quan2color(mesh->getFaces()[0].getColor());
-		m << "newmtl surf_" + int2str(mtlCounter) + "\n" + \
-			"Ns 96.078\n" + \
-			"Ka 1.000 1.000 1.000 \n" + \
-			"Kd " + to_string(color[0]) + " " + to_string(color[1]) + " " + to_string(color[2]) + "\n" + \
-			"Ks 0.000 0.000 0.000\n" + \
-			"Ni 1.000000\n" + \
-			"d " + to_string(mesh->getAlpha()) + "\n" + \
-			"illum 0\n" + \
-			"em 0.000000\n\n\n";
-		o << "usemtl surf_" + int2str(mtlCounter) + "/n";
-		for (vector<IndexedFace>::iterator it = mesh->getFaces().begin(); it != mesh->getFaces().end(); it++) {
-			if (compareColor(color, quan2color(it->getColor()))) { //if true write the face to the obj file
-				o << "f ";
-				for (vector<size_t>::iterator p = it->getPoints().begin(); p != it->getPoints().end(); p++) {
-					o << int2str(*p + pointsCounter) + " ";
-				}
-				o << "/n";
-			}
-			else // we reached a new color, and we need to write it in mtl before using it
-			{
-				color = quan2color(it->getColor());
-				mtlCounter++;
-				m << "newmtl surf_" + int2str(mtlCounter) + "\n" + \
-					"Ns 96.078\n" + \
-					"Ka 1.000 1.000 1.000 \n" + \
-					"Kd " + to_string(color[0]) + " " + to_string(color[1]) + " " + to_string(color[2]) + "\n" + \
-					"Ks 0.000 0.000 0.000\n" + \
-					"Ni 1.000000\n" + \
-					"d " + to_string(mesh->getAlpha()) + "\n" + \
-					"illum 0\n" + \
-					"em 0.000000\n\n\n";
-				o << "usemtl surf_" + int2str(mtlCounter) + "/n";
-				// now we can write the face in the obj file
-				o << "f ";
-				for (vector<size_t>::iterator p = it->getPoints().begin(); p != it->getPoints().end(); p++) {
-					o << int2str(*p + pointsCounter) + " ";
-				}
-				o << "/n";
-			}
-		}
-		pointsCounter += mesh->getPoints().size();
+	size_t mtl_counter = 0; // will be used to count the newmtl
+	size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
+	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ItMesh++) 
+	{
+		WriteObj(OBJFile, MTLObj, &(*ItMesh), &mtl_counter, points_counter);
+		points_counter += ItMesh->GetPoints().size();
 	}
 }
 
-void Model::addMesh(Mesh mesh) {
-	this->meshes.push_back(mesh);
+void CModel::AddMesh(CMesh aMesh) {
+	this->mMeshes.push_back(aMesh);
 }
 
 
-Model::~Model(){}
+CModel::~CModel(){}

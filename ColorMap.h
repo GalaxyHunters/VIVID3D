@@ -21,7 +21,7 @@ class ColorMap
 private:
 	vector<Color_t> color_map;
 public:
-	inline Color_t getColor(float val) { return color_map[int(val*76)]; }
+	inline Color_t GetColor(float val) { return color_map[int(val*76)]; }
 	inline ColorMap() 
 	{
 		color_map = vector<Color_t>();

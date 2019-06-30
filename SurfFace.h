@@ -8,27 +8,27 @@
 #include "Point.h"
 using namespace std;
 
-class SurfFace
+class CSurfFace
 {
 public:
-	vector<shared_ptr<Point>> points;
-	float color;
-	pair<size_t, size_t> C_points;
-	inline SurfFace(vector<shared_ptr<Point>> points, float color, pair<size_t, size_t> C_points);
-	inline SurfFace() {};
-	inline ~SurfFace();
+	vector<shared_ptr<CPoint>> mPoints;
+	float mColor;
+	pair<size_t, size_t> mCPoints;
+	inline CSurfFace(vector<shared_ptr<CPoint>> aPoints, float aColor, pair<size_t, size_t> aCPoints);
+	inline CSurfFace() {};
+	inline ~CSurfFace();
 
 private:
 
 };
 
-SurfFace::SurfFace(vector<shared_ptr<Point>> points, float color, pair<size_t, size_t> C_points) {
-	this->points = points;
-	this->color = color;
-	this->C_points = C_points;
+CSurfFace::CSurfFace(vector<shared_ptr<CPoint>> aPoints, float aColor, pair<size_t, size_t> aCPoints) {
+	this->mPoints = aPoints;
+	this->mColor = aColor;
+	this->mCPoints = aCPoints;
 }
 
-SurfFace::~SurfFace()
+CSurfFace::~CSurfFace()
 {
 }
 

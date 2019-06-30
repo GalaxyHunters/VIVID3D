@@ -3,466 +3,463 @@ using namespace std;
 
 static const float DoublePointThreshHold = 0.0001;
 
-Surf::Surf() {};
+CSurf::CSurf() {};
 
-Surf::Surf(const Surf &surf2) {
-	this->inputPoints = surf2.inputPoints;
-	this->mask = surf2.mask;
-	this->quan = surf2.quan;
+CSurf::CSurf(const CSurf &surf2) {
+	this->mInputPoints = surf2.mInputPoints;
+	this->mMask = surf2.mMask;
+	this->mQuan = surf2.mQuan;
 
-	map < std::shared_ptr<Point>, shared_ptr<Point>> oldToNew_Points;
-	this->vecPoints.clear();
-	for (size_t i = 0; i < surf2.vecPoints.size(); i++) {
-		this->vecPoints.push_back(std::shared_ptr<Point>(new Point(*(surf2.vecPoints[i]))));
-		oldToNew_Points[surf2.vecPoints[i]] = this->vecPoints.back();
+	map < std::shared_ptr<CPoint>, shared_ptr<CPoint>> old_to_new_Points;
+	this->mVecPoints.clear();
+	for (size_t i = 0; i < surf2.mVecPoints.size(); i++) {
+		this->mVecPoints.push_back(std::shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
+		old_to_new_Points[surf2.mVecPoints[i]] = this->mVecPoints.back();
 	}
-	this->vecFaces.clear();
-	SurfFace temp;
-	for (vector<SurfFace>::const_iterator it = (surf2.vecFaces).begin(); it != surf2.vecFaces.end(); it++) {
-		temp = SurfFace();
-		temp.color = (*it).color;
-		temp.C_points = (*it).C_points;
-		temp.points.clear();
-		for (vector<shared_ptr<Point>>::const_iterator pIt = it->points.begin(); pIt != it->points.end(); pIt++){
-			temp.points.push_back(oldToNew_Points[*pIt]);
+	this->mVecFaces.clear();
+	CSurfFace temp;
+	for (vector<CSurfFace>::const_iterator it = (surf2.mVecFaces).begin(); it != surf2.mVecFaces.end(); it++) {
+		temp = CSurfFace();
+		temp.mColor = (*it).mColor;
+		temp.mCPoints = (*it).mCPoints;
+		temp.mPoints.clear();
+		for (vector<shared_ptr<CPoint>>::const_iterator pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
+			temp.mPoints.push_back(old_to_new_Points[*pIt]);
 		}
-		this->vecFaces.push_back(temp);
+		this->mVecFaces.push_back(temp);
 	}
 }
 
-Surf Surf::createSurf(vector<Point> inputpoints, vector<bool> mask, vector<float> quan, float Vmin, float Vmax) {
-	Surf surf;
-	surf.setInputPoints(inputpoints);
-	surf.setMask(mask);
-	surf.setQuan(surf.normQuan(quan, Vmin, Vmax));
-	surf.runVorn();
-	surf.cleanEdges();
-	surf.cleanFaces(mask);
-	surf.cleanPoints();
+CSurf CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<float> aQuan, float aVMin, float aVMax) {
+	CSurf surf;
+	surf.SetInputPoints(aInputPoints);
+	surf.SetMask(aMask);
+	surf.SetQuan(surf.NormQuan(aQuan, aVMin, aVMax));
+	surf.RunVorn();
+	surf.CleanEdges();
+	surf.CleanFaces(aMask);
+	surf.CleanPoints();
 	return surf;
 }
 
-vector<Surf> Surf::createSurf(vector<Point> InputPoints, vector<vector<bool>> mask, vector<float> quan, float Vmin, float Vmax) {
-	Surf temp;
-	temp.setInputPoints(InputPoints);
-	temp.setQuan(temp.normQuan(quan, Vmin, Vmax));
-	temp.runVorn();
-	temp.cleanEdges();
-	vector<Surf> output;
-	Surf newSurf;
-	for (vector<vector<bool>>::iterator it = mask.begin(); it != mask.end(); it++) {
-		newSurf = Surf(temp);
-		newSurf.setMask(*it);
-		newSurf.cleanFaces(*it);
-		newSurf.cleanPoints();
+vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>> aMask, vector<float> aQuan, float aVMin, float aVMax) {
+	CSurf temp;
+	temp.SetInputPoints(aInputPoints);
+	temp.SetQuan(temp.NormQuan(aQuan, aVMin, aVMax));
+	temp.RunVorn();
+	temp.CleanEdges();
+	vector<CSurf> output;
+	CSurf newSurf;
+	for (vector<vector<bool>>::iterator it = aMask.begin(); it != aMask.end(); it++) {
+		newSurf = CSurf(temp);
+		newSurf.SetMask(*it);
+		newSurf.CleanFaces(*it);
+		newSurf.CleanPoints();
 		output.push_back(newSurf);
 	}
 	return output;
 }
 
-void Surf::cleanFaces(vector<bool> mask) {
-	vector<SurfFace> newFaces;
-	int maskLen = mask.size();
-	int Cpoint1;
-	int Cpoint2;
-	for (vector<SurfFace>::iterator it = vecFaces.begin(); it != vecFaces.end(); it++) {
-		Cpoint1 = get<0>(it->C_points);
-		Cpoint2 = get<1>(it->C_points);
-		if (maskLen > Cpoint1 && maskLen > Cpoint2) { //the indexs are both in range and not a part of the box
-			if (mask[Cpoint1] != mask[Cpoint2]) { //the face is a part of the surf
-				newFaces.push_back(*it);
-				newFaces.back().color = (this->quan[Cpoint1] + this->quan[Cpoint2]) / 2;
+void CSurf::CleanFaces(vector<bool> aMask) {
+	vector<CSurfFace> new_faces;
+	int maskLen = aMask.size();
+	int c_point1;
+	int c_point2;
+	for (vector<CSurfFace>::iterator it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
+		c_point1 = get<0>(it->mCPoints);
+		c_point2 = get<1>(it->mCPoints);
+		if (maskLen > c_point1 && maskLen > c_point2) { //the indexs are both in range and not a part of the box
+			if (aMask[c_point1] != aMask[c_point2]) { //the face is a part of the surf
+				new_faces.push_back(*it);
+				new_faces.back().mColor = (this->mQuan[c_point1] + this->mQuan[c_point2]) / 2;
 			}
 		}
 	}
-	this->vecFaces = newFaces;
+	this->mVecFaces = new_faces;
 }
 
-void Surf::cleanPoints() {
-	vector<std::shared_ptr<Point>> newPoints;
-	for (vector<std::shared_ptr<Point>>::iterator it = vecPoints.begin(); it != vecPoints.end(); it++) {
+void CSurf::CleanPoints() {
+	vector<std::shared_ptr<CPoint>> new_points;
+	for (vector<std::shared_ptr<CPoint>>::iterator it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
 		if (it->use_count() > 1) { // the points is also being called from another obj, other then this vector
-			newPoints.push_back(*it);
+			new_points.push_back(*it);
 		}
 	}
-	this->vecPoints = newPoints;
+	this->mVecPoints = new_points;
 	RemoveDoublePoints();
 }
 
 //----------------------------------------remove doubles functions ----------------------------------------------------------------------
-bool CompPoint(shared_ptr<Point> obj1, shared_ptr<Point> obj2) {
-	if (abs((*obj1).getX() - (*obj2).getX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs((*obj1).getY() - (*obj2).getY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs((*obj1).getZ() - (*obj2).getZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+bool CompPoint(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
+	if (abs((*aObj1).GetX() - (*aObj2).GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
+		if (abs((*aObj1).GetY() - (*aObj2).GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
+			if (abs((*aObj1).GetZ() - (*aObj2).GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
 				return true;
 			}
 			else
 			{ // we compare the points by z to see who needs to go first
-				return (*obj1).getZ() > (*obj2).getZ();
+				return (*aObj1).GetZ() > (*aObj2).GetZ();
 			}
 		}
 		else // we compare by y to see who needs to go first
 		{
-			return (*obj1).getY() > (*obj2).getY();
+			return (*aObj1).GetY() > (*aObj2).GetY();
 		}
 	}
 	else // we compare by x to see who goes first
 	{
-		return (*obj1).getX() > (*obj2).getX();
+		return (*aObj1).GetX() > (*aObj2).GetX();
 	}
 }
 
-void Surf::RemoveDoublePoints() {
+void CSurf::RemoveDoublePoints() {
 	//sort the array
-	std::sort(this->vecPoints.begin(), this->vecPoints.end(), CompPoint);
-	map < std::shared_ptr<Point>, std::shared_ptr<Point>> old_new_points; // will hold the new pointer fiting to each point
-	vector<shared_ptr<Point>> cleanedPoints;
+	std::sort(this->mVecPoints.begin(), this->mVecPoints.end(), CompPoint);
+	map < std::shared_ptr<CPoint>, std::shared_ptr<CPoint>> old_new_points; // will hold the new pointer fiting to each point
+	vector<shared_ptr<CPoint>> cleaned_points;
 	size_t j;
-	for (size_t i = 0; i < this->vecPoints.size(); i++) {
+	for (size_t i = 0; i < this->mVecPoints.size(); i++) {
 		j = i + 1;
-		cleanedPoints.push_back(this->vecPoints[i]); // push the point to the cleaned data
-		old_new_points[this->vecPoints[i]] = this->vecPoints[i];
-		while ((*this->vecPoints[i]).distance((*this->vecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
-			old_new_points[this->vecPoints[j]] = this->vecPoints[i];
+		cleaned_points.push_back(this->mVecPoints[i]); // push the point to the cleaned data
+		old_new_points[this->mVecPoints[i]] = this->mVecPoints[i];
+		while ((*this->mVecPoints[i]).CalcDistance((*this->mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+			old_new_points[this->mVecPoints[j]] = this->mVecPoints[i];
 			j += 1;
 			//cout << "removed point" << endl;
 		}
 		i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
 	}
 	// change the points ptrs within the faces
-	for (vector<SurfFace>::iterator faceIt = this->vecFaces.begin(); faceIt != this->vecFaces.end(); faceIt++) {
-		for (vector<shared_ptr<Point>>::iterator pointIt = faceIt->points.begin(); pointIt != faceIt->points.end(); pointIt++) {
+	for (vector<CSurfFace>::iterator faceIt = this->mVecFaces.begin(); faceIt != this->mVecFaces.end(); faceIt++) {
+		for (vector<shared_ptr<CPoint>>::iterator pointIt = faceIt->mPoints.begin(); pointIt != faceIt->mPoints.end(); pointIt++) {
 			(*pointIt) = old_new_points[*pointIt];
 		}
 	}
-	this->vecPoints = cleanedPoints;
+	this->mVecPoints = cleaned_points;
 }
 
 //smooth functions----------------------------------------------------------------------------------------------------------
 
-pair<vector<size_t>, vector<size_t>> _updatePoutPin(vector<size_t> Pout, vector<size_t> Pin) {
-	for (int i = 0; (unsigned)i < Pout.size(); i++) {
-		Pout[i] = i;
+pair<vector<size_t>, vector<size_t>> UpdatePoutPin(vector<size_t> aPOut, vector<size_t> aPIn) {
+	for (int i = 0; (unsigned)i < aPOut.size(); i++) {
+		aPOut[i] = i;
 	}
-	for (int i = 0; (unsigned)i < Pin.size(); i++) {
-		Pin[i] = i + Pout.size();
+	for (int i = 0; (unsigned)i < aPIn.size(); i++) {
+		aPIn[i] = i + aPOut.size();
 	}
-	return make_pair(Pout, Pin);
+	return make_pair(aPOut, aPIn);
 }
 
-pair<vector<size_t>, vector<size_t>> Surf::_setPinPout() { //define pin and pout
-	vector<size_t> Pout;
-	vector<size_t> Pin;
-	map<size_t, bool> PinMap;
-	map<size_t, bool> PoutMap;
-	int Cpoint1;
-	int Cpoint2;
-	for (vector<SurfFace>::iterator it = this->vecFaces.begin(); it != this->vecFaces.end(); it++) {
-		Cpoint1 = get<0>(it->C_points);
-		Cpoint2 = get<1>(it->C_points);
-		if (this->mask[Cpoint1]) {
-			if (PinMap.count(Cpoint1) == 0) {
-				Pin.push_back(Cpoint1);
-				PinMap[Cpoint1] = true;
+pair<vector<size_t>, vector<size_t>> CSurf::SetPinPout() { //define pin and pout
+	vector<size_t> p_out;
+	vector<size_t> p_in;
+	map<size_t, bool> p_in_map;
+	map<size_t, bool> p_out_map;
+	int c_point1;
+	int c_point2;
+	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+		c_point1 = get<0>(it->mCPoints);
+		c_point2 = get<1>(it->mCPoints);
+		if (this->mMask[c_point1]) {
+			if (p_in_map.count(c_point1) == 0) {
+				p_in.push_back(c_point1);
+				p_in_map[c_point1] = true;
 			}
-			if (PoutMap.count(Cpoint2) == 0) {
-				Pout.push_back(Cpoint2);
-				PoutMap[Cpoint2] = true;
+			if (p_out_map.count(c_point2) == 0) {
+				p_out.push_back(c_point2);
+				p_out_map[c_point2] = true;
 			}
 		}
 		else
 		{
-			if (PinMap.count(Cpoint2) == 0) {
-				Pin.push_back(Cpoint2);
-				PinMap[Cpoint2] = true;
+			if (p_in_map.count(c_point2) == 0) {
+				p_in.push_back(c_point2);
+				p_in_map[c_point2] = true;
 			}
-			if (PoutMap.count(Cpoint1) == 0) {
-				Pout.push_back(Cpoint1);
-				PoutMap[Cpoint1] = true;
+			if (p_out_map.count(c_point1) == 0) {
+				p_out.push_back(c_point1);
+				p_out_map[c_point1] = true;
 			}
 		}
 	}
-	return make_pair(Pout, Pin);
+	return make_pair(p_out, p_in);
 }
 
-void Surf::_updateInputPoints(vector<size_t> Pout, vector<size_t> Pin) {
-	vector<Point> newPoints;
+void CSurf::UpdateInputPoints(vector<size_t> aPOut, vector<size_t> aPIn) {
+	vector<CPoint> new_points;
 	vector<float> quan;
-	for (vector<size_t>::iterator it = Pout.begin(); it != Pout.end(); it++) {
-		newPoints.push_back(this->inputPoints[*it]);
-		quan.push_back(this->quan[*it]);
+	for (vector<size_t>::iterator it = aPOut.begin(); it != aPOut.end(); it++) {
+		new_points.push_back(this->mInputPoints[*it]);
+		quan.push_back(this->mQuan[*it]);
 	}
-	for (vector<size_t>::iterator it = Pin.begin(); it != Pin.end(); it++) {
-		newPoints.push_back(this->inputPoints[*it]);
-		quan.push_back(this->quan[*it]);
+	for (vector<size_t>::iterator it = aPIn.begin(); it != aPIn.end(); it++) {
+		new_points.push_back(this->mInputPoints[*it]);
+		quan.push_back(this->mQuan[*it]);
 	}
-	this->inputPoints = newPoints;
-	this->quan = quan;
+	this->mInputPoints = new_points;
+	this->mQuan = quan;
 }
-void Surf::_makeMask(size_t PoutSize, size_t PinSize) {
-	vector<bool> newMask;
-	for (size_t i = 0; i < PoutSize; i++) {
-		newMask.push_back(false);
+void CSurf::MakeMask(size_t aPOutSize, size_t aPInSize) {
+	vector<bool> new_mask;
+	for (size_t i = 0; i < aPOutSize; i++) {
+		new_mask.push_back(false);
 	}
-	for (size_t i = 0; i < PinSize; i++) {
-		newMask.push_back(true);
+	for (size_t i = 0; i < aPInSize; i++) {
+		new_mask.push_back(true);
 	}
-	this->mask = newMask;
+	this->mMask = new_mask;
 }
 
-bool CompPointData_t(Point_data_t obj1, Point_data_t obj2) {
-	if (abs(obj1.point.getX() - obj2.point.getX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs(obj1.point.getY() - obj2.point.getY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs(obj1.point.getZ() - obj2.point.getZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+bool CompPointData_t(CPointData_t aObj1, CPointData_t aObj2) {
+	if (abs(aObj1.mPoint.GetX() - aObj2.mPoint.GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
+		if (abs(aObj1.mPoint.GetY() - aObj2.mPoint.GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
+			if (abs(aObj1.mPoint.GetZ() - aObj2.mPoint.GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
 				return true;
 			}
 			else 
 			{ // we compare the points by z to see who needs to go first
-				return obj1.point.getZ() > obj2.point.getZ();
+				return aObj1.mPoint.GetZ() > aObj2.mPoint.GetZ();
 			}
 		}
 		else // we compare by y to see who needs to go first
 		{
-			return obj1.point.getY() > obj2.point.getY();
+			return aObj1.mPoint.GetY() > aObj2.mPoint.GetY();
 		}
 	}
 	else // we compare by x to see who goes first
 	{
-		return obj1.point.getX() > obj2.point.getX();
+		return aObj1.mPoint.GetX() > aObj2.mPoint.GetX();
 	}
 }
-vector<Point_data_t> Surf::RemoveDoublesVornIn(vector<Point_data_t> data) {
+
+pair<vector<size_t>, vector<size_t>> CSurf::CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<float> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut)
+{
+	vector<CPointData_t> data;
+	data.clear();
+	for (vector<size_t>::iterator it = aNewIn.begin(); it != aNewIn.end(); it++) {
+		data.push_back(CPointData_t(aNewPoints[*it], aNewQuan[*it], true));
+	}
+	for (vector<size_t>::iterator it = aNewOut.begin(); it != aNewOut.end(); it++) {
+		data.push_back(CPointData_t(aNewPoints[*it], aNewQuan[*it], false));
+	}
+	data = RemoveDoublesVornInput(data);
+	aNewPoints.clear();
+	aNewQuan.clear();
+	aNewIn.clear();
+	aNewOut.clear();
+	for (size_t i = 0; i < data.size(); i++) {
+		aNewPoints.push_back(data[i].mPoint);
+		aNewQuan.push_back(data[i].mQuan);
+		if (data[i].mIsIn) {
+			aNewIn.push_back(i);
+		}
+		else
+		{
+			aNewOut.push_back(i);
+		}
+	}
+	this->mInputPoints = aNewPoints;
+	this->mQuan = aNewQuan;
+	return make_pair(aNewOut, aNewIn);
+}
+vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t> data) {
 	//sort the array
 	std::sort(data.begin(), data.end(), CompPointData_t);
-	vector<Point_data_t> cleanedData;
+	vector<CPointData_t> cleaned_data;
 	size_t j;
 	for (size_t i = 0; i < data.size(); i++) {
 		j = i+1;
-		cleanedData.push_back(data[i]); // push the point to the cleaned data
-		while (data[i].point.distance(data[j].point) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		cleaned_data.push_back(data[i]); // push the point to the cleaned data
+		while (data[i].mPoint.CalcDistance(data[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			j += 1;
 			//cout << "removed point" << endl;
 		}
 		i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
 	}
 	
-	return cleanedData;
+	return cleaned_data;
 }
-
-pair<vector<size_t>, vector<size_t>> Surf::_S2addPoints(vector<size_t> Pout, vector<size_t> Pin) { //TODO seprate this to a few difrrent function(its way too long)
-	size_t Cpoint1;
-	size_t Cpoint2;
-	size_t PoutSize = Pout.size();
-	size_t PinSize = PoutSize + Pin.size();
+void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<float> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
+{
 	float x, y, z;
-	vector<Point> newPoints;
-	vector<size_t> newIn;
-	vector<size_t> newOut;
-	vector<float> newQuan;
-	size_t newIndex = 0; // the index for the new point to be added
-	//go over pout
-	for (vector<SurfFace>::iterator it = this->vecFaces.begin(); it != this->vecFaces.end(); it++) {
-		Cpoint1 = get<0>(it->C_points);
-		Cpoint2 = get<1>(it->C_points);
-		if (Cpoint1 < PoutSize && Cpoint2 < PoutSize) { //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-			newOut.push_back(newIndex);
-			x = (this->inputPoints[Cpoint1].getX() * 2 + this->inputPoints[Cpoint2].getX()) / 3.0;
-			y = (this->inputPoints[Cpoint1].getY() * 2 + this->inputPoints[Cpoint2].getY()) / 3.0;
-			z = (this->inputPoints[Cpoint1].getZ() * 2 + this->inputPoints[Cpoint2].getZ()) / 3.0;
-			newPoints.push_back(Point(x, y, z));
-			newQuan.push_back((this->quan[Cpoint1] + this->quan[Cpoint2]) / 2.0);
-			newIndex++;
+	(*apPVec).push_back(*apNewIndex);
+	x = (this->mInputPoints[aCPoint1].GetX() * 2 + this->mInputPoints[aCPoint2].GetX()) / 3.0;
+	y = (this->mInputPoints[aCPoint1].GetY() * 2 + this->mInputPoints[aCPoint2].GetY()) / 3.0;
+	z = (this->mInputPoints[aCPoint1].GetZ() * 2 + this->mInputPoints[aCPoint2].GetZ()) / 3.0;
+	(*apNewPoints).push_back(CPoint(x, y, z));
+	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+	(*apNewIndex)++;
 
-			newOut.push_back(newIndex);
-			x = (this->inputPoints[Cpoint1].getX() + this->inputPoints[Cpoint2].getX() * 2) / 3.0;
-			y = (this->inputPoints[Cpoint1].getY() + this->inputPoints[Cpoint2].getY() * 2) / 3.0;
-			z = (this->inputPoints[Cpoint1].getZ() + this->inputPoints[Cpoint2].getZ() * 2) / 3.0;
-			newPoints.push_back(Point(x, y, z));
-			newQuan.push_back((this->quan[Cpoint1] + this->quan[Cpoint2]) / 2.0);
-			newIndex++;
+	(*apPVec).push_back(*apNewIndex);
+	x = (this->mInputPoints[aCPoint1].GetX() + this->mInputPoints[aCPoint2].GetX() * 2) / 3.0;
+	y = (this->mInputPoints[aCPoint1].GetY() + this->mInputPoints[aCPoint2].GetY() * 2) / 3.0;
+	z = (this->mInputPoints[aCPoint1].GetZ() + this->mInputPoints[aCPoint2].GetZ() * 2) / 3.0;
+	(*apNewPoints).push_back(CPoint(x, y, z));
+	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+	(*apNewIndex)++;
+}
+pair<vector<size_t>, vector<size_t>> CSurf::Stage2AddPoints(vector<size_t> aPOut, vector<size_t> aPIn) {
+	size_t c_point1;
+	size_t c_point2;
+	size_t p_out_size = aPOut.size();
+	size_t p_in_size = p_out_size + aPIn.size();
+	vector<CPoint> new_points;
+	vector<size_t> new_in;
+	vector<size_t> new_out;
+	vector<float> new_quan;
+	size_t new_index = 0; // the index for the new point to be added
+	//go over pout
+	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+		c_point1 = get<0>(it->mCPoints);
+		c_point2 = get<1>(it->mCPoints);
+		if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+		{ 
+			AddPoints(&new_in, &new_points, &new_quan, &new_index, c_point1, c_point2);
 		}
 		//go over pin
-		if ((PinSize > Cpoint1 && Cpoint1 >= PoutSize) && (PinSize > Cpoint2 && Cpoint2 >= PoutSize)) { //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-			newIn.push_back(newIndex);
-			x = (this->inputPoints[Cpoint1].getX() * 2 + this->inputPoints[Cpoint2].getX()) / 3.0;
-			y = (this->inputPoints[Cpoint1].getY() * 2 + this->inputPoints[Cpoint2].getY()) / 3.0;
-			z = (this->inputPoints[Cpoint1].getZ() * 2 + this->inputPoints[Cpoint2].getZ()) / 3.0;
-			newPoints.push_back(Point(x, y, z));
-			newQuan.push_back((this->quan[Cpoint1] + this->quan[Cpoint2]) / 2.0);
-			newIndex++;
-
-			newIn.push_back(newIndex);
-			x = (this->inputPoints[Cpoint1].getX() + this->inputPoints[Cpoint2].getX() * 2) / 3.0;
-			y = (this->inputPoints[Cpoint1].getY() + this->inputPoints[Cpoint2].getY() * 2) / 3.0;
-			z = (this->inputPoints[Cpoint1].getZ() + this->inputPoints[Cpoint2].getZ() * 2) / 3.0;
-			newPoints.push_back(Point(x, y, z));
-			newQuan.push_back((this->quan[Cpoint1] + this->quan[Cpoint2]) / 2.0);
-			newIndex++;
-		}
-	}
-	vector<Point_data_t> data;
-	data.clear();
-	for (vector<size_t>::iterator it = newIn.begin(); it != newIn.end(); it++) {
-		data.push_back(Point_data_t(newPoints[*it], newQuan[*it], true));
-	}
-	for (vector<size_t>::iterator it = newOut.begin(); it != newOut.end(); it++) {
-		data.push_back(Point_data_t(newPoints[*it], newQuan[*it], false));
-	}
-	data = RemoveDoublesVornIn(data);
-	newPoints.clear();
-	newQuan.clear();
-	newIn.clear();
-	newOut.clear();
-	for (size_t i = 0; i < data.size(); i++) {
-		newPoints.push_back(data[i].point);
-		newQuan.push_back(data[i].quan);
-		if (data[i].isIn) {
-			newIn.push_back(i);
-		}
-		else
+		if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
 		{
-			newOut.push_back(i);
+			AddPoints(&new_out, &new_points, &new_quan, &new_index, c_point1, c_point2);
 		}
 	}
-	this->inputPoints = newPoints;
-	this->quan = newQuan;
-	return make_pair(newOut, newIn);
+	pair<vector<size_t>, vector<size_t>> output = CleanDoublePointsVorn(new_points, new_quan, new_in, new_out);
+	return output;
 }
 
 
 //public functions
 
-void Surf::smoothSurf() {
+void CSurf::SmoothSurf() {
 	//begin smooth part 1, collecting all the cpoints from the faces on the surf
-	pair<vector<size_t>, vector<size_t>> pair = _setPinPout();
-	vector<size_t> Pout = get<0>(pair);
-	vector<size_t> Pin = get<1>(pair);
-	_updateInputPoints(Pout, Pin);
-	this->runVorn();
+	pair<vector<size_t>, vector<size_t>> pair = SetPinPout();
+	vector<size_t> p_out = get<0>(pair);
+	vector<size_t> p_in = get<1>(pair);
+	UpdateInputPoints(p_out, p_in);
+	this->RunVorn();
 	//begin smooth part 2, adding new points between the cpoints
-	pair = _updatePoutPin(Pout, Pin);
-	Pout = get<0>(pair);
-	Pin = get<1>(pair);
-	pair = _S2addPoints(Pout, Pin);
-	Pout = get<0>(pair);
-	Pin = get<1>(pair);
+	pair = UpdatePoutPin(p_out, p_in);
+	p_out = get<0>(pair);
+	p_in = get<1>(pair);
+	pair = Stage2AddPoints(p_out, p_in);
+	p_out = get<0>(pair);
+	p_in = get<1>(pair);
 	//begin smooth part 3, running the model and cleaning it
-	_updateInputPoints(Pout, Pin);
-	runVorn();
-	cleanEdges();
-	_makeMask(Pout.size(), Pin.size());
-	cleanFaces(this->mask);
-	cleanPoints();
+	UpdateInputPoints(p_out, p_in);
+	RunVorn();
+	CleanEdges();
+	MakeMask(p_out.size(), p_in.size());
+	CleanFaces(this->mMask);
+	CleanPoints();
 	//done.
 }
 
-vector<float> Surf::normQuan(vector<float> quan, float Vmin, float Vmax) {
-	if (Vmin == Vmax) { //in case where Vmin-Vmax == 0
-		quan = vector<float>(quan.size(), 0.5);
-		return quan;
+vector<float> CSurf::NormQuan(vector<float> aQuan, float aVMin, float aVMax) {
+	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0
+		aQuan = vector<float>(aQuan.size(), 1);
+		return aQuan;
 	}
-	for (vector<float>::iterator it = quan.begin(); it != quan.end(); it++) {
-		*it = 1- ((*it - Vmax) / (Vmin - Vmax));
+	for (vector<float>::iterator it = aQuan.begin(); it != aQuan.end(); it++) {
+		*it = 1- ((*it - aVMax) / (aVMin - aVMax));
 		if (*it > 1) *it = 1;
 		if (*it < 0) *it = 0;
 	}
-	return quan;
+	return aQuan;
 }
 
 
-const Mesh Surf::to_mesh(string label, float alpha) {
-	vector<Point> points;
+const CMesh CSurf::ToMesh(string aLabel, float aAlpha) {
+	vector<CPoint> points;
 	size_t counter = 0;
-	map < std::shared_ptr<Point>, size_t> indexes;
-	for (vector<std::shared_ptr<Point>>::iterator it = this->vecPoints.begin(); it != this->vecPoints.end(); it++) {
+	map < std::shared_ptr<CPoint>, size_t> indexes;
+	for (vector<std::shared_ptr<CPoint>>::iterator it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
 		points.push_back(**it);
 		indexes[*it] = counter;
 		counter++;
 	}
-	vector<IndexedFace> faces;
-	vector<size_t> facePoints;
-	for (vector<SurfFace>::iterator it = this->vecFaces.begin(); it != this->vecFaces.end(); it++) {
-		for (vector<shared_ptr<Point>>::iterator point = it->points.begin(); point != it->points.end(); point++) {
-			facePoints.push_back(indexes[*point]);
+	vector<CIndexedFace> faces;
+	vector<size_t> face_points;
+	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+		for (vector<shared_ptr<CPoint>>::iterator point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
+			face_points.push_back(indexes[*point]);
 		}
-		faces.push_back(IndexedFace(facePoints, it->color));
-		facePoints = {};
+		faces.push_back(CIndexedFace(face_points, it->mColor));
+		face_points = {};
 	}
-	return Mesh(points, faces, label, alpha);
+	return CMesh(points, faces, aLabel, aAlpha);
 }
 
-void Surf::exportToObj(string output, string label, float alpha) {
-	Mesh mesh = to_mesh(label, alpha);
-	mesh.operator<< (output);
+void CSurf::ExportToObj(string aOutput, string aLabel, float aAlpha) {
+	CMesh mesh = ToMesh(aLabel, aAlpha);
+	mesh.operator<< (aOutput);
 }
 
-static bool comparePoint(Point point1, Point point2) {
-	double dis1 = point1.distance(Point(0, 0, 0));
-	double dis2 = point2.distance(Point(0, 0, 0));
+static bool ComparePoint(CPoint aPoint1, CPoint aPoint2) {
+	double dis1 = aPoint1.CalcDistance(CPoint(0, 0, 0));
+	double dis2 = aPoint2.CalcDistance(CPoint(0, 0, 0));
 	return (dis2 > dis1);
 }
-static bool(*compPoint)(Point, Point) = comparePoint;
+static bool(*CompPoint)(CPoint, CPoint) = ComparePoint;
 
-static vector<shared_ptr<Point>> convertfromvorn(vector<Vector3D> vornPoints) {
-	vector<shared_ptr<Point>> newVec;
-	for (vector<Vector3D>::iterator it = vornPoints.begin(); it != vornPoints.end(); it++) {
-		newVec.push_back(shared_ptr<Point>(new Point(it->x, it->y, it->z)));
+static vector<shared_ptr<CPoint>> ConvertFromVorn(vector<Vector3D> aVornPoints) {
+	vector<shared_ptr<CPoint>> new_vec;
+	for (vector<Vector3D>::iterator it = aVornPoints.begin(); it != aVornPoints.end(); it++) {
+		new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z)));
 	}
-	return newVec;
+	return new_vec;
 }
 
-static double _findBoxR(vector<Point> inputPoints) {
-	Point box_r = *max_element(inputPoints.begin(), inputPoints.end(), compPoint);
-	return box_r.distance(Point(0, 0, 0));
+static double FindBoxR(vector<CPoint> aInputPoints) {
+	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), CompPoint);
+	return box_r.CalcDistance(CPoint(0, 0, 0));
 }
-void Surf::runVorn() {
+void CSurf::RunVorn() {
 	//find the box_r
-	double box_R = _findBoxR(this->inputPoints);
+	double box_R = FindBoxR(this->mInputPoints);
 	cout << "start vorn" << endl;
-	pair<vector<Vector3D>, vector<vector<size_t>>> vornOut = compute_vornoi(this->inputPoints, box_R * 2);
+	pair<vector<Vector3D>, vector<vector<size_t>>> vorn_out = compute_vornoi(this->mInputPoints, box_R * 2);
 	cout << "vorn done" << endl;
 	//set the points
-	this->vecPoints = convertfromvorn(get<0>(vornOut));
+	this->mVecPoints = ConvertFromVorn(get<0>(vorn_out));
 	//set the faces
-	vector<vector<size_t>> vornFaces = get<1>(vornOut);
-	vector<SurfFace> newFaces;
-	size_t Cpoint1;
-	size_t Cpoint2;
+	vector<vector<size_t>> vorn_faces = get<1>(vorn_out);
+	vector<CSurfFace> new_faces;
+	size_t c_point1;
+	size_t c_point2;
 	float quan;
-	vector<shared_ptr<Point>> facePoints;
-	for (vector<vector<size_t>>::iterator face = vornFaces.begin(); face != vornFaces.end(); face++) {
-		Cpoint1 = face->back();
+	vector<shared_ptr<CPoint>> face_points;
+	for (vector<vector<size_t>>::iterator face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
+		c_point1 = face->back();
 		face->pop_back();
-		Cpoint2 = face->back();
+		c_point2 = face->back();
 		face->pop_back();
 		quan = 0; //quan will be defiened later in the program(clean faces) so for now this will be a place holder
-		facePoints = vector<shared_ptr<Point>>();
+		face_points = vector<shared_ptr<CPoint>>();
 		for (vector<size_t>::iterator point = face->begin(); point != face->end(); point++) {
-			facePoints.push_back(this->vecPoints[*point]);
+			face_points.push_back(this->mVecPoints[*point]);
 		}
-		newFaces.push_back(SurfFace(facePoints, quan, pair<size_t, size_t>(Cpoint1, Cpoint2)));
+		new_faces.push_back(CSurfFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
 	}
-	this->vecFaces = newFaces;
+	this->mVecFaces = new_faces;
 
 }
 
-void Surf::cleanEdges() {
-	double box_R = _findBoxR(this->inputPoints);
-	bool isOutOfRadius = false;
-	vector<SurfFace> newFaces;
-	for (vector<SurfFace>::iterator face = this->vecFaces.begin(); face != vecFaces.end(); face++) {
-		for (vector<shared_ptr<Point>>::iterator point = face->points.begin(); point != face->points.end(); point++) {
-			if ((**point).distance(Point(0, 0, 0)) > box_R * 1.1) {
-				isOutOfRadius = true;
+void CSurf::CleanEdges() {
+	double box_R = FindBoxR(this->mInputPoints);
+	bool is_out_of_radius = false;
+	vector<CSurfFace> new_faces;
+	for (vector<CSurfFace>::iterator face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
+		for (vector<shared_ptr<CPoint>>::iterator point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
+			if ((**point).CalcDistance(CPoint(0, 0, 0)) > box_R * 1.1) {
+				is_out_of_radius = true;
 			}
 		}
-		if (isOutOfRadius == false) { //the face is inside the box Radius and should be kept
-			newFaces.push_back(*face);
+		if (is_out_of_radius == false) { //the face is inside the box Radius and should be kept
+			new_faces.push_back(*face);
 		}
 		else
 		{
-			isOutOfRadius = false;
+			is_out_of_radius = false;
 		}
 	}
-	this->vecFaces = newFaces;
+	this->mVecFaces = new_faces;
  }

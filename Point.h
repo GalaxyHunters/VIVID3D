@@ -4,30 +4,30 @@
 
 #include <cmath>
 
-class Point
+class CPoint
 {
 public:
-	inline Point(){}
-	inline Point(const Point &point2) : _x(point2._x), _y(point2._y), _z(point2._z) {}
-	inline Point(float x, float y, float z);
-	inline ~Point();
-	inline double distance(Point p) { return sqrt(pow(this->_x - p.getX(), 2) + pow(this->_y - p.getY(), 2) + pow(this->_z - p.getZ(), 2)); }
-	inline float getX() { return this->_x; }
-	inline float getY() { return this->_y; }
-	inline float getZ() { return this->_z; }
-	inline void setX(float x) { this->_x = x; }
-	inline void setY(float y) { this->_y = y; }
-	inline void setZ(float z) { this->_z = z; }
+	inline CPoint(){}
+	inline CPoint(const CPoint &aPoint2) : mX(aPoint2.mX), mY(aPoint2.mY), mZ(aPoint2.mZ) {} //copy constructor
+	inline CPoint(float x, float y, float z);
+	inline ~CPoint();
+	inline double CalcDistance(CPoint aPoint2) { return sqrt(pow(this->mX - aPoint2.GetX(), 2) + pow(this->mY - aPoint2.GetY(), 2) + pow(this->mZ - aPoint2.GetZ(), 2)); }
+	inline float GetX() { return this->mX; }
+	inline float GetY() { return this->mY; }
+	inline float GetZ() { return this->mZ; }
+	inline void SetX(float aX) { this->mX = aX; }
+	inline void SetY(float aY) { this->mY = aY; }
+	inline void SetZ(float aZ) { this->mZ = aZ; }
 	//float getDis(Point p) { return (); }
 private:
-	float _x, _y, _z;
+	float mX, mY, mZ;
 };
 
-Point::Point(float x, float y, float z) : _x(x), _y(y), _z(z)
+CPoint::CPoint(float x, float y, float z) : mX(x), mY(y), mZ(z)
 {
 }
 
-Point::~Point()
+CPoint::~CPoint()
 {
 }
 

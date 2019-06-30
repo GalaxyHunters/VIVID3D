@@ -8,16 +8,16 @@
 using namespace std;
 using namespace MeshDecimation;
 
-inline vector<Vector3D> convertToVorn(vector<Point> inputPoints) {
-	vector<Vector3D> newVec;
-	for (vector<Point>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
-		newVec.push_back(Vector3D(it->getX(), it->getY(), it->getZ()));
+inline vector<Vector3D> ConvertToVorn(vector<CPoint> inputPoints) {
+	vector<Vector3D> new_vec;
+	for (vector<CPoint>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
+		new_vec.push_back(Vector3D(it->GetX(), it->GetY(), it->GetZ()));
 	}
-	return newVec;
+	return new_vec;
 }
 
-inline pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<Point> inputPoints, double box_R) {
-	vector<Vector3D> vornPoints = convertToVorn(inputPoints);
+inline pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<CPoint> aInputPoints, double aBoxR) {
+	vector<Vector3D> vorn_points = ConvertToVorn(aInputPoints);
 
 	/////////////////////////////////////debug////////////////////////////////////////////////////
 	//cout << vornPoints.size() << endl;
@@ -32,32 +32,33 @@ inline pair<vector<Vector3D>, vector<vector<size_t>>> compute_vornoi(vector<Poin
 	//}
 	//o.close();
 	/////////////////////////////////////////debug over/////////////////////////////////////////////
-	Voronoi3D temp(Vector3D(-box_R, -box_R, -box_R), Vector3D(box_R, box_R, box_R));
-	temp.Build(vornPoints);
-	vornPoints = temp.GetFacePoints();
+
+	Voronoi3D temp(Vector3D(-aBoxR, -aBoxR, -aBoxR), Vector3D(aBoxR, aBoxR, aBoxR));
+	temp.Build(vorn_points);
+	vorn_points = temp.GetFacePoints();
 
 	vector<vector<size_t>> faces;
-	size_t totalCells = temp.GetAllCellFaces().size();
+	size_t total_cells = temp.GetAllCellFaces().size();
 	face_vec cell;
 	point_vec face_points;
-	size_t Cpoint1, Cpoint2;
-	for (size_t i = 0; i < totalCells; i++) {
+	size_t c_point1, c_point2;
+	for (size_t i = 0; i < total_cells; i++) {
 		cell = temp.GetCellFaces(i);
 		for (face_vec::iterator face = cell.begin(); face != cell.end(); face++) {
-			Cpoint1 = get<0>(temp.GetFaceNeighbors(*face));
-			Cpoint2 = get<1>(temp.GetFaceNeighbors(*face));
-			if (!(Cpoint1 < i) && !(Cpoint2 < i)) { //the face doent belong to a cell we read already
+			c_point1 = get<0>(temp.GetFaceNeighbors(*face));
+			c_point2 = get<1>(temp.GetFaceNeighbors(*face));
+			if (!(c_point1 < i) && !(c_point2 < i)) { //the face doent belong to a cell we read already
 				faces.push_back(vector<size_t>());
 				face_points = temp.GetPointsInFace(*face);
 				for (point_vec::iterator point = face_points.begin(); point != face_points.end(); point++){
 					faces.back().push_back(*point);
 				}
-				faces.back().push_back(Cpoint1);
-				faces.back().push_back(Cpoint2);
+				faces.back().push_back(c_point1);
+				faces.back().push_back(c_point2);
 			}
 		}
 	}
-	pair<vector<Vector3D>, vector<vector<size_t>>> output(vornPoints, faces);
+	pair<vector<Vector3D>, vector<vector<size_t>>> output(vorn_points, faces);
 	return output;
 }
 
@@ -66,41 +67,41 @@ inline void CallBack(const char * msg)
 	cout << msg;
 }
 
-inline pair<vector<Point>, vector<IndexedFace>> decimateMesh(vector<Point> points, vector<IndexedFace> faces, int targetVerticesN, int targetTrianglesN, float maxError) {
+inline pair<vector<CPoint>, vector<CIndexedFace>> decimateMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) {
 	//write the data to vec3 format
 	vector< Vec3<float>> vertices;
 	vector< Vec3<int>> triangles;
-	for (vector<Point>::iterator pIt = points.begin(); pIt != points.end(); pIt++) {
-		vertices.push_back(Vec3<float>(pIt->getX(), pIt->getY(), pIt->getZ()));
+	for (vector<CPoint>::iterator pIt = aPoints.begin(); pIt != aPoints.end(); pIt++) {
+		vertices.push_back(Vec3<float>(pIt->GetX(), pIt->GetY(), pIt->GetZ()));
 	}
-	for (vector<IndexedFace>::iterator fIt = faces.begin(); fIt != faces.end(); fIt++) {
-		triangles.push_back(Vec3<int>((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->getColor()));
+	for (vector<CIndexedFace>::iterator fIt = aFaces.begin(); fIt != aFaces.end(); fIt++) {
+		triangles.push_back(Vec3<int>((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->GetColor()));
 	}
 	//decimate model
 	MeshDecimator myMDecimator;
 	myMDecimator.SetCallBack(&CallBack);
 	myMDecimator.Initialize(vertices.size(), triangles.size(), &vertices[0], &triangles[0]);
-	myMDecimator.Decimate(targetVerticesN, targetTrianglesN, maxError);
+	myMDecimator.Decimate(aTargetVerticesN, aTargetTrianglesN, aMaxError);
 
 	//get decimated data
-	vector< Vec3<Float> > decimatedPoints;
-	vector< Vec3<int> > decimatedtriangles;
-	decimatedPoints.resize(myMDecimator.GetNVertices());
-	decimatedtriangles.resize(myMDecimator.GetNTriangles());
+	vector< Vec3<Float> > decimated_points;
+	vector< Vec3<int> > decimated_triangles;
+	decimated_points.resize(myMDecimator.GetNVertices());
+	decimated_triangles.resize(myMDecimator.GetNTriangles());
 
-	myMDecimator.GetMeshData(&decimatedPoints[0], &decimatedtriangles[0]);
+	myMDecimator.GetMeshData(&decimated_points[0], &decimated_triangles[0]);
 
 	myMDecimator.~MeshDecimator();
 	//write the data to Mesh format
-	vector<Point> outPoints;
-	vector<IndexedFace> outFaces;
-	for (vector<Vec3<float>>::iterator pIt = decimatedPoints.begin(); pIt != decimatedPoints.end(); pIt++) {
-		outPoints.push_back(Point(pIt->X(), pIt->Y(), pIt->Z()));
+	vector<CPoint> out_points;
+	vector<CIndexedFace> out_faces;
+	for (vector<Vec3<float>>::iterator pIt = decimated_points.begin(); pIt != decimated_points.end(); pIt++) {
+		out_points.push_back(CPoint(pIt->X(), pIt->Y(), pIt->Z()));
 	}
-	for (vector<Vec3<int>>::iterator fIt = decimatedtriangles.begin(); fIt != decimatedtriangles.end(); fIt++) {
-		outFaces.push_back(IndexedFace((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->quan));
+	for (vector<Vec3<int>>::iterator fIt = decimated_triangles.begin(); fIt != decimated_triangles.end(); fIt++) {
+		out_faces.push_back(CIndexedFace((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->quan));
 	}
-	pair<vector<Point>, vector<IndexedFace>> output(outPoints, outFaces);
+	pair<vector<CPoint>, vector<CIndexedFace>> output(out_points, out_faces);
 	return output;
 }
 

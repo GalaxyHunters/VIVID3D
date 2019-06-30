@@ -90,7 +90,7 @@ void CSurf::CleanPoints() {
 }
 
 //----------------------------------------remove doubles functions ----------------------------------------------------------------------
-bool CompPoint(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
+bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 	if (abs((*aObj1).GetX() - (*aObj2).GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
 		if (abs((*aObj1).GetY() - (*aObj2).GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
 			if (abs((*aObj1).GetZ() - (*aObj2).GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
@@ -114,7 +114,7 @@ bool CompPoint(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 
 void CSurf::RemoveDoublePoints() {
 	//sort the array
-	std::sort(this->mVecPoints.begin(), this->mVecPoints.end(), CompPoint);
+	std::sort(this->mVecPoints.begin(), this->mVecPoints.end(), CompPointRD);
 	map < std::shared_ptr<CPoint>, std::shared_ptr<CPoint>> old_new_points; // will hold the new pointer fiting to each point
 	vector<shared_ptr<CPoint>> cleaned_points;
 	size_t j;

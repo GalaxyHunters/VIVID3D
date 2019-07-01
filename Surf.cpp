@@ -125,6 +125,10 @@ void CSurf::RemoveDoublePoints() {
 		while ((*this->mVecPoints[i]).CalcDistance((*this->mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			old_new_points[this->mVecPoints[j]] = this->mVecPoints[i];
 			j += 1;
+			if (j >= this->mVecPoints.size()) 
+			{
+				break;
+			}
 			//cout << "removed point" << endl;
 		}
 		i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).

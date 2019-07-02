@@ -64,7 +64,7 @@ int main() {
 	CSurf surf = surf.CreateSurf(points, mask, quan, Vmin, Vmax);
 	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-	//mesh.decimation(0.5, 1);
+	//mesh.Decimation(0.5, 1);
 	mesh << ("D:\\alpa\\models\\testCode_decimation_pyramid");
 
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------

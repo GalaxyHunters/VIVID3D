@@ -75,7 +75,7 @@ inline pair<vector<CPoint>, vector<CIndexedFace>> decimateMesh(vector<CPoint> aP
 		vertices.push_back(Vec3<float>(pIt->GetX(), pIt->GetY(), pIt->GetZ()));
 	}
 	for (vector<CIndexedFace>::iterator fIt = aFaces.begin(); fIt != aFaces.end(); fIt++) {
-		triangles.push_back(Vec3<int>((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->GetColor()));
+		triangles.push_back(Vec3<int>((*fIt)[0], (*fIt)[1], (*fIt)[2])); //, fIt->GetColor()
 	}
 	//decimate model
 	MeshDecimator myMDecimator;
@@ -94,12 +94,14 @@ inline pair<vector<CPoint>, vector<CIndexedFace>> decimateMesh(vector<CPoint> aP
 	myMDecimator.~MeshDecimator();
 	//write the data to Mesh format
 	vector<CPoint> out_points;
+	out_points.clear();
 	vector<CIndexedFace> out_faces;
+	//out_faces.clear();
 	for (vector<Vec3<float>>::iterator pIt = decimated_points.begin(); pIt != decimated_points.end(); pIt++) {
 		out_points.push_back(CPoint(pIt->X(), pIt->Y(), pIt->Z()));
 	}
 	for (vector<Vec3<int>>::iterator fIt = decimated_triangles.begin(); fIt != decimated_triangles.end(); fIt++) {
-		out_faces.push_back(CIndexedFace((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->quan));
+		out_faces.push_back(CIndexedFace((*fIt)[0], (*fIt)[1], (*fIt)[2], 0.5)); //, fIt->quan
 	}
 	pair<vector<CPoint>, vector<CIndexedFace>> output(out_points, out_faces);
 	return output;

@@ -94,7 +94,7 @@ bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 	if (abs((*aObj1).GetX() - (*aObj2).GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
 		if (abs((*aObj1).GetY() - (*aObj2).GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
 			if (abs((*aObj1).GetZ() - (*aObj2).GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
-				return true;
+				return false;
 			}
 			else
 			{ // we compare the points by z to see who needs to go first
@@ -122,6 +122,10 @@ void CSurf::RemoveDoublePoints() {
 		j = i + 1;
 		cleaned_points.push_back(this->mVecPoints[i]); // push the point to the cleaned data
 		old_new_points[this->mVecPoints[i]] = this->mVecPoints[i];
+		if (j >= mVecPoints.size())
+		{
+			break;
+		}
 		while ((*this->mVecPoints[i]).CalcDistance((*this->mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			old_new_points[this->mVecPoints[j]] = this->mVecPoints[i];
 			j += 1;
@@ -218,7 +222,7 @@ bool CompPointData_t(CPointData_t aObj1, CPointData_t aObj2) {
 	if (abs(aObj1.mPoint.GetX() - aObj2.mPoint.GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
 		if (abs(aObj1.mPoint.GetY() - aObj2.mPoint.GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
 			if (abs(aObj1.mPoint.GetZ() - aObj2.mPoint.GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
-				return true;
+				return false;
 			}
 			else 
 			{ // we compare the points by z to see who needs to go first
@@ -274,8 +278,16 @@ vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t> data) {
 	for (size_t i = 0; i < data.size(); i++) {
 		j = i+1;
 		cleaned_data.push_back(data[i]); // push the point to the cleaned data
+		if (j >= data.size())
+		{
+			break;
+		}
 		while (data[i].mPoint.CalcDistance(data[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			j += 1;
+			if (j >= data.size())
+			{
+				break;
+			}
 			//cout << "removed point" << endl;
 		}
 		i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).

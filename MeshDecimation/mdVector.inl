@@ -55,6 +55,7 @@ namespace MeshDecimation
 		this->m_data[0] = rhs.m_data[0]; 
 		this->m_data[1] = rhs.m_data[1]; 
 		this->m_data[2] = rhs.m_data[2]; 
+		this->mQuan = rhs.mQuan;
 	}
 	template <typename T>	
 	inline  void Vec3<T>::operator+=(const Vec3 & rhs)

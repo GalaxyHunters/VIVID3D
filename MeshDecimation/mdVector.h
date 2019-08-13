@@ -51,10 +51,10 @@ namespace MeshDecimation
 							Vec3();
 							Vec3(T a);
 							Vec3(T x, T y, T z);
-							Vec3(T x, T y, T z, float quan);
+							Vec3(T x, T y, T z, double quan);
 							Vec3(const Vec3 & rhs);
 		/*virtual*/			~Vec3(void);
-		float quan;
+		double mQuan;
 	private:
 		T					m_data[3];
 	};

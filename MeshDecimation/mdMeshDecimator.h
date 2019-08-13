@@ -71,7 +71,7 @@ namespace MeshDecimation
         inline size_t                           GetNVertices()const {return m_nVertices;};
         inline size_t                           GetNTriangles() const {return m_nTriangles;};
         inline size_t                           GetNEdges() const {return m_nEdges;};
-        void                                    GetMeshData(Vec3<Float> * points, Vec3<int> * triangles) const;
+        void                                    GetMeshData(std::vector<Vec3<Float>> * apPoints, std::vector<Vec3<int>> * apTriangles) const;
         void                                    ReleaseMemory();
         void                                    Initialize(size_t nVertices, size_t nTriangles, 
                                                            Vec3<Float> *  points, 

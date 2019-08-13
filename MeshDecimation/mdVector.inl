@@ -147,14 +147,14 @@ namespace MeshDecimation
 		m_data[0] = x;
 		m_data[1] = y;
 		m_data[2] = z;
+		mQuan = 0.2 ;
 	}
 	template <typename T>
-	inline Vec3<T>::Vec3(T x, T y, T z, float quan)
+	inline Vec3<T>::Vec3(T x, T y, T z, double quan): mQuan(quan)
 	{
 		m_data[0] = x;
 		m_data[1] = y;
 		m_data[2] = z;
-		this->quan = quan;
 	}
 	template <typename T>
 	inline Vec3<T>::Vec3(const Vec3 & rhs)
@@ -162,6 +162,7 @@ namespace MeshDecimation
 		m_data[0] = rhs.m_data[0];
 		m_data[1] = rhs.m_data[1];
 		m_data[2] = rhs.m_data[2];
+		mQuan = rhs.mQuan;
 	}
 	template <typename T>
 	inline Vec3<T>::~Vec3(void){};

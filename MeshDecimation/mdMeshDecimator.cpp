@@ -25,6 +25,7 @@ namespace MeshDecimation
     {
         this->ReleaseMemory();
     }
+
     void MeshDecimator::ReleaseMemory()
     {
         delete [] m_trianglesTags;
@@ -45,6 +46,7 @@ namespace MeshDecimation
         m_nEdges                    = 0;
         m_trianglesTags             = 0;
     }
+
     void MeshDecimator::Initialize(size_t nVertices, size_t nTriangles,   Vec3<Float> * points,  Vec3<int> * triangles)
     {
         m_nVertices         = nVertices;
@@ -79,7 +81,7 @@ namespace MeshDecimation
                 edge.m_v2 = tri[(k+1)%3];
                 m_vertices[edge.m_v1].m_triangles.Insert(t);
                 idEdge = GetEdge(edge.m_v1, edge.m_v2);
-                if (idEdge == -1)
+                if (-1 == idEdge)
                 {
                     m_edges.push_back(edge);
                     m_vertices[edge.m_v1].m_edges.Insert(nEdges);
@@ -275,15 +277,16 @@ namespace MeshDecimation
         return false;
     }
 
-    void MeshDecimator::GetMeshData(Vec3<Float> * points, Vec3<int> * triangles) const
+    void MeshDecimator::GetMeshData(std::vector<Vec3<Float>> * apPoints, std::vector<Vec3<int>> * apTriangles) const
     {
-        int * map = new int [m_nPoints];
+		std::vector<int> map(m_nPoints);
+		//int * map = new int [m_nPoints];
         int counter = 0;
         for (size_t v = 0; v < m_nPoints; ++v)
         {
-            if ( m_vertices[v].m_tag )
+            if (m_vertices[v].m_tag) // m_vertices[v].m_tag
             {
-                points[counter] = m_points[v];
+                apPoints->push_back(m_points[v]);
                 map[v] = counter++;
             }
         }
@@ -292,11 +295,7 @@ namespace MeshDecimation
         {
             if ( m_trianglesTags[t] )
             {
-                triangles[counter].X() = map[m_triangles[t].X()];
-                triangles[counter].Y() = map[m_triangles[t].Y()];
-                triangles[counter].Z() = map[m_triangles[t].Z()];
-				triangles[counter].quan = m_triangles[t].quan;
-                counter++;
+				apTriangles->push_back(Vec3<int>(map[m_triangles[t].X()], map[m_triangles[t].Y()], map[m_triangles[t].Z()], m_triangles[t].mQuan));
             }
         }
         //delete [] map;
@@ -530,7 +529,7 @@ namespace MeshDecimation
         int a, b;
         int idEdge1;
         int idEdge2;
-        int idEdgeV1V2;
+        int idEdgeV1V2 = 0;
         for(size_t itE1 = 0; itE1 < m_vertices[v1].m_edges.Size(); ++itE1)
         {
             idEdge1 = m_vertices[v1].m_edges[itE1];
@@ -557,7 +556,7 @@ namespace MeshDecimation
                 idEdgeV1V2 = idEdge1;
             }
         }
-        if (vertices.size() <= 4 || ( m_vertices[v1].m_onBoundary && m_vertices[v2].m_onBoundary && !m_edges[idEdgeV1V2].m_onBoundary))
+        if (vertices.size() <= 4 || ( m_vertices[v1].m_onBoundary && m_vertices[v2].m_onBoundary && !m_edges[idEdgeV1V2].m_onBoundary)) // 
         {
             return false;
         }

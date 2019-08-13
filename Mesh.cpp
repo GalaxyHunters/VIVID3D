@@ -5,9 +5,9 @@ using namespace boost::algorithm;
 
 CMesh::~CMesh() {}
 
-CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, float aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
+CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
 
-Color_t static Quan2Color(float aQuan) {
+Color_t static Quan2Color(cord_t aQuan) {
 	ColorMap output;
 	return output.GetColor(aQuan);
 }
@@ -22,7 +22,7 @@ bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
 static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 
-void CMesh::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, Color_t aColor, float aAlpha)
+void CMesh::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, Color_t aColor, cord_t aAlpha)
 {
 	aMTLFile << "newmtl surf_" + to_string(*apMtlCounter) + "\n" + \
 		"Ns 96.078\n" + \
@@ -99,14 +99,17 @@ void CMesh::operator<<(string aOutput) { //TODO get the color sorted(a way to co
 	m.close();
 }
 
-void CMesh::Decimation(float aVerticlePercent, float aMaxError) 
+void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError) 
 {
 	//triangulation
 	this->Triangulation();
+	//-------------------------debug
+	operator<<("D:\\alpa\\models\\testCode_triangles_pyramid");
+	//------------------------------------------------
 	//call decimation from utils
-	int targetVerticesN = aVerticlePercent * this->mPoints.size();
-	int targetTrianglesN = aVerticlePercent * this->mFaces.size();
-	pair<vector<CPoint>, vector<CIndexedFace>> temp = decimateMesh(this->mPoints, this->mFaces, targetVerticesN, targetTrianglesN, aMaxError);
+	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());
+	int targetTrianglesN = int(aVerticlePercent * this->mFaces.size());
+	pair<vector<CPoint>, vector<CIndexedFace>> temp = DecimateMesh(this->mPoints, this->mFaces, targetVerticesN, targetTrianglesN, aMaxError);
 	this->mPoints = get<0>(temp);
 	this->mFaces = get<1>(temp);
 }
@@ -123,8 +126,10 @@ void CMesh::Triangulation() {
 //geters seters
 
 string CMesh::GetLabel() { return this->mLabel; }
-float CMesh::GetAlpha() { return this->mAlpha; }
+cord_t CMesh::GetAlpha() { return this->mAlpha; }
 vector<CPoint> CMesh::GetPoints() { return this->mPoints; }
 vector<CIndexedFace> CMesh::GetFaces() { return this->mFaces; }
+void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
+void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
 void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
-void CMesh::SetAlpha(float aAlpha) { this->mAlpha = aAlpha; }
+void CMesh::SetAlpha(cord_t aAlpha) { this->mAlpha = aAlpha; }

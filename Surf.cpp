@@ -1,7 +1,7 @@
 #include "Surf.h"
 using namespace std;
 
-static const float DoublePointThreshHold = 0.0001;
+static const cord_t DoublePointThreshHold = 0.0001;
 
 CSurf::CSurf() {};
 
@@ -30,7 +30,7 @@ CSurf::CSurf(const CSurf &surf2) {
 	}
 }
 
-CSurf CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<float> aQuan, float aVMin, float aVMax) {
+CSurf CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
 	CSurf surf;
 	surf.SetInputPoints(aInputPoints);
 	surf.SetMask(aMask);
@@ -42,7 +42,7 @@ CSurf CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<
 	return surf;
 }
 
-vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>> aMask, vector<float> aQuan, float aVMin, float aVMax) {
+vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
 	CSurf temp;
 	temp.SetInputPoints(aInputPoints);
 	temp.SetQuan(temp.NormQuan(aQuan, aVMin, aVMax));
@@ -62,13 +62,13 @@ vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>
 
 void CSurf::CleanFaces(vector<bool> aMask) {
 	vector<CSurfFace> new_faces;
-	int maskLen = aMask.size();
-	int c_point1;
-	int c_point2;
+	size_t mask_len = aMask.size();
+	size_t c_point1;
+	size_t c_point2;
 	for (vector<CSurfFace>::iterator it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
 		c_point1 = get<0>(it->mCPoints);
 		c_point2 = get<1>(it->mCPoints);
-		if (maskLen > c_point1 && maskLen > c_point2) { //the indexs are both in range and not a part of the box
+		if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
 			if (aMask[c_point1] != aMask[c_point2]) { //the face is a part of the surf
 				new_faces.push_back(*it);
 				new_faces.back().mColor = (this->mQuan[c_point1] + this->mQuan[c_point2]) / 2;
@@ -163,8 +163,8 @@ pair<vector<size_t>, vector<size_t>> CSurf::SetPinPout() { //define pin and pout
 	vector<size_t> p_in;
 	map<size_t, bool> p_in_map;
 	map<size_t, bool> p_out_map;
-	int c_point1;
-	int c_point2;
+	size_t c_point1;
+	size_t c_point2;
 	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
 		c_point1 = get<0>(it->mCPoints);
 		c_point2 = get<1>(it->mCPoints);
@@ -195,7 +195,7 @@ pair<vector<size_t>, vector<size_t>> CSurf::SetPinPout() { //define pin and pout
 
 void CSurf::UpdateInputPoints(vector<size_t> aPOut, vector<size_t> aPIn) {
 	vector<CPoint> new_points;
-	vector<float> quan;
+	vector<cord_t> quan;
 	for (vector<size_t>::iterator it = aPOut.begin(); it != aPOut.end(); it++) {
 		new_points.push_back(this->mInputPoints[*it]);
 		quan.push_back(this->mQuan[*it]);
@@ -240,7 +240,7 @@ bool CompPointData_t(CPointData_t aObj1, CPointData_t aObj2) {
 	}
 }
 
-pair<vector<size_t>, vector<size_t>> CSurf::CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<float> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut)
+pair<vector<size_t>, vector<size_t>> CSurf::CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<cord_t> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut)
 {
 	vector<CPointData_t> data;
 	data.clear();
@@ -295,9 +295,9 @@ vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t> data) {
 	
 	return cleaned_data;
 }
-void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<float> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
+void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<cord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
 {
-	float x, y, z;
+	cord_t x, y, z;
 	(*apPVec).push_back(*apNewIndex);
 	x = (this->mInputPoints[aCPoint1].GetX() * 2 + this->mInputPoints[aCPoint2].GetX()) / 3.0;
 	y = (this->mInputPoints[aCPoint1].GetY() * 2 + this->mInputPoints[aCPoint2].GetY()) / 3.0;
@@ -322,7 +322,7 @@ pair<vector<size_t>, vector<size_t>> CSurf::Stage2AddPoints(vector<size_t> aPOut
 	vector<CPoint> new_points;
 	vector<size_t> new_in;
 	vector<size_t> new_out;
-	vector<float> new_quan;
+	vector<cord_t> new_quan;
 	size_t new_index = 0; // the index for the new point to be added
 	//go over pout
 	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
@@ -369,12 +369,12 @@ void CSurf::SmoothSurf() {
 	//done.
 }
 
-vector<float> CSurf::NormQuan(vector<float> aQuan, float aVMin, float aVMax) {
+vector<cord_t> CSurf::NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
 	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0
-		aQuan = vector<float>(aQuan.size(), 1);
+		aQuan = vector<cord_t>(aQuan.size(), 1);
 		return aQuan;
 	}
-	for (vector<float>::iterator it = aQuan.begin(); it != aQuan.end(); it++) {
+	for (vector<cord_t>::iterator it = aQuan.begin(); it != aQuan.end(); it++) {
 		*it = 1- ((*it - aVMax) / (aVMin - aVMax));
 		if (*it > 1) *it = 1;
 		if (*it < 0) *it = 0;
@@ -383,7 +383,7 @@ vector<float> CSurf::NormQuan(vector<float> aQuan, float aVMin, float aVMax) {
 }
 
 
-const CMesh CSurf::ToMesh(string aLabel, float aAlpha) {
+const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
 	vector<CPoint> points;
 	size_t counter = 0;
 	map < std::shared_ptr<CPoint>, size_t> indexes;
@@ -394,17 +394,22 @@ const CMesh CSurf::ToMesh(string aLabel, float aAlpha) {
 	}
 	vector<CIndexedFace> faces;
 	vector<size_t> face_points;
+	set<size_t> set_points;
 	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
 		for (vector<shared_ptr<CPoint>>::iterator point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
-			face_points.push_back(indexes[*point]);
+			if (set_points.count(indexes[*point]) == 0) {
+				face_points.push_back(indexes[*point]);
+				set_points.insert(indexes[*point]);
+			}
 		}
 		faces.push_back(CIndexedFace(face_points, it->mColor));
 		face_points = {};
+		set_points.clear();
 	}
 	return CMesh(points, faces, aLabel, aAlpha);
 }
 
-void CSurf::ExportToObj(string aOutput, string aLabel, float aAlpha) {
+void CSurf::ExportToObj(string aOutput, string aLabel, cord_t aAlpha) {
 	CMesh mesh = ToMesh(aLabel, aAlpha);
 	mesh.operator<< (aOutput);
 }
@@ -441,7 +446,7 @@ void CSurf::RunVorn() {
 	vector<CSurfFace> new_faces;
 	size_t c_point1;
 	size_t c_point2;
-	float quan;
+	cord_t quan;
 	vector<shared_ptr<CPoint>> face_points;
 	for (vector<vector<size_t>>::iterator face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
 		c_point1 = face->back();

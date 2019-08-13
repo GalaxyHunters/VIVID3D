@@ -6,7 +6,7 @@
 
 #include "Mesh.h"
 #include "SurfFace.h"
-#include "Utils.h"
+#include "External.h"
 
 #include <iostream>
 #include <map>
@@ -15,10 +15,10 @@ using namespace std;
 class CPointData_t { // used to sort and clean the voronoi input points
 public:
 	CPoint mPoint;
-	float mQuan;
+	cord_t mQuan;
 	bool mIsIn;
 	inline CPointData_t() {};
-	inline CPointData_t(CPoint aPoint, float aQuan, bool aIsIn) : mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+	inline CPointData_t(CPoint aPoint, cord_t aQuan, bool aIsIn) : mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
 class CSurf{
@@ -27,9 +27,9 @@ private:
 	vector<CSurfFace> mVecFaces;
 	vector<CPoint> mInputPoints; // for smooth
 	vector<bool> mMask; //for smooth
-	vector<float> mQuan; // for smooth
+	vector<cord_t> mQuan; // for smooth
  
-	vector<float> NormQuan(vector<float> aQuan, float aVMin, float aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+	vector<cord_t> NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
 	//vorn function:
 	void RunVorn();
@@ -43,26 +43,26 @@ private:
 	void UpdateInputPoints(vector<size_t> aPOut, vector<size_t> aPIn);
 	void MakeMask(size_t aPOutSize, size_t aPInSize);
 	pair<vector<size_t>, vector<size_t>> Stage2AddPoints(vector<size_t> aPOut, vector<size_t> aPIn);
-	void AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<float> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
-	pair<vector<size_t>, vector<size_t>> CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<float> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut);
+	void AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<cord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
+	pair<vector<size_t>, vector<size_t>> CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<cord_t> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut);
 	vector<CPointData_t> RemoveDoublesVornInput(vector<CPointData_t> aData);
 
 	CSurf();
 	
 public:	
 	CSurf(const CSurf &surf); //copy constructor
-	static CSurf CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<float> aQuan, float aVMin, float aVMax);
-	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>> aMask, vector<float> aQuan, float aVMin, float aVMax);
+	static CSurf CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
+	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	void SmoothSurf();
-	const CMesh ToMesh(string aLabel, float aAlpha);
-	void ExportToObj(string aOutputFile, string aLabel, float aAlpha);
+	const CMesh ToMesh(string aLabel, cord_t aAlpha);
+	void ExportToObj(string aOutputFile, string aLabel, cord_t aAlpha);
 
 	inline vector<CPoint> GetInputPoints() { return this->mInputPoints; }
 	inline vector<bool> GetMask() { return this->mMask; }
-	inline vector<float> GetQuan() { return this->mQuan; }
+	inline vector<cord_t> GetQuan() { return this->mQuan; }
 	inline void SetInputPoints(vector<CPoint> aInputPoints) { this->mInputPoints = aInputPoints; }
 	inline void SetMask(vector<bool> aMask) { this->mMask = aMask; }
-	inline void SetQuan(vector<float> aQuan) { this->mQuan = aQuan; }
+	inline void SetQuan(vector<cord_t> aQuan) { this->mQuan = aQuan; }
 	inline vector<shared_ptr<CPoint>> GetVecPoints() { return this->mVecPoints; }
 	inline vector<CSurfFace> GetVecfaces() { return this->mVecFaces; }
 
@@ -70,10 +70,10 @@ public:
 
 extern "C"
 {
-	inline CSurf Surf_new(vector<CPoint> InputPoints, vector<bool> mask, vector<float> quan, float Vmin, float Vmax) { return CSurf::CreateSurf(InputPoints, mask, quan, Vmin, Vmax); }
+	inline CSurf Surf_new(vector<CPoint> InputPoints, vector<bool> mask, vector<cord_t> quan, cord_t Vmin, cord_t Vmax) { return CSurf::CreateSurf(InputPoints, mask, quan, Vmin, Vmax); }
 	inline void Surf_smooth(CSurf surf) { surf.SmoothSurf(); }
-	inline const CMesh Surf_to_mesh(CSurf surf, string label, float alpha) { return surf.ToMesh(label, alpha); }
-	inline void Surf_exportToObj(CSurf surf, string output, string label, float alpha) { surf.ExportToObj(output, label, alpha); }
+	inline const CMesh Surf_to_mesh(CSurf surf, string label, cord_t alpha) { return surf.ToMesh(label, alpha); }
+	inline void Surf_exportToObj(CSurf surf, string output, string label, cord_t alpha) { surf.ExportToObj(output, label, alpha); }
 }
 
 #endif

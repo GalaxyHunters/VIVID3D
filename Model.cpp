@@ -9,7 +9,7 @@ CModel::CModel(vector<CMesh> aMeshes) {
 	this->mMeshes = aMeshes;
 }
 
-Color_t static Quan2Color(float aQuan) {
+Color_t static Quan2Color(cord_t aQuan) {
 	ColorMap output;
 	return output.GetColor(aQuan);
 }
@@ -24,7 +24,7 @@ bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
 static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 
-void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, Color_t aColor, float aAlpha)
+void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, Color_t aColor, cord_t aAlpha)
 {
 	aMTLFile << "newmtl surf_" + int2str(*apMtlCounter) + "\n" + \
 		"Ns 96.078\n" + \

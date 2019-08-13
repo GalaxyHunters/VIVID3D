@@ -10,8 +10,8 @@ int main() {
 	std::cout << "starting program" << endl;
 	vector<CPoint> points;
 	vector<bool> mask;
-	vector<float> quan;
-	float Vmin, Vmax;
+	vector<cord_t> quan;
+	cord_t Vmin, Vmax;
 
 //----------------------------------------------------------------------pyramid
 
@@ -64,9 +64,9 @@ int main() {
 	CSurf surf = surf.CreateSurf(points, mask, quan, Vmin, Vmax);
 	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-	//mesh.Decimation(0.5, 1);
+	mesh.Decimation(0.15, 0.4);
 	mesh << ("D:\\alpa\\models\\testCode_decimation_pyramid");
-
+	cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");
 	//Vmax = *max_element(temp.quan.begin(), temp.quan.end());
@@ -121,4 +121,37 @@ int main() {
 //	//surf.smoothSurf();
 //	surf.exportToObj("D:\\alpa\\models\\gal_07_fullRvir_smooth\\gal_07_lowColor_1e-27", "Vela_07_1e-27", 1);
 //	cout << "1e-27 done" << endl;
+//////////////////////////////////////////////////////////debug triangulation test///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//string line;
+	//ifstream test_file("D:\\alpa\\models\\cow.obj",  ios::in);
+	//CMesh mesh;
+	//vector<CPoint> mesh_points;
+	//vector<CIndexedFace> mesh_faces;
+	//CPoint point;
+	//std::string::size_type sz;
+	//size_t x, y, z;
+	//while (getline(test_file, line))
+	//{
+	//	if (line.at(0) == 'v') {
+	//		line = line.substr(2);
+	//		point.SetX(std::stod(line, &sz));
+	//		point.SetY(std::stod(line = line.substr(sz), &sz));
+	//		point.SetZ(std::stod(line.substr(sz)));
+	//		mesh_points.push_back(CPoint(point));
+	//	}
+	//	if (line.at(0) == 'f') {
+	//		line = line.substr(2);
+	//		x = std::stoi(line, &sz) - 1;
+	//		y = std::stoi(line = line.substr(sz), &sz) - 1;
+	//		z = std::stoi(line.substr(sz)) - 1;
+	//		mesh_faces.push_back(CIndexedFace(x, y, z, 0));
+	//	}
+	//}
+	//test_file.close();
+	//mesh.SetAlpha(1);
+	//mesh.SetFaces(mesh_faces);
+	//mesh.SetLabel("test");
+	//mesh.SetPoints(mesh_points);
+	//mesh.Decimation(0.3, 0.01);
+	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
 }

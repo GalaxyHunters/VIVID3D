@@ -19,7 +19,7 @@ private:
 
 	//output functions
 	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * aMesh, size_t * mtl_counter, size_t aPointsCounter);
-	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, float aAlpha);
+	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, cord_t aAlpha);
 	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
 };
 

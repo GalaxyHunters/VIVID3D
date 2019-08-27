@@ -2,7 +2,7 @@
 #define UTILS_H
 
 #include "Point.h"
-#include "Voronoi3D.hpp"
+#include "huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
 #include "MeshDecimation/mdMeshDecimator.h"
 #include "IndexedFace.h"
 

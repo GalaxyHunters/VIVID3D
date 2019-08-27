@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <map>
+
 using namespace std;
 
 class CPointData_t { // used to sort and clean the voronoi input points
@@ -33,7 +34,7 @@ private:
 
 	//vorn function:
 	void RunVorn();
-	void CleanFaces(vector<bool> aMask); // clean the unneaded faces(by mask)
+	void CleanFaces(vector<bool> aMask); // clean the unneeded faces(by mask)
 	void CleanPoints(); // removes all the unused points
 	void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)
 	void RemoveDoublePoints(); // remove all the double face points from the model

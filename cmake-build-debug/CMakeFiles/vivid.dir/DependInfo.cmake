@@ -5,9 +5,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/r3d/r3d.c" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/r3d/r3d.c" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.obj"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
@@ -15,43 +15,43 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../src/MeshDecimation"
   "../src/huji-rich-Elad3DFast/source/3D/GeometryCommon"
   "../src/huji-rich-Elad3DFast/source/misc"
-  "/Users/Tussbaum/Development/boost_1_71_0"
+  "C:/Users/nafta/boost_1_70_0"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/Tussbaum/Development/Vivid/src/External.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/External.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/Mesh.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Mesh.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/MeshDecimation/mdMeshDecimator.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/MeshDecimation/mdMeshDecimator.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/Model.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Model.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/Surf.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Surf.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/bisection.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/bisection.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/func_1_var.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/horner.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/horner.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/int2str.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/int2str.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/io3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/io3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/serializable.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/serializable.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/simple_io.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/misc/utils.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/utils.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o"
-  "/Users/Tussbaum/Development/Vivid/src/main.cpp" "/Users/Tussbaum/Development/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/main.cpp.o"
+  "C:/Users/nafta/Vivid/src/External.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/External.cpp.obj"
+  "C:/Users/nafta/Vivid/src/Mesh.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Mesh.cpp.obj"
+  "C:/Users/nafta/Vivid/src/MeshDecimation/mdMeshDecimator.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/MeshDecimation/mdMeshDecimator.cpp.obj"
+  "C:/Users/nafta/Vivid/src/Model.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Model.cpp.obj"
+  "C:/Users/nafta/Vivid/src/Surf.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/Surf.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/bisection.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/bisection.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/func_1_var.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/horner.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/horner.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/int2str.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/int2str.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/io3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/io3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/serializable.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/serializable.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/simple_io.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/simple_io.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/utils.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/misc/utils.cpp.obj"
+  "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.obj"
+  "C:/Users/nafta/Vivid/src/main.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir/src/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
@@ -59,7 +59,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src/MeshDecimation"
   "../src/huji-rich-Elad3DFast/source/3D/GeometryCommon"
   "../src/huji-rich-Elad3DFast/source/misc"
-  "/Users/Tussbaum/Development/boost_1_71_0"
+  "C:/Users/nafta/boost_1_70_0"
   )
 
 # Targets to which this target links.

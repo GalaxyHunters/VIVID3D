@@ -155,3 +155,10 @@ int main() {
 	//mesh.Decimation(0.3, 0.01);
 	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
 }
+
+#include <pybind11/pybind11.h>
+
+int add(int i, int j) {
+    return i + j;
+}
+

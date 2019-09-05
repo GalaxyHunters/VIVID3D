@@ -1,0 +1,10 @@
+"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_CXX_COMPILER=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe" -G "CodeBlocks - NMake Makefiles" C:\Users\nafta\Vivid
+CMake Error at pybind11/tools/FindPythonLibsNew.cmake:122 (message):
+  Python config failure: Python is 64-bit, chosen compiler is 32-bit
+Call Stack (most recent call first):
+  pybind11/tools/pybind11Tools.cmake:16 (find_package)
+  pybind11/CMakeLists.txt:36 (include)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/nafta/Vivid/cmake-build-release/CMakeFiles/CMakeOutput.log".

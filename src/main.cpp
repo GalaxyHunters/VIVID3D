@@ -156,9 +156,9 @@ int main() {
 	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
 }
 
-#include <pybind11/pybind11.h>
+/*#include <pybind11/pybind11.h>
 
 int add(int i, int j) {
     return i + j;
-}
+}*/
 

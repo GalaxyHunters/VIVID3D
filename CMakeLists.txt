@@ -11,14 +11,16 @@ project(vivid)
 set(CMAKE_CAA_STANDARD 14)
 
 
-
+#[[
 set(-DCMAKE_GENERATOR_PLATFORM=x64)
-set(CMAKE_CXX_FLAGS "-m64")
-set (CMAKE_C_FLAGS "-m64")
+
+#set(CMAKE_CXX_FLAGS -m64)
+#set (CMAKE_C_FLAGS -m64)
 set(-DCMAKE_CL_64=1 )
 set(-Ax64)
-set(CMAKE_CXX_FLAGS DCMAKE_CL_64=1  DCMAKE_GENERATOR_PLATFORM=x64 Ax64)
-add_subdirectory(pybind11)
+set(CMAKE_CXX_FLAGS -DCMAKE_CL_64=1  -DCMAKE_GENERATOR_PLATFORM=x64 -Ax64)]]
+
+#add_subdirectory(pybind11)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)

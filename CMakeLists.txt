@@ -8,19 +8,9 @@ execute_process(
 
 project(vivid)
 
-set(CMAKE_CAA_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 
-
-#[[
-set(-DCMAKE_GENERATOR_PLATFORM=x64)
-
-#set(CMAKE_CXX_FLAGS -m64)
-#set (CMAKE_C_FLAGS -m64)
-set(-DCMAKE_CL_64=1 )
-set(-Ax64)
-set(CMAKE_CXX_FLAGS -DCMAKE_CL_64=1  -DCMAKE_GENERATOR_PLATFORM=x64 -Ax64)]]
-
-#add_subdirectory(pybind11)
+add_subdirectory(pybind11)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
@@ -34,9 +24,10 @@ if(Boost_FOUND)
     include_directories(src/MeshDecimation)
     include_directories(src/huji-rich-Elad3DFast/source/3D/GeometryCommon)
     include_directories(src/huji-rich-Elad3DFast/source/misc)
-    include_directories()
+    include_directories(pybind11/include)
+    include_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
 
-    #INCLUDE_DIRECTORIES("C:/Users/nafta/source/boost_1_70_0")
+    link_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
 
     add_executable(vivid
             #elad3d
@@ -72,11 +63,50 @@ if(Boost_FOUND)
             #extra
             src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
-            src/main.cpp src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            #main
+            src/main.cpp
             )
 
     target_link_libraries(vivid Boost::boost)
 
+    pybind11_add_module(cmake_example_test
+            #elad3d
+            #source/3D/GeometryCommon
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+            src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+            #source/3D/r3d
+            src/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
+            src/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
+            #source/misc
+            src/huji-rich-Elad3DFast/source/misc/bisection.cpp
+            src/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
+            src/huji-rich-Elad3DFast/source/misc/horner.cpp
+            src/huji-rich-Elad3DFast/source/misc/int2str.cpp
+            src/huji-rich-Elad3DFast/source/misc/io3D.cpp
+            src/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
+            src/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
+            src/huji-rich-Elad3DFast/source/misc/serializable.cpp
+            src/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+            src/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+            src/huji-rich-Elad3DFast/source/misc/utils.cpp
+            #extra
+            src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
+            #vivid
+            src/main.cpp
+            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            )
 endif()
 
 

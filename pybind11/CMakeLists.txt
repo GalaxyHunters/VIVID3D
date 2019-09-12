@@ -7,11 +7,6 @@
 
 cmake_minimum_required(VERSION 2.8.12)
 
-# the name of the target operating system
-set(CMAKE_SYSTEM_NAME Linux)
-
-# which compilers to use for C and C++
-set(CMAKE_CXX_FLAGS DCMAKE_CL_64=1  DCMAKE_GENERATOR_PLATFORM=x64 Ax64)
 if (POLICY CMP0048)
   # cmake warns if loaded from a min-3.0-required parent dir, so silence the warning:
   cmake_policy(SET CMP0048 NEW)

@@ -30,16 +30,14 @@ CSurf::CSurf(const CSurf &surf2) {
 	}
 }
 
-CSurf CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
-	CSurf surf;
-	surf.SetInputPoints(aInputPoints);
-	surf.SetMask(aMask);
-	surf.SetQuan(surf.NormQuan(aQuan, aVMin, aVMax));
-	surf.RunVorn();
-	surf.CleanEdges();
-	surf.CleanFaces(aMask);
-	surf.CleanPoints();
-	return surf;
+CSurf::CSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
+	this->SetInputPoints(aInputPoints);
+	this->SetMask(aMask);
+	this->SetQuan(this->NormQuan(aQuan, aVMin, aVMax));
+	this->RunVorn();
+	this->CleanEdges();
+	this->CleanFaces(aMask);
+	this->CleanPoints();
 }
 
 vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
@@ -370,7 +368,15 @@ void CSurf::SmoothSurf() {
 }
 
 vector<cord_t> CSurf::NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
-	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0
+    if (aQuan.size()==0){ //incase the user doesnt input any color
+        aQuan = vector<cord_t>(this->mMask.size(), 1);
+        return aQuan;
+    }
+    if(aVMin ==  aVMax) { //in case the user inputs color but not aVMin and aVMax
+        aVMax = *max_element(aQuan.begin(), aQuan.end());
+        aVMin = *min_element(aQuan.begin(), aQuan.end());
+    }
+	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
 		aQuan = vector<cord_t>(aQuan.size(), 1);
 		return aQuan;
 	}

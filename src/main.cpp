@@ -61,7 +61,7 @@ int main() {
 	//Vmin = *min_element(quan.begin(), quan.end());
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-	CSurf surf = surf.CreateSurf(points, mask, quan, Vmin, Vmax);
+	CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
 	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 	mesh.Decimation(0.5, 0.4);
@@ -155,10 +155,4 @@ int main() {
 	//mesh.Decimation(0.3, 0.01);
 	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
 }
-
-/*#include <pybind11/pybind11.h>
-
-int add(int i, int j) {
-    return i + j;
-}*/
 

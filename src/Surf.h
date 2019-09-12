@@ -52,7 +52,7 @@ private:
 	
 public:	
 	CSurf(const CSurf &surf); //copy constructor
-	static CSurf CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
+	CSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, cord_t aAlpha);
@@ -69,13 +69,20 @@ public:
 
 };
 
-extern "C"
-{
-	inline CSurf Surf_new(vector<CPoint> InputPoints, vector<bool> mask, vector<cord_t> quan, cord_t Vmin, cord_t Vmax) { return CSurf::CreateSurf(InputPoints, mask, quan, Vmin, Vmax); }
-	inline void Surf_smooth(CSurf surf) { surf.SmoothSurf(); }
-	inline const CMesh Surf_to_mesh(CSurf surf, string label, cord_t alpha) { return surf.ToMesh(label, alpha); }
-	inline void Surf_exportToObj(CSurf surf, string output, string label, cord_t alpha) { surf.ExportToObj(output, label, alpha); }
-}
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
 
+PYBIND11_MODULE(vivid_py, m) {
+    py::class_<CSurf>(m, "CSurf")
+            .def(py::init<vector<CPoint>, vector<bool>, vector<cord_t>, cord_t, cord_t>(), "factory function for surf",
+                 py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0)
+            .def(py::init<const CSurf &> (), "copy constructor for CSurf", py::arg("surf"))
+            .def("SmoothSurf", &CSurf::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
+            .def("ToMesh", &CSurf::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
+                 py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1)
+            .def("ExportToObj", &CSurf::ExportToObj, "writes the surface to an OBJ file",
+                 py::arg("aOutputFile"),  py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
+}
+// .def(py::init(&CSurf::CreateSurf), "factory function for surf")
 #endif
 	

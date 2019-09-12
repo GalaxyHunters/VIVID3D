@@ -124,6 +124,19 @@ vivid\fast:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\build
 .PHONY : vivid\fast
 
+#=============================================================================
+# Target rules for targets named cmake_example_test
+
+# Build rule for target.
+cmake_example_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) cmake_example_test
+.PHONY : cmake_example_test
+
+# fast build rule for target.
+cmake_example_test\fast:
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\build
+.PHONY : cmake_example_test\fast
+
 src\External.obj: src\External.cpp.obj
 
 .PHONY : src\External.obj
@@ -131,6 +144,7 @@ src\External.obj: src\External.cpp.obj
 # target to build an object file
 src\External.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\External.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\External.cpp.obj
 .PHONY : src\External.cpp.obj
 
 src\External.i: src\External.cpp.i
@@ -140,6 +154,7 @@ src\External.i: src\External.cpp.i
 # target to preprocess a source file
 src\External.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\External.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\External.cpp.i
 .PHONY : src\External.cpp.i
 
 src\External.s: src\External.cpp.s
@@ -149,6 +164,7 @@ src\External.s: src\External.cpp.s
 # target to generate assembly for a file
 src\External.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\External.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\External.cpp.s
 .PHONY : src\External.cpp.s
 
 src\Mesh.obj: src\Mesh.cpp.obj
@@ -158,6 +174,7 @@ src\Mesh.obj: src\Mesh.cpp.obj
 # target to build an object file
 src\Mesh.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Mesh.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj
 .PHONY : src\Mesh.cpp.obj
 
 src\Mesh.i: src\Mesh.cpp.i
@@ -167,6 +184,7 @@ src\Mesh.i: src\Mesh.cpp.i
 # target to preprocess a source file
 src\Mesh.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Mesh.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.i
 .PHONY : src\Mesh.cpp.i
 
 src\Mesh.s: src\Mesh.cpp.s
@@ -176,6 +194,7 @@ src\Mesh.s: src\Mesh.cpp.s
 # target to generate assembly for a file
 src\Mesh.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Mesh.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.s
 .PHONY : src\Mesh.cpp.s
 
 src\MeshDecimation\mdMeshDecimator.obj: src\MeshDecimation\mdMeshDecimator.cpp.obj
@@ -185,6 +204,7 @@ src\MeshDecimation\mdMeshDecimator.obj: src\MeshDecimation\mdMeshDecimator.cpp.o
 # target to build an object file
 src\MeshDecimation\mdMeshDecimator.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj
 .PHONY : src\MeshDecimation\mdMeshDecimator.cpp.obj
 
 src\MeshDecimation\mdMeshDecimator.i: src\MeshDecimation\mdMeshDecimator.cpp.i
@@ -194,6 +214,7 @@ src\MeshDecimation\mdMeshDecimator.i: src\MeshDecimation\mdMeshDecimator.cpp.i
 # target to preprocess a source file
 src\MeshDecimation\mdMeshDecimator.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\MeshDecimation\mdMeshDecimator.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.i
 .PHONY : src\MeshDecimation\mdMeshDecimator.cpp.i
 
 src\MeshDecimation\mdMeshDecimator.s: src\MeshDecimation\mdMeshDecimator.cpp.s
@@ -203,6 +224,7 @@ src\MeshDecimation\mdMeshDecimator.s: src\MeshDecimation\mdMeshDecimator.cpp.s
 # target to generate assembly for a file
 src\MeshDecimation\mdMeshDecimator.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\MeshDecimation\mdMeshDecimator.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.s
 .PHONY : src\MeshDecimation\mdMeshDecimator.cpp.s
 
 src\Model.obj: src\Model.cpp.obj
@@ -212,6 +234,7 @@ src\Model.obj: src\Model.cpp.obj
 # target to build an object file
 src\Model.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Model.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Model.cpp.obj
 .PHONY : src\Model.cpp.obj
 
 src\Model.i: src\Model.cpp.i
@@ -221,6 +244,7 @@ src\Model.i: src\Model.cpp.i
 # target to preprocess a source file
 src\Model.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Model.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Model.cpp.i
 .PHONY : src\Model.cpp.i
 
 src\Model.s: src\Model.cpp.s
@@ -230,6 +254,7 @@ src\Model.s: src\Model.cpp.s
 # target to generate assembly for a file
 src\Model.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Model.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Model.cpp.s
 .PHONY : src\Model.cpp.s
 
 src\Surf.obj: src\Surf.cpp.obj
@@ -239,6 +264,7 @@ src\Surf.obj: src\Surf.cpp.obj
 # target to build an object file
 src\Surf.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Surf.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj
 .PHONY : src\Surf.cpp.obj
 
 src\Surf.i: src\Surf.cpp.i
@@ -248,6 +274,7 @@ src\Surf.i: src\Surf.cpp.i
 # target to preprocess a source file
 src\Surf.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Surf.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Surf.cpp.i
 .PHONY : src\Surf.cpp.i
 
 src\Surf.s: src\Surf.cpp.s
@@ -257,6 +284,7 @@ src\Surf.s: src\Surf.cpp.s
 # target to generate assembly for a file
 src\Surf.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\Surf.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\Surf.cpp.s
 .PHONY : src\Surf.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.obj
@@ -266,6 +294,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.obj: src\huji-rich-
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.i
@@ -275,6 +304,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.i: src\huji-rich-El
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.s
@@ -284,6 +314,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.s: src\huji-rich-El
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.obj
@@ -293,6 +324,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.obj: src\huji-rich-Elad3D
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.i
@@ -302,6 +334,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.i: src\huji-rich-Elad3DFa
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.s
@@ -311,6 +344,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.s: src\huji-rich-Elad3DFa
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.obj
@@ -320,6 +354,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.obj: src\huji-r
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.i
@@ -329,6 +364,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.i: src\huji-ric
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.s
@@ -338,6 +374,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.s: src\huji-ric
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.obj
@@ -347,6 +384,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.obj: src\
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.i
@@ -356,6 +394,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.i: src\hu
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.s
@@ -365,6 +404,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.s: src\hu
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.obj
@@ -374,6 +414,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.obj: src\huji-ri
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.i
@@ -383,6 +424,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.i: src\huji-rich
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.s
@@ -392,6 +434,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.s: src\huji-rich
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.obj
@@ -401,6 +444,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.obj: src\huji-ric
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.i
@@ -410,6 +454,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.i: src\huji-rich-
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.s
@@ -419,6 +464,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.s: src\huji-rich-
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.obj
@@ -428,6 +474,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.obj: src\huji-rich
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.i
@@ -437,6 +484,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.i: src\huji-rich-E
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.s
@@ -446,6 +494,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.s: src\huji-rich-E
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.obj
@@ -455,6 +504,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.obj: src\huji-r
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.i
@@ -464,6 +514,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.i: src\huji-ric
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.s
@@ -473,6 +524,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.s: src\huji-ric
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.obj
@@ -482,6 +534,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.obj: src\huji-rich
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.i
@@ -491,6 +544,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.i: src\huji-rich-E
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.s
@@ -500,6 +554,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.s: src\huji-rich-E
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.obj
@@ -509,6 +564,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.obj: src\huji-rich-El
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.i
@@ -518,6 +574,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.i: src\huji-rich-Elad
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.s
@@ -527,6 +584,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.s: src\huji-rich-Elad
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj
@@ -536,6 +594,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.obj: src\huji-rich-E
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.i
@@ -545,6 +604,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.i: src\huji-rich-Ela
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.s
@@ -554,6 +614,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.s: src\huji-rich-Ela
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.obj
@@ -563,6 +624,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.obj: src\huji-rich-
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.i
@@ -572,6 +634,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.i: src\huji-rich-El
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.s
@@ -581,6 +644,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.s: src\huji-rich-El
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx.s
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.obj: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.obj
@@ -590,6 +654,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.obj: src\huji-rich-Elad
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.obj
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.i: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.i
@@ -599,6 +664,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.i: src\huji-rich-Elad3D
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.i
 
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.s: src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.s
@@ -608,6 +674,7 @@ src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.s: src\huji-rich-Elad3D
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx.s
 
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.obj: src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.obj
@@ -617,6 +684,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.obj: src\huji-rich-Elad3DF
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.i: src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.i
@@ -626,6 +694,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.i: src\huji-rich-Elad3DFas
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.s: src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.s
@@ -635,6 +704,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.s: src\huji-rich-Elad3DFas
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.obj: src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.obj
@@ -644,6 +714,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\r3d.obj: src\huji-rich-Elad3DFast\source\
 # target to build an object file
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.obj
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.obj
 
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.i: src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.i
@@ -653,6 +724,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\r3d.i: src\huji-rich-Elad3DFast\source\3D
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.i
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.i
 
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.s: src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.s
@@ -662,6 +734,7 @@ src\huji-rich-Elad3DFast\source\3D\r3d\r3d.s: src\huji-rich-Elad3DFast\source\3D
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.s
 .PHONY : src\huji-rich-Elad3DFast\source\3D\r3d\r3d.c.s
 
 src\huji-rich-Elad3DFast\source\misc\bisection.obj: src\huji-rich-Elad3DFast\source\misc\bisection.cpp.obj
@@ -671,6 +744,7 @@ src\huji-rich-Elad3DFast\source\misc\bisection.obj: src\huji-rich-Elad3DFast\sou
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\bisection.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\bisection.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\bisection.i: src\huji-rich-Elad3DFast\source\misc\bisection.cpp.i
@@ -680,6 +754,7 @@ src\huji-rich-Elad3DFast\source\misc\bisection.i: src\huji-rich-Elad3DFast\sourc
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\bisection.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\bisection.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\bisection.s: src\huji-rich-Elad3DFast\source\misc\bisection.cpp.s
@@ -689,6 +764,7 @@ src\huji-rich-Elad3DFast\source\misc\bisection.s: src\huji-rich-Elad3DFast\sourc
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\bisection.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\bisection.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\bisection.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\func_1_var.obj: src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.obj
@@ -698,6 +774,7 @@ src\huji-rich-Elad3DFast\source\misc\func_1_var.obj: src\huji-rich-Elad3DFast\so
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\func_1_var.i: src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.i
@@ -707,6 +784,7 @@ src\huji-rich-Elad3DFast\source\misc\func_1_var.i: src\huji-rich-Elad3DFast\sour
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\func_1_var.s: src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.s
@@ -716,6 +794,7 @@ src\huji-rich-Elad3DFast\source\misc\func_1_var.s: src\huji-rich-Elad3DFast\sour
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\func_1_var.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\horner.obj: src\huji-rich-Elad3DFast\source\misc\horner.cpp.obj
@@ -725,6 +804,7 @@ src\huji-rich-Elad3DFast\source\misc\horner.obj: src\huji-rich-Elad3DFast\source
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\horner.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\horner.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\horner.i: src\huji-rich-Elad3DFast\source\misc\horner.cpp.i
@@ -734,6 +814,7 @@ src\huji-rich-Elad3DFast\source\misc\horner.i: src\huji-rich-Elad3DFast\source\m
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\horner.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\horner.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\horner.s: src\huji-rich-Elad3DFast\source\misc\horner.cpp.s
@@ -743,6 +824,7 @@ src\huji-rich-Elad3DFast\source\misc\horner.s: src\huji-rich-Elad3DFast\source\m
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\horner.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\horner.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\horner.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\int2str.obj: src\huji-rich-Elad3DFast\source\misc\int2str.cpp.obj
@@ -752,6 +834,7 @@ src\huji-rich-Elad3DFast\source\misc\int2str.obj: src\huji-rich-Elad3DFast\sourc
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\int2str.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\int2str.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\int2str.i: src\huji-rich-Elad3DFast\source\misc\int2str.cpp.i
@@ -761,6 +844,7 @@ src\huji-rich-Elad3DFast\source\misc\int2str.i: src\huji-rich-Elad3DFast\source\
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\int2str.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\int2str.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\int2str.s: src\huji-rich-Elad3DFast\source\misc\int2str.cpp.s
@@ -770,6 +854,7 @@ src\huji-rich-Elad3DFast\source\misc\int2str.s: src\huji-rich-Elad3DFast\source\
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\int2str.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\int2str.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\int2str.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\io3D.obj: src\huji-rich-Elad3DFast\source\misc\io3D.cpp.obj
@@ -779,6 +864,7 @@ src\huji-rich-Elad3DFast\source\misc\io3D.obj: src\huji-rich-Elad3DFast\source\m
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\io3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\io3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\io3D.i: src\huji-rich-Elad3DFast\source\misc\io3D.cpp.i
@@ -788,6 +874,7 @@ src\huji-rich-Elad3DFast\source\misc\io3D.i: src\huji-rich-Elad3DFast\source\mis
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\io3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\io3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\io3D.s: src\huji-rich-Elad3DFast\source\misc\io3D.cpp.s
@@ -797,6 +884,7 @@ src\huji-rich-Elad3DFast\source\misc\io3D.s: src\huji-rich-Elad3DFast\source\mis
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\io3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\io3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\io3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.obj: src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.obj
@@ -806,6 +894,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator.obj: src\huji-rich-Elad3DFas
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.i: src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.i
@@ -815,6 +904,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator.i: src\huji-rich-Elad3DFast\
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.s: src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.s
@@ -824,6 +914,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator.s: src\huji-rich-Elad3DFast\
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.obj: src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.obj
@@ -833,6 +924,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.obj: src\huji-rich-Elad3DF
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.i: src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.i
@@ -842,6 +934,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.i: src\huji-rich-Elad3DFas
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.s: src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.s
@@ -851,6 +944,7 @@ src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.s: src\huji-rich-Elad3DFas
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\serializable.obj: src\huji-rich-Elad3DFast\source\misc\serializable.cpp.obj
@@ -860,6 +954,7 @@ src\huji-rich-Elad3DFast\source\misc\serializable.obj: src\huji-rich-Elad3DFast\
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\serializable.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\serializable.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\serializable.i: src\huji-rich-Elad3DFast\source\misc\serializable.cpp.i
@@ -869,6 +964,7 @@ src\huji-rich-Elad3DFast\source\misc\serializable.i: src\huji-rich-Elad3DFast\so
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\serializable.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\serializable.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\serializable.s: src\huji-rich-Elad3DFast\source\misc\serializable.cpp.s
@@ -878,6 +974,7 @@ src\huji-rich-Elad3DFast\source\misc\serializable.s: src\huji-rich-Elad3DFast\so
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\serializable.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\serializable.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\serializable.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\simple_io.obj: src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.obj
@@ -887,6 +984,7 @@ src\huji-rich-Elad3DFast\source\misc\simple_io.obj: src\huji-rich-Elad3DFast\sou
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\simple_io.i: src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.i
@@ -896,6 +994,7 @@ src\huji-rich-Elad3DFast\source\misc\simple_io.i: src\huji-rich-Elad3DFast\sourc
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\simple_io.s: src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.s
@@ -905,6 +1004,7 @@ src\huji-rich-Elad3DFast\source\misc\simple_io.s: src\huji-rich-Elad3DFast\sourc
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\simple_io.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\universal_error.obj: src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj
@@ -914,6 +1014,7 @@ src\huji-rich-Elad3DFast\source\misc\universal_error.obj: src\huji-rich-Elad3DFa
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\universal_error.i: src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.i
@@ -923,6 +1024,7 @@ src\huji-rich-Elad3DFast\source\misc\universal_error.i: src\huji-rich-Elad3DFast
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\universal_error.s: src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.s
@@ -932,6 +1034,7 @@ src\huji-rich-Elad3DFast\source\misc\universal_error.s: src\huji-rich-Elad3DFast
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.s
 
 src\huji-rich-Elad3DFast\source\misc\utils.obj: src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj
@@ -941,6 +1044,7 @@ src\huji-rich-Elad3DFast\source\misc\utils.obj: src\huji-rich-Elad3DFast\source\
 # target to build an object file
 src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj
 
 src\huji-rich-Elad3DFast\source\misc\utils.i: src\huji-rich-Elad3DFast\source\misc\utils.cpp.i
@@ -950,6 +1054,7 @@ src\huji-rich-Elad3DFast\source\misc\utils.i: src\huji-rich-Elad3DFast\source\mi
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\misc\utils.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\misc\utils.cpp.i
 
 src\huji-rich-Elad3DFast\source\misc\utils.s: src\huji-rich-Elad3DFast\source\misc\utils.cpp.s
@@ -959,6 +1064,7 @@ src\huji-rich-Elad3DFast\source\misc\utils.s: src\huji-rich-Elad3DFast\source\mi
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\misc\utils.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\misc\utils.cpp.s
 
 src\huji-rich-Elad3DFast\source\tessellation\geometry.obj: src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj
@@ -968,6 +1074,7 @@ src\huji-rich-Elad3DFast\source\tessellation\geometry.obj: src\huji-rich-Elad3DF
 # target to build an object file
 src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj
 .PHONY : src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj
 
 src\huji-rich-Elad3DFast\source\tessellation\geometry.i: src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.i
@@ -977,6 +1084,7 @@ src\huji-rich-Elad3DFast\source\tessellation\geometry.i: src\huji-rich-Elad3DFas
 # target to preprocess a source file
 src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.i
 .PHONY : src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.i
 
 src\huji-rich-Elad3DFast\source\tessellation\geometry.s: src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s
@@ -986,6 +1094,7 @@ src\huji-rich-Elad3DFast\source\tessellation\geometry.s: src\huji-rich-Elad3DFas
 # target to generate assembly for a file
 src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s
 .PHONY : src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s
 
 src\main.obj: src\main.cpp.obj
@@ -995,6 +1104,7 @@ src\main.obj: src\main.cpp.obj
 # target to build an object file
 src\main.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.obj
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.obj
 .PHONY : src\main.cpp.obj
 
 src\main.i: src\main.cpp.i
@@ -1004,6 +1114,7 @@ src\main.i: src\main.cpp.i
 # target to preprocess a source file
 src\main.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.i
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.i
 .PHONY : src\main.cpp.i
 
 src\main.s: src\main.cpp.s
@@ -1013,6 +1124,7 @@ src\main.s: src\main.cpp.s
 # target to generate assembly for a file
 src\main.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.s
+	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.s
 .PHONY : src\main.cpp.s
 
 # Help Target
@@ -1022,6 +1134,7 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... vivid
+	@echo ... cmake_example_test
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... src/External.obj

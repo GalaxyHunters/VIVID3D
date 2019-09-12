@@ -1,4 +1,5 @@
 "C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - NMake Makefiles" C:\Users\nafta\Vivid
+-- pybind11 v2.2.0
 -- Boost version: 1.70.0
 Boost_FOUND
 -- Configuring done

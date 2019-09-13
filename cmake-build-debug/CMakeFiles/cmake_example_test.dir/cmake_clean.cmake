@@ -26,7 +26,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp.obj"
   "CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/misc/utils.cpp.obj"
   "CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.obj"
-  "CMakeFiles/cmake_example_test.dir/src/main.cpp.obj"
   "CMakeFiles/cmake_example_test.dir/src/Surf.cpp.obj"
   "CMakeFiles/cmake_example_test.dir/src/Mesh.cpp.obj"
   "CMakeFiles/cmake_example_test.dir/src/Model.cpp.obj"

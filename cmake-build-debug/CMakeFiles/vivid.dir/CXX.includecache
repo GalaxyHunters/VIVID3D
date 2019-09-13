@@ -724,23 +724,21 @@ C:/Users/nafta/Vivid/src/MeshDecimation/mdVector.inl
 
 C:/Users/nafta/Vivid/src/MeshDecimation/mdVector.inl
 
+C:/Users/nafta/Vivid/src/Model.cpp
+Model.h
+C:/Users/nafta/Vivid/src/Model.h
+
+C:/Users/nafta/Vivid/src/Model.h
+Mesh.h
+C:/Users/nafta/Vivid/src/Mesh.h
+Surf.h
+C:/Users/nafta/Vivid/src/Surf.h
+pybind11/pybind11.h
+-
+
 C:/Users/nafta/Vivid/src/Point.h
 cmath
 -
-
-C:/Users/nafta/Vivid/src/ReadBinFile.h
-Point.h
-C:/Users/nafta/Vivid/src/Point.h
-vector
--
-iostream
--
-fstream
-C:/Users/nafta/Vivid/src/fstream
-
-C:/Users/nafta/Vivid/src/Surf.cpp
-Surf.h
-C:/Users/nafta/Vivid/src/Surf.h
 
 C:/Users/nafta/Vivid/src/Surf.h
 Mesh.h
@@ -753,8 +751,6 @@ iostream
 -
 map
 -
-pybind11/pybind11.h
--
 
 C:/Users/nafta/Vivid/src/SurfFace.h
 vector
@@ -763,14 +759,6 @@ iostream
 -
 Point.h
 C:/Users/nafta/Vivid/src/Point.h
-
-C:/Users/nafta/Vivid/src/main.cpp
-Surf.h
-C:/Users/nafta/Vivid/src/Surf.h
-vector
--
-ReadBinFile.h
-C:/Users/nafta/Vivid/src/ReadBinFile.h
 
 C:/Users/nafta/boost_1_70_0/boost/algorithm/string/compare.hpp
 boost/algorithm/string/config.hpp

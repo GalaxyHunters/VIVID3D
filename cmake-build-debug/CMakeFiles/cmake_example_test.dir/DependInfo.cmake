@@ -56,7 +56,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/misc/universal_error.cpp.obj"
   "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc/utils.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/misc/utils.cpp.obj"
   "C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.obj"
-  "C:/Users/nafta/Vivid/src/main.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir/src/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 

@@ -3,10 +3,17 @@
 
 using namespace boost::algorithm;
 
-CModel::CModel() {}
+CModel::CModel() { this->mMeshes = vector<CMesh>();}
 
 CModel::CModel(vector<CMesh> aMeshes) {
 	this->mMeshes = aMeshes;
+}
+
+CModel::CModel(vector<CSurf> aSurfs, string aLabel, cord_t aAlpha){
+    this->mMeshes = vector<CMesh>();
+    for (vector<CSurf>::iterator it = aSurfs.begin(); it != aSurfs.end(); it++){
+        this->mMeshes.push_back((*it).ToMesh(aLabel, aAlpha));
+    }
 }
 
 Color_t static Quan2Color(cord_t aQuan) {
@@ -79,7 +86,7 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 	}
 }
 
-void CModel::operator<<(string aOutput) {
+void CModel::ExportToObj(string aOutput){
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
@@ -106,6 +113,10 @@ void CModel::operator<<(string aOutput) {
 
 void CModel::AddMesh(CMesh aMesh) {
 	this->mMeshes.push_back(aMesh);
+}
+
+void CModel::AddSurf(CSurf aSurf, string aLabel, cord_t aAlpha){
+    this->mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
 }
 
 

@@ -571,28 +571,9 @@ CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\g
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.s /c C:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp
 <<
 
-CMakeFiles\cmake_example_test.dir\src\main.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
-CMakeFiles\cmake_example_test.dir\src\main.cpp.obj: ..\src\main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/cmake_example_test.dir/src/main.cpp.obj"
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\main.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\main.cpp
-<<
-
-CMakeFiles\cmake_example_test.dir\src\main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cmake_example_test.dir/src/main.cpp.i"
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe > CMakeFiles\cmake_example_test.dir\src\main.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\nafta\Vivid\src\main.cpp
-<<
-
-CMakeFiles\cmake_example_test.dir\src\main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cmake_example_test.dir/src/main.cpp.s"
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\cmake_example_test.dir\src\main.cpp.s /c C:\Users\nafta\Vivid\src\main.cpp
-<<
-
 CMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
 CMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj: ..\src\Surf.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Surf.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Surf.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\Surf.cpp
 <<
@@ -611,7 +592,7 @@ CMakeFiles\cmake_example_test.dir\src\Surf.cpp.s: cmake_force
 
 CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
 CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj: ..\src\Mesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Mesh.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Mesh.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\Mesh.cpp
 <<
@@ -630,7 +611,7 @@ CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.s: cmake_force
 
 CMakeFiles\cmake_example_test.dir\src\Model.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
 CMakeFiles\cmake_example_test.dir\src\Model.cpp.obj: ..\src\Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Model.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/cmake_example_test.dir/src/Model.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\Model.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\Model.cpp
 <<
@@ -649,7 +630,7 @@ CMakeFiles\cmake_example_test.dir\src\Model.cpp.s: cmake_force
 
 CMakeFiles\cmake_example_test.dir\src\External.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
 CMakeFiles\cmake_example_test.dir\src\External.cpp.obj: ..\src\External.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/cmake_example_test.dir/src/External.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/cmake_example_test.dir/src/External.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\External.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\External.cpp
 <<
@@ -668,7 +649,7 @@ CMakeFiles\cmake_example_test.dir\src\External.cpp.s: cmake_force
 
 CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj: CMakeFiles\cmake_example_test.dir\flags.make
 CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj: ..\src\MeshDecimation\mdMeshDecimator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/cmake_example_test.dir/src/MeshDecimation/mdMeshDecimator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/cmake_example_test.dir/src/MeshDecimation/mdMeshDecimator.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj /FdCMakeFiles\cmake_example_test.dir\ /FS -c C:\Users\nafta\Vivid\src\MeshDecimation\mdMeshDecimator.cpp
 <<
@@ -714,7 +695,6 @@ cmake_example_test_OBJECTS = \
 "CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj" \
 "CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj" \
 "CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj" \
-"CMakeFiles\cmake_example_test.dir\src\main.cpp.obj" \
 "CMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj" \
 "CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj" \
 "CMakeFiles\cmake_example_test.dir\src\Model.cpp.obj" \
@@ -751,7 +731,6 @@ cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFa
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\universal_error.cpp.obj
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\misc\utils.cpp.obj
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\huji-rich-Elad3DFast\source\tessellation\geometry.cpp.obj
-cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\main.cpp.obj
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\Surf.cpp.obj
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\Mesh.cpp.obj
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\Model.cpp.obj
@@ -760,7 +739,7 @@ cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\src\MeshDecimation\mdM
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\build.make
 cmake_example_test.pyd: C:\Users\nafta\Miniconda2\libs\Python27.lib
 cmake_example_test.pyd: CMakeFiles\cmake_example_test.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX shared module cmake_example_test.pyd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\nafta\Vivid\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Linking CXX shared module cmake_example_test.pyd"
 	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_dll --intdir=CMakeFiles\cmake_example_test.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmake_example_test.dir\objects1.rsp @<<
  /out:cmake_example_test.pyd /implib:cmake_example_test.lib /pdb:C:\Users\nafta\Vivid\cmake-build-release\cmake_example_test.pdb /dll /version:0.0 /machine:x64 /INCREMENTAL:NO  -LIBPATH:C:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\libs C:\Users\nafta\Miniconda2\libs\Python27.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  
 <<

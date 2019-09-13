@@ -486,6 +486,18 @@ CMakeFiles/vivid.dir/src/External.cpp.obj
  C:/Users/nafta/boost_1_70_0/boost/utility/enable_if.hpp
  C:/Users/nafta/boost_1_70_0/boost/version.hpp
 CMakeFiles/vivid.dir/src/Mesh.cpp.obj
+ ../pybind11/include/pybind11/attr.h
+ ../pybind11/include/pybind11/buffer_info.h
+ ../pybind11/include/pybind11/cast.h
+ ../pybind11/include/pybind11/detail/class.h
+ ../pybind11/include/pybind11/detail/common.h
+ ../pybind11/include/pybind11/detail/descr.h
+ ../pybind11/include/pybind11/detail/init.h
+ ../pybind11/include/pybind11/detail/internals.h
+ ../pybind11/include/pybind11/detail/typeid.h
+ ../pybind11/include/pybind11/options.h
+ ../pybind11/include/pybind11/pybind11.h
+ ../pybind11/include/pybind11/pytypes.h
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp
@@ -505,6 +517,69 @@ CMakeFiles/vivid.dir/src/Mesh.cpp.obj
  ../src/huji-rich-Elad3DFast/source/tessellation/Edge.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/geometry.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/tessellation.hpp
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/Python.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/abstract.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/boolobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bufferobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytearrayobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytesobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cellobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/ceval.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/classobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/code.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/codecs.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/compile.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/complexobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/descrobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dictobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dtoa.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/enumobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/eval.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/fileobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/floatobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/frameobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/funcobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/genobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/import.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intrcheck.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/iterobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/listobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/longobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/memoryobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/methodobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/modsupport.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/moduleobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/object.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/objimpl.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/patchlevel.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyarena.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pycapsule.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyconfig.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyctype.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pydebug.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyerrors.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyfpe.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymacconfig.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymath.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymem.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyport.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystate.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrcmp.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrtod.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythonrun.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythread.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/rangeobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/setobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sliceobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/stringobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sysmodule.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/traceback.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/tupleobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/unicodeobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/warnings.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/weakrefobject.h
  C:/Users/nafta/Vivid/src/ColorMap.h
  C:/Users/nafta/Vivid/src/External.h
  C:/Users/nafta/Vivid/src/IndexedFace.h
@@ -1053,6 +1128,18 @@ CMakeFiles/vivid.dir/src/MeshDecimation/mdMeshDecimator.cpp.obj
  C:/Users/nafta/Vivid/src/MeshDecimation/mdVector.h
  C:/Users/nafta/Vivid/src/MeshDecimation/mdVector.inl
 CMakeFiles/vivid.dir/src/Model.cpp.obj
+ ../pybind11/include/pybind11/attr.h
+ ../pybind11/include/pybind11/buffer_info.h
+ ../pybind11/include/pybind11/cast.h
+ ../pybind11/include/pybind11/detail/class.h
+ ../pybind11/include/pybind11/detail/common.h
+ ../pybind11/include/pybind11/detail/descr.h
+ ../pybind11/include/pybind11/detail/init.h
+ ../pybind11/include/pybind11/detail/internals.h
+ ../pybind11/include/pybind11/detail/typeid.h
+ ../pybind11/include/pybind11/options.h
+ ../pybind11/include/pybind11/pybind11.h
+ ../pybind11/include/pybind11/pytypes.h
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp
@@ -1072,6 +1159,69 @@ CMakeFiles/vivid.dir/src/Model.cpp.obj
  ../src/huji-rich-Elad3DFast/source/tessellation/Edge.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/geometry.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/tessellation.hpp
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/Python.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/abstract.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/boolobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bufferobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytearrayobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytesobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cellobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/ceval.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/classobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/code.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/codecs.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/compile.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/complexobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/descrobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dictobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dtoa.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/enumobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/eval.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/fileobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/floatobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/frameobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/funcobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/genobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/import.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intrcheck.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/iterobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/listobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/longobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/memoryobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/methodobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/modsupport.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/moduleobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/object.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/objimpl.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/patchlevel.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyarena.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pycapsule.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyconfig.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyctype.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pydebug.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyerrors.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyfpe.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymacconfig.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymath.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymem.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyport.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystate.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrcmp.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrtod.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythonrun.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythread.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/rangeobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/setobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sliceobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/stringobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sysmodule.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/traceback.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/tupleobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/unicodeobject.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/warnings.h
+ C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/weakrefobject.h
  C:/Users/nafta/Vivid/src/ColorMap.h
  C:/Users/nafta/Vivid/src/External.h
  C:/Users/nafta/Vivid/src/IndexedFace.h
@@ -1083,6 +1233,8 @@ CMakeFiles/vivid.dir/src/Model.cpp.obj
  C:/Users/nafta/Vivid/src/Model.cpp
  C:/Users/nafta/Vivid/src/Model.h
  C:/Users/nafta/Vivid/src/Point.h
+ C:/Users/nafta/Vivid/src/Surf.h
+ C:/Users/nafta/Vivid/src/SurfFace.h
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/compare.hpp
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/config.hpp
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/constants.hpp
@@ -10136,18 +10288,6 @@ CMakeFiles/vivid.dir/src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
  C:/Users/nafta/boost_1_70_0/boost/utility/enable_if.hpp
  C:/Users/nafta/boost_1_70_0/boost/version.hpp
 CMakeFiles/vivid.dir/src/main.cpp.obj
- ../pybind11/include/pybind11/attr.h
- ../pybind11/include/pybind11/buffer_info.h
- ../pybind11/include/pybind11/cast.h
- ../pybind11/include/pybind11/detail/class.h
- ../pybind11/include/pybind11/detail/common.h
- ../pybind11/include/pybind11/detail/descr.h
- ../pybind11/include/pybind11/detail/init.h
- ../pybind11/include/pybind11/detail/internals.h
- ../pybind11/include/pybind11/detail/typeid.h
- ../pybind11/include/pybind11/options.h
- ../pybind11/include/pybind11/pybind11.h
- ../pybind11/include/pybind11/pytypes.h
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp
  ../src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp
@@ -10167,69 +10307,6 @@ CMakeFiles/vivid.dir/src/main.cpp.obj
  ../src/huji-rich-Elad3DFast/source/tessellation/Edge.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/geometry.hpp
  ../src/huji-rich-Elad3DFast/source/tessellation/tessellation.hpp
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/Python.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/abstract.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/boolobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bufferobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytearrayobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/bytesobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cellobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/ceval.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/classobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/cobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/code.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/codecs.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/compile.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/complexobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/descrobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dictobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/dtoa.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/enumobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/eval.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/fileobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/floatobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/frameobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/funcobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/genobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/import.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/intrcheck.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/iterobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/listobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/longobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/memoryobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/methodobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/modsupport.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/moduleobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/object.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/objimpl.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/patchlevel.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyarena.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pycapsule.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyconfig.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyctype.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pydebug.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyerrors.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyfpe.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymacconfig.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymath.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pymem.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pyport.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystate.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrcmp.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pystrtod.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythonrun.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/pythread.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/rangeobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/setobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sliceobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/stringobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/sysmodule.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/traceback.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/tupleobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/unicodeobject.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/warnings.h
- C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include/weakrefobject.h
  C:/Users/nafta/Vivid/src/ColorMap.h
  C:/Users/nafta/Vivid/src/External.h
  C:/Users/nafta/Vivid/src/IndexedFace.h

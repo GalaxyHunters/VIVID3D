@@ -5,6 +5,15 @@ using namespace boost::algorithm;
 
 CMesh::~CMesh() {}
 
+CMesh::CMesh(const CMesh &mesh){
+    this->mAlpha = mesh.mAlpha;
+    this->mFaces = mesh.mFaces;
+    this->mLabel = mesh.mLabel;
+    this->mPoints = mesh.mPoints;
+
+}
+
+
 CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
 
 Color_t static Quan2Color(cord_t aQuan) {
@@ -77,7 +86,7 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 	}
 }
 
-void CMesh::operator<<(string aOutput) { //TODO get the color sorted(a way to convert quan to color)
+void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to convert quan to color)
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
@@ -104,7 +113,7 @@ void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)
 	//triangulation
 	this->Triangulation();
 	//-------------------------debug
-	operator<<("D:\\alpa\\models\\testCode_triangles_pyramid");
+	ExportToObj("D:\\alpa\\models\\testCode_triangles_pyramid");
 	//------------------------------------------------
 	//call decimation from utils
 	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());
@@ -133,3 +142,17 @@ void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
 void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
 void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
 void CMesh::SetAlpha(cord_t aAlpha) { this->mAlpha = aAlpha; }
+
+
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
+
+PYBIND11_MODULE(Mesh, m) {
+    py::class_<CMesh>(m, "CMesh")
+            .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))
+            .def("Decimation", &CMesh::Decimation,
+                 "input values should be between 0 and 1. A Decimation algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
+                 py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
+            .def("ExportToObj", &CMesh::ExportToObj, "writes the surface to an OBJ file",
+                 py::arg("aOutputFile"));
+}

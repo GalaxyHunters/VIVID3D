@@ -417,7 +417,7 @@ const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
 
 void CSurf::ExportToObj(string aOutput, string aLabel, cord_t aAlpha) {
 	CMesh mesh = ToMesh(aLabel, aAlpha);
-	mesh.operator<< (aOutput);
+	mesh.ExportToObj(aOutput);
 }
 
 static bool ComparePoint(CPoint aPoint1, CPoint aPoint2) {
@@ -490,3 +490,19 @@ void CSurf::CleanEdges() {
 	}
 	this->mVecFaces = new_faces;
  }
+
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
+
+PYBIND11_MODULE(Surf, m) {
+    py::class_<CSurf>(m, "CSurf")
+            .def(py::init<vector<CPoint>, vector<bool>, vector<cord_t>, cord_t, cord_t>(), "constuctor function for surf",
+                 py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0)
+            .def(py::init<const CSurf &> (), "copy constructor for CSurf", py::arg("surf"))
+            .def("SmoothSurf", &CSurf::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
+            .def("ToMesh", &CSurf::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
+                 py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1)
+            .def("ExportToObj", &CSurf::ExportToObj, "writes the surface to an OBJ file",
+                 py::arg("aOutputFile"),  py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
+}
+// .def(py::init(&CSurf::CreateSurf), "factory function for surf")

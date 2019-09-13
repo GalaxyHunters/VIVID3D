@@ -408,7 +408,6 @@
 		</Unit>
 		<Unit filename="C:/Users/nafta/Vivid/src/main.cpp">
 			<Option target="vivid"/>
-			<Option target="cmake_example_test"/>
 		</Unit>
 		<Unit filename="C:/Users/nafta/Vivid/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

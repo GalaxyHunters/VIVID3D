@@ -1104,7 +1104,6 @@ src\main.obj: src\main.cpp.obj
 # target to build an object file
 src\main.cpp.obj:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.obj
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.obj
 .PHONY : src\main.cpp.obj
 
 src\main.i: src\main.cpp.i
@@ -1114,7 +1113,6 @@ src\main.i: src\main.cpp.i
 # target to preprocess a source file
 src\main.cpp.i:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.i
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.i
 .PHONY : src\main.cpp.i
 
 src\main.s: src\main.cpp.s
@@ -1124,7 +1122,6 @@ src\main.s: src\main.cpp.s
 # target to generate assembly for a file
 src\main.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.s
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\src\main.cpp.s
 .PHONY : src\main.cpp.s
 
 # Help Target

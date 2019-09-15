@@ -31,6 +31,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Vivid_py.dir/src/Model.cpp.obj"
   "CMakeFiles/Vivid_py.dir/src/External.cpp.obj"
   "CMakeFiles/Vivid_py.dir/src/MeshDecimation/mdMeshDecimator.cpp.obj"
+  "CMakeFiles/Vivid_py.dir/src/wrapper.cpp.obj"
   "Vivid_py.pdb"
   "Vivid_py.pyd"
   "Vivid_py.lib"

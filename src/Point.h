@@ -3,7 +3,8 @@
 #define POINT_H
 
 #include <cmath>
-
+#include <iostream>
+#include <vector>
 typedef double cord_t;
 
 class CPoint
@@ -12,6 +13,7 @@ public:
 	inline CPoint(){}
 	inline CPoint(const CPoint &aPoint2) : mX(aPoint2.mX), mY(aPoint2.mY), mZ(aPoint2.mZ) {} //copy constructor
 	inline CPoint(cord_t x, cord_t y, cord_t z);
+	inline CPoint(std::vector<cord_t > cords) : mX(cords[0]), mY(cords[1]), mZ(cords[2]) {}
 	inline ~CPoint();
 	inline cord_t CalcDistance(CPoint aPoint2) { return sqrt(pow(this->mX - aPoint2.GetX(), 2) + pow(this->mY - aPoint2.GetY(), 2) + pow(this->mZ - aPoint2.GetZ(), 2)); }
 	inline cord_t GetX() { return this->mX; }

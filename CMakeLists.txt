@@ -105,6 +105,8 @@ if(Boost_FOUND)
             src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
             src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            #wrapper
+            src/wrapper.cpp
             )
 endif()
 

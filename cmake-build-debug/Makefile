@@ -1124,6 +1124,33 @@ src\main.cpp.s:
 	$(MAKE) -f CMakeFiles\vivid.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vivid.dir\src\main.cpp.s
 .PHONY : src\main.cpp.s
 
+src\wrapper.obj: src\wrapper.cpp.obj
+
+.PHONY : src\wrapper.obj
+
+# target to build an object file
+src\wrapper.cpp.obj:
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj
+.PHONY : src\wrapper.cpp.obj
+
+src\wrapper.i: src\wrapper.cpp.i
+
+.PHONY : src\wrapper.i
+
+# target to preprocess a source file
+src\wrapper.cpp.i:
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\src\wrapper.cpp.i
+.PHONY : src\wrapper.cpp.i
+
+src\wrapper.s: src\wrapper.cpp.s
+
+.PHONY : src\wrapper.s
+
+# target to generate assembly for a file
+src\wrapper.cpp.s:
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\src\wrapper.cpp.s
+.PHONY : src\wrapper.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -1233,6 +1260,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/wrapper.obj
+	@echo ... src/wrapper.i
+	@echo ... src/wrapper.s
 .PHONY : help
 
 

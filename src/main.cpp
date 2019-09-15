@@ -8,7 +8,7 @@
 using namespace std;
 int main() {
 	std::cout << "starting program" << endl;
-	vector<CPoint> points;
+	vector<vector<double >> points;
 	vector<bool> mask;
 	vector<cord_t> quan;
 	cord_t Vmin, Vmax;
@@ -19,7 +19,7 @@ int main() {
 	for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
 		for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
 			for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-				points.push_back(CPoint(i, j, z));
+				points.push_back(vector<double>{i, j, z});
 				if (z >= 0 && HEIGHT >= z) {
 					a = HEIGHT - z;
 				}

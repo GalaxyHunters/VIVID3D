@@ -666,6 +666,25 @@ CMakeFiles\Vivid_py.dir\src\MeshDecimation\mdMeshDecimator.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Vivid_py.dir\src\MeshDecimation\mdMeshDecimator.cpp.s /c C:\Users\nafta\Vivid\src\MeshDecimation\mdMeshDecimator.cpp
 <<
 
+CMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj: CMakeFiles\Vivid_py.dir\flags.make
+CMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj: ..\src\wrapper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/Vivid_py.dir/src/wrapper.cpp.obj"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj /FdCMakeFiles\Vivid_py.dir\ /FS -c C:\Users\nafta\Vivid\src\wrapper.cpp
+<<
+
+CMakeFiles\Vivid_py.dir\src\wrapper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Vivid_py.dir/src/wrapper.cpp.i"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe > CMakeFiles\Vivid_py.dir\src\wrapper.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\nafta\Vivid\src\wrapper.cpp
+<<
+
+CMakeFiles\Vivid_py.dir\src\wrapper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Vivid_py.dir/src/wrapper.cpp.s"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\Vivid_py.dir\src\wrapper.cpp.s /c C:\Users\nafta\Vivid\src\wrapper.cpp
+<<
+
 # Object files for target Vivid_py
 Vivid_py_OBJECTS = \
 "CMakeFiles\Vivid_py.dir\src\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp.obj" \
@@ -699,7 +718,8 @@ Vivid_py_OBJECTS = \
 "CMakeFiles\Vivid_py.dir\src\Mesh.cpp.obj" \
 "CMakeFiles\Vivid_py.dir\src\Model.cpp.obj" \
 "CMakeFiles\Vivid_py.dir\src\External.cpp.obj" \
-"CMakeFiles\Vivid_py.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj"
+"CMakeFiles\Vivid_py.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj" \
+"CMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj"
 
 # External object files for target Vivid_py
 Vivid_py_EXTERNAL_OBJECTS =
@@ -736,10 +756,11 @@ Vivid_py.pyd: CMakeFiles\Vivid_py.dir\src\Mesh.cpp.obj
 Vivid_py.pyd: CMakeFiles\Vivid_py.dir\src\Model.cpp.obj
 Vivid_py.pyd: CMakeFiles\Vivid_py.dir\src\External.cpp.obj
 Vivid_py.pyd: CMakeFiles\Vivid_py.dir\src\MeshDecimation\mdMeshDecimator.cpp.obj
+Vivid_py.pyd: CMakeFiles\Vivid_py.dir\src\wrapper.cpp.obj
 Vivid_py.pyd: CMakeFiles\Vivid_py.dir\build.make
 Vivid_py.pyd: C:\Users\nafta\Miniconda2\libs\Python27.lib
 Vivid_py.pyd: CMakeFiles\Vivid_py.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Linking CXX shared module Vivid_py.pyd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX shared module Vivid_py.pyd"
 	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_dll --intdir=CMakeFiles\Vivid_py.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\Vivid_py.dir\objects1.rsp @<<
  /out:Vivid_py.pyd /implib:Vivid_py.lib /pdb:C:\Users\nafta\Vivid\cmake-build-debug\Vivid_py.pdb /dll /version:0.0 /machine:x64 /debug /INCREMENTAL  -LIBPATH:C:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\libs C:\Users\nafta\Miniconda2\libs\Python27.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  
 <<

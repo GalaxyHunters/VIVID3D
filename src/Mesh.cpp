@@ -142,17 +142,3 @@ void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
 void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
 void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
 void CMesh::SetAlpha(cord_t aAlpha) { this->mAlpha = aAlpha; }
-
-
-#include <pybind11/pybind11.h>
-namespace py = pybind11;
-
-PYBIND11_MODULE(Mesh, m) {
-    py::class_<CMesh>(m, "CMesh")
-            .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))
-            .def("Decimation", &CMesh::Decimation,
-                 "input values should be between 0 and 1. A Decimation algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
-                 py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
-            .def("ExportToObj", &CMesh::ExportToObj, "writes the surface to an OBJ file",
-                 py::arg("aOutputFile"));
-}

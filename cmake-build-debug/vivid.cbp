@@ -411,6 +411,9 @@
 		<Unit filename="C:/Users/nafta/Vivid/src/main.cpp">
 			<Option target="vivid"/>
 		</Unit>
+		<Unit filename="C:/Users/nafta/Vivid/src/wrapper.cpp">
+			<Option target="Vivid_py"/>
+		</Unit>
 		<Unit filename="C:/Users/nafta/Vivid/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

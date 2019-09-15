@@ -52,7 +52,7 @@ private:
 	
 public:	
 	CSurf(const CSurf &surf); //copy constructor
-	CSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
+	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, cord_t aAlpha);

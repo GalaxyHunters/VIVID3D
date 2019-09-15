@@ -59,9 +59,9 @@ class CMakeBuild(build_ext):
 setup(
     name='Vivid_py',
     version='0.0.1',
-    author='Dean Moldovan',
-    author_email='dean0x7d@gmail.com',
-    description='A test project using pybind11 and CMake',
+    author='Naftali Deutsch',
+    author_email='naftalide@gmail.com',
+    description='A 3D visualisation tool for cosmoligical simulations',
     long_description='',
     ext_modules=[CMakeExtension('Vivid_py')],
     cmdclass=dict(build_ext=CMakeBuild),

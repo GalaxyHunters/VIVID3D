@@ -31,15 +31,14 @@ quen = np.array(quen) #* (1.0/max(quen))
 
 x = vivid.CSurf(mesh_par, mask, quen)
 x.SmoothSurf()
-x.ExportToObj(r"..\test_models\test_wrapper_win")
 y = vivid.CSurf(x)
 
 x = x.ToMesh("hallelujah", 0.8)
 x.Decimation(0.6, 0.2)
 x.ExportToObj(r"..\test_models\test_wrapper_win")
 y = y.ToMesh()
+y.ExportToObj(r"..\test_models\test_wrapper_win")
 
 arr = [x, y]
 arr = np.array(arr)
 z = vivid.CModel(arr)
-z.ExportToObj(r"..\test_models\test_wrapper_CModel_win")

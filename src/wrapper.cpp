@@ -11,7 +11,7 @@ namespace py = pybind11;
 PYBIND11_MODULE(Vivid_py, m) {
     py::class_<CSurf>(m, "CSurf")
             .def(py::init<vector<vector<double >>, vector<bool>, vector<cord_t>, cord_t, cord_t>(), "constuctor function for surf",
-                 py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan"), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)
+                 py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)
             .def(py::init<const CSurf &> (), "copy constructor for CSurf", py::arg("surf"))
             .def("SmoothSurf", &CSurf::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
             .def("ToMesh", &CSurf::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",

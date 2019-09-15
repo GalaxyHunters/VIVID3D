@@ -1,5 +1,5 @@
 #include "Mesh.h"
-
+#include <stdio.h>
 
 using namespace boost::algorithm;
 
@@ -90,13 +90,22 @@ void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to co
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
+	string lines;
+    #if defined(_WIN32)
+	    lines = '\\';
+    #elif defined(_linux_)
+        lines = '/';
+    #elif defined __APPLE__
+        lines = '/';
+    #endif
+
 	ofstream o; // the obj file
 	o.open(aOutput + ".obj");
 	ofstream m; //the mtl file
 	m.open(aOutput + ".mtl");
 	string mtl = aOutput + ".mtl";
-	while (mtl.find('\\') != string::npos) {
-		mtl = mtl.substr(mtl.find('\\') + 1, string::npos);
+	while (mtl.find(lines) != string::npos) {
+		mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
 	}
 	//write obj file starter
 	o << "# This 3D code was produced by Vivid \n\n\n";

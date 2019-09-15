@@ -90,13 +90,23 @@ void CModel::ExportToObj(string aOutput){
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
+
+    string lines;
+    #if defined(_WIN32)
+	    lines = '\\';
+    #elif defined(_linux_)
+        lines = '/';
+    #elif defined __APPLE__
+        lines = '/';
+    #endif
+
 	ofstream OBJFile; // the obj file
 	OBJFile.open(aOutput + ".obj");
 	ofstream MTLObj; //the mtl file
 	MTLObj.open(aOutput + ".mtl");
 	string mtl = aOutput;
-	while (mtl.find('\\') != string::npos) {
-		mtl = mtl.substr(mtl.find('\\'), string::npos);
+	while (mtl.find(lines) != string::npos) {
+		mtl = mtl.substr(mtl.find(lines), string::npos);
 	}
 	//write obj file starter
 	OBJFile << "# This 3D code was produced by Vivid /n/n/n";

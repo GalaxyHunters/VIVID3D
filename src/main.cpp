@@ -65,7 +65,7 @@ int main() {
 	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 	mesh.Decimation(0.5, 0.4);
-	mesh.ExportToObj("..\\test_models\\testCode_Cmake_mac");
+	mesh.ExportToObj("..\\test_models\\testCode_Cmake");
 	cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");

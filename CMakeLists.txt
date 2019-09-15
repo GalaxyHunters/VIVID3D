@@ -26,9 +26,9 @@ if(Boost_FOUND)
     include_directories(src/huji-rich-Elad3DFast/source/misc)
     include_directories(pybind11/include)
     include_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+    #include_directories(~/boost_1_70_0)
 
     link_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
-
     add_executable(vivid
             #elad3d
             #source/3D/GeometryCommon
@@ -70,7 +70,7 @@ if(Boost_FOUND)
 
     target_link_libraries(vivid Boost::boost)
 
-    pybind11_add_module(cmake_example_test
+    pybind11_add_module(Vivid_py
             #elad3d
             #source/3D/GeometryCommon
             src/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp

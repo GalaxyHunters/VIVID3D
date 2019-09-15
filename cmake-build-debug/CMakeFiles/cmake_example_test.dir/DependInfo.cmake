@@ -23,6 +23,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../pybind11/include"
   "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
   "C:/Users/nafta/Miniconda2/include"
+  "C:/Users/nafta/boost_1_70_0"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/nafta/Vivid/src/External.cpp" "C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir/src/External.cpp.obj"
@@ -73,6 +74,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../pybind11/include"
   "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
   "C:/Users/nafta/Miniconda2/include"
+  "C:/Users/nafta/boost_1_70_0"
   )
 
 # Targets to which this target links.

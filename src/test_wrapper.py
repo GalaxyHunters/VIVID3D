@@ -1,4 +1,4 @@
-import cmake_example_t
+import cmake_example
 
 print cmake_example.add(1, 2)
 

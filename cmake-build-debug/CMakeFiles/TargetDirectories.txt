@@ -1,5 +1,5 @@
 C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/vivid.dir
-C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/cmake_example_test.dir
+C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/Vivid_py.dir
 C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 C:/Users/nafta/Vivid/cmake-build-debug/pybind11/CMakeFiles/rebuild_cache.dir

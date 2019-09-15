@@ -103,39 +103,39 @@ clean: CMakeFiles\vivid.dir\clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/cmake_example_test.dir
+# Target rules for target CMakeFiles/Vivid_py.dir
 
 # All Build rule for target.
-CMakeFiles\cmake_example_test.dir\all:
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\depend
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33 "Built target cmake_example_test"
-.PHONY : CMakeFiles\cmake_example_test.dir\all
+CMakeFiles\Vivid_py.dir\all:
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\depend
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33 "Built target Vivid_py"
+.PHONY : CMakeFiles\Vivid_py.dir\all
 
 # Include target in all.
-all: CMakeFiles\cmake_example_test.dir\all
+all: CMakeFiles\Vivid_py.dir\all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles\cmake_example_test.dir\rule: cmake_check_build_system
+CMakeFiles\Vivid_py.dir\rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles 33
-	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\all
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\nafta\Vivid\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles\cmake_example_test.dir\rule
+.PHONY : CMakeFiles\Vivid_py.dir\rule
 
 # Convenience name for target.
-cmake_example_test: CMakeFiles\cmake_example_test.dir\rule
+Vivid_py: CMakeFiles\Vivid_py.dir\rule
 
-.PHONY : cmake_example_test
-
-# clean rule for target.
-CMakeFiles\cmake_example_test.dir\clean:
-	$(MAKE) -f CMakeFiles\cmake_example_test.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\cmake_example_test.dir\clean
-.PHONY : CMakeFiles\cmake_example_test.dir\clean
+.PHONY : Vivid_py
 
 # clean rule for target.
-clean: CMakeFiles\cmake_example_test.dir\clean
+CMakeFiles\Vivid_py.dir\clean:
+	$(MAKE) -f CMakeFiles\Vivid_py.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Vivid_py.dir\clean
+.PHONY : CMakeFiles\Vivid_py.dir\clean
+
+# clean rule for target.
+clean: CMakeFiles\Vivid_py.dir\clean
 
 .PHONY : clean
 

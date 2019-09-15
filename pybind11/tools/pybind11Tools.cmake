@@ -148,7 +148,7 @@ function(pybind11_add_module target_name)
 
   if(WIN32 OR CYGWIN)
     # Link against the Python shared library on Windows
-    target_link_libraries(${target_name} PRIVATE ${PYTHON_LIBRARIES})
+    target_link_libraries(${target_name} PRIVATE ${PYTHON_LIBRARIES} Boost::boost)
   elseif(APPLE)
     # It's quite common to have multiple copies of the same Python version
     # installed on one's system. E.g.: one copy from the OS and another copy

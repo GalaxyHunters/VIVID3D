@@ -7,11 +7,11 @@ C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /std:c++14 /MP /bigob
 
 C_DEFINES = -Dcmake_example_test_EXPORTS
 
-C_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\Miniconda2\include 
+C_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\Miniconda2\include -IC:\Users\nafta\boost_1_70_0 
 
 CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /std:c++14 /MP /bigobj -std:c++14
 
 CXX_DEFINES = -Dcmake_example_test_EXPORTS
 
-CXX_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\Miniconda2\include 
+CXX_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\Miniconda2\include -IC:\Users\nafta\boost_1_70_0 
 

@@ -276,6 +276,9 @@ PYTHON_EXECUTABLE:FILEPATH=C:/Users/nafta/Miniconda2/python.exe
 USE_PYTHON_INCLUDE_DIR:BOOL=OFF
 
 //Dependencies for the target
+Vivid_py_LIB_DEPENDS:STATIC=general;C:/Users/nafta/Miniconda2/libs/Python27.lib;
+
+//Dependencies for the target
 cmake_example_LIB_DEPENDS:STATIC=general;C:/Users/nafta/Miniconda2/libs/Python27.lib;
 
 //Dependencies for the target

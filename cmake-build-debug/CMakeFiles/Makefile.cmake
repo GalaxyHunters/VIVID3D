@@ -63,5 +63,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/vivid.dir/DependInfo.cmake"
-  "CMakeFiles/cmake_example_test.dir/DependInfo.cmake"
+  "CMakeFiles/Vivid_py.dir/DependInfo.cmake"
   )

@@ -1083,6 +1083,8 @@ CMakeFiles/vivid.dir/src/Model.cpp.obj
  C:/Users/nafta/Vivid/src/Model.cpp
  C:/Users/nafta/Vivid/src/Model.h
  C:/Users/nafta/Vivid/src/Point.h
+ C:/Users/nafta/Vivid/src/Surf.h
+ C:/Users/nafta/Vivid/src/SurfFace.h
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/compare.hpp
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/config.hpp
  C:/Users/nafta/boost_1_70_0/boost/algorithm/string/constants.hpp

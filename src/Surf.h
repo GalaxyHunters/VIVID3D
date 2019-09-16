@@ -52,7 +52,7 @@ private:
 	
 public:	
 	CSurf(const CSurf &surf); //copy constructor
-	static CSurf CreateSurf(vector<CPoint> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
+	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax);
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, cord_t aAlpha);
@@ -68,14 +68,6 @@ public:
 	inline vector<CSurfFace> GetVecfaces() { return this->mVecFaces; }
 
 };
-
-extern "C"
-{
-	inline CSurf Surf_new(vector<CPoint> InputPoints, vector<bool> mask, vector<cord_t> quan, cord_t Vmin, cord_t Vmax) { return CSurf::CreateSurf(InputPoints, mask, quan, Vmin, Vmax); }
-	inline void Surf_smooth(CSurf surf) { surf.SmoothSurf(); }
-	inline const CMesh Surf_to_mesh(CSurf surf, string label, cord_t alpha) { return surf.ToMesh(label, alpha); }
-	inline void Surf_exportToObj(CSurf surf, string output, string label, cord_t alpha) { surf.ExportToObj(output, label, alpha); }
-}
 
 #endif
 	

@@ -8,7 +8,7 @@
 using namespace std;
 int main() {
 	std::cout << "starting program" << endl;
-	vector<CPoint> points;
+	vector<vector<double >> points;
 	vector<bool> mask;
 	vector<cord_t> quan;
 	cord_t Vmin, Vmax;
@@ -19,7 +19,7 @@ int main() {
 	for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
 		for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
 			for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-				points.push_back(CPoint(i, j, z));
+				points.push_back(vector<double>{i, j, z});
 				if (z >= 0 && HEIGHT >= z) {
 					a = HEIGHT - z;
 				}
@@ -61,11 +61,11 @@ int main() {
 	//Vmin = *min_element(quan.begin(), quan.end());
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-	CSurf surf = surf.CreateSurf(points, mask, quan, Vmin, Vmax);
+	CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
 	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 	mesh.Decimation(0.5, 0.4);
-	mesh << ("..\\test_models\\testCode_Cmake_mac");
+	mesh.ExportToObj("..\\test_models\\testCode_Cmake");
 	cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");
@@ -155,3 +155,4 @@ int main() {
 	//mesh.Decimation(0.3, 0.01);
 	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
 }
+

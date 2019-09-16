@@ -31,10 +31,11 @@ private:
 
 public:
 	CMesh() {};
+    CMesh(const CMesh &mesh);
 	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha);
 	~CMesh();
 	void Decimation(cord_t aVerticlePercent, cord_t aError);
-	void operator<<(string aOutputFile);
+	void ExportToObj(string aOutput);
 	string GetLabel();
 	cord_t GetAlpha();
 	vector<CPoint> GetPoints();
@@ -45,32 +46,6 @@ public:
 	void SetAlpha(cord_t aAlpha);
 };
 
-extern "C"
-{
-	//Mesh Mesh_new() { return Mesh(); }
-	inline CMesh Mesh_new(vector<CPoint> points, vector<CIndexedFace> faces, string label, cord_t alpha) { return CMesh(points, faces, label, alpha); }
-	inline void Mesh_decimation(CMesh mesh, cord_t verticlePercent, cord_t error) { mesh.Decimation(verticlePercent, error); }
-	inline void Mesh_export(CMesh mesh, string output) { mesh << output; }
-	inline string Mesh_getLabel(CMesh mesh) { return mesh.GetLabel(); }
-	inline cord_t Mesh_getAlpha(CMesh mesh) { return mesh.GetAlpha(); }
-	inline void Mesh_setLabel(CMesh mesh, string label) { mesh.SetLabel(label); }
-	inline void Mesh_setAlpha(CMesh mesh, cord_t alpha) { mesh.SetAlpha(alpha); }
-}
 
 #endif
-
-
-//protected:
-//	vector<Face> vecFaces;
-//	vector<Point> vecPoints;
-//	string label;
-//	cord_t alpha;
-//public:
-//	Mesh();
-//	Mesh(vector<Face> vecFaces, vector<Point> vecPoints, string label, cord_t alpha);
-//	void exportObj(string output);
-//	Mesh reduce();
-//	//Mesh merge(Mesh mesh); for now this function is cancelld
-//	void removePoints(); //clears all the points who arent used from the vecPoints
-
 

@@ -2,7 +2,7 @@
 #define MODEL_H
 
 #include "Mesh.h"
-
+#include "Surf.h"
 using namespace std;
 
 class CModel
@@ -10,10 +10,12 @@ class CModel
 public:
 	CModel();
 	CModel(vector<CMesh> aMeshes);
+	CModel(vector<CSurf> aSurfs, string aLabel, cord_t aAlpha);
 	~CModel();
-	void operator<<(string aOutputFile);
+	void ExportToObj(string aOutput);
 	static CMesh load(string inputFile); // TODO add a read obj func
-	void AddMesh(CMesh mesh);
+	void AddMesh(CMesh aMesh);
+	void AddSurf(CSurf aSurf, string aLabel, cord_t aAlpha);
 private:
 	vector<CMesh> mMeshes;
 
@@ -22,13 +24,4 @@ private:
 	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, cord_t aAlpha);
 	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
 };
-
-extern "C"
-{
-	inline CModel Model_new(vector<CMesh> meshes) { return CModel(meshes); }
-	inline void Model_export(CModel model, string output) { model << output; }
-	inline CMesh Model_load(CModel model, string inputFile) { return model.load(inputFile); }
-	inline void Model_addMesh(CModel model, CMesh mesh) { model.AddMesh(mesh); }
-}
-
 #endif

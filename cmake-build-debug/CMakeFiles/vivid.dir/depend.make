@@ -1082,6 +1082,8 @@ CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\MeshDecimation\mdVector.inl
 CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\Model.cpp
 CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\Model.h
 CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\Point.h
+CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\Surf.h
+CMakeFiles\vivid.dir\src\Model.cpp.obj: ..\src\SurfFace.h
 CMakeFiles\vivid.dir\src\Model.cpp.obj: C:\Users\nafta\boost_1_70_0\boost\algorithm\string\compare.hpp
 CMakeFiles\vivid.dir\src\Model.cpp.obj: C:\Users\nafta\boost_1_70_0\boost\algorithm\string\config.hpp
 CMakeFiles\vivid.dir\src\Model.cpp.obj: C:\Users\nafta\boost_1_70_0\boost\algorithm\string\constants.hpp

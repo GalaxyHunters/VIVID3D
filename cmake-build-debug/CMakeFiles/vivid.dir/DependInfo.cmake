@@ -15,6 +15,8 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../src/MeshDecimation"
   "../src/huji-rich-Elad3DFast/source/3D/GeometryCommon"
   "../src/huji-rich-Elad3DFast/source/misc"
+  "../pybind11/include"
+  "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
   "C:/Users/nafta/boost_1_70_0"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
@@ -59,6 +61,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src/MeshDecimation"
   "../src/huji-rich-Elad3DFast/source/3D/GeometryCommon"
   "../src/huji-rich-Elad3DFast/source/misc"
+  "../pybind11/include"
+  "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
   "C:/Users/nafta/boost_1_70_0"
   )
 

@@ -1,9 +1,18 @@
 #include "Mesh.h"
-
+#include <stdio.h>
 
 using namespace boost::algorithm;
 
 CMesh::~CMesh() {}
+
+CMesh::CMesh(const CMesh &mesh){
+    this->mAlpha = mesh.mAlpha;
+    this->mFaces = mesh.mFaces;
+    this->mLabel = mesh.mLabel;
+    this->mPoints = mesh.mPoints;
+
+}
+
 
 CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
 
@@ -77,17 +86,26 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 	}
 }
 
-void CMesh::operator<<(string aOutput) { //TODO get the color sorted(a way to convert quan to color)
+void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to convert quan to color)
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
+	string lines;
+    #if defined(_WIN32)
+	    lines = '\\';
+    #elif defined(_linux_)
+        lines = '/';
+    #elif defined __APPLE__
+        lines = '/';
+    #endif
+
 	ofstream o; // the obj file
 	o.open(aOutput + ".obj");
 	ofstream m; //the mtl file
 	m.open(aOutput + ".mtl");
 	string mtl = aOutput + ".mtl";
-	while (mtl.find('\\') != string::npos) {
-		mtl = mtl.substr(mtl.find('\\') + 1, string::npos);
+	while (mtl.find(lines) != string::npos) {
+		mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
 	}
 	//write obj file starter
 	o << "# This 3D code was produced by Vivid \n\n\n";
@@ -104,7 +122,7 @@ void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)
 	//triangulation
 	this->Triangulation();
 	//-------------------------debug
-	operator<<("D:\\alpa\\models\\testCode_triangles_pyramid");
+	ExportToObj("D:\\alpa\\models\\testCode_triangles_pyramid");
 	//------------------------------------------------
 	//call decimation from utils
 	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());

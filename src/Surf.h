@@ -24,7 +24,7 @@ public:
 
 class CSurf{
 private:
-	vector<std::shared_ptr<CPoint> > mVecPoints;
+	vector<shared_ptr<CPoint> > mVecPoints;
 	vector<CSurfFace> mVecFaces;
 	vector<CPoint> mInputPoints; // for smooth
 	vector<bool> mMask; //for smooth

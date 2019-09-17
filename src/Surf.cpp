@@ -10,10 +10,10 @@ CSurf::CSurf(const CSurf &surf2) {
 	this->mMask = surf2.mMask;
 	this->mQuan = surf2.mQuan;
 
-	map < std::shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
+	map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
 	this->mVecPoints.clear();
 	for (size_t i = 0; i < surf2.mVecPoints.size(); i++) {
-		this->mVecPoints.push_back(std::shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
+		this->mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
 		old_to_new_Points[surf2.mVecPoints[i]] = this->mVecPoints.back();
 	}
 	this->mVecFaces.clear();
@@ -82,8 +82,8 @@ void CSurf::CleanFaces(vector<bool> aMask) {
 }
 
 void CSurf::CleanPoints() {
-	vector<std::shared_ptr<CPoint> > new_points;
-	for (vector<std::shared_ptr<CPoint> >::iterator it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
+	vector<shared_ptr<CPoint> > new_points;
+	for (vector<shared_ptr<CPoint> >::iterator it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
 		if (it->use_count() > 1) { // the points is also being called from another obj, other then this vector
 			new_points.push_back(*it);
 		}
@@ -118,7 +118,7 @@ bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 void CSurf::RemoveDoublePoints() {
 	//sort the array
 	std::sort(this->mVecPoints.begin(), this->mVecPoints.end(), CompPointRD);
-	map < std::shared_ptr<CPoint>, std::shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
+	map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
 	vector<shared_ptr<CPoint> > cleaned_points;
 	size_t j;
 	for (size_t i = 0; i < this->mVecPoints.size(); i++) {
@@ -397,8 +397,8 @@ vector<cord_t> CSurf::NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax)
 const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
 	vector<CPoint> points;
 	size_t counter = 0;
-	map < std::shared_ptr<CPoint>, size_t> indexes;
-	for (vector<std::shared_ptr<CPoint> >::iterator it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
+	map < shared_ptr<CPoint>, size_t> indexes;
+	for (vector<shared_ptr<CPoint> >::iterator it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
 		points.push_back(**it);
 		indexes[*it] = counter;
 		counter++;

@@ -5,6 +5,8 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include "boost/shared_ptr.hpp"
+
 typedef double cord_t;
 
 class CPoint

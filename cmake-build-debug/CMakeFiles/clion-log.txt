@@ -2,6 +2,25 @@
 -- pybind11 v2.2.0
 -- Boost version: 1.70.0
 Boost_FOUND
+C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/
 -- Configuring done
--- Generating done
+CMake Error at CMakeLists.txt:38 (add_executable):
+  Cannot find source file:
+
+    src/animation/Animation.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:38 (add_executable):
+  No SOURCES given to target: vivid
+
+
+CMake Error at pybind11/tools/pybind11Tools.cmake:131 (add_library):
+  No SOURCES given to target: Vivid_py
+Call Stack (most recent call first):
+  CMakeLists.txt:82 (pybind11_add_module)
+
+
 -- Build files have been written to: C:/Users/nafta/Vivid/cmake-build-debug

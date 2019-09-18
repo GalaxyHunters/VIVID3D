@@ -19,6 +19,12 @@ find_package(Boost)
 
 message(Boost_FOUND)
 
+SET(FBX_ROOT "C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/")
+message(${FBX_ROOT})
+
+SET(INCLUDE_DIR ${FBX_ROOT}/include)
+SET(LINK_LIBS ${FBX_ROOT}/lib/vs2013/x64/debug/libfbxsdk-md.lib)
+
 if(Boost_FOUND)
     include_directories(src)
     include_directories(src/MeshDecimation)
@@ -26,8 +32,10 @@ if(Boost_FOUND)
     include_directories(src/huji-rich-Elad3DFast/source/misc)
     include_directories(pybind11/include)
     include_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+    include_directories(${INCLUDE_DIR})
 
     link_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
+
     add_executable(vivid
             #elad3d
             #source/3D/GeometryCommon
@@ -63,11 +71,14 @@ if(Boost_FOUND)
             src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
             src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            #animation
+            src/animation/Animation.cpp src/animation/Shapes.cpp src/animation/FbxFunc.cpp
             #main
             src/main.cpp
             )
 
     target_link_libraries(vivid Boost::boost)
+    TARGET_LINK_LIBRARIES(vivid ${LINK_LIBS})
 
     pybind11_add_module(Vivid_py
             #elad3d
@@ -104,6 +115,8 @@ if(Boost_FOUND)
             src/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
             src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp src/MeshDecimation/mdMeshDecimator.cpp
+            #animation
+            src/animation/Animation.cpp src/animation/Shapes.cpp src/animation/FbxFunc.cpp
             #wrapper
             src/wrapper.cpp
             )

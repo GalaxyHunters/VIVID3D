@@ -30,6 +30,7 @@
 					<Add directory="C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc"/>
 					<Add directory="C:/Users/nafta/Vivid/pybind11/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"/>
+					<Add directory="C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"/>
 					<Add directory="C:/Users/nafta/boost_1_70_0"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
@@ -59,6 +60,7 @@
 					<Add directory="C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc"/>
 					<Add directory="C:/Users/nafta/Vivid/pybind11/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"/>
+					<Add directory="C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"/>
 					<Add directory="C:/Users/nafta/boost_1_70_0"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
@@ -88,6 +90,7 @@
 					<Add directory="C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc"/>
 					<Add directory="C:/Users/nafta/Vivid/pybind11/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"/>
+					<Add directory="C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/include"/>
 					<Add directory="C:/Users/nafta/boost_1_70_0"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
@@ -118,6 +121,7 @@
 					<Add directory="C:/Users/nafta/Vivid/src/huji-rich-Elad3DFast/source/misc"/>
 					<Add directory="C:/Users/nafta/Vivid/pybind11/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"/>
+					<Add directory="C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"/>
 					<Add directory="C:/Users/nafta/Miniconda2/include"/>
 					<Add directory="C:/Users/nafta/boost_1_70_0"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>

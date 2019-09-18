@@ -7,11 +7,11 @@ C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MD /O2 /Ob2 /DNDEBUG
 
 C_DEFINES = 
 
-C_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\boost_1_70_0 
+C_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\zorik\OneDrive\Documents\Alpha\Vivid\src\FBX\FBX_SDK\2019.0\include -IC:\Users\nafta\boost_1_70_0 
 
 CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG   -std:c++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\nafta\boost_1_70_0 
+CXX_INCLUDES = -IC:\Users\nafta\Vivid\src -IC:\Users\nafta\Vivid\src\MeshDecimation -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\3D\GeometryCommon -IC:\Users\nafta\Vivid\src\huji-rich-Elad3DFast\source\misc -IC:\Users\nafta\Vivid\pybind11\include -IC:\Users\nafta\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include -IC:\Users\zorik\OneDrive\Documents\Alpha\Vivid\src\FBX\FBX_SDK\2019.0\include -IC:\Users\nafta\boost_1_70_0 
 

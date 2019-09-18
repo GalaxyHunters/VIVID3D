@@ -22,6 +22,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../src/huji-rich-Elad3DFast/source/misc"
   "../pybind11/include"
   "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
+  "C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"
   "C:/Users/nafta/Miniconda2/include"
   "C:/Users/nafta/boost_1_70_0"
   )
@@ -74,6 +75,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src/huji-rich-Elad3DFast/source/misc"
   "../pybind11/include"
   "C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include"
+  "C:/Users/zorik/OneDrive/Documents/Alpha/Vivid/src/FBX/FBX_SDK/2019.0/include"
   "C:/Users/nafta/Miniconda2/include"
   "C:/Users/nafta/boost_1_70_0"
   )

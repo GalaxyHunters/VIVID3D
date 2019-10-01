@@ -113,8 +113,8 @@ CMAKE_INSTALL_INCLUDEDIR:PATH=include
 //Info documentation (DATAROOTDIR/info)
 CMAKE_INSTALL_INFODIR:PATH=
 
-//Object code libraries (lib64)
-CMAKE_INSTALL_LIBDIR:PATH=lib64
+//Object code libraries (lib)
+CMAKE_INSTALL_LIBDIR:PATH=lib
 
 //Program executables (libexec)
 CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
@@ -255,10 +255,6 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//C++ standard flag, e.g. -std=c++11, -std=c++14, /std:c++14. 
-// Defaults to C++14 mode.
-PYBIND11_CPP_STANDARD:STRING=/std:c++14
-
 //Install pybind11 header files?
 PYBIND11_INSTALL:BOOL=OFF
 
@@ -277,12 +273,6 @@ USE_PYTHON_INCLUDE_DIR:BOOL=OFF
 
 //Dependencies for the target
 Vivid_py_LIB_DEPENDS:STATIC=general;C:/Users/nafta/Miniconda2/libs/Python27.lib;
-
-//Dependencies for the target
-cmake_example_LIB_DEPENDS:STATIC=general;C:/Users/nafta/Miniconda2/libs/Python27.lib;
-
-//Dependencies for the target
-cmake_example_test_LIB_DEPENDS:STATIC=general;C:/Users/nafta/Miniconda2/libs/Python27.lib;
 
 //Value Computed by CMake
 pybind11_BINARY_DIR:STATIC=C:/Users/nafta/Vivid/cmake-build-debug/pybind11
@@ -476,10 +466,10 @@ FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=C:/Users/nafta/Miniconda2/python.ex
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[C:/Users/nafta/Miniconda2/python.exe][v2.7.15()]
 //Test HAS_MSVC_GL_LTCG
-HAS_MSVC_GL_LTCG:INTERNAL=
+HAS_MSVC_GL_LTCG:INTERNAL=1
 PYBIND11_INCLUDE_DIR:INTERNAL=C:/Users/nafta/Vivid/pybind11/include
-PYBIND11_LTO_CXX_FLAGS:INTERNAL=
-PYBIND11_LTO_LINKER_FLAGS:INTERNAL=
+PYBIND11_LTO_CXX_FLAGS:INTERNAL=/GL
+PYBIND11_LTO_LINKER_FLAGS:INTERNAL=-LTCG
 PYBIND11_VERSION_MAJOR:INTERNAL=2
 PYBIND11_VERSION_MINOR:INTERNAL=2
 PYBIND11_VERSION_PATCH:INTERNAL=0

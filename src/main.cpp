@@ -1,7 +1,7 @@
 #include "Surf.h" // imports Vornoi3D.hpp
 #include <vector>
 #include "ReadBinFile.h"
-
+#include "Model.h"
 
 #define BOX_SIZE 20 
 #define HEIGHT 10
@@ -66,6 +66,8 @@ int main() {
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 	mesh.Decimation(0.5, 0.4);
 	mesh.ExportToObj("..\\test_models\\testCode_Cmake");
+	CModel model = CModel(vector<CMesh>{mesh});
+	model.ExportToObj("..\\test_models\\testCode_CModel");
 	cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");

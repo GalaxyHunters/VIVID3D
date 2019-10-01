@@ -50,25 +50,25 @@ The CXX compiler identification is MSVC, found in "C:/Users/nafta/Vivid/cmake-bu
 Determining if the C compiler works passed with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_c6d5f\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_c6d5f.dir\build.make /nologo -L                  CMakeFiles\cmTC_c6d5f.dir\build
-Building C object CMakeFiles/cmTC_c6d5f.dir/testCCompiler.c.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm904F.tmp
+Run Build Command(s):nmake /nologo cmTC_2baf0\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_2baf0.dir\build.make /nologo -L                  CMakeFiles\cmTC_2baf0.dir\build
+Building C object CMakeFiles/cmTC_2baf0.dir/testCCompiler.c.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm4E09.tmp
 testCCompiler.c
-Linking C executable cmTC_c6d5f.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_c6d5f.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_c6d5f.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm910B.tmp
+Linking C executable cmTC_2baf0.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_2baf0.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_2baf0.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm5117.tmp
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_03de1\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_03de1.dir\build.make /nologo -L                  CMakeFiles\cmTC_03de1.dir\build
-Building C object CMakeFiles/cmTC_03de1.dir/CMakeCCompilerABI.c.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm96B7.tmp
+Run Build Command(s):nmake /nologo cmTC_1db47\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_1db47.dir\build.make /nologo -L                  CMakeFiles\cmTC_1db47.dir\build
+Building C object CMakeFiles/cmTC_1db47.dir/CMakeCCompilerABI.c.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm5A9B.tmp
 CMakeCCompilerABI.c
-Linking C executable cmTC_03de1.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_03de1.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_03de1.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm9774.tmp
+Linking C executable cmTC_1db47.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_1db47.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_1db47.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm5C52.tmp
 
 
 
@@ -76,13 +76,13 @@ Linking C executable cmTC_03de1.exe
 Detecting C [] compiler features compiled with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_9d77e\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_9d77e.dir\build.make /nologo -L                  CMakeFiles\cmTC_9d77e.dir\build
-Building C object CMakeFiles/cmTC_9d77e.dir/feature_tests.c.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm9ADE.tmp
+Run Build Command(s):nmake /nologo cmTC_a54ed\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_a54ed.dir\build.make /nologo -L                  CMakeFiles\cmTC_a54ed.dir\build
+Building C object CMakeFiles/cmTC_a54ed.dir/feature_tests.c.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm6143.tmp
 feature_tests.c
-Linking C executable cmTC_9d77e.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_9d77e.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_9d77e.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm9B9A.tmp
+Linking C executable cmTC_a54ed.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_a54ed.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_a54ed.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm625D.tmp
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -90,25 +90,25 @@ Linking C executable cmTC_9d77e.exe
 Determining if the CXX compiler works passed with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_fcc7d\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_fcc7d.dir\build.make /nologo -L                  CMakeFiles\cmTC_fcc7d.dir\build
-Building CXX object CMakeFiles/cmTC_fcc7d.dir/testCXXCompiler.cxx.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm9EF5.tmp
+Run Build Command(s):nmake /nologo cmTC_cddd2\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_cddd2.dir\build.make /nologo -L                  CMakeFiles\cmTC_cddd2.dir\build
+Building CXX object CMakeFiles/cmTC_cddd2.dir/testCXXCompiler.cxx.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm66A2.tmp
 testCXXCompiler.cxx
-Linking CXX executable cmTC_fcc7d.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_fcc7d.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_fcc7d.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm9FB1.tmp
+Linking CXX executable cmTC_cddd2.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_cddd2.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_cddd2.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm679D.tmp
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_d9816\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_d9816.dir\build.make /nologo -L                  CMakeFiles\cmTC_d9816.dir\build
-Building CXX object CMakeFiles/cmTC_d9816.dir/CMakeCXXCompilerABI.cpp.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nmA2EC.tmp
+Run Build Command(s):nmake /nologo cmTC_078c6\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_078c6.dir\build.make /nologo -L                  CMakeFiles\cmTC_078c6.dir\build
+Building CXX object CMakeFiles/cmTC_078c6.dir/CMakeCXXCompilerABI.cpp.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm6B74.tmp
 CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_d9816.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_d9816.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_d9816.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nmA3B9.tmp
+Linking CXX executable cmTC_078c6.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_078c6.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_078c6.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm6C8E.tmp
 
 
 
@@ -116,13 +116,13 @@ Linking CXX executable cmTC_d9816.exe
 Detecting CXX [] compiler features compiled with the following output:
 Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):nmake /nologo cmTC_24d0d\fast 
-	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_24d0d.dir\build.make /nologo -L                  CMakeFiles\cmTC_24d0d.dir\build
-Building CXX object CMakeFiles/cmTC_24d0d.dir/feature_tests.cxx.obj
-	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nmA771.tmp
+Run Build Command(s):nmake /nologo cmTC_42de3\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_42de3.dir\build.make /nologo -L                  CMakeFiles\cmTC_42de3.dir\build
+Building CXX object CMakeFiles/cmTC_42de3.dir/feature_tests.cxx.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm70F2.tmp
 feature_tests.cxx
-Linking CXX executable cmTC_24d0d.exe
-	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_24d0d.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_24d0d.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nmA7EF.tmp
+Linking CXX executable cmTC_42de3.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_42de3.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_42de3.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm71ED.tmp
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -181,3 +181,22 @@ Linking CXX executable cmTC_24d0d.exe
     Feature record: CXX_FEATURE:1cxx_variable_templates
     Feature record: CXX_FEATURE:1cxx_variadic_macros
     Feature record: CXX_FEATURE:1cxx_variadic_templates
+Performing C++ SOURCE FILE Test HAS_MSVC_GL_LTCG succeeded with the following output:
+Change Dir: C:/Users/nafta/Vivid/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_0ea42\fast 
+	"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_0ea42.dir\build.make /nologo -L                  CMakeFiles\cmTC_0ea42.dir\build
+Building CXX object CMakeFiles/cmTC_0ea42.dir/src.cxx.obj
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\cl.exe @C:\Users\nafta\AppData\Local\Temp\nm797E.tmp
+src.cxx
+Linking CXX executable cmTC_0ea42.exe
+	"C:\Program Files\JetBrains\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_0ea42.dir --rc="D:\Windows Kits\10\bin\10.0.17763.0\x64\rc.exe" --mt="D:\Windows Kits\10\bin\10.0.17763.0\x64\mt.exe" --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_0ea42.dir\objects1.rsp @C:\Users\nafta\AppData\Local\Temp\nm7A79.tmp
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+Generating code
+Finished generating code
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+Generating code
+Finished generating code
+
+Source file was:
+int main() { return 0; }

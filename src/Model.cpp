@@ -42,7 +42,7 @@ void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlC
 		"d " + to_string(aAlpha) + "\n" + \
 		"illum 0\n" + \
 		"em 0.000000\n\n\n";
-	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "/n";
+	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "\n";
 }
 
 void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace) 
@@ -58,18 +58,22 @@ void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace)
 
 void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter) 
 {
-	aOBJFile << "o" + apMesh->GetLabel() + "/n";
+	aOBJFile << "o " + apMesh->GetLabel() + "\n";
+	//cout << apMesh->GetPoints().begin() << endl;
+    (*apMesh).GetPoints().begin();
 	//write points to obj file
-	for (vector<CPoint>::iterator it = apMesh->GetPoints().begin(); it != apMesh->GetPoints().end(); it++) 
+	vector<CPoint> Points = apMesh->GetPoints();
+    vector<CIndexedFace> Faces = apMesh->GetFaces();
+	for (vector<CPoint>::iterator it = Points.begin(); it != Points.end(); it++)
 	{
 		aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
 	}
 	//sort vecFaces by color
-	sort(apMesh->GetFaces().begin(), apMesh->GetFaces().end(), CompFace); // NlogN
+	sort(Faces.begin(), Faces.end(), CompFace); // NlogN
 	//write faces to obj file + write colors to mtl file
-	Color_t color = Quan2Color(apMesh->GetFaces()[0].GetColor());
+	Color_t color = Quan2Color((apMesh->GetFaces())[0].GetColor());
 	WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
-	for (vector<CIndexedFace>::iterator it = apMesh->GetFaces().begin(); it != apMesh->GetFaces().end(); it++) 
+	for (vector<CIndexedFace>::iterator it = Faces.begin(); it != Faces.end(); it++)
 	{
 		if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
 		{
@@ -105,12 +109,12 @@ void CModel::ExportToObj(string aOutput){
 	ofstream MTLObj; //the mtl file
 	MTLObj.open(aOutput + ".mtl");
 	string mtl = aOutput;
-	while (mtl.find(lines) != string::npos) {
-		mtl = mtl.substr(mtl.find(lines), string::npos);
+    while (mtl.find(lines) != string::npos) {
+        mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
 	}
 	//write obj file starter
-	OBJFile << "# This 3D code was produced by Vivid /n/n/n";
-	OBJFile << "mtllib" + mtl + "/n";
+	OBJFile << "# This 3D code was produced by Vivid \n\n\n";
+	OBJFile << "mtllib " + mtl + ".mtl\n";
 	
 	size_t mtl_counter = 0; // will be used to count the newmtl
 	size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file

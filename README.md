@@ -1,16 +1,34 @@
 # Vivid
 We present VIVID, an innovative method for research using 3D technology.
 
-Alongside theoretical and experimental studies, one of the useful tools for research in the field of physics is the numerical simulation. Powerful as it is, the understanding of simulation may be difficult. The typical way to visually inspect the simulations, 2D projections, allows the researcher to develop intuition and understanding of the simulation. However, not all the details of a given simulation are visible in such a plot. We find that involving 3D tools in scientific research can be profitable, and given the interactive nature of 3D, it can fill the gaps left by the 2D projections. The following developed tool enables new points of view for researchers and facilitates discoveries.
+Vivid uses an implantation of voronoi algorithem for a 3d space made by dr. elad stiennberg. The package takes simulated data as input and produsec an intreactive 3D model that is compatible with the 3D industry.  
 
- 
-
-VIVID uses a Voronoi code package to represent the simulated data as polygons. The tool proceeds to clear the data resulting in a surface. Later using algorithms of Smooth, decimation and Double Points handling it sharpens the model features, resulting in a clear, easy to study model. By presenting the simulation as fully interactive 3D models, we can make the process of analyzing the simulation faster and efficient, enabling visualizing hidden by 2D physical dynamics — the creation of such models is done in VIVID by just one simple line of code.
-
- 
 
 VIVID was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
 
 The code is written in C++ and wrapped in python code for comptorbality.
+
+
+Vivid is curruntly at the last stages of devolpement, including an installer and the finished wrapper, when those are done u will be able to simply install Vivid using anaconda and produse a model using a single function or a few lines of code for more controll.
+
+In order to produce a model the following inputs are reqired:
+
+Points - 3*n float ndArray, X Y Z values accurding to which, the model will be created.
+
+Mask - n boolean ndArray, mask values for the inputed points that represent which points shuld be within the surface and which ones shukld be outside(the surface will be created betwwen the two).
+
+OutputFile - string, name and diroctory for the output file.
+
+optinal arguments:
+
+Label - float, label for the created surface. defult argument = "Vivid_3D_model"
+
+Quan - n float ndArray, corospanding color valus for the inputted points. defult argument = ndArray.ones().
+
+Vmin - float, minimum value for color map. defult argument Quan.min_argument().
+
+Vmax - float, maximum value for color map. defult argument Quan.max_argument().
+
+decimation values #TODO
 
 also see https://naftalide.wixsite.com/vivid to view examples of output models.

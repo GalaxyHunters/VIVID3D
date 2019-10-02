@@ -117,8 +117,15 @@ void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to co
 	m.close();
 }
 
-void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError) 
+void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)
 {
+    //check input valdilty
+    if( aVerticlePercent < 0 || aVerticlePercent > 1){
+        throw "input error, DecimationPercent must be between 0 and 1";
+    }
+    if( aMaxError < 0 || aMaxError > 1){
+        throw "input error, MaxError must be between 0 and 1";
+    }
 	//triangulation
 	this->Triangulation();
 	//-------------------------debug
@@ -150,4 +157,10 @@ vector<CIndexedFace> CMesh::GetFaces() { return this->mFaces; }
 void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
 void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
 void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
-void CMesh::SetAlpha(cord_t aAlpha) { this->mAlpha = aAlpha; }
+void CMesh::SetAlpha(cord_t aAlpha){
+    //check input valdilty
+    if(aAlpha > 1 || aAlpha < 0){
+        throw "Alpha must be between 0 and 1";
+    }
+    this->mAlpha = aAlpha;
+}

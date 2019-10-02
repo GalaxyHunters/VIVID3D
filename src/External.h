@@ -3,7 +3,7 @@
 
 #include "Point.h"
 #include "Voronoi3D.hpp"
-#include "MeshDecimation/mdMeshDecimator.h"
+#include "mdMeshDecimator.h"
 #include "IndexedFace.h"
 
 using namespace std;

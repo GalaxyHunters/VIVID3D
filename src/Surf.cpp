@@ -31,6 +31,25 @@ CSurf::CSurf(const CSurf &surf2) {
 }
 
 CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
+    //check for input valdidlty
+    if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
+        throw "Input error, inputted vectors (points, mask, quan) must all be the same size";
+    }
+    //check if aMask has both False and True values
+    bool is_containing_true = false;
+    bool is_containing_false = false;
+    for(vector<bool>::iterator it = aMask.begin(); it != aMask.end(); it++){
+        if(*it == true){
+            is_containing_true = true;
+        }
+        if(*it == false){
+            is_containing_false = true;
+        }
+    }
+    if(!is_containing_false || !is_containing_true){
+        throw "Input error, mask must have both True and false values";
+    }
+    //code
     vector<CPoint> temp;
     for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
         temp.push_back(CPoint(*it));
@@ -395,6 +414,10 @@ vector<cord_t> CSurf::NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax)
 
 
 const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
+    //check input valdilty
+    if(aAlpha > 1 || aAlpha < 0){
+        throw "Alpha must be between 0 and 1";
+    }
 	vector<CPoint> points;
 	size_t counter = 0;
 	map < shared_ptr<CPoint>, size_t> indexes;

@@ -30,23 +30,23 @@ private:
 	vector<bool> mMask; //for smooth
 	vector<cord_t> mQuan; // for smooth
  
-	vector<cord_t> NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+	vector<cord_t>& NormQuan(vector<cord_t>& arQuan, cord_t aVMin, cord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
 	//vorn function:
 	void RunVorn();
-	void CleanFaces(vector<bool> aMask); // clean the unneeded faces(by mask)
+	void CleanFaces(vector<bool>& aMask); // clean the unneeded faces(by mask)
 	void CleanPoints(); // removes all the unused points
 	void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)
 	void RemoveDoublePoints(); // remove all the double face points from the model
 
 	//smooth functions:
-	pair<vector<size_t>, vector<size_t> > SetPinPout();
-	void UpdateInputPoints(vector<size_t> aPOut, vector<size_t> aPIn);
+	void SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn);
+	void UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
 	void MakeMask(size_t aPOutSize, size_t aPInSize);
-	pair<vector<size_t>, vector<size_t> > Stage2AddPoints(vector<size_t> aPOut, vector<size_t> aPIn);
+	void Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
 	void AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<cord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
-	pair<vector<size_t>, vector<size_t> > CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<cord_t> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut);
-	vector<CPointData_t> RemoveDoublesVornInput(vector<CPointData_t> aData);
+	void CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<cord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut);
+	vector<CPointData_t> RemoveDoublesVornInput(vector<CPointData_t>& arData);
 
 	CSurf();
 	
@@ -58,14 +58,14 @@ public:
 	const CMesh ToMesh(string aLabel, cord_t aAlpha);
 	void ExportToObj(string aOutputFile, string aLabel, cord_t aAlpha);
 
-	inline vector<CPoint> GetInputPoints() { return this->mInputPoints; }
-	inline vector<bool> GetMask() { return this->mMask; }
-	inline vector<cord_t> GetQuan() { return this->mQuan; }
-	inline void SetInputPoints(vector<CPoint> aInputPoints) { this->mInputPoints = aInputPoints; }
-	inline void SetMask(vector<bool> aMask) { this->mMask = aMask; }
-	inline void SetQuan(vector<cord_t> aQuan) { this->mQuan = aQuan; }
-	inline vector<shared_ptr<CPoint> > GetVecPoints() { return this->mVecPoints; }
-	inline vector<CSurfFace> GetVecfaces() { return this->mVecFaces; }
+	inline vector<CPoint>& GetInputPoints() { return this->mInputPoints; }
+	inline vector<bool>& GetMask() { return this->mMask; }
+	inline vector<cord_t>& GetQuan() { return this->mQuan; }
+	inline void SetInputPoints(vector<CPoint>& aInputPoints) { this->mInputPoints = aInputPoints; }
+	inline void SetMask(vector<bool>& aMask) { this->mMask = aMask; }
+	inline void SetQuan(vector<cord_t>& aQuan) { this->mQuan = aQuan; }
+	inline vector<shared_ptr<CPoint> >& GetVecPoints() { return this->mVecPoints; }
+	inline vector<CSurfFace>& GetVecfaces() { return this->mVecFaces; }
 
 };
 

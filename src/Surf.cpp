@@ -33,7 +33,9 @@ CSurf::CSurf(const CSurf &surf2) {
 CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
-        throw "Input error, inputted vectors (points, mask, quan) must all be the same size";
+        if(aQuan.size() != 0) {
+            throw "Input error, inputted vectors (points, mask, quan) must all be the same size";
+        }
     }
     //check if aMask has both False and True values
     bool is_containing_true = false;
@@ -82,7 +84,7 @@ vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool>
 	return output;
 }
 
-void CSurf::CleanFaces(vector<bool> aMask) {
+void CSurf::CleanFaces(vector<bool>& aMask) {
 	vector<CSurfFace> new_faces;
 	size_t mask_len = aMask.size();
 	size_t c_point1;
@@ -170,19 +172,16 @@ void CSurf::RemoveDoublePoints() {
 
 //smooth functions----------------------------------------------------------------------------------------------------------
 
-pair<vector<size_t>, vector<size_t> > UpdatePoutPin(vector<size_t> aPOut, vector<size_t> aPIn) {
+void UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
 	for (int i = 0; (unsigned)i < aPOut.size(); i++) {
 		aPOut[i] = i;
 	}
 	for (int i = 0; (unsigned)i < aPIn.size(); i++) {
 		aPIn[i] = i + aPOut.size();
 	}
-	return make_pair(aPOut, aPIn);
 }
 
-pair<vector<size_t>, vector<size_t> > CSurf::SetPinPout() { //define pin and pout
-	vector<size_t> p_out;
-	vector<size_t> p_in;
+void CSurf::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
 	map<size_t, bool> p_in_map;
 	map<size_t, bool> p_out_map;
 	size_t c_point1;
@@ -192,37 +191,36 @@ pair<vector<size_t>, vector<size_t> > CSurf::SetPinPout() { //define pin and pou
 		c_point2 = get<1>(it->mCPoints);
 		if (this->mMask[c_point1]) {
 			if (p_in_map.count(c_point1) == 0) {
-				p_in.push_back(c_point1);
+				arPIn.push_back(c_point1);
 				p_in_map[c_point1] = true;
 			}
 			if (p_out_map.count(c_point2) == 0) {
-				p_out.push_back(c_point2);
+				arPOut.push_back(c_point2);
 				p_out_map[c_point2] = true;
 			}
 		}
 		else
 		{
 			if (p_in_map.count(c_point2) == 0) {
-				p_in.push_back(c_point2);
+				arPIn.push_back(c_point2);
 				p_in_map[c_point2] = true;
 			}
 			if (p_out_map.count(c_point1) == 0) {
-				p_out.push_back(c_point1);
+				arPOut.push_back(c_point1);
 				p_out_map[c_point1] = true;
 			}
 		}
 	}
-	return make_pair(p_out, p_in);
 }
 
-void CSurf::UpdateInputPoints(vector<size_t> aPOut, vector<size_t> aPIn) {
+void CSurf::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
 	vector<CPoint> new_points;
 	vector<cord_t> quan;
-	for (vector<size_t>::iterator it = aPOut.begin(); it != aPOut.end(); it++) {
+	for (vector<size_t>::iterator it = arPOut.begin(); it != arPOut.end(); it++) {
 		new_points.push_back(this->mInputPoints[*it]);
 		quan.push_back(this->mQuan[*it]);
 	}
-	for (vector<size_t>::iterator it = aPIn.begin(); it != aPIn.end(); it++) {
+	for (vector<size_t>::iterator it = arPIn.begin(); it != arPIn.end(); it++) {
 		new_points.push_back(this->mInputPoints[*it]);
 		quan.push_back(this->mQuan[*it]);
 	}
@@ -262,51 +260,50 @@ bool CompPointData_t(CPointData_t aObj1, CPointData_t aObj2) {
 	}
 }
 
-pair<vector<size_t>, vector<size_t> > CSurf::CleanDoublePointsVorn(vector<CPoint> aNewPoints, vector<cord_t> aNewQuan, vector<size_t> aNewIn, vector<size_t> aNewOut)
+void CSurf::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<cord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
 {
 	vector<CPointData_t> data;
 	data.clear();
-	for (vector<size_t>::iterator it = aNewIn.begin(); it != aNewIn.end(); it++) {
-		data.push_back(CPointData_t(aNewPoints[*it], aNewQuan[*it], true));
+	for (vector<size_t>::iterator it = arNewIn.begin(); it != arNewIn.end(); it++) {
+		data.push_back(CPointData_t(arNewPoints[*it], arNewQuan[*it], true));
 	}
-	for (vector<size_t>::iterator it = aNewOut.begin(); it != aNewOut.end(); it++) {
-		data.push_back(CPointData_t(aNewPoints[*it], aNewQuan[*it], false));
+	for (vector<size_t>::iterator it = arNewOut.begin(); it != arNewOut.end(); it++) {
+		data.push_back(CPointData_t(arNewPoints[*it], arNewQuan[*it], false));
 	}
 	data = RemoveDoublesVornInput(data);
-	aNewPoints.clear();
-	aNewQuan.clear();
-	aNewIn.clear();
-	aNewOut.clear();
+	arNewPoints.clear();
+	arNewQuan.clear();
+	arNewIn.clear();
+	arNewOut.clear();
 	for (size_t i = 0; i < data.size(); i++) {
-		aNewPoints.push_back(data[i].mPoint);
-		aNewQuan.push_back(data[i].mQuan);
+		arNewPoints.push_back(data[i].mPoint);
+		arNewQuan.push_back(data[i].mQuan);
 		if (data[i].mIsIn) {
-			aNewIn.push_back(i);
+			arNewIn.push_back(i);
 		}
 		else
 		{
-			aNewOut.push_back(i);
+			arNewOut.push_back(i);
 		}
 	}
-	this->mInputPoints = aNewPoints;
-	this->mQuan = aNewQuan;
-	return make_pair(aNewOut, aNewIn);
+	this->mInputPoints = arNewPoints;
+	this->mQuan = arNewQuan;
 }
-vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t> data) {
+vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t>& arData) {
 	//sort the array
-	std::sort(data.begin(), data.end(), CompPointData_t);
+	std::sort(arData.begin(), arData.end(), CompPointData_t);
 	vector<CPointData_t> cleaned_data;
 	size_t j;
-	for (size_t i = 0; i < data.size(); i++) {
+	for (size_t i = 0; i < arData.size(); i++) {
 		j = i+1;
-		cleaned_data.push_back(data[i]); // push the point to the cleaned data
-		if (j >= data.size())
+		cleaned_data.push_back(arData[i]); // push the point to the cleaned data
+		if (j >= arData.size())
 		{
 			break;
 		}
-		while (data[i].mPoint.CalcDistance(data[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		while (arData[i].mPoint.CalcDistance(arData[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			j += 1;
-			if (j >= data.size())
+			if (j >= arData.size())
 			{
 				break;
 			}
@@ -336,15 +333,16 @@ void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vec
 	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
 	(*apNewIndex)++;
 }
-pair<vector<size_t>, vector<size_t> > CSurf::Stage2AddPoints(vector<size_t> aPOut, vector<size_t> aPIn) {
+
+void CSurf::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
 	size_t c_point1;
 	size_t c_point2;
-	size_t p_out_size = aPOut.size();
-	size_t p_in_size = p_out_size + aPIn.size();
+	size_t p_out_size = arPOut.size();
+	size_t p_in_size = p_out_size + arPIn.size();
 	vector<CPoint> new_points;
-	vector<size_t> new_in;
-	vector<size_t> new_out;
-	vector<cord_t> new_quan;
+    vector<cord_t> new_quan;
+	arPIn.clear();
+	arPOut.clear();
 	size_t new_index = 0; // the index for the new point to be added
 	//go over pout
 	for (vector<CSurfFace>::iterator it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
@@ -352,16 +350,15 @@ pair<vector<size_t>, vector<size_t> > CSurf::Stage2AddPoints(vector<size_t> aPOu
 		c_point2 = get<1>(it->mCPoints);
 		if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
 		{ 
-			AddPoints(&new_in, &new_points, &new_quan, &new_index, c_point1, c_point2);
+			AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2);
 		}
 		//go over pin
 		if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
 		{
-			AddPoints(&new_out, &new_points, &new_quan, &new_index, c_point1, c_point2);
+			AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2);
 		}
 	}
-	pair<vector<size_t>, vector<size_t> > output = CleanDoublePointsVorn(new_points, new_quan, new_in, new_out);
-	return output;
+	CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
 
 
@@ -369,18 +366,14 @@ pair<vector<size_t>, vector<size_t> > CSurf::Stage2AddPoints(vector<size_t> aPOu
 
 void CSurf::SmoothSurf() {
 	//begin smooth part 1, collecting all the cpoints from the faces on the surf
-	pair<vector<size_t>, vector<size_t> > pair = SetPinPout();
-	vector<size_t> p_out = get<0>(pair);
-	vector<size_t> p_in = get<1>(pair);
+    vector<size_t> p_out;
+    vector<size_t> p_in;
+    SetPinPout(p_out, p_in);
 	UpdateInputPoints(p_out, p_in);
 	this->RunVorn();
 	//begin smooth part 2, adding new points between the cpoints
-	pair = UpdatePoutPin(p_out, p_in);
-	p_out = get<0>(pair);
-	p_in = get<1>(pair);
-	pair = Stage2AddPoints(p_out, p_in);
-	p_out = get<0>(pair);
-	p_in = get<1>(pair);
+	UpdatePoutPin(p_out, p_in);
+	Stage2AddPoints(p_out, p_in);
 	//begin smooth part 3, running the model and cleaning it
 	UpdateInputPoints(p_out, p_in);
 	RunVorn();
@@ -391,25 +384,25 @@ void CSurf::SmoothSurf() {
 	//done.
 }
 
-vector<cord_t> CSurf::NormQuan(vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
-    if (aQuan.size()==0){ //incase the user doesnt input any color
-        aQuan = vector<cord_t>(this->mMask.size(), 1);
-        return aQuan;
+vector<cord_t>& CSurf::NormQuan(vector<cord_t>& arQuan, cord_t aVMin, cord_t aVMax) {
+    if (arQuan.size() == 0){ //incase the user doesnt input any color
+        arQuan = vector<cord_t>(this->mMask.size(), 1);
+        return arQuan;
     }
     if(aVMin ==  aVMax) { //in case the user inputs color but not aVMin and aVMax
-        aVMax = *max_element(aQuan.begin(), aQuan.end());
-        aVMin = *min_element(aQuan.begin(), aQuan.end());
+        aVMax = *max_element(arQuan.begin(), arQuan.end());
+        aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
 	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-		aQuan = vector<cord_t>(aQuan.size(), 1);
-		return aQuan;
+		arQuan = vector<cord_t>(arQuan.size(), 1);
+		return arQuan;
 	}
-	for (vector<cord_t>::iterator it = aQuan.begin(); it != aQuan.end(); it++) {
+	for (vector<cord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {
 		*it = 1- ((*it - aVMax) / (aVMin - aVMax));
 		if (*it > 1) *it = 1;
 		if (*it < 0) *it = 0;
 	}
-	return aQuan;
+	return arQuan;
 }
 
 
@@ -508,7 +501,7 @@ void CSurf::CleanEdges() {
 				is_out_of_radius = true;
 			}
 		}
-		if (is_out_of_radius == false) { //the face is inside the box Radius and should be kept
+		if (!is_out_of_radius) { //the face is inside the box Radius and should be kept
 			new_faces.push_back(*face);
 		}
 		else

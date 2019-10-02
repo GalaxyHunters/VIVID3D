@@ -128,10 +128,7 @@ void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)
     }
 	//triangulation
 	this->Triangulation();
-	//-------------------------debug
-	ExportToObj("D:\\alpa\\models\\testCode_triangles_pyramid");
-	//------------------------------------------------
-	//call decimation from utils
+	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * this->mFaces.size());
 	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, this->mFaces, targetVerticesN, targetTrianglesN, aMaxError);

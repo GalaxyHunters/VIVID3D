@@ -9,7 +9,7 @@
 using namespace std;
 using namespace MeshDecimation;
 
-vector<Vector3D> ConvertToVorn(vector<CPoint> inputPoints);
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint> aInputPoints, double aBoxR);
-pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError);
+void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints);
+pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, double aBoxR);
+pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace>& aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError);
 #endif

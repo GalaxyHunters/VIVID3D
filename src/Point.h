@@ -17,7 +17,7 @@ public:
 	inline CPoint(cord_t x, cord_t y, cord_t z);
 	inline CPoint(std::vector<cord_t > cords) : mX(cords[0]), mY(cords[1]), mZ(cords[2]) {}
 	inline ~CPoint();
-	inline cord_t CalcDistance(CPoint aPoint2) { return sqrt(pow(this->mX - aPoint2.GetX(), 2) + pow(this->mY - aPoint2.GetY(), 2) + pow(this->mZ - aPoint2.GetZ(), 2)); }
+	inline cord_t CalcDistance(CPoint& aPoint2) { return sqrt(pow(this->mX - aPoint2.GetX(), 2) + pow(this->mY - aPoint2.GetY(), 2) + pow(this->mZ - aPoint2.GetZ(), 2)); }
 	inline cord_t GetX() { return this->mX; }
 	inline cord_t GetY() { return this->mY; }
 	inline cord_t GetZ() { return this->mZ; }

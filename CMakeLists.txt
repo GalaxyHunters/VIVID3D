@@ -25,7 +25,10 @@ if(Boost_FOUND)
     include_directories(External_pkgs/huji-rich-Elad3DFast/source/3D/GeometryCommon)
     include_directories(External_pkgs/huji-rich-Elad3DFast/source/misc)
     include_directories(External_pkgs/pybind11/include)
+    include_directories(External_pkgs/lodepng)
+
     include_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+
 
     link_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
     add_executable(vivid
@@ -62,7 +65,9 @@ if(Boost_FOUND)
             #extra
             External_pkgs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
-            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp External_pkgs/MeshDecimation/mdMeshDecimator.cpp
+            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp
+            #external
+            External_pkgs/MeshDecimation/mdMeshDecimator.cpp External_pkgs/lodepng/lodepng.cpp
             #main
             src/main.cpp
             )
@@ -103,7 +108,9 @@ if(Boost_FOUND)
             #extra
             External_pkgs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
-            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp External_pkgs/MeshDecimation/mdMeshDecimator.cpp
+            src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp
+            #external
+            External_pkgs/MeshDecimation/mdMeshDecimator.cpp External_pkgs/lodepng/lodepng.cpp
             #wrapper
             src/wrapper.cpp
             )

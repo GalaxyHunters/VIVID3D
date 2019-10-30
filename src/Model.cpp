@@ -16,9 +16,8 @@ CModel::CModel(vector<CSurf> aSurfs, string aLabel, cord_t aAlpha){
     }
 }
 
-Color_t static Quan2Color(cord_t aQuan) {
-	ColorMap output;
-	return output.GetColor(aQuan);
+Color_t static Quan2Color(cord_t aQuan) { // calls function from ColorMap.h
+	return GetColor(aQuan);
 }
 
 bool static CompareColor(Color_t aColor1, Color_t aColor2) {

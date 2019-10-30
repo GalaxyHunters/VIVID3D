@@ -36,6 +36,7 @@ public:
 	~CMesh();
 	void Decimation(cord_t aVerticlePercent, cord_t aError);
 	void ExportToObj(string aOutput);
+	void ExportToObjTexture(string aOutput);
 	string GetLabel();
 	cord_t GetAlpha();
 	vector<CPoint> GetPoints();

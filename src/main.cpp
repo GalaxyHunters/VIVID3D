@@ -62,13 +62,13 @@ int main() {
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
 	CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-	surf.SmoothSurf();
+	//surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-	mesh.Decimation(0.5, 0.4);
-	mesh.ExportToObj("..\\test_models\\testCode_Cmake");
-	CModel model = CModel(vector<CMesh>{mesh});
-	model.ExportToObj("..\\test_models\\testCode_CModel");
-	cout << "blalala";
+	//mesh.Decimation(0.5, 0.4);
+	mesh.ExportToObjTexture("..\\test_models\\texture\\pyramid_no_smooth");
+	//CModel model = CModel(vector<CMesh>{mesh});
+	//model.ExportToObj("..\\test_models\\testCode_CModel");
+	//cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");
 	//Vmax = *max_element(temp.quan.begin(), temp.quan.end());

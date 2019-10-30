@@ -16,9 +16,8 @@ CMesh::CMesh(const CMesh &mesh){
 
 CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
 
-Color_t static Quan2Color(cord_t aQuan) {
-	ColorMap output;
-	return output.GetColor(aQuan);
+Color_t static Quan2Color(cord_t aQuan) { // calls function from ColorMap.h
+	return GetColor(aQuan);
 }
 
 bool static CompareColor(Color_t aColor1, Color_t aColor2) {
@@ -86,7 +85,7 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 	}
 }
 
-void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to convert quan to color)
+void CMesh::ExportToObj(string aOutput){
 	if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
 		aOutput.erase(aOutput.length() - 4, 4);
 	}
@@ -110,11 +109,46 @@ void CMesh::ExportToObj(string aOutput){ //TODO get the color sorted(a way to co
 	//write obj file starter
 	o << "# This 3D code was produced by Vivid \n\n\n";
 	o << "mtllib " + mtl + "\n";
-	
+
 	size_t mtl_counter = 0;
 	this->WriteObj(o, m, &mtl_counter);
 	o.close();
 	m.close();
+}
+
+void CMesh::ExportToObjTexture(string aOutput){
+    if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
+        aOutput.erase(aOutput.length() - 4, 4);
+    }
+    string lines;
+#if defined(_WIN32)
+    lines = '\\';
+#elif defined(_linux_)
+    lines = '/';
+    #elif defined __APPLE__
+        lines = '/';
+#endif
+
+    ofstream o; // the obj file
+    o.open(aOutput + ".obj");
+    ofstream m; //the mtl file
+    m.open(aOutput + ".mtl");
+    string mtl = aOutput + ".mtl";
+    while (mtl.find(lines) != string::npos) {
+        mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
+    }
+    //write texture
+    vector<unsigned char> texture;
+    texture = GetColorTexture();
+    encodePNG((aOutput + "Texture.png").c_str(), texture, 1, texture.size()/4);
+/*    //write obj file starter
+    o << "# This 3D code was produced by Vivid \n\n\n";
+    o << "mtllib " + mtl + "\n";
+
+    size_t mtl_counter = 0;
+    this->WriteObj(o, m, &mtl_counter);
+    o.close();
+    m.close();*/
 }
 
 void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)

@@ -100,6 +100,11 @@ inline static Color_t GetColor( float aVal) //float aColorMap ----- when we add 
     return ClmPlasma[int(aVal*ClmPlasma.size())];
 }
 
+inline static int GetColorIndex( float aVal) // float aColorMap ----- when we add support for more color maps an aption for choice between them will be added
+{
+    return int(aVal*ClmPlasma.size()); //returns the index of the color in ClmPlasma
+}
+
 inline static vector<unsigned char> GetColorTexture()//float aColorMap
 {
     vector<unsigned char> texture;

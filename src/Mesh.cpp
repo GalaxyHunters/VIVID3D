@@ -116,6 +116,51 @@ void CMesh::ExportToObj(string aOutput){
 	m.close();
 }
 
+void CMesh::WriteNewFaceTexture(ofstream &aOBJFile, CIndexedFace aFace){
+    aOBJFile << "f ";
+    vector<size_t> face_points = aFace.GetPoints();
+    size_t VT = GetColorIndex( aFace.GetColor())+1;
+    for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
+    {
+        aOBJFile << int2str(*ItPoint + 1) +"/" + int2str(VT) + " ";
+    }
+    aOBJFile << "\n";
+}
+
+void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, cord_t aAlpha){
+    aMTLFile << "newmtl texture_0\n" \
+		"Ns 96.078\n"  \
+		"Ka 1.000 1.000 1.000 \n"  \
+		"Kd 1.000 1.000 1.000 \n"  \
+		"Ks 0.000 0.000 0.000\n" \
+		"Ni 1.000000\n"  \
+		"d " + to_string(aAlpha) + "\n" \
+		"illum 0\n" \
+		"em 0.000000\n" \
+		"map_Ka " + aTextureName + "\n" \
+        "map_Kd " + aTextureName + "\n\n\n";
+
+    aOBJFile << "usemtl texture_0\n";
+}
+
+void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, cord_t aTextureSize){
+    aOBJFile << "o " + this->mLabel + "\n";
+    //write points to obj file
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+        aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+    }
+    //write uv cordinates
+    for(size_t i = aTextureSize; i > 0; i--){
+        aOBJFile << "vt 0 " + to_string(i/aTextureSize) + "\n";
+    }
+    //write faces
+    WriteMtlTexture(aOBJFile, aMTLFile, aTextureName, this->mAlpha);
+    for (vector<CIndexedFace>::iterator it = this->mFaces.begin(); it != this->mFaces.end(); it++){
+        WriteNewFaceTexture(aOBJFile, *it);
+    }
+}
+
 void CMesh::ExportToObjTexture(string aOutput){
     if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
         aOutput.erase(aOutput.length() - 4, 4);
@@ -140,15 +185,17 @@ void CMesh::ExportToObjTexture(string aOutput){
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    encodePNG((aOutput + "Texture.png").c_str(), texture, 1, texture.size()/4);
-/*    //write obj file starter
+    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
 
-    size_t mtl_counter = 0;
-    this->WriteObj(o, m, &mtl_counter);
+    mtl.erase(mtl.length() - 4, 4);
+
+    this->WriteObjTexture(o, m, mtl + "_texture.png", texture.size()/4);
+
     o.close();
-    m.close();*/
+    m.close();
 }
 
 void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)

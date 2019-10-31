@@ -24,8 +24,9 @@ PYBIND11_MODULE(Vivid_py, m) {
             .def("Decimation", &CMesh::Decimation,
                  "input values should be between 0 and 1. A Decimation algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
-            .def("ExportToObj", &CMesh::ExportToObj, "writes the surface to an OBJ file",
-                 py::arg("aOutputFile"));
+            .def("ExportToObj", &CMesh::ExportToObj, "writes the surface to an OBJ file, color is by metirals",
+                 py::arg("aOutputFile"))
+            .def("ExportToObjTexture", &CMesh::ExportToObjTexture, "writes the surface to an OBJ file, color is by texture", py::arg("aOutputFile"));
 
     py::class_<CModel>(m, "CModel")
             .def(py::init<> (), "default constructor for CModel")

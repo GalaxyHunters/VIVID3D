@@ -27,6 +27,10 @@ private:
 	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, Color_t color, cord_t aAlpha);
 	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
 
+    void WriteObjTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, cord_t aTextureSize);
+    void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, cord_t aAlpha);
+    void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace);
+
 	void Triangulation();
 
 public:

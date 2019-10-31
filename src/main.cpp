@@ -62,10 +62,10 @@ int main() {
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
 	CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-	//surf.SmoothSurf();
+	surf.SmoothSurf();
 	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-	//mesh.Decimation(0.5, 0.4);
-	mesh.ExportToObjTexture("..\\test_models\\texture\\pyramid_no_smooth");
+	mesh.Decimation(0.5, 0.4);
+	mesh.ExportToObjTexture("..\\test_models\\texture\\pyramid_smooth");
 	//CModel model = CModel(vector<CMesh>{mesh});
 	//model.ExportToObj("..\\test_models\\testCode_CModel");
 	//cout << "blalala";

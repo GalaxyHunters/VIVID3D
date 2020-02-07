@@ -1,6 +1,0 @@
-C:/Users/nafta/Vivid/cmake-build-release/CMakeFiles/vivid.dir
-C:/Users/nafta/Vivid/cmake-build-release/CMakeFiles/Vivid_py.dir
-C:/Users/nafta/Vivid/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/nafta/Vivid/cmake-build-release/CMakeFiles/rebuild_cache.dir
-C:/Users/nafta/Vivid/cmake-build-release/pybind11/CMakeFiles/rebuild_cache.dir
-C:/Users/nafta/Vivid/cmake-build-release/pybind11/CMakeFiles/edit_cache.dir

@@ -1,31 +1,15 @@
 
 #include "External.h"
 
-vector<Vector3D> ConvertToVorn(vector<CPoint> inputPoints) {
-	vector<Vector3D> new_vec;
-	for (vector<CPoint>::iterator it = inputPoints.begin(); it != inputPoints.end(); it++) {
-		new_vec.push_back(Vector3D(it->GetX(), it->GetY(), it->GetZ()));
+void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints) {
+	for (vector<CPoint>::iterator it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
+		arNewPoints.push_back(Vector3D(it->GetX(), it->GetY(), it->GetZ()));
 	}
-	return new_vec;
 }
 
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint> aInputPoints, double aBoxR) {
-	vector<Vector3D> vorn_points = ConvertToVorn(aInputPoints);
-
-	/////////////////////////////////////debug////////////////////////////////////////////////////
-	//cout << vornPoints.size() << endl;
-	//ofstream o;
-	//o.open("../../test_models/voroni_input.txt");
-	//o << "box size input:\n";
-	//o << to_string(-box_R) + " " + to_string(-box_R) + " " + to_string(-box_R) + "\n";
-	//o << to_string(box_R) + " " + to_string(box_R) + " " + to_string(box_R) + "\n";
-	//o << "points input:\n";
-	//for (vector<Vector3D>::iterator it = vornPoints.begin(); it != vornPoints.end(); it++) {
-	//	o << to_string(it->x) + " " + to_string(it->y) + " " + to_string(it->z) + "\n";
-	//}
-	//o.close();
-	/////////////////////////////////////////debug over/////////////////////////////////////////////
-
+pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, double aBoxR) {
+	vector<Vector3D> vorn_points;
+	ConvertToVorn(arInputPoints, vorn_points);
 	Voronoi3D temp(Vector3D(-aBoxR, -aBoxR, -aBoxR), Vector3D(aBoxR, aBoxR, aBoxR));
 	temp.Build(vorn_points);
 	vorn_points = temp.GetFacePoints();
@@ -60,7 +44,7 @@ void CallBack(const char * msg)
 	cout << msg;
 }
 
-pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) {
+pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace>& aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) {
 	//write the data to vec3 format
 	vector< Vec3<float> > vertices;
 	vector< Vec3<int> > triangles;
@@ -86,9 +70,6 @@ pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint> aPoints,
 
 	myMDecimator.GetMeshData(&decimated_points, &decimated_triangles);
 
-	//decimated_points.resize(myMDecimator.GetNVertices());
-	//decimated_triangles.resize(myMDecimator.GetNTriangles());
-
 	//write the data to Mesh format
 	vector<CPoint> out_points;
 	out_points.clear();
@@ -102,4 +83,12 @@ pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint> aPoints,
 	}
 	pair<vector<CPoint>, vector<CIndexedFace> > output(out_points, out_faces);
 	return output;
+}
+
+void encodePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height) {
+    //Encode the image
+    unsigned error = lodepng::encode(filename, image, width, height);
+
+    //if there's an error, display it
+    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 }

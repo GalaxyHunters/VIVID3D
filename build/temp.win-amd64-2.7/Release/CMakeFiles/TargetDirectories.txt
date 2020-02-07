@@ -1,5 +1,0 @@
-D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/vivid.dir
-D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/Vivid_py.dir
-D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/ALL_BUILD.dir
-D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/ZERO_CHECK.dir
-D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/External_pkgs/pybind11/CMakeFiles/ALL_BUILD.dir

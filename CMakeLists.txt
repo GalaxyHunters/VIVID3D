@@ -18,14 +18,20 @@ set(BOOST_ROOT "../../Libraries/boost_1_72_0")
 set(Boost_DEBUG 1)
 find_package(Boost)
 
+
 SET(FBX_ROOT "C:/Program Files/Autodesk/FBX2015/FBX_SDK/2019.0")
 message(${FBX_ROOT})
 
 SET(INCLUDE_DIR ${FBX_ROOT}/include)
 SET(LINK_LIBS ${FBX_ROOT}/lib/vs2015/x64/release/libfbxsdk-md.lib)
 
+include_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+include_directories(${INCLUDE_DIR})
+
+link_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
 
 if(Boost_FOUND)
+
     message(Boost_FOUND)
     include_directories(src)
     include_directories(External_pkgs/MeshDecimation)
@@ -34,10 +40,6 @@ if(Boost_FOUND)
     include_directories(External_pkgs/pybind11/include)
     include_directories(External_pkgs/lodepng)
 
-    include_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
-    include_directories(${INCLUDE_DIR})
-
-    link_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
     add_executable(vivid
             #elad3d
             #source/3D/GeometryCommon

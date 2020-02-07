@@ -36,6 +36,7 @@ PYBIND11_MODULE(Vivid_py, m) {
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));
+            .def("ExportToObjTexture", &CMesh::ExportToObjTexture, "writes the surface to an OBJ file, color is by texture", py::arg("aOutputFile"));
 
     m.def("Animate", &Animate, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
           py::arg("models"),py::arg("interval"), py::arg("outputfile"));

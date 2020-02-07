@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\r3d\r3d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\bisection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\func_1_var.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\horner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\int2str.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\io3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\serializable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\simple_io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\universal_error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\tessellation\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Surf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\External.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\Shapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\FbxFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation\mdMeshDecimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng\lodepng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Documents\Alpha\Vivid2\refactor\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E8B6A249-0551-3E97-99C0-1114653CA366}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -14,12 +14,19 @@ add_subdirectory(External_pkgs/pybind11)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-set(BOOST_ROOT "~/boost_1_70_0")
+set(BOOST_ROOT "../../Libraries/boost_1_72_0")
+set(Boost_DEBUG 1)
 find_package(Boost)
 
-message(Boost_FOUND)
+SET(FBX_ROOT "C:/Program Files/Autodesk/FBX2015/FBX_SDK/2019.0")
+message(${FBX_ROOT})
+
+SET(INCLUDE_DIR ${FBX_ROOT}/include)
+SET(LINK_LIBS ${FBX_ROOT}/lib/vs2015/x64/release/libfbxsdk-md.lib)
+
 
 if(Boost_FOUND)
+    message(Boost_FOUND)
     include_directories(src)
     include_directories(External_pkgs/MeshDecimation)
     include_directories(External_pkgs/huji-rich-Elad3DFast/source/3D/GeometryCommon)
@@ -27,10 +34,10 @@ if(Boost_FOUND)
     include_directories(External_pkgs/pybind11/include)
     include_directories(External_pkgs/lodepng)
 
-    include_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+    include_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/include)
+    include_directories(${INCLUDE_DIR})
 
-
-    link_directories(C:/Users/nafta/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
+    link_directories(C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs)
     add_executable(vivid
             #elad3d
             #source/3D/GeometryCommon
@@ -66,6 +73,10 @@ if(Boost_FOUND)
             External_pkgs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             #vivid
             src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp
+            #animation
+            src/animation/Animation.cpp
+            src/animation/Shapes.cpp
+            src/animation/FbxFunc.cpp
             #external
             External_pkgs/MeshDecimation/mdMeshDecimator.cpp External_pkgs/lodepng/lodepng.cpp
             #main
@@ -73,6 +84,7 @@ if(Boost_FOUND)
             )
 
     target_link_libraries(vivid Boost::boost)
+    TARGET_LINK_LIBRARIES(vivid ${LINK_LIBS})
 
     pybind11_add_module(Vivid_py
             #elad3d
@@ -111,9 +123,12 @@ if(Boost_FOUND)
             src/Surf.cpp src/Mesh.cpp src/Model.cpp src/External.cpp
             #external
             External_pkgs/MeshDecimation/mdMeshDecimator.cpp External_pkgs/lodepng/lodepng.cpp
+            #animation
+            src/animation/Animation.cpp src/animation/Shapes.cpp src/animation/FbxFunc.cpp
             #wrapper
             src/wrapper.cpp
             )
+    target_link_libraries(Vivid_py PRIVATE  ${LINK_LIBS} Boost::boost)
 endif()
 
 

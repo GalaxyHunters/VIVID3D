@@ -1,0 +1,7 @@
+README.md
+setup.py
+Vivid_py.egg-info/PKG-INFO
+Vivid_py.egg-info/SOURCES.txt
+Vivid_py.egg-info/dependency_links.txt
+Vivid_py.egg-info/not-zip-safe
+Vivid_py.egg-info/top_level.txt

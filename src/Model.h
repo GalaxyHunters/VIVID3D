@@ -16,6 +16,7 @@ public:
 	static CMesh load(string inputFile); // TODO add a read obj func
 	void AddMesh(CMesh aMesh);
 	void AddSurf(CSurf aSurf, string aLabel, cord_t aAlpha);
+	vector<CMesh> GetMeshes() {return this->mMeshes;}
 private:
 	vector<CMesh> mMeshes;
 

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\af5ba9e8cf084daa46f5415b31e495e3\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{82E4D593-5ED9-3805-9CC8-0CB910E1FF45}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

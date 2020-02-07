@@ -1,7 +1,8 @@
 #include "Surf.h"
 #include "Mesh.h"
 #include "Model.h"
-
+#include "animation/Shapes.h"
+#include "animation/Animation.h"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -35,6 +36,14 @@ PYBIND11_MODULE(Vivid_py, m) {
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));
+
+    m.def("Animate", &Animate, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
+          py::arg("models"),py::arg("interval"), py::arg("outputfile"));
+    m.def("RotateAnim", &RotateAnim, "takes a model and creates an animation of it rotating", py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("outputfile"));
+
+
+    py::class_<Shapes>(m, "Shapes")
+            .def_static("CreateCubeMesh", &Shapes::CreateCubeMesh, "creates a cube mesh", py::arg("sizeX"),  py::arg("sizeY"),  py::arg("sizeZ"),  py::arg("color") = 0.5, py::arg("alpha") = 0.9, py::arg("position") = vector<double>{0, 0, 0});
 
 
 

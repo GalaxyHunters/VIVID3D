@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C3E2F97D-15BE-37E5-B1A8-CA7A1BA3260E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>vivid</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vivid.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vivid</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vivid.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vivid</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">vivid.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">vivid</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">vivid.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">vivid</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std:c++14</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>VERSION_INFO="0.0.1";WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;VERSION_INFO=\"0.0.1\";_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\lib\vs2015\x64\release\libfbxsdk-md.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs;C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/Debug/vivid.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/Debug/vivid.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std:c++14</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>VERSION_INFO="0.0.1";WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;VERSION_INFO=\"0.0.1\";_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\lib\vs2015\x64\release\libfbxsdk-md.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs;C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/Release/vivid.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/Release/vivid.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std:c++14</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>VERSION_INFO="0.0.1";WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;VERSION_INFO=\"0.0.1\";_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\lib\vs2015\x64\release\libfbxsdk-md.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs;C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/MinSizeRel/vivid.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/MinSizeRel/vivid.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std:c++14</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>VERSION_INFO="0.0.1";WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;VERSION_INFO=\"0.0.1\";_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Alpha\Vivid2\refactor\src;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\pybind11\include;D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng;C:\Users\zorik\Miniconda2\pkgs\python-2.7.16-hcb6e200_0\include;C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\include;D:\Documents\Alpha\Libraries\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\Program Files\Autodesk\FBX2015\FBX_SDK\2019.0\lib\vs2015\x64\release\libfbxsdk-md.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs;C:/Users/zorik/Miniconda2/pkgs/python-2.7.16-hcb6e200_0/libs/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/RelWithDebInfo/vivid.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/RelWithDebInfo/vivid.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Documents\Alpha\Vivid2\refactor\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Documents/Alpha/Vivid2/refactor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\bin\cmake.exe -SD:/Documents/Alpha/Vivid2/refactor -BD:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release --check-stamp-file D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindBoost.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCXXCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeRCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Documents/Alpha/Vivid2/refactor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\bin\cmake.exe -SD:/Documents/Alpha/Vivid2/refactor -BD:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release --check-stamp-file D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindBoost.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCXXCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeRCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Documents/Alpha/Vivid2/refactor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\bin\cmake.exe -SD:/Documents/Alpha/Vivid2/refactor -BD:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release --check-stamp-file D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindBoost.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCXXCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeRCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Documents/Alpha/Vivid2/refactor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\bin\cmake.exe -SD:/Documents/Alpha/Vivid2/refactor -BD:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release --check-stamp-file D:/Documents/Alpha/Vivid2/refactor/build/temp.win-amd64-2.7/Release/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindBoost.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Users\zorik\Miniconda2\Lib\site-packages\cmake\data\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeCXXCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeRCCompiler.cmake;D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\3.15.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Voronoi3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Delaunay3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Face.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\HilbertOrder3D_Utils.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Intersections.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\predicates.cxx" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Predicates3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\RoundGrid3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tessellation3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\tetgen.cxx" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Tetrahedron.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\GeometryCommon\Vector3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\r3d\Intersection3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\3D\r3d\r3d.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\bisection.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\func_1_var.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\horner.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\int2str.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\io3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\mesh_generator.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\mesh_generator3D.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\serializable.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\simple_io.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\universal_error.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\misc\utils.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\huji-rich-Elad3DFast\source\tessellation\geometry.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Surf.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Mesh.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\Model.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\External.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\Animation.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\Shapes.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\animation\FbxFunc.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\MeshDecimation\mdMeshDecimator.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\External_pkgs\lodepng\lodepng.cpp" />
+    <ClCompile Include="D:\Documents\Alpha\Vivid2\refactor\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Documents\Alpha\Vivid2\refactor\build\temp.win-amd64-2.7\Release\ZERO_CHECK.vcxproj">
+      <Project>{BD5C91E9-CBE7-3315-A4DA-1EA256E7018E}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

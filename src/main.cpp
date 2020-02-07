@@ -2,73 +2,82 @@
 #include <vector>
 #include "ReadBinFile.h"
 #include "Model.h"
-
+#include "animation/Shapes.h"
+#include "animation/Animation.h"
 #define BOX_SIZE 20 
 #define HEIGHT 10
 using namespace std;
+
+////--------------------------------------------------------------test AniVIVID--------------------------------------------------------
+//int main()
+//{
+//    CModel ROTATE;
+//    ROTATE.AddMesh(Shapes::CreateCubeMesh(10, 10, 10, 0.3, 0.7, vector<double>{0,0,0}));
+//    RotateAnim(ROTATE, 1000, 10, 1, "D:\\Documents\\Alpha\\Models\\Random\\CheckMerge.fbx");
+//}
+
+
+
 int main() {
-	std::cout << "starting program" << endl;
-	vector<vector<double >> points;
-	vector<bool> mask;
-	vector<cord_t> quan;
-	cord_t Vmin, Vmax;
+    std::cout << "starting program" << endl;
+    vector<vector<double >> points;
+    vector<bool> mask;
+    vector<cord_t> quan;
+    cord_t Vmin, Vmax;
 
 //----------------------------------------------------------------------pyramid
 
-	int a(0);
-	for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
-		for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
-			for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-				points.push_back(vector<double>{i, j, z});
-				if (z >= 0 && HEIGHT >= z) {
-					a = HEIGHT - z;
-				}
+    int a(0);
+    for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
+        for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
+            for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
+                points.push_back(vector<double>{i, j, z});
+                if (z >= 0 && HEIGHT >= z) {
+                    a = HEIGHT - z;
+                } else {
+                    a = 0;
+                }
 
-				else {
-					a = 0;
-				}
+                if ((z >= 0 && HEIGHT >= z) && (-a <= i && i <= a) && (-a <= j && j <= a)) {
+                    mask.push_back(true);
+                    quan.push_back(std::log(pow(10, a) + 0.0001));
+                } else {
+                    mask.push_back(false);
+                    quan.push_back(std::log(0.00001));
+                }
+            }
+        }
+    }
 
-				if ((z >= 0 && HEIGHT >= z) && (-a <= i && i <= a) && (-a <= j && j <= a)) {
-					mask.push_back(true);
-					quan.push_back(std::log(pow(10, a) + 0.0001));
-				}
+    Vmax = *max_element(quan.begin(), quan.end());
+    Vmin = *min_element(quan.begin(), quan.end());
 
-				else {
-					mask.push_back(false);
-					quan.push_back(std::log(0.00001));
-				}
-			}
-		}
-	}
-
-	Vmax = *max_element(quan.begin(), quan.end());
-	Vmin = *min_element(quan.begin(), quan.end());
-
-	//----------------------------------------------------cube
-	//for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
-	//	for (int j = 2; j > -4; j -= 2) {
-	//		for (int z = 2; z > -4; z -= 2) {
-	//			points.push_back(Point(i, j, z));
-	//			quan.push_back(0);
-	//			mask.push_back(false);
-	//			if (i == j && j == z && z == 0) {
-	//				mask.back() = true;
-	//			}
-	//		}
-	//	}
-	//}
-	//Vmax = *max_element(quan.begin(), quan.end());
-	//Vmin = *min_element(quan.begin(), quan.end());
+    //----------------------------------------------------cube
+    //for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
+    //	for (int j = 2; j > -4; j -= 2) {
+    //		for (int z = 2; z > -4; z -= 2) {
+    //			points.push_back(Point(i, j, z));
+    //			quan.push_back(0);
+    //			mask.push_back(false);
+    //			if (i == j && j == z && z == 0) {
+    //				mask.back() = true;
+    //			}
+    //		}
+    //	}
+    //}
+    //Vmax = *max_element(quan.begin(), quan.end());
+    //Vmin = *min_element(quan.begin(), quan.end());
 
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-	CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-	surf.SmoothSurf();
-	CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-	mesh.Decimation(0.5, 0.4);
-	mesh.ExportToObjTexture("..\\test_models\\texture\\pyramid_smooth");
-	//CModel model = CModel(vector<CMesh>{mesh});
-	//model.ExportToObj("..\\test_models\\testCode_CModel");
-	//cout << "blalala";
+    CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
+    surf.SmoothSurf();
+    CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+    mesh.Decimation(0.5, 0.4);
+    mesh.ExportToObjTexture("D:\\Documents\\Alpha\\Models\\Random\\Pyramid.obj");
+}
+//	//CModel model = CModel(vector<CMesh>{mesh});
+//	//model.ExportToObj("..\\test_models\\testCode_CModel");
+//	//cout << "blalala";
 	//----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 	//ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");
 	//Vmax = *max_element(temp.quan.begin(), temp.quan.end());
@@ -156,5 +165,5 @@ int main() {
 	//mesh.SetPoints(mesh_points);
 	//mesh.Decimation(0.3, 0.01);
 	//mesh << ("D:\\alpa\\models\\testCode_decimation_cow.obj");
-}
+//}
 

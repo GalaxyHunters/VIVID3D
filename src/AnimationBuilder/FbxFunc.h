@@ -5,9 +5,9 @@
 #ifndef VIVID_FBXFUNC_H
 #define VIVID_FBXFUNC_H
 
-#include "Model.h"
+#include "ModelBuilder/Model.h"
 #include <iostream>
-#include "ReadBinFile.h"
+#include "Utils/ReadBinFile.h"
 #include <fbxsdk.h>
 #include <vector>
 #include "string"

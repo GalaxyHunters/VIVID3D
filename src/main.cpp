@@ -1,9 +1,9 @@
-#include "Surf.h" // imports Vornoi3D.hpp
+#include "ModelBuilder/Surf.h" // imports Vornoi3D.hpp
 #include <vector>
-#include "ReadBinFile.h"
-#include "Model.h"
-#include "animation/Shapes.h"
-#include "animation/Animation.h"
+#include "Utils/ReadBinFile.h"
+#include "ModelBuilder/Model.h"
+#include "Utils/Shapes.h"
+#include "AnimationBuilder/Animation.h"
 #define BOX_SIZE 20 
 #define HEIGHT 10
 using namespace std;
@@ -73,7 +73,7 @@ int main() {
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
     mesh.Decimation(0.5, 0.4);
-    mesh.ExportToObjTexture("D:\\Documents\\Alpha\\Models\\Random\\Pyramid.obj");
+    mesh.ExportToObjTexture("../temp/Pyramid.obj");
 }
 //	//CModel model = CModel(vector<CMesh>{mesh});
 //	//model.ExportToObj("..\\test_models\\testCode_CModel");

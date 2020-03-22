@@ -2,7 +2,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "Model.h"
+#include "ModelBuilder/Model.h"
 #include <iostream>
 #include <fbxsdk.h>
 #include "FbxFunc.h"

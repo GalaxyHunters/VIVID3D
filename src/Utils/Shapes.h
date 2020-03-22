@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fbxsdk.h>
-#include "Mesh.h"
+#include "ModelBuilder/Mesh.h"
 #include "ColorMap.h"
 
 #ifndef  SHAPES_H

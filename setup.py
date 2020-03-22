@@ -57,13 +57,13 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 setup(
-    name='Vivid_py',
+    name='vivid_py',
     version='0.0.1',
     author='Naftali Deutsch',
     author_email='naftalide@gmail.com',
-    description='A 3D visualisation tool for cosmoligical simulations',
+    description='A 3D visualisation tool for cosmological simulations',
     long_description='',
-    ext_modules=[CMakeExtension('Vivid_py')],
+    ext_modules=[CMakeExtension('Vivid')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )

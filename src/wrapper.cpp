@@ -1,15 +1,15 @@
-#include "Surf.h"
-#include "Mesh.h"
-#include "Model.h"
-#include "animation/Shapes.h"
-#include "animation/Animation.h"
+#include "ModelBuilder/Surf.h"
+#include "ModelBuilder/Mesh.h"
+#include "ModelBuilder/Model.h"
+#include "Utils/Shapes.h"
+#include "AnimationBuilder/Animation.h"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(Vivid_py, m) {
+PYBIND11_MODULE(vivid_py, m) {
     py::class_<CSurf>(m, "CSurf")
             .def(py::init<vector<vector<double >>, vector<bool>, vector<cord_t>, cord_t, cord_t>(), "constructor function for surf",
                  py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)

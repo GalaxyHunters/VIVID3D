@@ -2,9 +2,9 @@
 
 #include <string>
 #include "Animation.h"
-#include "Model.h"
-#include "ReadBinFile.h"
-#include "Surf.h"
+#include "ModelBuilder/Model.h"
+#include "Utils/ReadBinFile.h"
+#include "ModelBuilder/Surf.h"
 
 
 

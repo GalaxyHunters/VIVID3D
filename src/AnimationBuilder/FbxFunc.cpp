@@ -47,7 +47,7 @@ vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh)
 
     for (int l = 0; l < faces.size(); ++l)
     {
-//        vector<Color_t> MeshColors;
+//        vector<color_t> MeshColors;
 //        cout << faces[l].GetColor() << endl;
 //        MeshColors.GetColor(0.3);
         colors.push_back(FbxDouble3(GetColor(faces[l].GetColor()).R, GetColor(faces[l].GetColor()).G, GetColor(faces[l].GetColor()).B));

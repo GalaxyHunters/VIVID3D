@@ -1,0 +1,6 @@
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/CMakeFiles/vivid.dir
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/CMakeFiles/vivid_py.dir
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/CMakeFiles/edit_cache.dir
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/CMakeFiles/rebuild_cache.dir
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/bindings_python_version/CMakeFiles/rebuild_cache.dir
+C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15/bindings_python_version/CMakeFiles/edit_cache.dir

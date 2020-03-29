@@ -1,0 +1,7 @@
+"C:\Program Files\JetBrains\CLion 2019.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - NMake Makefiles" C:\Users\Tussbaum\Developments\vivid
+-- Found PythonInterp: C:/ProgramData/Miniconda3/python.exe (found suitable version "3.7.6", minimum required is "2.7") 
+-- pybind11 v2.2.0
+C:/ProgramData/Miniconda3/libs/Python37.lib
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/Tussbaum/Developments/vivid/cmake-build-release-visual-studio-15

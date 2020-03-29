@@ -60,7 +60,7 @@ setup(
     name='vivid_py',
     version='0.0.1',
     author='Naftali Deutsch',
-    author_email='naftalide@gmail.com',
+    # author_email='naftalide',
     description='A 3D visualisation tool for cosmological simulations',
     long_description='',
     ext_modules=[CMakeExtension('Vivid')],

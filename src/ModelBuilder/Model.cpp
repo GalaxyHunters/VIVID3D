@@ -9,14 +9,14 @@ CModel::CModel(vector<CMesh> aMeshes) {
 	this->mMeshes = aMeshes;
 }
 
-CModel::CModel(vector<CSurf> aSurfs, string aLabel, cord_t aAlpha){
+CModel::CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha){
     this->mMeshes = vector<CMesh>();
     for (vector<CSurf>::iterator it = aSurfs.begin(); it != aSurfs.end(); it++){
         this->mMeshes.push_back((*it).ToMesh(aLabel, aAlpha));
     }
 }
 
-color_t static Quan2Color(cord_t aQuan) { // calls function from ColorMap.h
+color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
 	return GetColor(aQuan);
 }
 
@@ -30,7 +30,7 @@ bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
 static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 
-void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, cord_t aAlpha)
+void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
 {
 	aMTLFile << "newmtl surf_" + int2str(*apMtlCounter) + "\n" + \
 		"Ns 96.078\n" + \
@@ -128,7 +128,7 @@ void CModel::AddMesh(CMesh aMesh) {
 	this->mMeshes.push_back(aMesh);
 }
 
-void CModel::AddSurf(CSurf aSurf, string aLabel, cord_t aAlpha){
+void CModel::AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha){
     this->mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
 }
 

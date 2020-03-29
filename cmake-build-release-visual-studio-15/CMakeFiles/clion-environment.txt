@@ -1,0 +1,4 @@
+ToolSet: 14.0 (local)@C:\Program Files (x86)\Microsoft Visual Studio 14.0
+Options: msvc.arch=amd64
+
+Options:

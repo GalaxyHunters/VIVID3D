@@ -13,7 +13,7 @@ Shapes::Shapes() {}
 const size_t a1 = NULL;
 const size_t b1 = NULL;
 
-CMesh Shapes::CreateCubeMesh(double sizeX, double sizeY, double sizeZ, cord_t color, cord_t alpha, vector<double> position)
+CMesh Shapes::CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position)
 {
 	vector<CPoint> CPoints(8);
 	CPoints.clear();
@@ -49,7 +49,7 @@ CMesh Shapes::CreateCubeMesh(double sizeX, double sizeY, double sizeZ, cord_t co
 	return CMesh;
 }
 
-CMesh Shapes::CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, cord_t Color, cord_t Alpha, vector<double> CenterPoint)
+CMesh Shapes::CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, coord_t Color, coord_t Alpha, vector<double> CenterPoint)
 {
     vector<CPoint> vertices;
     vector<CIndexedFace> faces;
@@ -102,7 +102,7 @@ CMesh Shapes::CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels,
 }
 
 
-CMesh Shapes::CreateArrowMesh(double x, double y, double z, double chest_length, double pointer_length, double width, cord_t color)
+CMesh Shapes::CreateArrowMesh(double x, double y, double z, double chest_length, double pointer_length, double width, coord_t color)
 {
     vector<CPoint> points;
     points.clear();
@@ -202,9 +202,12 @@ FbxMesh* Shapes::createCube(int sizeX, int sizeY, int sizeZ)
 	for (i = 0; i < 6; i++)
 	{
 		// all faces of the cube have the same texture
-		CMesh0->BeginPolygon(-1, -1, -1, false);																				/*this is a bit tricky. when creating a polygon for the CMesh you want to use BeginPolygon so the program																				will understand that when you started creating the polygon. afterwards you should create a loop to add
-																															the desired vertices into the polygon you begun creating. after you have add all vertices, you should use
-																															EndPolygon so the program knows you have finished creating your polygon.*/
+		CMesh0->BeginPolygon(-1, -1, -1, false);
+		/* this is a bit tricky. when creating a polygon for the CMesh you want to use BeginPolygon so the program
+		 * will understand that when you started creating the polygon. afterwards you should create a loop to add
+		 * the desired vertices into the polygon you begun creating. after you have add all vertices, you should use
+		 * EndPolygon so the program knows you have finished creating your polygon.
+		 * */
 
 		for (j = 0; j < 4; j++)
 		{

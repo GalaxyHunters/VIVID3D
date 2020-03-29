@@ -1,7 +1,7 @@
 #include "Surf.h"
 using namespace std;
 
-static const cord_t DoublePointThreshHold = 0.0001;
+static const coord_t DoublePointThreshHold = 0.0001;
 
 CSurf::CSurf() {};
 
@@ -30,7 +30,7 @@ CSurf::CSurf(const CSurf &surf2) {
 	}
 }
 
-CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
+CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
         if(aQuan.size() != 0) {
@@ -66,7 +66,7 @@ CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<co
 	this->CleanPoints();
 }
 
-vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<cord_t> aQuan, cord_t aVMin, cord_t aVMax) {
+vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
 	CSurf temp;
 	temp.SetInputPoints(aInputPoints);
 	temp.SetQuan(temp.NormQuan(aQuan, aVMin, aVMax));
@@ -215,7 +215,7 @@ void CSurf::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define
 
 void CSurf::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
 	vector<CPoint> new_points;
-	vector<cord_t> quan;
+	vector<coord_t> quan;
 	for (vector<size_t>::iterator it = arPOut.begin(); it != arPOut.end(); it++) {
 		new_points.push_back(this->mInputPoints[*it]);
 		quan.push_back(this->mQuan[*it]);
@@ -260,7 +260,7 @@ bool CompPointData_t(CPointData_t aObj1, CPointData_t aObj2) {
 	}
 }
 
-void CSurf::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<cord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
+void CSurf::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
 {
 	vector<CPointData_t> data;
 	data.clear();
@@ -314,9 +314,9 @@ vector<CPointData_t> CSurf::RemoveDoublesVornInput(vector<CPointData_t>& arData)
 	
 	return cleaned_data;
 }
-void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<cord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
+void CSurf::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
 {
-	cord_t x, y, z;
+	coord_t x, y, z;
 	(*apPVec).push_back(*apNewIndex);
 	x = (this->mInputPoints[aCPoint1].GetX() * 2 + this->mInputPoints[aCPoint2].GetX()) / 3.0;
 	y = (this->mInputPoints[aCPoint1].GetY() * 2 + this->mInputPoints[aCPoint2].GetY()) / 3.0;
@@ -340,7 +340,7 @@ void CSurf::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
 	size_t p_out_size = arPOut.size();
 	size_t p_in_size = p_out_size + arPIn.size();
 	vector<CPoint> new_points;
-    vector<cord_t> new_quan;
+    vector<coord_t> new_quan;
 	arPIn.clear();
 	arPOut.clear();
 	size_t new_index = 0; // the index for the new point to be added
@@ -384,9 +384,9 @@ void CSurf::SmoothSurf() {
 	//done.
 }
 
-vector<cord_t>& CSurf::NormQuan(vector<cord_t>& arQuan, cord_t aVMin, cord_t aVMax) {
+vector<coord_t>& CSurf::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) {
     if (arQuan.size() == 0){ //incase the user doesnt input any color
-        arQuan = vector<cord_t>(this->mMask.size(), 1);
+        arQuan = vector<coord_t>(this->mMask.size(), 1);
         return arQuan;
     }
     if(aVMin ==  aVMax) { //in case the user inputs color but not aVMin and aVMax
@@ -394,10 +394,10 @@ vector<cord_t>& CSurf::NormQuan(vector<cord_t>& arQuan, cord_t aVMin, cord_t aVM
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
 	if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-		arQuan = vector<cord_t>(arQuan.size(), 1);
+		arQuan = vector<coord_t>(arQuan.size(), 1);
 		return arQuan;
 	}
-	for (vector<cord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {
+	for (vector<coord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {
 		*it = 1- ((*it - aVMax) / (aVMin - aVMax));
 		if (*it > 1) *it = 1;
 		if (*it < 0) *it = 0;
@@ -406,7 +406,7 @@ vector<cord_t>& CSurf::NormQuan(vector<cord_t>& arQuan, cord_t aVMin, cord_t aVM
 }
 
 
-const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
+const CMesh CSurf::ToMesh(string aLabel, coord_t aAlpha) {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
         throw "Alpha must be between 0 and 1";
@@ -436,7 +436,7 @@ const CMesh CSurf::ToMesh(string aLabel, cord_t aAlpha) {
 	return CMesh(points, faces, aLabel, aAlpha);
 }
 
-void CSurf::ExportToObj(string aOutput, string aLabel, cord_t aAlpha) {
+void CSurf::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {
 	CMesh mesh = ToMesh(aLabel, aAlpha);
 	mesh.ExportToObj(aOutput);
 }
@@ -473,7 +473,7 @@ void CSurf::RunVorn() {
 	vector<CSurfFace> new_faces;
 	size_t c_point1;
 	size_t c_point2;
-	cord_t quan;
+	coord_t quan;
 	vector<shared_ptr<CPoint> > face_points;
 	for (vector<vector<size_t> >::iterator face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
 		c_point1 = face->back();

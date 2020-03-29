@@ -7,9 +7,6 @@
 #include "ModelBuilder/Surf.h"
 
 
-
-
-
 using namespace std;
 
 
@@ -212,8 +209,8 @@ void Animate(vector<CModel> models, double interval,  char* outputfile)
 //		for (int i = 0; i < MeshesInModel; i++)
 //		{
 //			ModelData temp = ReadBin(inputFiles[i]);
-//			cord_t Vmax = *max_element(temp.quan.begin(), temp.quan.end());
-//			cord_t Vmin = *min_element(temp.quan.begin(), temp.quan.end());
+//			coord_t Vmax = *max_element(temp.quan.begin(), temp.quan.end());
+//			coord_t Vmin = *min_element(temp.quan.begin(), temp.quan.end());
 //			
 //			CSurf surf = surf.CreateSurf(temp.points, temp.mask, temp.quan, Vmin, Vmax);
 //			surf.SmoothSurf();

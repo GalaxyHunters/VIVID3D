@@ -22,16 +22,16 @@ int main() {
     std::cout << "starting program" << endl;
     vector<vector<double >> points;
     vector<bool> mask;
-    vector<cord_t> quan;
-    cord_t Vmin, Vmax;
+    vector<coord_t> quan;
+    coord_t Vmin, Vmax;
 
 //----------------------------------------------------------------------pyramid
 
-    int a(0);
-    for (double i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
-        for (double j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
-            for (double z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-                points.push_back(vector<double>{i, j, z});
+    size_t a = 0;
+    for (size_t i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
+        for (size_t j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
+            for (size_t z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
+                points.push_back(vector<double>{(double)i, (double)j, (double)z});
                 if (z >= 0 && HEIGHT >= z) {
                     a = HEIGHT - z;
                 } else {

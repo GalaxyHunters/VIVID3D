@@ -11,7 +11,7 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(vivid_py, m) {
     py::class_<CSurf>(m, "CSurf")
-            .def(py::init<vector<vector<double >>, vector<bool>, vector<cord_t>, cord_t, cord_t>(), "constructor function for surf",
+            .def(py::init<vector<vector<double >>, vector<bool>, vector<coord_t>, coord_t, coord_t>(), "constructor function for surf",
                  py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)
             .def(py::init<const CSurf &> (), "copy constructor for CSurf", py::arg("surf"))
             .def("SmoothSurf", &CSurf::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
@@ -32,7 +32,7 @@ PYBIND11_MODULE(vivid_py, m) {
     py::class_<CModel>(m, "CModel")
             .def(py::init<> (), "default constructor for CModel")
             .def(py::init<vector<CMesh> > (), "constructor for CModel, from meshes", py::arg("Meshes"))
-            .def(py::init<vector<CSurf>, string, cord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
+            .def(py::init<vector<CSurf>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));

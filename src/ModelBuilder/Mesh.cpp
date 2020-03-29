@@ -14,9 +14,9 @@ CMesh::CMesh(const CMesh &mesh){
 }
 
 
-CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, cord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
+CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
 
-color_t static Quan2Color(cord_t aQuan) { // calls function from ColorMap.h
+color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
 	return GetColor(aQuan);
 }
 
@@ -30,7 +30,7 @@ bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
 static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 
-void CMesh::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, cord_t aAlpha)
+void CMesh::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
 {
 	aMTLFile << "newmtl surf_" + to_string(*apMtlCounter) + "\n" + \
 		"Ns 96.078\n" + \
@@ -127,7 +127,7 @@ void CMesh::WriteNewFaceTexture(ofstream &aOBJFile, CIndexedFace aFace){
     aOBJFile << "\n";
 }
 
-void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, cord_t aAlpha){
+void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, coord_t aAlpha){
     aMTLFile << "newmtl texture_0\n" \
 		"Ns 96.078\n"  \
 		"Ka 1.000 1.000 1.000 \n"  \
@@ -143,7 +143,7 @@ void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aText
     aOBJFile << "usemtl texture_0\n";
 }
 
-void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, cord_t aTextureSize){
+void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, coord_t aTextureSize){
     aOBJFile << "o " + this->mLabel + "\n";
     //write points to obj file
     for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
@@ -198,7 +198,7 @@ void CMesh::ExportToObjTexture(string aOutput){
     m.close();
 }
 
-void CMesh::Decimation(cord_t aVerticlePercent, cord_t aMaxError)
+void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
@@ -229,13 +229,13 @@ void CMesh::Triangulation() {
 //geters seters
 
 string CMesh::GetLabel() { return this->mLabel; }
-cord_t CMesh::GetAlpha() { return this->mAlpha; }
+coord_t CMesh::GetAlpha() { return this->mAlpha; }
 vector<CPoint> CMesh::GetPoints() { return this->mPoints; }
 vector<CIndexedFace> CMesh::GetFaces() { return this->mFaces; }
 void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
 void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
 void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
-void CMesh::SetAlpha(cord_t aAlpha){
+void CMesh::SetAlpha(coord_t aAlpha){
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
         throw "Alpha must be between 0 and 1";

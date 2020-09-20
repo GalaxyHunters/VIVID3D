@@ -92,9 +92,9 @@ void CMesh::ExportToObj(string aOutput){
 	string lines;
     #if defined(_WIN32)
 	    lines = '\\';
-    #elif defined(_linux_)
+    #elif defined(__linux__)
         lines = '/';
-    #elif defined __APPLE__
+    #elif defined(__APPLE__)
         lines = '/';
     #endif
 
@@ -166,13 +166,13 @@ void CMesh::ExportToObjTexture(string aOutput){
         aOutput.erase(aOutput.length() - 4, 4);
     }
     string lines;
-#if defined(_WIN32)
-    lines = '\\';
-#elif defined(_linux_)
-    lines = '/';
-    #elif defined __APPLE__
+    #if defined(_WIN32)                                     //TODO this is ugly, change this
+        lines = '\\';
+    #elif defined(__linux__)
         lines = '/';
-#endif
+    #elif defined(__APPLE__)
+        lines = '/';
+    #endif
 
     ofstream o; // the obj file
     o.open(aOutput + ".obj");

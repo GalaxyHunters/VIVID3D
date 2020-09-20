@@ -9,6 +9,7 @@
 # correspond to the ./configure --prefix=$FBX_DIR
 
 IF(APPLE)
+    MESSAGE(RUNNING_FBX_FINDER_MAC)
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         # using regular Clang or AppleClang
         SET(FBX_LIBDIR "clang")
@@ -133,6 +134,7 @@ FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
         PATH_SUFFIXES "lib/${FBX_LIBDIR}")
 
 IF(WIN32)
+    MESSAGE(RUNNING_FBX_FINDER_WIN32)
     FIND_LIBRARY( FBX_XML2_LIBRARY ${FBX_XML2_LIBNAME}
             PATHS ${FBX_SEARCH_PATHS}
             PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
@@ -229,4 +231,89 @@ IF(NOT FBX_FOUND)
         SET(FBX_FOUND "NO")
     ENDIF()
 
+ENDIF()
+
+#linking the sdk in unix
+IF(UNIX)
+    FIND_PACKAGE(LibXml2)
+#    SET(LIBXML2_LIBRARY "/usr/lib/x86_64-linux-gnu/libxml2.a")
+    MESSAGE(LIBXML2_LIBRARY=${LIBXML2_LIBRARY})
+
+#    ADD_LIBRARY(LIBXML2 STATIC IMPORTED)
+
+    MESSAGE(RUNNING_FBX_FINDER_UNIX)
+    SET(FBX_ROOT "/usr/local/lib/FBX")              #TODO this needs to be expanded
+    IF(FBX_ROOT)
+        #setting FBX_INCLUDE_DIR
+        SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)
+        IF(FBX_INCLUDE_DIR)
+            MESSAGE(FBX_INCLUDE_DIR=FOUND)
+        ELSE()
+            MESSAGE(FBX_INCLUDE_DIR=NOT_FOUND)
+        ENDIF()
+
+        #setting FBX_LIBRARY
+        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.so)
+        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.a)
+        IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_STATIC_RELEASE)
+            MESSAGE(FBX_LIBRARY=FOUND)
+        ELSE()
+            MESSAGE(FBX_LIBRARY=NOT_FOUND)
+        ENDIF()
+
+        #setting FBX_LIBRARY_DEBUG
+        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.so)
+        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.a)
+        IF(FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_DEBUG)
+            MESSAGE(FBX_LIBRARY_DEBUG=FOUND)
+        ELSE()
+            MESSAGE(FBX_LIBRARY_DEBUG=NOT_FOUND)
+        ENDIF()
+
+        #Creating the imported target FBX::fbx
+
+        IF(NOT TARGET FBX::fbx)
+            ADD_LIBRARY(FBX::fbx STATIC IMPORTED GLOBAL)
+            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")     #TODO need to create multiple code snippets to create a target for each fbx library file, also needed in windowns for relocatable lib
+            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LOCATION "${FBX_LIBRARY_STATIC_DEBUG}")
+            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY}")
+            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+#            ADD_DEPENDENCIES(FBX::fbx LibXml2::LibXml2)
+            MESSAGE(FBX::fbx=CREATED)
+        ENDIF()
+
+        #TODO this might be using a C compiler, check online
+
+        #defining a xml2 target for dependency
+
+#        IF(LibXml2_FOUND AND NOT TARGET LibXml2::LibXml2)
+#            ADD_LIBRARY(LibXml2::LibXml2 UNKNOWN IMPORTED)
+#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${LIBXML2_INCLUDE_DIRS}")
+#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_COMPILE_OPTIONS "${LIBXML2_DEFINITIONS}")
+#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
+#            SET_PROPERTY(TARGET LibXml2::LibXml2 APPEND PROPERTY IMPORTED_LOCATION "${LIBXML2_LIBRARY}")
+#        ENDIF()
+#
+#        IF(NOT TARGET FBX::fbx)
+#            ADD_LIBRARY(FBX::fbx INTERFACE IMPORTED)                                                          #TODO for tommorow, this is not supposed to be interface cuz fbx is not a header only library, utilize http://mesos.apache.org/documentation/latest/cmake-examples/
+#            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")     #TODO somehow add xml2 into this
+#            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${FBX_LIBRARY_DEBUG}")
+##            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
+#            ADD_DEPENDENCIES(FBX::fbx xml2)
+#            MESSAGE(FBX::fbx=CREATED)
+#        ENDIF()
+
+        #TODO extern c
+        #TODO Mangled Symbols
+
+
+        IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_RELEASE AND FBX_LIBRARY_STATIC_DEBUG AND FBX_INCLUDE_DIR AND TARGET FBX::fbx)
+            SET(FBX_FOUND "YES")
+        ELSE()
+            SET(FBX_FOUND "NO")
+        ENDIF()
+
+
+
+    ENDIF()
 ENDIF()

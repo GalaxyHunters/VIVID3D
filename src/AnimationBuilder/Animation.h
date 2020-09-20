@@ -2,9 +2,9 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "ModelBuilder/Model.h"
+#include "../ModelBuilder/Model.h"
 #include <iostream>
-#include <fbxsdk.h>
+#include "fbxsdk.h"
 #include "FbxFunc.h"
 
 //#include "Surf.h"
@@ -29,9 +29,9 @@ void RotateAnim(CModel model, float length, float interval, int RotAxis, char* o
 void Animate(vector<CModel>, double interval, char* outputfile);
 /* this function takes a vector aof models and creates a frame by frame animation with every model being a frame.*/
 
+void RotateAnimTextures(CModel model, float length, float duration, int RotAxis, const string& outputfile);
 
-
-
+void AnimateTextures(vector<CModel> Models, double Interval, const string& OutputFile);
 
 
 

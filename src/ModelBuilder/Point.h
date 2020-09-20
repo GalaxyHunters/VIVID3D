@@ -7,7 +7,7 @@
 #include <vector>
 #include "boost/shared_ptr.hpp"
 
-typedef double coord_t;
+typedef double coord_t; //TODO: float64_t
 
 class CPoint
 {
@@ -17,7 +17,7 @@ public:
 	inline CPoint(coord_t x, coord_t y, coord_t z);
 	inline CPoint(std::vector<coord_t > cords) : mX(cords[0]), mY(cords[1]), mZ(cords[2]) {}
 	inline ~CPoint();
-	inline coord_t CalcDistance(CPoint& aPoint2) { return sqrt(pow(this->mX - aPoint2.GetX(), 2) + pow(this->mY - aPoint2.GetY(), 2) + pow(this->mZ - aPoint2.GetZ(), 2)); }
+	inline coord_t CalcDistance(CPoint& aPoint2) { return sqrt(pow(mX - aPoint2.GetX(), 2) + pow(mY - aPoint2.GetY(), 2) + pow(mZ - aPoint2.GetZ(), 2)); }
 	inline coord_t GetX() { return this->mX; }
 	inline coord_t GetY() { return this->mY; }
 	inline coord_t GetZ() { return this->mZ; }

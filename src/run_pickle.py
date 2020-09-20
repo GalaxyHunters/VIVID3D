@@ -1,7 +1,11 @@
-import Vivid_py as vivid
+import sys
+sys.path.insert(0, "/home/zohar/Documents/Vivid/cmake-build-debug")
+
+import vivid_py as vivid
 import numpy as np
 import pickle
 import yt
+
 def OpenPickleData(path):
     with open(path, 'rb') as handle:
         data = pickle.load(handle)
@@ -24,9 +28,15 @@ def RunPickle(path, masks, colors):
     for i in range(len(masks)):
         data = OpenPickleData(path)
         mask_status = CheckPickleData(path, masks[i])
+
         if mask_status == True:
             try:
-                surfs.append(vivid.CSurf(data['mesh_par'], data['mask'][masks[i]], data['quan']))
+                mask = data['mask'][masks[i]]
+                quan = data['quan']
+                x = vivid.CSurf(data['mesh_par'], mask, quan)
+                x.SmoothSurf()
+                y = vivid.CSurf(x)
+                surfs.append(y)
                 #surfs[i].SmoothSurf()
                 print '--------------------successfully created ' + masks[i] + ' for file ' + path + '----------------------'
             except:
@@ -34,7 +44,8 @@ def RunPickle(path, masks, colors):
         else:
             print 'unable to create surf due to lack of points in the mask'
 
-        meshes.append(surfs[i].ToMesh())
+        meshes.append(surfs[i].ToMesh("WORK", 1))
+        i = i+1
         # faces = meshes[i].GetFaces();
         # for j in range(len(faces)):
         #     faces[j].SetColor(colors[i])
@@ -68,6 +79,36 @@ def ExportPklToObj(inputpath, outputpath, masks, colors):
     model.ExportToObj(outputpath)
     print 'model exported, find the file in' + outputpath
 
+Pickles = ["/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS.pickle",
+           "/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS.pickle",
+           "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS.pickle",
+           "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS.pickle"]
+
+
+
+names = ['VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS',
+         'VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS',
+         'VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS',
+         'VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS']
+
+data = OpenPickleData(Pickles[0])
+#print data
+#print data['mask']['1e-24']
+print np.array(data['quan'])
+
+vivid.CSurf(data['mesh_par'], np.array(data['mask']['1e-24']), np.array(data['quan']))
+
+#ExportPklToObj(Pickles[0], "/home/zohar/Documents/models/" + names[0], ['1e-24', '1e-25', '1e-26'], 1)
+
+# for f in range(4):
+#     pickle = Pickles[f]
+#     print pickle
+#     i = 0
+#     ExportPklToObj(pickle, "/home/zohar/Documents/models/" + names[i], ['1e-24', '1e-25', '1e-26'], 1)
+#     i = i + 1
+
+
+
 # def RotateAnim(inputpath, outputpath, masks, colors, time, distance, rotation_axis):
 #     model = RunPickle(inputpath, masks, colors)
 #     print 'starting animation'
@@ -75,12 +116,12 @@ def ExportPklToObj(inputpath, outputpath, masks, colors):
 #     print 'animation done, the file is in ' + outputpath
 
 
-models = []
-for i in range(100):
-    models.append(vivid.CModel())
-    models[i].AddMesh(vivid.Shapes.CreateCubeMesh(i, i, i))
-
-vivid.Animate(models, 0.05, "D:\\Documents\\Alpha\\Models\\Random\\NewAnimationPY2.fbx")
+# models = []
+# for i in range(100):
+#     models.append(vivid.CModel())
+#     models[i].AddMesh(vivid.Shapes.CreateCubeMesh(i, i, i))
+#
+# vivid.Animate(models, 0.05, "D:\\Documents\\Alpha\\Models\\Random\\NewAnimationPY2.fbx")
 
 # inputpaths = [
 #               # "C:\Users\zorik\OneDrive\Documents\Alpha\Models\Pickles\Fixed_pickles\VELA_v2.Thick.22.a0.13013972342_00008_1e-23_TO_25_FIXED.pickle",

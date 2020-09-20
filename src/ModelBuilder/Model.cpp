@@ -44,13 +44,13 @@ void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlC
 	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "\n";
 }
 
-void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace) 
+void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
 {
 	aOBJFile << "f ";
 	vector<size_t> face_points = aFace.GetPoints();
 	for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
 	{
-		aOBJFile << int2str(*ItPoint + 1) + " ";
+		aOBJFile << int2str(*ItPoint + 1 + aPointsCounter) + " ";
 	}
 	aOBJFile << "\n";
 }
@@ -76,7 +76,7 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 	{
 		if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
 		{
-			WriteNewFace(aOBJFile, *it);
+			WriteNewFace(aOBJFile, *it, aPointsCounter);
 		}
 		else // we reached a new color, and we need to write it in mtl before using it
 		{
@@ -84,7 +84,7 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 			(*apMtlCounter)++;
 			WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
 			// now we can write the face in the obj file
-			WriteNewFace(aOBJFile, *it);
+			WriteNewFace(aOBJFile, *it, aPointsCounter);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void CModel::ExportToObj(string aOutput){
     string lines;
     #if defined(_WIN32)
 	    lines = '\\';
-    #elif defined(_linux_)
+    #elif defined(__linux__)
         lines = '/';
     #elif defined __APPLE__
         lines = '/';
@@ -117,10 +117,12 @@ void CModel::ExportToObj(string aOutput){
 	
 	size_t mtl_counter = 0; // will be used to count the newmtl
 	size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ItMesh++) 
+	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ++ItMesh)
 	{
+//	    cout << ItMesh->GetLabel() << endl;
 		WriteObj(OBJFile, MTLObj, &(*ItMesh), &mtl_counter, points_counter);
 		points_counter += ItMesh->GetPoints().size();
+		mtl_counter = mtl_counter + 1;
 	}
 }
 

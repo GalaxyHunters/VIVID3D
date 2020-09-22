@@ -107,9 +107,9 @@ bool CheckIfPerpindicular(vector<double> VecA, vector<double> VecB){
 
 CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
     //begin by asserting some conditions
-    assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} and MiddleAxis != vector<double>{0,0,0} and MinorAxis != vector<double>{0,0,0}));
-    assert(("Radius cannot be equal to 0", Radii[0] != 0 and Radii[1] != 0 and Radii[2] != 0));
-    assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true and CheckIfPerpindicular(MajorAxis, MinorAxis) == true and CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
+    assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} && MiddleAxis != vector<double>{0,0,0} && MinorAxis != vector<double>{0,0,0}));
+    assert(("Radius cannot be equal to 0", Radii[0] != 0 && Radii[1] != 0 && Radii[2] != 0));
+    assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true && CheckIfPerpindicular(MajorAxis, MinorAxis) == true && CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
     //create a sphere to operate on
     CMesh Ellipsoid = CreateSphereMesh(NumOfMeridians, NumOfParallels, 1,  vector<double>{0,0,0}, Color, Alpha, Label);
     //use Radii to create strech matrix and stretch the sphere
@@ -221,7 +221,7 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
     CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label){
     //before we run, lets assert some conditions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
-    assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 and Width != 0 and PCRatio != 0));
+    assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 && Width != 0 && PCRatio != 0));
 
     CMesh arrow;
     vector<CPoint> points;

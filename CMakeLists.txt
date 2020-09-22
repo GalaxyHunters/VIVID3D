@@ -21,8 +21,9 @@ execute_process(
 
 project(vivid)
 
-#set(BOOST_ROOT "C:/Boost/include")
-find_package(Boost 1.62.0 REQUIRED COMPONENTS)
+set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
+#set(Boost_DEBUG 1)
+find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)
 #message(LibXml Found = ${LibXml2_FOUND})
 #message(LibXml2_LIBRARY=${LIBXML2_LIBRARY})
@@ -47,20 +48,21 @@ message(${FBX_LIBRARY_STATIC_RELEASE})
 message(${FBX_LIBRARY_STATIC_DEBUG})
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
-#set(PY_ROOT    "C:/ProgramDatas/Miniconda3")
+set(PY_ROOT    "C:/Users/zorik/Miniconda2")
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
 #set(PY_LINK_LIBS   ${PY_ROOT}/libs)
 #message(${PY_ROOT})
+#
 
-#set(PYTHONLIBS_FOUND TRUE)
-
-set(PYBIND11_PYTHON_VERSION 2.7)
-set(bindings_python_version 2.7 REQUIRED)
-add_subdirectory(pybind11 bindings_python_version)
-message(${PYTHON_LIBRARIES})
+#set(PYBIND11_PYTHON_VERSION 2.7)
+#set(bindings_python_version 2.7 REQUIRED)
+#add_subdirectory(pybind11 bindings_python_version)
+#message(${PYTHON_LIBRARIES})
+set(PY_ROOT "C:/Users/zorik/Miniconda2")
+add_subdirectory(pybind11)
 
 include_directories(src)
 include_directories(Libs/MeshDecimation)
@@ -75,6 +77,7 @@ include_directories(Libs/lodepng)
 #link_directories(${PY_LINK_LIBS})
 
 include_directories(${FBX_INCLUDE_DIR})
+
 
 
 add_executable(vivid
@@ -125,9 +128,9 @@ add_executable(vivid
 )
 
 target_link_libraries(vivid Boost::boost)
-#target_link_libraries(vivid FBX::fbx)
+target_link_libraries(vivid FBX::fbx)
 #target_link_libraries(vivid ${LIBXML2_LIBRARY})
-target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
+#target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
 
 pybind11_add_module(vivid_py
         #elad3d

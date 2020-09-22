@@ -1,0 +1,6 @@
+D:/Documents/Alpha/Vivid3/cmake-build-release/CMakeFiles/vivid.dir
+D:/Documents/Alpha/Vivid3/cmake-build-release/CMakeFiles/vivid_py.dir
+D:/Documents/Alpha/Vivid3/cmake-build-release/CMakeFiles/edit_cache.dir
+D:/Documents/Alpha/Vivid3/cmake-build-release/CMakeFiles/rebuild_cache.dir
+D:/Documents/Alpha/Vivid3/cmake-build-release/pybind11/CMakeFiles/rebuild_cache.dir
+D:/Documents/Alpha/Vivid3/cmake-build-release/pybind11/CMakeFiles/edit_cache.dir

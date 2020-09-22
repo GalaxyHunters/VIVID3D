@@ -1,0 +1,14 @@
+"D:\Program Files\JetBrains\CLion 2019.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - NMake Makefiles" D:\Documents\Alpha\Vivid3
+RUNNING_FBX_FINDER_WIN32
+FBX_INCLUDE_DIR=FOUND
+FBX_LIBRARY_RELEASE=FOUND
+FBX_LIBRARY_DEBUG=FOUND
+DEPENDECIES_FOUND
+FBX::fbx=CREATED
+FBX_FOUND=YES
+C:/Program Files/Autodesk/FBX/FBX_SDK/2020.0.1/lib/vs2017/x64/release/libfbxsdk-md.lib
+C:/Program Files/Autodesk/FBX/FBX_SDK/2020.0.1/lib/vs2017/x64/debug/libfbxsdk-md.lib
+-- pybind11 v2.2.0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Documents/Alpha/Vivid3/cmake-build-release

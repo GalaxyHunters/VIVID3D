@@ -1,7 +1,8 @@
 /cmake-build-debug
+/cmake-build-release
 /CMakeFiles
 /temp
 /binding_python_version
-/CMakeFiles
 /venv
 /test_models
+/Vivid_py.egg-info

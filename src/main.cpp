@@ -34,6 +34,7 @@ using namespace std;
 
 ////------------------------------------------------------------test sphere and ellipsoid
 int main(){
+    cout << "got it bro";
     CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
     sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
     CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 1, "ellips1");

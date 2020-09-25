@@ -11,12 +11,12 @@ using namespace std;
 class color_t
 {
 public:
-    int8_t R;
-    int8_t G;
-    int8_t B;
+    double R;
+    double G;
+    double B;
 
-	inline color_t(double R, double G, double B) : R(int8_t(R*INT8_MAX)), G(int8_t(G*INT8_MAX)), B(int8_t(B*INT8_MAX)) {}
-	inline color_t(int8_t R, int8_t G, int8_t B) : R(R), G(G), B(B) {}
+	inline color_t(double R, double G, double B) : R(R), G(G), B(B) {}
+//	inline color_t(int8_t R, int8_t G, int8_t B) : R(R), G(G), B(B) {}
 };
 
 static vector<color_t> ClmPlasma{color_t(0.050383, 0.029803, 0.52797),
@@ -110,10 +110,10 @@ inline static vector<unsigned char> GetColorTexture()//float aColorMap
 {
     vector<unsigned char> texture;
     for(vector<color_t>::iterator it = ClmPlasma.begin(); it != ClmPlasma.end(); it++){
-        texture.push_back((*it).R*INT8_MAX);
-        texture.push_back((*it).G*INT8_MAX);
-        texture.push_back((*it).B*INT8_MAX);
-        texture.push_back(INT8_MAX);
+        texture.push_back((*it).R*255);
+        texture.push_back((*it).G*255);
+        texture.push_back((*it).B*255);
+        texture.push_back(255);
     }
     texture.resize(texture.size());
     return texture;

@@ -239,12 +239,12 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
         for (int i = -1; i < 2; ++i) {
             if (i == 0) continue;
 //            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseY + 0.5 * i * Width, baseZ));
+            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ, baseY + 0.5 * i * Width));
         }
         //creating the points for the top square
         for (int k = -1; k < 2; ++k) {
             if (k == 0) continue;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseY + 0.5 * k * Width, baseZ + Length * (1 - PCRatio)));
+            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ + Length * (1 - PCRatio), baseY + 0.5 * k * Width));
         }
     }
     //creating the points for the pointer
@@ -253,11 +253,11 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
         for (int i = -1; i < 2; ++i) {
             if (i == 0) continue;
 //            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.75 * l * Width, baseY + 0.75 * i * Width, baseZ + Length * (1 - PCRatio)));
+            points.push_back(CPoint(baseX + 0.75 * l * Width, baseZ + Length * (1 - PCRatio), baseY + 0.75 * i * Width));
         }
     }
     //the pointer point
-    points.push_back(CPoint(baseX, baseY, baseZ + Length));
+    points.push_back(CPoint(baseX, baseZ + Length, baseY));
 
     //creating faces
         //creating the chest faces
@@ -275,33 +275,44 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
     faces.push_back(CIndexedFace(vector<size_t>{9, 12, 8}, Color));
         //rotating the arrow using a rotation matrix
 
-    //now we use a rotation matrix to rotate the arrow so it points to the desired location
+//    now we use a rotation matrix to rotate the arrow so it points to the desired location
     double a = DirVec[0];
     double b = DirVec[1];
     double c = DirVec[2];
     //start by calculating Theta Phi and Gamma using dot prodact
     //Theta
     double Theta = acos(a/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-//    cout << Theta << endl;
+    Theta = M_PI * 1.5;
+    cout << Theta << endl;
     //Phi
     double Phi = acos(b/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-//    cout << Phi << endl;
+    cout << Phi << endl;
+    Phi = 0;
     //Gamma
-    double Gamma = acos(c/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-//    cout << Gamma << endl;
+    double Gamma = acos(c/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));     //rotates around x?
+    cout << Gamma << endl;
+    Gamma = 0;
+
     //create the actual matrix
     vector<vector<double>> RotMatrix(3);
-    RotMatrix[0] = vector<double>{cos(Theta) * cos(Phi),
-                                  sin(Theta) * cos(Phi),
-                                  -sin(Phi)};
-    RotMatrix[1] = vector<double>{cos(Theta) * sin(Phi) * sin(Gamma) - sin(Theta) * cos(Gamma),
-                                  sin(Theta) * sin(Phi) * sin(Gamma) + cos(Theta) * cos(Gamma),
-                                  cos(Phi) * sin(Gamma)};
-    RotMatrix[2] = vector<double>{cos(Theta) * sin(Phi) * cos(Gamma) + sin(Theta) * sin(Gamma),
-                                  sin(Theta) * sin(Phi) * cos(Gamma) - cos(Theta) * sin(Gamma),
-                                  cos(Phi) * cos(Gamma)};
+    RotMatrix[0] = vector<double>{cos(Theta) * cos(Phi) * cos(Gamma) - sin(Theta) * sin(Gamma),
+                                  sin(Theta) * cos(Phi) * cos(Gamma) + cos(Theta) * sin(Gamma),
+                                  -sin(Phi) * cos(Gamma)};
+    RotMatrix[1] = vector<double>{-cos(Theta) * cos(Phi) * sin(Gamma) - sin(Theta) * cos(Gamma),
+                                  -sin(Theta) * cos(Phi) * sin(Gamma) + cos(Theta) * cos(Gamma),
+                                  sin(Phi) * sin(Gamma)};
+    RotMatrix[2] = vector<double>{cos(Theta) * sin(Phi),
+                                  sin(Theta) * sin(Phi),
+                                  cos(Phi)};
+//
+//    RotMatrix[0] = vector<double>{1, 0, 0};
+//    RotMatrix[1] = vector<double>{0, 1, 0};
+//    RotMatrix[2] = vector<double>{0, 0, 1};
 
-    //now that we have the matrix, we rotate accordingly
+//    RotMatrix[0] = vector<double>{1,0,0};
+//    RotMatrix[1] = vector<double>{0,cos(Theta),sin(Theta)};
+//    RotMatrix[2] = vector<double>{0,-cos(Theta),sin(Theta)};
+//    now that we have the matrix, we rotate accordingly
 
     for (int i1 = 0; i1 < points.size(); ++i1)
     {

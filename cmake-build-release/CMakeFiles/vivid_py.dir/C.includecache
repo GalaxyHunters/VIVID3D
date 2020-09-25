@@ -6,17 +6,3 @@
 
 #IncludeRegexTransform: 
 
-D:/Documents/Alpha/Vivid3/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
-r3d.h
-D:/Documents/Alpha/Vivid3/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.h
-string.h
--
-math.h
--
-stdio.h
--
-
-D:/Documents/Alpha/Vivid3/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.h
-stdint.h
--
-

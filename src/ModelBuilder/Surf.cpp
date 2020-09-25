@@ -389,7 +389,7 @@ vector<coord_t>& CSurf::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t
         arQuan = vector<coord_t>(this->mMask.size(), 1);
         return arQuan;
     }
-    if(aVMin ==  aVMax) { //in case the user inputs color but not aVMin and aVMax
+    if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
         aVMax = *max_element(arQuan.begin(), arQuan.end());
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
@@ -458,6 +458,8 @@ static vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints)
 	return new_vec;
 }
 
+
+
 static double FindBoxR(vector<CPoint> aInputPoints) {
     CPoint zeroPoint(0, 0, 0);
 	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
@@ -494,14 +496,41 @@ void CSurf::RunVorn() {
 
 }
 
+inline bool ComparePointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() > aPoint2.GetX());}
+inline bool ComparePointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() > aPoint2.GetY());}
+inline bool ComparePointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() > aPoint2.GetZ());}
+
+//define function that finds model center point and radius of points.
+CPoint FindCenPoint(vector<CPoint> aInputPoints){
+    double MaxX = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
+    double MinX = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
+
+    double MaxY = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
+    double MinY = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
+
+    double MaxZ = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
+    double MinZ = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
+
+    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
+    return CenPoint;
+}
+
+
+//static double FindModelCenRad(vector<CPoint> aInputPoints, CPoint CenPoint) {
+////    CPoint zeroPoint(0, 0, 0);
+//    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
+//    return box_r.CalcDistance(CenPoint);
+//}
+
+
 void CSurf::CleanEdges() {
-    CPoint zeroPoint(0, 0, 0);
+    CPoint cenPoint = FindCenPoint(this->mInputPoints);
 	double box_R = FindBoxR(this->mInputPoints);
 	bool is_out_of_radius = false;
 	vector<CSurfFace> new_faces;
 	for (vector<CSurfFace>::iterator face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
 		for (vector<shared_ptr<CPoint> >::iterator point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
-			if ((**point).CalcDistance(zeroPoint) > box_R * 1.1) {
+			if ((**point).CalcDistance(cenPoint) > box_R * 1.1) {
 				is_out_of_radius = true;
 			}
 		}

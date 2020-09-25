@@ -16,11 +16,42 @@ using namespace std;
 ////    RotateAnim(ROTATE, 1000, 10, 1, "D:\\Documents\\Alpha\\Models\\Random\\CheckMerge.fbx");
 ////}
 ////
+
+//inline bool ComparePointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() > aPoint2.GetX());}
+//inline bool ComparePointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() > aPoint2.GetY());}
+//inline bool ComparePointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() > aPoint2.GetZ());}
+//
+////inline bool CompareValue(double &aValue1, double &aValue2){return (aValue1 > aValue2);}
+//
+//
+////define function that finds model center point and radius of points.
+//CPoint FindCenPoint(vector<CPoint> aInputPoints){
+//    double MaxX = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
+//    double MinX = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
+//
+//    double MaxY = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
+//    double MinY = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
+//
+//    double MaxZ = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
+//    double MinZ = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
+//
+//    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
+//    return CenPoint;
+//}
+
+
 int main()
 {
-
-    CMesh cube = CreateCubeMesh(10, 10, 10, 0.5, 0.5, vector<double>{0,0,0});
-    cube.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\cube1_new");
+    CMesh cube = CreateCubeMesh(10, 10, 10, 0.7, 0.9, vector<double>{6,2,4});
+//    vector<CPoint> points = cube.GetPoints();
+//    CPoint point = FindCenPoint(points);
+//    cout << point.GetX() << endl;
+//    cout << point.GetY() << endl;
+//    cout << point.GetZ() << endl;
+//    CPoint point1(0, 0, 10);
+//    CPoint point2(0, 0, 20);
+//    bool val = ComparePointZ(point2, point1);
+//    printf("%d\n", val);
     return 0;
 }
 

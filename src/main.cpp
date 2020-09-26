@@ -39,39 +39,69 @@ using namespace std;
 //    return CenPoint;
 //}
 
+//
+//int main()
+//{
+//    CMesh cube = CreateCubeMesh(10, 10, 10, 0.7, 0.9, vector<double>{6,2,4});
+////    vector<CPoint> points = cube.GetPoints();
+////    CPoint point = FindCenPoint(points);
+////    cout << point.GetX() << endl;
+////    cout << point.GetY() << endl;
+////    cout << point.GetZ() << endl;
+////    CPoint point1(0, 0, 10);
+////    CPoint point2(0, 0, 20);
+////    bool val = ComparePointZ(point2, point1);
+////    printf("%d\n", val);
+//    return 0;
+//}
 
-int main()
-{
-    CMesh cube = CreateCubeMesh(10, 10, 10, 0.7, 0.9, vector<double>{6,2,4});
-//    vector<CPoint> points = cube.GetPoints();
-//    CPoint point = FindCenPoint(points);
-//    cout << point.GetX() << endl;
-//    cout << point.GetY() << endl;
-//    cout << point.GetZ() << endl;
-//    CPoint point1(0, 0, 10);
-//    CPoint point2(0, 0, 20);
-//    bool val = ComparePointZ(point2, point1);
-//    printf("%d\n", val);
-    return 0;
-}
 
-////----------------------------------------------------------test arrow
+
+//// ---------------------------------------------------------random
+
+struct MathVector{double size;
+    vector<double> direction;};
+
+//inline double CalcVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
+//inline MathVector NormalizeVector(MathVector &Vector){
+//    for (int l = 0; l < Vector.direction.size(); ++l) {
+//        Vector.direction[l] /= Vector.size;
+//    }
+//    return Vector;
+//}
 //int main(){
-//    cout << "x:" << endl;
-//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,0}, 0.8, 0.3,  "arrowX");
-//    cout << "y:" << endl;
-//    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
-//    cout << "z:" << endl;
-//    CMesh arrowZ = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,1}, 0.8, 0.3,  "arrowZ");
-//    CModel model;
-//    model.AddMesh(arrowX);
-////    model.AddMesh(arrowY);
-////    model.AddMesh(arrowZ);
-//    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
-////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+//    MathVector Vector;
+//    vector<double> dir{7,6,1};
+//    Vector.direction = dir;
+//    Vector.size = CalcVectorSize(dir);
+//    NormalizeVector(Vector);
+////    vector<double> Norm = NormalizeVector(vector);
+//
+//    cout << Vector.direction[2];
 //    return 0;
 //}
 //
+
+
+
+
+////----------------------------------------------------------test arrow
+int main(){
+    cout << "x:" << endl;
+    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
+    cout << "y:" << endl;
+    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
+    cout << "z:" << endl;
+    CMesh arrowZ = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,1}, 0.8, 0.3,  "arrowZ");
+    CModel model;
+    model.AddMesh(arrowX);
+    model.AddMesh(arrowY);
+    model.AddMesh(arrowZ);
+    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+//    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+    return 0;
+}
+
 
 ////------------------------------------------------------------test sphere and ellipsoid
 //int main(){

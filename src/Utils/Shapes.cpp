@@ -218,7 +218,63 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 //    return sphere;
 //}
 
-    CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label){
+//struct MathVector{double size;
+//    vector<double> direction;};
+
+inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
+inline double Multiply3DVectors(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
+inline vector<double> Normalize3DVector(vector<double> &Vector){
+    double VectorSize = Calc3DVectorSize(Vector);
+    for (int l = 0; l < Vector.size(); ++l) {
+        Vector[l] /= VectorSize;
+    }
+    return Vector;
+}
+
+//this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
+vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> Vector1, vector<double> Vector2){
+    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
+     vector<double> RotVector;
+     RotVector = vector<double>{Vector1[2] * Vector2[3] - Vector1[3] * Vector2[2], Vector1[3] * Vector2[1] - Vector1[1] * Vector2[3],
+                             Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1]};
+    //now we have a vector to rotate around. we normalize its size (turning it to 1).
+    Normalize3DVector(RotVector);
+    //compute our rotation angle theta
+    double Theta = acos(Multiply3DVectors(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2));
+    //build the matrix
+    double Ux = RotVector[0];
+    double Uy = RotVector[1];
+    double Uz = RotVector[2];
+    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
+                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
+                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
+                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
+                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
+                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
+                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
+                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
+                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
+    //apply matrix to points
+        for (int i1 = 0; i1 < Points.size(); ++i1)
+    {
+        CPoint& CurrentVector = Points[i1];
+        //right now im using a refrence to change the vector according to the matrix
+        double CVX = CurrentVector.GetX();
+        double CVY = CurrentVector.GetY();
+        double CVZ = CurrentVector.GetZ();
+
+        //now we rotate em
+        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
+                               CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
+                               CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
+    }
+
+    return Points;
+}
+
+
+
+CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label){
     //before we run, lets assert some conditions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
     assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 && Width != 0 && PCRatio != 0));
@@ -273,62 +329,9 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
     faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{9, 12, 8}, Color));
-        //rotating the arrow using a rotation matrix
+    //rotating the arrow using a rotation matrix
 
-//    now we use a rotation matrix to rotate the arrow so it points to the desired location
-    double a = DirVec[0];
-    double b = DirVec[1];
-    double c = DirVec[2];
-    //start by calculating Theta Phi and Gamma using dot prodact
-    //Theta
-    double Theta = acos(a/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-    Theta = M_PI * 1.5;
-    cout << Theta << endl;
-    //Phi
-    double Phi = acos(b/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-    cout << Phi << endl;
-    Phi = 0;
-    //Gamma
-    double Gamma = acos(c/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));     //rotates around x?
-    cout << Gamma << endl;
-    Gamma = 0;
-
-    //create the actual matrix
-    vector<vector<double>> RotMatrix(3);
-    RotMatrix[0] = vector<double>{cos(Theta) * cos(Phi) * cos(Gamma) - sin(Theta) * sin(Gamma),
-                                  sin(Theta) * cos(Phi) * cos(Gamma) + cos(Theta) * sin(Gamma),
-                                  -sin(Phi) * cos(Gamma)};
-    RotMatrix[1] = vector<double>{-cos(Theta) * cos(Phi) * sin(Gamma) - sin(Theta) * cos(Gamma),
-                                  -sin(Theta) * cos(Phi) * sin(Gamma) + cos(Theta) * cos(Gamma),
-                                  sin(Phi) * sin(Gamma)};
-    RotMatrix[2] = vector<double>{cos(Theta) * sin(Phi),
-                                  sin(Theta) * sin(Phi),
-                                  cos(Phi)};
-//
-//    RotMatrix[0] = vector<double>{1, 0, 0};
-//    RotMatrix[1] = vector<double>{0, 1, 0};
-//    RotMatrix[2] = vector<double>{0, 0, 1};
-
-//    RotMatrix[0] = vector<double>{1,0,0};
-//    RotMatrix[1] = vector<double>{0,cos(Theta),sin(Theta)};
-//    RotMatrix[2] = vector<double>{0,-cos(Theta),sin(Theta)};
-//    now that we have the matrix, we rotate accordingly
-
-    for (int i1 = 0; i1 < points.size(); ++i1)
-    {
-        CPoint& CurrentVector = points[i1];
-        //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.GetX();
-        double CVY = CurrentVector.GetY();
-        double CVZ = CurrentVector.GetZ();
-
-        CVX = CurrentVector.GetX();
-        CVY = CurrentVector.GetY();
-        CVZ = CurrentVector.GetZ();
-        CurrentVector = CPoint(baseX + CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
-                               baseY + CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
-                               baseZ + CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
-    }
+    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
 
     arrow.SetPoints(points);
     arrow.SetFaces(faces);

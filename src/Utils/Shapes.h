@@ -5,6 +5,7 @@
 #include <fbxsdk.h>
 #include "../ModelBuilder/Mesh.h"
 #include "../Utils/ColorMap.h"
+#include <functional>
 
 using namespace std;
 

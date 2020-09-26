@@ -79,24 +79,39 @@ def ExportPklToObj(inputpath, outputpath, masks, colors):
     model.ExportToObj(outputpath)
     print 'model exported, find the file in' + outputpath
 
-Pickles = ["/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS.pickle",
-           "/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS.pickle",
-           "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS.pickle",
-           "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS.pickle"]
 
+with open(r'D:\Documents\Alpha\Models\Pickles\special_boys\gal_07_1e-24.pickle', 'rb') as handle:  #gal_07_1e-24_w_color.pickle
+    data = pickle.load(handle)
 
+points = data['mesh_par']
+mask = data['mask']
+quan = data['quan']
 
-names = ['VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS',
-         'VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS',
-         'VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS',
-         'VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS']
+print len(mask)
+surf = vivid.CSurf(points, mask, quan)
+surf.SmoothSurf()
+mesh = surf.ToMesh(aLabel = "gal_07", aAlpha= 0.9)
+mesh.Decimation()
+mesh.ExportToObjTexture(r'D:\Documents\Alpha\Models\Pickles\special_boys\gal_07_1e-24')
 
-data = OpenPickleData(Pickles[0])
-#print data
-#print data['mask']['1e-24']
-print np.array(data['quan'])
-
-vivid.CSurf(data['mesh_par'], np.array(data['mask']['1e-24']), np.array(data['quan']))
+# Pickles = ["/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS.pickle",
+#            "/home/zohar/Documents/pickles/VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS.pickle",
+#            "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS.pickle",
+#            "/home/zohar/Documents/pickles/VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS.pickle"]
+#
+#
+#
+# names = ['VELA_v2.Thick.22.a0.230130642653_00001_1e-24_TO_1e-26_GAS',
+#          'VELA_v2.Thick.22.a0.21007296443_00006_1e-24_TO_1e-26_GAS',
+#          'VELA_v2.Thick.07.a0.370373249054_00031_1e-24_TO_1e-26_GAS',
+#          'VELA_v2.Thick.07.a0.34049654007_00013_1e-24_TO_1e-26_GAS']
+#
+# data = OpenPickleData(Pickles[0])
+# #print data
+# #print data['mask']['1e-24']
+# print np.array(data['quan'])
+#
+# vivid.CSurf(data['mesh_par'], np.array(data['mask']['1e-24']), np.array(data['quan']))
 
 #ExportPklToObj(Pickles[0], "/home/zohar/Documents/models/" + names[0], ['1e-24', '1e-25', '1e-26'], 1)
 

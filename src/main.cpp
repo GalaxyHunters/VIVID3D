@@ -86,36 +86,36 @@ struct MathVector{double size;
 
 
 ////----------------------------------------------------------test arrow
-int main(){
-    cout << "x:" << endl;
-    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
-    cout << "y:" << endl;
-    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
-    cout << "z:" << endl;
-    CMesh arrowZ = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,1}, 0.8, 0.3,  "arrowZ");
-    CModel model;
-    model.AddMesh(arrowX);
-    model.AddMesh(arrowY);
-    model.AddMesh(arrowZ);
-    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
-//    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
-    return 0;
-}
+//int main(){
+//    cout << "x:" << endl;
+//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
+//    cout << "y:" << endl;
+//    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
+//    cout << "z:" << endl;
+//    CMesh arrowZ = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,1}, 0.8, 0.3,  "arrowZ");
+//    CModel model;
+//    model.AddMesh(arrowX);
+//    model.AddMesh(arrowY);
+//    model.AddMesh(arrowZ);
+//    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+//    return 0;
+//}
 
 
 ////------------------------------------------------------------test sphere and ellipsoid
-//int main(){
-//    cout << "got it bro";
-//    CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
-//    sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
-//    CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 1, "ellips1");
-//    ellips.ExportToObj("/home/zohar/Documents/Vivid/test_models/ellips_test");
-//    CModel model;
-//    model.AddMesh(sphere);
-//    model.AddMesh(ellips);
-//
-//    model.ExportToObj("/home/zohar/Documents/Vivid/test_models/model_test");
-//}
+int main(){
+    cout << "got it bro";
+    CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
+    sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
+    CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 0.6, "ellips1");
+    ellips.ExportToObj("/home/zohar/Documents/Vivid/test_models/ellips_test");
+    CModel model;
+    model.AddMesh(sphere);
+    model.AddMesh(ellips);
+
+    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\model_test_texture");
+}
 
 
 

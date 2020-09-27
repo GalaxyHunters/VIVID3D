@@ -318,7 +318,7 @@ ENDIF()
 IF(WIN32)
     MESSAGE(RUNNING_FBX_FINDER_WIN32)
 #    FIND_PACKAGE(LibXml2)
-    SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX_SDK/2020.0.1")
+    SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX SDK/2020.0.1")
     IF(FBX_ROOT)
         #setting FBX_INCLUDE_DIR
         SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)

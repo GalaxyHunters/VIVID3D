@@ -6,7 +6,10 @@
 #include <iostream>
 #include <vector>
 #include "boost/shared_ptr.hpp"
+#include <string>
 
+
+using namespace std;
 typedef double coord_t; //TODO: float64_t
 
 class CPoint
@@ -24,6 +27,11 @@ public:
 	inline void SetX(coord_t aX) { this->mX = aX; }
 	inline void SetY(coord_t aY) { this->mY = aY; }
 	inline void SetZ(coord_t aZ) { this->mZ = aZ; }
+	inline CPoint& operator += (const CPoint& apPoint2) {this->mX += apPoint2.mX; this->mY += apPoint2.mY; this->mZ += apPoint2.mZ; return *this;}
+    inline CPoint& operator -= (const CPoint& apPoint2) {this->mX -= apPoint2.mX; this->mY -= apPoint2.mY; this->mZ -= apPoint2.mZ; return *this;}
+    inline CPoint& operator = (const CPoint& apPoint2) {this->mX = apPoint2.mX; this->mY = apPoint2.mY; this->mZ = apPoint2.mZ; return *this;}
+    inline CPoint operator + (const CPoint& apPoint2) {return CPoint (this->mX + apPoint2.mX, this->mY + apPoint2.mY, this->mZ + apPoint2.mZ); }
+    friend inline ostream& operator << (ostream& os, const CPoint& point) {os << "v " << point.mX  << " " << point.mY << " " << point.mZ << "\n" ; return os;}
 	//float getDis(Point p) { return (); }
 private:
 	coord_t mX, mY, mZ;

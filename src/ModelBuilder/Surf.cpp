@@ -5,31 +5,6 @@ static const coord_t DoublePointThreshHold = 0.0001;
 
 CSurf::CSurf() {};
 
-CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->"? no need
-	this->mInputPoints = surf2.mInputPoints;
-	this->mMask = surf2.mMask;
-	this->mQuan = surf2.mQuan;
-
-	map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
-	this->mVecPoints.clear();
-	for (size_t i = 0; i < surf2.mVecPoints.size(); i++) { //TODO: should it be iterator?
-		this->mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
-		old_to_new_Points[surf2.mVecPoints[i]] = this->mVecPoints.back();
-	}
-	this->mVecFaces.clear();
-	CSurfFace temp;
-	for (vector<CSurfFace>::const_iterator it = (surf2.mVecFaces).begin(); it != surf2.mVecFaces.end(); it++) {
-		temp = CSurfFace();
-		temp.mColor = (*it).mColor;
-		temp.mCPoints = (*it).mCPoints;
-		temp.mPoints.clear();
-		for (vector<shared_ptr<CPoint> >::const_iterator pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
-			temp.mPoints.push_back(old_to_new_Points[*pIt]);
-		}
-		this->mVecFaces.push_back(temp);
-	}
-}
-
 CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
@@ -51,10 +26,12 @@ CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<co
     if(!is_containing_false || !is_containing_true){
         throw "Input error, mask must have both True and false values";
     }
+    //model centralization
+    this->mCenVector = FindCenPoint(aInputPoints);
     //code
     vector<CPoint> temp;
     for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
-        temp.push_back(CPoint(*it));
+        temp.push_back(CPoint(*it) -= this->mCenVector);
     }
     temp.resize(temp.size());
 	this->SetInputPoints(temp);
@@ -66,24 +43,55 @@ CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<co
 	this->CleanPoints();
 }
 
-vector<CSurf> CSurf::CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
-	CSurf temp;
-	temp.SetInputPoints(aInputPoints);
-	temp.SetQuan(temp.NormQuan(aQuan, aVMin, aVMax));
-	temp.RunVorn();
-	temp.CleanEdges();
-	vector<CSurf> output;
-	CSurf newSurf;
-	for (vector<vector<bool> >::iterator it = aMask.begin(); it != aMask.end(); it++) {
-		newSurf = CSurf(temp);
-		newSurf.SetMask(*it);
-		newSurf.CleanFaces(*it);
-		newSurf.CleanPoints();
-		output.push_back(newSurf);
-	}
-	return output;
+CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->"? no need
+    this->mInputPoints = surf2.mInputPoints;
+    this->mMask = surf2.mMask;
+    this->mQuan = surf2.mQuan;
+
+    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
+    this->mVecPoints.clear();
+    for (size_t i = 0; i < surf2.mVecPoints.size(); i++) { //TODO: should it be iterator?
+        this->mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
+        old_to_new_Points[surf2.mVecPoints[i]] = this->mVecPoints.back();
+    }
+    this->mVecFaces.clear();
+    CSurfFace temp;
+    for (vector<CSurfFace>::const_iterator it = (surf2.mVecFaces).begin(); it != surf2.mVecFaces.end(); it++) {
+        temp = CSurfFace();
+        temp.mColor = (*it).mColor;
+        temp.mCPoints = (*it).mCPoints;
+        temp.mPoints.clear();
+        for (vector<shared_ptr<CPoint> >::const_iterator pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
+            temp.mPoints.push_back(old_to_new_Points[*pIt]);
+        }
+        this->mVecFaces.push_back(temp);
+    }
+}
+// ---------------------------------------------------Centralization functions ---------------------------------------------------------------
+// when the data is entered its not insured to be centered around 0, this function insures that it is (the model will be returned to his original axis upon export)
+inline bool ComparePointX(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[0] < aPoint2[0]);}
+inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[1] < aPoint2[1]);}
+inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
+
+//define function that finds model center point and radius of points.
+CPoint CSurf::FindCenPoint(const vector<vector<double>> &aInputPoints){
+    coord_t MaxX = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
+    coord_t MinX = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
+
+    coord_t MaxY = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
+    coord_t MinY = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
+
+    coord_t MaxZ = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
+    coord_t MinZ = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
+
+    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
+    return CenPoint;
 }
 
+
+// ------------------------------------------------------clean data----------------------------------------------------------------------
+
+// takes the data from voronoi and using the mask cleans it so that only the wanted surface is left
 void CSurf::CleanFaces(vector<bool>& aMask) {
 	vector<CSurfFace> new_faces;
 	size_t mask_len = aMask.size();
@@ -102,6 +110,8 @@ void CSurf::CleanFaces(vector<bool>& aMask) {
 	this->mVecFaces = new_faces;
 }
 
+// Do to the removal of many unneeded faces in CSurf::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
+// this function cleans both
 void CSurf::CleanPoints() {
 	vector<shared_ptr<CPoint> > new_points;
 	for (vector<shared_ptr<CPoint> >::iterator it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
@@ -113,7 +123,7 @@ void CSurf::CleanPoints() {
 	RemoveDoublePoints();
 }
 
-//----------------------------------------remove doubles functions ----------------------------------------------------------------------
+//----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 	if (abs((*aObj1).GetX() - (*aObj2).GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
 		if (abs((*aObj1).GetY() - (*aObj2).GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
@@ -170,8 +180,8 @@ void CSurf::RemoveDoublePoints() {
 	this->mVecPoints = cleaned_points;
 }
 
-//smooth functions----------------------------------------------------------------------------------------------------------
-
+//--------------------------------------------------------------------smooth functions----------------------------------------------------------------------------------------------------------
+//TODO write smooth algorithem
 void UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
 	for (int i = 0; (unsigned)i < aPOut.size(); i++) {
 		aPOut[i] = i;
@@ -433,7 +443,7 @@ const CMesh CSurf::ToMesh(string aLabel, coord_t aAlpha) {
 		face_points = vector<size_t>();
 		set_points.clear();
 	}
-	return CMesh(points, faces, aLabel, aAlpha);
+	return CMesh(points, faces, aLabel, aAlpha, this->mCenVector);
 }
 
 void CSurf::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {
@@ -496,41 +506,15 @@ void CSurf::RunVorn() {
 
 }
 
-inline bool ComparePointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() > aPoint2.GetX());}
-inline bool ComparePointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() > aPoint2.GetY());}
-inline bool ComparePointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() > aPoint2.GetZ());}
-
-//define function that finds model center point and radius of points.
-CPoint FindCenPoint(vector<CPoint> aInputPoints){
-    double MaxX = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
-    double MinX = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
-
-    double MaxY = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
-    double MinY = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
-
-    double MaxZ = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
-    double MinZ = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
-
-    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
-    return CenPoint;
-}
-
-
-//static double FindModelCenRad(vector<CPoint> aInputPoints, CPoint CenPoint) {
-////    CPoint zeroPoint(0, 0, 0);
-//    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
-//    return box_r.CalcDistance(CenPoint);
-//}
-
 
 void CSurf::CleanEdges() {
-    CPoint cenPoint = FindCenPoint(this->mInputPoints);
+    CPoint zero_point = CPoint(0, 0, 0);
 	double box_R = FindBoxR(this->mInputPoints);
 	bool is_out_of_radius = false;
 	vector<CSurfFace> new_faces;
 	for (vector<CSurfFace>::iterator face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
 		for (vector<shared_ptr<CPoint> >::iterator point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
-			if ((**point).CalcDistance(cenPoint) > box_R * 1.1) {
+			if ((**point).CalcDistance(zero_point) > box_R * 1.1) {
 				is_out_of_radius = true;
 			}
 		}

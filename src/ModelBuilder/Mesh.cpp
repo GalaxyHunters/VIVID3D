@@ -10,11 +10,12 @@ CMesh::CMesh(const CMesh &mesh){
     this->mFaces = mesh.mFaces;
     this->mLabel = mesh.mLabel;
     this->mPoints = mesh.mPoints;
+    this->mCenVector = mesh.mCenVector;
 
 }
 
 
-CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha) {}
+CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha, CPoint aCenVector) : mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha), mCenVector(aCenVector) {}
 
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
 	return GetColor(aQuan);
@@ -59,9 +60,11 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 {
 	aOBJFile << "o " + this->mLabel + "\n";
 	//write points to obj file
+	CPoint temp_point = CPoint(0, 0, 0);
 	for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++) 
 	{
-		aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+        temp_point = *it + this->mCenVector ; //sdd the CenVector to return model to the original centralization.
+        aOBJFile << temp_point; // writes the point in obj file as vertex
 	}
 	//sort vecFaces by color
 	sort(this->mFaces.begin(), this->mFaces.end(), CompFace); // NlogN
@@ -145,10 +148,12 @@ void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aText
 
 void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, coord_t aTextureSize){
     aOBJFile << "o " + this->mLabel + "\n";
+    CPoint temp_point = CPoint(0, 0, 0);
     //write points to obj file
     for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
     {
-        aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+        temp_point = *it + this->mCenVector ; //sdd the CenVector to return model to the original centralization.
+        aOBJFile << temp_point; // writes the point in obj file as vertex
     }
     //write uv cordinates
     for(size_t i = aTextureSize; i > 0; i--){
@@ -242,3 +247,5 @@ void CMesh::SetAlpha(coord_t aAlpha){
     }
     this->mAlpha = aAlpha;
 }
+void CMesh::setCenVector(const CPoint &vector){ this->mCenVector = vector; }
+CPoint CMesh::getCenVector() { return this->mCenVector; }

@@ -96,13 +96,19 @@ static vector<color_t> ClmPlasma{color_t(0.050383, 0.029803, 0.52797),
                                  color_t(0.94002, 0.97516, 0.13133)
 };
 
-inline static color_t GetColor(float aVal) //float aColorMap ----- when we add support for more color maps an aption for choice between them will be added
+inline static color_t GetColor(float aVal) //float aColorMap ----- when we add support for more color maps an option for choice between them will be added
 {
+    if (aVal == 1){
+        return ClmPlasma[ClmPlasma.size() - 1];
+    }
     return ClmPlasma[int(aVal*ClmPlasma.size())];
 }
 
-inline static int GetColorIndex( float aVal) // float aColorMap ----- when we add support for more color maps an aption for choice between them will be added
+inline static int GetColorIndex( float aVal) // float aColorMap ----- when we add support for more color maps an option for choice between them will be added
 {
+    if (aVal == 1){ // if aVal is 0 the result is 0 and if its 1 the result is 75 resulting in 76 options so we cancel the extreme one.
+        return ClmPlasma.size() - 1;
+    }
     return int(aVal*ClmPlasma.size()); //returns the index of the color in ClmPlasma
 }
 

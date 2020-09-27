@@ -29,8 +29,10 @@ private:
 	vector<CPoint> mInputPoints; // for smooth
 	vector<bool> mMask; //for smooth
 	vector<coord_t> mQuan; // for smooth
+	CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
  
 	vector<coord_t>& NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+    CPoint FindCenPoint(const vector<vector<double>> &aInputPoints); // find the center of the model (used to transform the data to be centered around 000)
 
 	//vorn function:
 	void RunVorn();
@@ -53,7 +55,6 @@ private:
 public:	
 	CSurf(const CSurf &surf); //copy constructor
 	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax);
-	static vector<CSurf> CreateSurf(vector<CPoint> aInputPoints, vector<vector<bool> > aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax);
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha);
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);

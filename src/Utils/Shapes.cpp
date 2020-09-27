@@ -153,76 +153,14 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 
 
 
-//CMesh CreateEllipsoidMesh(size_t num_of_meridians, size_t num_of_parallels, vector<double> DirVec, vector<double> Radii, vector<double> CenterPoint, coord_t Color, coord_t Alpha)
-//{
-//    //before we start lets assert some conditions
-//    assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
-//    assert(("None of the radii values can be 0", Radii[0] != 0 and Radii[1] !=0 and Radii[2] != 0));
-//
-//    CMesh sphere = CreateSphereMesh(num_of_meridians, num_of_parallels, 1,  vector<double>{0,0,0}, Color, Alpha);
-//    //calc rotation matrix
-//    double a = DirVec[0];
-//    double b = DirVec[1];
-//    double c = DirVec[2];
-//        //start by calculating Theta Phi and Gamma using dot prodact
-//        //Theta
-//    double Theta = acos(a/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Theta << endl;
-//        //Phi
-//    double Phi = acos(b/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Phi << endl;
-//        //Gamma
-//    double Gamma = acos(c/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Gamma << endl;
-//        //create the actual matrix
-//    vector<vector<double>> RotMatrix(3);
-//    RotMatrix[0] = vector<double>{cos(Theta) * cos(Phi),
-//                                  sin(Theta) * cos(Phi),
-//                                  -sin(Phi)};
-//    RotMatrix[1] = vector<double>{cos(Theta) * sin(Phi) * sin(Gamma) - sin(Theta) * cos(Gamma),
-//                                  sin(Theta) * sin(Phi) * sin(Gamma) + cos(Theta) * cos(Gamma),
-//                                  cos(Phi) * sin(Gamma)};
-//    RotMatrix[2] = vector<double>{cos(Theta) * sin(Phi) * cos(Gamma) + sin(Theta) * sin(Gamma),
-//                                  sin(Theta) * sin(Phi) * cos(Gamma) - cos(Theta) * sin(Gamma),
-//                                  cos(Phi) * cos(Gamma)};
-//    //calc stretch matrix
-//    vector<vector<double>> StretchMatrix(3);
-//    StretchMatrix[0] = vector<double>{Radii[0], 0, 0};
-//    StretchMatrix[1] = vector<double>{0, Radii[1], 0};
-//    StretchMatrix[2] = vector<double>{0, 0, Radii[2]};
-//
-//    //stretch the sphere according to the matrix
-//    vector<CPoint> points = sphere.GetPoints();
-//    //now because the center point is (0,0,0), the point values and the vector values are the same ((a,b,c) - (0,0,0) = (a,b,c)).
-//    for (int i1 = 0; i1 < points.size(); ++i1)
-//    {
-//        CPoint& CurrentVector = points[i1];
-//        //right now im using a refrence to change the vector according to the matrix
-//        double CVX = CurrentVector.GetX();
-//        double CVY = CurrentVector.GetY();
-//        double CVZ = CurrentVector.GetZ();
-//        //first we strech em
-//        CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
-//                               CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
-//                               CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
-//        //now we rotate em
-//        CVX = CurrentVector.GetX();
-//        CVY = CurrentVector.GetY();
-//        CVZ = CurrentVector.GetZ();
-//        CurrentVector = CPoint(CenterPoint[0] + CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
-//                               CenterPoint[1] + CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
-//                               CenterPoint[2] + CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
-//    }
-//    sphere.SetPoints(points);
-//    sphere.SetLabel("Ellipsoid");
-//    return sphere;
-//}
-
 //struct MathVector{double size;
 //    vector<double> direction;};
 
 inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-inline double Multiply3DVectors(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
+inline double VectorsDotProduct3D(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
+inline vector<double> VectorsCrossProduct3D(vector<double> &Vector1, vector<double> &Vector2){return vector<double>{Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1],
+                                                                                                                    Vector1[2] * Vector2[0] - Vector1[0] * Vector2[2],
+                                                                                                                    Vector1[0] * Vector2[1] - Vector1[1] * Vector2[0]};}
 inline vector<double> Normalize3DVector(vector<double> &Vector){
     double VectorSize = Calc3DVectorSize(Vector);
     for (int l = 0; l < Vector.size(); ++l) {
@@ -232,15 +170,14 @@ inline vector<double> Normalize3DVector(vector<double> &Vector){
 }
 
 //this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
-vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> Vector1, vector<double> Vector2){
+vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
     //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
      vector<double> RotVector;
-     RotVector = vector<double>{Vector1[2] * Vector2[3] - Vector1[3] * Vector2[2], Vector1[3] * Vector2[1] - Vector1[1] * Vector2[3],
-                             Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1]};
+     RotVector = VectorsCrossProduct3D(Vector1, Vector2);
     //now we have a vector to rotate around. we normalize its size (turning it to 1).
     Normalize3DVector(RotVector);
     //compute our rotation angle theta
-    double Theta = acos(Multiply3DVectors(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2));
+    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
     //build the matrix
     double Ux = RotVector[0];
     double Uy = RotVector[1];
@@ -264,9 +201,9 @@ vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> Vector1,
         double CVZ = CurrentVector.GetZ();
 
         //now we rotate em
-        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
-                               CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
-                               CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
+        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[0][1] + CVZ * RotMatrix[0][2],
+                               CVX * RotMatrix[1][0] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[1][2],
+                               CVX * RotMatrix[2][0] + CVY * RotMatrix[2][1] + CVZ * RotMatrix[2][2]);
     }
 
     return Points;
@@ -331,7 +268,7 @@ CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double
     faces.push_back(CIndexedFace(vector<size_t>{9, 12, 8}, Color));
     //rotating the arrow using a rotation matrix
 
-    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
+//    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
 
     arrow.SetPoints(points);
     arrow.SetFaces(faces);

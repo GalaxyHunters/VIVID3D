@@ -59,28 +59,90 @@ using namespace std;
 
 //// ---------------------------------------------------------random
 
-struct MathVector{double size;
-    vector<double> direction;};
+//struct MathVector{double size;
+//    vector<double> direction;};
 
-//inline double CalcVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-//inline MathVector NormalizeVector(MathVector &Vector){
-//    for (int l = 0; l < Vector.direction.size(); ++l) {
-//        Vector.direction[l] /= Vector.size;
-//    }
-//    return Vector;
-//}
-//int main(){
-//    MathVector Vector;
-//    vector<double> dir{7,6,1};
-//    Vector.direction = dir;
-//    Vector.size = CalcVectorSize(dir);
-//    NormalizeVector(Vector);
-////    vector<double> Norm = NormalizeVector(vector);
+inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
+inline double VectorsDotProduct3D(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
+inline vector<double> VectorsCrossProduct3D(vector<double> &Vector1, vector<double> &Vector2){return vector<double>{Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1],
+                                                                                                                    Vector1[2] * Vector2[0] - Vector1[0] * Vector2[2],
+                                                                                                                    Vector1[0] * Vector2[1] - Vector1[1] * Vector2[0]};}
+inline vector<double> Normalize3DVector(vector<double> &Vector){
+    double VectorSize = Calc3DVectorSize(Vector);
+    for (int l = 0; l < Vector.size(); ++l) {
+        Vector[l] /= VectorSize;
+    }
+    return Vector;
+}
+
+//this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
+vector<CPoint> RotateMatchVectors2(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
+    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
+    vector<double> RotVector;
+    RotVector = VectorsCrossProduct3D(Vector1, Vector2);
+    //now we have a vector to rotate around. we normalize its size (turning it to 1).
+    Normalize3DVector(RotVector);
+    //compute our rotation angle theta
+    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
+    cout << "Theta is " + to_string(Theta/M_PI) + "PI" << endl;
+    //build the matrix
+    double Ux = RotVector[0];
+    double Uy = RotVector[1];
+    double Uz = RotVector[2];
+    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
+                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
+                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
+                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
+                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
+                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
+                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
+                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
+                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
+    //apply matrix to points
+    for (int i1 = 0; i1 < Points.size(); ++i1)
+    {
+        CPoint& CurrentVector = Points[i1];
+        //right now im using a refrence to change the vector according to the matrix
+        double CVX = CurrentVector.GetX();
+        double CVY = CurrentVector.GetY();
+        double CVZ = CurrentVector.GetZ();
+
+        //now we rotate em
+        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[0][1] + CVZ * RotMatrix[0][2],
+                               CVX * RotMatrix[1][0] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[1][2],
+                               CVX * RotMatrix[2][0] + CVY * RotMatrix[2][1] + CVZ * RotMatrix[2][2]);
+    }
+
+    return Points;
+}
+
+
 //
-//    cout << Vector.direction[2];
-//    return 0;
-//}
-//
+int main(){
+    vector<double> x{1, 0, 0};
+    vector<double> y{0, 1, 0};
+    vector<CPoint> points{CPoint(1,0,0), CPoint(0,1,0), CPoint(0,0,1)};
+    points = RotateMatchVectors2(points, y, x);
+
+    for (int l = 0; l < points.size(); ++l) {
+        cout << "Point " + int2str(l) << endl;
+        cout << points[l].GetX() << endl;
+        cout << points[l].GetY() << endl;
+        cout << points[l].GetZ() << endl;
+    }
+//    z = Normalize3DVector(z);
+//    double size = Calc3DVectorSize(z);git
+//    double cosTheta = VectorsDotProduct3D(x, y)/(Calc3DVectorSize(x) * Calc3DVectorSize(y));
+//    double Theta = acos(float(VectorsDotProduct3D(x, y))/(Calc3DVectorSize(x) * Calc3DVectorSize(y)));
+//    cout << cosTheta << endl;
+//    cout << Theta << endl;
+//    cout << size << endl;
+//    cout << z[0] << endl;
+//    cout << z[1] << endl;
+//    cout << z[2] << endl;
+    return 0;
+}
+
 
 
 
@@ -88,35 +150,35 @@ struct MathVector{double size;
 ////----------------------------------------------------------test arrow
 //int main(){
 //    cout << "x:" << endl;
-//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
+//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{7,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
 //    cout << "y:" << endl;
 //    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
 //    cout << "z:" << endl;
 //    CMesh arrowZ = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,0,1}, 0.8, 0.3,  "arrowZ");
 //    CModel model;
 //    model.AddMesh(arrowX);
-//    model.AddMesh(arrowY);
-//    model.AddMesh(arrowZ);
+////    model.AddMesh(arrowY);
+////    model.AddMesh(arrowZ);
 //    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
 ////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
 //    return 0;
 //}
-
+//
 
 ////------------------------------------------------------------test sphere and ellipsoid
-int main(){
-    cout << "got it bro";
-    CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
-    sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
-    CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 0.6, "ellips1");
-    ellips.ExportToObj("/home/zohar/Documents/Vivid/test_models/ellips_test");
-    CModel model;
-    model.AddMesh(sphere);
-    model.AddMesh(ellips);
-
-    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\model_test_texture");
-}
-
+//int main(){
+//    cout << "got it bro";
+//    CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
+//    sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
+//    CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 0.6, "ellips1");
+//    ellips.ExportToObj("/home/zohar/Documents/Vivid/test_models/ellips_test");
+//    CModel model;
+//    model.AddMesh(sphere);
+//    model.AddMesh(ellips);
+//
+//    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\model_test_texture");
+//}
+//
 
 
 //int main() {

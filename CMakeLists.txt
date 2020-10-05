@@ -21,7 +21,7 @@ execute_process(
 
 project(vivid)
 
-set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
+#set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
 #set(Boost_DEBUG 1)
 find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)
@@ -37,20 +37,20 @@ find_package(Boost 1.62.0 REQUIRED)
 #set(Boost_USE_STATIC_RUNTIME OFF)
 #set(Boost_DEBUG 0)
 
-
+# TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 
 # Optional: set FBX lib path by a specific root
-#set(FBX_ROOT   "/home/zohar/Documents/FBX")
+#set(FBX_ROOT   "/home/zohar/Documents/FBX") # TODO if used should be FBX_DIR...
 find_package(FBX)
 message(FBX_FOUND = ${FBX_FOUND})
 message(${FBX_LIBRARY_STATIC_RELEASE})
 message(${FBX_LIBRARY_STATIC_DEBUG})
 
-#set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
-set(PY_ROOT    "C:/Users/zorik/Miniconda2")
+set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
+#set(PY_ROOT    "C:/Users/zorik/Miniconda2")
 
-#set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
+set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
 #set(PY_LINK_LIBS   ${PY_ROOT}/libs)
@@ -61,7 +61,7 @@ set(PY_ROOT    "C:/Users/zorik/Miniconda2")
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-set(PY_ROOT "C:/Users/zorik/Miniconda2")
+#set(PY_ROOT "C:/Users/zorik/Miniconda2")
 add_subdirectory(pybind11)
 
 include_directories(src)

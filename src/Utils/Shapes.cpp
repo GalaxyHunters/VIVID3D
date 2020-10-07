@@ -8,15 +8,42 @@
 using namespace std;
 
 
+// TODO what is it?
 const size_t a1 = NULL;
 const size_t b1 = NULL;
 
+//struct MathVector{double size;
+//    vector<double> direction;};
+inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
+inline double VectorsDotProduct3D(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
+inline vector<double> VectorsCrossProduct3D(vector<double> &Vector1, vector<double> &Vector2){return vector<double>{Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1],
+                                                                                                                    Vector1[2] * Vector2[0] - Vector1[0] * Vector2[2],
+                                                                                                                    Vector1[0] * Vector2[1] - Vector1[1] * Vector2[0]};}
+inline vector<double> Normalize3DVector(vector<double> &Vector){
+    double VectorSize = Calc3DVectorSize(Vector);
+    for (int l = 0; l < Vector.size(); ++l) {
+        Vector[l] /= VectorSize;
+    }
+    return Vector;
+}
+
+bool CheckIfPerpindicular(vector<double> VecA, vector<double> VecB){
+    if (VecA[0] * VecB[0] + VecA[1] * VecB[1] + VecA[2] * VecB[2] == 0) return true;
+    else return false;
+}
+
+
+
+
+
 //TODO make position a cpoint object
-CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
+CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
 {
 	vector<CPoint> CPoints(8);
 	CPoints.clear();
 	//TODO: Zohar MY OCD hurts here should start at  ---, --+, -+-, -++, +--, +-+ and I would say by for loop...
+	//TODO  it is binary counting to 6 right? so as a PSAGON, you should know every issue that slightly related to it
+	//TODO I promise to teach you binary kwakwa de la oma
 	CPoints.push_back(CPoint(-1, +1, +1)); //0
 	CPoints.push_back(CPoint(+1, +1, +1)); //1
 	CPoints.push_back(CPoint(+1, +1, -1)); //2
@@ -27,7 +54,6 @@ CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, co
 	CPoints.push_back(CPoint(+1, -1, +1)); //7
 
 	vector<CIndexedFace> faces(6);
-
 	faces[0] = CIndexedFace(vector<size_t>{0, 3, 2, 1}, color);
 	faces[1] = CIndexedFace(vector<size_t>{2, 3, 5, 4}, color);
 	faces[2] = CIndexedFace(vector<size_t>{1, 2, 4, 7}, color);
@@ -48,6 +74,7 @@ CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, co
 
 CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label)
 {
+    // TODO Zohar: VERYUGLY code, please use mesh.MoveMesh, mesh.ScaleMesh etc in this function
     vector<CPoint> vertices;
     vector<CIndexedFace> faces;
     double Theta;
@@ -55,7 +82,6 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     double CenterX = CenterPoint[0];
     double CenterY = CenterPoint[1];
     double CenterZ = CenterPoint[2];
-
 
     vertices.push_back(CPoint(CenterX, CenterY, CenterZ + radius)); //Creating the top polar
     vertices.push_back(CPoint(CenterX, CenterY, CenterZ - radius)); //Creating the bottom polar
@@ -101,15 +127,11 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     CMesh.SetLabel(Label);
 	return CMesh;
 }
-//
 
-bool CheckIfPerpindicular(vector<double> VecA, vector<double> VecB){
-    if (VecA[0] * VecB[0] + VecA[1] * VecB[1] + VecA[2] * VecB[2] == 0) return true;
-    else return false;
-}
-
+// TODO: Zohar again VERY UGLY code, please use transformMat
 CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
     //begin by asserting some conditions
+    // TODO I'm not sure, I think we may start using exceptions, assert looks bad
     assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} && MiddleAxis != vector<double>{0,0,0} && MinorAxis != vector<double>{0,0,0}));
     assert(("Radius cannot be equal to 0", Radii[0] != 0 && Radii[1] != 0 && Radii[2] != 0));
     assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true && CheckIfPerpindicular(MajorAxis, MinorAxis) == true && CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
@@ -154,24 +176,6 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 }
 
 
-
-
-//struct MathVector{double size;
-//    vector<double> direction;};
-
-inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-inline double VectorsDotProduct3D(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
-inline vector<double> VectorsCrossProduct3D(vector<double> &Vector1, vector<double> &Vector2){return vector<double>{Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1],
-                                                                                                                    Vector1[2] * Vector2[0] - Vector1[0] * Vector2[2],
-                                                                                                                    Vector1[0] * Vector2[1] - Vector1[1] * Vector2[0]};}
-inline vector<double> Normalize3DVector(vector<double> &Vector){
-    double VectorSize = Calc3DVectorSize(Vector);
-    for (int l = 0; l < Vector.size(); ++l) {
-        Vector[l] /= VectorSize;
-    }
-    return Vector;
-}
-
 //this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
 vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
     //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
@@ -185,29 +189,6 @@ vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1
     double Ux = RotVector[0];
     double Uy = RotVector[1];
     double Uz = RotVector[2];
-    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
-                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
-                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
-                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
-                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
-                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
-                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
-                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
-                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
-    //apply matrix to points
-        for (int i1 = 0; i1 < Points.size(); ++i1)
-    {
-        CPoint& CurrentVector = Points[i1];
-        //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.GetX();
-        double CVY = CurrentVector.GetY();
-        double CVZ = CurrentVector.GetZ();
-
-        //now we rotate em
-        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[0][1] + CVZ * RotMatrix[0][2],
-                               CVX * RotMatrix[1][0] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[1][2],
-                               CVX * RotMatrix[2][0] + CVY * RotMatrix[2][1] + CVZ * RotMatrix[2][2]);
-    }
 
     return Points;
 }

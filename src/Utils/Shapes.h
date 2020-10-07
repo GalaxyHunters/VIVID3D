@@ -10,8 +10,11 @@
 using namespace std;
 
 
-	
-CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position);
+// TODO add cubeMesh (use boxMesh with sizeX... are all one param
+// TODO These functions should be static and go by the naming conventions (and better naming, consistant naming...)
+// TODO also, use Doxygen commenting standards
+
+CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position);
 /*Creates a cube*/
 
 CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label);
@@ -23,6 +26,7 @@ CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double
 /*Creates a arrow*/
 
 
+// TODO Zohar why does it do here?
 FbxMesh* createCube(int sizeX, int sizeY, int sizeZ);
 /* this function creates a CCmesh object containing a sphere, the sphere is created in the position that the user dictates and has a radius also according to the users input.*/
 

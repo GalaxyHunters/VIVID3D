@@ -251,7 +251,7 @@ void CMesh::SetAlpha(coord_t aAlpha){
 
 
 
-void TransformMesh(const coord_t const aTrans[3][3]){
+void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;
     for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
@@ -277,7 +277,7 @@ void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
     auto ny = aNormVec.GetY();
     auto nz = aNormVec.GetZ();
 
-    const coord_t const rotation_mat[3][3] = {
+    coord_t const rotation_mat[3][3] = {
             cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
 
             ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,

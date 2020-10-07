@@ -39,7 +39,7 @@ public:
 	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha);
 	~CMesh();
 	void Decimation(coord_t aVerticlePercent, coord_t aError);
-	void ExportToObj(string aOutput);
+	void ExportToObj(string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
 	void ExportToObjTexture(string aOutput);
 	string GetLabel();
 	coord_t GetAlpha();
@@ -55,7 +55,7 @@ public:
      * transform CMesh points by transformation matrix
      * @param[in] aTrans a 3x3 dimension matrix.
      */
-    void TransformMesh(const coord_t const aTrans[3][3]);
+    void TransformMesh(coord_t const aTrans[3][3]);
     /**
      * Rotate the CMesh points around a normal vector by an angel, counterclockwise
      * @param[in] aNormVec the x,y.z normal to rotate around.

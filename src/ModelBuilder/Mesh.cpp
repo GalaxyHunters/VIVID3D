@@ -287,18 +287,6 @@ void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
     this->TransformMesh(rotation_mat);
 }
 
-//
-////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
-//vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
-//    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-//    vector<double> RotVector;
-//    RotVector = VectorsCrossProduct3D(Vector1, Vector2);
-//    //now we have a vector to rotate around. we normalize its size (turning it to 1).
-//    Normalize3DVector(RotVector);
-//    //compute our rotation angle theta
-//    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
-
-
 void CMesh::MoveMesh(CPoint aDirectionVec){
     auto x_movement = aDirectionVec.GetX();
     auto y_movement = aDirectionVec.GetY();

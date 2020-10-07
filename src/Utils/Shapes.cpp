@@ -193,116 +193,81 @@ vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1
     return Points;
 }
 
-
-
-CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label){
-    //before we run, lets assert some conditions
+CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<double> DirVec, double Color, double Alpha, string Label){
+    //before we run, lets assert some conditions //TODO same comment on Exceptions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
     assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 && Width != 0 && PCRatio != 0));
 
-    CMesh arrow;
+    // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points;
     vector<CIndexedFace> faces;
-    double &baseX = Base[0];
-    double &baseY = Base[1];
-    double &baseZ = Base[2];
-    //create points for the vector
-    //start by creating an arrow that points up the z axis
-
-
-    for (int j = -1; j < 2; ++j) {
+    for (int j = -1; j < 2; ++j) { //start by creating an arrow that points up the z axis
         if (j == 0) continue;
-        //creating the points for the bottom square
-        for (int i = -1; i < 2; ++i) {
+        for (int i = -1; i < 2; ++i) { //creating the points for the bottom square
             if (i == 0) continue;
-//            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ, baseY + 0.5 * i * Width));
+            points.push_back(CPoint(0.5 * j * Width, 0.5 * i * Width, 0));
         }
-        //creating the points for the top square
-        for (int k = -1; k < 2; ++k) {
+        for (int k = -1; k < 2; ++k) { //creating the points for the top square
             if (k == 0) continue;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ + Length * (1 - PCRatio), baseY + 0.5 * k * Width));
+            points.push_back(CPoint(0.5 * j * Width, 0.5 * k * Width, (1 - PCRatio)));
         }
     }
-    //creating the points for the pointer
-    for (int l = -1; l < 2; ++l) {
+    for (int l = -1; l < 2; ++l) { //creating the points for the pointer
         if (l == 0) continue;
         for (int i = -1; i < 2; ++i) {
             if (i == 0) continue;
-//            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.75 * l * Width, baseZ + Length * (1 - PCRatio), baseY + 0.75 * i * Width));
+            points.push_back(CPoint(0.75 * l * Width, 0.75 * i * Width, (1 - PCRatio) ));
         }
     }
-    //the pointer point
-    points.push_back(CPoint(baseX, baseZ + Length, baseY));
+    points.push_back(CPoint(0, 0, 1)); //the pointer point
 
     //creating faces
-        //creating the chest faces
+    //creating the chest faces
     faces.push_back(CIndexedFace(vector<size_t>{0, 4, 5, 1}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{2, 6, 7, 3}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{0, 2, 6, 4}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{4, 6, 7, 5}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{5, 7, 3, 1}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{1, 3, 2, 0}, Color));
-        //creating the pointer faces
-    faces.push_back(CIndexedFace(vector<size_t>{8, 10, 11, 9}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{8, 12, 10}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{9, 12, 8}, Color));
+    //creating the pointer faces
+    faces.push_back(CIndexedFace(vector<size_t>{8,  10, 11, 9}, Color));
+    faces.push_back(CIndexedFace(vector<size_t>{8,  12, 10},    Color));
+    faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11},    Color));
+    faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9},     Color));
+    faces.push_back(CIndexedFace(vector<size_t>{9,  12, 8},     Color));
     //rotating the arrow using a rotation matrix
 
 //    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
 
-    arrow.SetPoints(points);
-    arrow.SetFaces(faces);
-    arrow.SetAlpha(Alpha);
-    arrow.SetLabel(Label);
-    return arrow;
+    CMesh mesh;
+    mesh.SetPoints(points);
+    mesh.SetFaces(faces);
+    mesh.SetAlpha(Alpha);
+    mesh.SetLabel(Label);
+    mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
+
+
+    //TODO scale z by vector
+    //TODO rotate to new direction
+    //TODO ask Zohar what kind of arrow is it
+    //TODO, THINK about Jill Neiman's arrow and the scale thingy
+//    mesh.ScaleMesh(CPoint(0.5*sizeX, 0.5*sizeY, 0.5*sizeZ));
+    return mesh;
+
 }
 
+//
+////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
+//vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
+//    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
+//    vector<double> RotVector;
+//    RotVector = VectorsCrossProduct3D(Vector1, Vector2);
+//    //now we have a vector to rotate around. we normalize its size (turning it to 1).
+//    Normalize3DVector(RotVector);
+//    //compute our rotation angle theta
+//    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
 
-//CMesh CreateArrowMesh(double x, double y, double z, double chest_length, double pointer_length, double width, coord_t color)
-//{
-//    vector<CPoint> points;
-//    points.clear();
-//    points.push_back(CPoint(x, y, z));
-//    points.push_back(CPoint(x + (1.5 * width), y, z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x, y + (1.5 * width), z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x - (1.5 * width), y, z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x, y  - (1.5 * width), z - (1.5 * pointer_length)));
-//
-//    points.push_back(CPoint(x - width, y, z - pointer_length));
-//    points.push_back(CPoint(x + width, y, z - pointer_length));
-//    points.push_back(CPoint(x, y - width, z - pointer_length));
-//    points.push_back(CPoint(x, y  + width, z - pointer_length));
-//
-//    points.push_back(CPoint(x - width, y, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x + width, y, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x, y - width, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x, y + width, z - pointer_length - chest_length));
-//
-//    vector<CIndexedFace> faces(10);
-////    faces.clear();
-//    faces[0] = CIndexedFace(vector<size_t>{1, 2, 3, 4}, color);
-//    faces[1] = CIndexedFace(vector<size_t>{0, 1, 2}, color);
-//    faces[2] = CIndexedFace(vector<size_t>{0, 2, 3}, color);
-//    faces[3] = CIndexedFace(vector<size_t>{0, 3, 4}, color);
-//    faces[4] = CIndexedFace(vector<size_t>{0, 4, 1}, color);
-//
-//    faces[5] = CIndexedFace(vector<size_t>{5, 9, 12, 8}, color);
-//    faces[6] = CIndexedFace(vector<size_t>{8, 12, 10, 6}, color);
-//    faces[7] = CIndexedFace(vector<size_t>{6, 10, 11, 7}, color);
-//    faces[8] = CIndexedFace(vector<size_t>{7, 11, 9, 5}, color);
-//
-//    CMesh arrow;
-//    arrow.SetPoints(points);
-//    arrow.SetFaces(faces);
-//    arrow.SetAlpha(1);
-//    arrow.SetLabel("arrow");
-//
-//    return arrow;
-//}
+
 
 //FbxMesh* createCube(int sizeX, int sizeY, int sizeZ)
 //{

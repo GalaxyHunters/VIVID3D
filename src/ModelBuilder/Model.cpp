@@ -232,5 +232,10 @@ void CModel::AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha){
     this->mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
 }
 
+int CModel::ExportToGlb(){
+
+    return 42;
+}
+
 
 CModel::~CModel(){}

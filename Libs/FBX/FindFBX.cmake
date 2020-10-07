@@ -328,16 +328,16 @@ IF(WIN32)
             MESSAGE(FBX_INCLUDE_DIR=NOT_FOUND)
         ENDIF()
         #setting library paths
-        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libfbxsdk-md.lib)
-        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libfbxsdk.dll)
+        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/vs2017/x86/release/libfbxsdk-md.lib)
+        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/vs2017/x86/release/libfbxsdk.dll)
         IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_STATIC_RELEASE)
             MESSAGE(FBX_LIBRARY_RELEASE=FOUND)
         ELSE()
             MESSAGE(FBX_LIBRARY_RELEASE=NOT_FOUND)
         ENDIF()
 
-        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libfbxsdk-md.lib)
-        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libfbxsdk.dll)
+        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/vs2017/x86/debug/libfbxsdk-md.lib)
+        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/vs2017/x86/debug/libfbxsdk.dll)
         IF(FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_DEBUG)
             MESSAGE(FBX_LIBRARY_DEBUG=FOUND)
         ELSE()
@@ -345,11 +345,11 @@ IF(WIN32)
         ENDIF()
 
         #setting libxml2 and zlib variables
-        SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libxml2-md.lib)
-        SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libxml2-md.lib)
+        SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x86/debug/libxml2-md.lib)
+        SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x86/release/libxml2-md.lib)
 
-        SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/zlib-md.lib)
-        SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/zlib-md.lib)
+        SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x86/debug/zlib-md.lib)
+        SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x86/release/zlib-md.lib)
 
 #        ADD_LIBRARY(DEBUG_DEPENDENCIES STATIC IMPORTED GLOBAL ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
 

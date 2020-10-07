@@ -14,6 +14,7 @@ public:
 	~CModel();
 	void ExportToObj(string aOutput);
 	void ExportToObjTexture(string aOutput);
+	int ExportToGlb();
 	static CMesh load(string inputFile); // TODO add a read obj func
 	void AddMesh(CMesh aMesh);
 	void AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha);

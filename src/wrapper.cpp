@@ -35,7 +35,8 @@ PYBIND11_MODULE(vivid_py, m) {
             .def(py::init<vector<CSurf>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
-            .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));
+            .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"))
+            .def("ExportToGlb", &CModel::ExportToGlb, "stub function returns 42");
 
     m.def("Animate", &Animate, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
           py::arg("Models"),py::arg("Interval"), py::arg("OutputFile"));

@@ -20,8 +20,8 @@ execute_process(
 )
 
 project(vivid)
-
-set(BOOST_ROOT "C:/Users/nafta/source/boost_1_74_0")         #TODO tidy this up, should not have to specify by hand
+#C:/Users/nafta/source/boost_1_74_0
+set(BOOST_ROOT "C:/Users/user/Downloads/boost_1_62_0")         #TODO tidy this up, should not have to specify by hand
 #set(Boost_DEBUG 1)
 find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)
@@ -41,14 +41,15 @@ find_package(Boost 1.62.0 REQUIRED)
 
 
 # Optional: set FBX lib path by a specific root
-#set(FBX_ROOT   "C:/Program_Files/Autodesk/FBX/FBX_SDK/2020.0.1/include")
+#set(FBX_ROOT   "C:/Program_Files/Autodesk/FBX/FBX_SDK/2020.1.1/include")
 find_package(FBX)
 message(FBX_FOUND = ${FBX_FOUND})
 message(${FBX_LIBRARY_STATIC_RELEASE})
 message(${FBX_LIBRARY_STATIC_DEBUG})
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
-set(PY_ROOT    "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT    "C:/Users/nafta/Miniconda2")
+set(PY_ROOT    "C:/Users/user/anaconda3/envs/vivid model renderer")
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)

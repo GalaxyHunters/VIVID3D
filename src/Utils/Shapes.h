@@ -11,20 +11,20 @@ using namespace std;
 
 
 	
-	CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position);
-	/*Creates a cube*/
+CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position);
+/*Creates a cube*/
 
-    CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label);
-    /*Creates a sphere*/
+CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label);
+/*Creates a sphere*/
 
-    CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label);
+CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label);
 
-    CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label);
-    /*Creates a arrow*/
+CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label);
+/*Creates a arrow*/
 
 
-    FbxMesh* createCube(int sizeX, int sizeY, int sizeZ);
-	/* this function creates a CCmesh object containing a sphere, the sphere is created in the position that the user dictates and has a radius also according to the users input.*/
+FbxMesh* createCube(int sizeX, int sizeY, int sizeZ);
+/* this function creates a CCmesh object containing a sphere, the sphere is created in the position that the user dictates and has a radius also according to the users input.*/
 
 
 

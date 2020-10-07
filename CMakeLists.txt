@@ -43,13 +43,11 @@ find_package(Boost 1.62.0 REQUIRED)
 # Optional: set FBX lib path by a specific root
 #set(FBX_ROOT   "/home/zohar/Documents/FBX") # TODO if used should be FBX_DIR...
 find_package(FBX)
-message(FBX_FOUND = ${FBX_FOUND})
-message(${FBX_LIBRARY_STATIC_RELEASE})
-message(${FBX_LIBRARY_STATIC_DEBUG})
+message(FBX_FOUND = ${FBX_FOUND}) # TODO
 
-set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
+
+
 #set(PY_ROOT    "C:/Users/zorik/Miniconda2")
-
 set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
@@ -64,19 +62,13 @@ set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #set(PY_ROOT "C:/Users/zorik/Miniconda2")
 add_subdirectory(pybind11)
 
-include_directories(src)
+include_directories(src) #TODO: (TOMER) I prefer to include headers by name
 include_directories(Libs/MeshDecimation)
 include_directories(Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon)
 include_directories(Libs/huji-rich-Elad3DFast/source/misc)
 include_directories(Libs/pybind11/include)
 include_directories(Libs/lodepng)
-#include_directories( ../../../../../../../Program_Files/Autodesk/FBX/FBX_SDK/2019.0/include)
-
-# Not sure it is needed:
-#include_directories(${PY_INCLUDE_DIR})
-#link_directories(${PY_LINK_LIBS})
-
-include_directories(${FBX_INCLUDE_DIR})
+#include_directories(${FBX_INCLUDE_DIR})
 
 
 
@@ -119,7 +111,6 @@ add_executable(vivid
         src/AnimationBuilder/Animation.cpp
         src/Utils/Shapes.cpp
         src/AnimationBuilder/FbxFunc.cpp
-#            "../../../../../../../Program Files/Autodesk/FBX/FBX SDK/2019.0/include/fbxsdk.h"
         #external
         Libs/MeshDecimation/mdMeshDecimator.cpp
         Libs/lodepng/lodepng.cpp
@@ -129,8 +120,7 @@ add_executable(vivid
 
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid FBX::fbx)
-#target_link_libraries(vivid ${LIBXML2_LIBRARY})
-#target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
+
 
 pybind11_add_module(vivid_py
         #elad3d
@@ -177,6 +167,7 @@ pybind11_add_module(vivid_py
         src/wrapper.cpp
         )
 
+
 #message(${LIBXML2_LIBRARIES})
 #add_library(xml2 STATIC ${LIBXML2_LIBRARIES})
 target_link_libraries(vivid_py PRIVATE Boost::boost)
@@ -185,9 +176,6 @@ target_link_libraries(vivid_py PRIVATE Boost::boost)
 #target_link_libraries(vivid_py PRIVATE ${FBX_LIBRARY_STATIC_DEBUG})
 target_link_libraries(vivid_py PRIVATE FBX::fbx)
 #target_link_libraries(vivid_py PRIVATE ${LibXml2})
-
-
-
 
 
 #things already tried:

@@ -207,24 +207,23 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
     if( aMaxError < 0 || aMaxError > 1){
         throw "input error, MaxError must be between 0 and 1";
     }
-	//triangulation
-	this->Triangulation();
+
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * this->mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, this->mFaces, targetVerticesN, targetTrianglesN, aMaxError);
+	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, this->GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	this->mPoints = get<0>(temp);
 	this->mFaces = get<1>(temp);
 }
 
-void CMesh::Triangulation() {
+vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
 	vector<CIndexedFace> triangles;
 	for (vector<CIndexedFace>::iterator fIt = this->mFaces.begin(); fIt != this->mFaces.end(); fIt++) {
 		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
 			triangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
 		}
 	}
-	this->mFaces = triangles;
+	return triangles;
 }
 //geters seters
 

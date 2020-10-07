@@ -9,6 +9,7 @@
 
 typedef double coord_t; //TODO: float64_t
 
+// TODO CPoint should be typedef of vector calculation object by size 3 of maximum float.
 class CPoint
 {
 public:
@@ -24,7 +25,6 @@ public:
 	inline void SetX(coord_t aX) { this->mX = aX; }
 	inline void SetY(coord_t aY) { this->mY = aY; }
 	inline void SetZ(coord_t aZ) { this->mZ = aZ; }
-	//float getDis(Point p) { return (); }
 private:
 	coord_t mX, mY, mZ;
 };

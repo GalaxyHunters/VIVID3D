@@ -12,18 +12,19 @@ const size_t a1 = NULL;
 const size_t b1 = NULL;
 
 //TODO make position a cpoint object
-CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position)
+CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
 {
 	vector<CPoint> CPoints(8);
 	CPoints.clear();
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] + 0.5*sizeY, position[2] + 0.5*sizeZ)); //0
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] + 0.5*sizeY, position[2] + 0.5*sizeZ)); //1
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] + 0.5*sizeY, position[2] - 0.5*sizeZ)); //2
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] + 0.5*sizeY, position[2] - 0.5*sizeZ)); //3
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] - 0.5*sizeY, position[2] - 0.5*sizeZ)); //4
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] - 0.5*sizeY, position[2] - 0.5*sizeZ)); //5
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] - 0.5*sizeY, position[2] + 0.5*sizeZ)); //6
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] - 0.5*sizeY, position[2] + 0.5*sizeZ)); //7
+	//TODO: Zohar MY OCD hurts here should start at  ---, --+, -+-, -++, +--, +-+ and I would say by for loop...
+	CPoints.push_back(CPoint(-1, +1, +1)); //0
+	CPoints.push_back(CPoint(+1, +1, +1)); //1
+	CPoints.push_back(CPoint(+1, +1, -1)); //2
+	CPoints.push_back(CPoint(-1, +1, -1)); //3
+	CPoints.push_back(CPoint(+1, -1, -1)); //4
+	CPoints.push_back(CPoint(-1, -1, -1)); //5
+	CPoints.push_back(CPoint(-1, -1, +1)); //6
+	CPoints.push_back(CPoint(+1, -1, +1)); //7
 
 	vector<CIndexedFace> faces(6);
 
@@ -34,13 +35,15 @@ CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, co
 	faces[4] = CIndexedFace(vector<size_t>{3, 0, 6, 5}, color);
 	faces[5] = CIndexedFace(vector<size_t>{6, 7, 4, 5}, color);
 
-    CMesh CMesh;
-    CMesh.SetPoints(CPoints);
-    CMesh.SetFaces(faces);
-    CMesh.SetAlpha(alpha);
-    CMesh.SetLabel("cube");
+    CMesh mesh;
+    mesh.SetPoints(CPoints);
+    mesh.SetFaces(faces);
+    mesh.SetAlpha(alpha);
+    mesh.SetLabel("cube");
 
-	return CMesh;
+    mesh.MoveMesh(CPoint(pos[0], pos[1], pos[2]));
+	mesh.ScaleMesh(CPoint(0.5*sizeX, 0.5*sizeY, 0.5*sizeZ));
+    return mesh;
 }
 
 CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label)

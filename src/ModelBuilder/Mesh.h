@@ -52,21 +52,26 @@ public:
 
 
     /**
-     * Rotate the Mesh around a normal vector by an angel, counterclockwise
-     * @param[in] aNormalVec the x,y.z normal to rotate around.
-     * @param[in] aRadianAngel the angel to rotate by (in radians).
+     * transform CMesh points by transformation matrix
+     * @param[in] aTrans a 3x3 dimension matrix.
      */
-    void rotatewMesh(CPoint aNormalVec, double aRadianAngel);
+    void TransformMesh(const coord_t const aTrans[3][3]);
     /**
-     * Change Mesh location by addition of x,y,z.
+     * Rotate the CMesh points around a normal vector by an angel, counterclockwise
+     * @param[in] aNormVec the x,y.z normal to rotate around.
+     * @param[in] aRadAngel the angel to rotate by (in radians).
+     */
+    void RotatewMesh(CPoint aNormVec, double aRadAngel);
+    /**
+     * Change CMesh points location by addition of x,y,z.
      * @param[in] aDirectionVec the x,y.z direction to move by it.
      */
-    void moveMesh(CPoint aDirectionVec);
+    void MoveMesh(CPoint aDirectionVec);
     /**
-     * Change Mesh scale in x,y,z direction by x,y,z of the scale vector
+     * Change XMesh points scale in x,y,z direction by x,y,z of the scale vector
      * @param[in] aScaleVec the x,y.z direction to move by it.
      */
-    void scaleMesh(CPoint aScaleVec);
+    void ScaleMesh(CPoint aScaleVec);
 
 };
 

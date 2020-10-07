@@ -1,6 +1,8 @@
 #include "Mesh.h"
 #include <stdio.h>
 
+
+
 using namespace boost::algorithm;
 
 
@@ -246,16 +248,43 @@ void CMesh::SetAlpha(coord_t aAlpha){
 }
 
 
-void CMesh::rotatewMesh(CPoint aNormalVec, double aRadianAngel){
-//    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
-//                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
-//                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
-//                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
-//                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
-//                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
-//                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
-//                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
-//                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
+
+
+
+void TransformMesh(const coord_t const aTrans[3][3]){
+
+    double px,py,pz;
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+
+        px=it->GetX(); py=it->GetY(); pz=it->GetZ();
+
+        it->SetX( aTrans[0][0]*px + aTrans[0][1]*py + aTrans[0][2]*pz );
+        it->SetY( aTrans[1][0]*px + aTrans[1][1]*py + aTrans[1][2]*pz );
+        it->SetZ( aTrans[2][0]*px + aTrans[2][1]*py + aTrans[2][2]*pz );
+
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
+}
+
+void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
+    // Trig operations are expansive
+    auto cos_a = cos(aRadAngel);
+    auto sin_a = sin(aRadAngel);
+    // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
+    auto nx = aNormVec.GetX();
+    auto ny = aNormVec.GetY();
+    auto nz = aNormVec.GetZ();
+
+    const coord_t const rotation_mat[3][3] = {
+            cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
+
+            ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,
+
+            nz*nx*(1-cos_a) - ny*sin_a,     nz*ny*(1-cos_a) + nx*sin_a,     cos_a + nz*nz*(1-cos_a),
+    };
+    this->TransformMesh(rotation_mat);
 }
 
 //
@@ -268,39 +297,9 @@ void CMesh::rotatewMesh(CPoint aNormalVec, double aRadianAngel){
 //    Normalize3DVector(RotVector);
 //    //compute our rotation angle theta
 //    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
-//    //build the matrix
-//    double Ux = RotVector[0];
-//    double Uy = RotVector[1];
-//    double Uz = RotVector[2];
-//    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
-//                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
-//                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
-//                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
-//                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
-//                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
-//                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
-//                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
-//                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
-//    //apply matrix to points
-//    for (int i1 = 0; i1 < Points.size(); ++i1)
-//    {
-//        CPoint& CurrentVector = Points[i1];
-//        //right now im using a refrence to change the vector according to the matrix
-//        double CVX = CurrentVector.GetX();
-//        double CVY = CurrentVector.GetY();
-//        double CVZ = CurrentVector.GetZ();
-//
-//        //now we rotate em
-//        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[0][1] + CVZ * RotMatrix[0][2],
-//                               CVX * RotMatrix[1][0] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[1][2],
-//                               CVX * RotMatrix[2][0] + CVY * RotMatrix[2][1] + CVZ * RotMatrix[2][2]);
-//    }
-//
-//    return Points;
-//}
 
 
-void CMesh::moveMesh(CPoint aDirectionVec){
+void CMesh::MoveMesh(CPoint aDirectionVec){
     auto x_movement = aDirectionVec.GetX();
     auto y_movement = aDirectionVec.GetY();
     auto z_movement = aDirectionVec.GetZ();
@@ -315,7 +314,7 @@ void CMesh::moveMesh(CPoint aDirectionVec){
     }
 }
 
-void CMesh::scaleMesh(CPoint aScaleVec){
+void CMesh::ScaleMesh(CPoint aScaleVec){
     auto x_scale = aScaleVec.GetX();
     auto y_scale = aScaleVec.GetY();
     auto z_scale = aScaleVec.GetZ();

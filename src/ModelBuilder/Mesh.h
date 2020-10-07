@@ -49,6 +49,25 @@ public:
 	void SetPoints(vector<CPoint> aPoints);
 	void SetLabel(string aLabel);
 	void SetAlpha(coord_t aAlpha);
+
+
+    /**
+     * Rotate the Mesh around a normal vector by an angel, counterclockwise
+     * @param[in] aNormalVec the x,y.z normal to rotate around.
+     * @param[in] aRadianAngel the angel to rotate by (in radians).
+     */
+    void rotatewMesh(CPoint aNormalVec, double aRadianAngel);
+    /**
+     * Change Mesh location by addition of x,y,z.
+     * @param[in] aDirectionVec the x,y.z direction to move by it.
+     */
+    void moveMesh(CPoint aDirectionVec);
+    /**
+     * Change Mesh scale in x,y,z direction by x,y,z of the scale vector
+     * @param[in] aScaleVec the x,y.z direction to move by it.
+     */
+    void scaleMesh(CPoint aScaleVec);
+
 };
 
 

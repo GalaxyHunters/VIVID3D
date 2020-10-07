@@ -3,6 +3,9 @@
 
 using namespace boost::algorithm;
 
+
+// TODO: to place the methods in order and in substructure
+
 CMesh::~CMesh() {}
 
 CMesh::CMesh(const CMesh &mesh){
@@ -240,4 +243,89 @@ void CMesh::SetAlpha(coord_t aAlpha){
         throw "Alpha must be between 0 and 1";
     }
     this->mAlpha = aAlpha;
+}
+
+
+void CMesh::rotatewMesh(CPoint aNormalVec, double aRadianAngel){
+//    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
+//                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
+//                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
+//                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
+//                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
+//                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
+//                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
+//                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
+//                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
+}
+
+//
+////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
+//vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
+//    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
+//    vector<double> RotVector;
+//    RotVector = VectorsCrossProduct3D(Vector1, Vector2);
+//    //now we have a vector to rotate around. we normalize its size (turning it to 1).
+//    Normalize3DVector(RotVector);
+//    //compute our rotation angle theta
+//    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
+//    //build the matrix
+//    double Ux = RotVector[0];
+//    double Uy = RotVector[1];
+//    double Uz = RotVector[2];
+//    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
+//                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
+//                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
+//                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
+//                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
+//                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
+//                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
+//                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
+//                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
+//    //apply matrix to points
+//    for (int i1 = 0; i1 < Points.size(); ++i1)
+//    {
+//        CPoint& CurrentVector = Points[i1];
+//        //right now im using a refrence to change the vector according to the matrix
+//        double CVX = CurrentVector.GetX();
+//        double CVY = CurrentVector.GetY();
+//        double CVZ = CurrentVector.GetZ();
+//
+//        //now we rotate em
+//        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[0][1] + CVZ * RotMatrix[0][2],
+//                               CVX * RotMatrix[1][0] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[1][2],
+//                               CVX * RotMatrix[2][0] + CVY * RotMatrix[2][1] + CVZ * RotMatrix[2][2]);
+//    }
+//
+//    return Points;
+//}
+
+
+void CMesh::moveMesh(CPoint aDirectionVec){
+    auto x_movement = aDirectionVec.GetX();
+    auto y_movement = aDirectionVec.GetY();
+    auto z_movement = aDirectionVec.GetZ();
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+        it->SetX(x_movement+it->GetX());
+        it->SetY(y_movement+it->GetY());
+        it->SetZ(z_movement+it->GetZ());
+        // The only reason I let it pass like that, is because this is an inline code.
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
+}
+
+void CMesh::scaleMesh(CPoint aScaleVec){
+    auto x_scale = aScaleVec.GetX();
+    auto y_scale = aScaleVec.GetY();
+    auto z_scale = aScaleVec.GetZ();
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+        it->SetX(x_scale*it->GetX());
+        it->SetY(y_scale*it->GetY());
+        it->SetZ(z_scale*it->GetZ());
+        // The only reason I let it pass like that, is because this is an inline code.
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
 }

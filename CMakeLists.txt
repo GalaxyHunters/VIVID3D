@@ -1,9 +1,13 @@
+project(vivid)
+set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
+
+message(${PROJECT_SOURCE_DIR})
+
 cmake_minimum_required(VERSION 3.4)
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH}")
-
-
 set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" -l xml2)
+
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH}")
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -19,7 +23,6 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
-project(vivid)
 
 #set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
 #set(Boost_DEBUG 1)

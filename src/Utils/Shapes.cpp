@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #define _USE_MATH_DEFINES
-#include <math.h>
+//#include <math.h>
 
 using namespace std;
 
@@ -14,22 +14,29 @@ const size_t b1 = NULL;
 
 //struct MathVector{double size;
 //    vector<double> direction;};
-inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-inline double VectorsDotProduct3D(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
-inline vector<double> VectorsCrossProduct3D(vector<double> &Vector1, vector<double> &Vector2){return vector<double>{Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1],
-                                                                                                                    Vector1[2] * Vector2[0] - Vector1[0] * Vector2[2],
-                                                                                                                    Vector1[0] * Vector2[1] - Vector1[1] * Vector2[0]};}
-inline vector<double> Normalize3DVector(vector<double> &Vector){
-    double VectorSize = Calc3DVectorSize(Vector);
-    for (int l = 0; l < Vector.size(); ++l) {
-        Vector[l] /= VectorSize;
-    }
-    return Vector;
+
+inline double DotProduct(CPoint aVec1, CPoint aVec2){ return (aVec1.GetX()*aVec2.GetX() + aVec1.GetY()*aVec2.GetY() + aVec1.GetZ()*aVec2.GetZ());}
+inline double VectorSize(CPoint aVec){ return sqrt(DotProduct(aVec,aVec)) ;}
+inline CPoint CrossProduct(CPoint aVec1, CPoint aVec2) {
+    return CPoint(aVec1.GetY()*aVec2.GetZ() - aVec1.GetZ()*aVec2.GetY(),
+                  aVec1.GetZ()*aVec2.GetX() - aVec1.GetX()*aVec2.GetZ(),
+                  aVec1.GetX()*aVec2.GetZ() - aVec1.GetX()*aVec2.GetZ());
 }
 
-bool CheckIfPerpindicular(vector<double> VecA, vector<double> VecB){
-    if (VecA[0] * VecB[0] + VecA[1] * VecB[1] + VecA[2] * VecB[2] == 0) return true;
-    else return false;
+inline CPoint NormalizeVector(CPoint aVec)
+{
+    double vec_size = VectorSize(aVec);
+    aVec.SetX(aVec.GetX()/vec_size);
+    aVec.SetY(aVec.GetY()/vec_size);
+    aVec.SetZ(aVec.GetZ()/vec_size);
+    return aVec;
+}
+inline bool IsPerpindicular(CPoint aVec1, CPoint aVec2)
+{
+    if (0==DotProduct(aVec1,aVec2)) {
+        return true;
+    }
+    return false;
 }
 
 
@@ -175,24 +182,8 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 
 }
 
-
-//this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
-vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
-    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-     vector<double> RotVector;
-     RotVector = VectorsCrossProduct3D(Vector1, Vector2);
-    //now we have a vector to rotate around. we normalize its size (turning it to 1).
-    Normalize3DVector(RotVector);
-    //compute our rotation angle theta
-    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
-    //build the matrix
-    double Ux = RotVector[0];
-    double Uy = RotVector[1];
-    double Uz = RotVector[2];
-
-    return Points;
-}
-
+// TODO ask Zohar what kind of arrow is it
+// TODO, THINK about Jill Neiman's arrow and the scale thingy
 CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<double> DirVec, double Color, double Alpha, string Label){
     //before we run, lets assert some conditions //TODO same comment on Exceptions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
@@ -235,9 +226,6 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11},    Color));
     faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9},     Color));
     faces.push_back(CIndexedFace(vector<size_t>{9,  12, 8},     Color));
-    //rotating the arrow using a rotation matrix
-
-//    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
 
     CMesh mesh;
     mesh.SetPoints(points);
@@ -246,26 +234,30 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     mesh.SetLabel(Label);
     mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
 
+    // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
+    CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
+    auto direction_size = VectorSize(direction_vec);
+    CPoint normal_vec = NormalizeVector(CrossProduct(CPoint(0,0,1), direction_vec));
+    double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
 
-    //TODO scale z by vector
-    //TODO rotate to new direction
-    //TODO ask Zohar what kind of arrow is it
-    //TODO, THINK about Jill Neiman's arrow and the scale thingy
-//    mesh.ScaleMesh(CPoint(0.5*sizeX, 0.5*sizeY, 0.5*sizeZ));
+    mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+    mesh.RotatewMesh(normal_vec, rotation_angel);
+
     return mesh;
 
 }
 
-//
+
+
+
+
+
+
+
 ////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
 //vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
 //    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-//    vector<double> RotVector;
-//    RotVector = VectorsCrossProduct3D(Vector1, Vector2);
-//    //now we have a vector to rotate around. we normalize its size (turning it to 1).
-//    Normalize3DVector(RotVector);
-//    //compute our rotation angle theta
-//    double Theta = acos(float(VectorsDotProduct3D(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2)));
+
 
 
 

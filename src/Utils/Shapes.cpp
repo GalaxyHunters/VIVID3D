@@ -7,11 +7,6 @@
 
 using namespace std;
 
-
-// TODO what is it?
-const size_t a1 = NULL;
-const size_t b1 = NULL;
-
 //struct MathVector{double size;
 //    vector<double> direction;};
 
@@ -187,27 +182,27 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<double> DirVec, double Color, double Alpha, string Label){
     //before we run, lets assert some conditions //TODO same comment on Exceptions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
-    assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 && Width != 0 && PCRatio != 0));
+    assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
 
     // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points;
     vector<CIndexedFace> faces;
-    for (int j = -1; j < 2; ++j) { //start by creating an arrow that points up the z axis
+    for (int j =-1; j<2; j++) { //start by creating an arrow that points up the z axis
         if (j == 0) continue;
-        for (int i = -1; i < 2; ++i) { //creating the points for the bottom square
-            if (i == 0) continue;
+        for (int i=-1; i<2; i++) { //creating the points for the bottom square
+            if (0==i) continue;
             points.push_back(CPoint(0.5 * j * Width, 0.5 * i * Width, 0));
         }
-        for (int k = -1; k < 2; ++k) { //creating the points for the top square
-            if (k == 0) continue;
-            points.push_back(CPoint(0.5 * j * Width, 0.5 * k * Width, (1 - PCRatio)));
+        for (int k=-1; k<2; k++) { //creating the points for the top square
+            if (0==k) continue;
+            points.push_back(CPoint(0.5 * j * Width, 0.5 * k * Width, (1-PCRatio)));
         }
     }
-    for (int l = -1; l < 2; ++l) { //creating the points for the pointer
-        if (l == 0) continue;
-        for (int i = -1; i < 2; ++i) {
-            if (i == 0) continue;
-            points.push_back(CPoint(0.75 * l * Width, 0.75 * i * Width, (1 - PCRatio) ));
+    for (int l=-1; l<2; l++) { //creating the points for the pointer
+        if (0==l) continue;
+        for (int i = -1; i<2; i++) {
+            if (0==i) continue;
+            points.push_back(CPoint(0.75 * l * Width, 0.75 * i * Width, (1-PCRatio) ));
         }
     }
     points.push_back(CPoint(0, 0, 1)); //the pointer point
@@ -233,15 +228,20 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     mesh.SetAlpha(Alpha);
     mesh.SetLabel(Label);
     mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
-
+//
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
     auto direction_size = VectorSize(direction_vec);
+    CPoint cross_vec = CrossProduct(CPoint(0,0,1), direction_vec);
     CPoint normal_vec = NormalizeVector(CrossProduct(CPoint(0,0,1), direction_vec));
     double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
-
-    mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
-    mesh.RotatewMesh(normal_vec, rotation_angel);
+    cout << "normal_vec" << normal_vec << "\n";
+    cout << rotation_angel << "\n";
+    cout << "direction_size" << direction_size;
+    cout << "cross_product" << cross_vec.GetX() << "\n";
+//
+//    mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+//    mesh.RotatewMesh(normal_vec, rotation_angel);
 
     return mesh;
 

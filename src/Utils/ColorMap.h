@@ -108,12 +108,13 @@ inline static int GetColorIndex( float aVal) // float aColorMap ----- when we ad
 
 inline static vector<unsigned char> GetColorTexture()//float aColorMap
 {
+    // TODO 255 is a magic num. take char.max or something
     vector<unsigned char> texture;
     for(vector<color_t>::iterator it = ClmPlasma.begin(); it != ClmPlasma.end(); it++){
-        texture.push_back((*it).R*255);
-        texture.push_back((*it).G*255);
-        texture.push_back((*it).B*255);
-        texture.push_back(255);
+        texture.push_back((unsigned char) ((*it).R*255) );
+        texture.push_back((unsigned char) ((*it).G*255) );
+        texture.push_back((unsigned char) ((*it).B*255) );
+        texture.push_back((unsigned char) (255));
     }
     texture.resize(texture.size());
     return texture;

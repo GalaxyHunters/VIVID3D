@@ -38,9 +38,6 @@ public:
     CMesh(const CMesh &mesh);
 	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha);
 	~CMesh();
-	void Decimation(coord_t aVerticlePercent, coord_t aError);
-	void ExportToObj(string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
-	void ExportToObjTexture(string aOutput);
 	string GetLabel();
 	coord_t GetAlpha();
 	vector<CPoint> GetPoints();
@@ -49,6 +46,11 @@ public:
 	void SetPoints(vector<CPoint> aPoints);
 	void SetLabel(string aLabel);
 	void SetAlpha(coord_t aAlpha);
+
+    void Decimation(coord_t aVerticlePercent, coord_t aError);
+
+    void ExportToObj(string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
+    void ExportToObjTexture(string aOutput);
 
 
     /**

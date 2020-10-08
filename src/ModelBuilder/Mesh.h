@@ -21,6 +21,7 @@ private:
 	string mLabel;
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
+    CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
 
 	//output functions
 	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter);
@@ -36,16 +37,19 @@ private:
 public:
 	CMesh() {};
     CMesh(const CMesh &mesh);
-	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha);
+	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
 	~CMesh();
 	string GetLabel();
 	coord_t GetAlpha();
 	vector<CPoint> GetPoints();
 	vector<CIndexedFace> GetFaces();
+    CPoint getCenVector();
 	void SetFaces(vector<CIndexedFace> aFaces);
 	void SetPoints(vector<CPoint> aPoints);
 	void SetLabel(string aLabel);
 	void SetAlpha(coord_t aAlpha);
+	void setCenVector(const CPoint &vector);
+
 
     void Decimation(coord_t aVerticlePercent, coord_t aError);
 

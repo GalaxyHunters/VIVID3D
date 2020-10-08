@@ -48,6 +48,9 @@ find_package(Boost 1.62.0 REQUIRED)
 find_package(FBX)
 message(FBX_FOUND = ${FBX_FOUND}) # TODO
 
+#set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
+#set(PY_ROOT    "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT    "C:/Users/zorik/Miniconda2")
 
 
 #set(PY_ROOT    "C:/Users/zorik/Miniconda2")

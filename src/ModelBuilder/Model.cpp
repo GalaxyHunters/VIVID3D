@@ -61,11 +61,13 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 	//cout << apMesh->GetPoints().begin() << endl;
     (*apMesh).GetPoints().begin();
 	//write points to obj file
+	CPoint temp_point = CPoint(0, 0, 0);
 	vector<CPoint> Points = apMesh->GetPoints();
     vector<CIndexedFace> Faces = apMesh->GetFaces();
 	for (vector<CPoint>::iterator it = Points.begin(); it != Points.end(); it++)
 	{
-		aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+        temp_point = *it + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
+        aOBJFile << temp_point; // writes the point in obj file as vertex
 	}
 	//sort vecFaces by color
 	sort(Faces.begin(), Faces.end(), CompFace); // NlogN

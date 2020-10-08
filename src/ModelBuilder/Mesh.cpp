@@ -1,7 +1,12 @@
 #include "Mesh.h"
 #include <stdio.h>
 
+
+
 using namespace boost::algorithm;
+
+
+// TODO: to place the methods in order and in substructure
 
 CMesh::~CMesh() {}
 
@@ -61,7 +66,7 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 	aOBJFile << "o " + this->mLabel + "\n";
 	//write points to obj file
 	CPoint temp_point = CPoint(0, 0, 0);
-	for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++) 
+	for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
 	{
         temp_point = *it + this->mCenVector ; //sdd the CenVector to return model to the original centralization.
         aOBJFile << temp_point; // writes the point in obj file as vertex
@@ -212,24 +217,23 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
     if( aMaxError < 0 || aMaxError > 1){
         throw "input error, MaxError must be between 0 and 1";
     }
-	//triangulation
-	this->Triangulation();
+
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * this->mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * this->mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, this->mFaces, targetVerticesN, targetTrianglesN, aMaxError);
+	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, this->GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	this->mPoints = get<0>(temp);
 	this->mFaces = get<1>(temp);
 }
 
-void CMesh::Triangulation() {
+vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
 	vector<CIndexedFace> triangles;
 	for (vector<CIndexedFace>::iterator fIt = this->mFaces.begin(); fIt != this->mFaces.end(); fIt++) {
 		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
 			triangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
 		}
 	}
-	this->mFaces = triangles;
+	return triangles;
 }
 //geters seters
 
@@ -249,3 +253,73 @@ void CMesh::SetAlpha(coord_t aAlpha){
 }
 void CMesh::setCenVector(const CPoint &vector){ this->mCenVector = vector; }
 CPoint CMesh::getCenVector() { return this->mCenVector; }
+
+
+
+
+
+void CMesh::TransformMesh(coord_t const aTrans[3][3]){
+
+    double px,py,pz;
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+
+        px=it->GetX(); py=it->GetY(); pz=it->GetZ();
+
+        it->SetX( aTrans[0][0]*px + aTrans[0][1]*py + aTrans[0][2]*pz );
+        it->SetY( aTrans[1][0]*px + aTrans[1][1]*py + aTrans[1][2]*pz );
+        it->SetZ( aTrans[2][0]*px + aTrans[2][1]*py + aTrans[2][2]*pz );
+
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
+}
+
+void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
+    // Trig operations are expansive
+    auto cos_a = cos(aRadAngel);
+    auto sin_a = sin(aRadAngel);
+    // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
+    auto nx = aNormVec.GetX();
+    auto ny = aNormVec.GetY();
+    auto nz = aNormVec.GetZ();
+
+    coord_t const rotation_mat[3][3] = {
+            cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
+
+            ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,
+
+            nz*nx*(1-cos_a) - ny*sin_a,     nz*ny*(1-cos_a) + nx*sin_a,     cos_a + nz*nz*(1-cos_a),
+    };
+    this->TransformMesh(rotation_mat);
+}
+
+void CMesh::MoveMesh(CPoint aDirectionVec){
+    auto x_movement = aDirectionVec.GetX();
+    auto y_movement = aDirectionVec.GetY();
+    auto z_movement = aDirectionVec.GetZ();
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+        it->SetX(x_movement+it->GetX());
+        it->SetY(y_movement+it->GetY());
+        it->SetZ(z_movement+it->GetZ());
+        // The only reason I let it pass like that, is because this is an inline code.
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
+}
+
+void CMesh::ScaleMesh(CPoint aScaleVec){
+    auto x_scale = aScaleVec.GetX();
+    auto y_scale = aScaleVec.GetY();
+    auto z_scale = aScaleVec.GetZ();
+    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    {
+        it->SetX(x_scale*it->GetX());
+        it->SetY(y_scale*it->GetY());
+        it->SetZ(z_scale*it->GetZ());
+        // The only reason I let it pass like that, is because this is an inline code.
+        // We should change all to vectorized operators.
+        // May the god of compilers forgive us all for our sins.
+    }
+}

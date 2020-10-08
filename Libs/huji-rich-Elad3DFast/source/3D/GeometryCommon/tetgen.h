@@ -1750,7 +1750,7 @@ public:
 //                                                                           //
 // TetGen sorts the points using the method in the paper of Boissonnat,J.-D.,//
 // Devillers, O. and Hornus, S. "Incremental Construction of the Delaunay    //
-// Triangulation and the Delaunay Graph in Medium Dimension," In Proceedings //
+// GetFacesAsTriangles and the Delaunay Graph in Medium Dimension," In Proceedings //
 // of the 25th ACM Symposium on Computational Geometry, 2009.                //
 //   It first randomly sorts the points into subgroups using the Biased Rand-//
 // omized Insertion Ordering (BRIO) of Amenta et al 2003, then sorts the     //

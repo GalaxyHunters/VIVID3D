@@ -17,29 +17,7 @@ using namespace std;
 ////}
 ////
 
-//inline bool ComparePointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() > aPoint2.GetX());}
-//inline bool ComparePointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() > aPoint2.GetY());}
-//inline bool ComparePointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() > aPoint2.GetZ());}
-//
-////inline bool CompareValue(double &aValue1, double &aValue2){return (aValue1 > aValue2);}
-//
-//
-////define function that finds model center point and radius of points.
-//CPoint FindCenPoint(vector<CPoint> aInputPoints){
-//    double MaxX = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
-//    double MinX = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX)->GetX();
-//
-//    double MaxY = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
-//    double MinY = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY)->GetY();
-//
-//    double MaxZ = max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
-//    double MinZ = min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ)->GetZ();
-//
-//    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
-//    return CenPoint;
-//}
 
-//
 //int main()
 //{
 //    CMesh cube = CreateCubeMesh(10, 10, 10, 0.7, 0.9, vector<double>{6,2,4});
@@ -57,28 +35,20 @@ using namespace std;
 
 
 
-//// ---------------------------------------------------------random
-
-
-//inline double CalcVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-//inline MathVector NormalizeVector(MathVector &Vector){
-//    for (int l = 0; l < Vector.direction.size(); ++l) {
-//        Vector.direction[l] /= Vector.size;
-//    }
-//    return Vector;
-//}
-//int main(){
-//    MathVector Vector;
-//    vector<double> dir{7,6,1};
-//    Vector.direction = dir;
-//    Vector.size = CalcVectorSize(dir);
-//    NormalizeVector(Vector);
-////    vector<double> Norm = NormalizeVector(vector);
 //
-//    cout << Vector.direction[2];
-//    return 0;
-//}
-//
+int main(){
+    CModel model;
+    // Some 3D viewers are centering the 3D models and change direction. this sets the center
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere1") );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0, 0, 1}, 0.01, 0.2, "sphere2") );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
+    auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
+    model.AddMesh(arrow_x);
+    model.ExportToObj("Tests/arrow_test");
+
+    return 0;
+}
+
 
 
 
@@ -86,7 +56,7 @@ using namespace std;
 ////----------------------------------------------------------test arrow
 //int main(){
 //    cout << "x:" << endl;
-//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
+//    CMesh arrowX = CreateArrowMesh(10, 1, 0.2, vector<double>{7,0,0}, vector<double>{1,0,0}, 0.8, 0.3,  "arrowX");
 //    cout << "y:" << endl;
 //    CMesh arrowY = CreateArrowMesh(10, 1, 0.2, vector<double>{0,0,0}, vector<double>{0,1,0}, 0.8, 0.3,  "arrowY");
 //    cout << "z:" << endl;
@@ -99,7 +69,7 @@ using namespace std;
 ////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
 //    return 0;
 //}
-
+//
 
 ////------------------------------------------------------------test sphere and ellipsoid
 //int main(){
@@ -114,45 +84,12 @@ using namespace std;
 //
 //    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\model_test_texture");
 //}
+//
 
 
-
-int main() {
-    std::cout << "starting program" << endl;
-    vector<vector<double >> points;
-    vector<bool> mask;
-    vector<coord_t> quan;
-    coord_t Vmin, Vmax;
-    vector<double> temp;
-//----------------------------------------------------------------------pyramid ---------------------------------------
-    cout << "but why" << endl;
-    int a = 0;
-    for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
-        for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
-            for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-                temp = vector<double>(3);
-    		    temp[0] = i ; temp[1] = j; temp[2] = z;
-                points.push_back(temp);
-                if (z >= 0 && HEIGHT >= z) {
-                    a = HEIGHT - z;
-                } else {
-                    a = 0;
-                }
-
-                if ((z >= 0 && HEIGHT >= z) && (-a <= i && i <= a) && (-a <= j && j <= a)) {
-                    mask.push_back(true);
-                    quan.push_back(std::log(pow(10, a) + 0.00001));
-                } else {
-                    mask.push_back(false);
-                    quan.push_back(std::log(0.000001));
-                }
-            }
-        }
-    }
-
-    cout << quan.size() << " " << points.size() << endl;
-    Vmax = 0 ; //*max_element(quan.begin(), quan.end());
-    Vmin = 0 ;//*min_element(quan.begin(), quan.end());
+//    cout << quan.size() << " " << points.size() << endl;
+//    Vmax = 0 ; //*max_element(quan.begin(), quan.end());
+//    Vmin = 0 ;//*min_element(quan.begin(), quan.end());
 ////    //----------------------------------------------------cube
 //    vector<double> temp;
 //    for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
@@ -173,15 +110,15 @@ int main() {
 //    Vmin = *min_element(quan.begin(), quan.end());
 //cout << quan.size() << " " << points.size() << endl;
 //--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-    try {
-        CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-        surf.SmoothSurf();
-        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-        mesh.Decimation(0.5, 0.4);
-        mesh.ExportToObjTexture("..\\test_models\\Pyramid.obj");
-    }
-    catch (exception &e) { cout << e.what() << "ggggggg" << endl;}
-}
+//    try {
+//        CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
+//        surf.SmoothSurf();
+//        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+//        mesh.Decimation(0.5, 0.4);
+//        mesh.ExportToObjTexture("..\\test_models\\Pyramid.obj");
+//    }
+//    catch (exception &e) { cout << e.what() << "ggggggg" << endl;}
+//}
 //	//CModel model = CModel(vector<CMesh>{mesh});
 //	//model.ExportToObj("..\\test_models\\testCode_CModel");
 //	//cout << "blalala";

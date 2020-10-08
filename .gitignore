@@ -6,3 +6,9 @@
 /venv
 /test_models
 /Vivid_py.egg-info
+/Tests/test_wrapper_animation_win.fbx
+/Tests/test_wrapper_win.mtl
+/Tests/test_wrapper_win.obj
+/Tests/test_wrapper_win_texture.mtl
+/Tests/test_wrapper_win_texture.obj
+/Tests/test_wrapper_win_texture_texture.png

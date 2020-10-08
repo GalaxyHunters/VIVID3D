@@ -1,9 +1,13 @@
+project(vivid)
+set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
+
+message(${PROJECT_SOURCE_DIR})
+
 cmake_minimum_required(VERSION 3.4)
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH}")
-
-
 set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" -l xml2)
+
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH}")
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -19,9 +23,8 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
-project(vivid)
 
-set(BOOST_ROOT "C:/Users/nafta/source/boost_1_74_0")         #TODO tidy this up, should not have to specify by hand
+#set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
 #set(Boost_DEBUG 1)
 find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)
@@ -37,20 +40,21 @@ find_package(Boost 1.62.0 REQUIRED)
 #set(Boost_USE_STATIC_RUNTIME OFF)
 #set(Boost_DEBUG 0)
 
-
+# TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 
 # Optional: set FBX lib path by a specific root
-#set(FBX_ROOT   "C:/Program_Files/Autodesk/FBX/FBX_SDK/2020.0.1/include")
+#set(FBX_ROOT   "/home/zohar/Documents/FBX") # TODO if used should be FBX_DIR...
 find_package(FBX)
-message(FBX_FOUND = ${FBX_FOUND})
-message(${FBX_LIBRARY_STATIC_RELEASE})
-message(${FBX_LIBRARY_STATIC_DEBUG})
+message(FBX_FOUND = ${FBX_FOUND}) # TODO
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
-set(PY_ROOT    "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT    "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT    "C:/Users/zorik/Miniconda2")
 
-#set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
+
+#set(PY_ROOT    "C:/Users/zorik/Miniconda2")
+set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
 #set(PY_LINK_LIBS   ${PY_ROOT}/libs)
@@ -61,22 +65,16 @@ set(PY_ROOT    "C:/Users/nafta/Miniconda2")
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-set(PY_ROOT "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT "C:/Users/zorik/Miniconda2")
 add_subdirectory(pybind11)
 
-include_directories(src)
+include_directories(src) #TODO: (TOMER) I prefer to include headers by name
 include_directories(Libs/MeshDecimation)
 include_directories(Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon)
 include_directories(Libs/huji-rich-Elad3DFast/source/misc)
 include_directories(Libs/pybind11/include)
 include_directories(Libs/lodepng)
-#include_directories( ../../../../../../../Program_Files/Autodesk/FBX/FBX_SDK/2019.0/include)
-
-# Not sure it is needed:
-#include_directories(${PY_INCLUDE_DIR})
-#link_directories(${PY_LINK_LIBS})
-
-include_directories(${FBX_INCLUDE_DIR})
+#include_directories(${FBX_INCLUDE_DIR})
 
 
 
@@ -119,7 +117,6 @@ add_executable(vivid
         src/AnimationBuilder/Animation.cpp
         src/Utils/Shapes.cpp
         src/AnimationBuilder/FbxFunc.cpp
-#            "../../../../../../../Program Files/Autodesk/FBX/FBX SDK/2019.0/include/fbxsdk.h"
         #external
         Libs/MeshDecimation/mdMeshDecimator.cpp
         Libs/lodepng/lodepng.cpp
@@ -129,8 +126,7 @@ add_executable(vivid
 
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid FBX::fbx)
-#target_link_libraries(vivid ${LIBXML2_LIBRARY})
-#target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
+
 
 pybind11_add_module(vivid_py
         #elad3d
@@ -177,6 +173,7 @@ pybind11_add_module(vivid_py
         src/wrapper.cpp
         )
 
+
 #message(${LIBXML2_LIBRARIES})
 #add_library(xml2 STATIC ${LIBXML2_LIBRARIES})
 target_link_libraries(vivid_py PRIVATE Boost::boost)
@@ -185,9 +182,6 @@ target_link_libraries(vivid_py PRIVATE Boost::boost)
 #target_link_libraries(vivid_py PRIVATE ${FBX_LIBRARY_STATIC_DEBUG})
 target_link_libraries(vivid_py PRIVATE FBX::fbx)
 #target_link_libraries(vivid_py PRIVATE ${LibXml2})
-
-
-
 
 
 #things already tried:

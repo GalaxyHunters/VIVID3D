@@ -43,8 +43,8 @@ PYBIND11_MODULE(vivid_py, m) {
     m.def("AnimateTextures", &AnimateTextures, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",py::arg("Models"), py::arg("Interval"), py::arg("OutputFile"));
     m.def("RotateAnimTextures", &RotateAnimTextures, "takes a model and creates an animation of it rotating", py::arg("Model"), py::arg("Length"), py::arg("Duration"), py::arg("RotationAxis"), py::arg("OutputFile"));
 
-    m.def("CreateCubeMesh", &CreateCubeMesh, "Creates a cube mesh", py::arg("sizeX"),  py::arg("sizeY"),  py::arg("sizeZ"),  py::arg("color") = 0.5, py::arg("alpha") = 0.9, py::arg("position") = vector<double>{0, 0, 0});
+    m.def("CreateBoxMesh", &CreateBoxMesh, "Creates a box mesh", py::arg("sizeX"),  py::arg("sizeY"),  py::arg("sizeZ"),  py::arg("color") = 0.5, py::arg("alpha") = 0.9, py::arg("position") = vector<double>{0, 0, 0});
     m.def("CreateSphereMesh", &CreateSphereMesh,"Creates a sphere", py::arg("NumOfMeridians"), py::arg("NumOfParallels"), py::arg("Radius"), py::arg("CenterPoint"),py::arg("Color"), py::arg("Alpha"), py::arg("Label"));
     m.def("CreateEllipsoidMesh", &CreateEllipsoidMesh, "Creates ellipsoid mesh", py::arg("NumOfMeridians"), py::arg("NumOfParallels"), py::arg("Radii"), py::arg("CenterPoint"), py::arg("MajorAxis"), py::arg("MiddleAxis"), py::arg("MinorAxis"), py::arg("Color"), py::arg("Alpha"), py::arg("Label"));
-    m.def("CreateArrowMesh", &CreateArrowMesh, "Creates an arrow mesh", py::arg("Length"), py::arg("Width") = 1, py::arg("PointerToChestRatio") = 0.2, py::arg("BasePoint"), py::arg("DirectionVector"), py::arg("Color"), py::arg("Alpha") = 0.6, py::arg("Label"));
+    m.def("CreateArrowMesh", &CreateArrowMesh, "Creates an arrow mesh",  py::arg("Width"), py::arg("PointerToChestRatio"), py::arg("BasePoint"), py::arg("DirectionVector"), py::arg("Color"), py::arg("Alpha") = 1, py::arg("Label")="");
 }

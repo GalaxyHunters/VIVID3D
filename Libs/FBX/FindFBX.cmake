@@ -8,6 +8,9 @@
 # $FBX_DIR is an environment variable that would
 # correspond to the ./configure --prefix=$FBX_DIR
 
+
+
+# === Set FBX_LIBDIR to compiler type ==============================================================================>>>
 IF(APPLE)
     MESSAGE(RUNNING_FBX_FINDER_MAC)
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -47,7 +50,9 @@ ELSE()
     SET(FBX_LIBDIR ${FBX_LIBDIR}/x86)
 ENDIF()
 
-#try to use 2015.1 or 2014.2 version
+
+# === Set FBX_LIBNAME and FBX_LIBNAME_DEBUG ========================================================================>>>
+# TODO fix the if-else mechanism especially the GNU part
 
 IF(APPLE)
     SET(FBX_LIBNAME "fbxsdk")
@@ -66,9 +71,10 @@ ELSE()
     ENDIF()
 ENDIF()
 
-SET(FBX_LIBNAME_DEBUG ${FBX_LIBNAME}d)
-
-SET( FBX_SEARCH_PATHS
+# === Find the FBX package: ========================================================================================>>>
+# Common library installation paths list
+# TODO: try to add linux path here!
+SET(FBX_SEARCH_PATHS
         $ENV{FBX_DIR}
         "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2020.0.1"
         "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2020.0.1"
@@ -115,39 +121,33 @@ SET( FBX_SEARCH_PATHS
         /Applications/Autodesk/FBXSDK20142
         )
 
-# search for headers & debug/release libraries
+# look at the common list for the headers, debug/release, and shared/static libraries
 FIND_PATH(FBX_INCLUDE_DIR "fbxsdk.h"
         PATHS ${FBX_SEARCH_PATHS}
         PATH_SUFFIXES "include")
-FIND_LIBRARY( FBX_LIBRARY ${FBX_LIBNAME}
+FIND_LIBRARY(FBX_LIBRARY ${FBX_LIBNAME}
         PATHS ${FBX_SEARCH_PATHS}
         PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
-
-#Once one of the calls succeeds the result variable will be set and stored in the cache so that no call will search again.
-
-#no debug d suffix, search in debug folder only
-FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME}
+FIND_LIBRARY(FBX_LIBRARY_DEBUG ${FBX_LIBNAME}
         PATHS ${FBX_SEARCH_PATHS}
         PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
-FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
-        PATHS ${FBX_SEARCH_PATHS}
-        PATH_SUFFIXES "lib/${FBX_LIBDIR}")
 
-#IF(WIN32)
-#    MESSAGE(RUNNING_FBX_FINDER_WIN32)
-#    FIND_LIBRARY( FBX_XML2_LIBRARY ${FBX_XML2_LIBNAME}
-#            PATHS ${FBX_SEARCH_PATHS}
-#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
-#    FIND_LIBRARY( FBX_ZLIB_LIBRARY ${FBX_ZLIB_LIBNAME}
-#            PATHS ${FBX_SEARCH_PATHS}
-#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
-#    FIND_LIBRARY( FBX_XML2_LIBRARY_DEBUG ${FBX_XML2_LIBNAME}
-#            PATHS ${FBX_SEARCH_PATHS}
-#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
-#    FIND_LIBRARY( FBX_ZLIB_LIBRARY_DEBUG ${FBX_ZLIB_LIBNAME}
-#            PATHS ${FBX_SEARCH_PATHS}
-#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
-#ENDIF()
+# Currently unused, cmake takes only .lib files!
+# -------------------------------------------------------------------------------------------------------------------->
+#SET(FBX_LIBNAME_SHARED "libfbxsdk.dll")
+#SET(FBX_LIBNAME_STATIC "libfbxsdk-md.lib")
+#FIND_LIBRARY(FBX_LIBRARY_SHARED_RELEASE ${FBX_LIBNAME_SHARED}
+#        PATHS ${FBX_SEARCH_PATHS}
+#        PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
+#FIND_LIBRARY(FBX_LIBRARY_STATIC_RELEASE ${FBX_LIBNAME_STATIC}
+#        PATHS ${FBX_SEARCH_PATHS}
+#        PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
+#FIND_LIBRARY(FBX_LIBRARY_SHARED_DEBUG ${FBX_LIBNAME_SHARED}
+#        PATHS ${FBX_SEARCH_PATHS}
+#        PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
+#FIND_LIBRARY(FBX_LIBRARY_STATIC_DEBUG ${FBX_LIBNAME_STATIC}
+#        PATHS ${FBX_SEARCH_PATHS}
+#        PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
 
 IF(FBX_LIBRARY AND FBX_LIBRARY_DEBUG AND FBX_INCLUDE_DIR)
     SET(FBX_FOUND "YES")
@@ -155,91 +155,146 @@ ELSE()
     SET(FBX_FOUND "NO")
 ENDIF()
 
-IF(NOT FBX_FOUND)
-    #try to use 2014.1 version
-    IF(APPLE)
-        SET(FBX_LIBNAME "fbxsdk-2014.1")
-    ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
-        SET(FBX_LIBNAME "fbxsdk-2014.1")
-    ELSE()
-        SET(FBX_LIBNAME "fbxsdk-2014.1")
-    ENDIF()
+# ---- FIND ZLIB & LIBXML2 LIBS ---
+# TODO: finish this code, Notice we don't need it in 2019 with vs2015!
+SET(LIBXML2_LIBRARY_DEBUG BLAT)
+SET(LIBXML2_LIBRARY_RELEASE BLAT)
+SET(ZLIB_LIBRARY_DEBUG BLAT)
+SET(ZLIB_LIBRARY_RELEASE BLAT)
+#
+#        FIND_PACKAGE(LibXml2)
+#        MESSAGE(LIBXML2_LIBRARY=${LIBXML2_LIBRARY})
 
-    SET(FBX_LIBNAME_DEBUG ${FBX_LIBNAME}d)
-
-    SET( FBX_SEARCH_PATHS
-            $ENV{FBX_DIR}
-            "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2014.1"
-            "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2014.1"
-            "/Applications/Autodesk/FBX/FBX SDK/2014.1"
-            /Applications/Autodesk/FBXSDK20141
-            )
-
-    # search for headers & debug/release libraries
-    FIND_PATH(FBX_INCLUDE_DIR "fbxsdk.h"
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "include")
-    FIND_LIBRARY( FBX_LIBRARY ${FBX_LIBNAME}
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
-
-    FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
-    IF(FBX_LIBRARY AND FBX_LIBRARY_DEBUG AND FBX_INCLUDE_DIR)
-        SET(FBX_FOUND "YES")
-    ELSE()
-        SET(FBX_FOUND "NO")
-    ENDIF()
-
+#SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX SDK/2019.0")
+##setting libxml2 and zlib variables
+#SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2015/x64/debug/libxml2-md.lib)
+#SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2015/x64/release/libxml2-md.lib)
+#
+#SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2015/x64/debug/zlib-md.lib)
+#SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2015/x64/release/zlib-md.lib)
+#
+#message(FLOPPATY1)
+#message(${FBX_XML2_LIBRARY})
+#message(${FBX_XML2_LIBRARY_DEBUG})
+#message(${FBX_ZLIB_LIBRARY})
+#message(${FBX_ZLIB_LIBRARY_DEBUG})
+#
+## TODO (Zohar): what this part do?
+#IF(WIN32)
+#    MESSAGE(RUNNING_FBX_FINDER_WIN32)
+#    FIND_LIBRARY(FBX_XML2_LIBRARY ${FBX_XML2_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
+#    FIND_LIBRARY(FBX_XML2_LIBRARY_DEBUG ${FBX_XML2_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
+#    FIND_LIBRARY(FBX_ZLIB_LIBRARY ${FBX_ZLIB_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/release" "lib/${FBX_LIBDIR}")
+#    FIND_LIBRARY(FBX_ZLIB_LIBRARY_DEBUG ${FBX_ZLIB_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}/debug")
+#ENDIF()
+#
+IF(LIBXML2_LIBRARY_DEBUG AND LIBXML2_LIBRARY_RELEASE AND ZLIB_LIBRARY_DEBUG AND ZLIB_LIBRARY_RELEASE)
+    SET(DEPENDECIES_FOUND "YES")
+ELSE()
+    SET(DEPENDECIES_FOUND "NO")
 ENDIF()
 
-IF(NOT FBX_FOUND)
-    #try to use 2013.3 version
-    IF(APPLE)
-        SET(FBX_LIBNAME "fbxsdk-2013.3-static")
-    ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
-        SET(FBX_LIBNAME "fbxsdk-2013.3-static")
-    ELSE()
-        SET(FBX_LIBNAME "fbxsdk-2013.3-md")
-    ENDIF()
+#message(FLOPPATY2)
+#message(${FBX_XML2_LIBRARY})
+#message(${FBX_XML2_LIBRARY_DEBUG})
+#message(${FBX_ZLIB_LIBRARY})
+#message(${FBX_ZLIB_LIBRARY_DEBUG})
 
-    SET(FBX_LIBNAME_DEBUG ${FBX_LIBNAME}d)
 
-    SET( FBX_SEARCH_PATHS
-            $ENV{FBX_DIR}
-            "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2013.3"
-            "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2013.3"
-            "/Applications/Autodesk/FBX/FBX SDK/2013.3"
-            /Applications/Autodesk/FBXSDK20133
-            )
 
-    # search for headers & debug/release libraries
-    FIND_PATH(FBX_INCLUDE_DIR "fbxsdk.h"
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "include")
-    FIND_LIBRARY( FBX_LIBRARY ${FBX_LIBNAME}
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
 
-    FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
-            PATHS ${FBX_SEARCH_PATHS}
-            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
-    IF(FBX_LIBRARY AND FBX_LIBRARY_DEBUG AND FBX_INCLUDE_DIR)
-        SET(FBX_FOUND "YES")
-    ELSE()
-        SET(FBX_FOUND "NO")
-    ENDIF()
+# <<<=== Find the FBX package (general part) ===============================================================================
 
-ENDIF()
+# Apparently legacy support for 2014 FBX,
+#IF(NOT FBX_FOUND)
+#    #try to use 2014.1 version
+#    IF(APPLE)
+#        SET(FBX_LIBNAME "fbxsdk-2014.1")
+#    ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
+#        SET(FBX_LIBNAME "fbxsdk-2014.1")
+#    ELSE()
+#        SET(FBX_LIBNAME "fbxsdk-2014.1")
+#    ENDIF()
+#
+#    SET(FBX_LIBNAME_DEBUG ${FBX_LIBNAME}d)
+#
+#    SET( FBX_SEARCH_PATHS
+#            $ENV{FBX_DIR}
+#            "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2014.1"
+#            "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2014.1"
+#            "/Applications/Autodesk/FBX/FBX SDK/2014.1"
+#            /Applications/Autodesk/FBXSDK20141
+#            )
+#    # search for headers & debug/release libraries
+#    FIND_PATH(FBX_INCLUDE_DIR "fbxsdk.h"
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "include")
+#    FIND_LIBRARY( FBX_LIBRARY ${FBX_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
+#    FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
+#    IF(FBX_LIBRARY AND FBX_LIBRARY_DEBUG AND FBX_INCLUDE_DIR)
+#        SET(FBX_FOUND "YES")
+#    ELSE()
+#        SET(FBX_FOUND "NO")
+#    ENDIF()
+#ENDIF()
 
+# Apparently legacy support for 2013 FBX,
+#IF(NOT FBX_FOUND)
+#    #try to use 2013.3 version
+#    IF(APPLE)
+#        SET(FBX_LIBNAME "fbxsdk-2013.3-static")
+#    ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
+#        SET(FBX_LIBNAME "fbxsdk-2013.3-static")
+#    ELSE()
+#        SET(FBX_LIBNAME "fbxsdk-2013.3-md")
+#    ENDIF()
+#    SET(FBX_LIBNAME_DEBUG ${FBX_LIBNAME}d)
+#    SET( FBX_SEARCH_PATHS
+#            $ENV{FBX_DIR}
+#            "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2013.3"
+#            "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2013.3"
+#            "/Applications/Autodesk/FBX/FBX SDK/2013.3"
+#            /Applications/Autodesk/FBXSDK20133
+#            )
+#    # search for headers & debug/release libraries
+#    FIND_PATH(FBX_INCLUDE_DIR "fbxsdk.h"
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "include")
+#    FIND_LIBRARY( FBX_LIBRARY ${FBX_LIBNAME}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
+#
+#    FIND_LIBRARY( FBX_LIBRARY_DEBUG ${FBX_LIBNAME_DEBUG}
+#            PATHS ${FBX_SEARCH_PATHS}
+#            PATH_SUFFIXES "lib/${FBX_LIBDIR}")
+#    IF(FBX_LIBRARY AND FBX_LIBRARY_DEBUG AND FBX_INCLUDE_DIR)
+#        SET(FBX_FOUND "YES")
+#    ELSE()
+#        SET(FBX_FOUND "NO")
+#    ENDIF()
+#ENDIF()
+
+# TODO (Zohar): I really think we can pu most of it in the general pasrt and the final compilation with the windows part, talk to me!
+#IF(NOT FBX_FOUND) # TODO: TOMER My addition 20201005_1830
 #linking the sdk in unix
 IF(UNIX)
     FIND_PACKAGE(LibXml2)
-#    SET(LIBXML2_LIBRARY "/usr/lib/x86_64-linux-gnu/libxml2.a")
+    #    SET(LIBXML2_LIBRARY "/usr/lib/x86_64-linux-gnu/libxml2.a")
     MESSAGE(LIBXML2_LIBRARY=${LIBXML2_LIBRARY})
 
-#    ADD_LIBRARY(LIBXML2 STATIC IMPORTED)
+    #    ADD_LIBRARY(LIBXML2 STATIC IMPORTED)
 
     MESSAGE(RUNNING_FBX_FINDER_UNIX)
     SET(FBX_ROOT "/usr/local/lib/FBX")              #TODO this needs to be expanded
@@ -278,7 +333,7 @@ IF(UNIX)
             SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LOCATION "${FBX_LIBRARY_STATIC_DEBUG}")
             SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY}")
             SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-#            ADD_DEPENDENCIES(FBX::fbx LibXml2::LibXml2)
+            #            ADD_DEPENDENCIES(FBX::fbx LibXml2::LibXml2)
             MESSAGE(FBX::fbx=CREATED)
         ENDIF()
 
@@ -286,26 +341,25 @@ IF(UNIX)
 
         #defining a xml2 target for dependency
 
-#        IF(LibXml2_FOUND AND NOT TARGET LibXml2::LibXml2)
-#            ADD_LIBRARY(LibXml2::LibXml2 UNKNOWN IMPORTED)
-#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${LIBXML2_INCLUDE_DIRS}")
-#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_COMPILE_OPTIONS "${LIBXML2_DEFINITIONS}")
-#            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
-#            SET_PROPERTY(TARGET LibXml2::LibXml2 APPEND PROPERTY IMPORTED_LOCATION "${LIBXML2_LIBRARY}")
-#        ENDIF()
-#
-#        IF(NOT TARGET FBX::fbx)
-#            ADD_LIBRARY(FBX::fbx INTERFACE IMPORTED)                                                          #TODO for tommorow, this is not supposed to be interface cuz fbx is not a header only library, utilize http://mesos.apache.org/documentation/latest/cmake-examples/
-#            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")     #TODO somehow add xml2 into this
-#            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${FBX_LIBRARY_DEBUG}")
-##            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
-#            ADD_DEPENDENCIES(FBX::fbx xml2)
-#            MESSAGE(FBX::fbx=CREATED)
-#        ENDIF()
+        #        IF(LibXml2_FOUND AND NOT TARGET LibXml2::LibXml2)
+        #            ADD_LIBRARY(LibXml2::LibXml2 UNKNOWN IMPORTED)
+        #            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${LIBXML2_INCLUDE_DIRS}")
+        #            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_COMPILE_OPTIONS "${LIBXML2_DEFINITIONS}")
+        #            SET_TARGET_PROPERTIES(LibXml2::LibXml2 PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
+        #            SET_PROPERTY(TARGET LibXml2::LibXml2 APPEND PROPERTY IMPORTED_LOCATION "${LIBXML2_LIBRARY}")
+        #        ENDIF()
+        #
+        #        IF(NOT TARGET FBX::fbx)
+        #            ADD_LIBRARY(FBX::fbx INTERFACE IMPORTED)                                                          #TODO for tommorow, this is not supposed to be interface cuz fbx is not a header only library, utilize http://mesos.apache.org/documentation/latest/cmake-examples/
+        #            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")     #TODO somehow add xml2 into this
+        #            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${FBX_LIBRARY_DEBUG}")
+        ##            SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_LINK_LIBRARIES "${LIBXML2_LIBRARY}")
+        #            ADD_DEPENDENCIES(FBX::fbx xml2)
+        #            MESSAGE(FBX::fbx=CREATED)
+        #        ENDIF()
 
         #TODO extern c
         #TODO Mangled Symbols
-
 
         IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_RELEASE AND FBX_LIBRARY_STATIC_DEBUG AND FBX_INCLUDE_DIR AND TARGET FBX::fbx)
             SET(FBX_FOUND "YES")
@@ -314,65 +368,36 @@ IF(UNIX)
         ENDIF()
     ENDIF()
 ENDIF()
+#ENDIF()
 
+#message(FLOP)
+#message(${FBX_LIBRARY})
+#message(${FBX_LIBRARY_DEBUG})
+#message(${FBX_INCLUDE_DIR})
+
+IF(NOT FBX_FOUND)
+    MESSAGE(FATAL_ERROR "Error: FBX was not found") #TODO: Zohar you should use message(FATAL_ERROR "Foo")
+ENDIF()
+
+IF(NOT DEPENDECIES_FOUND)
+    MESSAGE(FATAL_ERROR "Error: Dependencies not found") # TODO: Zohar you should build the flow differently here
+ENDIF()
+
+
+
+# TODO: Zohar, I've changed the flow here to be simple to read, I think we should let go also to the WIN32 If statment
 IF(WIN32)
     MESSAGE(RUNNING_FBX_FINDER_WIN32)
-#    FIND_PACKAGE(LibXml2)
-    SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX SDK/2020.0.1")
-    IF(FBX_ROOT)
-        #setting FBX_INCLUDE_DIR
-        SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)
-        IF(FBX_INCLUDE_DIR)
-            MESSAGE(FBX_INCLUDE_DIR=FOUND)
-        ELSE()
-            MESSAGE(FBX_INCLUDE_DIR=NOT_FOUND)
-        ENDIF()
-        #setting library paths
-        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libfbxsdk-md.lib)
-        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libfbxsdk.dll)
-        IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_STATIC_RELEASE)
-            MESSAGE(FBX_LIBRARY_RELEASE=FOUND)
-        ELSE()
-            MESSAGE(FBX_LIBRARY_RELEASE=NOT_FOUND)
-        ENDIF()
 
-        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libfbxsdk-md.lib)
-        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libfbxsdk.dll)
-        IF(FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_DEBUG)
-            MESSAGE(FBX_LIBRARY_DEBUG=FOUND)
-        ELSE()
-            MESSAGE(FBX_LIBRARY_DEBUG=NOT_FOUND)
-        ENDIF()
-
-        #setting libxml2 and zlib variables
-        SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libxml2-md.lib)
-        SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libxml2-md.lib)
-
-        SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/zlib-md.lib)
-        SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/zlib-md.lib)
-
-#        ADD_LIBRARY(DEBUG_DEPENDENCIES STATIC IMPORTED GLOBAL ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
-
-        IF(LIBXML2_LIBRARY_DEBUG AND LIBXML2_LIBRARY_RELEASE AND ZLIB_LIBRARY_DEBUG AND ZLIB_LIBRARY_RELEASE)
-            MESSAGE(DEPENDECIES_FOUND)
-            #creating the imported target FBX::fbx
-            IF(NOT TARGET FBX::fbx)
-                ADD_LIBRARY(FBX::fbx STATIC IMPORTED GLOBAL)
-                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")     #TODO need to create multiple code snippets to create a target for each fbx library file, also needed in windowns for relocatable lib
-                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LOCATION "${FBX_LIBRARY_STATIC_RELEASE}")
-                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY_RELEASE};${ZLIB_LIBRARY_RELEASE}")
-#                TARGET_LINK_LIBRARIES(FBX::fbx INTERFACE ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
-                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-                MESSAGE(FBX::fbx=CREATED)
-            ENDIF()
-
-            IF(FBX_LIBRARY_SHARED_RELEASE AND FBX_LIBRARY_SHARED_DEBUG AND FBX_LIBRARY_STATIC_RELEASE AND FBX_LIBRARY_STATIC_DEBUG AND FBX_INCLUDE_DIR AND TARGET FBX::fbx)
-                SET(FBX_FOUND "YES")
-            ELSE()
-                SET(FBX_FOUND "NO")
-            ENDIF()
-        ELSE()
-            MESSAGE(FATAL_ERROR "DEPENDENCIES_NOT_FOUND")
-        ENDIF()
+    #creating the imported target FBX::fbx
+    IF(NOT TARGET FBX::fbx) #TODO add here compilation with the debug libs !!!
+        ADD_LIBRARY(FBX::fbx STATIC IMPORTED GLOBAL)
+        #TODO need to create multiple code snippets to create a target for each fbx library file, also needed in windowns for relocatable lib
+        SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")
+        SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LOCATION "${FBX_LIBRARY}")
+#                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY_RELEASE};${ZLIB_LIBRARY_RELEASE}") # TODO we don't need it in 2019 version
+        #                TARGET_LINK_LIBRARIES(FBX::fbx INTERFACE ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
+        SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+        MESSAGE(FBX::fbx=CREATED)
     ENDIF()
 ENDIF()

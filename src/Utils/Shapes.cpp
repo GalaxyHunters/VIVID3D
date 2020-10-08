@@ -3,30 +3,59 @@
 #include <iostream>
 #include <vector>
 #define _USE_MATH_DEFINES
-#include <math.h>
+//#include <math.h>
 
 using namespace std;
 
+//struct MathVector{double size;
+//    vector<double> direction;};
 
-const size_t a1 = NULL;
-const size_t b1 = NULL;
+inline double DotProduct(CPoint aVec1, CPoint aVec2){ return (aVec1.GetX()*aVec2.GetX() + aVec1.GetY()*aVec2.GetY() + aVec1.GetZ()*aVec2.GetZ());}
+inline double VectorSize(CPoint aVec){ return sqrt(DotProduct(aVec,aVec)) ;}
+inline CPoint CrossProduct(CPoint aVec1, CPoint aVec2) {
+    return CPoint(aVec1.GetY()*aVec2.GetZ() - aVec1.GetZ()*aVec2.GetY(),
+                  aVec1.GetZ()*aVec2.GetX() - aVec1.GetX()*aVec2.GetZ(),
+                  aVec1.GetX()*aVec2.GetZ() - aVec1.GetX()*aVec2.GetZ());
+}
+
+inline CPoint NormalizeVector(CPoint aVec)
+{
+    double vec_size = VectorSize(aVec);
+    aVec.SetX(aVec.GetX()/vec_size);
+    aVec.SetY(aVec.GetY()/vec_size);
+    aVec.SetZ(aVec.GetZ()/vec_size);
+    return aVec;
+}
+inline bool IsPerpindicular(CPoint aVec1, CPoint aVec2)
+{
+    if (0==DotProduct(aVec1,aVec2)) {
+        return true;
+    }
+    return false;
+}
+
+
+
+
 
 //TODO make position a cpoint object
-CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> position)
+CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
 {
 	vector<CPoint> CPoints(8);
 	CPoints.clear();
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] + 0.5*sizeY, position[2] + 0.5*sizeZ)); //0
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] + 0.5*sizeY, position[2] + 0.5*sizeZ)); //1
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] + 0.5*sizeY, position[2] - 0.5*sizeZ)); //2
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] + 0.5*sizeY, position[2] - 0.5*sizeZ)); //3
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] - 0.5*sizeY, position[2] - 0.5*sizeZ)); //4
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] - 0.5*sizeY, position[2] - 0.5*sizeZ)); //5
-	CPoints.push_back(CPoint(position[0] - 0.5*sizeX, position[1] - 0.5*sizeY, position[2] + 0.5*sizeZ)); //6
-	CPoints.push_back(CPoint(position[0] + 0.5*sizeX, position[1] - 0.5*sizeY, position[2] + 0.5*sizeZ)); //7
+	//TODO: Zohar MY OCD hurts here should start at  ---, --+, -+-, -++, +--, +-+ and I would say by for loop...
+	//TODO  it is binary counting to 6 right? so as a PSAGON, you should know every issue that slightly related to it
+	//TODO I promise to teach you binary kwakwa de la oma
+	CPoints.push_back(CPoint(-1, +1, +1)); //0
+	CPoints.push_back(CPoint(+1, +1, +1)); //1
+	CPoints.push_back(CPoint(+1, +1, -1)); //2
+	CPoints.push_back(CPoint(-1, +1, -1)); //3
+	CPoints.push_back(CPoint(+1, -1, -1)); //4
+	CPoints.push_back(CPoint(-1, -1, -1)); //5
+	CPoints.push_back(CPoint(-1, -1, +1)); //6
+	CPoints.push_back(CPoint(+1, -1, +1)); //7
 
 	vector<CIndexedFace> faces(6);
-
 	faces[0] = CIndexedFace(vector<size_t>{0, 3, 2, 1}, color);
 	faces[1] = CIndexedFace(vector<size_t>{2, 3, 5, 4}, color);
 	faces[2] = CIndexedFace(vector<size_t>{1, 2, 4, 7}, color);
@@ -34,17 +63,20 @@ CMesh CreateCubeMesh(double sizeX, double sizeY, double sizeZ, coord_t color, co
 	faces[4] = CIndexedFace(vector<size_t>{3, 0, 6, 5}, color);
 	faces[5] = CIndexedFace(vector<size_t>{6, 7, 4, 5}, color);
 
-    CMesh CMesh;
-    CMesh.SetPoints(CPoints);
-    CMesh.SetFaces(faces);
-    CMesh.SetAlpha(alpha);
-    CMesh.SetLabel("cube");
+    CMesh mesh;
+    mesh.SetPoints(CPoints);
+    mesh.SetFaces(faces);
+    mesh.SetAlpha(alpha);
+    mesh.SetLabel("cube");
 
-	return CMesh;
+    mesh.MoveMesh(CPoint(pos[0], pos[1], pos[2]));
+	mesh.ScaleMesh(CPoint(0.5*sizeX, 0.5*sizeY, 0.5*sizeZ));
+    return mesh;
 }
 
 CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label)
 {
+    // TODO Zohar: VERYUGLY code, please use mesh.MoveMesh, mesh.ScaleMesh etc in this function
     vector<CPoint> vertices;
     vector<CIndexedFace> faces;
     double Theta;
@@ -52,7 +84,6 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     double CenterX = CenterPoint[0];
     double CenterY = CenterPoint[1];
     double CenterZ = CenterPoint[2];
-
 
     vertices.push_back(CPoint(CenterX, CenterY, CenterZ + radius)); //Creating the top polar
     vertices.push_back(CPoint(CenterX, CenterY, CenterZ - radius)); //Creating the bottom polar
@@ -98,15 +129,11 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     CMesh.SetLabel(Label);
 	return CMesh;
 }
-//
 
-bool CheckIfPerpindicular(vector<double> VecA, vector<double> VecB){
-    if (VecA[0] * VecB[0] + VecA[1] * VecB[1] + VecA[2] * VecB[2] == 0) return true;
-    else return false;
-}
-
+// TODO: Zohar again VERY UGLY code, please use transformMat
 CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
     //begin by asserting some conditions
+    // TODO I'm not sure, I think we may start using exceptions, assert looks bad
     assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} && MiddleAxis != vector<double>{0,0,0} && MinorAxis != vector<double>{0,0,0}));
     assert(("Radius cannot be equal to 0", Radii[0] != 0 && Radii[1] != 0 && Radii[2] != 0));
     assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true && CheckIfPerpindicular(MajorAxis, MinorAxis) == true && CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
@@ -150,238 +177,101 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
 
 }
 
-
-
-
-//CMesh CreateEllipsoidMesh(size_t num_of_meridians, size_t num_of_parallels, vector<double> DirVec, vector<double> Radii, vector<double> CenterPoint, coord_t Color, coord_t Alpha)
-//{
-//    //before we start lets assert some conditions
-//    assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
-//    assert(("None of the radii values can be 0", Radii[0] != 0 and Radii[1] !=0 and Radii[2] != 0));
-//
-//    CMesh sphere = CreateSphereMesh(num_of_meridians, num_of_parallels, 1,  vector<double>{0,0,0}, Color, Alpha);
-//    //calc rotation matrix
-//    double a = DirVec[0];
-//    double b = DirVec[1];
-//    double c = DirVec[2];
-//        //start by calculating Theta Phi and Gamma using dot prodact
-//        //Theta
-//    double Theta = acos(a/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Theta << endl;
-//        //Phi
-//    double Phi = acos(b/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Phi << endl;
-//        //Gamma
-//    double Gamma = acos(c/sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2)));
-////    cout << Gamma << endl;
-//        //create the actual matrix
-//    vector<vector<double>> RotMatrix(3);
-//    RotMatrix[0] = vector<double>{cos(Theta) * cos(Phi),
-//                                  sin(Theta) * cos(Phi),
-//                                  -sin(Phi)};
-//    RotMatrix[1] = vector<double>{cos(Theta) * sin(Phi) * sin(Gamma) - sin(Theta) * cos(Gamma),
-//                                  sin(Theta) * sin(Phi) * sin(Gamma) + cos(Theta) * cos(Gamma),
-//                                  cos(Phi) * sin(Gamma)};
-//    RotMatrix[2] = vector<double>{cos(Theta) * sin(Phi) * cos(Gamma) + sin(Theta) * sin(Gamma),
-//                                  sin(Theta) * sin(Phi) * cos(Gamma) - cos(Theta) * sin(Gamma),
-//                                  cos(Phi) * cos(Gamma)};
-//    //calc stretch matrix
-//    vector<vector<double>> StretchMatrix(3);
-//    StretchMatrix[0] = vector<double>{Radii[0], 0, 0};
-//    StretchMatrix[1] = vector<double>{0, Radii[1], 0};
-//    StretchMatrix[2] = vector<double>{0, 0, Radii[2]};
-//
-//    //stretch the sphere according to the matrix
-//    vector<CPoint> points = sphere.GetPoints();
-//    //now because the center point is (0,0,0), the point values and the vector values are the same ((a,b,c) - (0,0,0) = (a,b,c)).
-//    for (int i1 = 0; i1 < points.size(); ++i1)
-//    {
-//        CPoint& CurrentVector = points[i1];
-//        //right now im using a refrence to change the vector according to the matrix
-//        double CVX = CurrentVector.GetX();
-//        double CVY = CurrentVector.GetY();
-//        double CVZ = CurrentVector.GetZ();
-//        //first we strech em
-//        CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
-//                               CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
-//                               CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
-//        //now we rotate em
-//        CVX = CurrentVector.GetX();
-//        CVY = CurrentVector.GetY();
-//        CVZ = CurrentVector.GetZ();
-//        CurrentVector = CPoint(CenterPoint[0] + CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
-//                               CenterPoint[1] + CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
-//                               CenterPoint[2] + CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
-//    }
-//    sphere.SetPoints(points);
-//    sphere.SetLabel("Ellipsoid");
-//    return sphere;
-//}
-
-//struct MathVector{double size;
-//    vector<double> direction;};
-
-inline double Calc3DVectorSize(vector<double> &Vector){ return sqrt(pow(Vector[0], 2) + pow(Vector[1], 2) + pow(Vector[2], 2)) ;}
-inline double Multiply3DVectors(vector<double> &Vector1, vector<double> &Vector2){ return (Vector1[0] * Vector2[0] + Vector1[1] * Vector2[1] + Vector1[2] * Vector2[2]);}
-inline vector<double> Normalize3DVector(vector<double> &Vector){
-    double VectorSize = Calc3DVectorSize(Vector);
-    for (int l = 0; l < Vector.size(); ++l) {
-        Vector[l] /= VectorSize;
-    }
-    return Vector;
-}
-
-//this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
-vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> Vector1, vector<double> Vector2){
-    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-     vector<double> RotVector;
-     RotVector = vector<double>{Vector1[2] * Vector2[3] - Vector1[3] * Vector2[2], Vector1[3] * Vector2[1] - Vector1[1] * Vector2[3],
-                             Vector1[1] * Vector2[2] - Vector1[2] * Vector2[1]};
-    //now we have a vector to rotate around. we normalize its size (turning it to 1).
-    Normalize3DVector(RotVector);
-    //compute our rotation angle theta
-    double Theta = acos(Multiply3DVectors(Vector1, Vector2))/(Calc3DVectorSize(Vector1) * Calc3DVectorSize(Vector2));
-    //build the matrix
-    double Ux = RotVector[0];
-    double Uy = RotVector[1];
-    double Uz = RotVector[2];
-    vector<vector<double>> RotMatrix{vector<double>{cos(Theta) + pow(Ux, 2) * (1 - cos(Theta)),
-                                                    Uy * Ux * (1 - cos(Theta) + Uz * sin(Theta)),
-                                                    Uz * Ux * (1 - cos(Theta)) - Uy * sin(Theta)},
-                                     vector<double>{Ux * Uy * (1 - cos(Theta)) - Uz * sin(Theta),
-                                                    cos(Theta) + pow(Uy, 2) * (1 - cos(Theta)),
-                                                    Uz * Uy * (1 - cos(Theta) + Ux * sin(Theta))},
-                                     vector<double>{Ux * Uz * (1 - cos(Theta)) + Uy * sin(Theta),
-                                                    Uy * Uz * (1 - cos(Theta)) - Ux * sin(Theta),
-                                                    cos(Theta) + pow(Uz, 2) * (1 - cos(Theta))}};
-    //apply matrix to points
-        for (int i1 = 0; i1 < Points.size(); ++i1)
-    {
-        CPoint& CurrentVector = Points[i1];
-        //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.GetX();
-        double CVY = CurrentVector.GetY();
-        double CVZ = CurrentVector.GetZ();
-
-        //now we rotate em
-        CurrentVector = CPoint(CVX * RotMatrix[0][0] + CVY * RotMatrix[1][0] + CVZ * RotMatrix[2][0],
-                               CVX * RotMatrix[0][1] + CVY * RotMatrix[1][1] + CVZ * RotMatrix[2][1],
-                               CVX * RotMatrix[0][2] + CVY * RotMatrix[1][2] + CVZ * RotMatrix[2][2]);
-    }
-
-    return Points;
-}
-
-
-
-CMesh CreateArrowMesh(double Length, double Width, double PCRatio, vector<double> Base, vector<double> DirVec, double Color, double Alpha, string Label){
-    //before we run, lets assert some conditions
+// TODO ask Zohar what kind of arrow is it
+// TODO, THINK about Jill Neiman's arrow and the scale thingy
+CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<double> DirVec, double Color, double Alpha, string Label){
+    //before we run, lets assert some conditions //TODO same comment on Exceptions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
-    assert(("Length, Width and PCRatio must be diffrent then 0", Length != 0 && Width != 0 && PCRatio != 0));
-
-    CMesh arrow;
+    assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
+    assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
+    // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points;
     vector<CIndexedFace> faces;
-    double &baseX = Base[0];
-    double &baseY = Base[1];
-    double &baseZ = Base[2];
-    //create points for the vector
-    //start by creating an arrow that points up the z axis
-
-
-    for (int j = -1; j < 2; ++j) {
+    for (int j =-1; j<2; j++) { //start by creating an arrow that points up the z axis
         if (j == 0) continue;
-        //creating the points for the bottom square
-        for (int i = -1; i < 2; ++i) {
-            if (i == 0) continue;
-//            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ, baseY + 0.5 * i * Width));
+        for (int i=-1; i<2; i++) { //creating the points for the bottom square
+            if (0==i) continue;
+            points.push_back(CPoint(0.4 * j * Width, 0.4 * i * Width, 0));
         }
-        //creating the points for the top square
-        for (int k = -1; k < 2; ++k) {
-            if (k == 0) continue;
-            points.push_back(CPoint(baseX + 0.5 * j * Width, baseZ + Length * (1 - PCRatio), baseY + 0.5 * k * Width));
+        for (int k=-1; k<2; k++) { //creating the points for the top square
+            if (0==k) continue;
+            points.push_back(CPoint(0.4 * j * Width, 0.4 * k * Width, (1-PCRatio)));
         }
     }
-    //creating the points for the pointer
-    for (int l = -1; l < 2; ++l) {
-        if (l == 0) continue;
-        for (int i = -1; i < 2; ++i) {
-            if (i == 0) continue;
-//            cout << i << endl;
-            points.push_back(CPoint(baseX + 0.75 * l * Width, baseZ + Length * (1 - PCRatio), baseY + 0.75 * i * Width));
+    for (int l=-1; l<2; l++) { //creating the points for the pointer
+        if (0==l) continue;
+        for (int i = -1; i<2; i++) {
+            if (0==i) continue;
+            points.push_back(CPoint(0.8 * l * Width, 0.8 * i * Width, (1-PCRatio) ));
         }
     }
-    //the pointer point
-    points.push_back(CPoint(baseX, baseZ + Length, baseY));
+    points.push_back(CPoint(0, 0, 1)); //the pointer point
 
     //creating faces
-        //creating the chest faces
+    //creating the chest faces
     faces.push_back(CIndexedFace(vector<size_t>{0, 4, 5, 1}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{2, 6, 7, 3}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{0, 2, 6, 4}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{4, 6, 7, 5}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{5, 7, 3, 1}, Color));
     faces.push_back(CIndexedFace(vector<size_t>{1, 3, 2, 0}, Color));
-        //creating the pointer faces
-    faces.push_back(CIndexedFace(vector<size_t>{8, 10, 11, 9}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{8, 12, 10}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9}, Color));
-    faces.push_back(CIndexedFace(vector<size_t>{9, 12, 8}, Color));
-    //rotating the arrow using a rotation matrix
+    //creating the pointer faces
+    faces.push_back(CIndexedFace(vector<size_t>{8,  10, 11, 9}, Color));
+    faces.push_back(CIndexedFace(vector<size_t>{8,  12, 10},    Color));
+    faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11},    Color));
+    faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9},     Color));
+    faces.push_back(CIndexedFace(vector<size_t>{9,  12, 8},     Color));
 
-    points = RotateMatchVectors(points, vector<double>{0, 0, 1}, DirVec);
+    CMesh mesh;
+    mesh.SetPoints(points);
+    mesh.SetFaces(faces);
+    mesh.SetAlpha(Alpha);
+    mesh.SetLabel(Label);
 
-    arrow.SetPoints(points);
-    arrow.SetFaces(faces);
-    arrow.SetAlpha(Alpha);
-    arrow.SetLabel(Label);
-    return arrow;
+    // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
+    CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
+    auto direction_size = VectorSize(direction_vec);
+    CPoint cross_vec = CrossProduct(CPoint(0,0,1), direction_vec);
+    CPoint normal_vec = NormalizeVector(cross_vec);
+    double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
+
+//    cout << "normal_vec: " << normal_vec << "\t";
+//    cout << "rotation_angel: " << rotation_angel << "\n";
+//    cout << "direction_size: " << direction_size << "\n";
+//    cout << "cross_product: " << cross_vec << "\n";
+//    cout << "VectorSize(cross_vec): " << VectorSize(cross_vec) << "\n";
+
+    if (VectorSize(cross_vec)<0.0001) // meaning direction_vec is on the z axis
+    {
+        if (direction_vec.GetZ() < 0)
+        {
+            direction_size = -1*direction_size;
+        }
+        mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+    }
+    else{
+        mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+        mesh.RotatewMesh(normal_vec, rotation_angel);
+    }
+
+    mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
+    return mesh;
+
 }
 
 
-//CMesh CreateArrowMesh(double x, double y, double z, double chest_length, double pointer_length, double width, coord_t color)
-//{
-//    vector<CPoint> points;
-//    points.clear();
-//    points.push_back(CPoint(x, y, z));
-//    points.push_back(CPoint(x + (1.5 * width), y, z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x, y + (1.5 * width), z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x - (1.5 * width), y, z - (1.5 * pointer_length)));
-//    points.push_back(CPoint(x, y  - (1.5 * width), z - (1.5 * pointer_length)));
-//
-//    points.push_back(CPoint(x - width, y, z - pointer_length));
-//    points.push_back(CPoint(x + width, y, z - pointer_length));
-//    points.push_back(CPoint(x, y - width, z - pointer_length));
-//    points.push_back(CPoint(x, y  + width, z - pointer_length));
-//
-//    points.push_back(CPoint(x - width, y, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x + width, y, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x, y - width, z - pointer_length - chest_length));
-//    points.push_back(CPoint(x, y + width, z - pointer_length - chest_length));
-//
-//    vector<CIndexedFace> faces(10);
-////    faces.clear();
-//    faces[0] = CIndexedFace(vector<size_t>{1, 2, 3, 4}, color);
-//    faces[1] = CIndexedFace(vector<size_t>{0, 1, 2}, color);
-//    faces[2] = CIndexedFace(vector<size_t>{0, 2, 3}, color);
-//    faces[3] = CIndexedFace(vector<size_t>{0, 3, 4}, color);
-//    faces[4] = CIndexedFace(vector<size_t>{0, 4, 1}, color);
-//
-//    faces[5] = CIndexedFace(vector<size_t>{5, 9, 12, 8}, color);
-//    faces[6] = CIndexedFace(vector<size_t>{8, 12, 10, 6}, color);
-//    faces[7] = CIndexedFace(vector<size_t>{6, 10, 11, 7}, color);
-//    faces[8] = CIndexedFace(vector<size_t>{7, 11, 9, 5}, color);
-//
-//    CMesh arrow;
-//    arrow.SetPoints(points);
-//    arrow.SetFaces(faces);
-//    arrow.SetAlpha(1);
-//    arrow.SetLabel("arrow");
-//
-//    return arrow;
-//}
+
+
+
+
+
+
+////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
+//vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
+//    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
+
+
+
 
 //FbxMesh* createCube(int sizeX, int sizeY, int sizeZ)
 //{

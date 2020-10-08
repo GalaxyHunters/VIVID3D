@@ -183,7 +183,7 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     //before we run, lets assert some conditions //TODO same comment on Exceptions
     assert(("Direction Vector cannot be (0,0,0)", DirVec != vector<double>{0,0,0}));
     assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
-
+    assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
     // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points;
     vector<CIndexedFace> faces;
@@ -191,18 +191,18 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
         if (j == 0) continue;
         for (int i=-1; i<2; i++) { //creating the points for the bottom square
             if (0==i) continue;
-            points.push_back(CPoint(0.5 * j * Width, 0.5 * i * Width, 0));
+            points.push_back(CPoint(0.4 * j * Width, 0.4 * i * Width, 0));
         }
         for (int k=-1; k<2; k++) { //creating the points for the top square
             if (0==k) continue;
-            points.push_back(CPoint(0.5 * j * Width, 0.5 * k * Width, (1-PCRatio)));
+            points.push_back(CPoint(0.4 * j * Width, 0.4 * k * Width, (1-PCRatio)));
         }
     }
     for (int l=-1; l<2; l++) { //creating the points for the pointer
         if (0==l) continue;
         for (int i = -1; i<2; i++) {
             if (0==i) continue;
-            points.push_back(CPoint(0.75 * l * Width, 0.75 * i * Width, (1-PCRatio) ));
+            points.push_back(CPoint(0.8 * l * Width, 0.8 * i * Width, (1-PCRatio) ));
         }
     }
     points.push_back(CPoint(0, 0, 1)); //the pointer point
@@ -227,22 +227,34 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     mesh.SetFaces(faces);
     mesh.SetAlpha(Alpha);
     mesh.SetLabel(Label);
-    mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
-//
+
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
     auto direction_size = VectorSize(direction_vec);
     CPoint cross_vec = CrossProduct(CPoint(0,0,1), direction_vec);
-    CPoint normal_vec = NormalizeVector(CrossProduct(CPoint(0,0,1), direction_vec));
+    CPoint normal_vec = NormalizeVector(cross_vec);
     double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
-    cout << "normal_vec" << normal_vec << "\n";
-    cout << rotation_angel << "\n";
-    cout << "direction_size" << direction_size;
-    cout << "cross_product" << cross_vec.GetX() << "\n";
-//
-//    mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
-//    mesh.RotatewMesh(normal_vec, rotation_angel);
 
+//    cout << "normal_vec: " << normal_vec << "\t";
+//    cout << "rotation_angel: " << rotation_angel << "\n";
+//    cout << "direction_size: " << direction_size << "\n";
+//    cout << "cross_product: " << cross_vec << "\n";
+//    cout << "VectorSize(cross_vec): " << VectorSize(cross_vec) << "\n";
+
+    if (VectorSize(cross_vec)<0.0001) // meaning direction_vec is on the z axis
+    {
+        if (direction_vec.GetZ() < 0)
+        {
+            direction_size = -1*direction_size;
+        }
+        mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+    }
+    else{
+        mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
+        mesh.RotatewMesh(normal_vec, rotation_angel);
+    }
+
+    mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));
     return mesh;
 
 }

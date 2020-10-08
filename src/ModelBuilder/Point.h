@@ -34,7 +34,7 @@ private:
 
 inline ostream& operator<<(ostream &out, const CPoint &p)
 {
-    out << '(' << p.mX << ',' << p.mY << '.' << p.mZ << ')';
+    out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';
     return out;
 }
 

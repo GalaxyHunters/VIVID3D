@@ -49,7 +49,7 @@ message(${FBX_LIBRARY_STATIC_DEBUG})
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
 #set(PY_ROOT    "C:/Users/nafta/Miniconda2")
-set(PY_ROOT    "C:/Users/user/anaconda3/envs/vivid model renderer")
+set(PY_ROOT    "C:/Users/user/miniconda2/envs/vivid27_32")
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
@@ -62,7 +62,7 @@ set(PY_ROOT    "C:/Users/user/anaconda3/envs/vivid model renderer")
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-set(PY_ROOT "C:/Users/nafta/Miniconda2")
+#set(PY_ROOT "C:/Users/nafta/Miniconda2")
 add_subdirectory(pybind11)
 
 include_directories(src)

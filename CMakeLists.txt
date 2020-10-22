@@ -39,7 +39,6 @@ find_package(Boost 1.62.0 REQUIRED)
 
 
 
-
 # Optional: set FBX lib path by a specific root
 #set(FBX_ROOT   "C:/Program_Files/Autodesk/FBX/FBX_SDK/2020.1.1/include")
 find_package(FBX)
@@ -49,16 +48,16 @@ message(${FBX_LIBRARY_STATIC_DEBUG})
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
 #set(PY_ROOT    "C:/Users/nafta/Miniconda2")
-set(PY_ROOT    "C:/Users/user/miniconda2/envs/vivid27_32")
+
+
+set(PYTHON_EXECUTABLE "C:/Users/user/miniconda3/envs/vivid37/python.exe")
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
 #set(PY_LINK_LIBS   ${PY_ROOT}/libs)
 #message(${PY_ROOT})
-#
-
-#set(PYBIND11_PYTHON_VERSION 2.7)
+set(PYBIND11_PYTHON_VERSION 3.7)
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})

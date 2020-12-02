@@ -1,7 +1,7 @@
 # Vivid
 We present VIVID, an innovative method for research using 3D technology.
 
-Vivid uses an implantation of voronoi algorithem for a 3d space made by dr. elad stiennberg. The package takes simulated data as input and produsec an intreactive 3D model that is compatible with the 3D industry.  
+Vivid uses an implementation of voronoi algorithm for a 3d space made by Dr. Elad Stiennberg. The package takes simulated data as input and produces an interactive 3D model that is compatible with the 3D industry.  
 
 
 VIVID was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
@@ -9,7 +9,7 @@ VIVID was tested in our cosmology research group by producing models from simula
 The code is written in C++ and wrapped in python code for comptorbality.
 
 
-Vivid is curruntly at the last stages of devolpement, including an installer and the finished wrapper, when those are done u will be able to simply install Vivid using anaconda and produse a model using a single function or a few lines of code for more controll.
+Vivid is currently in the last stages of development, including an installer and the finished wrapper. Soon you will be able to simply install Vivid using anaconda and produce a model using a single function or a few lines of code for more control.
 
 In order to produce a model the following inputs are reqired:
 
@@ -23,11 +23,11 @@ optinal arguments:
 
 Label - float, label for the created surface. defult argument = "Vivid_3D_model"
 
-Quan - n float ndArray, corospanding color valus for the inputted points. defult argument = ndArray.ones().
+Quan - n float ndArray, corresponding color values for the input points. default argument = ndArray.ones().
 
-Vmin - float, minimum value for color map. defult argument Quan.min_argument().
+Vmin - float, minimum value for color map. default argument Quan.min_argument().
 
-Vmax - float, maximum value for color map. defult argument Quan.max_argument().
+Vmax - float, maximum value for color map. default argument Quan.max_argument().
 
 decimation values #TODO
 

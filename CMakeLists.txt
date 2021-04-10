@@ -125,7 +125,7 @@ add_executable(vivid
 )
 
 target_link_libraries(vivid Boost::boost)
-target_link_libraries(vivid FBX::fbx)
+target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
 
 
 pybind11_add_module(vivid_py

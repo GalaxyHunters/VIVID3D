@@ -8,15 +8,6 @@
 #define HEIGHT 10
 using namespace std;
 
-//////--------------------------------------------------------------test AniVIVID--------------------------------------------------------
-////int main()
-///
-////    CModel ROTATE;
-////    ROTATE.AddMesh(Shapes::CreateCubeMesh(10, 10, 10, 0.3, 0.7, vector<double>{0,0,0}));
-////    RotateAnim(ROTATE, 1000, 10, 1, "D:\\Documents\\Alpha\\Models\\Random\\CheckMerge.fbx");
-////}
-////
-
 
 //int main()
 //{

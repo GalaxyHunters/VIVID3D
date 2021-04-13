@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/FBX;${CMAKE_MODULE_PATH}")
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -30,7 +30,7 @@ find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)
 #message(LibXml Found = ${LibXml2_FOUND})
 #message(LibXml2_LIBRARY=${LIBXML2_LIBRARY})
-#set(xml2_lib "/home/zohar/Documents/Vivid/Libs/libxml2/libxml2.so")
+#set(xml2_lib "/home/zohar/Documents/Vivid/lib/libxml2/libxml2.so")
 
 
 #include_directories(${LIBXML2_INCLUDE_DIR})
@@ -69,11 +69,11 @@ set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
-include_directories(Libs/MeshDecimation)
-include_directories(Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon)
-include_directories(Libs/huji-rich-Elad3DFast/source/misc)
-include_directories(Libs/pybind11/include)
-include_directories(Libs/lodepng)
+include_directories(lib/MeshDecimation)
+include_directories(lib/huji-rich-Elad3DFast/source/3D/GeometryCommon)
+include_directories(lib/huji-rich-Elad3DFast/source/misc)
+include_directories(lib/pybind11/include)
+include_directories(lib/lodepng)
 #include_directories(${FBX_INCLUDE_DIR})
 
 
@@ -81,45 +81,45 @@ include_directories(Libs/lodepng)
 add_executable(vivid
         #elad3d
         #source/3D/GeometryCommon
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
         #source/3D/r3d
-        Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
+        lib/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
         #source/misc
-        Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/horner.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/utils.cpp
+        lib/huji-rich-Elad3DFast/source/misc/bisection.cpp
+        lib/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
+        lib/huji-rich-Elad3DFast/source/misc/horner.cpp
+        lib/huji-rich-Elad3DFast/source/misc/int2str.cpp
+        lib/huji-rich-Elad3DFast/source/misc/io3D.cpp
+        lib/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
+        lib/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
+        lib/huji-rich-Elad3DFast/source/misc/serializable.cpp
+        lib/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+        lib/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+        lib/huji-rich-Elad3DFast/source/misc/utils.cpp
         #extra
-        Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
+        lib/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp Libs/External.cpp
+        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
         #animation
         src/AnimationBuilder/Animation.cpp
         src/Utils/Shapes.cpp
         src/AnimationBuilder/FbxFunc.cpp
         #external
-        Libs/MeshDecimation/mdMeshDecimator.cpp
-        Libs/lodepng/lodepng.cpp
+        lib/MeshDecimation/mdMeshDecimator.cpp
+        lib/lodepng/lodepng.cpp
         #main
         src/main.cpp
 )
@@ -131,40 +131,40 @@ target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
 pybind11_add_module(vivid_py
         #elad3d
         #source/3D/GeometryCommon
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+        lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
         #source/3D/r3d
-        Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
-        Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
+        lib/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
+        lib/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
         #source/misc
-        Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/horner.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp
-        Libs/huji-rich-Elad3DFast/source/misc/utils.cpp
+        lib/huji-rich-Elad3DFast/source/misc/bisection.cpp
+        lib/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
+        lib/huji-rich-Elad3DFast/source/misc/horner.cpp
+        lib/huji-rich-Elad3DFast/source/misc/int2str.cpp
+        lib/huji-rich-Elad3DFast/source/misc/io3D.cpp
+        lib/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
+        lib/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
+        lib/huji-rich-Elad3DFast/source/misc/serializable.cpp
+        lib/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+        lib/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+        lib/huji-rich-Elad3DFast/source/misc/utils.cpp
         #extra
-        Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
+        lib/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp Libs/External.cpp
+        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
         #external
-        Libs/MeshDecimation/mdMeshDecimator.cpp Libs/lodepng/lodepng.cpp
+        lib/MeshDecimation/mdMeshDecimator.cpp lib/lodepng/lodepng.cpp
         #animation
         src/AnimationBuilder/Animation.cpp src/AnimationBuilder/FbxFunc.cpp
         #shapes

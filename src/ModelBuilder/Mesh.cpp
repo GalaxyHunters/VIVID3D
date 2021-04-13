@@ -226,14 +226,14 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 	this->mFaces = get<1>(temp);
 }
 
-vector<CIndexedFace>& CMesh::GetFacesAsTriangles() {
-	vector<CIndexedFace> triangles;
+vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
+    vector<CIndexedFace> aTriangles = vector<CIndexedFace>();
 	for (vector<CIndexedFace>::iterator fIt = this->mFaces.begin(); fIt != this->mFaces.end(); fIt++) {
 		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
-			triangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
+            aTriangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
 		}
 	}
-	return triangles;
+	return aTriangles;
 }
 //geters seters
 

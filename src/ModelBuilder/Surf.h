@@ -6,7 +6,7 @@
 
 #include "Mesh.h"
 #include "SurfFace.h"
-#include "../Libs/External.h"
+#include "../lib/External.h"
 
 #include <iostream>
 #include <map>

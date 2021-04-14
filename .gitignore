@@ -4,7 +4,7 @@
 /temp
 /binding_python_version
 /venv
-/test_models
+/testModels
 /Vivid_py.egg-info
 /Tests/test_wrapper_animation_win.fbx
 /Tests/test_wrapper_win.mtl

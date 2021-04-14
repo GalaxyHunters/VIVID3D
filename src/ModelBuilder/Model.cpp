@@ -6,13 +6,13 @@ using namespace boost::algorithm;
 CModel::CModel() { this->mMeshes = vector<CMesh>();}
 
 CModel::CModel(vector<CMesh> aMeshes) {
-	this->mMeshes = aMeshes;
+	mMeshes = aMeshes;
 }
 
 CModel::CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha){
-    this->mMeshes = vector<CMesh>();
-    for (vector<CSurf>::iterator it = aSurfs.begin(); it != aSurfs.end(); it++){
-        this->mMeshes.push_back((*it).ToMesh(aLabel, aAlpha));
+    mMeshes = vector<CMesh>();
+    for (auto it = aSurfs.begin(); it != aSurfs.end(); it++){
+        mMeshes.push_back((*it).ToMesh(aLabel, aAlpha));
     }
 }
 
@@ -122,7 +122,7 @@ void CModel::ExportToObj(string aOutput){
 	
 	size_t mtl_counter = 0; // will be used to count the newmtl
 	size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ++ItMesh)
+	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ItMesh++)
 	{
 //	    cout << ItMesh->GetLabel() << endl;
 		WriteObj(OBJFile, MTLObj, &(*ItMesh), &mtl_counter, points_counter);
@@ -163,7 +163,7 @@ void CModel::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMes
                              coord_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + aMesh->GetLabel() + "\n";
     //write points to obj file
-    for (vector<CPoint>::iterator it = aMesh->GetPoints().begin(); it != aMesh->GetPoints().end(); it++)
+    for (auto it = aMesh->GetPoints().begin(); it != aMesh->GetPoints().end(); it++)
     {
         aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
     }
@@ -173,7 +173,7 @@ void CModel::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMes
     }
     //write faces
     WriteMtlTexture(aOBJFile, aMTLFile,  mtl_counter, aTextureName, aMesh->GetAlpha());
-    for (vector<CIndexedFace>::iterator it = aMesh->GetFaces().begin(); it != aMesh->GetFaces().end(); it++){
+    for (auto it = aMesh->GetFaces().begin(); it != aMesh->GetFaces().end(); it++){
         WriteNewFaceTexture(aOBJFile, *it, aPointsCounter);
     }
 }
@@ -211,7 +211,7 @@ void CModel::ExportToObjTexture(string aOutput) {
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ++ItMesh)
+    for (auto ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ++ItMesh)
     {
 //	    cout << ItMesh->GetLabel() << endl;
         WriteObj(o, m, &(*ItMesh), &mtl_counter, points_counter);
@@ -225,11 +225,11 @@ void CModel::ExportToObjTexture(string aOutput) {
 
 
 void CModel::AddMesh(CMesh aMesh) {
-	this->mMeshes.push_back(aMesh);
+	mMeshes.push_back(aMesh);
 }
 
 void CModel::AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha){
-    this->mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
+    mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
 }
 
 

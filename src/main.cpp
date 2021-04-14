@@ -10,9 +10,7 @@ using namespace std;
 //const std::string DATA_FOLDER_PATH = "./tests/test_data/";
 
 int main(){
-//    vector<vector<double >> points;
-//    vector<coord_t> quan;
-//    vector<bool> mask;
+
 
 
     CModel model;
@@ -26,34 +24,38 @@ int main(){
     model.ExportToObj("./testModels/arrow_test"); // /testModels/
 
 //
-//    // Pyramid Surf
-//    vector<double> temp;
-//    for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
-//    	for (int j = 2; j > -4; j -= 2) {
-//    		for (int z = 2; z > -4; z -= 2) {
-//    		    temp = vector<double>(3);
-//    		    temp[0] = i ; temp[1] = j; temp[2] = z;
-//    			points.push_back(temp);
-//    			quan.push_back(0.5);
-//    			mask.push_back(false);
-//    			if (i == j && j == z && z == 0) {
-//    				mask.back() = true;
-//    			}
-//    		}
-//    	}
-//    }
-//    coord_t Vmax = *max_element(quan.begin(), quan.end());
-//    coord_t Vmin = *min_element(quan.begin(), quan.end());
-//    cout << quan.size() << " " << points.size() << endl;
-////--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-//    try {
-//        CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-//        surf.SmoothSurf();
-//        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-////        mesh.Decimation(0.5, 0.4);
-//        mesh.ExportToObjTexture("../testModels/Pyramid");
-//    }
-//    catch (exception &e) { cout << e.what() << endl;}
+    // Pyramid Surf
+    vector<double> temp;
+    vector<vector<double >> points;
+    vector<coord_t> quan;
+    vector<bool> mask;
+
+    for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
+    	for (int j = 2; j > -4; j -= 2) {
+    		for (int z = 2; z > -4; z -= 2) {
+    		    temp = vector<double>(3);
+    		    temp[0] = i ; temp[1] = j; temp[2] = z;
+    			points.push_back(temp);
+    			quan.push_back(0.5);
+    			mask.push_back(false);
+    			if (i == j && j == z && z == 0) {
+    				mask.back() = true;
+    			}
+    		}
+    	}
+    }
+    coord_t Vmax = *max_element(quan.begin(), quan.end());
+    coord_t Vmin = *min_element(quan.begin(), quan.end());
+    cout << quan.size() << " " << points.size() << endl;
+//--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
+    try {
+        CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
+        surf.SmoothSurf();
+        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+//        mesh.Decimation(0.5, 0.4);
+        mesh.ExportToObjTexture("./testModels/Pyramid");
+    }
+    catch (exception &e) { cout << e.what() << endl;}
 
     return EXIT_SUCCESS;
 }

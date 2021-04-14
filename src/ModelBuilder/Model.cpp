@@ -3,7 +3,6 @@
 
 using namespace boost::algorithm;
 
-CModel::CModel() { this->mMeshes = vector<CMesh>();}
 
 CModel::CModel(vector<CMesh> aMeshes) {
 	mMeshes = aMeshes;
@@ -42,6 +41,9 @@ void CModel::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlC
 		"illum 0\n" + \
 		"em 0.000000\n\n\n";
 	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "\n";
+
+    aOBJFile.flush();
+    aMTLFile.flush();
 }
 
 void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
@@ -55,7 +57,7 @@ void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPoints
 	aOBJFile << "\n";
 }
 
-void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter) 
+void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter)
 {
 	aOBJFile << "o " + apMesh->GetLabel() + "\n";
 	//cout << apMesh->GetPoints().begin() << endl;
@@ -64,17 +66,19 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 	CPoint temp_point = CPoint(0, 0, 0);
 	vector<CPoint> Points = apMesh->GetPoints();
     vector<CIndexedFace> Faces = apMesh->GetFaces();
-	for (vector<CPoint>::iterator it = Points.begin(); it != Points.end(); it++)
+	for (auto it = Points.begin(); it != Points.end(); it++)
 	{
         temp_point = *it + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
         aOBJFile << temp_point; // writes the point in obj file as vertex
 	}
+    aOBJFile.flush();
+
 	//sort vecFaces by color
 	sort(Faces.begin(), Faces.end(), CompFace); // NlogN
 	//write faces to obj file + write colors to mtl file
 	color_t color = Quan2Color((apMesh->GetFaces())[0].GetColor());
 	WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
-	for (vector<CIndexedFace>::iterator it = Faces.begin(); it != Faces.end(); it++)
+	for (auto it = Faces.begin(); it != Faces.end(); it++)
 	{
 		if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
 		{
@@ -108,10 +112,10 @@ void CModel::ExportToObj(string aOutput){
         lines = '/';
     #endif
 
-	ofstream OBJFile; // the obj file
-	OBJFile.open(aOutput + ".obj");
-	ofstream MTLObj; //the mtl file
-	MTLObj.open(aOutput + ".mtl");
+	ofstream OBJFile (aOutput + ".obj"); // obj file  //TODO naming
+	ofstream MTLObj  (aOutput + ".mtl");  // mtl file
+//  TODO if (OBJFile.is_open())  MTLObj.is_open()  https://www.cplusplus.com/doc/tutorial/files/
+
 	string mtl = aOutput;
     while (mtl.find(lines) != string::npos) {
         mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
@@ -122,13 +126,16 @@ void CModel::ExportToObj(string aOutput){
 	
 	size_t mtl_counter = 0; // will be used to count the newmtl
 	size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-	for (vector<CMesh>::iterator ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ItMesh++)
+	for (auto it = mMeshes.begin(); it != mMeshes.end(); it++)
 	{
-//	    cout << ItMesh->GetLabel() << endl;
-		WriteObj(OBJFile, MTLObj, &(*ItMesh), &mtl_counter, points_counter);
-		points_counter += ItMesh->GetPoints().size();
+//	    cout << it->GetLabel() << endl;
+		WriteObj(OBJFile, MTLObj, &(*it), &mtl_counter, points_counter);
+		points_counter += it->GetPoints().size();
 		mtl_counter = mtl_counter + 1;
 	}
+    OBJFile.flush();
+    MTLObj.flush();
+
 }
 
 
@@ -136,7 +143,7 @@ void CModel::WriteNewFaceTexture(ofstream &aOBJFile, CIndexedFace aFace, size_t 
     aOBJFile << "f ";
     vector<size_t> face_points = aFace.GetPoints();
     size_t VT = GetColorIndex( aFace.GetColor())+1;
-    for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
+    for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
     {
         aOBJFile << int2str(*ItPoint + 1 + aPointsCounter) +"/" + int2str(VT) + " ";
     }
@@ -211,7 +218,7 @@ void CModel::ExportToObjTexture(string aOutput) {
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    for (auto ItMesh = this->mMeshes.begin(); ItMesh != this->mMeshes.end(); ++ItMesh)
+    for (auto ItMesh = mMeshes.begin(); ItMesh != mMeshes.end(); ++ItMesh)
     {
 //	    cout << ItMesh->GetLabel() << endl;
         WriteObj(o, m, &(*ItMesh), &mtl_counter, points_counter);
@@ -233,4 +240,4 @@ void CModel::AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha){
 }
 
 
-CModel::~CModel(){}
+CModel::~CModel() = default;

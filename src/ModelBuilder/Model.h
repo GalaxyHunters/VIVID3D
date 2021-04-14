@@ -21,7 +21,7 @@ private:
     void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter);
 
 public:
-	CModel();
+	CModel() : mMeshes() {};
 	CModel(vector<CMesh> aMeshes);
 	CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha);
 	~CModel();

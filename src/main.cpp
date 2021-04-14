@@ -17,13 +17,13 @@ int main(){
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-//    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere1") );
-//    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0, 0, 1}, 0.01, 0.2, "sphere2") );
-//    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere1") );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0, 0, 1}, 0.01, 0.2, "sphere2") );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
 //
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-    model.ExportToObj("./arrow_test"); // /testModels/
+    model.ExportToObj("./testModels/arrow_test"); // /testModels/
 
 //
 //    // Pyramid Surf

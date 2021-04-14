@@ -23,7 +23,7 @@ int main(){
 //
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-//    model.ExportToObj("./testModels/arrow_test");
+    model.ExportToObj("./arrow_test"); // /testModels/
 
 //
 //    // Pyramid Surf

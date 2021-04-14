@@ -44,7 +44,7 @@ void CallBack(const char * msg)
 	cout << msg;
 }
 
-pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace>& aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) {
+pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) { //TODO: aFaces is not by reference
 	//write the data to vec3 format
 	vector< Vec3<float> > vertices;
 	vector< Vec3<int> > triangles;

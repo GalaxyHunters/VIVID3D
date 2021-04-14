@@ -136,6 +136,19 @@ vivid/fast:
 	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/build
 .PHONY : vivid/fast
 
+#=============================================================================
+# Target rules for targets named VoronoiLib
+
+# Build rule for target.
+VoronoiLib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VoronoiLib
+.PHONY : VoronoiLib
+
+# fast build rule for target.
+VoronoiLib/fast:
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/build
+.PHONY : VoronoiLib/fast
+
 Libs/External.o: Libs/External.cpp.o
 
 .PHONY : Libs/External.o
@@ -202,8 +215,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.o: Libs/huji-rich-
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
@@ -212,8 +224,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.i: Libs/huji-rich-
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
@@ -222,8 +233,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.s: Libs/huji-rich-
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
@@ -232,8 +242,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.o: Libs/huji-rich-Elad3D
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
@@ -242,8 +251,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.i: Libs/huji-rich-Elad3D
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
@@ -252,8 +260,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.s: Libs/huji-rich-Elad3D
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
@@ -262,8 +269,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.o: Libs/huji-r
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
@@ -272,8 +278,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.i: Libs/huji-r
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
@@ -282,8 +287,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.s: Libs/huji-r
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
@@ -292,8 +296,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.o: Libs/
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
@@ -302,8 +305,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.i: Libs/
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
@@ -312,8 +314,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.s: Libs/
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
@@ -322,8 +323,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.o: Libs/huji-ri
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
@@ -332,8 +332,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.i: Libs/huji-ri
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
@@ -342,8 +341,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.s: Libs/huji-ri
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
@@ -352,8 +350,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.o: Libs/huji-ric
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
@@ -362,8 +359,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.i: Libs/huji-ric
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
@@ -372,8 +368,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.s: Libs/huji-ric
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
@@ -382,8 +377,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.o: Libs/huji-rich
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
@@ -392,8 +386,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.i: Libs/huji-rich
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
@@ -402,8 +395,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.s: Libs/huji-rich
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
@@ -412,8 +404,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.o: Libs/huji-r
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
@@ -422,8 +413,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.i: Libs/huji-r
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
@@ -432,8 +422,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.s: Libs/huji-r
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
@@ -442,8 +431,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.o: Libs/huji-rich
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
@@ -452,8 +440,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.i: Libs/huji-rich
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
@@ -462,8 +449,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.s: Libs/huji-rich
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
@@ -472,8 +458,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.o: Libs/huji-rich-El
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
@@ -482,8 +467,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.i: Libs/huji-rich-El
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
@@ -492,8 +476,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.s: Libs/huji-rich-El
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
@@ -502,8 +485,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.o: Libs/huji-rich-E
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
@@ -512,8 +494,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.i: Libs/huji-rich-E
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
@@ -522,8 +503,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.s: Libs/huji-rich-E
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
@@ -532,8 +512,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.o: Libs/huji-rich-
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
@@ -542,8 +521,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.i: Libs/huji-rich-
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
@@ -552,8 +530,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.s: Libs/huji-rich-
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.o: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
@@ -562,8 +539,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.o: Libs/huji-rich-Elad
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.i: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
@@ -572,8 +548,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.i: Libs/huji-rich-Elad
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
 
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.s: Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
@@ -582,8 +557,7 @@ Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.s: Libs/huji-rich-Elad
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.o: Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
@@ -592,8 +566,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.o: Libs/huji-rich-Elad3DF
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.i: Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
@@ -602,8 +575,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.i: Libs/huji-rich-Elad3DF
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.s: Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
@@ -612,8 +584,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.s: Libs/huji-rich-Elad3DF
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.o: Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
@@ -622,8 +593,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.o: Libs/huji-rich-Elad3DFast/source/
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.i: Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
@@ -632,8 +602,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.i: Libs/huji-rich-Elad3DFast/source/
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
 
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.s: Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
@@ -642,8 +611,7 @@ Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.s: Libs/huji-rich-Elad3DFast/source/
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
 
 Libs/huji-rich-Elad3DFast/source/misc/bisection.o: Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
@@ -652,8 +620,7 @@ Libs/huji-rich-Elad3DFast/source/misc/bisection.o: Libs/huji-rich-Elad3DFast/sou
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/bisection.i: Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
@@ -662,8 +629,7 @@ Libs/huji-rich-Elad3DFast/source/misc/bisection.i: Libs/huji-rich-Elad3DFast/sou
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/bisection.s: Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
@@ -672,8 +638,7 @@ Libs/huji-rich-Elad3DFast/source/misc/bisection.s: Libs/huji-rich-Elad3DFast/sou
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.o: Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
@@ -682,8 +647,7 @@ Libs/huji-rich-Elad3DFast/source/misc/func_1_var.o: Libs/huji-rich-Elad3DFast/so
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.i: Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
@@ -692,8 +656,7 @@ Libs/huji-rich-Elad3DFast/source/misc/func_1_var.i: Libs/huji-rich-Elad3DFast/so
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.s: Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
@@ -702,8 +665,7 @@ Libs/huji-rich-Elad3DFast/source/misc/func_1_var.s: Libs/huji-rich-Elad3DFast/so
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/horner.o: Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
@@ -712,8 +674,7 @@ Libs/huji-rich-Elad3DFast/source/misc/horner.o: Libs/huji-rich-Elad3DFast/source
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/horner.i: Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
@@ -722,8 +683,7 @@ Libs/huji-rich-Elad3DFast/source/misc/horner.i: Libs/huji-rich-Elad3DFast/source
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/horner.s: Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
@@ -732,8 +692,7 @@ Libs/huji-rich-Elad3DFast/source/misc/horner.s: Libs/huji-rich-Elad3DFast/source
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/int2str.o: Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
@@ -742,8 +701,7 @@ Libs/huji-rich-Elad3DFast/source/misc/int2str.o: Libs/huji-rich-Elad3DFast/sourc
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/int2str.i: Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
@@ -752,8 +710,7 @@ Libs/huji-rich-Elad3DFast/source/misc/int2str.i: Libs/huji-rich-Elad3DFast/sourc
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/int2str.s: Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
@@ -762,8 +719,7 @@ Libs/huji-rich-Elad3DFast/source/misc/int2str.s: Libs/huji-rich-Elad3DFast/sourc
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/io3D.o: Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
@@ -772,8 +728,7 @@ Libs/huji-rich-Elad3DFast/source/misc/io3D.o: Libs/huji-rich-Elad3DFast/source/m
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/io3D.i: Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
@@ -782,8 +737,7 @@ Libs/huji-rich-Elad3DFast/source/misc/io3D.i: Libs/huji-rich-Elad3DFast/source/m
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/io3D.s: Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
@@ -792,8 +746,7 @@ Libs/huji-rich-Elad3DFast/source/misc/io3D.s: Libs/huji-rich-Elad3DFast/source/m
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.o: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
@@ -802,8 +755,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.o: Libs/huji-rich-Elad3DFas
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.i: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
@@ -812,8 +764,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.i: Libs/huji-rich-Elad3DFas
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.s: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
@@ -822,8 +773,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.s: Libs/huji-rich-Elad3DFas
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.o: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
@@ -832,8 +782,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.o: Libs/huji-rich-Elad3DF
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.i: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
@@ -842,8 +791,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.i: Libs/huji-rich-Elad3DF
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.s: Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
@@ -852,8 +800,7 @@ Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.s: Libs/huji-rich-Elad3DF
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/serializable.o: Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
@@ -862,8 +809,7 @@ Libs/huji-rich-Elad3DFast/source/misc/serializable.o: Libs/huji-rich-Elad3DFast/
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/serializable.i: Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
@@ -872,8 +818,7 @@ Libs/huji-rich-Elad3DFast/source/misc/serializable.i: Libs/huji-rich-Elad3DFast/
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/serializable.s: Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
@@ -882,8 +827,7 @@ Libs/huji-rich-Elad3DFast/source/misc/serializable.s: Libs/huji-rich-Elad3DFast/
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.o: Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
@@ -892,8 +836,7 @@ Libs/huji-rich-Elad3DFast/source/misc/simple_io.o: Libs/huji-rich-Elad3DFast/sou
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.i: Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
@@ -902,8 +845,7 @@ Libs/huji-rich-Elad3DFast/source/misc/simple_io.i: Libs/huji-rich-Elad3DFast/sou
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.s: Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
@@ -912,8 +854,7 @@ Libs/huji-rich-Elad3DFast/source/misc/simple_io.s: Libs/huji-rich-Elad3DFast/sou
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.o: Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
@@ -922,8 +863,7 @@ Libs/huji-rich-Elad3DFast/source/misc/universal_error.o: Libs/huji-rich-Elad3DFa
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.i: Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
@@ -932,8 +872,7 @@ Libs/huji-rich-Elad3DFast/source/misc/universal_error.i: Libs/huji-rich-Elad3DFa
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.s: Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
@@ -942,8 +881,7 @@ Libs/huji-rich-Elad3DFast/source/misc/universal_error.s: Libs/huji-rich-Elad3DFa
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/misc/utils.o: Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
@@ -952,8 +890,7 @@ Libs/huji-rich-Elad3DFast/source/misc/utils.o: Libs/huji-rich-Elad3DFast/source/
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/misc/utils.i: Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
@@ -962,8 +899,7 @@ Libs/huji-rich-Elad3DFast/source/misc/utils.i: Libs/huji-rich-Elad3DFast/source/
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/misc/utils.s: Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
@@ -972,8 +908,7 @@ Libs/huji-rich-Elad3DFast/source/misc/utils.s: Libs/huji-rich-Elad3DFast/source/
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
 
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.o: Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
@@ -982,8 +917,7 @@ Libs/huji-rich-Elad3DFast/source/tessellation/geometry.o: Libs/huji-rich-Elad3DF
 
 # target to build an object file
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
 .PHONY : Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
 
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.i: Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
@@ -992,8 +926,7 @@ Libs/huji-rich-Elad3DFast/source/tessellation/geometry.i: Libs/huji-rich-Elad3DF
 
 # target to preprocess a source file
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
 .PHONY : Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
 
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.s: Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
@@ -1002,8 +935,7 @@ Libs/huji-rich-Elad3DFast/source/tessellation/geometry.s: Libs/huji-rich-Elad3DF
 
 # target to generate assembly for a file
 Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s:
-	$(MAKE) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
-	$(MAKE) -f CMakeFiles/vivid.dir/build.make CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
+	$(MAKE) -f CMakeFiles/VoronoiLib.dir/build.make CMakeFiles/VoronoiLib.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
 .PHONY : Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
 
 Libs/lodepng/lodepng.o: Libs/lodepng/lodepng.cpp.o
@@ -1280,6 +1212,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... vivid_py"
 	@echo "... vivid"
+	@echo "... VoronoiLib"
 	@echo "... Libs/External.o"
 	@echo "... Libs/External.i"
 	@echo "... Libs/External.s"

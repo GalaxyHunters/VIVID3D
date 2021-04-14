@@ -57,360 +57,9 @@ include CMakeFiles/vivid.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/vivid.dir/flags.make
 
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o: ../../Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o   -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/horner.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/misc/utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.s
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o: CMakeFiles/vivid.dir/flags.make
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o: ../../Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o -c /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp > CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.i
-
-CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ghil/Development/Vivid/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp -o CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.s
-
 CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o: ../../src/ModelBuilder/Surf.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o -c /home/ghil/Development/Vivid/src/ModelBuilder/Surf.cpp
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.i: cmake_force
@@ -423,7 +72,7 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o: ../../src/ModelBuilder/Mesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o -c /home/ghil/Development/Vivid/src/ModelBuilder/Mesh.cpp
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.i: cmake_force
@@ -436,7 +85,7 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o: ../../src/ModelBuilder/Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o -c /home/ghil/Development/Vivid/src/ModelBuilder/Model.cpp
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.i: cmake_force
@@ -449,7 +98,7 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/Libs/External.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/Libs/External.cpp.o: ../../Libs/External.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/vivid.dir/Libs/External.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vivid.dir/Libs/External.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/External.cpp.o -c /home/ghil/Development/Vivid/Libs/External.cpp
 
 CMakeFiles/vivid.dir/Libs/External.cpp.i: cmake_force
@@ -462,7 +111,7 @@ CMakeFiles/vivid.dir/Libs/External.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.o: ../../src/AnimationBuilder/Animation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.o -c /home/ghil/Development/Vivid/src/AnimationBuilder/Animation.cpp
 
 CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.i: cmake_force
@@ -475,7 +124,7 @@ CMakeFiles/vivid.dir/src/AnimationBuilder/Animation.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.o: ../../src/Utils/Shapes.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.o -c /home/ghil/Development/Vivid/src/Utils/Shapes.cpp
 
 CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.i: cmake_force
@@ -488,7 +137,7 @@ CMakeFiles/vivid.dir/src/Utils/Shapes.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.o: ../../src/AnimationBuilder/FbxFunc.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.o -c /home/ghil/Development/Vivid/src/AnimationBuilder/FbxFunc.cpp
 
 CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.i: cmake_force
@@ -501,7 +150,7 @@ CMakeFiles/vivid.dir/src/AnimationBuilder/FbxFunc.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.o: ../../Libs/MeshDecimation/mdMeshDecimator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.o -c /home/ghil/Development/Vivid/Libs/MeshDecimation/mdMeshDecimator.cpp
 
 CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.i: cmake_force
@@ -514,7 +163,7 @@ CMakeFiles/vivid.dir/Libs/MeshDecimation/mdMeshDecimator.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o: ../../Libs/lodepng/lodepng.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o -c /home/ghil/Development/Vivid/Libs/lodepng/lodepng.cpp
 
 CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.i: cmake_force
@@ -527,7 +176,7 @@ CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.s: cmake_force
 
 CMakeFiles/vivid.dir/src/main.cpp.o: CMakeFiles/vivid.dir/flags.make
 CMakeFiles/vivid.dir/src/main.cpp.o: ../../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/vivid.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/vivid.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vivid.dir/src/main.cpp.o -c /home/ghil/Development/Vivid/src/main.cpp
 
 CMakeFiles/vivid.dir/src/main.cpp.i: cmake_force
@@ -540,33 +189,6 @@ CMakeFiles/vivid.dir/src/main.cpp.s: cmake_force
 
 # Object files for target vivid
 vivid_OBJECTS = \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o" \
-"CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o" \
 "CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o" \
 "CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o" \
 "CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o" \
@@ -581,33 +203,6 @@ vivid_OBJECTS = \
 # External object files for target vivid
 vivid_EXTERNAL_OBJECTS =
 
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/tetgen.cxx.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/3D/r3d/r3d.c.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/bisection.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/func_1_var.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/horner.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/misc/utils.cpp.o
-../../vivid: CMakeFiles/vivid.dir/Libs/huji-rich-Elad3DFast/source/tessellation/geometry.cpp.o
 ../../vivid: CMakeFiles/vivid.dir/src/ModelBuilder/Surf.cpp.o
 ../../vivid: CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o
 ../../vivid: CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o
@@ -619,9 +214,10 @@ vivid_EXTERNAL_OBJECTS =
 ../../vivid: CMakeFiles/vivid.dir/Libs/lodepng/lodepng.cpp.o
 ../../vivid: CMakeFiles/vivid.dir/src/main.cpp.o
 ../../vivid: CMakeFiles/vivid.dir/build.make
+../../vivid: ../lib.linux-x86_64-2.7/libVoronoiLib.so
 ../../vivid: /usr/lib/gcc/x64/debug/libfbxsdk.so
 ../../vivid: CMakeFiles/vivid.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Linking CXX executable ../../vivid"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable ../../vivid"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vivid.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

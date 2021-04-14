@@ -325,7 +325,7 @@ vivid_BINARY_DIR:STATIC=/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7
 vivid_SOURCE_DIR:STATIC=/home/ghil/Development/Vivid
 
 //Dependencies for the target
-vivid_py_LIB_DEPENDS:STATIC=general;FBX::fbx;
+vivid_py_LIB_DEPENDS:STATIC=general;VoronoiLib;general;FBX::fbx;
 
 
 ########################

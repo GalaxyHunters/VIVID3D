@@ -19,8 +19,12 @@ public:
 	coord_t mQuan;
 	bool mIsIn;
 	inline CPointData_t() {};
-	inline CPointData_t(CPoint aPoint, coord_t aQuan, bool aIsIn) : mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+	inline CPointData_t(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
+
+
+
+
 
 class CSurf{
 private:

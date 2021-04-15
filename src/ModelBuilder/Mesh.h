@@ -32,7 +32,7 @@ private:
     void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aAlpha);
     void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace);
 
-    vector<CIndexedFace> GetFacesAsTriangles();
+    vector<CIndexedFace>& GetFacesAsTriangles();
 
 public:
 	CMesh() {};

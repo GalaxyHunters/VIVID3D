@@ -11,11 +11,11 @@ using namespace boost::algorithm;
 CMesh::~CMesh() {}
 
 CMesh::CMesh(const CMesh &mesh){
-    this->mAlpha = mesh.mAlpha;
-    this->mFaces = mesh.mFaces;
-    this->mLabel = mesh.mLabel;
-    this->mPoints = mesh.mPoints;
-    this->mCenVector = mesh.mCenVector;
+    mAlpha = mesh.mAlpha;
+    mFaces = mesh.mFaces;
+    mLabel = mesh.mLabel;
+    mPoints = mesh.mPoints;
+    mCenVector = mesh.mCenVector;
 
 }
 
@@ -63,20 +63,20 @@ void CMesh::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace)
 
 void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter) 
 {
-	aOBJFile << "o " + this->mLabel + "\n";
+	aOBJFile << "o " + mLabel + "\n";
 	//write points to obj file
 	CPoint temp_point = CPoint(0, 0, 0);
-	for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+	for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
 	{
-        temp_point = *it + this->mCenVector ; //sdd the CenVector to return model to the original centralization.
+        temp_point = *it + mCenVector ; //sdd the CenVector to return model to the original centralization.
         aOBJFile << temp_point; // writes the point in obj file as vertex
 	}
 	//sort vecFaces by color
-	sort(this->mFaces.begin(), this->mFaces.end(), CompFace); // NlogN
+	sort(mFaces.begin(), mFaces.end(), CompFace); // NlogN
 	//write faces to obj file + write colors to mtl file
-	color_t color = Quan2Color(this->mFaces[0].GetColor());
-	WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, this->mAlpha);
-	for (vector<CIndexedFace>::iterator it = this->mFaces.begin(); it != this->mFaces.end(); it++) 
+	color_t color = Quan2Color(mFaces[0].GetColor());
+	WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, mAlpha);
+	for (vector<CIndexedFace>::iterator it = mFaces.begin(); it != mFaces.end(); it++)
 	{
 		if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
 		{
@@ -86,7 +86,7 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 		{
 			color = Quan2Color(it->GetColor());
 			(*apMtlCounter)++;
-			WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, this->mAlpha);
+			WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, mAlpha);
 			// now we can write the face in the obj file
 			WriteNewFace(aOBJFile, *it);
 		}
@@ -119,7 +119,7 @@ void CMesh::ExportToObj(string aOutput){
 	o << "mtllib " + mtl + "\n";
 
 	size_t mtl_counter = 0;
-	this->WriteObj(o, m, &mtl_counter);
+	WriteObj(o, m, &mtl_counter);
 	o.close();
 	m.close();
 }
@@ -152,12 +152,12 @@ void CMesh::WriteMtlTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aText
 }
 
 void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aTextureName, coord_t aTextureSize){
-    aOBJFile << "o " + this->mLabel + "\n";
+    aOBJFile << "o " + mLabel + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
     //write points to obj file
-    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
     {
-        temp_point = *it + this->mCenVector ; //sdd the CenVector to return model to the original centralization.
+        temp_point = *it + mCenVector ; //sdd the CenVector to return model to the original centralization.
         aOBJFile << temp_point; // writes the point in obj file as vertex
     }
     //write uv cordinates
@@ -165,8 +165,8 @@ void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aText
         aOBJFile << "vt 0 " + to_string(i/aTextureSize) + "\n";
     }
     //write faces
-    WriteMtlTexture(aOBJFile, aMTLFile, aTextureName, this->mAlpha);
-    for (vector<CIndexedFace>::iterator it = this->mFaces.begin(); it != this->mFaces.end(); it++){
+    WriteMtlTexture(aOBJFile, aMTLFile, aTextureName, mAlpha);
+    for (vector<CIndexedFace>::iterator it = mFaces.begin(); it != mFaces.end(); it++){
         WriteNewFaceTexture(aOBJFile, *it);
     }
 }
@@ -202,7 +202,7 @@ void CMesh::ExportToObjTexture(string aOutput){
 
     mtl.erase(mtl.length() - 4, 4);
 
-    this->WriteObjTexture(o, m, mtl + "_texture.png", texture.size()/4);
+    WriteObjTexture(o, m, mtl + "_texture.png", texture.size()/4);
 
     o.close();
     m.close();
@@ -221,7 +221,7 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(this->mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
+	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	mPoints = get<0>(temp);
 	mFaces = get<1>(temp);
 }
@@ -237,22 +237,22 @@ vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
 }
 //geters seters
 
-string CMesh::GetLabel() { return this->mLabel; }
-coord_t CMesh::GetAlpha() { return this->mAlpha; }
-vector<CPoint> CMesh::GetPoints() { return this->mPoints; }
-vector<CIndexedFace> CMesh::GetFaces() { return this->mFaces; }
-void CMesh::SetFaces(vector<CIndexedFace> aFaces) { this->mFaces = aFaces; }
-void CMesh::SetPoints(vector<CPoint> aPoints) { this->mPoints = aPoints; }
-void CMesh::SetLabel(string aLabel) { this->mLabel = aLabel; }
+string CMesh::GetLabel() { return mLabel; }
+coord_t CMesh::GetAlpha() { return mAlpha; }
+vector<CPoint> CMesh::GetPoints() { return mPoints; }
+vector<CIndexedFace> CMesh::GetFaces() { return mFaces; }
+void CMesh::SetFaces(vector<CIndexedFace> aFaces) { mFaces = aFaces; }
+void CMesh::SetPoints(vector<CPoint> aPoints) { mPoints = aPoints; }
+void CMesh::SetLabel(string aLabel) { mLabel = aLabel; }
 void CMesh::SetAlpha(coord_t aAlpha){
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
         throw "Alpha must be between 0 and 1";
     }
-    this->mAlpha = aAlpha;
+    mAlpha = aAlpha;
 }
-void CMesh::setCenVector(const CPoint &vector){ this->mCenVector = vector; }
-CPoint CMesh::getCenVector() { return this->mCenVector; }
+void CMesh::setCenVector(const CPoint &vector){ mCenVector = vector; }
+CPoint CMesh::getCenVector() { return mCenVector; }
 
 
 
@@ -261,7 +261,7 @@ CPoint CMesh::getCenVector() { return this->mCenVector; }
 void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;
-    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
     {
 
         px=it->GetX(); py=it->GetY(); pz=it->GetZ();
@@ -291,14 +291,14 @@ void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
 
             nz*nx*(1-cos_a) - ny*sin_a,     nz*ny*(1-cos_a) + nx*sin_a,     cos_a + nz*nz*(1-cos_a),
     };
-    this->TransformMesh(rotation_mat);
+    TransformMesh(rotation_mat);
 }
 
 void CMesh::MoveMesh(CPoint aDirectionVec){
     auto x_movement = aDirectionVec.GetX();
     auto y_movement = aDirectionVec.GetY();
     auto z_movement = aDirectionVec.GetZ();
-    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    for (vector<CPoint>::iterator it = mPoints.begin(); it != this->mPoints.end(); it++)
     {
         it->SetX(x_movement+it->GetX());
         it->SetY(y_movement+it->GetY());

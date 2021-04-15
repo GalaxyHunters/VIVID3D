@@ -22,12 +22,12 @@ private:
 
 public:
 	CModel() : mMeshes() {};
-	CModel(vector<CMesh> aMeshes);
+	CModel(const vector<CMesh> & arMeshes) : mMeshes(arMeshes){};
 	CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha);
 	~CModel();
 	void ExportToObj(string aOutput);
 	void ExportToObjTexture(string aOutput);
-	static CMesh load(string inputFile); // TODO add a read obj func
+//	static CMesh load(string inputFile); // TODO add a read obj func
 	void AddMesh(CMesh aMesh);
 	void AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha);
 	vector<CMesh> GetMeshes() {return mMeshes;}

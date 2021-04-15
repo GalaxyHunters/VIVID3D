@@ -4,10 +4,6 @@
 using namespace boost::algorithm;
 
 
-CModel::CModel(vector<CMesh> aMeshes) {
-	mMeshes = aMeshes;
-}
-
 CModel::CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha){
     mMeshes = vector<CMesh>();
     for (auto it = aSurfs.begin(); it != aSurfs.end(); it++){

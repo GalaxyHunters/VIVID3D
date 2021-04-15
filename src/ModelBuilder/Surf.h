@@ -58,19 +58,19 @@ private:
 	
 public:	
 	CSurf(const CSurf &surf); //copy constructor
-	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax);
+	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 	void SmoothSurf();
-	const CMesh ToMesh(string aLabel, coord_t aAlpha);
+	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);
 
-	inline vector<CPoint>& GetInputPoints() { return this->mInputPoints; }
-	inline vector<bool>& GetMask() { return this->mMask; }
-	inline vector<coord_t>& GetQuan() { return this->mQuan; }
-	inline void SetInputPoints(vector<CPoint>& aInputPoints) { this->mInputPoints = aInputPoints; }
-	inline void SetMask(vector<bool>& aMask) { this->mMask = aMask; }
-	inline void SetQuan(vector<coord_t>& aQuan) { this->mQuan = aQuan; }
-	inline vector<shared_ptr<CPoint> >& GetVecPoints() { return this->mVecPoints; }
-	inline vector<CSurfFace>& GetVecfaces() { return this->mVecFaces; }
+	inline vector<CPoint>& GetInputPoints() { return mInputPoints; }
+	inline vector<bool>& GetMask() { return mMask; }
+	inline vector<coord_t>& GetQuan() { return mQuan; }
+	inline void SetInputPoints(vector<CPoint>& aInputPoints) { mInputPoints = aInputPoints; }
+	inline void SetMask(vector<bool>& aMask) { mMask = aMask; }
+	inline void SetQuan(vector<coord_t>& aQuan) { mQuan = aQuan; }
+	inline vector<shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
+	inline vector<CSurfFace>& GetVecfaces() { return mVecFaces; }
 
 };
 

@@ -4,58 +4,88 @@
 #include "Utils/Shapes.h"
 #include "AnimationBuilder/Animation.h"
 #include "ModelBuilder/Surf.h"
+#include "ModelBuilder/Point.h"
 
 using namespace std;
 
-//const std::string DATA_FOLDER_PATH = "./tests/test_data/";
+const std::string DATA_FOLDER_PATH = "./tests/test_data/";
 
-int main(){
-
-
-
+/* Test basic shapes creation, add them to a Model and export to OBJ. */
+int RunBasicTests(){
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
+    // TODO (Tomer): what does "this sets the center" mean???
     model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere1") );
     model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0, 0, 1}, 0.01, 0.2, "sphere2") );
     model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
-//
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
     model.ExportToObj("./testModels/arrow_test"); // /testModels/
 
-//
-    // Pyramid Surf
-    vector<double> temp;
-    vector<vector<double >> points;
-    vector<coord_t> quan;
-    vector<bool> mask;
+    return EXIT_SUCCESS;
+}
+
+/* Test surf functionality by cubic 3D pyramid (with square base)*/
+int RunPyramidSurfTests() { //Decimate isn't activated currently
+    vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
 
     for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
-    	for (int j = 2; j > -4; j -= 2) {
-    		for (int z = 2; z > -4; z -= 2) {
-    		    temp = vector<double>(3);
-    		    temp[0] = i ; temp[1] = j; temp[2] = z;
-    			points.push_back(temp);
-    			quan.push_back(0.5);
-    			mask.push_back(false);
-    			if (i == j && j == z && z == 0) {
-    				mask.back() = true;
-    			}
-    		}
-    	}
+        for (int j = 2; j > -4; j -= 2) {
+            for (int k = 2; k > -4; k -= 2) {
+                points.push_back( vector<double> {(double)i, (double)j, (double)k} );
+                quan.push_back(0.5);
+                mask.push_back(false);
+                if (i == j && j == k && k == 0) {
+                    mask.back() = true;
+                }
+            }
+        }
     }
-    coord_t Vmax = *max_element(quan.begin(), quan.end());
-    coord_t Vmin = *min_element(quan.begin(), quan.end());
-    cout << quan.size() << " " << points.size() << endl;
-//--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
-    try {
-        CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-        surf.SmoothSurf();
-        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//        mesh.Decimation(0.5, 0.4);
-        mesh.ExportToObjTexture("./testModels/Pyramid");
-    }
-    catch (exception &e) { cout << e.what() << endl;}
+//    cout << quan.size() << " " << points.size() << endl; // TODO: Should've been assert!
+
+    CSurf surf = CSurf(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    surf.SmoothSurf();
+    CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+//    mesh.Decimation(0.5, 0.4);
+    mesh.ExportToObjTexture("./testModels/Pyramid");
+
+    return EXIT_SUCCESS;
+}
+
+/* Test the Elad Voronoi bug and the pointy faces bugs */
+int RunMedicaneTests(){
+    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
+    ModelData medicaneNoise = ReadBin(DATA_FOLDER_PATH + "medicane_noise.bin");
+
+    CModel model;
+    // Some 3D viewers are centering the 3D models and change direction. this sets the center
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
+
+
+    CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
+    medicaneSurf.SmoothSurf();
+    CMesh medicaneMesh = medicaneSurf.ToMesh("vivid_3d_obj", 1.0);
+    medicaneMesh.Decimation(0.5, 0.4);
+    model.AddMesh(medicaneMesh);
+    model.ExportToObj("MedicaneModelTest");
+    return EXIT_SUCCESS;
+}
+
+
+
+
+
+int main(){
+    int ret_value = EXIT_SUCCESS;
+
+//    ret_value = RunBasicTests();
+//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+//
+//    ret_value = RunPyramidSurfTests();
+//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+
+    ret_value = RunMedicaneTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
 }
@@ -70,11 +100,6 @@ int main(){
 //    vector<bool> mMask;
 //    vector<float> mQuan;
 //};
-//
-//
-//
-//
-//
 //
 //CData readCSV(const string &strPath2Dataset, bool noise = false)
 //{

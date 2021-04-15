@@ -10,26 +10,24 @@
 
 using namespace std;
 
-class ModelData {
-public:
-	vector<CPoint> points;
+struct ModelData { // TODO: code repetition!
+	vector<vector<double >> points;
 	vector<bool> mask;
-	vector<float> quan;
-	inline ModelData() {}
+	vector<coord_t> quan;
 };
 
-class ModelDataMultipleMasks {
-public:
-	vector<CPoint> points;
+struct ModelDataMultipleMasks {
+	vector<vector<double >> points;
 	vector<vector<bool> > mask;
-	vector<float> quan;
-	inline ModelDataMultipleMasks() {}
+	vector<coord_t> quan;
 };
 
-inline static ModelData ReadBin(string file_loc) {
+
+// TODO: why inline #facepalm^100
+static ModelData ReadBin(string file_loc) {
 	ifstream binFile(file_loc, ios::in | ios::binary);
 	float x, y, z; //will hold the temporary x, y ,z values
-	float temp_quan; //will hold the temporary color values
+    coord_t temp_quan; //will hold the temporary color values
 	bool temp_mask; //will hold the temporary mask values
 	int length; //will hold the length of the input
 	ModelData output = ModelData();
@@ -40,7 +38,7 @@ inline static ModelData ReadBin(string file_loc) {
 		binFile.read((char*)&x, 4);
 		binFile.read((char*)&y, 4);
 		binFile.read((char*)&z, 4);
-		output.points.push_back(CPoint(x, y, z));
+		output.points.push_back(vector<double >{x, y, z});
 	}
 	for (int i = 0; i < length; i++) { //read the mask values
 		binFile.read((char*)&temp_mask, 1);
@@ -55,10 +53,10 @@ inline static ModelData ReadBin(string file_loc) {
 }
 
 
-inline static ModelDataMultipleMasks ReadBinMultipleMasks(string file_loc) {
+static ModelDataMultipleMasks ReadBinMultipleMasks(string file_loc) {
 	ifstream binFile(file_loc, ios::in | ios::binary);
 	float x, y, z; //will hold the temporary x, y ,z values
-	float temp_quan; //will hold the temporary color values
+    coord_t temp_quan; //will hold the temporary color values
 	bool temp_mask; //will hold the temporary mask values
 	int length; //will hold the length of the input
 	int maskNum; //will hold the number of masks to read
@@ -70,7 +68,7 @@ inline static ModelDataMultipleMasks ReadBinMultipleMasks(string file_loc) {
 		binFile.read((char*)&x, 4);
 		binFile.read((char*)&y, 4);
 		binFile.read((char*)&z, 4);
-		output.points.push_back(CPoint(x, y, z));
+		output.points.push_back(vector<double >{x, y, z});
 	}
 	for (int i = 0; i < length; i++) { //read the quan values
 		binFile.read((char*)&temp_quan, 4);

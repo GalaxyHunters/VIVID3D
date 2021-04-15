@@ -5,7 +5,7 @@ static const coord_t DoublePointThreshHold = 0.0001;
 
 CSurf::CSurf() {};
 
-CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
+CSurf::CSurf(vector<vector<double>> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
         if(aQuan.size() != 0) { // use empty()
@@ -27,34 +27,34 @@ CSurf::CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<co
         throw "Input error, mask must have both True and false values";
     }
     //model centralization
-    this->mCenVector = FindCenPoint(aInputPoints);
+    mCenVector = FindCenPoint(aInputPoints);
     //code
     vector<CPoint> temp;
     for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
-        temp.push_back(CPoint(*it) -= this->mCenVector);
+        temp.push_back(CPoint(*it) -= mCenVector);
     }
     temp.resize(temp.size());
-	this->SetInputPoints(temp);
-	this->SetMask(aMask);
-	this->SetQuan(this->NormQuan(aQuan, aVMin, aVMax));
-	this->RunVorn();
-	this->CleanEdges();
-	this->CleanFaces(aMask);
-	this->CleanPoints();
+	SetInputPoints(temp);
+	SetMask(aMask);
+	SetQuan(NormQuan(aQuan, aVMin, aVMax));
+	RunVorn();
+	CleanEdges();
+	CleanFaces(aMask);
+	CleanPoints();
 }
 
 CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->"? no need
-    this->mInputPoints = surf2.mInputPoints;
-    this->mMask = surf2.mMask;
-    this->mQuan = surf2.mQuan;
+    mInputPoints = surf2.mInputPoints;
+    mMask = surf2.mMask;
+    mQuan = surf2.mQuan;
 
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
-    this->mVecPoints.clear();
+    mVecPoints.clear();
     for (size_t i = 0; i < surf2.mVecPoints.size(); i++) { //TODO: should it be iterator?
-        this->mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
-        old_to_new_Points[surf2.mVecPoints[i]] = this->mVecPoints.back();
+        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
+        old_to_new_Points[surf2.mVecPoints[i]] = mVecPoints.back();
     }
-    this->mVecFaces.clear();
+    mVecFaces.clear();
     CSurfFace temp;
     for (vector<CSurfFace>::const_iterator it = (surf2.mVecFaces).begin(); it != surf2.mVecFaces.end(); it++) {
         temp = CSurfFace();
@@ -64,7 +64,7 @@ CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->
         for (vector<shared_ptr<CPoint> >::const_iterator pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
             temp.mPoints.push_back(old_to_new_Points[*pIt]);
         }
-        this->mVecFaces.push_back(temp);
+        mVecFaces.push_back(temp);
     }
 }
 // ---------------------------------------------------Centralization functions ---------------------------------------------------------------
@@ -119,7 +119,7 @@ void CSurf::CleanPoints() {
 			new_points.push_back(*it);
 		}
 	}
-	this->mVecPoints = new_points;
+	mVecPoints = new_points;
 	RemoveDoublePoints();
 }
 
@@ -163,7 +163,7 @@ void CSurf::RemoveDoublePoints() {
 		while ((*mVecPoints[i]).CalcDistance((*mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			old_new_points[mVecPoints[j]] = mVecPoints[i];
 			j += 1;
-			if (j >= this->mVecPoints.size())
+			if (j >= mVecPoints.size())
 			{
 				break;
 			}
@@ -172,12 +172,12 @@ void CSurf::RemoveDoublePoints() {
 		i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
 	}
 	// change the points ptrs within the faces
-	for (auto faceIt = this->mVecFaces.begin(); faceIt != this->mVecFaces.end(); faceIt++) {
+	for (auto faceIt = mVecFaces.begin(); faceIt != mVecFaces.end(); faceIt++) {
 		for (auto pointIt = faceIt->mPoints.begin(); pointIt != faceIt->mPoints.end(); pointIt++) {
 			(*pointIt) = old_new_points[*pointIt];
 		}
 	}
-	this->mVecPoints = cleaned_points;
+	mVecPoints = cleaned_points;
 }
 
 //--------------------------------------------------------------------smooth functions----------------------------------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ void CSurf::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define
 	map<size_t, bool> p_out_map;
 	size_t c_point1;
 	size_t c_point2;
-	for (auto it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+	for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
 		c_point1 = get<0>(it->mPairPoints);
 		c_point2 = get<1>(it->mPairPoints);
 		if (mMask[c_point1]) {
@@ -227,8 +227,8 @@ void CSurf::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
 	vector<CPoint> new_points;
 	vector<coord_t> quan;
 	for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
-		new_points.push_back(this->mInputPoints[*it]);
-		quan.push_back(this->mQuan[*it]);
+		new_points.push_back(mInputPoints[*it]);
+		quan.push_back(mQuan[*it]);
 	}
 	for (auto it = arPIn.begin(); it != arPIn.end(); it++) {
 		new_points.push_back(this->mInputPoints[*it]);

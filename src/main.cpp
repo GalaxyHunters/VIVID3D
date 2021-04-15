@@ -57,15 +57,15 @@ int RunMedicaneTests(){
     ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
     ModelData medicaneNoise = ReadBin(DATA_FOLDER_PATH + "medicane_noise.bin");
 
+
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 
-
     CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.SmoothSurf();
-    CMesh medicaneMesh = medicaneSurf.ToMesh("vivid_3d_obj", 1.0);
-    medicaneMesh.Decimation(0.5, 0.4);
+    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
+//    medicaneMesh.Decimation(0.5, 0.4);
     model.AddMesh(medicaneMesh);
     model.ExportToObj("MedicaneModelTest");
     return EXIT_SUCCESS;
@@ -89,10 +89,6 @@ int main(){
 
     return EXIT_SUCCESS;
 }
-
-
-
-
 
 
 //struct CData{

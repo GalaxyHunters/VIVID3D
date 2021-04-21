@@ -9,11 +9,13 @@ LagrangianExtensiveUpdater3D::LagrangianExtensiveUpdater3D(LagrangianFlux3D cons
 
 void LagrangianExtensiveUpdater3D::operator()(const vector<Conserved3D>& fluxes, const Tessellation3D & tess,
 	const double dt, const vector<ComputationalCell3D>& cells, vector<Conserved3D>& extensives, double time,
-	TracerStickerNames const & tracerstickernames) const
+					      TracerStickerNames const & tracerstickernames, std::vector<Vector3D> const& /*face_vel*/, 
+					      std::vector<std::pair<ComputationalCell3D, ComputationalCell3D> > const& /*interp_values*/) const
 {
 	std::vector<Conserved3D> old_extensive(extensives);
 #ifdef RICH_MPI
-	MPI_exchange_data(tess, old_extensive, true);
+	Conserved3D edummy;
+	MPI_exchange_data(tess, old_extensive, true,&edummy);
 #endif
 	size_t indexX = static_cast<size_t>(binary_find(tracerstickernames.tracer_names.begin(), tracerstickernames.tracer_names.end(),
 		string("AreaX")) - tracerstickernames.tracer_names.begin());
@@ -21,16 +23,18 @@ void LagrangianExtensiveUpdater3D::operator()(const vector<Conserved3D>& fluxes,
 		string("AreaY")) - tracerstickernames.tracer_names.begin());
 	size_t indexZ = static_cast<size_t>(binary_find(tracerstickernames.tracer_names.begin(), tracerstickernames.tracer_names.end(),
 		string("AreaZ")) - tracerstickernames.tracer_names.begin());
-	assert(indexX < tracerstickernames.tracer_names.size() && indexY < tracerstickernames.tracer_names.size()
-		&& indexZ < tracerstickernames.tracer_names.size());
 
 	size_t N = tess.GetPointNo();
 	// Reduce the area tracer
-	for (size_t i = 0; i < N; ++i)
+	bool AreaChange = indexX < tracerstickernames.tracer_names.size();
+	if (AreaChange)
 	{
-		extensives[i].tracers[indexX] *= 0.95;
-		extensives[i].tracers[indexY] *= 0.95;
-		extensives[i].tracers[indexZ] *= 0.95;
+		for (size_t i = 0; i < N; ++i)
+		{
+			extensives[i].tracers[indexX] *= 0.95;
+			extensives[i].tracers[indexY] *= 0.95;
+			extensives[i].tracers[indexZ] *= 0.95;
+		}
 	}
 
 	std::vector<double> oldEk(N, 0), oldEtherm(N, 0), oldE(N, 0);
@@ -103,9 +107,12 @@ void LagrangianExtensiveUpdater3D::operator()(const vector<Conserved3D>& fluxes,
 			extensives[n0] -= delta;
 			double Eknew = 0.5*ScalarProd(extensives[n0].momentum, extensives[n0].momentum) / extensives[n0].mass;
 			extensives[n0].internal_energy -= delta.energy + (Eknew - Ek);
-			extensives[n0].tracers[indexX] -= normal.x*deltaWs;
-			extensives[n0].tracers[indexY] -= normal.y*deltaWs;
-			extensives[n0].tracers[indexZ] -= normal.z*deltaWs;
+			if (AreaChange)
+			{
+				extensives[n0].tracers[indexX] -= normal.x*deltaWs;
+				extensives[n0].tracers[indexY] -= normal.y*deltaWs;
+				extensives[n0].tracers[indexZ] -= normal.z*deltaWs;
+			}
 		}
 		if (n1 < N)
 		{
@@ -113,9 +120,12 @@ void LagrangianExtensiveUpdater3D::operator()(const vector<Conserved3D>& fluxes,
 			extensives[n1] += delta;
 			double Eknew = 0.5*ScalarProd(extensives[n1].momentum, extensives[n1].momentum) / extensives[n1].mass;
 			extensives[n1].internal_energy += delta.energy - (Eknew - Ek);
-			extensives[n1].tracers[indexX] -= normal.x*deltaWs;
-			extensives[n1].tracers[indexY] -= normal.y*deltaWs;
-			extensives[n1].tracers[indexZ] -= normal.z*deltaWs;
+			if (AreaChange)
+			{
+				extensives[n1].tracers[indexX] -= normal.x*deltaWs;
+				extensives[n1].tracers[indexY] -= normal.y*deltaWs;
+				extensives[n1].tracers[indexZ] -= normal.z*deltaWs;
+			}
 		}
 	}
 
@@ -135,9 +145,12 @@ void LagrangianExtensiveUpdater3D::operator()(const vector<Conserved3D>& fluxes,
 #ifdef RICH_MPI
 			MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 #endif
-			std::cout << "Bad cell in LagrangianExtensiveUpdate, cell " << i << " rank " << rank << std::endl;
+			std::cout << "Bad cell in LagrangianExtensiveUpdate, cell " << i << " rank " << rank <<" time "<<time<< std::endl;
 			std::cout << "mass " << extensives[i].mass << " energy " << extensives[i].energy << " internalE " <<
 				extensives[i].internal_energy << " momentum" << abs(extensives[i].momentum) << " volume " << tess.GetVolume(i)
+				<< std::endl;
+			std::cout << "old mass " << old_extensive[i].mass << " energy " << old_extensive[i].energy << " internalE " <<
+				old_extensive[i].internal_energy << " momentum" << abs(old_extensive[i].momentum) << " volume " << tess.GetVolume(i)
 				<< std::endl;
 			std::cout << "Old cell, density " << cells[i].density << " pressure " << cells[i].pressure << " v " <<
 				abs(cells[i].velocity) << std::endl;

@@ -25,7 +25,9 @@ int RunBasicTests(){
     return EXIT_SUCCESS;
 }
 
-/* Test surf functionality by cubic 3D pyramid (with square base)*/
+/*
+ * Test surf functionality by cubic 3D pyramid (with square base)
+ */
 int RunPyramidSurfTests() { //Decimate isn't activated currently
     vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
 
@@ -56,7 +58,6 @@ int RunPyramidSurfTests() { //Decimate isn't activated currently
 int RunMedicaneTests(){
     ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
     ModelData medicaneNoise = ReadBin(DATA_FOLDER_PATH + "medicane_noise.bin");
-
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center

@@ -17,6 +17,15 @@ ComputationalCell3D::ComputationalCell3D(double density_i,
   density(density_i), pressure(pressure_i),internal_energy(internal_energy_i),ID(ID_i),
   velocity(velocity_i), tracers(tracers_i),stickers(stickers_i) {}
 
+ComputationalCell3D::ComputationalCell3D(const ComputationalCell3D& other):
+density(other.density),
+pressure(other.pressure),
+internal_energy(other.internal_energy),
+ID(other.ID),
+velocity(other.velocity),
+tracers(other.tracers),
+stickers(other.stickers) {}
+
 
 ComputationalCell3D& ComputationalCell3D::operator=(ComputationalCell3D const& other)
 {
@@ -39,7 +48,7 @@ ComputationalCell3D& ComputationalCell3D::operator+=(ComputationalCell3D const& 
 	//assert(this->tracers.size() == other.tracers.size());
 	//size_t N = this->tracers.size();
 #ifdef __INTEL_COMPILER
-#pragma ivdep
+#pragma omp simd
 #endif
 	for (size_t j = 0; j < MAX_TRACERS; ++j)
 		this->tracers[j] += other.tracers[j];
@@ -170,7 +179,7 @@ void ComputationalCellAddMult(ComputationalCell3D &res, ComputationalCell3D cons
 	//assert(res.tracers.size() == other.tracers.size());
 	//size_t N = res.tracers.size();
 #ifdef __INTEL_COMPILER
-#pragma ivdep
+#pragma omp simd
 #endif
 	for (size_t j = 0; j < MAX_TRACERS; ++j)
 		res.tracers[j] += other.tracers[j] * scalar;
@@ -232,7 +241,7 @@ void ReplaceComputationalCell(ComputationalCell3D & cell, ComputationalCell3D co
 	//size_t N = other.tracers.size();
 	//cell.tracers.resize(N);
 #ifdef __INTEL_COMPILER
-#pragma ivdep
+#pragma omp simd
 #endif
 	for (size_t j = 0; j < MAX_TRACERS; ++j)
 		cell.tracers[j] = other.tracers[j];

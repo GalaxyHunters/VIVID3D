@@ -64,11 +64,11 @@ int RunMedicaneTests(){
     model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 
     CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
-    medicaneSurf.SmoothSurf();
-    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
+//    medicaneSurf.SmoothSurf();
+//    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
 //    medicaneMesh.Decimation(0.5, 0.4);
-    model.AddMesh(medicaneMesh);
-    model.ExportToObj("MedicaneModelTest");
+//    model.AddMesh(medicaneMesh);
+//    model.ExportToObj("MedicaneModelTest");
     return EXIT_SUCCESS;
 }
 

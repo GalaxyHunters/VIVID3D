@@ -12,3 +12,5 @@
 /Tests/test_wrapper_win_texture.mtl
 /Tests/test_wrapper_win_texture.obj
 /Tests/test_wrapper_win_texture_texture.png
+/valgrind.xml
+/valgrind_EladNew_20210421.xml

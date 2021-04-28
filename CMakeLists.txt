@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Libs/FBX;${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/Libs/huji-rich-Elad3DFast")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/FBX;${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast")
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -52,20 +52,20 @@ find_package(FBX)
 add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
-include_directories(Libs/MeshDecimation)
-include_directories(Libs/pybind11/include)
-include_directories(Libs/lodepng)
+include_directories(lib/MeshDecimation)
+include_directories(lib/pybind11/include)
+include_directories(lib/lodepng)
 
 add_executable(vivid
         #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp Libs/External.cpp
+        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
         #animation
         src/AnimationBuilder/Animation.cpp
         src/Utils/Shapes.cpp
         src/AnimationBuilder/FbxFunc.cpp
         #external
-        Libs/MeshDecimation/mdMeshDecimator.cpp
-        Libs/lodepng/lodepng.cpp
+        lib/MeshDecimation/mdMeshDecimator.cpp
+        lib/lodepng/lodepng.cpp
         #main
         src/main.cpp
 )
@@ -79,9 +79,9 @@ target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
 
 pybind11_add_module(vivid_py
         #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp Libs/External.cpp
+        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
         #external
-        Libs/MeshDecimation/mdMeshDecimator.cpp Libs/lodepng/lodepng.cpp
+        lib/MeshDecimation/mdMeshDecimator.cpp lib/lodepng/lodepng.cpp
         #animation
         src/AnimationBuilder/Animation.cpp src/AnimationBuilder/FbxFunc.cpp
         #shapes

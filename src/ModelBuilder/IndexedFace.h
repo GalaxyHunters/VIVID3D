@@ -15,11 +15,11 @@ public:
 	inline CIndexedFace(vector<size_t> aPoints, coord_t aColor);
 	inline CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, coord_t aColor); // used after triangulation and decimation
 	inline ~CIndexedFace();
-	inline vector<size_t> GetPoints() { return this->mPoints; }
-	inline size_t operator[](size_t I) {return this->mPoints[I];}
-	inline coord_t GetColor() { return this->mColor; }
-	inline void SetColor(coord_t aColor) { this->mColor = aColor; }
-	inline void SetPoints(vector<size_t> aPoints) { this->mPoints = aPoints; }
+	inline vector<size_t> GetPoints() { return mPoints; }
+	inline size_t operator[](size_t I) {return mPoints[I];}
+	inline coord_t GetColor() { return mColor; }
+	inline void SetColor(coord_t aColor) { mColor = aColor; }
+	inline void SetPoints(vector<size_t> aPoints) { mPoints = aPoints; }
 
 private:
 	vector<size_t> mPoints;
@@ -32,7 +32,7 @@ CIndexedFace::CIndexedFace(vector<size_t> aPoints, coord_t aColor) : mColor(aCol
 {
 	for (vector<size_t>::iterator it = aPoints.begin(); it != aPoints.end(); it++)
 	{
-		this->mPoints.push_back(*it);
+		mPoints.push_back(*it);
 	}
 }
 

@@ -1,7 +1,0 @@
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles/rebuild_cache.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles/edit_cache.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles/vivid_py.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles/vivid.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/CMakeFiles/VoronoiLib.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/pybind11/CMakeFiles/rebuild_cache.dir
-/home/ghil/Development/Vivid/build/temp.linux-x86_64-2.7/pybind11/CMakeFiles/edit_cache.dir

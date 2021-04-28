@@ -3,7 +3,7 @@
 
 #include "Point.h"
 #include "IndexedFace.h"
-#include "../Libs/External.h"
+#include "../lib/External.h"
 #include "Utils/ColorMap.h"
 
 #include <iostream>
@@ -32,7 +32,7 @@ private:
     void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aAlpha);
     void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace);
 
-    vector<CIndexedFace>& GetFacesAsTriangles();
+    vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};

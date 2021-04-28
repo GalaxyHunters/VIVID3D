@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "Point.h"
+
 using namespace std;
 
 class CSurfFace
@@ -13,23 +14,14 @@ class CSurfFace
 public:
 	vector<shared_ptr<CPoint> > mPoints;
 	coord_t mColor;
-	pair<size_t, size_t> mCPoints;
-	inline CSurfFace(vector<shared_ptr<CPoint> > aPoints, coord_t aColor, pair<size_t, size_t> aCPoints);
+	pair<size_t, size_t> mPairPoints;
+
+	inline CSurfFace(vector<shared_ptr<CPoint>> pPoints, coord_t pColor, pair<size_t, size_t> pPairPoints) : mPoints(pPoints), mColor(pColor), mPairPoints(pPairPoints){};
 	inline CSurfFace() {};
-	inline ~CSurfFace();
+	inline ~CSurfFace() {};
 
 private:
 
 };
-
-CSurfFace::CSurfFace(vector<shared_ptr<CPoint> > aPoints, coord_t aColor, pair<size_t, size_t> aCPoints) {
-	this->mPoints = aPoints;
-	this->mColor = aColor;
-	this->mCPoints = aCPoints;
-}
-
-CSurfFace::~CSurfFace()
-{
-}
 
 #endif

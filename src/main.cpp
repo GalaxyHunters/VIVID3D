@@ -82,8 +82,8 @@ int main(){
     ret_value = RunBasicTests();
     if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
-    ret_value = RunPyramidSurfTests();
-    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+//    ret_value = RunPyramidSurfTests();
+//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
 //    ret_value = RunMedicaneTests();
 //    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;

@@ -22,7 +22,7 @@ struct SimpleStruct {
     bool bool_;
     uint32_t uint_;
     float float_;
-    long double ldbl_;
+    double ldbl_;
 };
 
 std::ostream& operator<<(std::ostream& os, const SimpleStruct& v) {
@@ -33,7 +33,7 @@ PYBIND11_PACKED(struct PackedStruct {
     bool bool_;
     uint32_t uint_;
     float float_;
-    long double ldbl_;
+    double ldbl_;
 });
 
 std::ostream& operator<<(std::ostream& os, const PackedStruct& v) {
@@ -54,7 +54,7 @@ struct PartialStruct {
     uint32_t uint_;
     float float_;
     uint64_t dummy2;
-    long double ldbl_;
+    double ldbl_;
 };
 
 struct PartialNestedStruct {
@@ -143,7 +143,7 @@ py::array mkarray_via_buffer(size_t n) {
     s.bool_ = (i) % 2 != 0; \
     s.uint_ = (uint32_t) (i); \
     s.float_ = (float) (i) * 1.5f; \
-    s.ldbl_ = (long double) (i) * -2.5L; } while (0)
+    s.ldbl_ = (double) (i) * -2.5L; } while (0)
 
 template <typename S>
 py::array_t<S, 0> create_recarray(size_t n) {

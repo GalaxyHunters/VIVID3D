@@ -6,6 +6,8 @@
 #include <iostream>
 #include "ModelBuilder/Point.h"
 
+// TODO: redesign color scheme
+
 using namespace std;
 
 class color_t
@@ -19,7 +21,8 @@ public:
 //	inline color_t(int8_t R, int8_t G, int8_t B) : R(R), G(G), B(B) {}
 };
 
-static vector<color_t> ClmPlasma{color_t(0.050383, 0.029803, 0.52797),
+
+const vector<color_t> ClmPlasma{color_t(0.050383, 0.029803, 0.52797),
                                  color_t(0.086222, 0.026125, 0.54266),
                                  color_t(0.11512, 0.023556, 0.55547),
                                  color_t(0.14861, 0.021154, 0.57056),
@@ -96,27 +99,25 @@ static vector<color_t> ClmPlasma{color_t(0.050383, 0.029803, 0.52797),
                                  color_t(0.94002, 0.97516, 0.13133)
 };
 
-inline static color_t GetColor(float aVal) //float aColorMap ----- when we add support for more color maps an option for choice between them will be added
+inline static int GetColorIndex( double aVal) // float aColorMap ----- when we add support for more color maps an option for choice between them will be added
 {
-    if (aVal == 1){
-        return ClmPlasma[ClmPlasma.size() - 1];
+    if (ClmPlasma.empty()){ // TODO: not suppose to happen fix later
+        return 0;
     }
-    return ClmPlasma[int(aVal*ClmPlasma.size())];
+    return floor (aVal * (double(ClmPlasma.size())-1)); //returns the index of the color in ClmPlasma
 }
 
-inline static int GetColorIndex( float aVal) // float aColorMap ----- when we add support for more color maps an option for choice between them will be added
+inline static color_t GetColor(double aVal) //float aColorMap ----- when we add support for more color maps an option for choice between them will be added
 {
-    if (aVal == 1){ // if aVal is 0 the result is 0 and if its 1 the result is 75 resulting in 76 options so we cancel the extreme one.
-        return ClmPlasma.size() - 1;
-    }
-    return int(aVal*ClmPlasma.size()); //returns the index of the color in ClmPlasma
+    return ClmPlasma[GetColorIndex(aVal)];
 }
+
 
 inline static vector<unsigned char> GetColorTexture()//float aColorMap
 {
     // TODO 255 is a magic num. take char.max or something
     vector<unsigned char> texture;
-    for(vector<color_t>::iterator it = ClmPlasma.begin(); it != ClmPlasma.end(); it++){
+     for(auto it = ClmPlasma.begin(); it != ClmPlasma.end(); it++){
         texture.push_back((unsigned char) ((*it).R*255) );
         texture.push_back((unsigned char) ((*it).G*255) );
         texture.push_back((unsigned char) ((*it).B*255) );

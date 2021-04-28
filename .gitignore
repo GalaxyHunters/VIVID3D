@@ -4,7 +4,7 @@
 /temp
 /binding_python_version
 /venv
-/test_models
+/tests/testModels
 /Vivid_py.egg-info
 /Tests/test_wrapper_animation_win.fbx
 /Tests/test_wrapper_win.mtl
@@ -12,3 +12,5 @@
 /Tests/test_wrapper_win_texture.mtl
 /Tests/test_wrapper_win_texture.obj
 /Tests/test_wrapper_win_texture_texture.png
+/valgrind.xml
+/valgrind_EladNew_20210421.xml

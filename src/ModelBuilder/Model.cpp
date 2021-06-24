@@ -1,8 +1,9 @@
 #include "Model.h"
 
+using namespace vivid;
 
 using namespace boost::algorithm;
-
+using namespace std;
 
 CModel::CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha){
     mMeshes = vector<CMesh>();

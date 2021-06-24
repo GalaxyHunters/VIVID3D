@@ -27,10 +27,4 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 /*Creates a arrow*/
 
 
-// TODO Zohar why does it do here?
-FbxMesh* createCube(int sizeX, int sizeY, int sizeZ);
-/* this function creates a CCmesh object containing a sphere, the sphere is created in the position that the user dictates and has a radius also according to the users input.*/
-
-
-
 #endif

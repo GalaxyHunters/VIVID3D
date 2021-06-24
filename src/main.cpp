@@ -6,6 +6,7 @@
 #include "ModelBuilder/Surf.h"
 #include "ModelBuilder/Point.h"
 
+using namespace vivid;
 using namespace std;
 
 const std::string DATA_FOLDER_PATH = "./tests/test_data/";
@@ -74,19 +75,17 @@ int RunMedicaneTests(){
 
 
 
-
-
 int main(){
     int ret_value = EXIT_SUCCESS;
 
     ret_value = RunBasicTests();
     if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
-//    ret_value = RunPyramidSurfTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    ret_value = RunPyramidSurfTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
-//    ret_value = RunMedicaneTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    ret_value = RunMedicaneTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
 }

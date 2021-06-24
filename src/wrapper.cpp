@@ -1,11 +1,12 @@
 #include "ModelBuilder/Surf.h"
 #include "ModelBuilder/Mesh.h"
-#include "ModelBuilder/Model.h"
 #include "Utils/Shapes.h"
 #include "AnimationBuilder/Animation.h"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+
+using namespace vivid;
 
 namespace py = pybind11;
 

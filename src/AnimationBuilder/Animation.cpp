@@ -1,12 +1,8 @@
-//#include "stdafx.h"
-
-#include <string>
 #include "Animation.h"
 
-using namespace std;
+using namespace vivid;
 
-
-void FbfAnimNodes(vector<FbxNode*> FbxMeshNodes, char* outputfile, float interval)          //animation based on nodes
+void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, char* outputfile, float interval)          //animation based on nodes
 {
 	FbxManager* manager = FbxManager::Create();                                             //Creating the manager, the biggest container
 	FbxScene* scene = FbxScene::Create(manager, "");                                //Creating the scene, this object will be the one exported
@@ -16,7 +12,7 @@ void FbfAnimNodes(vector<FbxNode*> FbxMeshNodes, char* outputfile, float interva
 	FbxTime time;
 	FbxNode* SceneRootNode = scene->GetRootNode();
 
-    for (int l = 0; l < FbxMeshNodes.size(); ++l)
+    for (auto l = 0; l < FbxMeshNodes.size(); l++)
     {
         SceneRootNode->AddChild(FbxMeshNodes[l]);
     }
@@ -32,7 +28,7 @@ void FbfAnimNodes(vector<FbxNode*> FbxMeshNodes, char* outputfile, float interva
 	vector<FbxAnimCurve*> animCurves;
 	animCurves.resize(FbxMeshNodes.size());
 	keyIndexes.resize(FbxMeshNodes.size());
-	for (int i = 0; i < FbxMeshNodes.size(); ++i)
+	for (auto i = 0; i < FbxMeshNodes.size(); i++)
 	{
 		animCurves[i] = NULL;
 		keyIndexes[i] = 0;
@@ -65,7 +61,7 @@ void FbfAnimNodes(vector<FbxNode*> FbxMeshNodes, char* outputfile, float interva
 //	lExporter->Export(scene);
 }
 
-void FbfAnimMeshes(vector<FbxMesh*> FbxMeshes, char* outputfile, float interval)
+void FbfAnimMeshes(std::vector<FbxMesh*> FbxMeshes, char* outputfile, float interval)
 {
     FbxManager* manager = FbxManager::Create();
     FbxScene* scene = FbxScene::Create(manager, "");
@@ -77,7 +73,7 @@ void FbfAnimMeshes(vector<FbxMesh*> FbxMeshes, char* outputfile, float interval)
     vector<FbxNode*> animNodes;
     animNodes.resize(FbxMeshes.size());
     int a = 0;
-    for (vector<FbxMesh*>::iterator it = FbxMeshes.begin(); it != FbxMeshes.end(); ++it)
+    for (auto it = FbxMeshes.begin(); it != FbxMeshes.end(); it++)
     {
         animNodes[a] = FbxNode::Create(scene, "");		//creates a node to connect to the CMesh (for later use).
         animNodes[a]->SetNodeAttribute(FbxMeshes[a]);							//set the node atrribute to CMesh. this lets the node know that he is connected to a CMesh.
@@ -90,7 +86,7 @@ void FbfAnimMeshes(vector<FbxMesh*> FbxMeshes, char* outputfile, float interval)
     vector<FbxAnimCurve*> animCurves;
     animCurves.resize(FbxMeshes.size());
     keyIndexes.resize(FbxMeshes.size());
-    for (vector<FbxMesh*>::iterator it = FbxMeshes.begin(); it != FbxMeshes.end(); ++it)
+    for (auto it = FbxMeshes.begin(); it != FbxMeshes.end(); ++it)
     {
         animCurves[i] = NULL;
         keyIndexes[i] = 0;
@@ -172,7 +168,7 @@ void RotateAnim(CModel model, float length, float duration, int RotAxis, char* o
 //	lExporter->Export(scene);
 }
 
-void Animate(vector<CModel> models, double interval, char* outputfile)
+void Animate(std::vector<CModel> models, double interval, char* outputfile) //TODO (TOMER) iterator!!! with auto!!!
 {
     vector<FbxNode*> nodes;
     for (int l = 0; l < models.size(); ++l)
@@ -230,7 +226,7 @@ void RotateAnimTextures(CModel model, float length, float duration, int RotAxis,
 }
 
 
-void AnimateTextures(vector<CModel> Models, double Interval, const string& OutputFile){
+void AnimateTextures(std::vector<CModel> Models, double Interval, const string& OutputFile){
     //Initialize required container variables and some variables for later
     int ModelsSize = Models.size();
     FbxManager* manager = FbxManager::Create();

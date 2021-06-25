@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-
+using namespace vivid;
 using namespace boost::algorithm;
 
 
@@ -195,7 +195,7 @@ void CMesh::ExportToObjTexture(string aOutput){
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    vivid::encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
@@ -221,7 +221,7 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
+	pair<vector<CPoint>, vector<CIndexedFace> > temp = vivid::DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	mPoints = get<0>(temp);
 	mFaces = get<1>(temp);
 }

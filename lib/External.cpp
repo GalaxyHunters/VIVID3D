@@ -1,15 +1,16 @@
-
 #include "External.h"
 
-void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints) {
-	for (vector<CPoint>::iterator it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
+using namespace vivid;
+
+void vivid::ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints) {
+	for (auto it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
 		arNewPoints.push_back(Vector3D(it->GetX(), it->GetY(), it->GetZ()));
 	}
 }
 
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, double aBoxR) {
-	vector<Vector3D> vorn_points;
-	ConvertToVorn(arInputPoints, vorn_points);
+std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR) {
+    std::vector<Vector3D> vorn_points;
+	vivid::ConvertToVorn(arInputPoints, vorn_points);
 	Voronoi3D temp(Vector3D(-aBoxR, -aBoxR, -aBoxR), Vector3D(aBoxR, aBoxR, aBoxR));
 	temp.Build(vorn_points);
 	vorn_points = temp.GetFacePoints();
@@ -35,7 +36,7 @@ pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& 
 			}
 		}
 	}
-	pair<vector<Vector3D>, vector<vector<size_t> > > output(vorn_points, faces);
+    std::pair<std::vector<Vector3D>, std::vector<vector<size_t> > > output(vorn_points, faces); //TODO ....
 	return output;
 }
 

@@ -4,6 +4,8 @@
 
 #include "FbxFunc.h"
 
+using namespace vivid;
+
 void FbxSceneExport(FbxScene* scene, const string& outputfile)
 {
     FbxManager* manager = FbxManager::Create();
@@ -112,7 +114,7 @@ FbxNode* OneModelToFbx(CModel Model)
     FbxNode* ParentNode = FbxNode::Create(manager, "ParentNode");
     for (int l = 0; l < Meshes.size(); ++l)
     {
-        Nodes[l] = OneMeshToFbx(Meshes[l]);
+        Nodes[l] = vivid::OneMeshToFbx(Meshes[l]);
         ParentNode->AddChild(Nodes[l]);
     }
     return ParentNode;
@@ -191,7 +193,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
     vector<CIndexedFace> CFaces = mesh.GetFaces();
     //int PointsSize = CPoints.size();                                        //maybe useless, for memory purposes
     int FacesSize = CFaces.size();
-    FMesh->InitControlPoints(GetCPSize(mesh));                              //Initialize the control point (aka vertex) array of the FBX mesh
+    FMesh->InitControlPoints(vivid::GetCPSize(mesh));                              //Initialize the control point (aka vertex) array of the FBX mesh
     FbxVector4* FMeshCP = FMesh->GetControlPoints();                                 //putting the array into a workable variable
 
     for (int l = 0; l < CPoints.size(); ++l)
@@ -213,7 +215,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
         UVMap->GetDirectArray().Add(FbxVector2(0, l/75));                           //This loop adds all possible colors from the texture to the UV map vertice array
         //This is basically ColorMap's ClmPlasma map, except its saved in a UV index way
     }
-    UVMap->GetIndexArray().SetCount(GetCPSize(mesh));
+    UVMap->GetIndexArray().SetCount(vivid::GetCPSize(mesh));
 
     //create faces for the mesh
     for (int k1 = 0; k1 < CFaces.size(); ++k1){

@@ -206,7 +206,7 @@ void CModel::ExportToObjTexture(string aOutput) {
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    vivid::encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";

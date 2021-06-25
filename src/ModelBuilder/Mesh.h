@@ -6,13 +6,14 @@
 #include "../lib/External.h"
 #include "Utils/ColorMap.h"
 
-#include <iostream>
 #include "boost/algorithm/string/predicate.hpp"
 #include "int2str.hpp"
-#include "string"
-#include "fstream"
+#include <string>
+#include <fstream>
+#include <vector>
 
-using namespace std;
+namespace vivid
+{
 
 class CMesh {
 
@@ -24,36 +25,36 @@ private:
     CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
 
 	//output functions
-	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter);
-	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, color_t color, coord_t aAlpha);
-	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
+	void WriteObj(std::ofstream& aOBJFile, std::ofstream& aMTLFile, size_t * mtl_counter);
+	void WriteNewMtl(std::ofstream& aOBJFile, std::ofstream& aMTLFile, size_t * mtl_counter, color_t color, coord_t aAlpha);
+	void WriteNewFace(std::ofstream& aOBJFile, CIndexedFace aFace);
 
-    void WriteObjTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aTextureSize);
-    void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aAlpha);
-    void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace);
+    void WriteObjTexture(std::ofstream& aOBJFile, std::ofstream& aMTLFile, std::string aTextureName, coord_t aTextureSize);
+    void WriteMtlTexture(std::ofstream& aOBJFile, std::ofstream& aMTLFile, std::string aTextureName, coord_t aAlpha);
+    void WriteNewFaceTexture(std::ofstream& aOBJFile, CIndexedFace aFace);
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};
     CMesh(const CMesh &mesh);
-	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
 	~CMesh();
-	string GetLabel();
+    std::string GetLabel();
 	coord_t GetAlpha();
-	vector<CPoint> GetPoints();
-	vector<CIndexedFace> GetFaces();
+    std::vector<CPoint> GetPoints();
+    std::vector<CIndexedFace> GetFaces();
     CPoint getCenVector();
-	void SetFaces(vector<CIndexedFace> aFaces);
-	void SetPoints(vector<CPoint> aPoints);
-	void SetLabel(string aLabel);
+	void SetFaces(std::vector<CIndexedFace> aFaces);
+	void SetPoints(std::vector<CPoint> aPoints);
+	void SetLabel(std::string aLabel);
 	void SetAlpha(coord_t aAlpha);
 	void setCenVector(const CPoint &vector);
 
 
     void Decimation(coord_t aVerticlePercent, coord_t aError);
 
-    void ExportToObj(string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
+    void ExportToObj(std::string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
     void ExportToObjTexture(string aOutput);
 
 
@@ -81,6 +82,6 @@ public:
 
 };
 
-
+} // namespace vivid
 #endif
 

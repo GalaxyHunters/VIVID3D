@@ -1,4 +1,9 @@
 #include "Surf.h"
+#include "External.h"
+
+#include <map>
+
+using namespace vivid;
 using namespace std;
 
 static const coord_t DoublePointThreshHold = 0.0001;
@@ -30,7 +35,7 @@ CSurf::CSurf(vector<vector<double>> aInputPoints, vector<bool> aMask, vector<coo
     mCenVector = FindCenPoint(aInputPoints);
     //code
     vector<CPoint> temp;
-    for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
+    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){
         temp.push_back(CPoint(*it) -= mCenVector);
     }
     temp.resize(temp.size());
@@ -48,7 +53,7 @@ CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->
     mMask = surf2.mMask;
     mQuan = surf2.mQuan;
 
-    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
+    std::map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
     mVecPoints.clear();
     for (size_t i = 0; i < surf2.mVecPoints.size(); i++) { //TODO: should it be iterator?
         mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
@@ -61,7 +66,7 @@ CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->
         temp.mColor = (*it).mColor;
         temp.mPairPoints = (*it).mPairPoints;
         temp.mPoints.clear();
-        for (vector<shared_ptr<CPoint> >::const_iterator pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
+        for (auto pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
             temp.mPoints.push_back(old_to_new_Points[*pIt]);
         }
         mVecFaces.push_back(temp);
@@ -478,9 +483,9 @@ static double FindBoxR(vector<CPoint> aInputPoints) {
 void CSurf::RunVorn() {
 	//find the box_r
 	double box_R = FindBoxR(this->mInputPoints);
-	cout << "start vorn" << endl;
+	cout << "start vorn" << endl; //TODO BAD!
 	pair<vector<Vector3D>, vector<vector<size_t> > > vorn_out = compute_vornoi(this->mInputPoints, box_R * 2);
-	cout << "vorn done" << endl;
+	cout << "vorn done" << endl; //TODO BAD!
 	//set the points
 	this->mVecPoints = ConvertFromVorn(get<0>(vorn_out));
 	//set the faces

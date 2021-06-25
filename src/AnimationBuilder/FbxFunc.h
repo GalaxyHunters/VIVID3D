@@ -14,7 +14,8 @@
 #include "string"
 //#include <direct.h>
 
-using namespace vivid;
+namespace vivid
+{
 
 void FbxSceneExport(FbxScene* scene, const std::string& outputfile);
 
@@ -42,5 +43,6 @@ inline bool CheckTexture(const std::string& texture){
 
 //vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh);
 
+}; // namespace vivid
 
 #endif //VIVID_FBXFUNC_H

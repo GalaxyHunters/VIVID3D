@@ -1,9 +1,9 @@
 #include "Shapes.h"
-//#include "Animation.h"
-#include <iostream>
-#include <vector>
-#define _USE_MATH_DEFINES
+
+#define _USE_MATH_DEFINES //TODO WTF???
 //#include <math.h>
+
+using namespace vivid;
 
 using namespace std;
 
@@ -74,7 +74,7 @@ CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coo
     return mesh;
 }
 
-CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label)
+CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, const vector<double> CenterPoint, coord_t Color, coord_t Alpha, const string Label)
 {
     // TODO Zohar: VERYUGLY code, please use mesh.MoveMesh, mesh.ScaleMesh etc in this function
     vector<CPoint> vertices;
@@ -126,24 +126,26 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     CMesh.SetPoints(vertices);
     CMesh.SetFaces(faces);
     CMesh.SetAlpha(Alpha);
-    CMesh.SetLabel(Label);
+//    CMesh.SetLabel(Label); //TODO FIXME
 	return CMesh;
 }
 
 // TODO: Zohar again VERY UGLY code, please use transformMat
-CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
+CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> aRadius_vec, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
     //begin by asserting some conditions
     // TODO I'm not sure, I think we may start using exceptions, assert looks bad
 //    assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} && MiddleAxis != vector<double>{0,0,0} && MinorAxis != vector<double>{0,0,0}));
-//    assert(("Radius cannot be equal to 0", Radii[0] != 0 && Radii[1] != 0 && Radii[2] != 0));
+//    assert(("Radius cannot be equal to 0", aRadius_vec[0] != 0 && aRadius_vec[1] != 0 && aRadius_vec[2] != 0));
 //    assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true && CheckIfPerpindicular(MajorAxis, MinorAxis) == true && CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
     //create a sphere to operate on
-    CMesh Ellipsoid = CreateSphereMesh(NumOfMeridians, NumOfParallels, 1,  vector<double>{0,0,0}, Color, Alpha, Label);
-    //use Radii to create strech matrix and stretch the sphere
+
+//    CMesh Ellipsoid = CreateSphereMesh(NumOfMeridians, NumOfParallels, 1.0, vector<double>{0.0,0.0,0.0}, Color, Alpha, Label); //TODO FIXME later
+    CMesh Ellipsoid;
+    //use aRadius_vec to create strech matrix and stretch the sphere
     vector<vector<double>> StretchMatrix;
-    StretchMatrix.push_back(vector<double>{Radii[0], 0, 0});
-    StretchMatrix.push_back(vector<double>{0, Radii[1], 0});
-    StretchMatrix.push_back(vector<double>{0, 0, Radii[2]});
+    StretchMatrix.push_back(vector<double>{aRadius_vec[0], 0, 0});
+    StretchMatrix.push_back(vector<double>{0, aRadius_vec[1], 0});
+    StretchMatrix.push_back(vector<double>{0, 0, aRadius_vec[2]});
     //use all axis vectors to create a rotation matrix
     vector<vector<double>> RotateMatrix;
     RotateMatrix.push_back(MajorAxis);

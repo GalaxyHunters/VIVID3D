@@ -5,7 +5,6 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include "boost/shared_ptr.hpp"
 #include <string>
 
 typedef double coord_t; //TODO: float64_t and rename!

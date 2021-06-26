@@ -54,7 +54,7 @@ int RunCubeSurfTests() { //Decimate isn't activated currently
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Decimation(0.5, 0.4);
-    mesh.ExportToObjTexture("./TestModels/Cube");
+    mesh.ExportToObj("./TestModels/Cube");
 
     return EXIT_SUCCESS;
 }
@@ -99,7 +99,7 @@ int RunPyramidSurfTest(){
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Decimation(0.5, 0.4);
-    mesh.ExportToObjTexture("./TestModels/Cube");
+    mesh.ExportToObj("./TestModels/Cube");
 
     return EXIT_SUCCESS;
 
@@ -210,8 +210,8 @@ int main(){
         CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //        mesh.Decimation(0.5, 0.4);
         CModel model1 = CModel(mesh);
-        model1.ExportToObjTexture("./TestModels/Pyramid_model");
-        mesh.ExportToObjTexture("./TestModels/Pyramid_mesh");
+        //model1.ExportToObj("./TestModels/Pyramid_model");
+        mesh.ExportToObj("./TestModels/Pyramid_mesh", 0);
     }
     catch (exception &e) { cout << e.what() << endl;}
 

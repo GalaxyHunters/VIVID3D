@@ -27,6 +27,7 @@ private:
 	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter);
 	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, color_t color, coord_t aAlpha);
 	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
+	void WriteNewPoint(ofstream& aOBJFile, CPoint aPoint);
 
     void WriteObjTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aTextureSize);
     void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aAlpha);

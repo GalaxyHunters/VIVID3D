@@ -50,6 +50,10 @@ void CMesh::WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCo
 	aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "\n";
 }
 
+void CMesh::WriteNewPoint(ofstream& aOBJFile, CPoint aPoint)
+{
+    aOBJFile << "v " << to_string(aPoint.GetX()) + " " + to_string(aPoint.GetY()) + " " + to_string(aPoint.GetZ()) + "\n";
+}
 void CMesh::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace) 
 {
 	aOBJFile << "f ";
@@ -68,8 +72,8 @@ void CMesh::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCount
 	CPoint temp_point = CPoint(0, 0, 0);
 	for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
 	{
-        temp_point = *it + mCenVector ; //sdd the CenVector to return model to the original centralization.
-        aOBJFile << temp_point; // writes the point in obj file as vertex
+        temp_point = *it + mCenVector ; //add the CenVector to return model to the original centralization.
+        WriteNewPoint(aOBJFile, temp_point); // writes the point in obj file as vertex
 	}
 	//sort vecFaces by color
 	sort(mFaces.begin(), mFaces.end(), CompFace); // NlogN
@@ -157,8 +161,8 @@ void CMesh::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, string aText
     //write points to obj file
     for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
     {
-        temp_point = *it + mCenVector ; //sdd the CenVector to return model to the original centralization.
-        aOBJFile << temp_point; // writes the point in obj file as vertex
+        temp_point = *it + mCenVector ; //add the CenVector to return model to the original centralization.
+        WriteNewPoint(aOBJFile, temp_point);; // writes the point in obj file as vertex
     }
     //write uv cordinates
     for(size_t i = aTextureSize; i > 0; i--){

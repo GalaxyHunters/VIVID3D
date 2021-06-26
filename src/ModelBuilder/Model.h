@@ -15,6 +15,7 @@ private:
     void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, color_t color, coord_t aAlpha);
 //	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
     void WriteNewFace(ofstream &aOBJFile, CIndexedFace aFace, size_t aPointsCounter);
+    void WriteNewPoint(ofstream& aOBJFile, CPoint aPoint);
 
     void WriteObjTexture(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * aMesh, size_t * mtl_counter, string aTextureName, coord_t aTextureSize, size_t aPointsCounter);
     void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, coord_t aAlpha);
@@ -22,6 +23,7 @@ private:
 
 public:
 	CModel() : mMeshes() {};
+	CModel(const CMesh arMesh) {this->mMeshes = vector<CMesh>(); mMeshes.push_back(arMesh);};
 	CModel(const vector<CMesh> & arMeshes) : mMeshes(arMeshes){};
 	CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha);
 	~CModel();

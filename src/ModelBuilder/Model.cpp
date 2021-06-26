@@ -53,6 +53,11 @@ void CModel::WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPoints
 	aOBJFile << "\n";
 }
 
+void CModel::WriteNewPoint(ofstream& aOBJFile, CPoint aPoint)
+{
+    aOBJFile << "v " << to_string(aPoint.GetX()) + " " + to_string(aPoint.GetY()) + " " + to_string(aPoint.GetZ()) + "\n";
+}
+
 void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter)
 {
 	aOBJFile << "o " + apMesh->GetLabel() + "\n";
@@ -65,7 +70,7 @@ void CModel::WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, si
 	for (auto it = Points.begin(); it != Points.end(); it++)
 	{
         temp_point = *it + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
-        aOBJFile << temp_point; // writes the point in obj file as vertex
+        WriteNewPoint(aOBJFile, temp_point);; // writes the point in obj file as vertex
 	}
     aOBJFile.flush();
 
@@ -165,10 +170,15 @@ void CModel::WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mt
 void CModel::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_t * mtl_counter, string aTextureName,
                              coord_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + aMesh->GetLabel() + "\n";
+    CPoint temp_point = CPoint(0, 0, 0);
+    CPoint cen_point = aMesh->getCenVector();
+    vector<CPoint> points = aMesh->GetPoints();
     //write points to obj file
-    for (auto it = aMesh->GetPoints().begin(); it != aMesh->GetPoints().end(); it++)
+    for (auto it = points.begin(); it != points.end(); it++)
     {
-        aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+        temp_point = *it + cen_point; //add the CenVector to return model to the original
+        WriteNewPoint(aOBJFile, temp_point);
+        //aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
     }
     //write uv cordinates
     for(size_t i = aTextureSize; i > 0; i--){
@@ -176,7 +186,8 @@ void CModel::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMes
     }
     //write faces
     WriteMtlTexture(aOBJFile, aMTLFile,  mtl_counter, aTextureName, aMesh->GetAlpha());
-    for (auto it = aMesh->GetFaces().begin(); it != aMesh->GetFaces().end(); it++){
+    vector<CIndexedFace> faces = aMesh->GetFaces();
+    for (vector<CIndexedFace>::iterator it = faces.begin(); it != faces.end(); it++){
         WriteNewFaceTexture(aOBJFile, *it, aPointsCounter);
     }
 }
@@ -217,7 +228,7 @@ void CModel::ExportToObjTexture(string aOutput) {
     for (auto ItMesh = mMeshes.begin(); ItMesh != mMeshes.end(); ++ItMesh)
     {
 //	    cout << ItMesh->GetLabel() << endl;
-        WriteObj(o, m, &(*ItMesh), &mtl_counter, points_counter);
+        WriteObjTexture(o, m, &(*ItMesh), &mtl_counter, mtl + "_texture.png", texture.size()/4, points_counter);
         points_counter += ItMesh->GetPoints().size();
         mtl_counter = mtl_counter + 1;
     }

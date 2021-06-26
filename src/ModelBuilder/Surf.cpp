@@ -30,6 +30,7 @@ CSurf::CSurf(vector<vector<double>> aInputPoints, vector<bool> aMask, vector<coo
     mCenVector = FindCenPoint(aInputPoints);
     //code
     vector<CPoint> temp;
+    // Why dont we set temp to be the size of aInputPoints ahead of time?
     for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
         temp.push_back(CPoint(*it) -= mCenVector);
     }

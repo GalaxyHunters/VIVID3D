@@ -68,7 +68,7 @@ add_executable(vivid
         lib/lodepng/lodepng.cpp
         #main
         src/main.cpp
-)
+        )
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.

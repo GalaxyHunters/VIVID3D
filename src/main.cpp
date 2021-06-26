@@ -5,6 +5,8 @@
 #include "AnimationBuilder/Animation.h"
 #include "ModelBuilder/Surf.h"
 #include "ModelBuilder/Point.h"
+#include "../lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
+#include "../lib/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 using namespace std;
 
@@ -72,10 +74,95 @@ int RunMedicaneTests(){
     return EXIT_SUCCESS;
 }
 
+static bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) {
+    CPoint zeroPoint(0, 0, 0);
+    double dis1 = aPoint1.CalcDistance(zeroPoint);
+    double dis2 = aPoint2.CalcDistance(zeroPoint);
+    return (dis2 > dis1);
+}
+
+static double FindBoxR(vector<CPoint>& aInputPoints) {
+    CPoint zeroPoint(0, 0, 0);
+    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
+    return box_r.CalcDistance(zeroPoint);
+}
+
+int main ()
+{
+    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
+
+    size_t const N = medicane.points.size ();
+    std :: vector <double> x (N);//= read_vector ("c: /sim_data/x.txt");
+    std :: vector <double> y (N);//= read_vector ("c: /sim_data/y.txt");
+    std :: vector <double> z (N);//= read_vector ("c: /sim_data/z.txt");
+
+    std :: vector <Vector3D> points (N);
+    //vector<CPoint> aInputPoints (N);
+    for (size_t i = 0; i < N; ++i) {
+        x[i] = medicane.points[i][0];
+        y[i] = medicane.points[i][1];
+        z[i] = medicane.points[i][2];
+        points[i].Set (x[i], y[i], z[i]);
+        /*aInputPoints[i].SetX(x[i]);
+        aInputPoints[i].SetY(y[i]);
+        aInputPoints[i].SetZ(z[i]);*/
+    }
+
+    double const xmin = * (std :: min_element (x.begin (), x.end ()));
+    double const ymin = * (std :: min_element (y.begin (), y.end ()));
+    double const zmin = * (std :: min_element (z.begin (), z.end ()));
+    double const xmax = * (std :: max_element (x.begin (), x.end ()));
+    double const ymax = * (std :: max_element (y.begin (), y.end ()));
+    double const zmax = * (std :: max_element (z.begin (), z.end ()));
+
+    // Elad box version 1, superior to our box. why * 0.01 -> slight box expansion.
+    //Vector3D ll (xmin - (xmax - xmin) * 0.01, ymin - (ymax - ymin) * 0.01, zmin - (zmax - zmin) * 0.01);
+    //Vector3D ur (xmax + (xmax - xmin) * 0.01, ymax + (ymax - ymin) * 0.01, zmax + (zmax - zmin) * 0.01);
+    cout << "points[0] before center" << endl;
+    cout << points[0].x << endl;
+    cout << points[0].y << endl;
+    cout << points[0].z << endl;
+    //CPoint CenPoint((xmax + xmin)/2, (ymax + ymin)/2, (zmax + zmin)/2);
+    Vector3D const CenPoint3D = Vector3D((xmax + xmin)/2, (ymax + ymin)/2, (zmax + zmin)/2);
+    for (size_t i = 0; i< N; ++i){
+        x[i] -= CenPoint3D.x;
+        y[i] -= CenPoint3D.y;
+        z[i] -= CenPoint3D.z;
+
+        points[i].operator-=(CenPoint3D);
+        //aInputPoints[i].operator-=(CenPoint);
+    }
+    cout << "Center: " << endl;
+    cout << CenPoint3D.x << endl;
+    cout << CenPoint3D.y << endl;
+    cout << CenPoint3D.z << endl;
+    cout << "points[0] after center" << endl;
+    cout << points[0].x << endl;
+    cout << points[0].y << endl;
+    cout << points[0].z << endl;
+    //our box version:
+    //double boxR = FindBoxR(aInputPoints);
+
+    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
+    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));
+    double const zmin1 = * (std :: min_element (z.begin (), z.end ()));
+    double const xmax1 = * (std :: max_element (x.begin (), x.end ()));
+    double const ymax1 = * (std :: max_element (y.begin (), y.end ()));
+    double const zmax1 = * (std :: max_element (z.begin (), z.end ()));
+
+    Vector3D ll (xmin1 - (xmax1 - xmin1) * 0.01, ymin1 - (ymax1 - ymin1) * 0.01, zmin1 - (zmax1 - zmin1) * 0.01);
+    Vector3D ur (xmax1 + (xmax1 - xmin1) * 0.01, ymax1 + (ymax1 - ymin1) * 0.01, zmax1 + (zmax1 - zmin1) * 0.01);
+
+    //aInputPoints.clear();
+    //aInputPoints.shrink_to_fit();
+    Voronoi3D tess (ll, ur);
+    //Voronoi3D tess (Vector3D(-boxR, -boxR, -boxR), Vector3D(boxR, boxR, boxR));
+    tess.Build (points);
+    return 0;
+}
 
 
-
-
+/*
 int main(){
     int ret_value = EXIT_SUCCESS;
 
@@ -89,7 +176,7 @@ int main(){
 //    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
-}
+} */
 
 
 //struct CData{

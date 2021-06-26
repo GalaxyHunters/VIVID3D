@@ -112,16 +112,36 @@ int RunMedicaneTests(){
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
     CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
-//    medicaneSurf.SmoothSurf();
-//    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-//    medicaneMesh.Decimation(0.5, 0.4);
-//    model.AddMesh(medicaneMesh);
-//    model.ExportToObj("MedicaneModelTest");
+    //medicaneSurf.SmoothSurf();
+    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
+    //medicaneMesh.Decimation(0.5, 0.4);
+    model.AddMesh(medicaneMesh);
+    model.ExportToObj("./testModels/MedicaneModelTest");
     return EXIT_SUCCESS;
 }
+
+/*int main ()
+{
+    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
+
+    size_t const N = medicane.points.size ();
+    std :: vector <double> x (N);//= read_vector ("c: /sim_data/x.txt");
+    std :: vector <double> y (N);//= read_vector ("c: /sim_data/y.txt");
+    std :: vector <double> z (N);//= read_vector ("c: /sim_data/z.txt");
+
+    std :: vector <Vector3D> points (N);
+    //vector<CPoint> aInputPoints (N);
+    for (size_t i = 0; i < N; ++i) {
+        x[i] = medicane.points[i][0];
+        y[i] = medicane.points[i][1];
+        z[i] = medicane.points[i][2];
+        points[i].Set (x[i], y[i], z[i]);
+//        aInputPoints[i].SetX(x[i]);
+//        aInputPoints[i].SetY(y[i]);
+//        aInputPoints[i].SetZ(z[i]);
 
 static bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) {
     CPoint zeroPoint(0, 0, 0);
@@ -197,6 +217,7 @@ int main(){
                 }
             }
         }
+
     }
 
     cout << quan.size() << " " << points.size() << endl;
@@ -213,11 +234,44 @@ int main(){
         //model1.ExportToObj("./TestModels/Pyramid_model");
         mesh.ExportToObj("./TestModels/Pyramid_mesh", 0);
     }
+
+/*    cout << "Center: " << endl;
+    cout << CenPoint3D.x << endl;
+    cout << CenPoint3D.y << endl;
+    cout << CenPoint3D.z << endl;
+    cout << "points[0] after center" << endl;
+    cout << points[0].x << endl;
+    cout << points[0].y << endl;
+    cout << points[0].z << endl;
+    //our box version:
+    //double boxR = FindBoxR(aInputPoints);
+
+    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
+    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));
+    double const zmin1 = * (std :: min_element (z.begin (), z.end ()));
+    double const xmax1 = * (std :: max_element (x.begin (), x.end ()));
+    double const ymax1 = * (std :: max_element (y.begin (), y.end ()));
+    double const zmax1 = * (std :: max_element (z.begin (), z.end ()));
+
+    Vector3D ll (xmin1 - (xmax1 - xmin1) * 0.01, ymin1 - (ymax1 - ymin1) * 0.01, zmin1 - (zmax1 - zmin1) * 0.01);
+    Vector3D ur (xmax1 + (xmax1 - xmin1) * 0.01, ymax1 + (ymax1 - ymin1) * 0.01, zmax1 + (zmax1 - zmin1) * 0.01);
+
+    //aInputPoints.clear();
+    //aInputPoints.shrink_to_fit();
+    Voronoi3D tess (ll, ur);
+    //Voronoi3D tess (Vector3D(-boxR, -boxR, -boxR), Vector3D(boxR, boxR, boxR));
+    tess.Build (points);  */
+
+
     catch (exception &e) { cout << e.what() << endl;}
 
     return EXIT_SUCCESS;
+
     return 0;
-}
+}*/
+
+
+
 
 
 
@@ -297,20 +351,22 @@ int main(){
 
 
 /*
+
 int main(){
     int ret_value = EXIT_SUCCESS;
 
+    cout << "Basic" << endl;
     ret_value = RunBasicTests();
     if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
-
-//    ret_value = RunPyramidSurfTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
-
-//    ret_value = RunMedicaneTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = RunPyramidSurfTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    cout << "Medicane" << endl;
+    ret_value = RunMedicaneTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
-} */
+}
 
 
 //struct CData{

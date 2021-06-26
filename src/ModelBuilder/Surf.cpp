@@ -38,6 +38,11 @@ CSurf::CSurf(vector<vector<double>> aInputPoints, vector<bool> aMask, vector<coo
 	SetInputPoints(temp);
 	SetMask(aMask);
 	SetQuan(NormQuan(aQuan, aVMin, aVMax));
+
+	// freeing up aInputPoints from memory, at this point it's not needed.
+	aInputPoints.clear();
+	aInputPoints.shrink_to_fit();
+
 	RunVorn();
 	CleanEdges();
 	CleanFaces(aMask);
@@ -73,6 +78,11 @@ CSurf::CSurf(const CSurf &surf2) { //TODO: why like this? why do you use "this->
 inline bool ComparePointX(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[0] < aPoint2[0]);}
 inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[1] < aPoint2[1]);}
 inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
+
+// TODO: Why doesn't operator overload work here??
+inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() < aPoint2.GetX());}
+inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() < aPoint2.GetY());}
+inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() < aPoint2.GetZ());}
 
 //define function that finds model center point and radius of points.
 CPoint CSurf::FindCenPoint(const vector<vector<double>> &aInputPoints){
@@ -469,18 +479,51 @@ static vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints)
 	return new_vec;
 }
 
-
+// TODO: Add alt Box func
 
 static double FindBoxR(vector<CPoint> aInputPoints) {
     CPoint zeroPoint(0, 0, 0);
 	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
 	return box_r.CalcDistance(zeroPoint);
 }
+
+static vector<Vector3D> FindBox(vector<CPoint> aInputPoints) {
+    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
+    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
+
+    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
+    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
+
+    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
+    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
+
+    vector<Vector3D> Box (2);
+
+    const double expandFactor = 1;
+
+    Vector3D ll (xmin - (xmax - xmin) * expandFactor, ymin - (ymax - ymin) * expandFactor, zmin - (zmax - zmin) * expandFactor);
+    Vector3D ur (xmax + (xmax - xmin) * expandFactor, ymax + (ymax - ymin) * expandFactor, zmax + (zmax - zmin) * expandFactor);
+
+    Box.at(0) = ll;
+    Box.at(1) = ur;
+
+    return Box;
+}
+
+// TODO: Implement alt box func and alt compute vornoi func
 void CSurf::RunVorn() {
 	//find the box_r
 	double box_R = FindBoxR(this->mInputPoints);
+	cout << "BoxR = " << box_R << endl;
+	// New version:
+	vector<Vector3D> Box = FindBox(this->mInputPoints);
+	cout << "Box[0] Elad = " << Box.at(0).x << " " << Box.at(0).y << " " << Box.at(0).z << endl;
+    cout << "Box[1] Elad = " << Box.at(1).x << " " << Box.at(1).y << " " << Box.at(1).z << endl;
+
 	cout << "start vorn" << endl;
-	pair<vector<Vector3D>, vector<vector<size_t> > > vorn_out = compute_vornoi(this->mInputPoints, box_R * 2);
+    //pair<vector<Vector3D>, vector<vector<size_t> > > vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
+	pair<vector<Vector3D>, vector<vector<size_t> > > vorn_out = compute_vornoi(this->mInputPoints, Box);
+
 	cout << "vorn done" << endl;
 	//set the points
 	this->mVecPoints = ConvertFromVorn(get<0>(vorn_out));

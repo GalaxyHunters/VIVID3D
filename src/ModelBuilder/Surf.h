@@ -3,6 +3,7 @@
 #ifndef SURF_H
 #define SURF_H
 
+class CSurf;
 
 #include "Mesh.h"
 #include "SurfFace.h"

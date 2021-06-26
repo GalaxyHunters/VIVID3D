@@ -1,0 +1,13 @@
+newmtl texture_0
+Ns 96.078
+Ka 1.000 1.000 1.000 
+Kd 1.000 1.000 1.000 
+Ks 0.000 0.000 0.000
+Ni 1.000000
+d 1.000000
+illum 0
+em 0.000000
+map_Ka Pyramid_mesh_texture.png
+map_Kd Pyramid_mesh_texture.png
+
+

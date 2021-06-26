@@ -1,5 +1,6 @@
 #include "Mesh.h"
-#include <stdio.h>
+#include "External.h"
+//#include <stdio.h>
 
 
 using namespace vivid;
@@ -193,9 +194,9 @@ void CMesh::ExportToObjTexture(string aOutput){
         mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
     }
     //write texture
-    vector<unsigned char> texture;
+    vector<unsigned char> texture; //TODO (TOMER) why unsigned char?
     texture = GetColorTexture();
-    vivid::encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
@@ -221,7 +222,7 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = vivid::DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
+	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	mPoints = get<0>(temp);
 	mFaces = get<1>(temp);
 }
@@ -261,7 +262,7 @@ CPoint CMesh::getCenVector() { return mCenVector; }
 void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;
-    for (vector<CPoint>::iterator it = mPoints.begin(); it != mPoints.end(); it++)
+    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
     {
 
         px=it->GetX(); py=it->GetY(); pz=it->GetZ();
@@ -298,7 +299,7 @@ void CMesh::MoveMesh(CPoint aDirectionVec){
     auto x_movement = aDirectionVec.GetX();
     auto y_movement = aDirectionVec.GetY();
     auto z_movement = aDirectionVec.GetZ();
-    for (vector<CPoint>::iterator it = mPoints.begin(); it != this->mPoints.end(); it++)
+    for (auto it = mPoints.begin(); it != this->mPoints.end(); it++)
     {
         it->SetX(x_movement+it->GetX());
         it->SetY(y_movement+it->GetY());
@@ -313,7 +314,7 @@ void CMesh::ScaleMesh(CPoint aScaleVec){
     auto x_scale = aScaleVec.GetX();
     auto y_scale = aScaleVec.GetY();
     auto z_scale = aScaleVec.GetZ();
-    for (vector<CPoint>::iterator it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    for (auto it = this->mPoints.begin(); it != this->mPoints.end(); it++)
     {
         it->SetX(x_scale*it->GetX());
         it->SetY(y_scale*it->GetY());

@@ -29,7 +29,19 @@ public:
 	inline CPoint& operator += (const CPoint& apPoint2) {mX += apPoint2.mX; mY += apPoint2.mY; mZ += apPoint2.mZ; return *this;}
     inline CPoint& operator -= (const CPoint& apPoint2) {mX -= apPoint2.mX; mY -= apPoint2.mY; mZ -= apPoint2.mZ; return *this;}
     inline CPoint& operator = (const CPoint& apPoint2) {mX = apPoint2.mX; mY = apPoint2.mY; mZ = apPoint2.mZ; return *this;}
-    inline CPoint operator + (const CPoint& apPoint2) {return CPoint (mX + apPoint2.mX, mY + apPoint2.mY, mZ + apPoint2.mZ); }
+    inline CPoint  operator + (const CPoint& apPoint2) {return CPoint (mX + apPoint2.mX, mY + apPoint2.mY, mZ + apPoint2.mZ); }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // TODO NAFTALI: This is VERY_BAD_PRACTICE as there can be other formats instead of obj, hence printing to OBJ format should be done in a different place.
     friend inline ostream& operator << (ostream& os, const CPoint& point) {os << "v " << point.mX  << " " << point.mY << " " << point.mZ << "\n" ; return os;}

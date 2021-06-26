@@ -78,7 +78,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -86,7 +86,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>
@@ -211,7 +211,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -219,7 +219,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>
@@ -339,7 +339,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -347,7 +347,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>
@@ -529,7 +529,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -957,7 +957,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -965,7 +965,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>
@@ -1131,7 +1131,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -1139,7 +1139,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>
@@ -1305,7 +1305,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::RunVorn()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -1313,7 +1313,7 @@
     <frame>
       <ip>0x284E24</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurf::CSurf(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
+      <fn>CSurface::CSurface(std::vector&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt;, std::allocator&lt;std::vector&lt;double, std::allocator&lt;double&gt; &gt; &gt; &gt;, std::vector&lt;bool, std::allocator&lt;bool&gt; &gt;, std::vector&lt;double, std::allocator&lt;double&gt; &gt;, double, double)</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>40</line>

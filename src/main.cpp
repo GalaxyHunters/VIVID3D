@@ -46,7 +46,7 @@ int RunPyramidSurfTests() { //Decimate isn't activated currently
     }
 //    cout << quan.size() << " " << points.size() << endl; // TODO: Should've been assert!
 
-    CSurf surf = CSurf(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Decimation(0.5, 0.4);
@@ -64,7 +64,7 @@ int RunMedicaneTests(){
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
 //    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 
-    CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
+    CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
 //    medicaneSurf.SmoothSurf();
 //    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
 //    medicaneMesh.Decimation(0.5, 0.4);
@@ -201,7 +201,7 @@ int main(){
 //    // Some 3D viewers are centering the 3D models and change direction. this sets the center
 //    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 //
-//    CSurf medicaneSurf = CSurf(data_og.mPoints, data_og.mMask, data_og.mQuan, 0.f, 1.f);
+//    CSurface medicaneSurf = CSurface(data_og.mPoints, data_og.mMask, data_og.mQuan, 0.f, 1.f);
 //    medicaneSurf.smoothSurf();
 //    CMesh medicaneMesh = medicaneSurf.ToMesh("vivid_3d_obj", 1.0);
 //    medicaneMesh.Decimation(0.5, 0.4);

@@ -33,7 +33,7 @@ public:
 
     CModel(const vector<CMesh> &arMeshes) : mMeshes(arMeshes) {};
 
-    CModel(std::vector<CSurf> aSurfs, std::string aLabel, coord_t aAlpha);
+    CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha);
 
     ~CModel();
 
@@ -44,7 +44,7 @@ public:
 //	static CMesh load(string inputFile); // TODO add a read obj func
     void AddMesh(CMesh aMesh);
 
-    void AddSurf(CSurf aSurf, std::string aLabel, coord_t aAlpha);
+    void AddSurf(CSurface aSurf, std::string aLabel, coord_t aAlpha);
 
     std::vector<CMesh> GetMeshes() { return mMeshes; }
 

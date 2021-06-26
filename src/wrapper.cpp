@@ -11,15 +11,15 @@ using namespace vivid;
 namespace py = pybind11;
 
 PYBIND11_MODULE(vivid_py, m) {
-    py::class_<CSurf>(m, "CSurf")
+    py::class_<CSurface>(m, "CSurface")
             .def(py::init<vector<vector<double >>, vector<bool>, vector<coord_t>, coord_t, coord_t>(), "constructor function for surf",
                  py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)
-            .def(py::init<const CSurf &> (), "copy constructor for CSurf", py::arg("surf"))
-            .def("SmoothSurf", &CSurf::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
-            .def("ToMesh", &CSurf::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
+            .def(py::init<const CSurface &> (), "copy constructor for CSurface", py::arg("surf"))
+            .def("SmoothSurf", &CSurface::SmoothSurf, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
+            .def("ToMesh", &CSurface::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1)
-            .def("ExportToObj", &CSurf::ExportToObj, "writes the surface to an OBJ file",
-                 py::arg("aOutputFile"),  py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
+            .def("ExportToObj", &CSurface::ExportToObj, "writes the surface to an OBJ file",
+                 py::arg("aOutputFile"), py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
 
     py::class_<CMesh>(m, "CMesh")
             .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))
@@ -33,7 +33,7 @@ PYBIND11_MODULE(vivid_py, m) {
     py::class_<CModel>(m, "CModel")
             .def(py::init<> (), "default constructor for CModel")
             .def(py::init<vector<CMesh> > (), "constructor for CModel, from meshes", py::arg("Meshes"))
-            .def(py::init<vector<CSurf>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
+            .def(py::init<vector<CSurface>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));

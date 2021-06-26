@@ -5,7 +5,8 @@
 #ifndef VIVID_FBXFUNC_H
 #define VIVID_FBXFUNC_H
 
-#include "../ModelBuilder/Model.h"
+#include "Model.h"
+#include "Mesh.h"
 #include <iostream>
 //#include "ReadBinFile.h"
 #include <fbxsdk.h>
@@ -14,8 +15,7 @@
 #include "string"
 //#include <direct.h>
 
-namespace vivid
-{
+using namespace vivid;
 
 void FbxSceneExport(FbxScene* scene, const std::string& outputfile);
 
@@ -36,13 +36,12 @@ FbxNode* OneModelToFbx(CModel model);
 FbxNode* OneMeshToFbx(CMesh CMesh); //TODO DELETE THIS LATER
 /* this function is used to convert a model object into a FbxNode object which is animatable*/
 
-inline bool CheckTexture(const std::string& texture){
+inline bool CheckTexture(const std::string& texture){ // TODO: (TOMER) WTF?
     struct stat buffer;
     return (stat (texture.c_str(), &buffer) == 0);
 }
 
 //vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh);
 
-}; // namespace vivid
 
 #endif //VIVID_FBXFUNC_H

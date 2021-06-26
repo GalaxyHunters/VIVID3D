@@ -1,11 +1,12 @@
 #include "Model.h"
+#include "External.h"
 
 using namespace vivid;
 
 using namespace boost::algorithm;
 using namespace std;
 
-CModel::CModel(vector<CSurf> aSurfs, string aLabel, coord_t aAlpha){
+CModel::CModel(vector<CSurface> aSurfs, string aLabel, coord_t aAlpha){
     mMeshes = vector<CMesh>();
     for (auto it = aSurfs.begin(); it != aSurfs.end(); it++){
         mMeshes.push_back((*it).ToMesh(aLabel, aAlpha));
@@ -206,7 +207,7 @@ void CModel::ExportToObjTexture(string aOutput) {
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    vivid::encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
@@ -232,7 +233,7 @@ void CModel::AddMesh(CMesh aMesh) {
 	mMeshes.push_back(aMesh);
 }
 
-void CModel::AddSurf(CSurf aSurf, string aLabel, coord_t aAlpha){
+void CModel::AddSurf(CSurface aSurf, string aLabel, coord_t aAlpha){
     mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
 }
 

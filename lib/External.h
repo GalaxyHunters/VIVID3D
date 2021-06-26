@@ -1,10 +1,11 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef External_H
+#define External_H
 
 #include "Point.h"
+#include "IndexedFace.h"
 #include "Voronoi3D.hpp"
 #include "mdMeshDecimator.h"
-#include "IndexedFace.h"
+#include "../lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.hpp"
 #include "lodepng.h"
 
 

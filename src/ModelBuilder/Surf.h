@@ -1,41 +1,39 @@
 #ifndef SURF_H
 #define SURF_H
 
-
 #include "Mesh.h"
 #include <memory>
 
 namespace vivid
 {
 
-class CPointData_t { // used to sort and clean the voronoi input points
+class CSurfacePoint { // used to sort and clean the voronoi input points
 public:
 	CPoint mPoint;
 	coord_t mQuan;
 	bool mIsIn;
-	inline CPointData_t() {};
-	inline CPointData_t(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+	inline CSurfacePoint() {};
+	inline CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
 
-class CSurfFace{
+class CSurfaceFace{
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints;
     std::pair<size_t, size_t> mPairPoints;
     coord_t mColor;
 
-    inline CSurfFace(std::vector<std::shared_ptr<CPoint>> pPoints, coord_t pColor, std::pair<size_t, size_t> pPairPoints) :
+    inline CSurfaceFace(std::vector<std::shared_ptr<CPoint>> pPoints, coord_t pColor, std::pair<size_t, size_t> pPairPoints) :
             mPoints(pPoints), mColor(pColor), mPairPoints(pPairPoints){};
-    inline CSurfFace() {};
-    inline ~CSurfFace() {};
+    inline CSurfaceFace() {};
+    inline ~CSurfaceFace() {};
 };
 
 
-
-class CSurf{
+class CSurface{
 private:
     std::vector<std::shared_ptr<CPoint> > mVecPoints;
-    std::vector<CSurfFace> mVecFaces;
+    std::vector<CSurfaceFace> mVecFaces;
     std::vector<CPoint> mInputPoints; // for smooth
     std::vector<bool> mMask; //for smooth
     std::vector<coord_t> mQuan; // for smooth
@@ -58,13 +56,13 @@ private:
 	void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
 	void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
 	void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
-    std::vector<CPointData_t> RemoveDoublesVornInput(std::vector<CPointData_t>& arData);
+    std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 
-	CSurf();
+	CSurface();
 	
 public:	
-	CSurf(const CSurf &surf); //copy constructor
-	CSurf(std::vector<vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
+	CSurface(const CSurface &surf); //copy constructor
+	CSurface(std::vector<vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);
@@ -76,7 +74,7 @@ public:
 	inline void SetMask(std::vector<bool>& aMask) { mMask = aMask; }
 	inline void SetQuan(std::vector<coord_t>& aQuan) { mQuan = aQuan; }
 	inline std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
-	inline std::vector<CSurfFace>& GetVecfaces() { return mVecFaces; }
+	inline std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
 
 };
 

@@ -50,7 +50,7 @@ void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, char* outputfile, f
         }
 	}
 
-	FbxSceneExport(scene, outputfile);
+	FbxSceneExport(scene, string(outputfile) );
 //	// Create an exporter.
 //	FbxExporter* lExporter = FbxExporter::Create(manager, "");
 //
@@ -157,7 +157,7 @@ void RotateAnim(CModel model, float length, float duration, int RotAxis, char* o
 		animCurve->KeyModifyEnd();
 	}
 
-    FbxSceneExport(scene, outputfile);
+    FbxSceneExport(scene, string(outputfile) );
 //	// Create an exporter.
 //	FbxExporter* lExporter = FbxExporter::Create(manager, "");
 //
@@ -272,7 +272,7 @@ void AnimateTextures(std::vector<CModel> Models, double Interval, const string& 
     }
 
     //Export scene
-    FbxSceneExport(scene, OutputFile);
+    FbxSceneExport(scene, std::string(OutputFile) );
 }
 
 
@@ -312,7 +312,7 @@ void AnimateTextures(std::vector<CModel> Models, double Interval, const string& 
 //			cord_t Vmax = *max_element(temp.quan.begin(), temp.quan.end());
 //			cord_t Vmin = *min_element(temp.quan.begin(), temp.quan.end());
 //			
-//			CSurf surf = surf.CreateSurf(temp.points, temp.mask, temp.quan, Vmin, Vmax);
+//			CSurface surf = surf.CreateSurf(temp.points, temp.mask, temp.quan, Vmin, Vmax);
 //			surf.SmoothSurf();
 //			CMesh mesh = surf.ToMesh("mesh" + to_string(i), 0.2);
 //

@@ -3,8 +3,10 @@
 //
 
 #include "FbxFunc.h"
+#include "External.h"
 
 using namespace vivid;
+using namespace std;
 
 void FbxSceneExport(FbxScene* scene, const string& outputfile)
 {
@@ -114,7 +116,7 @@ FbxNode* OneModelToFbx(CModel Model)
     FbxNode* ParentNode = FbxNode::Create(manager, "ParentNode");
     for (int l = 0; l < Meshes.size(); ++l)
     {
-        Nodes[l] = vivid::OneMeshToFbx(Meshes[l]);
+        Nodes[l] = OneMeshToFbx(Meshes[l]);
         ParentNode->AddChild(Nodes[l]);
     }
     return ParentNode;
@@ -137,7 +139,7 @@ void CreateTexture(FbxScene* scene, FbxMesh* FMesh, double AlphaFactor, const st
 
     //checks if a texture png file already exists, if not, it creates the texture file
 //    const char *TexturePath;
-    if (CheckTexture(string(outputpath + "_texture.png")) == false) {
+    if (CheckTexture(string(outputpath) + string("_texture.png")) == false) {
         cout << "no texture found, creating texture" << endl;
         vector<unsigned char> texture;
         texture = GetColorTexture();
@@ -193,7 +195,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
     vector<CIndexedFace> CFaces = mesh.GetFaces();
     //int PointsSize = CPoints.size();                                        //maybe useless, for memory purposes
     int FacesSize = CFaces.size();
-    FMesh->InitControlPoints(vivid::GetCPSize(mesh));                              //Initialize the control point (aka vertex) array of the FBX mesh
+    FMesh->InitControlPoints(GetCPSize(mesh));                              //Initialize the control point (aka vertex) array of the FBX mesh
     FbxVector4* FMeshCP = FMesh->GetControlPoints();                                 //putting the array into a workable variable
 
     for (int l = 0; l < CPoints.size(); ++l)
@@ -215,7 +217,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
         UVMap->GetDirectArray().Add(FbxVector2(0, l/75));                           //This loop adds all possible colors from the texture to the UV map vertice array
         //This is basically ColorMap's ClmPlasma map, except its saved in a UV index way
     }
-    UVMap->GetIndexArray().SetCount(vivid::GetCPSize(mesh));
+    UVMap->GetIndexArray().SetCount(GetCPSize(mesh));
 
     //create faces for the mesh
     for (int k1 = 0; k1 < CFaces.size(); ++k1){

@@ -63,12 +63,12 @@ int RunMedicaneTests(){
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
-    CSurf medicaneSurf = CSurf( medicaneNoise.points, medicaneNoise.mask, medicaneNoise.quan, medicaneNoise.quan[0], medicaneNoise.quan[0] );
-    medicaneSurf.SmoothSurf();
+    CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
+    //medicaneSurf.SmoothSurf();
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-    medicaneMesh.Decimation(0.5, 0.4);
+    //medicaneMesh.Decimation(0.5, 0.4);
     model.AddMesh(medicaneMesh);
     model.ExportToObj("./testModels/MedicaneModelTest");
     return EXIT_SUCCESS;

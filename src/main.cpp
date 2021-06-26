@@ -65,29 +65,16 @@ int RunMedicaneTests(){
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 
-    CSurf medicaneSurf = CSurf( medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
-//    medicaneSurf.SmoothSurf();
-//    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-//    medicaneMesh.Decimation(0.5, 0.4);
-//    model.AddMesh(medicaneMesh);
-//    model.ExportToObj("MedicaneModelTest");
+    CSurf medicaneSurf = CSurf( medicaneNoise.points, medicaneNoise.mask, medicaneNoise.quan, medicaneNoise.quan[0], medicaneNoise.quan[0] );
+    medicaneSurf.SmoothSurf();
+    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
+    medicaneMesh.Decimation(0.5, 0.4);
+    model.AddMesh(medicaneMesh);
+    model.ExportToObj("./testModels/MedicaneModelTest");
     return EXIT_SUCCESS;
 }
 
-static bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) {
-    CPoint zeroPoint(0, 0, 0);
-    double dis1 = aPoint1.CalcDistance(zeroPoint);
-    double dis2 = aPoint2.CalcDistance(zeroPoint);
-    return (dis2 > dis1);
-}
-
-static double FindBoxR(vector<CPoint>& aInputPoints) {
-    CPoint zeroPoint(0, 0, 0);
-    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
-    return box_r.CalcDistance(zeroPoint);
-}
-
-int main ()
+/*int main ()
 {
     ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
 
@@ -103,9 +90,9 @@ int main ()
         y[i] = medicane.points[i][1];
         z[i] = medicane.points[i][2];
         points[i].Set (x[i], y[i], z[i]);
-        /*aInputPoints[i].SetX(x[i]);
-        aInputPoints[i].SetY(y[i]);
-        aInputPoints[i].SetZ(z[i]);*/
+//        aInputPoints[i].SetX(x[i]);
+//        aInputPoints[i].SetY(y[i]);
+//        aInputPoints[i].SetZ(z[i]);
     }
 
     double const xmin = * (std :: min_element (x.begin (), x.end ()));
@@ -158,25 +145,27 @@ int main ()
     Voronoi3D tess (ll, ur);
     //Voronoi3D tess (Vector3D(-boxR, -boxR, -boxR), Vector3D(boxR, boxR, boxR));
     tess.Build (points);
+
     return 0;
-}
+}*/
 
 
-/*
+
 int main(){
     int ret_value = EXIT_SUCCESS;
 
+    cout << "Basic" << endl;
     ret_value = RunBasicTests();
     if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
-
-//    ret_value = RunPyramidSurfTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
-
-//    ret_value = RunMedicaneTests();
-//    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = RunPyramidSurfTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    cout << "Medicane" << endl;
+    ret_value = RunMedicaneTests();
+    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
-} */
+}
 
 
 //struct CData{

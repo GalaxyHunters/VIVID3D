@@ -70,7 +70,7 @@ public:
 
 
     // TODO NAFTALI: This is VERY_BAD_PRACTICE as there can be other formats instead of obj, hence printing to OBJ format should be done in a different place.
-    friend inline ostream& operator << (ostream& os, const CPoint& point) {os << "v " << point.mX  << " " << point.mY << " " << point.mZ << "\n" ; return os;}
+//    friend inline ostream& operator << (ostream& os, const CPoint& point) {os << "v " << point.mX  << " " << point.mY << " " << point.mZ << "\n" ; return os;}
 
 
 };

@@ -78,7 +78,7 @@ add_executable(vivid
         src/AnimationBuilder/FbxFunc.cpp
         #main
         src/main.cpp
-)
+        )
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.

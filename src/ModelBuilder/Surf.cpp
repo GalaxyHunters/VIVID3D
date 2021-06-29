@@ -6,7 +6,7 @@
 using namespace vivid;
 using namespace std;
 
-const coord_t DoublePointThreshHold = 0.0001;
+static const coord_t DoublePointThreshHold = 0.0001;
 
 CSurface::CSurface() {};
 
@@ -35,13 +35,20 @@ CSurface::CSurface(vector<vector<double>> aInputPoints, vector<bool> aMask, vect
     mCenVector = FindCenPoint(aInputPoints);
     //code
     vector<CPoint> temp;
+    // Why dont we set temp to be the size of aInputPoints ahead of time?
     for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){
+    for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
         temp.push_back(CPoint(*it) -= mCenVector);
     }
     temp.resize(temp.size());
 	SetInputPoints(temp);
 	SetMask(aMask);
 	SetQuan(NormQuan(aQuan, aVMin, aVMax));
+
+	// freeing up aInputPoints from memory, at this point it's not needed.
+	aInputPoints.clear();
+	aInputPoints.shrink_to_fit();
+
 	RunVorn();
 	CleanEdges();
 	CleanFaces(aMask);
@@ -77,6 +84,11 @@ CSurface::CSurface(const CSurface &surf2) { //TODO: why like this? why do you us
 inline bool ComparePointX(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[0] < aPoint2[0]);}
 inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[1] < aPoint2[1]);}
 inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
+
+// TODO: Why doesn't operator overload work here??
+inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() < aPoint2.GetX());}
+inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() < aPoint2.GetY());}
+inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() < aPoint2.GetZ());}
 
 //define function that finds model center point and radius of points.
 CPoint CSurface::FindCenPoint(const vector<vector<double>> &aInputPoints){
@@ -473,18 +485,50 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 	return new_vec;
 }
 
-double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be static!!!
+// TODO: Add alt Box func
+static double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be static!!!
     CPoint zeroPoint(0, 0, 0);
 	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
 	return box_r.Dist(zeroPoint);
 }
 
+static vector<Vector3D> FindBox(vector<CPoint> aInputPoints) {
+    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
+    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
+
+    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
+    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
+
+    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
+    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
+
+    vector<Vector3D> Box (2);
+
+    const double expandFactor = 1;
+
+    Vector3D ll (xmin - (xmax - xmin) * expandFactor, ymin - (ymax - ymin) * expandFactor, zmin - (zmax - zmin) * expandFactor);
+    Vector3D ur (xmax + (xmax - xmin) * expandFactor, ymax + (ymax - ymin) * expandFactor, zmax + (zmax - zmin) * expandFactor);
+
+    Box.at(0) = ll;
+    Box.at(1) = ur;
+
+    return Box;
+}
+
+// TODO: Implement alt box func and alt compute vornoi func
 void CSurface::RunVorn() {
 	//find the box_r
 	double box_R = FindBoxR(mInputPoints);
-	cout << "start vorn" << endl; //TODO BAD!
-	auto vorn_out = compute_vornoi(mInputPoints, 2*box_R );
-	cout << "vorn done" << endl; //TODO BAD!
+	cout << "BoxR = " << box_R << endl;
+	// New version:
+	vector<Vector3D> Box = FindBox(this->mInputPoints);
+	cout << "Box[0] Elad = " << Box.at(0).x << " " << Box.at(0).y << " " << Box.at(0).z << endl;
+    cout << "Box[1] Elad = " << Box.at(1).x << " " << Box.at(1).y << " " << Box.at(1).z << endl;
+
+	cout << "start vorn" << endl;
+    //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
+    auto vorn_out = compute_vornoi(mInputPoints, 2*box_R );
+	cout << "vorn done" << endl;
 	//set the points
 	mVecPoints = ConvertFromVorn(get<0>(vorn_out));
 	//set the faces

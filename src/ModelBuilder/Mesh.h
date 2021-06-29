@@ -1,11 +1,11 @@
 #ifndef MESH_H
 #define MESH_H
 
+
 #include "Point.h"
 #include "IndexedFace.h"
 #include "../lib/External.h"
 #include "Utils/ColorMap.h"
-
 #include <iostream>
 #include "boost/algorithm/string/predicate.hpp"
 #include "int2str.hpp"
@@ -22,15 +22,6 @@ private:
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
     CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
-
-	//output functions
-	void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter);
-	void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, color_t color, coord_t aAlpha);
-	void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace);
-
-    void WriteObjTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aTextureSize);
-    void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, string aTextureName, coord_t aAlpha);
-    void WriteNewFaceTexture(ofstream& aOBJFile, CIndexedFace aFace);
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
@@ -53,8 +44,7 @@ public:
 
     void Decimation(coord_t aVerticlePercent, coord_t aError);
 
-    void ExportToObj(string aOutput); // TODO (Naftali) Shouldbn't it be a stream too?
-    void ExportToObjTexture(string aOutput);
+    void ExportToObj(string aOutput, bool WithTexture = 1); // TODO (Naftali) Shouldbn't it be a stream too?
 
 
     /**

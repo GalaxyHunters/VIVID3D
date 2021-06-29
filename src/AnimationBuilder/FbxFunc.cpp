@@ -79,7 +79,7 @@ FbxNode* OneMeshToFbx(CMesh CMesh)
 
     for (int l = 0; l < CMeshPoints.size(); ++l)
     {
-        FMeshCP[l].Set(CMeshPoints[l].GetX(), CMeshPoints[l].GetY(), CMeshPoints[l].GetZ());
+        FMeshCP[l].Set(CMeshPoints[l].X(), CMeshPoints[l].Y(), CMeshPoints[l].Z());
     }
 
     for (int i1 = 0; i1 < ColorValues.size(); ++i1)
@@ -200,7 +200,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
 
     for (int l = 0; l < CPoints.size(); ++l)
     {
-        FMeshCP[l].Set(CPoints[l].GetX(), CPoints[l].GetY(), CPoints[l].GetZ());
+        FMeshCP[l].Set(CPoints[l].X(), CPoints[l].Y(), CPoints[l].Z());
     }
 
 

@@ -2,15 +2,15 @@
 
 using namespace vivid;
 
-void vivid::ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints) {
+void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints) {
 	for (auto it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
-		arNewPoints.push_back(Vector3D(it->GetX(), it->GetY(), it->GetZ()));
+		arNewPoints.push_back(Vector3D(it->X(), it->Y(), it->Z()));
 	}
 }
 
 std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR) {
     std::vector<Vector3D> vorn_points;
-	vivid::ConvertToVorn(arInputPoints, vorn_points);
+	ConvertToVorn(arInputPoints, vorn_points);
 	Voronoi3D temp(Vector3D(-aBoxR, -aBoxR, -aBoxR), Vector3D(aBoxR, aBoxR, aBoxR));
 	temp.Build(vorn_points);
 	vorn_points = temp.GetFacePoints();
@@ -55,7 +55,7 @@ pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints
 		triangles.push_back(temp_triangle); //, fIt->GetColor()
 	}
 	for (vector<CPoint>::iterator pIt = aPoints.begin(); pIt != aPoints.end(); pIt++) {
-		vertices.push_back(Vec3<float>(pIt->GetX(), pIt->GetY(), pIt->GetZ(), 0));
+		vertices.push_back(Vec3<float>(pIt->X(), pIt->Y(), pIt->Z(), 0));
 	}
 	//decimate model
 	MeshDecimator myMDecimator;

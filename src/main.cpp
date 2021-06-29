@@ -16,11 +16,11 @@ int RunBasicTests(){
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     // TODO (Tomer): what does "this sets the center" mean???
-//    model.AddMesh( CreateSphereMesh(10, 10, 0.1, std::vector<double>({0.0, 0.0, 0.0}),  5, 0.8, std::string("sphere1")) );
-//    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0.0, 0.0, 1.0}, 0.01, 0.2, "sphere2") );
-//    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
-    auto arrow_x = vivid::CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
-//    model.AddMesh(arrow_x);
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, std::vector<double>({0.0, 0.0, 0.0}),  5, 0.8, std::string("sphere1")) );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0.0, 0.0, 1.0}, 0.01, 0.2, "sphere2") );
+    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
+    auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
+    model.AddMesh(arrow_x);
     model.ExportToObj("./testModels/arrow_test"); // /testModels/
 
     return EXIT_SUCCESS;
@@ -62,13 +62,13 @@ int RunMedicaneTests(){
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-//    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
+    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.8, "sphere") );
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
 //    medicaneSurf.SmoothSurf();
 //    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
 //    medicaneMesh.Decimation(0.5, 0.4);
-//    model.AddMesh(medicaneMesh);
+//    model.AddMesh(medicaneMesh);zxx
 //    model.ExportToObj("MedicaneModelTest");
     return EXIT_SUCCESS;
 }

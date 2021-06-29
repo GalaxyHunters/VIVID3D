@@ -130,24 +130,24 @@ void CSurface::CleanPoints() {
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
-	if (abs((*aObj1).GetX() - (*aObj2).GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs((*aObj1).GetY() - (*aObj2).GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs((*aObj1).GetZ() - (*aObj2).GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+	if (abs((*aObj1).X() - (*aObj2).X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
+		if (abs((*aObj1).Y() - (*aObj2).Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
+			if (abs((*aObj1).Z() - (*aObj2).Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
 				return false;
 			}
 			else
 			{ // we compare the points by z to see who needs to go first
-				return (*aObj1).GetZ() > (*aObj2).GetZ();
+				return (*aObj1).Z() > (*aObj2).Z();
 			}
 		}
 		else // we compare by y to see who needs to go first
 		{
-			return (*aObj1).GetY() > (*aObj2).GetY();
+			return (*aObj1).Y() > (*aObj2).Y();
 		}
 	}
 	else // we compare by x to see who goes first
 	{
-		return (*aObj1).GetX() > (*aObj2).GetX();
+		return (*aObj1).X() > (*aObj2).X();
 	}
 }
 
@@ -165,7 +165,7 @@ void CSurface::RemoveDoublePoints() {
 		{
 			break;
 		}
-		while ((*mVecPoints[i]).CalcDistance((*mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		while ((*mVecPoints[i]).Dist((*mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			old_new_points[mVecPoints[j]] = mVecPoints[i];
 			j += 1;
 			if (j >= mVecPoints.size())
@@ -254,24 +254,24 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 }
 
 bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) {
-	if (abs(aObj1.mPoint.GetX() - aObj2.mPoint.GetX()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs(aObj1.mPoint.GetY() - aObj2.mPoint.GetY()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs(aObj1.mPoint.GetZ() - aObj2.mPoint.GetZ()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+	if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
+		if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
+			if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
 				return false;
 			}
 			else
 			{ // we compare the points by z to see who needs to go first
-				return aObj1.mPoint.GetZ() > aObj2.mPoint.GetZ();
+				return aObj1.mPoint.Z() > aObj2.mPoint.Z();
 			}
 		}
 		else // we compare by y to see who needs to go first
 		{
-			return aObj1.mPoint.GetY() > aObj2.mPoint.GetY();
+			return aObj1.mPoint.Y() > aObj2.mPoint.Y();
 		}
 	}
 	else // we compare by x to see who goes first
 	{
-		return aObj1.mPoint.GetX() > aObj2.mPoint.GetX();
+		return aObj1.mPoint.X() > aObj2.mPoint.X();
 	}
 }
 
@@ -316,7 +316,7 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 		{
 			break;
 		}
-		while (arData[i].mPoint.CalcDistance(arData[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		while (arData[i].mPoint.Dist(arData[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
 			j += 1;
 			if (j >= arData.size())
 			{
@@ -333,17 +333,17 @@ void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, 
 {
 	coord_t x, y, z;
 	(*apPVec).push_back(*apNewIndex);
-	x = (this->mInputPoints[aCPoint1].GetX() * 2 + this->mInputPoints[aCPoint2].GetX()) / 3.0;
-	y = (this->mInputPoints[aCPoint1].GetY() * 2 + this->mInputPoints[aCPoint2].GetY()) / 3.0;
-	z = (this->mInputPoints[aCPoint1].GetZ() * 2 + this->mInputPoints[aCPoint2].GetZ()) / 3.0;
+	x = (this->mInputPoints[aCPoint1].X() * 2 + this->mInputPoints[aCPoint2].X()) / 3.0;
+	y = (this->mInputPoints[aCPoint1].Y() * 2 + this->mInputPoints[aCPoint2].Y()) / 3.0;
+	z = (this->mInputPoints[aCPoint1].Z() * 2 + this->mInputPoints[aCPoint2].Z()) / 3.0;
 	(*apNewPoints).push_back(CPoint(x, y, z));
 	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
 	(*apNewIndex)++;
 
 	(*apPVec).push_back(*apNewIndex);
-	x = (this->mInputPoints[aCPoint1].GetX() + this->mInputPoints[aCPoint2].GetX() * 2) / 3.0;
-	y = (this->mInputPoints[aCPoint1].GetY() + this->mInputPoints[aCPoint2].GetY() * 2) / 3.0;
-	z = (this->mInputPoints[aCPoint1].GetZ() + this->mInputPoints[aCPoint2].GetZ() * 2) / 3.0;
+	x = (this->mInputPoints[aCPoint1].X() + this->mInputPoints[aCPoint2].X() * 2) / 3.0;
+	y = (this->mInputPoints[aCPoint1].Y() + this->mInputPoints[aCPoint2].Y() * 2) / 3.0;
+	z = (this->mInputPoints[aCPoint1].Z() + this->mInputPoints[aCPoint2].Z() * 2) / 3.0;
 	(*apNewPoints).push_back(CPoint(x, y, z));
 	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
 	(*apNewIndex)++;
@@ -458,8 +458,8 @@ void CSurface::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {
 
 bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) { //TODO (TOMER) Move to CPoint
     CPoint zeroPoint(0, 0, 0);
-	double dis1 = aPoint1.CalcDistance(zeroPoint);
-	double dis2 = aPoint2.CalcDistance(zeroPoint);
+	double dis1 = aPoint1.Dist(zeroPoint);
+	double dis2 = aPoint2.Dist(zeroPoint);
 	return (dis2 > dis1);
 }
 
@@ -476,7 +476,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be static!!!
     CPoint zeroPoint(0, 0, 0);
 	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
-	return box_r.CalcDistance(zeroPoint);
+	return box_r.Dist(zeroPoint);
 }
 
 void CSurface::RunVorn() {
@@ -519,7 +519,7 @@ void CSurface::CleanEdges() {
 	vector<CSurfaceFace> new_faces;
 	for (auto face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
 		for (auto point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
-			if ((**point).CalcDistance(zero_point) > box_R * 1.1) {
+			if ((**point).Dist(zero_point) > box_R * 1.1) {
 				is_out_of_radius = true;
 			}
 		}

@@ -170,7 +170,7 @@ void CModel::WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMes
     //write points to obj file
     for (auto it = aMesh->GetPoints().begin(); it != aMesh->GetPoints().end(); it++)
     {
-        aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
+        aOBJFile << "v " + to_string(it->X()) + " " + to_string(it->Y()) + " " + to_string(it->Z()) + "\n";
     }
     //write uv cordinates
     for(size_t i = aTextureSize; i > 0; i--){

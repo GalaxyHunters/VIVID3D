@@ -265,11 +265,11 @@ void CMesh::TransformMesh(coord_t const aTrans[3][3]){
     for (auto it = mPoints.begin(); it != mPoints.end(); it++)
     {
 
-        px=it->GetX(); py=it->GetY(); pz=it->GetZ();
+        px= it->X(); py= it->Y(); pz= it->Z();
 
-        it->SetX( aTrans[0][0]*px + aTrans[0][1]*py + aTrans[0][2]*pz );
-        it->SetY( aTrans[1][0]*px + aTrans[1][1]*py + aTrans[1][2]*pz );
-        it->SetZ( aTrans[2][0]*px + aTrans[2][1]*py + aTrans[2][2]*pz );
+        it->X(aTrans[0][0] * px + aTrans[0][1] * py + aTrans[0][2] * pz);
+        it->Y(aTrans[1][0] * px + aTrans[1][1] * py + aTrans[1][2] * pz);
+        it->Z(aTrans[2][0] * px + aTrans[2][1] * py + aTrans[2][2] * pz);
 
         // We should change all to vectorized operators.
         // May the god of compilers forgive us all for our sins.
@@ -281,9 +281,9 @@ void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);
     // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
-    auto nx = aNormVec.GetX();
-    auto ny = aNormVec.GetY();
-    auto nz = aNormVec.GetZ();
+    auto nx = aNormVec.X();
+    auto ny = aNormVec.Y();
+    auto nz = aNormVec.Z();
 
     coord_t const rotation_mat[3][3] = {
             cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
@@ -296,14 +296,15 @@ void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
 }
 
 void CMesh::MoveMesh(CPoint aDirectionVec){
-    auto x_movement = aDirectionVec.GetX();
-    auto y_movement = aDirectionVec.GetY();
-    auto z_movement = aDirectionVec.GetZ();
-    for (auto it = mPoints.begin(); it != this->mPoints.end(); it++)
+//    auto x_movement = aDirectionVec.X();
+//    auto y_movement = aDirectionVec.Y();
+//    auto z_movement = aDirectionVec.Z();
+    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
     {
-        it->SetX(x_movement+it->GetX());
-        it->SetY(y_movement+it->GetY());
-        it->SetZ(z_movement+it->GetZ());
+        *it += aDirectionVec;
+//        it->X(x_movement + it->X());
+//        it->Y(y_movement + it->Y());
+//        it->Z(z_movement + it->Z());
         // The only reason I let it pass like that, is because this is an inline code.
         // We should change all to vectorized operators.
         // May the god of compilers forgive us all for our sins.
@@ -311,14 +312,14 @@ void CMesh::MoveMesh(CPoint aDirectionVec){
 }
 
 void CMesh::ScaleMesh(CPoint aScaleVec){
-    auto x_scale = aScaleVec.GetX();
-    auto y_scale = aScaleVec.GetY();
-    auto z_scale = aScaleVec.GetZ();
+    auto x_scale = aScaleVec.X();
+    auto y_scale = aScaleVec.Y();
+    auto z_scale = aScaleVec.Z();
     for (auto it = this->mPoints.begin(); it != this->mPoints.end(); it++)
     {
-        it->SetX(x_scale*it->GetX());
-        it->SetY(y_scale*it->GetY());
-        it->SetZ(z_scale*it->GetZ());
+        it->X(x_scale * it->X());
+        it->Y(y_scale * it->Y());
+        it->Z(z_scale * it->Z());
         // The only reason I let it pass like that, is because this is an inline code.
         // We should change all to vectorized operators.
         // May the god of compilers forgive us all for our sins.

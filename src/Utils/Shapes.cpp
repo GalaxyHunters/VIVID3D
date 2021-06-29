@@ -7,36 +7,11 @@ using namespace vivid;
 
 using namespace std;
 
-//struct MathVector{double size;
-//    vector<double> direction;};
 
-inline double DotProduct(CPoint aVec1, CPoint aVec2){ return (aVec1.GetX()*aVec2.GetX() + aVec1.GetY()*aVec2.GetY() + aVec1.GetZ()*aVec2.GetZ());}
-inline double VectorSize(CPoint aVec){ return sqrt(DotProduct(aVec,aVec)) ;}
-inline CPoint CrossProduct(CPoint aVec1, CPoint aVec2) {
-    return CPoint(aVec1.GetY()*aVec2.GetZ() - aVec1.GetZ()*aVec2.GetY(),
-                  aVec1.GetZ()*aVec2.GetX() - aVec1.GetX()*aVec2.GetZ(),
-                  aVec1.GetX()*aVec2.GetZ() - aVec1.GetX()*aVec2.GetZ());
-}
 
-inline CPoint NormalizeVector(CPoint aVec)
+
+namespace vivid
 {
-    double vec_size = VectorSize(aVec);
-    aVec.SetX(aVec.GetX()/vec_size);
-    aVec.SetY(aVec.GetY()/vec_size);
-    aVec.SetZ(aVec.GetZ()/vec_size);
-    return aVec;
-}
-inline bool IsPerpindicular(CPoint aVec1, CPoint aVec2)
-{
-    if (0==DotProduct(aVec1,aVec2)) {
-        return true;
-    }
-    return false;
-}
-
-
-
-
 
 //TODO make position a cpoint object
 CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
@@ -157,17 +132,17 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
     {
         CPoint& CurrentVector = points[i1];
         //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.GetX();
-        double CVY = CurrentVector.GetY();
-        double CVZ = CurrentVector.GetZ();
+        double CVX = CurrentVector.X();
+        double CVY = CurrentVector.Y();
+        double CVZ = CurrentVector.Z();
         //first we strech em
         CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
                                CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
                                CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
         //now we rotate em
-        CVX = CurrentVector.GetX();
-        CVY = CurrentVector.GetY();
-        CVZ = CurrentVector.GetZ();
+        CVX = CurrentVector.X();
+        CVY = CurrentVector.Y();
+        CVZ = CurrentVector.Z();
         CurrentVector = CPoint(CenterPoint[0] + CVX * RotateMatrix[0][0] + CVY * RotateMatrix[1][0] + CVZ * RotateMatrix[2][0],
                                CenterPoint[1] + CVX * RotateMatrix[0][1] + CVY * RotateMatrix[1][1] + CVZ * RotateMatrix[2][1],
                                CenterPoint[2] + CVX * RotateMatrix[0][2] + CVY * RotateMatrix[1][2] + CVZ * RotateMatrix[2][2]);
@@ -232,20 +207,20 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
-    auto direction_size = VectorSize(direction_vec);
-    CPoint cross_vec = CrossProduct(CPoint(0,0,1), direction_vec);
-    CPoint normal_vec = NormalizeVector(cross_vec);
-    double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
+    auto direction_size = direction_vec.Norm();
+    CPoint cross_vec = CPoint(0,0,1).Cross(direction_vec);
+    CPoint normal_vec = cross_vec.Normalize();
+    double rotation_angel = acos( CPoint(0,0,1).Dot(normal_vec)); //Note both vec are normalized so it's ok
 
 //    cout << "normal_vec: " << normal_vec << "\t";
 //    cout << "rotation_angel: " << rotation_angel << "\n";
 //    cout << "direction_size: " << direction_size << "\n";
 //    cout << "cross_product: " << cross_vec << "\n";
-//    cout << "VectorSize(cross_vec): " << VectorSize(cross_vec) << "\n";
+//    cout << "VectorSize(cross_vec): " << Norm(cross_vec) << "\n";
 
-    if (VectorSize(cross_vec)<0.0001) // meaning direction_vec is on the z axis
+    if ( cross_vec.Norm() < 0.0001 ) // meaning direction_vec is on the z axis
     {
-        if (direction_vec.GetZ() < 0)
+        if (direction_vec.Z() < 0)
         {
             direction_size = -1*direction_size;
         }
@@ -261,7 +236,7 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 
 }
 
-
+} // namespace vivid
 
 
 ////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.

@@ -8,9 +8,9 @@ set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message(${PROJECT_SOURCE_DIR})
 
 
+message(${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast;)
 
-
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/FBX;${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX/; ${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast/;")
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -33,6 +33,7 @@ find_package(Boost 1.62.0 REQUIRED)
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI)
 find_package(FBX)
+#find_package(IMPORTANDEXPORT REQUIRED)
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
 #set(PY_ROOT    "C:/Users/nafta/Miniconda2")
@@ -61,13 +62,13 @@ include_directories(src/Utils)
 include_directories(lib)
 include_directories(lib/MeshDecimation)
 include_directories(lib/pybind11/include)
-include_directories(lib/lodepng)
+include_directories(lib/ImportAndExport/lodepng)
 
 add_executable(vivid
         #external
         lib/External.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
-        lib/lodepng/lodepng.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
         #vivid
         src/ModelBuilder/Surf.cpp
         src/ModelBuilder/Mesh.cpp
@@ -92,7 +93,7 @@ pybind11_add_module(vivid_py
         #external
         lib/External.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
-        lib/lodepng/lodepng.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
         #vivid
         src/ModelBuilder/Surf.cpp
         src/ModelBuilder/Mesh.cpp

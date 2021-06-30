@@ -10,7 +10,7 @@ message(${PROJECT_SOURCE_DIR})
 
 message(${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast;)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX/; ${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast/;")
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast; ${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX;)
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -32,7 +32,7 @@ find_package(Boost 1.62.0 REQUIRED)
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI)
-find_package(FBX)
+find_package(FBX REQUIRED)
 #find_package(IMPORTANDEXPORT REQUIRED)
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")

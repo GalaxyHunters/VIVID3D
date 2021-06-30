@@ -1,9 +1,10 @@
 #include "Model.h"
 #include "External.h"
+#include "ObjExportImport.h"
 
 using namespace vivid;
 
-using namespace boost::algorithm;
+//using namespace boost::algorithm;
 using namespace std;
 
 CModel::CModel(vector<CSurface> aSurfs, string aLabel, coord_t aAlpha){
@@ -14,7 +15,7 @@ CModel::CModel(vector<CSurface> aSurfs, string aLabel, coord_t aAlpha){
 }
 
 void CModel::ExportToObj(string aOutput, bool WithTexture){
-//    ExportToObj(*this, aOutput, WithTexture);
+//    OBJExporter(*this, aOutput, WithTexture);
 }
 
 void CModel::AddMesh(CMesh aMesh) {

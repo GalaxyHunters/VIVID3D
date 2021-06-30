@@ -1,10 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-//#include "fstream"
 #include "Mesh.h"
 #include "Surf.h"
-#include "ObjExportImport.h"
 
 
 namespace vivid

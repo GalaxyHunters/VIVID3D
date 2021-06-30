@@ -1,8 +1,10 @@
 #include "Mesh.h"
+#include "Model.h" // TODO TOMER!! Y?
 #include "External.h"
+
+#include "boost/algorithm/string/predicate.hpp"
 //#include <stdio.h>
 
-#include "Model.h" // TODO TOMER!! Y?
 
 
 using namespace vivid;
@@ -28,7 +30,7 @@ CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel,
 
 
 void CMesh::ExportToObj(string aOutput, bool WithTexture){
-    vivid::OBJExporter( CModel(*this), aOutput, WithTexture);
+    CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
 }
 
 void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)

@@ -4,10 +4,10 @@
 
 #include "Point.h"
 #include "IndexedFace.h"
-#include "../lib/External.h"
+#include "External.h"
 #include "Utils/ColorMap.h"
 
-#include "boost/algorithm/string/predicate.hpp"
+
 #include "int2str.hpp"
 #include <string>
 #include <fstream>

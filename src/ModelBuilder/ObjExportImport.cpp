@@ -1,4 +1,10 @@
 #include "ObjExportImport.h"
+#include <boost/algorithm/string/predicate.hpp>
+
+//TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
+
+
+using namespace vivid;
 
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
     return GetColor(aQuan);
@@ -44,7 +50,7 @@ void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
 
 void WriteNewPoint(ofstream& aOBJFile, CPoint aPoint)
 {
-    aOBJFile << "v " << to_string(aPoint.GetX()) + " " + to_string(aPoint.GetY()) + " " + to_string(aPoint.GetZ()) + "\n";
+    aOBJFile << "v " << to_string(aPoint.X()) + " " + to_string(aPoint.Y()) + " " + to_string(aPoint.Z()) + "\n";
 }
 
 void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter)
@@ -88,12 +94,13 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
 
 
 
-void ExportToObjMaterial(CModel * aModel, string aOutput){
-    if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
+void ExportToObjMaterial(CModel &aModel, string aOutput){
+    if (boost::ends_with(aOutput, ".obj") ) { //check if the output file ends with .obj, and delete it if it does
         aOutput.erase(aOutput.length() - 4, 4);
     }
 
     string lines;
+    //TODO BAD!!! Y NOT STD????
 #if defined(_WIN32)
     lines = '\\';
 #elif defined(__linux__)
@@ -116,7 +123,7 @@ void ExportToObjMaterial(CModel * aModel, string aOutput){
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    vector<CMesh> meshes = aModel->GetMeshes();
+    vector<CMesh> meshes = aModel.GetMeshes();
     for (auto it = meshes.begin(); it != meshes.end(); it++)
     {
 //	    cout << it->GetLabel() << endl;
@@ -182,8 +189,8 @@ void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_
     }
 }
 
-void ExportToObjTexture(CModel * aModel, string aOutput) {
-    if (ends_with(aOutput, ".obj")) { //check if the output file ends with .obj, and delete it if it does
+void ExportToObjTexture(CModel &aModel, string aOutput) {
+    if (boost::ends_with(aOutput, ".obj") )  { //check if the output file ends with .obj, and delete it if it does
         aOutput.erase(aOutput.length() - 4, 4);
     }
     string lines;
@@ -215,7 +222,7 @@ void ExportToObjTexture(CModel * aModel, string aOutput) {
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    vector<CMesh> meshes = aModel->GetMeshes();
+    vector<CMesh> meshes = aModel.GetMeshes();
     for (auto ItMesh = meshes.begin(); ItMesh != meshes.end(); ++ItMesh)
     {
 //	    cout << ItMesh->GetLabel() << endl;
@@ -228,7 +235,7 @@ void ExportToObjTexture(CModel * aModel, string aOutput) {
     m.close();
 }
 
-void ExportToObj(CModel * aModel,std::string aOutPutFile, bool WithTexture){
+void OBJExporter(CModel &aModel,std::string aOutPutFile, bool WithTexture){
     if (WithTexture == 0){
         ExportToObjMaterial(aModel, aOutPutFile);
     }

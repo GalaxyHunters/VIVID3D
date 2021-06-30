@@ -11,8 +11,6 @@ void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& ar
 
 // TODO: Alt compute_vornoi func
 
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, double aBoxR) {
-	vector<Vector3D> vorn_points;
 std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR) {
     std::vector<Vector3D> vorn_points;
 	ConvertToVorn(arInputPoints, vorn_points);

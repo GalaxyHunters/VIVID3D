@@ -28,8 +28,7 @@ CMesh::CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel,
 
 
 void CMesh::ExportToObj(string aOutput, bool WithTexture){
-    CModel temp = CModel(*this);
-    ::ExportToObj(&temp, aOutput, WithTexture);
+    vivid::OBJExporter( CModel(*this), aOutput, WithTexture);
 }
 
 void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)

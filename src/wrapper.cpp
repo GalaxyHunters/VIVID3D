@@ -26,18 +26,14 @@ PYBIND11_MODULE(vivid_py, m) {
             .def("Decimation", &CMesh::Decimation,
                  "input values should be between 0 and 1. A Decimation algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
-            .def("ExportToObj", &CMesh::ExportToObj, "writes the surface to an OBJ file, color is by metirals",
-                 py::arg("aOutputFile"))
-            .def("ExportToObjTexture", &CMesh::ExportToObjTexture, "writes the surface to an OBJ file, color is by texture", py::arg("aOutputFile"));
-
+            .def("ExportToObj", &CMesh::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     py::class_<CModel>(m, "CModel")
             .def(py::init<> (), "default constructor for CModel")
             .def(py::init<vector<CMesh> > (), "constructor for CModel, from meshes", py::arg("Meshes"))
             .def(py::init<vector<CSurface>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
             .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
-            .def("ExportToObj", &CModel::ExportToObj, "writes the surfaces to an OBJ file", py::arg("aOutputFile"));
-
+            .def("ExportToObj", &CModel::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     m.def("Animate", &Animate, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
           py::arg("Models"),py::arg("Interval"), py::arg("OutputFile"));
     m.def("RotateAnim", &RotateAnim, "takes a model and creates an animation of it rotating", py::arg("Model"), py::arg("Length"), py::arg("Duration"), py::arg("RotationAxis"), py::arg("OutputFile"));

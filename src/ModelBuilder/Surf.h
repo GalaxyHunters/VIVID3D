@@ -60,11 +60,11 @@ private:
 	void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
     std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 
-	CSurface();
+//	CSurface();
 	
 public:	
 	CSurface(const CSurface &surf); //copy constructor
-	CSurface(std::vector<vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
+	CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);

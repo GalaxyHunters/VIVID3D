@@ -73,6 +73,7 @@ add_executable(vivid
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/Utils/Shapes.cpp
+        src/ModelBuilder/ObjExportImport.cpp
         #animation
         src/AnimationBuilder/Animation.cpp
         src/AnimationBuilder/FbxFunc.cpp

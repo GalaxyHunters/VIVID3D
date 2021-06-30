@@ -6,11 +6,12 @@
 using namespace vivid;
 using namespace std;
 
-static const coord_t DoublePointThreshHold = 0.0001;
+const coord_t DoublePointThreshHold = 0.0001;
 
-CSurface::CSurface() {};
+//CSurface() {};
 
-CSurface::CSurface(vector<vector<double>> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
+CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan,
+                   coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
         if(aQuan.size() != 0) { // use empty()
@@ -37,7 +38,6 @@ CSurface::CSurface(vector<vector<double>> aInputPoints, vector<bool> aMask, vect
     vector<CPoint> temp;
     // Why dont we set temp to be the size of aInputPoints ahead of time?
     for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){
-    for (vector<vector<double> >::iterator it = aInputPoints.begin(); it != aInputPoints.end(); it++){
         temp.push_back(CPoint(*it) -= mCenVector);
     }
     temp.resize(temp.size());
@@ -55,20 +55,20 @@ CSurface::CSurface(vector<vector<double>> aInputPoints, vector<bool> aMask, vect
 	CleanPoints();
 }
 
-CSurface::CSurface(const CSurface &surf2) { //TODO: why like this? why do you use "this->"? no need
-    mInputPoints = surf2.mInputPoints;
-    mMask = surf2.mMask;
-    mQuan = surf2.mQuan;
+CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use "this->"? no need
+    mInputPoints = surf.mInputPoints;
+    mMask = surf.mMask;
+    mQuan = surf.mQuan;
 
     std::map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
     mVecPoints.clear();
-    for (size_t i = 0; i < surf2.mVecPoints.size(); i++) { //TODO: should it be iterator?
-        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf2.mVecPoints[i]))));
-        old_to_new_Points[surf2.mVecPoints[i]] = mVecPoints.back();
+    for (size_t i = 0; i < surf.mVecPoints.size(); i++) { //TODO: should it be iterator?
+        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf.mVecPoints[i]))));
+        old_to_new_Points[surf.mVecPoints[i]] = mVecPoints.back();
     }
     mVecFaces.clear();
     CSurfaceFace temp;
-    for (vector<CSurfaceFace>::const_iterator it = (surf2.mVecFaces).begin(); it != surf2.mVecFaces.end(); it++) {
+    for (auto it = (surf.mVecFaces).begin(); it != surf.mVecFaces.end(); it++) {
         temp = CSurfaceFace();
         temp.mColor = (*it).mColor;
         temp.mPairPoints = (*it).mPairPoints;
@@ -86,9 +86,9 @@ inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &a
 inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
 
 // TODO: Why doesn't operator overload work here??
-inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetX() < aPoint2.GetX());}
-inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetY() < aPoint2.GetY());}
-inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.GetZ() < aPoint2.GetZ());}
+inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.X() < aPoint2.X());}
+inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Y() < aPoint2.Y());}
+inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Z() < aPoint2.Z());}
 
 //define function that finds model center point and radius of points.
 CPoint CSurface::FindCenPoint(const vector<vector<double>> &aInputPoints){
@@ -493,14 +493,14 @@ static double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be stati
 }
 
 static vector<Vector3D> FindBox(vector<CPoint> aInputPoints) {
-    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
-    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).GetX();
+    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
+    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
 
-    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
-    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).GetY();
+    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
+    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
 
-    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
-    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).GetZ();
+    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
+    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
 
     vector<Vector3D> Box (2);
 

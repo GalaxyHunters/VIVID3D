@@ -14,7 +14,7 @@ CModel::CModel(vector<CSurface> aSurfs, string aLabel, coord_t aAlpha){
 }
 
 void CModel::ExportToObj(string aOutput, bool WithTexture){
-    ::ExportToObj(this, aOutput, WithTexture);
+//    ExportToObj(*this, aOutput, WithTexture);
 }
 
 void CModel::AddMesh(CMesh aMesh) {

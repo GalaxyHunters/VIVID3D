@@ -2,15 +2,18 @@
 #define OBJEXPORTIMPORT_H
 
 #include "Model.h"
-#include "fstream"
+//#include "fstream"
 
 
-using namespace std;
-using namespace boost::algorithm;
+//using namespace boost::algorithm;
+namespace vivid
+{
 
 //output functions
-void ExportToObj(CModel *aModel, std::string aOutPutFile, bool WithTexture = 1);
+//TODO should habe return value, and maybe exception!
+//void OBJExporter(CModel &aModel, std::string aOutPutFile, bool WithTexture); //=1
 
 //CModel ImportToObj(ostream* aInPutFile);
 
+} // namespace vivid
 #endif

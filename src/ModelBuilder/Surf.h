@@ -3,77 +3,83 @@
 #ifndef SURF_H
 #define SURF_H
 
-class CSurf;
-
 #include "Mesh.h"
-#include "SurfFace.h"
-#include "../lib/External.h"
+#include <memory>
 
-#include <iostream>
-#include <map>
+namespace vivid
+{
 
-using namespace std;
-
-class CPointData_t { // used to sort and clean the voronoi input points
+class CSurfacePoint { // used to sort and clean the voronoi input points
 public:
 	CPoint mPoint;
 	coord_t mQuan;
 	bool mIsIn;
-	inline CPointData_t() {};
-	inline CPointData_t(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+	inline CSurfacePoint() {};
+	inline CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
 
+class CSurfaceFace{
+public:
+    std::vector<std::shared_ptr<CPoint> > mPoints;
+    std::pair<size_t, size_t> mPairPoints;
+    coord_t mColor;
+
+    inline CSurfaceFace(std::vector<std::shared_ptr<CPoint>> pPoints, coord_t pColor, std::pair<size_t, size_t> pPairPoints) :
+            mPoints(pPoints), mColor(pColor), mPairPoints(pPairPoints){};
+    inline CSurfaceFace() {};
+    inline ~CSurfaceFace() {};
+};
 
 
-
-class CSurf{
+class CSurface{
 private:
-	vector<shared_ptr<CPoint> > mVecPoints;
-	vector<CSurfFace> mVecFaces;
-	vector<CPoint> mInputPoints; // for smooth
-	vector<bool> mMask; //for smooth
-	vector<coord_t> mQuan; // for smooth
+    std::vector<std::shared_ptr<CPoint> > mVecPoints;
+    std::vector<CSurfaceFace> mVecFaces;
+    std::vector<CPoint> mInputPoints; // for smooth
+    std::vector<bool> mMask; //for smooth
+    std::vector<coord_t> mQuan; // for smooth
 	CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
- 
-	vector<coord_t>& NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
-    CPoint FindCenPoint(const vector<vector<double>> &aInputPoints); // find the center of the model (used to transform the data to be centered around 000)
+
+    std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+    CPoint FindCenPoint(const std::vector<std::vector<double>> &aInputPoints); // find the center of the model (used to transform the data to be centered around 000)
 
 	//vorn function:
 	void RunVorn();
-	void CleanFaces(vector<bool>& aMask); // clean the unneeded faces(by mask)
+	void CleanFaces(std::vector<bool>& aMask); // clean the unneeded faces(by mask)
 	void CleanPoints(); // removes all the unused points
 	void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)
 	void RemoveDoublePoints(); // remove all the double face points from the model
 
 	//smooth functions:
-	void SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn);
-	void UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
+	void SetPinPout(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
+	void UpdateInputPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
 	void MakeMask(size_t aPOutSize, size_t aPInSize);
-	void Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
-	void AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
-	void CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut);
-	vector<CPointData_t> RemoveDoublesVornInput(vector<CPointData_t>& arData);
+	void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
+	void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
+	void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
+    std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 
-	CSurf();
+//	CSurface();
 	
 public:	
-	CSurf(const CSurf &surf); //copy constructor
-	CSurf(vector<vector<double >> aInputPoints, vector<bool> aMask, vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
+	CSurface(const CSurface &surf); //copy constructor
+	CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);
 
-	inline vector<CPoint>& GetInputPoints() { return mInputPoints; }
-	inline vector<bool>& GetMask() { return mMask; }
-	inline vector<coord_t>& GetQuan() { return mQuan; }
-	inline void SetInputPoints(vector<CPoint>& aInputPoints) { mInputPoints = aInputPoints; }
-	inline void SetMask(vector<bool>& aMask) { mMask = aMask; }
-	inline void SetQuan(vector<coord_t>& aQuan) { mQuan = aQuan; }
-	inline vector<shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
-	inline vector<CSurfFace>& GetVecfaces() { return mVecFaces; }
+	inline std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
+	inline std::vector<bool>& GetMask() { return mMask; }
+	inline std::vector<coord_t>& GetQuan() { return mQuan; }
+	inline void SetInputPoints(std::vector<CPoint>& aInputPoints) { mInputPoints = aInputPoints; }
+	inline void SetMask(std::vector<bool>& aMask) { mMask = aMask; }
+	inline void SetQuan(std::vector<coord_t>& aQuan) { mQuan = aQuan; }
+	inline std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
+	inline std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
 
 };
 
+} // namespace vivid
 #endif
 	

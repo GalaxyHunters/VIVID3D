@@ -1,21 +1,25 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef External_H
+#define External_H
 
-#include "ModelBuilder/Point.h"
+#include "Point.h"
+#include "IndexedFace.h"
 #include "Voronoi3D.hpp"
 #include "mdMeshDecimator.h"
-#include "ModelBuilder/IndexedFace.h"
+#include "IndexedFace.h"
 #include "lodepng.h"
 
-using namespace std;
-using namespace MeshDecimation;
+using namespace MeshDecimation; //TODO
+using namespace vivid;
 
-void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints);
+//namespace vivid
+//{
+
+void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints);
 // TODO: Alt compute_vornoi func
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, double aBoxR);
+std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR);
 pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, vector<Vector3D> Box);
-pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError);
+std::pair<std::vector<CPoint>, std::vector<CIndexedFace> > DecimateMesh(std::vector<CPoint>& aPoints, std::vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError);
 void encodePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
 
-
+//}; // namespace vivid
 #endif

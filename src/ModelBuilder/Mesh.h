@@ -4,15 +4,17 @@
 
 #include "Point.h"
 #include "IndexedFace.h"
-#include "../lib/External.h"
+#include "External.h"
 #include "Utils/ColorMap.h"
-#include <iostream>
-#include "boost/algorithm/string/predicate.hpp"
-#include "int2str.hpp"
-#include "string"
-#include "fstream"
 
-using namespace std;
+
+#include "int2str.hpp"
+#include <string>
+#include <fstream>
+#include <vector>
+
+namespace vivid
+{
 
 class CMesh {
 
@@ -28,16 +30,16 @@ private:
 public:
 	CMesh() {};
     CMesh(const CMesh &mesh);
-	CMesh(vector<CPoint> aPoints, vector<CIndexedFace> aFaces, string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
 	~CMesh();
-	string GetLabel();
+    std::string GetLabel();
 	coord_t GetAlpha();
-	vector<CPoint> GetPoints();
-	vector<CIndexedFace> GetFaces();
+    std::vector<CPoint> GetPoints();
+    std::vector<CIndexedFace> GetFaces();
     CPoint getCenVector();
-	void SetFaces(vector<CIndexedFace> aFaces);
-	void SetPoints(vector<CPoint> aPoints);
-	void SetLabel(string aLabel);
+	void SetFaces(std::vector<CIndexedFace> aFaces);
+	void SetPoints(std::vector<CPoint> aPoints);
+	void SetLabel(std::string aLabel);
 	void SetAlpha(coord_t aAlpha);
 	void setCenVector(const CPoint &vector);
 
@@ -71,6 +73,6 @@ public:
 
 };
 
-
+} // namespace vivid
 #endif
 

@@ -1,10 +1,13 @@
 project(vivid)
+
+cmake_minimum_required(VERSION 3.4)
+set(CMAKE_CXX_STANDARD 14)
+
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 
 message(${PROJECT_SOURCE_DIR})
 
-cmake_minimum_required(VERSION 3.4)
-set(CMAKE_CXX_STANDARD 14)
+
 
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/FBX;${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast")
@@ -52,20 +55,28 @@ find_package(FBX)
 add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
+include_directories(src/ModelBuilder)
+include_directories(src/AnimationBuilder) # TODO delete
+include_directories(src/Utils)
+include_directories(lib)
 include_directories(lib/MeshDecimation)
 include_directories(lib/pybind11/include)
 include_directories(lib/lodepng)
 
 add_executable(vivid
-        #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
-        #animation
-        src/AnimationBuilder/Animation.cpp
-        src/Utils/Shapes.cpp
-        src/AnimationBuilder/FbxFunc.cpp
         #external
+        lib/External.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/lodepng/lodepng.cpp
+        #vivid
+        src/ModelBuilder/Surf.cpp
+        src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Model.cpp
+        src/Utils/Shapes.cpp
+        src/ModelBuilder/ObjExportImport.cpp
+        #animation
+        src/AnimationBuilder/Animation.cpp
+        src/AnimationBuilder/FbxFunc.cpp
         #main
         src/main.cpp
         )
@@ -78,14 +89,18 @@ target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
 
 
 pybind11_add_module(vivid_py
-        #vivid
-        src/ModelBuilder/Surf.cpp src/ModelBuilder/Mesh.cpp src/ModelBuilder/Model.cpp lib/External.cpp
         #external
-        lib/MeshDecimation/mdMeshDecimator.cpp lib/lodepng/lodepng.cpp
-        #animation
-        src/AnimationBuilder/Animation.cpp src/AnimationBuilder/FbxFunc.cpp
-        #shapes
+        lib/External.cpp
+        lib/MeshDecimation/mdMeshDecimator.cpp
+        lib/lodepng/lodepng.cpp
+        #vivid
+        src/ModelBuilder/Surf.cpp
+        src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Model.cpp
         src/Utils/Shapes.cpp
+        #animation
+        src/AnimationBuilder/Animation.cpp
+        src/AnimationBuilder/FbxFunc.cpp
         #wrapper
         src/wrapper.cpp
         )

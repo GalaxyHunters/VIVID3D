@@ -1,42 +1,17 @@
 #include "Shapes.h"
-//#include "Animation.h"
-#include <iostream>
-#include <vector>
-#define _USE_MATH_DEFINES
+
+#define _USE_MATH_DEFINES //TODO WTF???
 //#include <math.h>
+
+using namespace vivid;
 
 using namespace std;
 
-//struct MathVector{double size;
-//    vector<double> direction;};
 
-inline double DotProduct(CPoint aVec1, CPoint aVec2){ return (aVec1.GetX()*aVec2.GetX() + aVec1.GetY()*aVec2.GetY() + aVec1.GetZ()*aVec2.GetZ());}
-inline double VectorSize(CPoint aVec){ return sqrt(DotProduct(aVec,aVec)) ;}
-inline CPoint CrossProduct(CPoint aVec1, CPoint aVec2) {
-    return CPoint(aVec1.GetY()*aVec2.GetZ() - aVec1.GetZ()*aVec2.GetY(),
-                  aVec1.GetZ()*aVec2.GetX() - aVec1.GetX()*aVec2.GetZ(),
-                  aVec1.GetX()*aVec2.GetZ() - aVec1.GetX()*aVec2.GetZ());
-}
 
-inline CPoint NormalizeVector(CPoint aVec)
+
+namespace vivid
 {
-    double vec_size = VectorSize(aVec);
-    aVec.SetX(aVec.GetX()/vec_size);
-    aVec.SetY(aVec.GetY()/vec_size);
-    aVec.SetZ(aVec.GetZ()/vec_size);
-    return aVec;
-}
-inline bool IsPerpindicular(CPoint aVec1, CPoint aVec2)
-{
-    if (0==DotProduct(aVec1,aVec2)) {
-        return true;
-    }
-    return false;
-}
-
-
-
-
 
 //TODO make position a cpoint object
 CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, vector<double> pos)
@@ -74,7 +49,7 @@ CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coo
     return mesh;
 }
 
-CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, vector<double> CenterPoint, coord_t Color, coord_t Alpha, string Label)
+CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, const vector<double> CenterPoint, coord_t Color, coord_t Alpha, const string Label)
 {
     // TODO Zohar: VERYUGLY code, please use mesh.MoveMesh, mesh.ScaleMesh etc in this function
     vector<CPoint> vertices;
@@ -126,24 +101,26 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
     CMesh.SetPoints(vertices);
     CMesh.SetFaces(faces);
     CMesh.SetAlpha(Alpha);
-    CMesh.SetLabel(Label);
+//    CMesh.SetLabel(Label); //TODO FIXME
 	return CMesh;
 }
 
 // TODO: Zohar again VERY UGLY code, please use transformMat
-CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> Radii, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
+CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<double> aRadius_vec, vector<double> CenterPoint, vector<double> MajorAxis, vector<double> MiddleAxis, vector<double> MinorAxis, coord_t Color, coord_t Alpha, string Label){
     //begin by asserting some conditions
     // TODO I'm not sure, I think we may start using exceptions, assert looks bad
 //    assert(("Axis vectors cannot be (0,0,0)", MajorAxis != vector<double>{0,0,0} && MiddleAxis != vector<double>{0,0,0} && MinorAxis != vector<double>{0,0,0}));
-//    assert(("Radius cannot be equal to 0", Radii[0] != 0 && Radii[1] != 0 && Radii[2] != 0));
+//    assert(("Radius cannot be equal to 0", aRadius_vec[0] != 0 && aRadius_vec[1] != 0 && aRadius_vec[2] != 0));
 //    assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(MajorAxis, MiddleAxis) == true && CheckIfPerpindicular(MajorAxis, MinorAxis) == true && CheckIfPerpindicular(MiddleAxis, MinorAxis) == true));
     //create a sphere to operate on
-    CMesh Ellipsoid = CreateSphereMesh(NumOfMeridians, NumOfParallels, 1,  vector<double>{0,0,0}, Color, Alpha, Label);
-    //use Radii to create strech matrix and stretch the sphere
+
+//    CMesh Ellipsoid = CreateSphereMesh(NumOfMeridians, NumOfParallels, 1.0, vector<double>{0.0,0.0,0.0}, Color, Alpha, Label); //TODO FIXME later
+    CMesh Ellipsoid;
+    //use aRadius_vec to create strech matrix and stretch the sphere
     vector<vector<double>> StretchMatrix;
-    StretchMatrix.push_back(vector<double>{Radii[0], 0, 0});
-    StretchMatrix.push_back(vector<double>{0, Radii[1], 0});
-    StretchMatrix.push_back(vector<double>{0, 0, Radii[2]});
+    StretchMatrix.push_back(vector<double>{aRadius_vec[0], 0, 0});
+    StretchMatrix.push_back(vector<double>{0, aRadius_vec[1], 0});
+    StretchMatrix.push_back(vector<double>{0, 0, aRadius_vec[2]});
     //use all axis vectors to create a rotation matrix
     vector<vector<double>> RotateMatrix;
     RotateMatrix.push_back(MajorAxis);
@@ -155,17 +132,17 @@ CMesh CreateEllipsoidMesh(size_t NumOfMeridians, size_t NumOfParallels, vector<d
     {
         CPoint& CurrentVector = points[i1];
         //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.GetX();
-        double CVY = CurrentVector.GetY();
-        double CVZ = CurrentVector.GetZ();
+        double CVX = CurrentVector.X();
+        double CVY = CurrentVector.Y();
+        double CVZ = CurrentVector.Z();
         //first we strech em
         CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
                                CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
                                CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
         //now we rotate em
-        CVX = CurrentVector.GetX();
-        CVY = CurrentVector.GetY();
-        CVZ = CurrentVector.GetZ();
+        CVX = CurrentVector.X();
+        CVY = CurrentVector.Y();
+        CVZ = CurrentVector.Z();
         CurrentVector = CPoint(CenterPoint[0] + CVX * RotateMatrix[0][0] + CVY * RotateMatrix[1][0] + CVZ * RotateMatrix[2][0],
                                CenterPoint[1] + CVX * RotateMatrix[0][1] + CVY * RotateMatrix[1][1] + CVZ * RotateMatrix[2][1],
                                CenterPoint[2] + CVX * RotateMatrix[0][2] + CVY * RotateMatrix[1][2] + CVZ * RotateMatrix[2][2]);
@@ -230,20 +207,20 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
-    auto direction_size = VectorSize(direction_vec);
-    CPoint cross_vec = CrossProduct(CPoint(0,0,1), direction_vec);
-    CPoint normal_vec = NormalizeVector(cross_vec);
-    double rotation_angel = acos(DotProduct(CPoint(0,0,1), normal_vec)); //Note both vec are normalized so it's ok
+    auto direction_size = direction_vec.Norm();
+    CPoint cross_vec = CPoint(0,0,1).Cross(direction_vec);
+    CPoint normal_vec = cross_vec.Normalize();
+    double rotation_angel = acos( CPoint(0,0,1).Dot(normal_vec)); //Note both vec are normalized so it's ok
 
 //    cout << "normal_vec: " << normal_vec << "\t";
 //    cout << "rotation_angel: " << rotation_angel << "\n";
 //    cout << "direction_size: " << direction_size << "\n";
 //    cout << "cross_product: " << cross_vec << "\n";
-//    cout << "VectorSize(cross_vec): " << VectorSize(cross_vec) << "\n";
+//    cout << "VectorSize(cross_vec): " << Norm(cross_vec) << "\n";
 
-    if (VectorSize(cross_vec)<0.0001) // meaning direction_vec is on the z axis
+    if ( cross_vec.Norm() < 0.0001 ) // meaning direction_vec is on the z axis
     {
-        if (direction_vec.GetZ() < 0)
+        if (direction_vec.Z() < 0)
         {
             direction_size = -1*direction_size;
         }
@@ -259,105 +236,12 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 
 }
 
-
-
-
-
-
+} // namespace vivid
 
 
 ////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
 //vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
 //    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-
-
-
-
-//FbxMesh* createCube(int sizeX, int sizeY, int sizeZ)
-//{
-//	FbxManager* manager = FbxManager::Create();
-//	//FbxScene* scene = FbxScene::Create(manager, "");
-//	//FbxNode* sceneRootNode = scene->GetRootNode();
-//	FbxMesh* CMesh0 = FbxMesh::Create(manager, "CMesh0");			//creates the CMesh
-//	//creating vertices for the CMesh
-//	FbxVector4 vertex0(-sizeX, -sizeY, sizeZ);
-//	FbxVector4 vertex1(sizeX, -sizeY, sizeZ);
-//	FbxVector4 vertex2(sizeX, sizeY, sizeZ);
-//	FbxVector4 vertex3(-sizeX, sizeY, sizeZ);
-//	FbxVector4 vertex4(-sizeX, -sizeY, -sizeZ);
-//	FbxVector4 vertex5(sizeX, -sizeY, -sizeZ);
-//	FbxVector4 vertex6(sizeX, sizeY, -sizeZ);
-//	FbxVector4 vertex7(-sizeX, sizeY, -sizeZ);
-//
-//	//CMeshNode0->ConnectSrcObject(CMesh0);
-//	CMesh0->InitControlPoints(24);								//Initialize the control CPoint array of the CMesh.
-//	FbxVector4* CMesh0ControlCPoints = CMesh0->GetControlPoints();		//
-//
-//	// Define each face of the cube.
-//	// Face 1
-//	CMesh0ControlCPoints[0] = vertex0;
-//	CMesh0ControlCPoints[1] = vertex1;
-//	CMesh0ControlCPoints[2] = vertex2;
-//	CMesh0ControlCPoints[3] = vertex3;
-//	// Face 2
-//	CMesh0ControlCPoints[4] = vertex1;
-//	CMesh0ControlCPoints[5] = vertex5;
-//	CMesh0ControlCPoints[6] = vertex6;
-//	CMesh0ControlCPoints[7] = vertex2;
-//	// Face 3
-//	CMesh0ControlCPoints[8] = vertex5;
-//	CMesh0ControlCPoints[9] = vertex4;
-//	CMesh0ControlCPoints[10] = vertex7;
-//	CMesh0ControlCPoints[11] = vertex6;
-//	// Face 4
-//	CMesh0ControlCPoints[12] = vertex4;
-//	CMesh0ControlCPoints[13] = vertex0;
-//	CMesh0ControlCPoints[14] = vertex3;
-//	CMesh0ControlCPoints[15] = vertex7;
-//	// Face 5
-//	CMesh0ControlCPoints[16] = vertex3;
-//	CMesh0ControlCPoints[17] = vertex2;
-//	CMesh0ControlCPoints[18] = vertex6;
-//	CMesh0ControlCPoints[19] = vertex7;
-//	// Face 6
-//	CMesh0ControlCPoints[20] = vertex1;
-//	CMesh0ControlCPoints[21] = vertex0;
-//	CMesh0ControlCPoints[22] = vertex4;
-//	CMesh0ControlCPoints[23] = vertex5;
-//
-//	int i, j;
-//	int polygonVertices0[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-//		14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-//	for (i = 0; i < 6; i++)
-//	{
-//		// all faces of the cube have the same texture
-//		CMesh0->BeginPolygon(-1, -1, -1, false);																				/*this is a bit tricky. when creating a polygon for the CMesh you want to use BeginPolygon so the program																				will understand that when you started creating the polygon. afterwards you should create a loop to add
-//																															the desired vertices into the polygon you begun creating. after you have add all vertices, you should use
-//																															EndPolygon so the program knows you have finished creating your polygon.*/
-//
-//		for (j = 0; j < 4; j++)
-//		{
-//			// Control CPoint index
-//			CMesh0->AddPolygon(polygonVertices0[i * 4 + j]);
-//
-//
-//		}
-//
-//		CMesh0->EndPolygon();
-//	}
-//
-//	/*FbxNode* CMeshNode0 = FbxNode::Create(scene, "node0");		//creates a node to connect to the CMesh (for later use).
-//	CMeshNode0->SetNodeAttribute(CMesh0);							//set the node atrribute to CMesh. this lets the node know that he is connected to a CMesh.
-//	sceneRootNode->AddChild(CMeshNode0); */
-//
-//
-//	return CMesh0;
-//}
-
-
-
-
-
 
 
 

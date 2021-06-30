@@ -1,5 +1,5 @@
-#ifndef OBJEXPORTIMPORT_H
-#define OBJEXPORTIMPORT_H
+#ifndef VIVID_OBJEXPORTIMPORT_H
+#define VIVID_OBJEXPORTIMPORT_H
 
 #include "Model.h"
 
@@ -14,4 +14,4 @@ void OBJExporter(CModel &aModel, std::string aOutPutFile, bool WithTexture); //=
 //CModel ImportToObj(ostream* aInPutFile);
 
 } // namespace vivid
-#endif
+#endif //VIVID_OBJEXPORTIMPORT_H

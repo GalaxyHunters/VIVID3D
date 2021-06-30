@@ -1,5 +1,5 @@
-#ifndef POINT_H
-#define POINT_H
+#ifndef VIVID_POINT_H
+#define VIVID_POINT_H
 
 #include <cmath>
 #include <iostream>
@@ -7,7 +7,6 @@
 #include <string>
 
 typedef double coord_t; //TODO: float64_t and rename!
-using namespace std;
 
 //TODO TODO TODO struct MathVector{double size;
 //    vector<double> direction;};
@@ -15,6 +14,10 @@ using namespace std;
 
 // TODO CPoint should be typedef of vector calculation object by size 3 of maximum float.
 // TODO const and & and inl file
+
+namespace vivid
+{
+
 class CPoint
 {
 private:
@@ -69,16 +72,16 @@ public:
     }
 
 
-    // TODO NAFTALI: This is VERY_BAD_PRACTICE as there can be other formats instead of obj, hence printing to OBJ format should be done in a different place.
-//    friend inline ostream& operator << (ostream& os, const CPoint& point) {os << "v " << point.mX  << " " << point.mY << " " << point.mZ << "\n" ; return os;}
+    friend std::ostream& operator<<(std::ostream &out, const CPoint &p)
+    {
+        out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';
+        return out;
+    }
 
 
 };
 
-//inline ostream& operator<<(ostream &out, const CPoint &p)
-//{
-//    out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';
-//    return out;
-//}
 
-#endif
+
+}; // namespace vivid
+#endif //VIVID_POINT_H

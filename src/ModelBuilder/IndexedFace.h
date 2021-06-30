@@ -1,5 +1,5 @@
-#ifndef INDEXEDFACE_H
-#define INDEXEDFACE_H
+#ifndef VIVID_INDEXEDFACE_H
+#define VIVID_INDEXEDFACE_H
 
 #include "Point.h"
 
@@ -47,4 +47,4 @@ CIndexedFace::~CIndexedFace()
 }
 
 } // namespace vivid
-#endif
+#endif //VIVID_INDEXEDFACE_H

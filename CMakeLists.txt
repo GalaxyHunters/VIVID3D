@@ -55,29 +55,30 @@ add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
 include_directories(src/ModelBuilder)
-include_directories(src/AnimationBuilder) # TODO delete
 include_directories(src/Utils)
 include_directories(lib)
 include_directories(lib/MeshDecimation)
 include_directories(lib/pybind11/include)
+include_directories(lib/ImportAndExport)
 include_directories(lib/ImportAndExport/lodepng)
 
 add_executable(vivid
         #external
         lib/External.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
-        lib/ImportAndExport/lodepng/lodepng.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp
+        src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/Utils/Shapes.cpp
-        src/ModelBuilder/ObjExportImport.cpp
+        lib/ImportAndExport/ObjExportImport.cpp
         #animation
-        src/AnimationBuilder/Animation.cpp
-        src/AnimationBuilder/FbxFunc.cpp
+        src/ModelBuilder/Animation.cpp
+        lib/ImportAndExport/FbxExportImport.cpp
         #main
         src/main.cpp
+        lib/ImportAndExport/DataToImage.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
         )
 
 
@@ -93,13 +94,13 @@ pybind11_add_module(vivid_py
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp
+        src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/Utils/Shapes.cpp
         #animation
-        src/AnimationBuilder/Animation.cpp
-        src/AnimationBuilder/FbxFunc.cpp
+        src/ModelBuilder/Animation.cpp
+        lib/ImportAndExport/FbxExportImport.cpp
         #wrapper
         src/wrapper.cpp
         )

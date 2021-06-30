@@ -1,6 +1,5 @@
-#ifndef MESH_H
-#define MESH_H
-
+#ifndef VIVID_MESH_H
+#define VIVID_MESH_H
 
 #include "Point.h"
 #include "IndexedFace.h"
@@ -59,7 +58,7 @@ public:
      * @param[in] aNormVec the x,y.z normal to rotate around.
      * @param[in] aRadAngel the angel to rotate by (in radians).
      */
-    void RotatewMesh(CPoint aNormVec, double aRadAngel);
+    void RotateMesh(CPoint aNormVec, double aRadAngel);
     /**
      * Change CMesh points location by addition of x,y,z.
      * @param[in] aDirectionVec the x,y.z direction to move by it.
@@ -74,5 +73,5 @@ public:
 };
 
 } // namespace vivid
-#endif
+#endif //VIVID_MESH_H
 

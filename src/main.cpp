@@ -2,8 +2,8 @@
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
 #include "Utils/Shapes.h"
-#include "AnimationBuilder/Animation.h"
-#include "ModelBuilder/Surf.h"
+#include "ModelBuilder/Animation.h"
+#include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
 
@@ -19,7 +19,7 @@ using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
-const std::string TEST_OUTPUT_PATH = "./tests/testModels/";
+const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */

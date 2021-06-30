@@ -1,8 +1,8 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef VIVID_MODEL_H
+#define VIVID_MODEL_H
 
 #include "Mesh.h"
-#include "Surf.h"
+#include "Surface.h"
 
 
 namespace vivid
@@ -30,5 +30,4 @@ public:
 };
 
 }; // namespace vivid
-
-#endif
+#endif //VIVID_MODEL_H

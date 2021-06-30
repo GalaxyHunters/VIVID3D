@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "External.h"
-#include "ObjExportImport.h"
+#include "ImportAndExport/ObjExportImport.h"
 
 using namespace vivid;
 

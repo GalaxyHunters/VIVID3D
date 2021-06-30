@@ -1,7 +1,5 @@
-
-
-#ifndef SURF_H
-#define SURF_H
+#ifndef VIVID_SURFACE_H
+#define VIVID_SURFACE_H
 
 #include "Mesh.h"
 #include <memory>
@@ -81,5 +79,5 @@ public:
 };
 
 } // namespace vivid
-#endif
+#endif //VIVID_SURFACE_H
 	

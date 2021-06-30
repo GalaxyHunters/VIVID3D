@@ -228,7 +228,7 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     }
     else{
         mesh.ScaleMesh(CPoint(direction_size, direction_size, direction_size));
-        mesh.RotatewMesh(normal_vec, rotation_angel);
+        mesh.RotateMesh(normal_vec, rotation_angel);
     }
 
     mesh.MoveMesh(CPoint(aPos[0], aPos[1], aPos[2]));

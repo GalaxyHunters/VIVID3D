@@ -1,5 +1,5 @@
-#ifndef SHAPES_H
-#define SHAPES_H
+#ifndef VIVID_SHAPES_H
+#define VIVID_SHAPES_H
 
 #include "Mesh.h"
 #include "ColorMap.h"
@@ -31,4 +31,4 @@ CMesh CreateArrowMesh(double Width, double PCRatio, std::vector<double> aPos, st
 /*Creates a arrow*/
 
 } // namespace vivid
-#endif
+#endif //VIVID_SHAPES_H

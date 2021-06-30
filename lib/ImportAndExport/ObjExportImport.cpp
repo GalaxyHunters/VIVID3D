@@ -1,10 +1,12 @@
 #include "ObjExportImport.h"
 #include <boost/algorithm/string/predicate.hpp>
+#include "DataToImage.h"
 
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
 
 using namespace vivid;
+using namespace std;
 
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
     return GetColor(aQuan);
@@ -213,7 +215,7 @@ void ExportToObjTexture(CModel &aModel, string aOutput) {
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    encodePNG( string(aOutput + "_texture.png"), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";

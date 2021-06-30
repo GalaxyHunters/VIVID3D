@@ -99,7 +99,7 @@ void CMesh::TransformMesh(coord_t const aTrans[3][3]){
     }
 }
 
-void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
+void CMesh::RotateMesh(CPoint aNormVec, double aRadAngel){
     // Trig operations are expansive
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);

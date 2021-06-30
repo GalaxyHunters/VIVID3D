@@ -1,7 +1,7 @@
-
 #include "External.h"
 
 using namespace vivid;
+using namespace std;
 
 void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints) {
 	for (auto it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
@@ -121,10 +121,3 @@ pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints
 	return output;
 }
 
-void encodePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height) {
-    //Encode the image
-    unsigned error = lodepng::encode(filename, image, width, height);
-
-    //if there's an error, display it
-    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
-}

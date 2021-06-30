@@ -30,7 +30,7 @@ int RunBasicTests(){
     model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-    model.ExportToObj("./testModels/arrow_test"); // /testModels/
+    model.ExportToObj("./TestModels/arrow_test"); // /testModels/
 
     return EXIT_SUCCESS;
 }
@@ -124,7 +124,7 @@ int RunMedicaneTests(){
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
     //medicaneMesh.Decimation(0.5, 0.4);
     model.AddMesh(medicaneMesh);
-    model.ExportToObj("./testModels/MedicaneModelTest");
+    model.ExportToObj("./TestModels/MedicaneModelTest");
     return EXIT_SUCCESS;
 }
 

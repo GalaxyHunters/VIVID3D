@@ -8,8 +8,6 @@ set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message(${PROJECT_SOURCE_DIR})
 
 
-message(${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast;)
-
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast; ${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX;)
 
 # TODO: Choose between Linux\Windows\mac

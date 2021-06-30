@@ -18,10 +18,14 @@
 using namespace vivid;
 using namespace std;
 
-const std::string DATA_FOLDER_PATH = "./tests/test_data/";
+const std::string DATA_MODEL_PATH  = "./tests/test_data/";
+const std::string TEST_OUTPUT_PATH = "./tests/testModels/";
+
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
 int RunBasicTests(){
+    cout << "Basic Test:" << endl;
+
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     // TODO (Tomer): what does "this sets the center" mean???
@@ -30,15 +34,15 @@ int RunBasicTests(){
     model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-    model.ExportToObj("./TestModels/arrow_test"); // /testModels/
+    model.ExportToObj(TEST_OUTPUT_PATH + "/arrow_test"); // /testModels/
 
     return EXIT_SUCCESS;
 }
 
-/*
- * Test surf functionality by cubic 3D pyramid (with square base)
- */
+/* Test surf functionality with cube */
 int RunCubeSurfTests() { //Decimate isn't activated currently
+    cout << "Cube Test:" << endl;
+
     vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
 
     for (int i = 2; i > -4; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
@@ -59,12 +63,15 @@ int RunCubeSurfTests() { //Decimate isn't activated currently
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Decimation(0.5, 0.4);
-    mesh.ExportToObj("./TestModels/Cube");
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
 }
 
+/* Test surf functionality by cubic 3D pyramid (with square base) */
 int RunPyramidSurfTest(){
+    cout << "pyramid Test:" << endl;
+
     vector<vector<double >> points;
     vector<bool> mask;
     vector<coord_t> quan;
@@ -104,7 +111,7 @@ int RunPyramidSurfTest(){
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Decimation(0.5, 0.4);
-    mesh.ExportToObj("./TestModels/Cube");
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
 
@@ -112,8 +119,10 @@ int RunPyramidSurfTest(){
 
 /* Test the Elad Voronoi bug and the pointy faces bugs */
 int RunMedicaneTests(){
-    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
-    ModelData medicaneNoise = ReadBin(DATA_FOLDER_PATH + "medicane_noise.bin");
+    cout << "Medicane Test:" << endl;
+
+    ModelData medicane = ReadBin(DATA_MODEL_PATH + "medicane.bin");
+    ModelData medicaneNoise = ReadBin(DATA_MODEL_PATH + "medicane_noise.bin");
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
@@ -124,15 +133,15 @@ int RunMedicaneTests(){
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
     //medicaneMesh.Decimation(0.5, 0.4);
     model.AddMesh(medicaneMesh);
-    model.ExportToObj("./TestModels/MedicaneModelTest");
+    model.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModelTest");
     return EXIT_SUCCESS;
 }
+
 
 
 int main(){
     int ret_value = EXIT_SUCCESS;
 
-    cout << "Basic" << endl;
     ret_value = RunBasicTests();
     if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
     cout << "Cube" << endl;
@@ -148,11 +157,19 @@ int main(){
     return EXIT_SUCCESS;
 }
 
+
+
+
+
 // GARBAGE code of ADAM and NAFTALI #FIX IT!!! TODO TODO TODO
-//
+//  |
+//  |
+//  |
+//  v
+
 ///*int main ()
 //{
-//    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
+//    ModelData medicane = ReadBin( DATA_MODEL_PATH + "medicane.bin");
 //
 //    size_t const N = medicane.points.size ();
 //    std :: vector <double> x (N);//= read_vector ("c: /sim_data/x.txt");
@@ -304,7 +321,7 @@ int main(){
 //
 ////int main ()
 ////{
-////    ModelData medicane = ReadBin( DATA_FOLDER_PATH + "medicane.bin");
+////    ModelData medicane = ReadBin( DATA_MODEL_PATH + "medicane.bin");
 ////
 ////    size_t const N = medicane.points.size ();
 ////    std :: vector <double> x (N);//= read_vector ("c: /sim_data/x.txt");
@@ -479,9 +496,9 @@ int main(){
 ////    f.close()
 //
 //    // Import unfiltered data as csv, parse into several vectors
-//    auto data_og = readCSV(DATA_FOLDER_PATH, false);
+//    auto data_og = readCSV(DATA_MODEL_PATH, false);
 //    // Import data with added noise as csv, parse into several vectors
-//    auto data_noise = readCSV(DATA_FOLDER_PATH, true);
+//    auto data_noise = readCSV(DATA_MODEL_PATH, true);
 //
 //    CModel model;
 //    // Some 3D viewers are centering the 3D models and change direction. this sets the center

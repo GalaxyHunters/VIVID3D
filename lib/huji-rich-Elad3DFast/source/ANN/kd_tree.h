@@ -74,6 +74,10 @@ public:
 
 	virtual void GetToSend(std::vector<ANNpointArray> const& faces, std::vector<size_t>const& Nfaces, vector<ANNkd_ptr>& nodes, double angle2,
 		std::vector<ANNpoint> const& normals, ANNorthRect &bb) = 0;
+
+	virtual void GetOpticalDepth(ANNpoint const& qpoint, std::vector<std::pair<double,double> > & res, double angle2, ANNorthRect& bb) const = 0;
+
+	virtual void GetToSendOpticalDepth(std::vector<ANNorthRect> const& faces, vector<ANNkd_ptr>& nodes, double angle2, ANNorthRect& bb) = 0;
 };
 
 //----------------------------------------------------------------------
@@ -131,6 +135,20 @@ public:
 		Q = Qs;
 	}
 
+	ANNkd_leaf(							// constructor
+		int				n,				// number of points
+		ANNidxArray		b,
+		double m,
+		ANNpoint pt)				// bucket
+		:n_pts(n), bkt(b)
+	{
+		n_pts = n;			// number of points in bucket
+		bkt = b;			// the bucket
+		mass = m;
+		for (size_t i = 0; i < 3; ++i)
+			CM[i] = pt[i];
+	}
+
 	~ANNkd_leaf() { }					// destructor (none)
 
 	virtual void getStats(						// get tree statistics
@@ -149,6 +167,8 @@ public:
 		std::array<double, 4> const& qCM) const;
 	void GetToSend(std::vector<ANNpointArray> const& faces, std::vector<size_t> const& Nfaces, vector<ANNkd_ptr>& nodes, double angle2,
 		std::vector<ANNpoint> const& normals, ANNorthRect &bb);
+	void GetOpticalDepth(ANNpoint const& qpoint, std::vector<std::pair<double, double> >& res, double angle2, ANNorthRect& bb) const;
+	void GetToSendOpticalDepth(std::vector<ANNorthRect> const& faces, vector<ANNkd_ptr>& nodes, double angle2, ANNorthRect& bb);
 };
 
 //----------------------------------------------------------------------
@@ -222,6 +242,8 @@ public:
 		std::vector<ANNpoint> const& normals, ANNorthRect &bb);
 	void GetAcc(std::vector<ANNpoint> &qpoint, 	std::vector<ANNpoint> &res, double angle2, ANNorthRect &bb,
 		std::array<double, 4> const& qCM) const;
+	void GetOpticalDepth(ANNpoint const& qpoint, std::vector<std::pair<double, double> >& res, double angle2, ANNorthRect& bb) const;
+	void GetToSendOpticalDepth(std::vector<ANNorthRect> const& faces, vector<ANNkd_ptr>& nodes, double angle2, ANNorthRect& bb);
 };
 
 //----------------------------------------------------------------------
@@ -246,6 +268,16 @@ ANNkd_ptr rkd_tree(				// recursive construction of kd-tree
 	int					dim,			// dimension of space
 	int					bsp,			// bucket space
 	ANNorthRect			&bnd_box,		// bounding box for current node
+	ANNkd_splitter		splitter);		// splitting routine
+
+ANNkd_ptr rkd_tree(				// recursive construction of kd-tree
+	ANNpointArray const& pa,				// point array (unaltered)
+	ANNidxArray			pidx,			// point indices to store in subtree
+	vector<double> const& masses,
+	int					n,				// number of points
+	int					dim,			// dimension of space
+	int					bsp,			// bucket space
+	ANNorthRect& bnd_box,		// bounding box for current node
 	ANNkd_splitter		splitter);		// splitting routine
 
 double DistanceToFace(ANNpointArray const& face, size_t Nface, const double* qpoint,double maxdist,ANNpoint normal);

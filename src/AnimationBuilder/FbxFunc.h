@@ -5,7 +5,8 @@
 #ifndef VIVID_FBXFUNC_H
 #define VIVID_FBXFUNC_H
 
-#include "../ModelBuilder/Model.h"
+#include "Model.h"
+#include "Mesh.h"
 #include <iostream>
 //#include "ReadBinFile.h"
 #include <fbxsdk.h>
@@ -14,18 +15,19 @@
 #include "string"
 //#include <direct.h>
 
+using namespace vivid;
 
-void FbxSceneExport(FbxScene* scene, const string& outputfile);
+void FbxSceneExport(FbxScene* scene, const std::string& outputfile);
 
-void FbxMeshExport(FbxMesh* Mesh, char* output);
+void FbxMeshExport(FbxMesh* Mesh, char* output); //TODO (TOMER): that should have been string. what is this c <-> CPP mix???
 /* exports a FbxMesh*/
 
-void FbxNodeExport(FbxNode* node, char* output);
+void FbxNodeExport(FbxNode* node, char* output); //TODO (TOMER): that should have been string. what is this c <-> CPP mix???
 /* exports a FbxNode*/
 
 FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene);
 
-FbxNode* OneModelToFbxTextures(CModel model, FbxScene* scene, const string& outputpath);
+FbxNode* OneModelToFbxTextures(CModel model, FbxScene* scene, const std::string& outputpath);
 
 int GetCPSize(CMesh mesh);
 
@@ -34,7 +36,7 @@ FbxNode* OneModelToFbx(CModel model);
 FbxNode* OneMeshToFbx(CMesh CMesh); //TODO DELETE THIS LATER
 /* this function is used to convert a model object into a FbxNode object which is animatable*/
 
-inline bool CheckTexture(const string& texture){
+inline bool CheckTexture(const std::string& texture){ // TODO: (TOMER) WTF?
     struct stat buffer;
     return (stat (texture.c_str(), &buffer) == 0);
 }

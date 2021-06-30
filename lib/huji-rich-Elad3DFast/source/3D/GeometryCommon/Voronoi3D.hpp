@@ -35,17 +35,12 @@ private:
 	std::set<int> set_temp_;
 	std::stack<int> stack_temp_;
 
-#ifdef RICH_MPI
-	vector<Vector3D> UpdateMPIPoints(Tessellation3D const& vproc, int rank,
-		vector<Vector3D> const& points, vector<std::size_t> &selfindex, vector<int> &sentproc,
-		vector<vector<std::size_t> > &sentpoints);
-#endif
 	void output_buildextra(std::string const& filename)const;
 	void FindIntersectionsSingle(vector<Face> const& box, std::size_t point, Sphere &sphere,
 		vector<size_t> &intersecting_faces,std::vector<double> &Rtemp,std::vector<Vector3D> &vtemp);
 	void FindIntersectionsRecursive(vector<std::size_t> &res,Tessellation3D const& tproc, std::size_t rank,
 		std::size_t point, Sphere &sphere, size_t mode, boost::container::flat_set<size_t> &visited,
-		std::stack<std::size_t> &to_check,bool &skipped,face_vec &faces, vector<size_t> const& past_duplicate);
+		std::stack<std::size_t> &to_check,bool &skipped,face_vec &faces, vector<size_t> &past_duplicate);
 	void FindIntersectionsFirstMPI(vector<std::size_t> &res, std::size_t point,
 		Sphere &sphere, std::vector<Face> const& faces, bool &skipped, face_vec const& face_index);
 	std::size_t GetFirstPointToCheck(void)const;
@@ -95,6 +90,17 @@ private:
 	std::array<Vector3D, 4> temp_points_;
 	std::array<Vector3D, 5> temp_points2_;
 public:
+#ifdef RICH_MPI
+	vector<Vector3D> UpdateMPIPoints(Tessellation3D const& vproc, int rank,
+		vector<Vector3D> const& points, vector<std::size_t>& selfindex, vector<int>& sentproc,
+		vector<vector<std::size_t> >& sentpoints);
+#endif
+	vector<int>& GetSentProcs(void);
+
+	vector<vector<size_t> >& GetSentPoints(void);
+
+	vector<size_t>& GetSelfIndex(void);
+
 	vector<Vector3D>& GetAllFaceCM(void);
 
 	Vector3D FaceCM(std::size_t index)const;
@@ -108,9 +114,9 @@ public:
 #ifdef RICH_MPI
 	void Build(vector<Vector3D> const& points, Tessellation3D const& tproc);
 
-	friend void SetLoad(Voronoi3D &tproc, vector<Vector3D> &points, size_t Niter, double speed, int mode,double round);
+	friend void SetLoad(Voronoi3D &tproc, vector<Vector3D> &points, size_t Niter, double speed, int mode,double round, bool display);
 
-	friend void SetLoad(Voronoi3D &tproc, vector<Vector3D> &points,vector<ComputationalCell3D> &cells, size_t Niter, double speed, int mode, double round);
+	friend void SetLoad(Voronoi3D &tproc, vector<Vector3D> &points,vector<ComputationalCell3D> &cells, size_t Niter, double speed, int mode, double round, bool display);
 #endif
 
 	void BuildDebug(int rank);

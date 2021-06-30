@@ -470,8 +470,9 @@ namespace
 					try
 					{
 #endif
-						extensives[neigh[j] - index_remove] += eu.ConvertPrimitveToExtensive3D(cells[ToRemove[i]], eos, dv.second[0], tsn, interp.GetSlopes()[ToRemove[i]],
-							oldtess.GetCellCM(ToRemove[i]), Vector3D(dv.second[1], dv.second[2], dv.second[3]));
+						if(dv.first)
+							extensives[neigh[j] - index_remove] += eu.ConvertPrimitveToExtensive3D(cells[ToRemove[i]], eos, dv.second[0], tsn, interp.GetSlopes()[ToRemove[i]],
+								oldtess.GetCellCM(ToRemove[i]), Vector3D(dv.second[1], dv.second[2], dv.second[3]));
 #ifdef RICH_DEBUG
 				}
 				catch (UniversalError &eo)
@@ -879,7 +880,7 @@ ComputationalCell3D SimpleAMRCellUpdater3D::ConvertExtensiveToPrimitve3D(const C
 		eo.AddEntry("Vx", res.velocity.x);
 		eo.AddEntry("Vy", res.velocity.y);
 		eo.AddEntry("Vz", res.velocity.z);
-		eo.AddEntry("ID", res.ID);
+		eo.AddEntry("ID", static_cast<double>(res.ID));
 		eo.AddEntry("internal energy", extensive.internal_energy / extensive.mass);
 		eo.AddEntry("Volume", 1.0 / vol_inv);
 		throw eo;
@@ -914,7 +915,7 @@ ComputationalCell3D SimpleAMRCellUpdaterSR3D::ConvertExtensiveToPrimitve3D(const
 	double gamma_1 = std::sqrt(1 - ScalarProd(res.velocity, res.velocity));
 	res.density = extensive.mass *gamma_1*volume;
 	res.stickers = old_cell.stickers;
-	size_t N = extensive.tracers.size();
+	//	size_t N = extensive.tracers.size();
 //	res.tracers.resize(N);
 	for (size_t i = 0; i < extensive.tracers.size(); ++i)
 		res.tracers[i] = extensive.tracers[i] / extensive.mass;
@@ -933,9 +934,20 @@ CellsToRemove3D::~CellsToRemove3D(void) {}
 
 CellsToRefine3D::~CellsToRefine3D(void) {}
 
-AMR3D::AMR3D(EquationOfState const& eos, CellsToRefine3D const& refine, CellsToRemove3D const& remove,SpatialReconstruction3D &interp, AMRCellUpdater3D* cu,
-	AMRExtensiveUpdater3D* eu) :eos_(eos), refine_(refine), remove_(remove),interp_(interp), scu_(SimpleAMRCellUpdater3D()),
-	seu_(SimpleAMRExtensiveUpdater3D()), cu_(cu), eu_(eu)
+AMR3D::AMR3D(EquationOfState const& eos, 
+	     CellsToRefine3D const& refine,
+	     CellsToRemove3D const& remove,
+	     SpatialReconstruction3D &interp,
+	     AMRCellUpdater3D* cu,
+	     AMRExtensiveUpdater3D* eu):
+  eos_(eos), 
+  refine_(refine), 
+  remove_(remove),
+  scu_(SimpleAMRCellUpdater3D()),
+  seu_(SimpleAMRExtensiveUpdater3D()), 
+  interp_(interp), 
+  cu_(cu), 
+  eu_(eu)
 {
 	if (!cu)
 		cu_ = &scu_;
@@ -1081,7 +1093,8 @@ void AMR3D::operator() (HDSim3D &sim)
 
 #ifdef RICH_MPI
 	// Update cells
-	MPI_exchange_data(tess, cells, true);
+	ComputationalCell3D cdummy;
+	MPI_exchange_data(tess, cells, true,&cdummy);
 #endif
 	// Update Max ID
 	size_t & MaxID = sim.GetMaxID();

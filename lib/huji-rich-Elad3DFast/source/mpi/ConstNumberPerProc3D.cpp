@@ -423,9 +423,9 @@ void ConstNumberPerProc3D::Update(Tessellation3D& tproc, Tessellation3D const& t
 		load = std::max(load, static_cast<double>(NPerProc[i]) / static_cast<double>(IdealPerProc));
 
 	double NewSpeed = speed_;
-	if (load > 3)
-		NewSpeed *= std::min(std::pow(load - 2, 3), 0.15 / speed_);
-
+	/*if (load > 3)
+		NewSpeed *= std::min(std::pow(load - 2, 1.5), 0.005 / speed_);
+*/
 	const double d = fastabs(CM - tproc.GetMeshPoint(rank));
 	double dxround = 0, dyround = 0, dzround = 0;
 	if (d > 0.1*R[static_cast<size_t>(rank)])
@@ -443,6 +443,8 @@ void ConstNumberPerProc3D::Update(Tessellation3D& tproc, Tessellation3D const& t
 	}
 	++run_counter_;
 	Vector3D RankCM = GetProcCM(tlocal);
+	if (tlocal.GetPointNo() == 0)
+		RankCM = tproc.GetCellCM(rank);
 	//Vector3D RankCM = tproc.GetCellCM(static_cast<size_t>(rank));
 	vector<double> tosend = list_serialize(vector<Vector3D>(1, RankCM));
 	vector<double> torecv(static_cast<size_t>(nproc) * 3);
@@ -486,7 +488,7 @@ void ConstNumberPerProc3D::Update(Tessellation3D& tproc, Tessellation3D const& t
 		face_vec faces = tproc.GetCellFaces(rank);
 		size_t Nneigh = neigh.size();
 
-		const double neigheps = 0.025;
+		const double neigheps = std::max(0.01,std::min(0.1,RoundSpeed_*0.2));
 		for (size_t i = 0; i < Nneigh; ++i)
 		{
 			if (static_cast<int>(neigh[i]) >= nproc)
@@ -495,7 +497,7 @@ void ConstNumberPerProc3D::Update(Tessellation3D& tproc, Tessellation3D const& t
 			const double mind = neigheps * std::min(MyR, R[neigh[i]]);
 			if (dist < mind)
 			{
-				double speed2 = NewSpeed * 10 * (mind - dist) *MyR / (dist*dist);
+				double speed2 = NewSpeed * 10 * (mind - dist) * std::min(MyR, R[neigh[i]]) / (dist*dist);
 				dx += speed2 * (point.x - tproc.GetMeshPoint(neigh[i]).x);
 				dy += speed2 * (point.y - tproc.GetMeshPoint(neigh[i]).y);
 				dz += speed2 * (point.z - tproc.GetMeshPoint(neigh[i]).z);
@@ -503,7 +505,8 @@ void ConstNumberPerProc3D::Update(Tessellation3D& tproc, Tessellation3D const& t
 			else
 			{
 				Vector3D otherpoint = RankCMs[neigh[i]];
-				double merit = static_cast<double>(NPerProc[static_cast<size_t>(rank)] - NPerProc[neigh[i]])*std::pow(tproc.GetArea(faces[i])/(MyR*MyR),0.4) / IdealPerProc;
+				//Vector3D otherpoint = tproc.GetMeshPoint(neigh[i]);
+				double merit = static_cast<double>(NPerProc[static_cast<size_t>(rank)] - NPerProc[neigh[i]])*std::pow(tproc.GetArea(faces[i]) / (MyR*MyR), 0.4) / IdealPerProc;
 				double dr = fastabs(otherpoint - point);
 				dx -= NewSpeed * merit*(otherpoint.x - point.x)*MyR / dr;
 				dy -= NewSpeed * merit*(otherpoint.y - point.y)*MyR / dr;

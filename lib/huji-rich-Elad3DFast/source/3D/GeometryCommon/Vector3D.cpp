@@ -40,11 +40,17 @@ Vector3D RotateZ(Vector3D const& v, double a)
 	return res;
 }
 
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 double abs(Vector3D const& v)
 {
 	return std::sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
 }
 
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 double fastabs(Vector3D const& v)
 {
 	return fastsqrt(v.x*v.x + v.y*v.y + v.z*v.z);
@@ -82,13 +88,9 @@ void Vector3D::unserialize(const vector<double>& data)
 	z = data[2];
 }
 
-void Vector3D::Set(double ix, double iy, double iz)
-{
-	x = ix;
-	y = iy;
-	z = iz;
-}
-
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 Vector3D& Vector3D::operator=(Vector3D const& v)
 {
 	x = v.x;
@@ -97,6 +99,9 @@ Vector3D& Vector3D::operator=(Vector3D const& v)
 	return *this;
 }
 
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 Vector3D& Vector3D::operator*=(double s)
 {
 	x *= s;
@@ -105,6 +110,31 @@ Vector3D& Vector3D::operator*=(double s)
 	return *this;
 }
 
+double& Vector3D::operator[](size_t index)
+{
+	if (index == 0)
+		return x;
+	if (index == 1)
+		return y;
+	if (index == 2)
+		return z;
+	assert(false);
+}
+
+double Vector3D::operator[](size_t index)const
+{
+	if (index == 0)
+		return x;
+	if (index == 1)
+		return y;
+	if (index == 2)
+		return z;
+	assert(false);
+}
+
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 Vector3D& Vector3D::operator+=(Vector3D const& v)
 {
 	x += v.x;
@@ -113,6 +143,9 @@ Vector3D& Vector3D::operator+=(Vector3D const& v)
 	return *this;
 }
 
+#ifdef __INTEL_COMPILER
+#pragma omp declare simd
+#endif
 Vector3D& Vector3D::operator-=(Vector3D const& v)
 {
 	x -= v.x;

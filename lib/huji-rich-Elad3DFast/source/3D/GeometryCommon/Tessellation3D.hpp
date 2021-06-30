@@ -21,6 +21,11 @@ using std::vector;
 class Tessellation3D
 {
 public:
+#ifdef RICH_MPI
+	virtual vector<Vector3D> UpdateMPIPoints(Tessellation3D const& vproc, int rank,
+		vector<Vector3D> const& points, vector<std::size_t>& selfindex, vector<int>& sentproc,
+		vector<vector<std::size_t> >& sentpoints) = 0;
+#endif
 
 	/*! \brief Builds the tessellation
 	\param points Initial position of mesh generating points
@@ -171,6 +176,12 @@ public:
 
 	virtual vector<size_t> const& GetSelfIndex(void) const = 0;
 
+	virtual vector<int>& GetSentProcs(void) = 0;
+
+	virtual vector<vector<size_t> > & GetSentPoints(void) = 0;
+
+	virtual vector<size_t> & GetSelfIndex(void) = 0;
+
 	/*!
 	\brief Returns the total number of points (including ghost)
 	\return The total number of points
@@ -255,4 +266,5 @@ public:
 	virtual void SetBox(Vector3D const& ll, Vector3D const& ur) = 0;
 };
 
+point_vec_v VectorValues(std::vector<Vector3D> const&v, point_vec const &index);
 #endif // TESSELLATION3D_HPP

@@ -1,38 +1,37 @@
-#pragma once
-
 #ifndef INDEXEDFACE_H
 #define INDEXEDFACE_H
 
-#include <vector>
 #include "Point.h"
 
-using namespace std;
+namespace vivid
+{
 
 class CIndexedFace
 {
 public:
 	inline CIndexedFace();
-	inline CIndexedFace(vector<size_t> aPoints, coord_t aColor);
+	inline CIndexedFace(std::vector<size_t> aPoints, coord_t aColor);
 	inline CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, coord_t aColor); // used after triangulation and decimation
 	inline ~CIndexedFace();
-	inline vector<size_t> GetPoints() { return this->mPoints; }
-	inline size_t operator[](size_t I) {return this->mPoints[I];}
-	inline coord_t GetColor() { return this->mColor; }
-	inline void SetColor(coord_t aColor) { this->mColor = aColor; }
-	inline void SetPoints(vector<size_t> aPoints) { this->mPoints = aPoints; }
+	inline std::vector<size_t> GetPoints() { return mPoints; }
+	inline size_t operator[](size_t I) {return mPoints[I];}
+	inline coord_t GetColor() { return mColor; }
+	inline void SetColor(coord_t aColor) { mColor = aColor; }
+	inline void SetPoints(std::vector<size_t> aPoints) { mPoints = aPoints; }
 
 private:
-	vector<size_t> mPoints;
+    std::vector<size_t> mPoints;
 	coord_t mColor;
 };
 
 CIndexedFace::CIndexedFace() : mColor(0) {}
 
-CIndexedFace::CIndexedFace(vector<size_t> aPoints, coord_t aColor) : mColor(aColor)
+// TODO CPP file
+CIndexedFace::CIndexedFace(std::vector<size_t> aPoints, coord_t aColor) : mColor(aColor)
 {
-	for (vector<size_t>::iterator it = aPoints.begin(); it != aPoints.end(); it++)
+	for (auto it = aPoints.begin(); it != aPoints.end(); it++)
 	{
-		this->mPoints.push_back(*it);
+		mPoints.push_back(*it);
 	}
 }
 
@@ -46,4 +45,6 @@ CIndexedFace::CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, coord
 CIndexedFace::~CIndexedFace()
 {
 }
+
+} // namespace vivid
 #endif

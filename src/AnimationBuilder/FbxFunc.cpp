@@ -3,6 +3,10 @@
 //
 
 #include "FbxFunc.h"
+#include "External.h"
+
+using namespace vivid;
+using namespace std;
 
 void FbxSceneExport(FbxScene* scene, const string& outputfile)
 {
@@ -75,7 +79,7 @@ FbxNode* OneMeshToFbx(CMesh CMesh)
 
     for (int l = 0; l < CMeshPoints.size(); ++l)
     {
-        FMeshCP[l].Set(CMeshPoints[l].GetX(), CMeshPoints[l].GetY(), CMeshPoints[l].GetZ());
+        FMeshCP[l].Set(CMeshPoints[l].X(), CMeshPoints[l].Y(), CMeshPoints[l].Z());
     }
 
     for (int i1 = 0; i1 < ColorValues.size(); ++i1)
@@ -135,7 +139,7 @@ void CreateTexture(FbxScene* scene, FbxMesh* FMesh, double AlphaFactor, const st
 
     //checks if a texture png file already exists, if not, it creates the texture file
 //    const char *TexturePath;
-    if (CheckTexture(string(outputpath + "_texture.png")) == false) {
+    if (CheckTexture(string(outputpath) + string("_texture.png")) == false) {
         cout << "no texture found, creating texture" << endl;
         vector<unsigned char> texture;
         texture = GetColorTexture();
@@ -196,7 +200,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
 
     for (int l = 0; l < CPoints.size(); ++l)
     {
-        FMeshCP[l].Set(CPoints[l].GetX(), CPoints[l].GetY(), CPoints[l].GetZ());
+        FMeshCP[l].Set(CPoints[l].X(), CPoints[l].Y(), CPoints[l].Z());
     }
 
 

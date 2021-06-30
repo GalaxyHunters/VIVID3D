@@ -55,15 +55,15 @@ namespace
 	}
 }
 
-void ConditionActionFlux1::operator()(vector<Conserved3D> &fluxes, const Tessellation3D& tess, const vector<Vector3D>& face_velocities,
-	const vector<ComputationalCell3D>& cells, const vector<Conserved3D>& extensives, const EquationOfState& eos,
+std::vector<std::pair<ComputationalCell3D, ComputationalCell3D> > ConditionActionFlux1::operator()(vector<Conserved3D> &fluxes, const Tessellation3D& tess, const vector<Vector3D>& face_velocities,
+												   const vector<ComputationalCell3D>& cells, const vector<Conserved3D>& /*extensives*/, const EquationOfState& eos,
 	const double time, const double /*dt*/, TracerStickerNames const& tracerstickernames) const
 {
 	for (size_t i = 0; i < sequence_.size(); ++i)
 		sequence_[i].second->Reset();
 	vector<std::pair<ComputationalCell3D, ComputationalCell3D> > face_values;
 	interp_(tess, cells, time, face_values, tracerstickernames);
-	fluxes.resize(tess.GetTotalFacesNumber(), extensives[0]);
+	fluxes.resize(tess.GetTotalFacesNumber());
 	size_t Nloop = fluxes.size();
 	for (size_t i = 0; i < Nloop; ++i)
 	{
@@ -105,6 +105,7 @@ void ConditionActionFlux1::operator()(vector<Conserved3D> &fluxes, const Tessell
 		}
 		choose_action(i, tess, cells, eos, face_velocities[i], sequence_, fluxes[i], time, tracerstickernames, face_values[i]);
 	}
+	return face_values;
 }
 
 ConditionActionFlux1::Condition3D::~Condition3D(void) {}

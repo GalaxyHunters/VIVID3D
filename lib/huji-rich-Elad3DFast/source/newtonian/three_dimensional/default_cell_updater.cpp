@@ -13,6 +13,7 @@ namespace
 		res.pressure = new_pressure;
 		double de = eos.dp2e(res.density, res.pressure) - energy;
 		energy += de;
+		res.internal_energy = energy;
 		extensive.energy += de * extensive.mass;
 		extensive.internal_energy += de * extensive.mass;
 	}
@@ -47,7 +48,7 @@ namespace
 		EquationOfState const& eos)
 	{
 		size_t Nloop = tess.GetPointNo();
-		size_t Ntracers = res[0].tracers.size();
+		size_t Ntracers = tsn.tracer_names.size();
 		for (size_t i = 0; i < Nloop; ++i)
 		{
 			try
@@ -103,7 +104,7 @@ namespace
 						eo.AddEntry("Cell volume", vol);
 						eo.AddEntry("Cell energy", extensives[i].energy);
 						eo.AddEntry("Cell thermal energy per unit mass", energy);
-						eo.AddEntry("Cell id", res[i].ID);
+						eo.AddEntry("Cell id", static_cast<double>(res[i].ID));
 						throw eo;
 					}
 				}
@@ -126,7 +127,7 @@ namespace
 					eo.AddEntry("Cell volume", vol);
 					eo.AddEntry("Cell energy", extensives[i].energy);
 					eo.AddEntry("Cell thermal energy per unit mass", energy);
-					eo.AddEntry("Cell id", res[i].ID);
+					eo.AddEntry("Cell id", static_cast<double>(res[i].ID));
 					throw eo;
 				}
 			}
@@ -138,7 +139,7 @@ namespace
 				eo.AddEntry("Cell y momentum", extensives[i].momentum.y);
 				eo.AddEntry("Cell z momentum", extensives[i].momentum.z);
 				eo.AddEntry("Cell energy", extensives[i].energy);
-				throw;
+				throw eo;
 			}
 		}
 	}
@@ -148,7 +149,7 @@ namespace
 		EquationOfState const& eos, double G)
 	{
 		size_t Nloop = tess.GetPointNo();
-		size_t Ntracers = res[0].tracers.size();
+		size_t Ntracers = tsn.tracer_names.size();
 		for (size_t i = 0; i < Nloop; ++i)
 		{
 			try
@@ -164,7 +165,7 @@ namespace
 					res[i].velocity = v * extensives[i].momentum / abs(extensives[i].momentum);
 				double gamma_1 = std::sqrt(1 - ScalarProd(res[i].velocity, res[i].velocity));
 				res[i].density = extensives[i].mass *gamma_1*volume;
-				double r = fastabs(tess.GetMeshPoint(i));
+				//				double r = fastabs(tess.GetMeshPoint(i));
 				if (res[i].density < 0)
 					throw UniversalError("Negative density");
 				for (size_t j = 0; j < extensives[i].tracers.size(); ++j)
@@ -206,7 +207,7 @@ namespace
 			}
 			catch (UniversalError &eo)
 			{
-				eo.AddEntry("Cell ID", res[i].ID);
+			  eo.AddEntry("Cell ID", static_cast<double>(res[i].ID));
 				eo.AddEntry("Cell volume", tess.GetVolume(i));
 				eo.AddEntry("Cell index", static_cast<double>(i));
 				eo.AddEntry("Cell mass", extensives[i].mass);
@@ -217,10 +218,10 @@ namespace
 				eo.AddEntry("Cell y location", tess.GetMeshPoint(i).y);
 				eo.AddEntry("Cell z location", tess.GetMeshPoint(i).z);
 				eo.AddEntry("Cell energy", extensives[i].energy);
-				eo.AddEntry("Number of tracers", Ntracers);
+				eo.AddEntry("Number of tracers", static_cast<double>(Ntracers));
 				for (size_t j = 0; j < Ntracers; ++j)
 					eo.AddEntry("Tracer extensive value", extensives[i].tracers[j]);
-				eo.AddEntry("Entropy index", entropy_index);
+				eo.AddEntry("Entropy index", static_cast<double>(entropy_index));
 				throw;
 			}
 		}
@@ -241,7 +242,10 @@ void DefaultCellUpdater::operator()(vector<ComputationalCell3D> &res, EquationOf
 		entropy_index_ = static_cast<size_t>(it - tracerstickernames.tracer_names.begin());
 #ifdef RICH_MPI
 	if (entropy_index_ < tracerstickernames.tracer_names.size())
-		MPI_exchange_data(tess, extensives, true);
+	{
+		Conserved3D edummy;
+		MPI_exchange_data(tess, extensives, true,&edummy);
+	}
 #endif
 	if (!SR_)
 		regular_update(res, extensives, tess, entropy_index_, tracerstickernames, eos);

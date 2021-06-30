@@ -4,6 +4,8 @@
 #ifdef RICH_MPI
 #include "../../mpi/mpi_commands.hpp"
 #endif
+#include "../../misc/simple_io.hpp"
+#include "../../misc/int2str.hpp"
 
 #ifdef RICH_MPI
 namespace
@@ -11,7 +13,7 @@ namespace
 	void CallTreeGetSend(ANNkd_tree* tree, Tessellation3D const& tproc, face_vec const& faces, vector<ANNkd_ptr>& nodes,
 		double opening)
 	{
-		vector<Vector3D> facepoints;
+		point_vec_v facepoints;
 		vector<ANNpointArray> annfaces(faces.size());
 		vector<size_t> Nfaces(faces.size());
 		vector<ANNpoint> normals(faces.size());
@@ -22,7 +24,7 @@ namespace
 			Nfaces[j] = NFace;
 			annfaces[j] = annAllocPts(static_cast<int>(NFace), 3);
 #ifdef __INTEL_COMPILER
-#pragma ivdep
+#pragma omp simd early_exit
 #endif
 			for (size_t i = 0; i < NFace; ++i)
 			{
@@ -40,7 +42,8 @@ namespace
 	}
 }
 #endif
-ANNSelfGravity::ANNSelfGravity(double opening, Tessellation3D const* tproc) : opening_(opening), tproc_(tproc) {}
+ANNSelfGravity::ANNSelfGravity(double opening, Tessellation3D const* tproc, std::string debug_name) : 
+	opening_(opening), tproc_(tproc), d_name_(debug_name) {}
 
 void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<ComputationalCell3D>& cells,
 	const vector<Conserved3D>& /*fluxes*/, const double /*time*/, TracerStickerNames const & /*tracerstickernames*/,
@@ -57,14 +60,15 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 
 	size_t Norg = tess.GetPointNo();
 	acc.resize(Norg);
-	vector<double> masses(Norg);
-	std::vector<std::array<double, 6> >  Q(Norg);
+	size_t Nmass = std::max(Norg, static_cast<size_t>(1));
+	vector<double> masses(Nmass,0.0);
+	std::vector<std::array<double, 6> >  Q(Nmass, std::array<double, 6>{});
 
-	ANNpointArray dpoints = annAllocPts(static_cast<int>(Norg), 3);
+	ANNpointArray dpoints = annAllocPts(static_cast<int>(Nmass), 3);
 	vector<Vector3D> const& AllCM = tess.GetAllCM();
-	vector<double> const& volumes = tess.GetAllVolumes();
+	vector<double> const& volumes = tess.GetAllVolumes(); 
 #ifdef __INTEL_COMPILER
-#pragma ivdep
+#pragma omp simd
 #endif
 	for (size_t i = 0; i < Norg; ++i)
 	{
@@ -81,7 +85,16 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 		for (size_t j = 0; j < 6; j++)
 			Q[i][j] = 0;
 	}
-	ANNkd_tree *atree = new ANNkd_tree(dpoints, masses, Q, static_cast<int>(Norg), 1, ANN_KD_SL_MIDPT);
+#ifdef RICH_MPI
+	if (Nmass > Norg)
+	{
+		dpoints[0][0] = tproc_->GetMeshPoint(rank).x;
+		dpoints[0][1] = tproc_->GetMeshPoint(rank).y;
+		dpoints[0][2] = tproc_->GetMeshPoint(rank).z;
+	}
+
+#endif // RICH_MPI
+	ANNkd_tree *atree = new ANNkd_tree(dpoints, masses, Q, static_cast<int>(Nmass), 1, ANN_KD_SL_MIDPT);
 
 #ifdef RICH_MPI
 #ifdef timing
@@ -109,10 +122,25 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 			m_send.push_back(nodes[j]->CM[0]);
 			m_send.push_back(nodes[j]->CM[1]);
 			m_send.push_back(nodes[j]->CM[2]);
+			double Qsum = 0;
+#ifdef __INTEL_COMPILER
+#pragma omp simd reduction(+:Qsum)
+#endif
 			for (size_t k = 0; k < 6; ++k)
-				m_send.push_back(nodes[j]->Q[k]);
+				Qsum += std::fabs(nodes[j]->Q[k]);
+			if (Qsum > DBL_MIN)
+			{
+				for (size_t k = 0; k < 6; ++k)
+					m_send.push_back(nodes[j]->Q[k]);
+				m_size[i] += 10;
+			}
+			else
+			{
+				m_send.push_back(DBL_MAX);
+				m_size[i] += 5;
+			}
 		}
-		m_size[i] = static_cast<int>(nodes.size()*10);
+		assert(m_size[i] > 0);
 	}
 	delete atree;
 	annClose();
@@ -126,34 +154,88 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 	vector<int> m_rec_size(Nproc);
 	MPI_Alltoall(&m_size[0], 1, MPI_INT, &m_rec_size[0], 1, MPI_INT, MPI_COMM_WORLD);
 
+	int Nmaxlocal = *std::max_element(m_size.begin(), m_size.end());
+	//int max_loc = static_cast<int>(std::max_element(m_size.begin(), m_size.end()) - m_size.begin());
+	vector<int> maxes(Nproc);
+	MPI_Gather(&Nmaxlocal, 1, MPI_INT, &maxes[0], 1, MPI_INT, 0, MPI_COMM_WORLD);
+	int Nmaxglobal = 0;
+	MPI_Reduce(&Nmaxlocal, &Nmaxglobal, 1, MPI_INT, MPI_MAX, 0, MPI_COMM_WORLD);
+	//	int max_logc = static_cast<int>(std::max_element(maxes.begin(), maxes.end()) - maxes.begin());
+	if (rank == 0)
+		std::cout << "Maximum send length in gravity is " << Nmaxglobal << std::endl;
+	MPI_Barrier(MPI_COMM_WORLD);
 	vector<int> s_disp(Nproc, 0), r_disp(Nproc, 0);
 	for (size_t i = 1; i < Nproc; ++i)
 		s_disp[i] = s_disp[i - 1] + m_size[i - 1];
 	for (size_t i = 1; i < Nproc; ++i)
 		r_disp[i] = r_disp[i - 1] + m_rec_size[i - 1];
 	vector<double> m_recv(r_disp.back() + m_rec_size.back(), 0);
-
-	MPI_Alltoallv(&m_send[0], &m_size[0], &s_disp[0], MPI_DOUBLE, &m_recv[0], &m_rec_size[0], &r_disp[0], MPI_DOUBLE, MPI_COMM_WORLD);
-	assert(m_recv.size() % 10 == 0);
-	size_t toadd = m_recv.size()/10;
-	dpoints = annAllocPts(static_cast<int>(Norg + toadd), 3);
-	masses.resize(Norg + toadd);
-	Q.resize(Norg + toadd);
+#ifdef RICH_DEBUG
+	MPI_Barrier(MPI_COMM_WORLD);
+	write_vector(m_send, d_name_ + "m_send_" + int2str(rank) + ".txt");
+	write_vector(m_size, d_name_ + "m_size_" + int2str(rank) + ".txt");
+	write_vector(s_disp, d_name_ + "s_disp_" + int2str(rank) + ".txt");
+	write_vector(m_rec_size, d_name_ + "m_rec_size_" + int2str(rank) + ".txt");
+	write_vector(r_disp, d_name_ + "r_disp_" + int2str(rank) + ".txt");
+	write_number(m_recv.size(), d_name_ + "m_recv_" + int2str(rank) + ".txt");
+#endif
+	int error = MPI_Alltoallv(&m_send[0], &m_size[0], &s_disp[0], MPI_DOUBLE, &m_recv[0], &m_rec_size[0], &r_disp[0], MPI_DOUBLE, MPI_COMM_WORLD);
+	if (error != 0)
+	{
+		write_vector(m_send, d_name_ + "m_send_" + int2str(rank) + ".txt");
+		write_vector(m_size, d_name_ + "m_size_" + int2str(rank) + ".txt");
+		write_vector(s_disp, d_name_ + "s_disp_" + int2str(rank) + ".txt");
+		write_vector(m_rec_size, d_name_ + "m_rec_size_" + int2str(rank) + ".txt");
+		write_vector(r_disp, d_name_ + "r_disp_" + int2str(rank) + ".txt");
+		write_number(static_cast<int>(m_recv.size()), d_name_ + "m_recv_" + int2str(rank) + ".txt");
+		throw;
+	}
+	MPI_Barrier(MPI_COMM_WORLD);
+	assert(m_recv.size() % 5 == 0);
+	size_t m_recv_size = m_recv.size();
+	size_t toadd = 0;
+	for (size_t i = 4; i < m_recv_size; i+=5)
+	{
+		++toadd;
+		if (m_recv[i] > (0.1 * DBL_MAX))
+			continue;
+		else
+		{
+			i += 5;
+			continue;
+		}
+	}
+	dpoints = annAllocPts(static_cast<int>(Nmass + toadd), 3);
+	masses.resize(Nmass + toadd);
+	Q.resize(Nmass + toadd);
+	size_t counter = 0;
 #ifdef __INTEL_COMPILER
 #pragma ivdep
 #endif
 	for (size_t i = 0; i < toadd; ++i)
 	{
-		masses[Norg + i] = m_recv[i * 10];
-		dpoints[Norg + i][0] = m_recv[i * 10+1];
-		dpoints[Norg + i][1] = m_recv[i * 10+2];
-		dpoints[Norg + i][2] = m_recv[i * 10 + 3];
-		Q[Norg + i][0] = m_recv[i * 10 + 4];
-		Q[Norg + i][1] = m_recv[i * 10 + 5];
-		Q[Norg + i][2] = m_recv[i * 10 + 6];
-		Q[Norg + i][3] = m_recv[i * 10 + 7];
-		Q[Norg + i][4] = m_recv[i * 10 + 8];
-		Q[Norg + i][5] = m_recv[i * 10 + 9];
+		masses[Nmass + i] = m_recv[counter];
+		dpoints[Nmass + i][0] = m_recv[counter+1];
+		dpoints[Nmass + i][1] = m_recv[counter +2];
+		dpoints[Nmass + i][2] = m_recv[counter + 3];
+		if (m_recv[counter + 4] > (0.1 * DBL_MAX))
+		{
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
+			for (int j = 0; j < 6; j++)
+				Q[Nmass + i][j] = 0;
+			counter += 5;
+		}
+		else
+		{
+#ifdef __INTEL_COMPILER
+#pragma ivdep
+#endif
+			for (int j = 0; j < 6; j++)
+				Q[Nmass + i][j] = m_recv[counter + 4 + j];
+			counter += 10;
+		}
 	}
 #ifdef timing
 	t1 = MPI_Wtime();
@@ -171,7 +253,15 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 		dpoints[i][1] = AllCM[i].y;
 		dpoints[i][2] = AllCM[i].z;
 	}
-	atree = new ANNkd_tree(dpoints, masses, Q, static_cast<int>(Norg + toadd), 1, ANN_KD_SL_MIDPT);
+#ifdef RICH_MPI
+	if (Nmass > Norg)
+	{
+		dpoints[0][0] = tproc_->GetMeshPoint(rank).x;
+		dpoints[0][1] = tproc_->GetMeshPoint(rank).y;
+		dpoints[0][2] = tproc_->GetMeshPoint(rank).z;
+	}
+#endif // RICH_MPI
+	atree = new ANNkd_tree(dpoints, masses, Q, static_cast<int>(Nmass + toadd), 1, ANN_KD_SL_MIDPT);
 #ifdef timing
 	t0 = MPI_Wtime();
 	if (rank == 0)
@@ -199,8 +289,7 @@ void ANNSelfGravity::operator()(const Tessellation3D & tess, const vector<Comput
 		qpoints.resize(Ninner);
 		accpoints.resize(Ninner);
 #ifdef __INTEL_COMPILER
-#pragma ivdep
-//#pragma vector aligned
+#pragma omp simd
 #endif
 		for (size_t j = 0; j < Ninner; ++j)
 		{

@@ -72,13 +72,13 @@ add_executable(vivid
         lib/ImportAndExport/lodepng/lodepng.cpp
         lib/ImportAndExport/ObjExportImport.cpp
         lib/ImportAndExport/FbxExportImport.cpp
+        lib/ImportAndExport/Animation.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/Shapes.cpp
         src/Extra/Analysis.h
-        lib/ImportAndExport/Animation.cpp
 
         #main
         src/main.cpp

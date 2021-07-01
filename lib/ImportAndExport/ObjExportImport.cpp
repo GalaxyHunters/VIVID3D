@@ -10,6 +10,7 @@ using namespace std;
 namespace vivid
 {  // TODO temp fix most of the functions here should be rewritten or become out of scope
 
+
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
     return GetColor(aQuan);
 }
@@ -94,9 +95,6 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
         }
     }
 }
-
-
-
 
 void ExportToObjMaterial(CModel &aModel, string aOutput){
     if (boost::ends_with(aOutput, ".obj") ) { //check if the output file ends with .obj, and delete it if it does

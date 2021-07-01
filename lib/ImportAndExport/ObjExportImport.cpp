@@ -5,9 +5,10 @@
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
 
-using namespace vivid;
 using namespace std;
 
+namespace vivid
+{
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
     return GetColor(aQuan);
 }
@@ -245,3 +246,5 @@ void OBJExporter(CModel &aModel,std::string aOutPutFile, bool WithTexture){
         ExportToObjTexture(aModel, aOutPutFile);
     }
 }
+
+} // namespace vivid

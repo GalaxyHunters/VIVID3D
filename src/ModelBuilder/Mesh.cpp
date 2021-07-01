@@ -79,9 +79,6 @@ void CMesh::SetAlpha(coord_t aAlpha){
 void CMesh::setCenVector(const CPoint &vector){ mCenVector = vector; }
 CPoint CMesh::getCenVector() { return mCenVector; }
 
-
-
-
 void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;

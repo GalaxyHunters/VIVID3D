@@ -1,9 +1,9 @@
 #pragma once
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef VIVID_ANIMATION_H
+#define VIVID_ANIMATION_H
 
 #include "fbxsdk.h"
-#include "FbxFunc.h"
+#include "ImportAndExport/FbxExportImport.h"
 
 //#include "Surf.h"
 
@@ -31,7 +31,5 @@ void RotateAnimTextures(CModel model, float length, float duration, int RotAxis,
 void AnimateTextures(std::vector<CModel> Models, double Interval, const string& OutputFile);
 
 
-
 }; // namespace vivid
-
-#endif
+#endif //VIVID_ANIMATION_H

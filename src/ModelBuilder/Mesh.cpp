@@ -46,14 +46,14 @@ void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
 	//call decimation from External
 	int targetVerticesN = int(aVerticlePercent * mPoints.size());
 	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	pair<vector<CPoint>, vector<CIndexedFace> > temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
+	auto temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
 	mPoints = get<0>(temp);
 	mFaces = get<1>(temp);
 }
 
 vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
     vector<CIndexedFace> aTriangles = vector<CIndexedFace>();
-	for (vector<CIndexedFace>::iterator fIt = mFaces.begin(); fIt != mFaces.end(); fIt++) {
+	for (auto fIt = mFaces.begin(); fIt != mFaces.end(); fIt++) {
 		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
             aTriangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
 		}
@@ -79,9 +79,6 @@ void CMesh::SetAlpha(coord_t aAlpha){
 void CMesh::setCenVector(const CPoint &vector){ mCenVector = vector; }
 CPoint CMesh::getCenVector() { return mCenVector; }
 
-
-
-
 void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;
@@ -99,7 +96,7 @@ void CMesh::TransformMesh(coord_t const aTrans[3][3]){
     }
 }
 
-void CMesh::RotatewMesh(CPoint aNormVec, double aRadAngel){
+void CMesh::RotateMesh(CPoint aNormVec, double aRadAngel){
     // Trig operations are expansive
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);

@@ -1,15 +1,15 @@
 #include <vector>
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
-#include "Utils/Shapes.h"
-#include "AnimationBuilder/Animation.h"
-#include "ModelBuilder/Surf.h"
+#include "ModelBuilder/Shapes.h"
+#include "ImportAndExport/Animation.h"
+#include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
 
-// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#include "../lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
-#include "../lib/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
+//// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
+#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 #define BOX_SIZE 20
 #define HEIGHT 10
@@ -19,7 +19,7 @@ using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
-const std::string TEST_OUTPUT_PATH = "./tests/testModels/";
+const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */

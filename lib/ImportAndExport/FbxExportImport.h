@@ -1,19 +1,13 @@
-//
-// Created by zorik on 15/09/2019.
-//
-
-#ifndef VIVID_FBXFUNC_H
-#define VIVID_FBXFUNC_H
+#ifndef VIVID_FBXEXPORTIMPORT_H
+#define VIVID_FBXEXPORTIMPORT_H
 
 #include "Model.h"
 #include "Mesh.h"
-#include <iostream>
-//#include "ReadBinFile.h"
 #include <fbxsdk.h>
-#include <vector>
 #include <sys/stat.h>
-#include "string"
-//#include <direct.h>
+
+// TODO FIX with ZOHAR
+
 
 using namespace vivid;
 
@@ -44,4 +38,4 @@ inline bool CheckTexture(const std::string& texture){ // TODO: (TOMER) WTF?
 //vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh);
 
 
-#endif //VIVID_FBXFUNC_H
+#endif //VIVID_FBXEXPORTIMPORT_H

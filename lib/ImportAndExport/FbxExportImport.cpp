@@ -1,12 +1,10 @@
-//
-// Created by zorik on 15/09/2019.
-//
-
-#include "FbxFunc.h"
+#include "FbxExportImport.h"
+#include "DataToImage.h"
 #include "External.h"
 
 using namespace vivid;
 using namespace std;
+
 
 void FbxSceneExport(FbxScene* scene, const string& outputfile)
 {
@@ -143,7 +141,7 @@ void CreateTexture(FbxScene* scene, FbxMesh* FMesh, double AlphaFactor, const st
         cout << "no texture found, creating texture" << endl;
         vector<unsigned char> texture;
         texture = GetColorTexture();
-        encodePNG((string(outputpath + "_texture.png")).c_str(), texture, 1, texture.size() / 4);
+        encodePNG( string(outputpath + "_texture.png"), texture, 1, texture.size() / 4);
 //        TexturePath = ();
         cout << "texture creation done" << endl;
     }

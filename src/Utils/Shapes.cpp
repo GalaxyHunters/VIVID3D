@@ -1,4 +1,5 @@
 #include "Shapes.h"
+#include <cassert>
 
 #define _USE_MATH_DEFINES //TODO WTF???
 //#include <math.h>

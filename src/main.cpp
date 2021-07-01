@@ -7,9 +7,9 @@
 #include "ModelBuilder/Point.h"
 
 
-// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#include "../lib/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
-#include "../lib/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
+//// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
+#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 #define BOX_SIZE 20
 #define HEIGHT 10

@@ -20,7 +20,7 @@ namespace vivid
 CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, std::vector<double> position);
 /*Creates a cube*/
 
-CMesh CreateSphereMesh(std::size_t num_of_meridians, std::size_t num_of_parallels, double radius, const std::vector<double> CenterPoint, coord_t Color, coord_t Alpha, const std::string Label);
+CMesh CreateSphereMesh(std::size_t num_of_meridians, std::size_t num_of_parallels, double radius, const CPoint &arCenter, coord_t Color, coord_t Alpha, const std::string Label);
 /*Creates a sphere*/
 
 CMesh CreateEllipsoidMesh(std::size_t NumOfMeridians, std::size_t NumOfParallels, std::vector<double> aRadiusVec,

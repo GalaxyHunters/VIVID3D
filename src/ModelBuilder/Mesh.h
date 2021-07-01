@@ -22,7 +22,7 @@ private:
 	string mLabel;
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
-    CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
+    CPoint mCenVector; // TODO, should be handeled only in surf, here there is no meaning to cen. holds the center of the data (used to center the data by 000 and back to original upon export)
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
@@ -65,7 +65,7 @@ public:
      */
     void MoveMesh(CPoint aDirectionVec);
     /**
-     * Change XMesh points scale in x,y,z direction by x,y,z of the scale vector
+     * Change CMesh points scale in x,y,z direction by x,y,z of the scale vector
      * @param[in] aScaleVec the x,y.z direction to move by it.
      */
     void ScaleMesh(CPoint aScaleVec);

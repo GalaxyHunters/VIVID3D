@@ -30,20 +30,20 @@ public:
 	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
 	inline ~CPoint(){}
 	inline coord_t Dist(CPoint& aVec) { return sqrt(pow(mX - aVec.X(), 2) + pow(mY - aVec.Y(), 2) + pow(mZ - aVec.Z(), 2)); }
-	inline coord_t X() { return mX; }
-	inline coord_t Y() { return mY; }
-	inline coord_t Z() { return mZ; }
+	inline const coord_t X() const{ return mX; }
+	inline const coord_t Y() const{ return mY; }
+	inline const coord_t Z() const{ return mZ; }
 	inline void X(coord_t aX) { mX = aX; }
 	inline void Y(coord_t aY) { mY = aY; }
 	inline void Z(coord_t aZ) { mZ = aZ; }
-	inline CPoint& operator += (const CPoint& apV) { mX += apV.mX; mY += apV.mY; mZ += apV.mZ; return *this; }
-    inline CPoint& operator -= (const CPoint& apV) { mX -= apV.mX; mY -= apV.mY; mZ -= apV.mZ; return *this; }
-    inline CPoint& operator =  (const CPoint& apV) { mX =  apV.mX; mY =  apV.mY; mZ =  apV.mZ; return *this; }
-    inline CPoint  operator +  (const CPoint& apV) { return CPoint (mX + apV.mX, mY + apV.mY, mZ + apV.mZ); }
-    inline CPoint  operator -  (const CPoint& apV) { return CPoint (mX - apV.mX, mY - apV.mY, mZ - apV.mZ); }
-    inline CPoint  operator *  (const coord_t aSc) { return CPoint (aSc * mX, aSc * mY, aSc * mZ); }
+	inline CPoint& operator+= (const CPoint& apV) { mX += apV.mX; mY += apV.mY; mZ += apV.mZ; return *this; }
+    inline CPoint& operator-= (const CPoint& apV) { mX -= apV.mX; mY -= apV.mY; mZ -= apV.mZ; return *this; }
+    inline CPoint& operator=  (const CPoint& apV) { mX =  apV.mX; mY =  apV.mY; mZ =  apV.mZ; return *this; }
+    inline CPoint  operator+  (const CPoint& apV) const{ return CPoint (mX + apV.mX, mY + apV.mY, mZ + apV.mZ); }
+    inline CPoint  operator-  (const CPoint& apV) const{ return CPoint (mX - apV.mX, mY - apV.mY, mZ - apV.mZ); }
+    inline CPoint  operator*  (const coord_t aSc) const{ return CPoint (aSc * mX, aSc * mY, aSc * mZ); }
 //    inline CPoint  operator *  (const coord_t aSc, const CPoint& apV) { return CPoint (aSc * apV.X(), aSc * apV.Y(), aSc * apV.Z()); }
-    inline CPoint  operator /  (const coord_t aSc) {
+    inline CPoint  operator/  (const coord_t aSc) {
         if (0 == aSc)
         {
             return CPoint(0,0,0);

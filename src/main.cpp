@@ -1,8 +1,8 @@
 #include <vector>
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
-#include "Utils/Shapes.h"
-#include "ModelBuilder/Animation.h"
+#include "ModelBuilder/Shapes.h"
+#include "ImportAndExport/Animation.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 

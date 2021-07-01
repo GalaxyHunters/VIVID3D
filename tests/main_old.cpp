@@ -2,8 +2,8 @@
 #include <vector>
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
-#include "Utils/Shapes.h"
-#include "ModelBuilder/Animation.h"
+#include "ModelBuilder/Shapes.h"
+#include "ImportAndExport/Animation.h"
 #define BOX_SIZE 20
 #define HEIGHT 10
 using namespace std;

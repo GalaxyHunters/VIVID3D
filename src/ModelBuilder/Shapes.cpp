@@ -2,14 +2,11 @@
 #include <cassert>
 
 #define _USE_MATH_DEFINES //TODO WTF???
-//#include <math.h>
+//#include <math>
 
 using namespace vivid;
 
 using namespace std;
-
-
-
 
 namespace vivid
 {
@@ -50,19 +47,16 @@ CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coo
     return mesh;
 }
 
-CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, const vector<double> CenterPoint, coord_t Color, coord_t Alpha, const string Label)
+CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double radius, const CPoint &arCenter, coord_t Color, coord_t Alpha, const string Label)
 {
     // TODO Zohar: VERYUGLY code, please use mesh.MoveMesh, mesh.ScaleMesh etc in this function
     vector<CPoint> vertices;
     vector<CIndexedFace> faces;
-    double Theta;
-    double Phi;
-    double CenterX = CenterPoint[0];
-    double CenterY = CenterPoint[1];
-    double CenterZ = CenterPoint[2];
+    double Theta, Phi;
 
-    vertices.push_back(CPoint(CenterX, CenterY, CenterZ + radius)); //Creating the top polar
-    vertices.push_back(CPoint(CenterX, CenterY, CenterZ - radius)); //Creating the bottom polar
+    CPoint z_radius_vec = CPoint(0,0,radius);
+    vertices.push_back(arCenter + z_radius_vec); //Creating the top polar
+    vertices.push_back(arCenter - z_radius_vec); //Creating the bottom polar
 
     double PhiStep = M_PI / (num_of_parallels + 1);
     double ThetaStep = (2 * M_PI) / num_of_meridians;
@@ -73,7 +67,7 @@ CMesh CreateSphereMesh(size_t num_of_meridians, size_t num_of_parallels, double 
         for (int k = 1; k < num_of_parallels + 1; ++k)
         {
             Phi = (M_PI / 2) - (k * PhiStep);
-            vertices.push_back(CPoint(CenterX + radius * cos(Phi) * cos(Theta), CenterY + radius * cos(Phi) * sin(Theta), CenterZ + radius * sin(Phi)));    //creating the vertices
+            vertices.push_back(CPoint(arCenter.X() + radius * cos(Phi) * cos(Theta), arCenter.Y() + radius * cos(Phi) * sin(Theta), arCenter.Z() + radius * sin(Phi)));    //creating the vertices
         }
     }
 

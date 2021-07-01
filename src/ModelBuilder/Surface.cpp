@@ -33,7 +33,7 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
         throw "Input error, mask must have both True and false values";
     }
     //model centralization
-    mCenVector = FindCenPoint(aInputPoints);
+    mCenVector = GetGeometricCenter(aInputPoints);
     //code
     vector<CPoint> temp;
     // Why dont we set temp to be the size of aInputPoints ahead of time?
@@ -91,7 +91,7 @@ inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Y()
 inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Z() < aPoint2.Z());}
 
 //define function that finds model center point and radius of points.
-CPoint CSurface::FindCenPoint(const vector<vector<double>> &aInputPoints){
+CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &aInputPoints){
     coord_t MaxX = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
     coord_t MinX = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
 

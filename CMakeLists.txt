@@ -68,41 +68,46 @@ add_executable(vivid
         lib/External.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
+        lib/ImportAndExport/DataToImage.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
+        lib/ImportAndExport/ObjExportImport.cpp
+        lib/ImportAndExport/FbxExportImport.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
-        src/Utils/Shapes.cpp
-        lib/ImportAndExport/ObjExportImport.cpp
-        #animation
-        src/ModelBuilder/Animation.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
+        src/ModelBuilder/Shapes.cpp
+        src/Extra/Analysis.h
+        lib/ImportAndExport/Animation.cpp
+
         #main
         src/main.cpp
-        lib/ImportAndExport/DataToImage.cpp
-        lib/ImportAndExport/lodepng/lodepng.cpp
         )
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
 target_link_libraries(vivid Boost::boost)
-target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
+target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
 
 pybind11_add_module(vivid_py
         #external
         lib/External.cpp
+        lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
+        lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
+        lib/ImportAndExport/ObjExportImport.cpp
+        lib/ImportAndExport/FbxExportImport.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
-        src/Utils/Shapes.cpp
-        #animation
-        src/ModelBuilder/Animation.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
+        src/ModelBuilder/Shapes.cpp
+        src/Extra/Analysis.h
+        lib/ImportAndExport/Animation.cpp
+
         #wrapper
         src/wrapper.cpp
         )

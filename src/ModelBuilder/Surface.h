@@ -40,7 +40,7 @@ private:
 	CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
 
     std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
-    CPoint FindCenPoint(const std::vector<std::vector<double>> &aInputPoints); // find the center of the model (used to transform the data to be centered around 000)
+    CPoint GetGeometricCenter(const std::vector<std::vector<double>> &aInputPoints); // find the center of the model (used to transform the data to be centered around 000)
 
 	//vorn function:
 	void RunVorn();

@@ -29,7 +29,7 @@ std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vor
 	size_t c_point1, c_point2;
 	for (size_t i = 0; i < total_cells; i++) {
 		cell = temp.GetCellFaces(i);
-		for (face_vec::iterator face = cell.begin(); face != cell.end(); face++) {
+		for (auto face = cell.begin(); face != cell.end(); face++) {
 			c_point1 = get<0>(temp.GetFaceNeighbors(*face));
 			c_point2 = get<1>(temp.GetFaceNeighbors(*face));
 			if (!(c_point1 < i) && !(c_point2 < i)) { //the face doent belong to a cell we read already
@@ -61,7 +61,7 @@ pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& 
     size_t c_point1, c_point2;
     for (size_t i = 0; i < total_cells; i++) {
         cell = temp.GetCellFaces(i);
-        for (face_vec::iterator face = cell.begin(); face != cell.end(); face++) {
+        for (auto face = cell.begin(); face != cell.end(); face++) {
             c_point1 = get<0>(temp.GetFaceNeighbors(*face));
             c_point2 = get<1>(temp.GetFaceNeighbors(*face));
             if (!(c_point1 < i) && !(c_point2 < i)) { //the face doent belong to a cell we read already

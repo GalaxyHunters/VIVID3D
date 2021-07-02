@@ -65,7 +65,7 @@ include_directories(lib/ImportAndExport/lodepng)
 
 add_executable(vivid
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp
@@ -93,7 +93,7 @@ target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
 pybind11_add_module(vivid_py
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp

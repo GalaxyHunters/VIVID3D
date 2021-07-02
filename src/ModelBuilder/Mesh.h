@@ -3,7 +3,7 @@
 
 #include "Point.h"
 #include "IndexedFace.h"
-#include "External.h"
+#include "Decimate.h"
 #include "Utils/ColorMap.h"
 
 
@@ -30,7 +30,7 @@ private:
 public:
 	CMesh() {};
     CMesh(const CMesh &mesh);
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha); //CPoint aCenVector = CPoint(0, 0, 0)
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0)); //CPoint aCenVector = CPoint(0, 0, 0)
 	//operator =
 	~CMesh();
 
@@ -38,12 +38,12 @@ public:
 	coord_t GetAlpha();
     std::vector<CPoint> GetPoints();
     std::vector<CIndexedFace> GetFaces();
-//    CPoint getCenVector();
+    CPoint getCenVector();
     void SetFaces(std::vector<CIndexedFace> aFaces);
 	void SetPoints(std::vector<CPoint> aPoints);
 	void SetLabel(std::string aLabel);
 	void SetAlpha(coord_t aAlpha);
-//	void setCenVector(const CPoint &vector);
+	void setCenVector(const CPoint &vector);
 
 
     void Decimation(coord_t aVerticlePercent, coord_t aError);

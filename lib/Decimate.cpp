@@ -1,4 +1,4 @@
-#include "External.h"
+#include "Decimate.h"
 
 using namespace std;
 
@@ -7,7 +7,7 @@ namespace vivid
 
 void CallBack(const char * msg) //TODO Y
 {
-	cout << msg;
+	cout << msg; //TODO should be log
 }
 
 pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CIndexedFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) { //TODO: aFaces is not by reference
@@ -15,11 +15,11 @@ pair<vector<CPoint>, vector<CIndexedFace> > DecimateMesh(vector<CPoint>& aPoints
 	vector< Vec3<float> > vertices;
 	vector< Vec3<int> > triangles;
 	Vec3<int> temp_triangle;
-	for (vector<CIndexedFace>::iterator fIt = aFaces.begin(); fIt != aFaces.end(); fIt++) {
+	for (auto fIt = aFaces.begin(); fIt != aFaces.end(); fIt++) {
 		temp_triangle = Vec3<int>((*fIt)[0], (*fIt)[1], (*fIt)[2], fIt->GetColor());
 		triangles.push_back(temp_triangle); //, fIt->GetColor()
 	}
-	for (vector<CPoint>::iterator pIt = aPoints.begin(); pIt != aPoints.end(); pIt++) {
+	for (auto pIt = aPoints.begin(); pIt != aPoints.end(); pIt++) {
 		vertices.push_back(Vec3<float>(pIt->X(), pIt->Y(), pIt->Z(), 0));
 	}
 	//decimate model

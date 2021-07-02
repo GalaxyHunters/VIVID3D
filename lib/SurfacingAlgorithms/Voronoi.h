@@ -1,5 +1,5 @@
-#ifndef VIVID_External_H
-#define VIVID_External_H
+#ifndef VIVID_VORONOI_H
+#define VIVID_VORONOI_H
 
 #include "Point.h"
 #include "Voronoi3D.hpp"
@@ -16,4 +16,4 @@ std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vor
 
 
 }; // namespace vivid
-#endif //VIVID_External_H
+#endif //VIVID_VORONOI_H

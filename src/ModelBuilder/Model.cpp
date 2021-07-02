@@ -1,5 +1,5 @@
 #include "Model.h"
-#include "External.h"
+#include "Decimate.h"
 #include "ImportAndExport/ObjImportExport.h"
 
 using namespace vivid;

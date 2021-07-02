@@ -1,6 +1,6 @@
 #include "Mesh.h"
 #include "Model.h" // TODO TOMER!! Y?
-#include "External.h"
+#include "Decimate.h"
 
 #include "boost/algorithm/string/predicate.hpp"
 //#include <stdio.h>

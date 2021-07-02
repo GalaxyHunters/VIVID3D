@@ -12,12 +12,13 @@ class CModel
 {
 private:
     std::vector<CMesh> mMeshes = std::vector<CMesh>();
-
+    //TODO shouldn't we get Model name here?
 public:
     // TODO Think! should we pass param by reference? should we use const?
     // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
     CModel(){};
 	CModel(CMesh aMesh) {mMeshes.push_back(aMesh);};
+    //operator =
 	CModel(std::vector<CMesh> aMeshes) : mMeshes(aMeshes){};
 	CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha);
 	~CModel();
@@ -28,6 +29,7 @@ public:
 
 	// Add Importers
     void ExportToObj(std::string aOutput, bool WithTexture = 1);
+//    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
 };
 

@@ -2,7 +2,7 @@
 
 using namespace vivid;
 
-void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, char* outputfile, float interval)          //animation based on nodes
+void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, string outputfile, float interval)          //animation based on nodes
 {
 	FbxManager* manager = FbxManager::Create();                                             //Creating the manager, the biggest container
 	FbxScene* scene = FbxScene::Create(manager, "");                                //Creating the scene, this object will be the one exported
@@ -11,6 +11,7 @@ void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, char* outputfile, f
 	animStack->AddMember(layer0);
 	FbxTime time;
 	FbxNode* SceneRootNode = scene->GetRootNode();
+    // TODO Tomer where do you DELETE the pointers?
 
     for (auto l = 0; l < FbxMeshNodes.size(); l++)
     {
@@ -50,7 +51,7 @@ void vivid::FbfAnimNodes(std::vector<FbxNode*> FbxMeshNodes, char* outputfile, f
         }
 	}
 
-	FbxSceneExport(scene, string(outputfile) );
+	FbxSceneExport(scene, outputfile );
 //	// Create an exporter.
 //	FbxExporter* lExporter = FbxExporter::Create(manager, "");
 //
@@ -119,9 +120,11 @@ void FbfAnimMeshes(std::vector<FbxMesh*> FbxMeshes, char* outputfile, float inte
     lExporter->Export(scene);
 }
 
-void RotateAnim(CModel model, float length, float duration, int RotAxis, char* outputfile)
+
+void RotateAnim(CModel &arModel, float aLength, float aDuration, int aRotAxis, std::string &aOutputFilePath)
 {
-    FbxNode* CMeshNode = OneModelToFbx(model);
+    // TODO clean code here. Too many param.
+    FbxNode* CMeshNode = OneModelToFbx(arModel);
 	FbxManager* manager = FbxManager::Create();
 	FbxScene* scene = FbxScene::Create(manager, "scene");
 	FbxAnimStack* animStack = FbxAnimStack::Create(scene, "animation stack");
@@ -136,10 +139,9 @@ void RotateAnim(CModel model, float length, float duration, int RotAxis, char* o
 
 
 	CMeshNode->LclRotation.GetCurveNode(layer0, true);
-		 if (RotAxis == 0) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_X, true);
-	else if (RotAxis == 1) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_Y, true);
-	else if (RotAxis == 2) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_Z, true);
-
+		 if (aRotAxis == 0) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_X, true);
+	else if (aRotAxis == 1) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_Y, true);
+	else if (aRotAxis == 2) animCurve = CMeshNode->LclRotation.GetCurve(layer0, FBXSDK_CURVENODE_COMPONENT_Z, true);
 
 
 	if (animCurve)
@@ -150,14 +152,14 @@ void RotateAnim(CModel model, float length, float duration, int RotAxis, char* o
 		keyIndex = animCurve->KeyAdd(time);
 		animCurve->KeySet(keyIndex, time, 0.0, FbxAnimCurveDef::eInterpolationLinear);
 
-		time.SetSecondDouble(duration);
+		time.SetSecondDouble(aDuration);
 		keyIndex = animCurve->KeyAdd(time);
-		animCurve->KeySet(keyIndex, time, -length, FbxAnimCurveDef::eInterpolationLinear);
+		animCurve->KeySet(keyIndex, time, -aLength, FbxAnimCurveDef::eInterpolationLinear);
 
 		animCurve->KeyModifyEnd();
 	}
 
-    FbxSceneExport(scene, string(outputfile) );
+    FbxSceneExport(scene, aOutputFilePath);
 //	// Create an exporter.
 //	FbxExporter* lExporter = FbxExporter::Create(manager, "");
 //
@@ -168,14 +170,14 @@ void RotateAnim(CModel model, float length, float duration, int RotAxis, char* o
 //	lExporter->Export(scene);
 }
 
-void Animate(std::vector<CModel> models, double interval, char* outputfile) //TODO (TOMER) iterator!!! with auto!!!
+void Animate(std::vector<CModel> &arModels, double aInterval, std::string aOutputFilePath)
 {
-    vector<FbxNode*> nodes;
-    for (int l = 0; l < models.size(); ++l)
+    vector<FbxNode*> nodes; //TODO (TOMER) iterator!!! for each loop or even by some vector command!
+    for (int l = 0; l < arModels.size(); ++l)
     {
-        nodes.push_back(OneModelToFbx(models[l]));
+        nodes.push_back(OneModelToFbx(arModels[l]));
     }
-    FbfAnimNodes(nodes, outputfile, interval);
+    FbfAnimNodes(nodes, aOutputFilePath, aInterval);
 }
 
 void RotateAnimTextures(CModel model, float length, float duration, int RotAxis, const string& outputfile){

@@ -22,6 +22,7 @@ private:
 	string mLabel;
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
+
     CPoint mCenVector; // TODO, should be handeled only in surf, here there is no meaning to cen. holds the center of the data (used to center the data by 000 and back to original upon export)
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
@@ -29,7 +30,8 @@ private:
 public:
 	CMesh() {};
     CMesh(const CMesh &mesh);
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha); //CPoint aCenVector = CPoint(0, 0, 0)
+	//operator =
 	~CMesh();
     std::string GetLabel();
 	coord_t GetAlpha();

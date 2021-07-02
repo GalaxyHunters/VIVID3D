@@ -1,9 +1,8 @@
-#pragma once
-#ifndef VIVID_ANIMATION_H
-#define VIVID_ANIMATION_H
+#ifndef VIVID_FBXIMPORTEXPORT_H
+#define VIVID_FBXIMPORTEXPORT_H
 
 #include "fbxsdk.h"
-#include "ImportAndExport/FbxExportImport.h"
+#include "ImportAndExport/FbxCode.h"
 
 
 namespace vivid
@@ -33,4 +32,4 @@ animation in which the time interval between each frame is determined by the use
 
 
 }; // namespace vivid
-#endif //VIVID_ANIMATION_H
+#endif //VIVID_FBXIMPORTEXPORT_H

@@ -1,7 +1,7 @@
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Mesh.h"
 #include "ModelBuilder/Shapes.h"
-#include "ImportAndExport/Animation.h"
+#include "ImportAndExport/FBXImportExport.h"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>

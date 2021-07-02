@@ -70,9 +70,9 @@ add_executable(vivid
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
-        lib/ImportAndExport/ObjExportImport.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
-        lib/ImportAndExport/Animation.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
+        lib/ImportAndExport/FBXImportExport.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
@@ -98,15 +98,15 @@ pybind11_add_module(vivid_py
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
-        lib/ImportAndExport/ObjExportImport.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/Shapes.cpp
         src/Extra/Analysis.h
-        lib/ImportAndExport/Animation.cpp
+        lib/ImportAndExport/FBXImportExport.cpp
 
         #wrapper
         src/wrapper.cpp

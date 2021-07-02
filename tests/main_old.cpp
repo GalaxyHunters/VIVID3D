@@ -3,7 +3,7 @@
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
-#include "ImportAndExport/Animation.h"
+#include "ImportAndExport/FBXImportExport.h"
 #define BOX_SIZE 20
 #define HEIGHT 10
 using namespace std;

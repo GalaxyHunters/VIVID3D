@@ -24,6 +24,7 @@ public:
 	~CModel();
 
 	void AddMesh(CMesh aMesh);
+	//remove Mesh?
 	void AddSurf(CSurface aSurf, std::string aLabel, coord_t aAlpha);
 	vector<CMesh> GetMeshes() {return mMeshes;}
 

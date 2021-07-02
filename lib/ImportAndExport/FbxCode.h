@@ -1,5 +1,5 @@
-#ifndef VIVID_FBXEXPORTIMPORT_H
-#define VIVID_FBXEXPORTIMPORT_H
+#ifndef VIVID_FBXCODE_H
+#define VIVID_FBXCODE_H
 
 #include "Model.h"
 #include "Mesh.h"
@@ -38,4 +38,4 @@ inline bool CheckTexture(const std::string& texture){ // TODO: (TOMER) WTF?
 //vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh);
 
 
-#endif //VIVID_FBXEXPORTIMPORT_H
+#endif //VIVID_FBXCODE_H

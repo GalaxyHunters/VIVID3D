@@ -74,15 +74,28 @@ add_executable(vivid
         lib/ImportAndExport/FbxCode.cpp
         lib/ImportAndExport/FBXImportExport.cpp
         #vivid
-        src/ModelBuilder/Surface.cpp
-        src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
+        src/ModelBuilder/ModelComponent.cpp
+        src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Line.cpp
+        src/ModelBuilder/PointCloud.cpp
+
+        src/ModelBuilder/Surface.cpp
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp
+
         src/ModelBuilder/Shapes.cpp
+
+        src/ModelBuilder/Animation.cpp
+        src/ModelBuilder/StopMotionAnimation.cpp
+
         src/Extra/Analysis.h
 
         #main
         src/main.cpp
-        )
+
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp)
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.

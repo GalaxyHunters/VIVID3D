@@ -11,8 +11,9 @@ namespace vivid
 class CModel
 {
 private:
-    std::vector<CMesh> mMeshes = std::vector<CMesh>();
-    //TODO shouldn't we get Model name here?
+    std::string mLabel = ""; //TODO should it be default string
+    std::vector<CMesh> mMeshes = {}; //TODO ModelComponent refactor
+
 public:
     // TODO Think! should we pass param by reference? should we use const?
     // Should we have surfaces here? in what way? is there a better way that is still easy to the user?

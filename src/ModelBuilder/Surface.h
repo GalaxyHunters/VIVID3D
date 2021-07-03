@@ -7,6 +7,7 @@
 namespace vivid
 {
 
+//TODO Should it containd Cpoint?
 class CSurfacePoint { // used to sort and clean the voronoi input points
 public:
 	CPoint mPoint;
@@ -16,7 +17,7 @@ public:
 	inline CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
-
+//TODO Should it containd CFace?
 class CSurfaceFace{
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints;
@@ -29,7 +30,7 @@ public:
     inline ~CSurfaceFace() {};
 };
 
-
+//public CMesh
 class CSurface{
 private:
     std::vector<std::shared_ptr<CPoint> > mVecPoints;

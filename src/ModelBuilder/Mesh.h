@@ -1,6 +1,8 @@
 #ifndef VIVID_MESH_H
 #define VIVID_MESH_H
 
+#include "ModelComponent.h"
+
 #include "Point.h"
 #include "IndexedFace.h"
 #include "Decimate.h"
@@ -15,11 +17,12 @@
 namespace vivid
 {
 
-class CMesh {
+class CMesh : public CModelComponent{
 
 private:
+    string mLabel;
+
 	coord_t mAlpha;
-	string mLabel;
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
 

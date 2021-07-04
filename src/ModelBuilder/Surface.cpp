@@ -204,7 +204,7 @@ void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) 
 }
 void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 	vector<bool> new_mask;
-	for (size_t i = 0; i < aPOutSize; i++) {
+	for (size_t i = 0; i < aPOutSize; i++) { //TODO might be faster using fill or something similar in vector
 		new_mask.push_back(false);
 	}
 	for (size_t i = 0; i < aPInSize; i++) {
@@ -213,7 +213,7 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 	mMask = new_mask;
 }
 
-bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) {
+bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
 	if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
 		if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
 			if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
@@ -261,8 +261,8 @@ void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t
 			arNewOut.push_back(i);
 		}
 	}
-	this->mInputPoints = arNewPoints;
-	this->mQuan = arNewQuan;
+	mInputPoints = arNewPoints;
+	mQuan = arNewQuan;
 }
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData) {
 	//sort the array
@@ -294,19 +294,19 @@ void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, 
     //TODO ugly and wrong func name
 	coord_t x, y, z;
 	(*apPVec).push_back(*apNewIndex);
-	x = (this->mInputPoints[aCPoint1].X() * 2 + this->mInputPoints[aCPoint2].X()) / 3.0;
-	y = (this->mInputPoints[aCPoint1].Y() * 2 + this->mInputPoints[aCPoint2].Y()) / 3.0;
-	z = (this->mInputPoints[aCPoint1].Z() * 2 + this->mInputPoints[aCPoint2].Z()) / 3.0;
+	x = (mInputPoints[aCPoint1].X() * 2 + mInputPoints[aCPoint2].X()) / 3.0;
+	y = (mInputPoints[aCPoint1].Y() * 2 + mInputPoints[aCPoint2].Y()) / 3.0;
+	z = (mInputPoints[aCPoint1].Z() * 2 + mInputPoints[aCPoint2].Z()) / 3.0;
 	(*apNewPoints).push_back(CPoint(x, y, z));
-	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+	(*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
 	(*apNewIndex)++;
 
 	(*apPVec).push_back(*apNewIndex);
-	x = (this->mInputPoints[aCPoint1].X() + this->mInputPoints[aCPoint2].X() * 2) / 3.0;
-	y = (this->mInputPoints[aCPoint1].Y() + this->mInputPoints[aCPoint2].Y() * 2) / 3.0;
-	z = (this->mInputPoints[aCPoint1].Z() + this->mInputPoints[aCPoint2].Z() * 2) / 3.0;
+	x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
+	y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
+	z = (mInputPoints[aCPoint1].Z() + mInputPoints[aCPoint2].Z() * 2) / 3.0;
 	(*apNewPoints).push_back(CPoint(x, y, z));
-	(*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+	(*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
 	(*apNewIndex)++;
 }
 

@@ -55,7 +55,6 @@ public:
         return out;
     }
 
-
 };
 
 }; // namespace vivid

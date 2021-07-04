@@ -42,34 +42,18 @@ public:
     inline CPoint  operator+  (const CPoint& apV) const{ return CPoint (mX + apV.mX, mY + apV.mY, mZ + apV.mZ); }
     inline CPoint  operator-  (const CPoint& apV) const{ return CPoint (mX - apV.mX, mY - apV.mY, mZ - apV.mZ); }
     inline CPoint  operator*  (const coord_t aSc) const{ return CPoint (aSc * mX, aSc * mY, aSc * mZ); }
-//    inline CPoint  operator *  (const coord_t aSc, const CPoint& apV) { return CPoint (aSc * apV.X(), aSc * apV.Y(), aSc * apV.Z()); }
-    inline CPoint  operator/  (const coord_t aSc) {
-        if (0 == aSc)
-        {
-            return CPoint(0,0,0);
-        }
-	    return CPoint (mX / aSc, mY / aSc, mZ / aSc);
-	}
+    inline CPoint  operator/  (const coord_t aSc) const{ return CPoint (mX / aSc, mY / aSc, mZ / aSc); }
 
+    inline coord_t Dot  (const CPoint& arVec) const{ return (mX * arVec.X() + mY * arVec.Y() + mZ * arVec.Z()); }
+    inline CPoint  Cross(const CPoint& arVec) const{
+        return CPoint(mY * arVec.Z() - mZ * arVec.Y(),
+                      mZ * arVec.X() - mX * arVec.Z(),
+                      mX * arVec.Y() - mY * arVec.X()); }
 
-    inline coord_t Dot  (CPoint aVec){ return (mX * aVec.X() + mY * aVec.Y() + mZ * aVec.Z()); }
-    inline CPoint  Cross(CPoint aVec){
-        return CPoint(mY * aVec.Z() - mZ * aVec.Y(),
-                      mZ * aVec.X() - mX * aVec.Z(),
-                      mX * aVec.Y() - mY * aVec.X()); }
+    inline coord_t Magnitude() const { return sqrt(Dot(*this)) ;}
+    inline CPoint  Normalize() const { return (*this / Magnitude() ); }
+    inline bool Orthogonal(CPoint aV1, CPoint aV2){ return (0 == aV1.Dot(aV2)); }
 
-    inline coord_t Norm(){ return sqrt(Dot(*this)) ;}
-    inline CPoint  Normalize()
-    {
-        return (*this / this->Norm() );
-    }
-    inline bool Orthogonal(CPoint aV1, CPoint aV2)
-    {
-        if (0 == aV1.Dot(aV2)) {
-            return true;
-        }
-        return false;
-    }
 
 
     friend std::ostream& operator<<(std::ostream &out, const CPoint &p)

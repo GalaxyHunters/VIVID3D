@@ -202,7 +202,7 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
-    auto direction_size = direction_vec.Norm();
+    auto direction_size = direction_vec.Magnitude();
     CPoint cross_vec = CPoint(0,0,1).Cross(direction_vec);
     CPoint normal_vec = cross_vec.Normalize();
     double rotation_angel = acos( CPoint(0,0,1).Dot(normal_vec)); //Note both vec are normalized so it's ok
@@ -211,9 +211,9 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
 //    cout << "rotation_angel: " << rotation_angel << "\n";
 //    cout << "direction_size: " << direction_size << "\n";
 //    cout << "cross_product: " << cross_vec << "\n";
-//    cout << "VectorSize(cross_vec): " << Norm(cross_vec) << "\n";
+//    cout << "VectorSize(cross_vec): " << Magnitude(cross_vec) << "\n";
 
-    if ( cross_vec.Norm() < 0.0001 ) // meaning direction_vec is on the z axis
+    if (cross_vec.Magnitude() < 0.0001 ) // meaning direction_vec is on the z axis
     {
         if (direction_vec.Z() < 0)
         {

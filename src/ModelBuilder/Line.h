@@ -18,16 +18,16 @@ private:
 public:
     //Constructor and Copy Constructor
     CLine(){}
-    CLine(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
-    CLine(const CLine &aLine) : mPoints(aLine.mPoints) {}
+    CLine(const std::vector<CPoint> &arPoints, const std::string arLabel) : mPoints(arPoints), CModelComponent(arLabel){}
+    CLine(const CLine &arLine) : mPoints(arLine.mPoints), CModelComponent(arLine) {}
     ~CLine(){}
 
     // Operator=
-    inline CLine& operator= (const CLine& aLine) { mPoints = aLine.mPoints; return *this; }
+    inline CLine& operator= (const CLine& arLine) { mPoints = arLine.mPoints; CModelComponent::operator=(arLine); return *this; }
 
     // Set and Get
-    inline const std::vector<CPoint> Points() const{ return mPoints; }
-    inline void Points(std::vector<CPoint> &aPoints) { mPoints = aPoints; }
+    inline const std::vector<CPoint> GetPoints() const{ return mPoints; }
+    inline void SetPoints(const std::vector<CPoint> &arPoints) { mPoints = arPoints; }
 };
 
 }; // namespace vivid

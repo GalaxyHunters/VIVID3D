@@ -32,8 +32,10 @@ private:
 
 public:
 	CMesh() {};
-    CMesh(const CMesh &aMesh) : mLabel(aMesh.mLabel), mAlpha(aMesh.mAlpha), mPoints(aMesh.mPoints), mFaces(aMesh.mFaces){};
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha): mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha){}
+    CMesh(const CMesh &aMesh) :
+        mLabel(aMesh.mLabel), mAlpha(aMesh.mAlpha), mPoints(aMesh.mPoints), mFaces(aMesh.mFaces), CModelComponent(aMesh){};
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha):
+	    mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha), CModelComponent(aLabel){}
 	//operator =
 	~CMesh();
 

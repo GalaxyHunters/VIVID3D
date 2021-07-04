@@ -12,9 +12,19 @@ class CModelComponent {
 private:
     std::string mLabel = "";
 protected:
+    //Constructor, Copy Constructor, Destructor
+    CModelComponent(){}
+    CModelComponent(const std::string &arLabel) : mLabel(arLabel){}
+    CModelComponent(const CModelComponent &arModel) : mLabel(arModel.mLabel){}
+    virtual ~CModelComponent() = 0;
+
+    // Operator=
+    inline CModelComponent& operator= (const CModelComponent& arModel) { mLabel = arModel.mLabel; return *this; }
+
+
     // set get
-    inline const std::string Label() const{ return mLabel; }
-    inline void Label(std::string &aLabel) { mLabel = aLabel; }
+    inline const std::string GetLabel() const{ return mLabel; }
+    inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
 
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 

@@ -16,19 +16,19 @@ private:
 public:
     //Constructor and Copy Constructor
     CPointCloud(){}
-    CPointCloud(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
-    CPointCloud(const CPointCloud &aPC) : mPoints(aPC.mPoints) {}
+    CPointCloud(const std::vector<CPoint> &arPoints, const std::string arLabel) : mPoints(arPoints), CModelComponent(arLabel){}
+    CPointCloud(const CPointCloud &arPC) : mPoints(arPC.mPoints), CModelComponent(arPC){}
     ~CPointCloud(){}
 
     // Operator=
-    inline CPointCloud& operator= (const CPointCloud& aPC) { mPoints = aPC.mPoints; return *this; }
+    inline CPointCloud& operator= (const CPointCloud& arPC) { mPoints = arPC.mPoints; CModelComponent::operator=(arPC); return *this; }
 
     // Set and Get
-    inline const std::vector<CPoint> Points() const{ return mPoints; }
-    inline void Points(std::vector<CPoint> &aPoints) { mPoints = aPoints; }
+    inline const std::vector<CPoint> GetPoints() const{ return mPoints; }
+    inline void SetPoints(const std::vector<CPoint> &arPoints) { mPoints = arPoints; }
 
     // Add
-    inline void AddPoints(std::vector<CPoint> &aPoints) { mPoints.insert(mPoints.end(), aPoints.begin(), aPoints.end()); }
+    inline void AddPoints(const std::vector<CPoint> &arPoints) { mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end()); }
 };
 
 }; // namespace vivid

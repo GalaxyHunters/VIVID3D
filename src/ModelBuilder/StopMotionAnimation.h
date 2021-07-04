@@ -12,22 +12,22 @@ class CStopMotionAnimation : public CAnimation{
 private:
     std::vector<CModel> mModels = {};
 public:
-    //Constructor and Copy Constructor
+    //Constructor, Copy Constructor, Destructor
     CStopMotionAnimation(){}
-    CStopMotionAnimation(std::vector<CModel> &aModels, std::string &aLabel, duration_t &aDuration) :
-        mModels(aModels), CAnimation(aLabel, aDuration){}
-    CStopMotionAnimation(const CStopMotionAnimation &aSMA) : mModels(aSMA.mModels), CAnimation(aSMA) {}
+    CStopMotionAnimation(const std::vector<CModel> &arModels, const std::string &arLabel, const duration_t &arDuration) :
+        mModels(arModels), CAnimation(arLabel, arDuration){}
+    CStopMotionAnimation(const CStopMotionAnimation &arSMA) : mModels(arSMA.mModels), CAnimation(arSMA) {}
     ~CStopMotionAnimation(){}
 
     // Operator=
-    inline CStopMotionAnimation& operator= (const CStopMotionAnimation& aSMA) { mModels = aSMA.mModels; return *this; }
+    inline CStopMotionAnimation& operator= (const CStopMotionAnimation& arSMA) { mModels = arSMA.mModels; CAnimation::operator=(arSMA); return *this; }
 
     // Set and Get
-    inline const std::vector<CModel> Models() const{ return mModels; }
-    inline void Models(std::vector<CModel> &aModels) { mModels = aModels; }
+    inline const std::vector<CModel> GetModels() const{ return mModels; }
+    inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
 
     // Add
-    inline void AddModels(std::vector<CModel> &aModels) { mModels.insert(mModels.end(), aModels.begin(), aModels.end()); }
+    inline void AddModels(const std::vector<CModel> &arModels) { mModels.insert(mModels.end(), arModels.begin(), arModels.end()); }
 
     //add model, add models... look at vec operations
 };

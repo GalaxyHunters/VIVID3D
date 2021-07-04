@@ -439,7 +439,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 	size_t counter = 0;
 	map < shared_ptr<CPoint>, size_t> indexes;
 	for (auto it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
-		points.push_back(**it);
+		points.push_back(**it - mCenVector);
 		indexes[*it] = counter;
 		counter++;
 	}
@@ -457,7 +457,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 		face_points = vector<size_t>();
 		set_points.clear();
 	}
-	return CMesh(points, faces, aLabel, aAlpha, this->mCenVector);
+	return CMesh(points, faces, aLabel, aAlpha);
 }
 
 void CSurface::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {

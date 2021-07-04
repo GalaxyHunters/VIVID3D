@@ -69,7 +69,7 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
     vector<CIndexedFace> Faces = apMesh->GetFaces();
     for (auto it = Points.begin(); it != Points.end(); it++)
     {
-        temp_point = *it + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
+        temp_point = *it; // + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
         WriteNewPoint(aOBJFile, temp_point);; // writes the point in obj file as vertex
     }
     aOBJFile.flush();
@@ -170,12 +170,12 @@ void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_
                              coord_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + aMesh->GetLabel() + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
-    CPoint cen_point = aMesh->getCenVector();
+    // CPoint cen_point = aMesh->getCenVector();
     vector<CPoint> points = aMesh->GetPoints();
     //write points to obj file
     for (auto it = points.begin(); it != points.end(); it++)
     {
-        temp_point = *it + cen_point; //add the CenVector to return model to the original
+        temp_point = *it; // + cen_point; //add the CenVector to return model to the original
         WriteNewPoint(aOBJFile, temp_point);
         //aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
     }

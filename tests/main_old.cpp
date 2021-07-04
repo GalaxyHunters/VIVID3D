@@ -22,8 +22,8 @@ using namespace std;
 //    model.AddMesh(arrowX);
 //    model.AddMesh(arrowY);
 //    model.AddMesh(arrowZ);
-//    model.ExportToObj("D:/Documents/Alpha/Vivid3/testModels/arrow_test");
-////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/testModels/arrow_test");
+//    model.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
+////    arrow.ExportToObj("D:/Documents/Alpha/Vivid3/test_models/arrow_test");
 //    return 0;
 //}
 //
@@ -32,14 +32,14 @@ using namespace std;
 //int main(){
 //    cout << "got it bro";
 //    CMesh sphere = CreateSphereMesh(10, 10, 1, vector<double>{1, 1, 1}, 0.2, 0.8, "sphere");
-//    sphere.ExportToObj("/home/zohar/Documents/Vivid/testModels/sphere_test");
+//    sphere.ExportToObj("/home/zohar/Documents/Vivid/test_models/sphere_test");
 //    CMesh ellips = CreateEllipsoidMesh(10, 10,  vector<double>{4,1,1}, vector<double>{2,3,6}, vector<double>{-1,2,0}, vector<double>{2,1,0}, vector<double>{0,0,1}, 0.7, 0.6, "ellips1");
-//    ellips.ExportToObj("/home/zohar/Documents/Vivid/testModels/ellips_test");
+//    ellips.ExportToObj("/home/zohar/Documents/Vivid/test_models/ellips_test");
 //    CModel model;
 //    model.AddMesh(sphere);
 //    model.AddMesh(ellips);
 //
-//    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\testModels\\model_test_texture");
+//    model.ExportToObjTexture("D:\\Documents\\Alpha\\Vivid3\\test_models\\model_test_texture");
 //}
 //
 
@@ -72,12 +72,12 @@ using namespace std;
 //        surf.SmoothSurf();
 //        CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //        mesh.Decimation(0.5, 0.4);
-//        mesh.ExportToObjTexture("..\\testModels\\Pyramid.obj");
+//        mesh.ExportToObjTexture("..\\test_models\\Pyramid.obj");
 //    }
 //    catch (exception &e) { cout << e.what() << "ggggggg" << endl;}
 //}
 //	//CModel model = CModel(vector<CMesh>{mesh});
-//	//model.ExportToObj("..\\testModels\\testCode_CModel");
+//	//model.ExportToObj("..\\test_models\\testCode_CModel");
 //	//cout << "blalala";
 //	----------------------------------------------------test read bin file -----------------------------------------------------------------------------
 //	ModelData temp = ReadBin("D:\\alpa\\bin_files\\gal_07_0.2Rvie.bin");

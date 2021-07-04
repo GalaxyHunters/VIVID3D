@@ -7,9 +7,11 @@ namespace vivid
 {
 
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
+//TODO splines?
 class CModelComponent {
     std::string mLabel = "";
     // set get
+
 
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 

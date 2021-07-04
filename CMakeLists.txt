@@ -95,7 +95,7 @@ add_executable(vivid
         src/main.cpp
 
         src/ModelBuilder/VoronoiSurface.cpp
-        src/ModelBuilder/MarchingCubesSurface.cpp)
+        src/ModelBuilder/MarchingCubesSurface.cpp src/ModelBuilder/ErrorMsg.h)
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.

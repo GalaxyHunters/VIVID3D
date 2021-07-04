@@ -35,6 +35,7 @@ class CSurface{
 private:
     std::vector<std::shared_ptr<CPoint> > mVecPoints;
     std::vector<CSurfaceFace> mVecFaces;
+
     std::vector<CPoint> mInputPoints; // for smooth
     std::vector<bool> mMask; //for smooth
     std::vector<coord_t> mQuan; // for smooth
@@ -63,7 +64,9 @@ private:
 	
 public:	
 	CSurface(const CSurface &surf); //copy constructor
+	// operator =
 	CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
+
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);

@@ -157,8 +157,8 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
     assert(("Width and PCRatio must be different then 0", Width != 0 && PCRatio != 0));
     // Create arrow pointing from (0,0,0) to (0,0,1)
-    vector<CPoint> points;
-    vector<CIndexedFace> faces;
+    vector<CPoint> points ={};
+    vector<CIndexedFace> faces={};
     for (int j =-1; j<2; j++) { //start by creating an arrow that points up the z axis
         if (j == 0) continue;
         for (int i=-1; i<2; i++) { //creating the points for the bottom square
@@ -194,11 +194,8 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9},     Color));
     faces.push_back(CIndexedFace(vector<size_t>{9,  12, 8},     Color));
 
-    CMesh mesh;
-    mesh.SetPoints(points);
-    mesh.SetFaces(faces);
-    mesh.SetAlpha(Alpha);
-    mesh.SetLabel(Label);
+    CMesh mesh(points,faces, Label, Alpha);
+
 
     // Scale the arrow by DirVec and later rotating the arrow to DirVec direction
     CPoint direction_vec  = CPoint(DirVec[0],DirVec[1],DirVec[2]);
@@ -206,12 +203,6 @@ CMesh CreateArrowMesh(double Width, double PCRatio, vector<double> aPos, vector<
     CPoint cross_vec = CPoint(0,0,1).Cross(direction_vec);
     CPoint normal_vec = cross_vec.Normalize();
     double rotation_angel = acos( CPoint(0,0,1).Dot(normal_vec)); //Note both vec are normalized so it's ok
-
-//    cout << "normal_vec: " << normal_vec << "\t";
-//    cout << "rotation_angel: " << rotation_angel << "\n";
-//    cout << "direction_size: " << direction_size << "\n";
-//    cout << "cross_product: " << cross_vec << "\n";
-//    cout << "VectorSize(cross_vec): " << Magnitude(cross_vec) << "\n";
 
     if (cross_vec.Magnitude() < 0.0001 ) // meaning direction_vec is on the z axis
     {

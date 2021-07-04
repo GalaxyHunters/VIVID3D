@@ -112,7 +112,7 @@ void CSurface::CleanPoints() {
 		}
 	}
 	mVecPoints = new_points;
-	RemoveDoublePoints();
+    CleanDoublePoints();
 }
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
@@ -138,7 +138,7 @@ bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 	}
 }
 
-void CSurface::RemoveDoublePoints() {
+void CSurface::CleanDoublePoints() {
 	//sort the array
 	std::sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
 	map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
@@ -181,8 +181,8 @@ void UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
 	for (int i = 0; (unsigned)i < aPIn.size(); i++) {
 		aPIn[i] = i + aPOut.size();
 	}
-}
 
+}
 void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
 	map<size_t, bool> p_in_map;
 	map<size_t, bool> p_out_map;

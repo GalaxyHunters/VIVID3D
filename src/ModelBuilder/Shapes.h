@@ -16,6 +16,8 @@ namespace vivid
 // TODO These functions should be static and go by the naming conventions (and better naming, consistant naming...)
 // TODO also, use Doxygen commenting standards
 // TODO make sure all the code parts here is consistent, names of param are sometime capitalized, some not... the order of actions in the algorithm, the inner naming etc...
+// all 3 vec should be passed with CPoint const&
+
 
 CMesh CreateBoxMesh(double sizeX, double sizeY, double sizeZ, coord_t color, coord_t alpha, std::vector<double> position);
 /*Creates a cube*/

@@ -33,7 +33,7 @@ void CMesh::ExportToObj(string aOutput, bool WithTexture){
     CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
 }
 
-void CMesh::Decimation(coord_t aVerticlePercent, coord_t aMaxError)
+void CMesh::Decimate(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){

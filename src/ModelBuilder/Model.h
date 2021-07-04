@@ -30,9 +30,10 @@ public:
 	vector<CMesh> GetMeshes() {return mMeshes;}
 
 	// Add Importers
-    void ExportToObj(std::string aOutput, bool WithTexture = 1);
+    void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 //    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
+    //TODO export to BLOB
 };
 
 }; // namespace vivid

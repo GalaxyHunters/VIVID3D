@@ -49,9 +49,9 @@ public:
 	void setCenVector(const CPoint &vector);
 
 
-    void Decimation(coord_t aVerticlePercent, coord_t aError);
+    void Decimate(coord_t aVerticlePercent, coord_t aError);
 
-    void ExportToObj(string aOutput, bool WithTexture = 1); // TODO (Naftali) Shouldbn't it be a stream too?
+    void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 
 
     /**

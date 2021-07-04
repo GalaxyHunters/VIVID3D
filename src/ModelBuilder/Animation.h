@@ -15,11 +15,12 @@ private:
     std::string mLabel = "";
     duration_t mDuration = 0;
     // Camera route (location, angel etc)
-public:
+protected:
     //Constructor and Copy Constructor
     CAnimation(){}
-    CAnimation(std::string aLabel, duration_t &aDuration) : mLabel(aLabel), mDuration(aDuration){}
+    CAnimation(std::string &aLabel, duration_t &aDuration) : mLabel(aLabel), mDuration(aDuration){}
     CAnimation(const CAnimation &aAnim) : mLabel(aAnim.mLabel), mDuration(aAnim.mDuration) {}
+    virtual ~CAnimation() = 0;
 
     // Set and Get
     inline const std::string Label() const{ return mLabel; }

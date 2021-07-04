@@ -20,6 +20,10 @@ public:
     CLine(){}
     CLine(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
     CLine(const CLine &aLine) : mPoints(aLine.mPoints) {}
+    ~CLine(){}
+
+    // Operator=
+    inline CLine& operator= (const CLine& aLine) { mPoints = aLine.mPoints; return *this; }
 
     // Set and Get
     inline const std::vector<CPoint> Points() const{ return mPoints; }

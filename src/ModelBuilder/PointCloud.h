@@ -9,15 +9,19 @@ namespace vivid
 {
 
 /* 3D points class*/
-class PointCloud : public CModelComponent{
+class CPointCloud : public CModelComponent{
 private:
     /* mPoints - Points in the 3D space */
     std::vector<CPoint> mPoints = {};
 public:
     //Constructor and Copy Constructor
-    PointCloud(){}
-    PointCloud(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
-    PointCloud(const PointCloud &aPC) : mPoints(aPC.mPoints) {}
+    CPointCloud(){}
+    CPointCloud(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
+    CPointCloud(const CPointCloud &aPC) : mPoints(aPC.mPoints) {}
+    ~CPointCloud(){}
+
+    // Operator=
+    inline CPointCloud& operator= (const CPointCloud& aPC) { mPoints = aPC.mPoints; return *this; }
 
     // Set and Get
     inline const std::vector<CPoint> Points() const{ return mPoints; }

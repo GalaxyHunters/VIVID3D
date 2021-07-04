@@ -14,8 +14,13 @@ private:
 public:
     //Constructor and Copy Constructor
     CStopMotionAnimation(){}
-    CStopMotionAnimation(std::vector<CModel> &aModels) : mModels(aModels){}
-    CStopMotionAnimation(const CStopMotionAnimation &aSMA) : mModels(aSMA.mModels) {}
+    CStopMotionAnimation(std::vector<CModel> &aModels, std::string &aLabel, duration_t &aDuration) :
+        mModels(aModels), CAnimation(aLabel, aDuration){}
+    CStopMotionAnimation(const CStopMotionAnimation &aSMA) : mModels(aSMA.mModels), CAnimation(aSMA) {}
+    ~CStopMotionAnimation(){}
+
+    // Operator=
+    inline CStopMotionAnimation& operator= (const CStopMotionAnimation& aSMA) { mModels = aSMA.mModels; return *this; }
 
     // Set and Get
     inline const std::vector<CModel> Models() const{ return mModels; }

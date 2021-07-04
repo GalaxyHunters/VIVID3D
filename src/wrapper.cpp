@@ -1,7 +1,7 @@
-#include "ModelBuilder/Surf.h"
+#include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Mesh.h"
-#include "Utils/Shapes.h"
-#include "AnimationBuilder/Animation.h"
+#include "ModelBuilder/Shapes.h"
+#include "ImportAndExport/FBXImportExport.h"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -23,8 +23,8 @@ PYBIND11_MODULE(vivid_py, m) {
 
     py::class_<CMesh>(m, "CMesh")
             .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))
-            .def("Decimation", &CMesh::Decimation,
-                 "input values should be between 0 and 1. A Decimation algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
+            .def("Decimate", &CMesh::Decimate,
+                 "input values should be between 0 and 1. A Decimate algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
             .def("ExportToObj", &CMesh::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     py::class_<CModel>(m, "CModel")

@@ -1,5 +1,5 @@
-#include "Surf.h"
-#include "External.h"
+#include "Surface.h"
+#include "Voronoi.h"
 
 #include <map>
 
@@ -8,10 +8,7 @@ using namespace std;
 
 const coord_t DoublePointThreshHold = 0.0001;
 
-//CSurface() {};
-
-CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan,
-                   coord_t aVMin, coord_t aVMax) {
+CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
     if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
         if(aQuan.size() != 0) { // use empty()
@@ -33,7 +30,7 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
         throw "Input error, mask must have both True and false values";
     }
     //model centralization
-    mCenVector = FindCenPoint(aInputPoints);
+    mCenVector = GetGeometricCenter(aInputPoints);
     //code
     vector<CPoint> temp;
     // Why dont we set temp to be the size of aInputPoints ahead of time?
@@ -91,7 +88,7 @@ inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Y()
 inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Z() < aPoint2.Z());}
 
 //define function that finds model center point and radius of points.
-CPoint CSurface::FindCenPoint(const vector<vector<double>> &aInputPoints){
+CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &aInputPoints){
     coord_t MaxX = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
     coord_t MinX = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
 
@@ -442,7 +439,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 	size_t counter = 0;
 	map < shared_ptr<CPoint>, size_t> indexes;
 	for (auto it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
-		points.push_back(**it);
+		points.push_back(**it - mCenVector);
 		indexes[*it] = counter;
 		counter++;
 	}
@@ -460,7 +457,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 		face_points = vector<size_t>();
 		set_points.clear();
 	}
-	return CMesh(points, faces, aLabel, aAlpha, this->mCenVector);
+	return CMesh(points, faces, aLabel, aAlpha);
 }
 
 void CSurface::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {

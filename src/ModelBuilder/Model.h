@@ -1,8 +1,8 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef VIVID_MODEL_H
+#define VIVID_MODEL_H
 
 #include "Mesh.h"
-#include "Surf.h"
+#include "Surface.h"
 
 
 namespace vivid
@@ -11,24 +11,30 @@ namespace vivid
 class CModel
 {
 private:
-    std::vector<CMesh> mMeshes;
+    std::string mLabel = ""; //TODO should it be default string
+    std::vector<CMesh> mMeshes = {}; //TODO ModelComponent refactor
 
 public:
-	CModel() : mMeshes() {}; // TODO YYY?
-	CModel(const CMesh arMesh) {mMeshes = std::vector<CMesh>(); mMeshes.push_back(arMesh);};
-	CModel(const std::vector<CMesh> & arMeshes) : mMeshes(arMeshes){};
-	CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha); // TODO YYY?
+    // TODO Think! should we pass param by reference? should we use const?
+    // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
+    CModel(){};
+	CModel(CMesh aMesh) {mMeshes.push_back(aMesh);};
+    //operator =
+	CModel(std::vector<CMesh> aMeshes) : mMeshes(aMeshes){};
+	CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha);
 	~CModel();
 
-	void ExportToObj(std::string aOutput, bool WithTexture = 1);
-
-//	static CMesh load(string inputFile); // TODO add a read obj func
 	void AddMesh(CMesh aMesh);
+	//remove Mesh?
 	void AddSurf(CSurface aSurf, std::string aLabel, coord_t aAlpha);
 	vector<CMesh> GetMeshes() {return mMeshes;}
 
+	// Add Importers
+    void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
+//    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
+
+    //TODO export to BLOB
 };
 
 }; // namespace vivid
-
-#endif
+#endif //VIVID_MODEL_H

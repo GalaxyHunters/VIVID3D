@@ -3,6 +3,6 @@
 /CMakeFiles/
 /binding_python_version/
 /venv/
-/tests/testModels/
+/tests/test_models/
 /Vivid_py.egg-info
 vivid

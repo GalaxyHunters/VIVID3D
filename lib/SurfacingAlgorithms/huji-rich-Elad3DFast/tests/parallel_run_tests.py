@@ -59,7 +59,7 @@ def get_all_file_paths():
     import os
 
     res = []
-    for root, dirs, files in os.walk('.'):
+    for root, dirs, files in os.walk(''):
         for name in files:
             res.append(os.path.join(root, name))
     return res

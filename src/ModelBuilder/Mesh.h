@@ -1,10 +1,11 @@
-#ifndef MESH_H
-#define MESH_H
+#ifndef VIVID_MESH_H
+#define VIVID_MESH_H
 
+#include "ModelComponent.h"
 
 #include "Point.h"
 #include "IndexedFace.h"
-#include "External.h"
+#include "Decimate.h"
 #include "Utils/ColorMap.h"
 
 
@@ -16,37 +17,39 @@
 namespace vivid
 {
 
-class CMesh {
+class CMesh : public CModelComponent{
 
 private:
+    string mLabel;
+
 	coord_t mAlpha;
-	string mLabel;
 	vector<CPoint> mPoints;
 	vector<CIndexedFace> mFaces;
-    CPoint mCenVector; // holds the center of the data (used to center the data by 000 and back to original upon export)
+
+//    CPoint mCenVector; // TODO, should be handeled only in surf, here there is no meaning to cen. holds the center of the data (used to center the data by 000 and back to original upon export)
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};
-    CMesh(const CMesh &mesh);
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, CPoint aCenVector = CPoint(0, 0, 0));
+    CMesh(const CMesh &aMesh) : mLabel(aMesh.mLabel), mAlpha(aMesh.mAlpha), mPoints(aMesh.mPoints), mFaces(aMesh.mFaces){};
+	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha): mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha){}
+	//operator =
 	~CMesh();
+
     std::string GetLabel();
 	coord_t GetAlpha();
     std::vector<CPoint> GetPoints();
     std::vector<CIndexedFace> GetFaces();
-    CPoint getCenVector();
-	void SetFaces(std::vector<CIndexedFace> aFaces);
+
+    void SetFaces(std::vector<CIndexedFace> aFaces);
 	void SetPoints(std::vector<CPoint> aPoints);
 	void SetLabel(std::string aLabel);
 	void SetAlpha(coord_t aAlpha);
-	void setCenVector(const CPoint &vector);
 
+    void Decimate(coord_t aVerticlePercent, coord_t aError);
 
-    void Decimation(coord_t aVerticlePercent, coord_t aError);
-
-    void ExportToObj(string aOutput, bool WithTexture = 1); // TODO (Naftali) Shouldbn't it be a stream too?
+    void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 
 
     /**
@@ -59,14 +62,14 @@ public:
      * @param[in] aNormVec the x,y.z normal to rotate around.
      * @param[in] aRadAngel the angel to rotate by (in radians).
      */
-    void RotatewMesh(CPoint aNormVec, double aRadAngel);
+    void RotateMesh(CPoint aNormVec, double aRadAngel);
     /**
      * Change CMesh points location by addition of x,y,z.
      * @param[in] aDirectionVec the x,y.z direction to move by it.
      */
     void MoveMesh(CPoint aDirectionVec);
     /**
-     * Change XMesh points scale in x,y,z direction by x,y,z of the scale vector
+     * Change CMesh points scale in x,y,z direction by x,y,z of the scale vector
      * @param[in] aScaleVec the x,y.z direction to move by it.
      */
     void ScaleMesh(CPoint aScaleVec);
@@ -74,5 +77,5 @@ public:
 };
 
 } // namespace vivid
-#endif
+#endif //VIVID_MESH_H
 

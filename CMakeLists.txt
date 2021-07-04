@@ -8,9 +8,7 @@ set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message(${PROJECT_SOURCE_DIR})
 
 
-
-
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/FBX;${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/lib/huji-rich-Elad3DFast")
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast; ${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX;)
 
 # TODO: Choose between Linux\Windows\mac
 # TODO: Choose between py3\py27
@@ -31,8 +29,9 @@ find_package(Boost 1.62.0 REQUIRED)
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
-find_package(VORONOI)
-find_package(FBX)
+find_package(VORONOI REQUIRED)
+find_package(FBX     REQUIRED)
+#find_package(IMPORTANDEXPORT REQUIRED)
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
 #set(PY_ROOT    "C:/Users/nafta/Miniconda2")
@@ -56,51 +55,72 @@ add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
 include_directories(src/ModelBuilder)
-include_directories(src/AnimationBuilder) # TODO delete
 include_directories(src/Utils)
 include_directories(lib)
 include_directories(lib/MeshDecimation)
+include_directories(lib/SurfacingAlgorithms)
 include_directories(lib/pybind11/include)
-include_directories(lib/lodepng)
+include_directories(lib/ImportAndExport)
+include_directories(lib/ImportAndExport/lodepng)
 
 add_executable(vivid
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
+        lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
-        lib/lodepng/lodepng.cpp
+        lib/ImportAndExport/DataToImage.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
+        lib/ImportAndExport/FBXImportExport.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp
-        src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
-        src/Utils/Shapes.cpp
-        src/ModelBuilder/ObjExportImport.cpp
-        #animation
-        src/AnimationBuilder/Animation.cpp
-        src/AnimationBuilder/FbxFunc.cpp
+        src/ModelBuilder/ModelComponent.cpp
+        src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Line.cpp
+        src/ModelBuilder/PointCloud.cpp
+
+        src/ModelBuilder/Surface.cpp
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp
+
+        src/ModelBuilder/Shapes.cpp
+
+        src/ModelBuilder/Animation.cpp
+        src/ModelBuilder/StopMotionAnimation.cpp
+
+        src/Extra/Analysis.h
+
         #main
         src/main.cpp
-        )
+
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp src/ModelBuilder/ErrorMsg.h)
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
 target_link_libraries(vivid Boost::boost)
-target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2)
+target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
 
 pybind11_add_module(vivid_py
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
+        lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
-        lib/lodepng/lodepng.cpp
+        lib/ImportAndExport/DataToImage.cpp
+        lib/ImportAndExport/lodepng/lodepng.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
         #vivid
-        src/ModelBuilder/Surf.cpp
+        src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
-        src/Utils/Shapes.cpp
-        #animation
-        src/AnimationBuilder/Animation.cpp
-        src/AnimationBuilder/FbxFunc.cpp
+        src/ModelBuilder/Shapes.cpp
+        src/Extra/Analysis.h
+        lib/ImportAndExport/FBXImportExport.cpp
+
         #wrapper
         src/wrapper.cpp
         )

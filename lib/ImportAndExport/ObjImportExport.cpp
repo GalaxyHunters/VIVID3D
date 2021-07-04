@@ -1,10 +1,15 @@
-#include "ObjExportImport.h"
+#include "ObjImportExport.h"
 #include <boost/algorithm/string/predicate.hpp>
+#include "DataToImage.h"
 
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
 
-using namespace vivid;
+using namespace std;
+
+namespace vivid
+{  // TODO temp fix most of the functions here should be rewritten or become out of scope
+
 
 color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
     return GetColor(aQuan);
@@ -64,7 +69,7 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
     vector<CIndexedFace> Faces = apMesh->GetFaces();
     for (auto it = Points.begin(); it != Points.end(); it++)
     {
-        temp_point = *it + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
+        temp_point = *it; // + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
         WriteNewPoint(aOBJFile, temp_point);; // writes the point in obj file as vertex
     }
     aOBJFile.flush();
@@ -90,9 +95,6 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
         }
     }
 }
-
-
-
 
 void ExportToObjMaterial(CModel &aModel, string aOutput){
     if (boost::ends_with(aOutput, ".obj") ) { //check if the output file ends with .obj, and delete it if it does
@@ -168,12 +170,12 @@ void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_
                              coord_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + aMesh->GetLabel() + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
-    CPoint cen_point = aMesh->getCenVector();
+    // CPoint cen_point = aMesh->getCenVector();
     vector<CPoint> points = aMesh->GetPoints();
     //write points to obj file
     for (auto it = points.begin(); it != points.end(); it++)
     {
-        temp_point = *it + cen_point; //add the CenVector to return model to the original
+        temp_point = *it; // + cen_point; //add the CenVector to return model to the original
         WriteNewPoint(aOBJFile, temp_point);
         //aOBJFile << "v " + to_string(it->GetX()) + " " + to_string(it->GetY()) + " " + to_string(it->GetZ()) + "\n";
     }
@@ -213,7 +215,7 @@ void ExportToObjTexture(CModel &aModel, string aOutput) {
     //write texture
     vector<unsigned char> texture;
     texture = GetColorTexture();
-    encodePNG((aOutput + "_texture.png").c_str(), texture, 1, texture.size()/4);
+    encodePNG( string(aOutput + "_texture.png"), texture, 1, texture.size()/4);
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
@@ -243,3 +245,5 @@ void OBJExporter(CModel &aModel,std::string aOutPutFile, bool WithTexture){
         ExportToObjTexture(aModel, aOutPutFile);
     }
 }
+
+} // namespace vivid

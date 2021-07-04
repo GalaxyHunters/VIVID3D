@@ -2,7 +2,7 @@
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
-#include "ImportAndExport/Animation.h"
+#include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
@@ -34,7 +34,7 @@ int RunBasicTests(){
     model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
     auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/arrow_test"); // /testModels/
+    model.ExportToObj(TEST_OUTPUT_PATH + "/arrow_test"); // /test_models/
 
     return EXIT_SUCCESS;
 }
@@ -62,7 +62,7 @@ int RunCubeSurfTests() { //Decimate isn't activated currently
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Decimation(0.5, 0.4);
+//    mesh.Decimate(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
@@ -110,7 +110,7 @@ int RunPyramidSurfTest(){
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Decimation(0.5, 0.4);
+//    mesh.Decimate(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
@@ -131,7 +131,7 @@ int RunMedicaneTests(){
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     //medicaneSurf.SmoothSurf();
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-    //medicaneMesh.Decimation(0.5, 0.4);
+    //medicaneMesh.Decimate(0.5, 0.4);
     model.AddMesh(medicaneMesh);
     model.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModelTest");
     return EXIT_SUCCESS;
@@ -213,7 +213,7 @@ int main(){
 ////
 //    auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
 //    model.AddMesh(arrow_x);
-//    model.ExportToObj("./TestModels/arrow_test"); // /testModels/
+//    model.ExportToObj("./TestModels/arrow_test"); // /test_models/
 //
 ////
 //    // Pyramid Surf
@@ -273,7 +273,7 @@ int main(){
 //CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
 //surf.SmoothSurf();
 //CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-////        mesh.Decimation(0.5, 0.4);
+////        mesh.Decimate(0.5, 0.4);
 //CModel model1 = CModel(mesh);
 ////model1.ExportToObj("./TestModels/Pyramid_model");
 //mesh.ExportToObj("./TestModels/Pyramid_mesh", 0);
@@ -507,7 +507,7 @@ int main(){
 //    CSurf medicaneSurf = CSurf(data_og.mPoints, data_og.mMask, data_og.mQuan, 0.f, 1.f);
 //    medicaneSurf.smoothSurf();
 //    CMesh medicaneMesh = medicaneSurf.ToMesh("vivid_3d_obj", 1.0);
-//    medicaneMesh.Decimation(0.5, 0.4);
+//    medicaneMesh.Decimate(0.5, 0.4);
 //    model.AddMesh(medicaneMesh);
 //    model.ExportToObj("MedicaneModelTest");
 //

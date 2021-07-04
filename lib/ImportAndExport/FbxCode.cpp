@@ -1,6 +1,6 @@
-#include "FbxExportImport.h"
+#include "FbxCode.h"
 #include "DataToImage.h"
-#include "External.h"
+#include "Decimate.h"
 
 using namespace vivid;
 using namespace std;

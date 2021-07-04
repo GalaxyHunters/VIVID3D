@@ -1,6 +1,6 @@
 #include "Model.h"
-#include "External.h"
-#include "ImportAndExport/ObjExportImport.h"
+#include "Decimate.h"
+#include "ImportAndExport/ObjImportExport.h"
 
 using namespace vivid;
 using namespace std;

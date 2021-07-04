@@ -7,6 +7,7 @@
 namespace vivid
 {
 
+//TODO Should it containd Cpoint?
 class CSurfacePoint { // used to sort and clean the voronoi input points
 public:
 	CPoint mPoint;
@@ -16,7 +17,7 @@ public:
 	inline CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
-
+//TODO Should it containd CFace?
 class CSurfaceFace{
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints;
@@ -29,11 +30,12 @@ public:
     inline ~CSurfaceFace() {};
 };
 
-
+//public CMesh
 class CSurface{
 private:
     std::vector<std::shared_ptr<CPoint> > mVecPoints;
     std::vector<CSurfaceFace> mVecFaces;
+
     std::vector<CPoint> mInputPoints; // for smooth
     std::vector<bool> mMask; //for smooth
     std::vector<coord_t> mQuan; // for smooth
@@ -62,7 +64,9 @@ private:
 	
 public:	
 	CSurface(const CSurface &surf); //copy constructor
+	// operator =
 	CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
+
 	void SmoothSurf();
 	const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: why const?
 	void ExportToObj(string aOutputFile, string aLabel, coord_t aAlpha);

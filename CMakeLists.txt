@@ -65,24 +65,37 @@ include_directories(lib/ImportAndExport/lodepng)
 
 add_executable(vivid
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
-        lib/ImportAndExport/ObjExportImport.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
-        lib/ImportAndExport/Animation.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
+        lib/ImportAndExport/FBXImportExport.cpp
         #vivid
-        src/ModelBuilder/Surface.cpp
-        src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
+        src/ModelBuilder/ModelComponent.cpp
+        src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Line.cpp
+        src/ModelBuilder/PointCloud.cpp
+
+        src/ModelBuilder/Surface.cpp
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp
+
         src/ModelBuilder/Shapes.cpp
+
+        src/ModelBuilder/Animation.cpp
+        src/ModelBuilder/StopMotionAnimation.cpp
+
         src/Extra/Analysis.h
 
         #main
         src/main.cpp
-        )
+
+        src/ModelBuilder/VoronoiSurface.cpp
+        src/ModelBuilder/MarchingCubesSurface.cpp src/ModelBuilder/ErrorMsg.h)
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
@@ -93,20 +106,20 @@ target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
 pybind11_add_module(vivid_py
         #external
-        lib/External.cpp
+        lib/Decimate.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
         lib/MeshDecimation/mdMeshDecimator.cpp
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
-        lib/ImportAndExport/ObjExportImport.cpp
-        lib/ImportAndExport/FbxExportImport.cpp
+        lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/FbxCode.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/Shapes.cpp
         src/Extra/Analysis.h
-        lib/ImportAndExport/Animation.cpp
+        lib/ImportAndExport/FBXImportExport.cpp
 
         #wrapper
         src/wrapper.cpp

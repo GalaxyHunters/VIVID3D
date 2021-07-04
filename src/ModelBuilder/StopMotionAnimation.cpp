@@ -1,0 +1,1 @@
+#include "StopMotionAnimation.h"

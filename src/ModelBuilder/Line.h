@@ -12,10 +12,18 @@ namespace vivid
 
 /* 3D Line class */
 class CLine : public CModelComponent{
+private:
     /* mPoints - Points in which the line pass through */
     std::vector<CPoint> mPoints = {};
+public:
+    //Constructor and Copy Constructor
+    CLine(){}
+    CLine(std::vector<CPoint> &aPoints) : mPoints(aPoints){}
+    CLine(const CLine &aLine) : mPoints(aLine.mPoints) {}
 
     // Set and Get
+    inline const std::vector<CPoint> Points() const{ return mPoints; }
+    inline void Points(std::vector<CPoint> &aPoints) { mPoints = aPoints; }
 };
 
 }; // namespace vivid

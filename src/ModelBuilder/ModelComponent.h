@@ -13,6 +13,8 @@ class CModelComponent {
     // set get
 
 
+
+
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
 //        /**

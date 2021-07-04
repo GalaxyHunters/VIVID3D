@@ -6,7 +6,9 @@
 using namespace vivid;
 using namespace std;
 
-const coord_t DoublePointThreshHold = 0.0001;
+constexpr double BOX_EXPAND_FACTOR = 1;
+
+const coord_t DoublePointThreshHold = 0.0001; //TODO constexpr
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     //check for input valdidlty
@@ -77,30 +79,6 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
     }
 }
 // ---------------------------------------------------Centralization functions ---------------------------------------------------------------
-// when the data is entered its not insured to be centered around 0, this function insures that it is (the model will be returned to his original axis upon export)
-inline bool ComparePointX(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[0] < aPoint2[0]);}
-inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[1] < aPoint2[1]);}
-inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
-
-// TODO: Why doesn't operator overload work here??
-inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.X() < aPoint2.X());}
-inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Y() < aPoint2.Y());}
-inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Z() < aPoint2.Z());}
-
-//define function that finds model center point and radius of points.
-CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &aInputPoints){
-    coord_t MaxX = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
-    coord_t MinX = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
-
-    coord_t MaxY = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
-    coord_t MinY = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
-
-    coord_t MaxZ = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
-    coord_t MinZ = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
-
-    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
-    return CenPoint;
-}
 
 
 // ------------------------------------------------------clean data----------------------------------------------------------------------
@@ -134,7 +112,7 @@ void CSurface::CleanPoints() {
 		}
 	}
 	mVecPoints = new_points;
-	RemoveDoublePoints();
+    CleanDoublePoints();
 }
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
@@ -160,7 +138,7 @@ bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
 	}
 }
 
-void CSurface::RemoveDoublePoints() {
+void CSurface::CleanDoublePoints() {
 	//sort the array
 	std::sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
 	map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
@@ -203,8 +181,8 @@ void UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
 	for (int i = 0; (unsigned)i < aPIn.size(); i++) {
 		aPIn[i] = i + aPOut.size();
 	}
-}
 
+}
 void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
 	map<size_t, bool> p_in_map;
 	map<size_t, bool> p_out_map;
@@ -248,8 +226,8 @@ void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) 
 		new_points.push_back(this->mInputPoints[*it]);
 		quan.push_back(this->mQuan[*it]);
 	}
-	this->mInputPoints = new_points;
-	this->mQuan = quan;
+	mInputPoints = new_points;
+	mQuan = quan;
 }
 void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 	vector<bool> new_mask;
@@ -259,7 +237,7 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 	for (size_t i = 0; i < aPInSize; i++) {
 		new_mask.push_back(true);
 	}
-	this->mMask = new_mask;
+	mMask = new_mask;
 }
 
 bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) {
@@ -340,6 +318,7 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 }
 void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
 {
+    //TODO ugly and wrong func name
 	coord_t x, y, z;
 	(*apPVec).push_back(*apNewIndex);
 	x = (this->mInputPoints[aCPoint1].X() * 2 + this->mInputPoints[aCPoint2].X()) / 3.0;
@@ -408,7 +387,7 @@ void CSurface::SmoothSurf() {
 	//done.
 }
 
-vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) {
+vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) { //TODO should be one line with some std function
     if (arQuan.size() == 0){ //incase the user doesnt input any color
         arQuan = vector<coord_t>(mMask.size(), 1);
         return arQuan;
@@ -438,7 +417,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 	vector<CPoint> points;
 	size_t counter = 0;
 	map < shared_ptr<CPoint>, size_t> indexes;
-	for (auto it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
+	for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
 		points.push_back(**it - mCenVector);
 		indexes[*it] = counter;
 		counter++;
@@ -446,7 +425,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 	vector<CIndexedFace> faces;
 	vector<size_t> face_points;
 	set<size_t> set_points;
-	for (auto it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+	for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
 		for (auto point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
 			if (set_points.count(indexes[*point]) == 0) {
 				face_points.push_back(indexes[*point]);
@@ -465,60 +444,61 @@ void CSurface::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {
 	mesh.ExportToObj(aOutput);
 }
 
-bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) { //TODO (TOMER) Move to CPoint
-    CPoint zeroPoint(0, 0, 0);
-	double dis1 = aPoint1.Dist(zeroPoint);
-	double dis2 = aPoint2.Dist(zeroPoint);
-	return (dis2 > dis1);
-}
 
 //static bool(*CompPoint)(&CPoint, &CPoint) = ComparePoint;
 
 vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 	vector<shared_ptr<CPoint> > new_vec;
 	for (auto it = aVornPoints.begin(); it != aVornPoints.end(); it++) {
-		new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z)));
+		new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z))); //TODO y not copy c~tor?
 	}
 	return new_vec;
 }
 
-// TODO: Add alt Box func
-static double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be static!!!
-    CPoint zeroPoint(0, 0, 0);
-	CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
-	return box_r.Dist(zeroPoint);
+
+
+// TODO Y doesn't it use members?
+CPoint GeometricCenter(const std::vector<CPoint> &arPoints){
+    coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
+    coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
+    coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
+    coord_t MinY = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
+    coord_t MaxZ = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
+    coord_t MinZ = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
+
+    return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
 }
 
-static vector<Vector3D> FindBox(vector<CPoint> aInputPoints) {
-    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
-    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
+// TODO Y doesn't it use members?
+// TODO maybe should be just cen and radius? and then we won't need mCenVector? what was that bug all about?
+double FindContainingRadius(const vector<CPoint>& arPoints){
+	return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
+}
+// TODO Y doesn't it use members?
+static pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints){
 
-    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
-    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
+    coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t y_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t z_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+    coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
-    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
-    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
+    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
+    CPoint box_mid = CPoint(x_min, y_min, z_min) + box_dim * 0.5;            //box middle
 
-    vector<Vector3D> Box (2);
-
-    const double expandFactor = 1;
-
-    Vector3D ll (xmin - (xmax - xmin) * expandFactor, ymin - (ymax - ymin) * expandFactor, zmin - (zmax - zmin) * expandFactor);
-    Vector3D ur (xmax + (xmax - xmin) * expandFactor, ymax + (ymax - ymin) * expandFactor, zmax + (zmax - zmin) * expandFactor);
-
-    Box.at(0) = ll;
-    Box.at(1) = ur;
-
-    return Box;
+    return pair<CPoint,CPoint>(box_mid-box_dim*BOX_EXPAND_FACTOR, box_mid+box_dim*BOX_EXPAND_FACTOR);
 }
 
 // TODO: Implement alt box func and alt compute vornoi func
 void CSurface::RunVorn() {
 	//find the box_r
-	double box_R = FindBoxR(mInputPoints);
+	double box_R = FindContainingRadius(mInputPoints);
 	cout << "BoxR = " << box_R << endl;
 	// New version:
-	vector<Vector3D> Box = FindBox(this->mInputPoints);
+    pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
+    //TODO should not use vec3 here!!! only in lib folder!
+    vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
 	cout << "Box[0] Elad = " << Box.at(0).x << " " << Box.at(0).y << " " << Box.at(0).z << endl;
     cout << "Box[1] Elad = " << Box.at(1).x << " " << Box.at(1).y << " " << Box.at(1).z << endl;
 
@@ -555,7 +535,7 @@ void CSurface::RunVorn() {
 
 void CSurface::CleanEdges() {
     CPoint zero_point = CPoint(0, 0, 0);
-	double box_R = FindBoxR(this->mInputPoints);
+	double box_R = FindContainingRadius(this->mInputPoints);
 	bool is_out_of_radius = false;
 	vector<CSurfaceFace> new_faces;
 	for (auto face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {

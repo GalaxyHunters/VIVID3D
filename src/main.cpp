@@ -194,7 +194,7 @@ int main(){
 //    return (dis2 > dis1);
 //}
 //
-//static double FindBoxR(vector<CPoint>& aInputPoints) {
+//static double FindContainingRadius(vector<CPoint>& aInputPoints) {
 //    CPoint zeroPoint(0, 0, 0);
 //    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
 //    return box_r.CalcDistance(zeroPoint);
@@ -288,7 +288,7 @@ int main(){
 //    cout << points[0].y << endl;
 //    cout << points[0].z << endl;
 //    //our box version:
-//    //double boxR = FindBoxR(aInputPoints);
+//    //double boxR = FindContainingRadius(aInputPoints);
 //
 //    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
 //    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));
@@ -373,7 +373,7 @@ int main(){
 ////    cout << points[0].y << endl;
 ////    cout << points[0].z << endl;
 ////    //our box version:
-////    //double boxR = FindBoxR(aInputPoints);
+////    //double boxR = FindContainingRadius(aInputPoints);
 ////
 ////    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
 ////    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));

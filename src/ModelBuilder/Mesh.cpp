@@ -120,7 +120,7 @@ void CMesh::ScaleMesh(CPoint aScaleVec){
     auto x_scale = aScaleVec.X();
     auto y_scale = aScaleVec.Y();
     auto z_scale = aScaleVec.Z();
-    for (auto it = this->mPoints.begin(); it != this->mPoints.end(); it++)
+    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
     {
         it->X(x_scale * it->X());
         it->Y(y_scale * it->Y());

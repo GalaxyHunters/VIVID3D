@@ -13,8 +13,9 @@ public:
 	CPoint mPoint;
 	coord_t mQuan;
 	bool mIsIn;
-	inline CSurfacePoint() {};
-	inline CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+
+	CSurfacePoint() {};
+	CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
 //TODO Should it containd CFace?
@@ -24,10 +25,10 @@ public:
     std::pair<size_t, size_t> mPairPoints;
     coord_t mColor;
 
-    inline CSurfaceFace(std::vector<std::shared_ptr<CPoint>> pPoints, coord_t pColor, std::pair<size_t, size_t> pPairPoints) :
-            mPoints(pPoints), mColor(pColor), mPairPoints(pPairPoints){};
-    inline CSurfaceFace() {};
-    inline ~CSurfaceFace() {};
+    CSurfaceFace(std::vector<std::shared_ptr<CPoint>> pPoints, coord_t pColor, std::pair<size_t, size_t> pPairPoints) :
+            mPoints(pPoints), mColor(pColor), mPairPoints(pPairPoints){}; //TODO!!! wrong!!! mPoints(pPoints),
+    CSurfaceFace() {};
+    ~CSurfaceFace() {};
 };
 
 //public CMesh
@@ -47,9 +48,9 @@ private:
 	//vorn function:
 	void RunVorn();
 	void CleanFaces(std::vector<bool>& aMask); // clean the unneeded faces(by mask)
-	void CleanPoints(); // removes all the unused points
+	void CleanPoints(); // removes all the unused points (TODO (Tomer asks): clean points that are not on rlevant faces?)
 	void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)
-	void RemoveDoublePoints(); // remove all the double face points from the model
+	void CleanDoublePoints(); // remove all the double face points from the model
 
 	//smooth functions:
 	void SetPinPout(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
@@ -57,6 +58,8 @@ private:
 	void MakeMask(size_t aPOutSize, size_t aPInSize);
 	void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
 	void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
+
+
 	void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
     std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 

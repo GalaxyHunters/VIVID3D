@@ -20,11 +20,10 @@ namespace vivid
 class CMesh : public CModelComponent{
 
 private:
-    string mLabel;
-
-	coord_t mAlpha;
-	vector<CPoint> mPoints;
-	vector<CIndexedFace> mFaces;
+    string mLabel = "";
+	coord_t mAlpha = 0;
+	vector<CPoint> mPoints ={};
+	vector<CIndexedFace> mFaces ={};
 
 //    CPoint mCenVector; // TODO, should be handeled only in surf, here there is no meaning to cen. holds the center of the data (used to center the data by 000 and back to original upon export)
 

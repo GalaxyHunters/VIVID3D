@@ -6,40 +6,31 @@
 using namespace vivid;
 using namespace std;
 
-constexpr double BOX_EXPAND_FACTOR = 1;
+constexpr coord_t BOX_EXPAND_FACTOR = 1;
+constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
 
-const coord_t DoublePointThreshHold = 0.0001; //TODO constexpr
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
-    //check for input valdidlty
-    if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
-        if(aQuan.size() != 0) { // use empty()
-            throw "Input error, inputted vectors (points, mask, quan) must all be the same size";
-        }
+    // Check input validity
+    if((aInputPoints.size() != aMask.size()) || (aInputPoints.size() != aQuan.size())){
+        throw ("ValueError - input vectors have not the same size"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    //check if aMask has both False and True values
-    bool is_containing_true = false;
-    bool is_containing_false = false;
-    for(vector<bool>::iterator it = aMask.begin(); it != aMask.end(); it++){
-        if(*it == true){
-            is_containing_true = true;
-        }
-        if(*it == false){
-            is_containing_false = true;
-        }
+    if(aInputPoints.empty() || aInputPoints.empty() || aQuan.empty()) {
+        throw ("ValueError - input vectors is empty"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    if(!is_containing_false || !is_containing_true){
-        throw "Input error, mask must have both True and false values";
+    if( (find(aMask.begin(),aMask.end(),true) == aMask.end()) || std::find(aMask.begin(), aMask.end(), false) == aMask.end() ){
+
+        throw ("ValueError - mask must contain both true and false values"); //TODO find better sentence and put all of it in ErrMsg.h
     }
+
     //model centralization
     mCenVector = GetGeometricCenter(aInputPoints);
-    //code
-    vector<CPoint> temp;
-    // Why dont we set temp to be the size of aInputPoints ahead of time?
-    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){
+    vector<CPoint> temp={};
+    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){  //TODO for each
         temp.push_back(CPoint(*it) -= mCenVector);
     }
-    temp.resize(temp.size());
+
+    temp.resize(temp.size()); // Why dont we set temp to be the size of aInputPoints ahead of time?
 	SetInputPoints(temp);
 	SetMask(aMask);
 	SetQuan(NormQuan(aQuan, aVMin, aVMax));
@@ -48,7 +39,7 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
 	aInputPoints.clear();
 	aInputPoints.shrink_to_fit();
 
-	RunVorn();
+	RunVorn(); // TODO should not be activate yet
 	CleanEdges();
 	CleanFaces(aMask);
 	CleanPoints();
@@ -116,26 +107,8 @@ void CSurface::CleanPoints() {
 }
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
-bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
-	if (abs((*aObj1).X() - (*aObj2).X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs((*aObj1).Y() - (*aObj2).Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs((*aObj1).Z() - (*aObj2).Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
-				return false;
-			}
-			else
-			{ // we compare the points by z to see who needs to go first
-				return (*aObj1).Z() > (*aObj2).Z();
-			}
-		}
-		else // we compare by y to see who needs to go first
-		{
-			return (*aObj1).Y() > (*aObj2).Y();
-		}
-	}
-	else // we compare by x to see who goes first
-	{
-		return (*aObj1).X() > (*aObj2).X();
-	}
+bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) {
+    return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
 
 void CSurface::CleanDoublePoints() {
@@ -152,7 +125,7 @@ void CSurface::CleanDoublePoints() {
 		{
 			break;
 		}
-		while ((*mVecPoints[i]).Dist((*mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		while ((*mVecPoints[i]).Dist((*mVecPoints[j])) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
 			old_new_points[mVecPoints[j]] = mVecPoints[i];
 			j += 1;
 			if (j >= mVecPoints.size())
@@ -241,9 +214,9 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 }
 
 bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) {
-	if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-		if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-			if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+	if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
+		if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
+			if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
 				return false;
 			}
 			else
@@ -303,7 +276,7 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 		{
 			break;
 		}
-		while (arData[i].mPoint.Dist(arData[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+		while (arData[i].mPoint.Dist(arData[j].mPoint) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
 			j += 1;
 			if (j >= arData.size())
 			{

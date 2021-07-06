@@ -431,7 +431,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 
 
 // TODO Y doesn't it use members?
-CPoint GeometricCenter(const std::vector<CPoint> &arPoints){
+CPoint GetGeometricCenter(const std::vector<std::vector<double>> &arPoints){
     coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
     coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
     coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
@@ -458,26 +458,22 @@ static pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints){
     coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
     CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
-    CPoint box_mid = CPoint(x_min, y_min, z_min) + box_dim * 0.5;            //box middle
+    CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
+    CPoint box_max = CPoint(x_min, y_min, z_min);        //box max
 
-    return pair<CPoint,CPoint>(box_mid-box_dim*BOX_EXPAND_FACTOR, box_mid+box_dim*BOX_EXPAND_FACTOR);
+    return pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
 }
 
 // TODO: Implement alt box func and alt compute vornoi func
 void CSurface::RunVorn() {
 	//find the box_r
 	double box_R = FindContainingRadius(mInputPoints);
-	cout << "BoxR = " << box_R << endl;
 	// New version:
     pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
     //TODO should not use vec3 here!!! only in lib folder!
-    vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
-	cout << "Box[0] Elad = " << Box.at(0).x << " " << Box.at(0).y << " " << Box.at(0).z << endl;
-    cout << "Box[1] Elad = " << Box.at(1).x << " " << Box.at(1).y << " " << Box.at(1).z << endl;
-
-	cout << "start vorn" << endl;
+    //vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
     //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
-    auto vorn_out = compute_vornoi(mInputPoints, 2*box_R );
+    auto vorn_out = compute_vornoi(mInputPoints, box );
 	cout << "vorn done" << endl;
 	//set the points
 	mVecPoints = ConvertFromVorn(get<0>(vorn_out));

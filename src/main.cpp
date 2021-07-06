@@ -143,16 +143,16 @@ int main(){
     int ret_value = EXIT_SUCCESS;
 
     ret_value = RunBasicTests();
-    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Cube" << endl;
     ret_value = RunCubeSurfTests();
-    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Pyramid" << endl;
     ret_value = RunPyramidSurfTest();
-    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
-    cout << "Medicane" << endl;
-    ret_value = RunMedicaneTests();
-    if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    //cout << "Medicane" << endl;
+    //ret_value = RunMedicaneTests();
+    //if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
 }

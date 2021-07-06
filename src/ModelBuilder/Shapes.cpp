@@ -137,6 +137,51 @@ CMesh CreateSphereMesh(size_t aNumOfMeridians, size_t aNumOfParallels, double aR
 }
 
 // TODO: Zohar again VERY UGLY code, please use transformMat
+CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec, const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis, vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel){
+    //begin by asserting some conditions
+    if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
+        throw "Axis vectors cannot be (0,0,0)";
+    }
+    CMesh Ellipsoid = CreateSphereMesh(aNumOfMeridians, aNumOfParallels, 1.0, CPoint(0., 0., 0.), aColor, aAlpha, aLabel);
+    //CMesh Ellipsoid;
+    //use aRadiusVec to create strech matrix and stretch the sphere
+    vector<vector<double>> StretchMatrix;
+    StretchMatrix.push_back(vector<double>{aRadiusVec[0], 0, 0});
+    StretchMatrix.push_back(vector<double>{0, aRadiusVec[1], 0});
+    StretchMatrix.push_back(vector<double>{0, 0, aRadiusVec[2]});
+    //use all axis vectors to create a rotation matrix
+    vector<vector<double>> RotateMatrix;
+    RotateMatrix.push_back(aMajorAxis);
+    RotateMatrix.push_back(aMiddleAxis);
+    RotateMatrix.push_back(aMinorAxis);
+    //apply matrices to points
+    vector<CPoint> points = Ellipsoid.GetPoints();
+    for (int i = 0; i < points.size(); ++i)
+    {
+        CPoint& CurrentVector = points[i];
+        //right now im using a refrence to change the vector according to the matrix
+        double CVX = CurrentVector.X();
+        double CVY = CurrentVector.Y();
+        double CVZ = CurrentVector.Z();
+        //first we strech em
+        CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
+                               CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
+                               CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
+        //now we rotate em
+        CVX = CurrentVector.X();
+        CVY = CurrentVector.Y();
+        CVZ = CurrentVector.Z();
+        CurrentVector = CPoint(arCenter.X() + CVX * RotateMatrix[0][0] + CVY * RotateMatrix[1][0] + CVZ * RotateMatrix[2][0],
+                               arCenter.Y() + CVX * RotateMatrix[0][1] + CVY * RotateMatrix[1][1] + CVZ * RotateMatrix[2][1],
+                               arCenter.Z() + CVX * RotateMatrix[0][2] + CVY * RotateMatrix[1][2] + CVZ * RotateMatrix[2][2]);
+    }
+
+    Ellipsoid.SetPoints(points);
+    return Ellipsoid;
+    //set new info to the mesh
+
+}
+// TODO: Zohar again VERY UGLY code, please use transformMat
 CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec, const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis, vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel){
     if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
         throw "Axis vectors cannot be (0,0,0)";
@@ -144,6 +189,7 @@ CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParall
     CMesh Ellipsoid = CreateSphereMesh(aNumOfMeridians, aNumOfParallels, 1.0, CPoint(0., 0., 0.), aColor, aAlpha, aLabel);
     //use aRadiusVec to create strech matrix and stretch the sphere
     Ellipsoid.ScaleMesh(CPoint(aRadiusVec[0], aRadiusVec[1], aRadiusVec[2]));
+    // I'm not sure this has the same result as Zohars code.
     coord_t aMat[3][3];
     aMat[0][0] = aMajorAxis[0]; aMat[0][1] = aMajorAxis[1]; aMat[0][2] = aMajorAxis[2];
     aMat[1][0] = aMiddleAxis[0]; aMat[1][1] = aMiddleAxis[1]; aMat[1][2] = aMiddleAxis[2];
@@ -151,58 +197,6 @@ CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParall
     Ellipsoid.TransformMesh(aMat);
 
     return Ellipsoid;
-    //set new info to the mesh
-
-}
-
-    / TODO: Zohar again VERY UGLY code, please use transformMat
-            CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec, const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis, vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel){
-    //begin by asserting some conditions
-    // TODO I'm not sure, I think we may start using exceptions, assert looks bad
-    if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
-throw "Axis vectors cannot be (0,0,0)";
-}
-//    assert(("Radius cannot be equal to 0", aRadiusVec[0] != 0 && aRadiusVec[1] != 0 && aRadiusVec[2] != 0));
-//    assert(("Bro did you just input vectors that arent perpendicular? bro ngl thats kinda cringe", CheckIfPerpindicular(aMajorAxis, aMiddleAxis) == true && CheckIfPerpindicular(aMajorAxis, aMinorAxis) == true && CheckIfPerpindicular(aMiddleAxis, aMinorAxis) == true));
-//create a sphere to operate on
-
-//    CMesh Ellipsoid = CreateSphereMesh(aNumOfMeridians, aNumOfParallels, 1.0, vector<double>{0.0,0.0,0.0}, aColor, aAlpha, aLabel); //TODO FIXME later
-CMesh Ellipsoid;
-//use aRadiusVec to create strech matrix and stretch the sphere
-vector<vector<double>> StretchMatrix;
-StretchMatrix.push_back(vector<double>{aRadiusVec[0], 0, 0});
-StretchMatrix.push_back(vector<double>{0, aRadiusVec[1], 0});
-StretchMatrix.push_back(vector<double>{0, 0, aRadiusVec[2]});
-//use all axis vectors to create a rotation matrix
-vector<vector<double>> RotateMatrix;
-RotateMatrix.push_back(aMajorAxis);
-RotateMatrix.push_back(aMiddleAxis);
-RotateMatrix.push_back(aMinorAxis);
-//apply matrices to points
-vector<CPoint> points = Ellipsoid.GetPoints();
-for (int i = 0; i < points.size(); ++i)
-{
-CPoint& CurrentVector = points[i];
-//right now im using a refrence to change the vector according to the matrix
-double CVX = CurrentVector.X();
-double CVY = CurrentVector.Y();
-double CVZ = CurrentVector.Z();
-//first we strech em
-CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
-                       CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
-                       CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
-//now we rotate em
-CVX = CurrentVector.X();
-CVY = CurrentVector.Y();
-CVZ = CurrentVector.Z();
-CurrentVector = CPoint(arCenter.X() + CVX * RotateMatrix[0][0] + CVY * RotateMatrix[1][0] + CVZ * RotateMatrix[2][0],
-                       arCenter.Y() + CVX * RotateMatrix[0][1] + CVY * RotateMatrix[1][1] + CVZ * RotateMatrix[2][1],
-                       arCenter.Z() + CVX * RotateMatrix[0][2] + CVY * RotateMatrix[1][2] + CVZ * RotateMatrix[2][2]);
-}
-
-Ellipsoid.SetPoints(points);
-return Ellipsoid;
-//set new info to the mesh
 
 }
 

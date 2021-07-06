@@ -9,11 +9,22 @@ namespace vivid
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
 //TODO splines?
 class CModelComponent {
+private:
     std::string mLabel = "";
     // set get
+protected:
+    //Constructor, Copy Constructor, Destructor
+    CModelComponent(){}
+    CModelComponent(const std::string &arLabel) : mLabel(arLabel){}
+    CModelComponent(const CModelComponent &arModel) : mLabel(arModel.mLabel){}
+    virtual ~CModelComponent() = 0;
 
+    // Operator=
+    inline CModelComponent& operator= (const CModelComponent& arModel) { mLabel = arModel.mLabel; return *this; }
 
-
+    // set get
+    inline const std::string GetLabel() const{ return mLabel; }
+    inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
 
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 

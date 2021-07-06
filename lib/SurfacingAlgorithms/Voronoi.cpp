@@ -47,9 +47,10 @@ std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vor
 	return output;
 }
 // TODO: ADAM is it yours?
-pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, vector<Vector3D> Box) {
+pair<vector<Vector3D>, vector<vector<size_t> > > compute_vornoi(vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> box) {
     vector<Vector3D> vorn_points;
     ConvertToVorn(arInputPoints, vorn_points);
+    vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
     Voronoi3D temp(Box.at(0), Box.at(1));
     temp.Build(vorn_points);
     vorn_points = temp.GetFacePoints();

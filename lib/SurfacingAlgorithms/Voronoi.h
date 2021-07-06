@@ -12,7 +12,7 @@ namespace vivid
 
 // TODO: Alt compute_vornoi func
 std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR);
-std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, std::vector<Vector3D> Box);
+std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> box);
 
 
 }; // namespace vivid

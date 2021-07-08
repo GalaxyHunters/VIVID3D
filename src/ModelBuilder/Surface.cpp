@@ -6,38 +6,31 @@
 using namespace vivid;
 using namespace std;
 
-const coord_t DoublePointThreshHold = 0.0001;
+constexpr coord_t BOX_EXPAND_FACTOR = 1;
+constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
+
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
-    //check for input valdidlty
-    if((aInputPoints.size() != aMask.size()) || (aQuan.size() != aInputPoints.size()) || (aQuan.size() != aMask.size())){
-        if(aQuan.size() != 0) { // use empty()
-            throw "Input error, inputted vectors (points, mask, quan) must all be the same size";
-        }
+    // Check input validity
+    if((aInputPoints.size() != aMask.size()) || (aInputPoints.size() != aQuan.size())){
+        throw ("ValueError - input vectors have not the same size"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    //check if aMask has both False and True values
-    bool is_containing_true = false;
-    bool is_containing_false = false;
-    for(vector<bool>::iterator it = aMask.begin(); it != aMask.end(); it++){
-        if(*it == true){
-            is_containing_true = true;
-        }
-        if(*it == false){
-            is_containing_false = true;
-        }
+    if(aInputPoints.empty() || aInputPoints.empty() || aQuan.empty()) {
+        throw ("ValueError - input vectors is empty"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    if(!is_containing_false || !is_containing_true){
-        throw "Input error, mask must have both True and false values";
+    if( (find(aMask.begin(),aMask.end(),true) == aMask.end()) || std::find(aMask.begin(), aMask.end(), false) == aMask.end() ){
+
+        throw ("ValueError - mask must contain both true and false values"); //TODO find better sentence and put all of it in ErrMsg.h
     }
+
     //model centralization
     mCenVector = GetGeometricCenter(aInputPoints);
-    //code
-    vector<CPoint> temp;
-    // Why dont we set temp to be the size of aInputPoints ahead of time?
-    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){
+    vector<CPoint> temp={};
+    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){  //TODO for each
         temp.push_back(CPoint(*it) -= mCenVector);
     }
-    temp.resize(temp.size());
+
+    temp.resize(temp.size()); // Why dont we set temp to be the size of aInputPoints ahead of time?
     SetInputPoints(temp);
     SetMask(aMask);
     SetQuan(NormQuan(aQuan, aVMin, aVMax));
@@ -46,7 +39,7 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
     aInputPoints.clear();
     aInputPoints.shrink_to_fit();
 
-    RunVorn();
+    RunVorn(); // TODO should not be activate yet
     CleanEdges();
     CleanFaces(aMask);
     CleanPoints();
@@ -77,30 +70,6 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
     }
 }
 // ---------------------------------------------------Centralization functions ---------------------------------------------------------------
-// when the data is entered its not insured to be centered around 0, this function insures that it is (the model will be returned to his original axis upon export)
-inline bool ComparePointX(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[0] < aPoint2[0]);}
-inline bool ComparePointY(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[1] < aPoint2[1]);}
-inline bool ComparePointZ(const vector<double> &aPoint1, const vector<double> &aPoint2){return (aPoint1[2] < aPoint2[2]);}
-
-// TODO: Why doesn't operator overload work here??
-inline bool CompareCPointX(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.X() < aPoint2.X());}
-inline bool CompareCPointY(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Y() < aPoint2.Y());}
-inline bool CompareCPointZ(CPoint &aPoint1, CPoint &aPoint2){return (aPoint1.Z() < aPoint2.Z());}
-
-//define function that finds model center point and radius of points.
-CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &aInputPoints){
-    coord_t MaxX = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
-    coord_t MinX = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointX))[0];
-
-    coord_t MaxY = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
-    coord_t MinY = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointY))[1];
-
-    coord_t MaxZ = (*max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
-    coord_t MinZ = (*min_element(aInputPoints.begin(), aInputPoints.end(), *ComparePointZ))[2];
-
-    CPoint CenPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
-    return CenPoint;
-}
 
 
 // ------------------------------------------------------clean data----------------------------------------------------------------------
@@ -134,33 +103,15 @@ void CSurface::CleanPoints() {
         }
     }
     mVecPoints = new_points;
-    RemoveDoublePoints();
+    CleanDoublePoints();
 }
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
-bool CompPointRD(shared_ptr<CPoint> aObj1, shared_ptr<CPoint> aObj2) {
-    if (abs((*aObj1).X() - (*aObj2).X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-        if (abs((*aObj1).Y() - (*aObj2).Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-            if (abs((*aObj1).Z() - (*aObj2).Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
-                return false;
-            }
-            else
-            { // we compare the points by z to see who needs to go first
-                return (*aObj1).Z() > (*aObj2).Z();
-            }
-        }
-        else // we compare by y to see who needs to go first
-        {
-            return (*aObj1).Y() > (*aObj2).Y();
-        }
-    }
-    else // we compare by x to see who goes first
-    {
-        return (*aObj1).X() > (*aObj2).X();
-    }
+bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) {
+    return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
 
-void CSurface::RemoveDoublePoints() {
+void CSurface::CleanDoublePoints() {
     //sort the array
     std::sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
@@ -174,7 +125,7 @@ void CSurface::RemoveDoublePoints() {
         {
             break;
         }
-        while ((*mVecPoints[i]).Dist((*mVecPoints[j])) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+        while ((*mVecPoints[i]).Dist((*mVecPoints[j])) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
             old_new_points[mVecPoints[j]] = mVecPoints[i];
             j += 1;
             if (j >= mVecPoints.size())
@@ -203,8 +154,8 @@ void UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
     for (int i = 0; (unsigned)i < aPIn.size(); i++) {
         aPIn[i] = i + aPOut.size();
     }
-}
 
+}
 void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
     map<size_t, bool> p_in_map;
     map<size_t, bool> p_out_map;
@@ -248,24 +199,24 @@ void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) 
         new_points.push_back(this->mInputPoints[*it]);
         quan.push_back(this->mQuan[*it]);
     }
-    this->mInputPoints = new_points;
-    this->mQuan = quan;
+    mInputPoints = new_points;
+    mQuan = quan;
 }
 void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
     vector<bool> new_mask;
-    for (size_t i = 0; i < aPOutSize; i++) {
+    for (size_t i = 0; i < aPOutSize; i++) { //TODO might be faster using fill or something similar in vector
         new_mask.push_back(false);
     }
     for (size_t i = 0; i < aPInSize; i++) {
         new_mask.push_back(true);
     }
-    this->mMask = new_mask;
+    mMask = new_mask;
 }
 
-bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) {
-    if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= DoublePointThreshHold) { //the x value is nurmallcly the same
-        if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= DoublePointThreshHold) { //the y value is nurmallcly the same
-            if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= DoublePointThreshHold) { //the z value is nurmallcly the same
+bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
+    if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
+        if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
+            if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
                 return false;
             }
             else
@@ -310,8 +261,8 @@ void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t
             arNewOut.push_back(i);
         }
     }
-    this->mInputPoints = arNewPoints;
-    this->mQuan = arNewQuan;
+    mInputPoints = arNewPoints;
+    mQuan = arNewQuan;
 }
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData) {
     //sort the array
@@ -325,7 +276,7 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
         {
             break;
         }
-        while (arData[i].mPoint.Dist(arData[j].mPoint) <= DoublePointThreshHold) { //check if the point has duplicates that we need to skip
+        while (arData[i].mPoint.Dist(arData[j].mPoint) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
             j += 1;
             if (j >= arData.size())
             {
@@ -340,21 +291,22 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 }
 void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
 {
+    //TODO ugly and wrong func name
     coord_t x, y, z;
     (*apPVec).push_back(*apNewIndex);
-    x = (this->mInputPoints[aCPoint1].X() * 2 + this->mInputPoints[aCPoint2].X()) / 3.0;
-    y = (this->mInputPoints[aCPoint1].Y() * 2 + this->mInputPoints[aCPoint2].Y()) / 3.0;
-    z = (this->mInputPoints[aCPoint1].Z() * 2 + this->mInputPoints[aCPoint2].Z()) / 3.0;
+    x = (mInputPoints[aCPoint1].X() * 2 + mInputPoints[aCPoint2].X()) / 3.0;
+    y = (mInputPoints[aCPoint1].Y() * 2 + mInputPoints[aCPoint2].Y()) / 3.0;
+    z = (mInputPoints[aCPoint1].Z() * 2 + mInputPoints[aCPoint2].Z()) / 3.0;
     (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
     (*apNewIndex)++;
 
     (*apPVec).push_back(*apNewIndex);
-    x = (this->mInputPoints[aCPoint1].X() + this->mInputPoints[aCPoint2].X() * 2) / 3.0;
-    y = (this->mInputPoints[aCPoint1].Y() + this->mInputPoints[aCPoint2].Y() * 2) / 3.0;
-    z = (this->mInputPoints[aCPoint1].Z() + this->mInputPoints[aCPoint2].Z() * 2) / 3.0;
+    x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
+    y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
+    z = (mInputPoints[aCPoint1].Z() + mInputPoints[aCPoint2].Z() * 2) / 3.0;
     (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((this->mQuan[aCPoint1] + this->mQuan[aCPoint2]) / 2.0);
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
     (*apNewIndex)++;
 }
 
@@ -408,7 +360,7 @@ void CSurface::SmoothSurf() {
     //done.
 }
 
-vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) {
+vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) { //TODO should be one line with some std function
     if (arQuan.size() == 0){ //incase the user doesnt input any color
         arQuan = vector<coord_t>(mMask.size(), 1);
         return arQuan;
@@ -438,7 +390,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
-    for (auto it = this->mVecPoints.begin(); it != this->mVecPoints.end(); it++) {
+    for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
         points.push_back(**it - mCenVector);
         indexes[*it] = counter;
         counter++;
@@ -446,7 +398,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     vector<CIndexedFace> faces;
     vector<size_t> face_points;
     set<size_t> set_points;
-    for (auto it = this->mVecFaces.begin(); it != this->mVecFaces.end(); it++) {
+    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         for (auto point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
             if (set_points.count(indexes[*point]) == 0) {
                 face_points.push_back(indexes[*point]);
@@ -465,66 +417,63 @@ void CSurface::ExportToObj(string aOutput, string aLabel, coord_t aAlpha) {
     mesh.ExportToObj(aOutput);
 }
 
-bool ComparePoint(CPoint &aPoint1, CPoint &aPoint2) { //TODO (TOMER) Move to CPoint
-    CPoint zeroPoint(0, 0, 0);
-    double dis1 = aPoint1.Dist(zeroPoint);
-    double dis2 = aPoint2.Dist(zeroPoint);
-    return (dis2 > dis1);
-}
 
 //static bool(*CompPoint)(&CPoint, &CPoint) = ComparePoint;
 
 vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
     vector<shared_ptr<CPoint> > new_vec;
     for (auto it = aVornPoints.begin(); it != aVornPoints.end(); it++) {
-        new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z)));
+        new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z))); //TODO y not copy c~tor?
     }
     return new_vec;
 }
 
-// TODO: Add alt Box func
-static double FindBoxR(vector<CPoint>& aInputPoints) { //TODO shouldn't be static!!!
-    CPoint zeroPoint(0, 0, 0);
-    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
-    return box_r.Dist(zeroPoint);
+
+
+// TODO Y doesn't it use members?
+CPoint GetGeometricCenter(const std::vector<std::vector<double>> &arPoints){
+    coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
+    coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
+    coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
+    coord_t MinY = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
+    coord_t MaxZ = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
+    coord_t MinZ = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
+
+    return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
 }
 
-static vector<Vector3D> FindBox(vector<CPoint> aInputPoints) {
-    coord_t xmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
-    coord_t xmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointX)).X();
+// TODO Y doesn't it use members?
+// TODO maybe should be just cen and radius? and then we won't need mCenVector? what was that bug all about?
+double FindContainingRadius(const vector<CPoint>& arPoints){
+    return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
+}
+// TODO Y doesn't it use members?
+static pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints){
 
-    coord_t ymax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
-    coord_t ymin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointY)).Y();
+    coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t y_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t z_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+    coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
-    coord_t zmax = (*max_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
-    coord_t zmin = (*min_element(aInputPoints.begin(), aInputPoints.end(), *CompareCPointZ)).Z();
+    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
+    CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
+    CPoint box_max = CPoint(x_min, y_min, z_min);        //box max
 
-    vector<Vector3D> Box (2);
-
-    const double expandFactor = 1;
-
-    Vector3D ll (xmin - (xmax - xmin) * expandFactor, ymin - (ymax - ymin) * expandFactor, zmin - (zmax - zmin) * expandFactor);
-    Vector3D ur (xmax + (xmax - xmin) * expandFactor, ymax + (ymax - ymin) * expandFactor, zmax + (zmax - zmin) * expandFactor);
-
-    Box.at(0) = ll;
-    Box.at(1) = ur;
-
-    return Box;
+    return pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
 }
 
 // TODO: Implement alt box func and alt compute vornoi func
 void CSurface::RunVorn() {
     //find the box_r
-    double box_R = FindBoxR(mInputPoints);
-    cout << "BoxR = " << box_R << endl;
+    double box_R = FindContainingRadius(mInputPoints);
     // New version:
-    vector<Vector3D> Box = FindBox(this->mInputPoints);
-    cout << "Box[0] Elad = " << Box.at(0).x << " " << Box.at(0).y << " " << Box.at(0).z << endl;
-    cout << "Box[1] Elad = " << Box.at(1).x << " " << Box.at(1).y << " " << Box.at(1).z << endl;
-
-    cout << "start vorn" << endl;
+    pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
+    //TODO should not use vec3 here!!! only in lib folder!
+    //vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
     //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
-    auto vorn_out = compute_vornoi(mInputPoints, 2*box_R );
+    auto vorn_out = compute_vornoi(mInputPoints, box );
     cout << "vorn done" << endl;
     //set the points
     mVecPoints = ConvertFromVorn(get<0>(vorn_out));
@@ -555,7 +504,7 @@ void CSurface::RunVorn() {
 
 void CSurface::CleanEdges() {
     CPoint zero_point = CPoint(0, 0, 0);
-    double box_R = FindBoxR(this->mInputPoints);
+    double box_R = FindContainingRadius(this->mInputPoints);
     bool is_out_of_radius = false;
     vector<CSurfaceFace> new_faces;
     for (auto face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {

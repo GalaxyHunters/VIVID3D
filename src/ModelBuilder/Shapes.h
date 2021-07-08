@@ -31,9 +31,9 @@ CMesh CreateEllipsoidMesh(std::size_t aNumOfMeridians, std::size_t aNumOfParalle
                           const CPoint &arCenter, std::vector<coord_t> aMajorAxis, std::vector<coord_t> aMiddleAxis, std::vector<double> aMinorAxis,
                           coord_t aColor, coord_t aAlpha, std::string aLabel);
 
-CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arRadiusVec,
-                                     vector<coord_t> aMajorAxis, vector<coord_t> aMiddleAxis,
-                                     vector<coord_t> aMinorAxis, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
+CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels,
+                                     vector<coord_t> aMajorAxis, vector<coord_t> aMiddleAxis, vector<coord_t> aMinorAxis,
+                                     coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 
 CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 /*Creates a arrow*/

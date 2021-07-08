@@ -23,18 +23,30 @@ const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
-int RunBasicTests(){
+int RunBasicTests1(){
     cout << "Basic Test:" << endl;
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     // TODO (Tomer): what does "this sets the center" mean???
-    model.AddMesh( CreateSphereMesh(10, 10, 0.1, std::vector<double>({0.0, 0.0, 0.0}),  5, 0.8, std::string("sphere1")) );
-    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{0.0, 0.0, 1.0}, 0.01, 0.2, "sphere2") );
-    model.AddMesh( CreateSphereMesh(3, 3, 0.1, vector<double>{1, 0, 0}, 30, 1, "sphere3") );
-    auto arrow_x = CreateArrowMesh(0.15, 0.4, vector<double>{0,0,0}, vector<double>{0,5,0}, 0.8, 0.6, "arrowX");
+    model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 10, 10, 0.1, 0.8, "sphere1" ));
+    model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 1.0), 0.1, 3, 3, 0.01, 0.2, "sphere2") );
+    model.AddMesh( CreateSphereMesh(CPoint(1, 0, 0), 30, 3, 3, 0.1, 1, "sphere3") );
+    auto arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/arrow_test"); // /test_models/
+    model.ExportToObj(TEST_OUTPUT_PATH + "/Spheres_Arrow"); // /test_models/
+
+    return EXIT_SUCCESS;
+}
+
+/* Test basic shapes creation, add them to a Model and export to OBJ. */
+int RunBasicTests2(){
+    cout << "Basic Test:" << endl;
+
+    CModel model;
+    model.AddMesh(CreateBoxMesh(CPoint(0,0,0), CPoint(2, 3, 5), 0.5, 0.7, "Box"));
+    model.AddMesh(CreateCubeMesh(CPoint(0,0,3), 5, 0.5, 0.3, "Cube"));
+    model.ExportToObj(TEST_OUTPUT_PATH + "/Cube_Box"); // /test_models/
 
     return EXIT_SUCCESS;
 }
@@ -126,7 +138,7 @@ int RunMedicaneTests(){
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
+    //model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     //medicaneSurf.SmoothSurf();
@@ -142,7 +154,9 @@ int RunMedicaneTests(){
 int main(){
     int ret_value = EXIT_SUCCESS;
 
-    ret_value = RunBasicTests();
+    ret_value = RunBasicTests1();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    ret_value = RunBasicTests2();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Cube" << endl;
     ret_value = RunCubeSurfTests();

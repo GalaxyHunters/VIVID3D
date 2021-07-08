@@ -1,8 +1,8 @@
 #include "Shapes.h"
 #include <cassert>
+#include <math.h>
+//#define _USE_MATH_DEFINES //TODO WTF???
 
-#define _USE_MATH_DEFINES //TODO WTF???
-//#include <math>
 
 using namespace vivid;
 using namespace std;
@@ -12,54 +12,49 @@ constexpr double ARROW_FACTOR = 0.4;
 namespace vivid
 {
 
-CMesh CreateCubeMesh(double aSize, coord_t aColor, coord_t aAlpha, const CPoint &arCenter)
+CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
-    vector<CPoint> CPoints(8);
-    CPoints.clear();
+    //mesh = CreateBoxMesh(arCenter, CPoint(aSize, aSize, aSize), aColor, aAlpha, arLabel);
 
-    CPoints.push_back(CPoint(-1, -1, -1)); //5 -> 0
-    CPoints.push_back(CPoint(-1, -1, +1)); //6 -> 1
-    CPoints.push_back(CPoint(-1, +1, -1)); //3 -> 2
-    CPoints.push_back(CPoint(-1, +1, +1)); //0 -> 3
-    CPoints.push_back(CPoint(+1, -1, -1)); //4 -^ 4
-    CPoints.push_back(CPoint(+1, -1, +1)); //7 -> 5
-    CPoints.push_back(CPoint(+1, +1, -1)); //2 -> 6
-    CPoints.push_back(CPoint(+1, +1, +1)); //1 -> 7
+    vector<CPoint> points= { CPoint(-1, -1, -1), //5 -> 0
+                              CPoint(-1, -1, +1), //6 -> 1
+                              CPoint(-1, +1, -1), //3 -> 2
+                              CPoint(-1, +1, +1), //0 -> 3
+                              CPoint(+1, -1, -1), //4 -^ 4
+                              CPoint(+1, -1, +1), //7 -> 5
+                              CPoint(+1, +1, -1), //2 -> 6
+                              CPoint(+1, +1, +1) };//1 -> 7
 
-    vector<CIndexedFace> faces(6);
-    faces[0] = CIndexedFace(vector<size_t>{4, 2, 6, 7}, aColor);
-    faces[1] = CIndexedFace(vector<size_t>{6, 2, 0, 4}, aColor);
-    faces[2] = CIndexedFace(vector<size_t>{7, 6, 4, 5}, aColor);
-    faces[3] = CIndexedFace(vector<size_t>{3, 7, 5, 1}, aColor);
-    faces[4] = CIndexedFace(vector<size_t>{2, 3, 1, 0}, aColor);
-    faces[5] = CIndexedFace(vector<size_t>{1, 5, 4, 0}, aColor);
+    vector<CIndexedFace> faces = { CIndexedFace(vector<size_t>{4, 2, 6, 7}, aColor),
+                                   CIndexedFace(vector<size_t>{6, 2, 0, 4}, aColor),
+                                   CIndexedFace(vector<size_t>{7, 6, 4, 5}, aColor),
+                                   CIndexedFace(vector<size_t>{3, 7, 5, 1}, aColor),
+                                   CIndexedFace(vector<size_t>{2, 3, 1, 0}, aColor),
+                                   CIndexedFace(vector<size_t>{1, 5, 4, 0}, aColor) };
 
-    CMesh mesh;
-    mesh.SetPoints(CPoints);
-    mesh.SetFaces(faces);
-    mesh.SetAlpha(aAlpha);
-    mesh.SetLabel("Cube");
+    CMesh mesh(points, faces, arLabel, aAlpha);
 
     mesh.MoveMesh(arCenter);
-    mesh.ScaleMesh(CPoint(0.5 * aSize, 0.5 * aSize, 0.5 * aSize));
+    mesh.ScaleMesh(CPoint(aSize, aSize, aSize));
     return mesh;
 }
 
-CMesh CreateBoxMesh(double aSizeX, double aSizeY, double aSizeZ, coord_t aColor, coord_t aAlpha, const CPoint &arPos)
+
+CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
-	vector<CPoint> CPoints(8);
-	CPoints.clear();
+	vector<CPoint> points(8);
+	points.clear();
 	//TODO: Zohar MY OCD hurts here should start at  ---, --+, -+-, -++, +--, +-+ and I would say by for loop...
 	//TODO  it is binary counting to 6 right? so as a PSAGON, you should know every issue that slightly related to it
 	//TODO I promise to teach you binary kwakwa de la oma
-	CPoints.push_back(CPoint(-1, +1, +1)); //0
-	CPoints.push_back(CPoint(+1, +1, +1)); //1
-	CPoints.push_back(CPoint(+1, +1, -1)); //2
-	CPoints.push_back(CPoint(-1, +1, -1)); //3
-	CPoints.push_back(CPoint(+1, -1, -1)); //4
-	CPoints.push_back(CPoint(-1, -1, -1)); //5
-	CPoints.push_back(CPoint(-1, -1, +1)); //6
-	CPoints.push_back(CPoint(+1, -1, +1)); //7
+	points.push_back(CPoint(-1, +1, +1)); //0
+	points.push_back(CPoint(+1, +1, +1)); //1
+	points.push_back(CPoint(+1, +1, -1)); //2
+	points.push_back(CPoint(-1, +1, -1)); //3
+	points.push_back(CPoint(+1, -1, -1)); //4
+	points.push_back(CPoint(-1, -1, -1)); //5
+	points.push_back(CPoint(-1, -1, +1)); //6
+	points.push_back(CPoint(+1, -1, +1)); //7
 
 	vector<CIndexedFace> faces(6);
 	faces[0] = CIndexedFace(vector<size_t>{0, 3, 2, 1}, aColor);
@@ -69,70 +64,64 @@ CMesh CreateBoxMesh(double aSizeX, double aSizeY, double aSizeZ, coord_t aColor,
 	faces[4] = CIndexedFace(vector<size_t>{3, 0, 6, 5}, aColor);
 	faces[5] = CIndexedFace(vector<size_t>{6, 7, 4, 5}, aColor);
 
-    CMesh mesh;
-    mesh.SetPoints(CPoints);
-    mesh.SetFaces(faces);
-    mesh.SetAlpha(aAlpha);
-    mesh.SetLabel("Box");
+    CMesh mesh(points, faces, arLabel, aAlpha);
+    mesh.MoveMesh(arCenter);
+    mesh.ScaleMesh(arSize);
 
     return mesh;
 }
 
-CMesh CreateSphereMesh(size_t aNumOfMeridians, size_t aNumOfParallels, double aRadius, const CPoint &arCenter, coord_t aColor, coord_t aAlpha, const string aLabel)
+CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMeridians, size_t aNumOfParallels, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
-    vector<CPoint> vertices;
+    vector<CPoint> points;
     vector<CIndexedFace> faces;
     double theta, phi;
 
-    vertices.push_back(CPoint(0, 0, aRadius)); //Creating the top polar
-    vertices.push_back(CPoint(0,0,-aRadius)); //Creating the bottom polar
+    points.push_back(CPoint(0, 0, aRadius)); //Creating the top polar
+    points.push_back(CPoint(0, 0, -aRadius)); //Creating the bottom polar
 
     double phi_step = M_PI / (aNumOfParallels + 1);
     double theta_step = (2 * M_PI) / aNumOfMeridians;
 
-    for (int i = 0; i < aNumOfMeridians; ++i)
+    for (int i = 0; i < aNumOfMeridians; i++)
     {
         theta = i * theta_step;
-        for (int j = 1; j < aNumOfParallels + 1; ++j)
+        for (int j = 1; j < aNumOfParallels + 1; j++)
         {
             phi = (M_PI / 2) - (j * phi_step);
-            //vertices.push_back(CPoint(arCenter.X() + aRadius * cos(phi) * cos(theta), arCenter.Y() + aRadius * cos(phi) * sin(theta), arCenter.Z() + aRadius * sin(phi)));
-            vertices.push_back(CPoint(cos(phi) * cos(theta), cos(phi) * sin(theta), sin(phi)));    //creating the vertices
+            //points.push_back(CPoint(arCenter.X() + aRadius * cos(phi) * cos(theta), arCenter.Y() + aRadius * cos(phi) * sin(theta), arCenter.Z() + aRadius * sin(phi)));
+            points.push_back(CPoint(cos(phi) * cos(theta), cos(phi) * sin(theta), sin(phi)));    //creating the points
         }
     }
 
-    for (int j = 0; j < aNumOfMeridians - 1; ++j)
+    for (int i = 0; i < aNumOfMeridians - 1; i++)
     {
-        faces.push_back(CIndexedFace(vector<size_t>{0, 2 + (j + 1) * aNumOfParallels, 2 + j * aNumOfParallels}, aColor)); //creates triangles
+        faces.push_back(CIndexedFace(vector<size_t>{0, 2 + (i + 1) * aNumOfParallels, 2 + i * aNumOfParallels}, aColor)); //creates triangles
     }
     faces.push_back(CIndexedFace(vector<size_t>{0, 2, 2 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
 
-    for (int j = 2; j < 1 + aNumOfParallels; ++j)
+    for (int i = 2; i < 1 + aNumOfParallels; i++)
     {
-        for (int k = 0; k < aNumOfMeridians - 1; ++k)
+        for (int j = 0; j < aNumOfMeridians - 1; j++)
         {
-            faces.push_back(CIndexedFace(vector<size_t>{j + k * aNumOfParallels, j + (k + 1) * aNumOfParallels,
-                                                        j + 1 + (k + 1) * aNumOfParallels, j + 1 + k * aNumOfParallels}, aColor));
+            faces.push_back(CIndexedFace(vector<size_t>{i + j * aNumOfParallels, i + (j + 1) * aNumOfParallels,
+                                                        i + 1 + (j + 1) * aNumOfParallels, i + 1 + j * aNumOfParallels}, aColor));
         }
-        faces.push_back(CIndexedFace(vector<size_t>{j + (aNumOfMeridians - 1) * aNumOfParallels,
-                                                    (size_t)j, (size_t)(j + 1),
-                                                    j + 1 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
+        faces.push_back(CIndexedFace(vector<size_t>{i + (aNumOfMeridians - 1) * aNumOfParallels,
+                                                    (size_t)i, (size_t)(i + 1),
+                                                    i + 1 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
     }
 
-    for (int i = 0; i < aNumOfMeridians - 1; ++i)
+    for (int i = 0; i < aNumOfMeridians - 1; i++)
     {
         faces.push_back(CIndexedFace(vector<size_t>{1, 1 + (i + 1) * aNumOfParallels, 1 + (i + 2) * aNumOfParallels}, aColor));
     }
     faces.push_back(CIndexedFace(vector<size_t>{1, 1 + (aNumOfMeridians) * aNumOfParallels, 1 + aNumOfParallels}, aColor));
 
-    CMesh mesh;
-    mesh.SetPoints(vertices);
-    mesh.SetFaces(faces);
+    CMesh mesh(points, faces, arLabel, aAlpha);
     mesh.MoveMesh(arCenter);
     mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
 
-    mesh.SetAlpha(aAlpha);
-    mesh.SetLabel(aLabel);
 	return mesh;
 }
 
@@ -142,8 +131,7 @@ CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector
     if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
         throw "Axis vectors cannot be (0,0,0)";
     }
-    CMesh Ellipsoid = CreateSphereMesh(aNumOfMeridians, aNumOfParallels, 1.0, CPoint(0., 0., 0.), aColor, aAlpha, aLabel);
-    //CMesh Ellipsoid;
+    CMesh Ellipsoid;
     //use aRadiusVec to create strech matrix and stretch the sphere
     vector<vector<double>> StretchMatrix;
     StretchMatrix.push_back(vector<double>{aRadiusVec[0], 0, 0});
@@ -156,7 +144,7 @@ CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector
     RotateMatrix.push_back(aMinorAxis);
     //apply matrices to points
     vector<CPoint> points = Ellipsoid.GetPoints();
-    for (int i = 0; i < points.size(); ++i)
+    for (int i = 0; i < points.size(); i++)
     {
         CPoint& CurrentVector = points[i];
         //right now im using a refrence to change the vector according to the matrix
@@ -182,13 +170,14 @@ CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector
 
 }
 // TODO: Zohar again VERY UGLY code, please use transformMat
-CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec, const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis, vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel){
+CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arRadiusVec, vector<coord_t> aMajorAxis, vector<coord_t> aMiddleAxis, vector<coord_t> aMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
+{
     if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
         throw "Axis vectors cannot be (0,0,0)";
     }
-    CMesh Ellipsoid = CreateSphereMesh(aNumOfMeridians, aNumOfParallels, 1.0, CPoint(0., 0., 0.), aColor, aAlpha, aLabel);
+    CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, aColor, aAlpha, arLabel);
     //use aRadiusVec to create strech matrix and stretch the sphere
-    Ellipsoid.ScaleMesh(CPoint(aRadiusVec[0], aRadiusVec[1], aRadiusVec[2]));
+    Ellipsoid.ScaleMesh(arRadiusVec);
     // I'm not sure this has the same result as Zohars code.
     coord_t aMat[3][3];
     aMat[0][0] = aMajorAxis[0]; aMat[0][1] = aMajorAxis[1]; aMat[0][2] = aMajorAxis[2];
@@ -197,70 +186,76 @@ CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParall
     Ellipsoid.TransformMesh(aMat);
 
     return Ellipsoid;
-
 }
 
 // TODO ask Zohar what kind of arrow is it
 // TODO, THINK about Jill Neiman's arrow and the scale thingy
-CMesh CreateArrowMesh(double aWidth, double aPCRatio, const CPoint &arCenter, vector<double> aDirVec, double aColor, double aAlpha, string aLabel){
+CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const string &arLabel)
+{
     //before we run, lets check Exceptions
-    if (aDirVec != vector<double>{0, 0, 0}) {
+    if (0 == arDirVec.Magnitude())  {
         throw "Direction Vector cannot be (0,0,0)";
-    } else if (aWidth != 0 && aPCRatio != 0) {
+    }
+    if (0 == aWidth || 0 == aPCRatio) {
         throw "aWidth and aPCRatio must be different then 0";
     }
 //    assert(("Direction Vector cannot be (0,0,0)", aDirVec != vector<double>{0,0,0}));
 //    assert(("aWidth and aPCRatio must be different then 0", aWidth != 0 && aPCRatio != 0));
     // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points ={};
-    vector<CIndexedFace> faces={};
+
     for (int i =-1; i < 2; i++) { //start by creating an arrow that points up the z axis
-        if (i == 0) continue;
-        for (int j=-1; j < 2; j++) { //creating the points for the bottom square
-            if (0 == j) continue;
-            points.push_back(CPoint(ARROW_FACTOR * i * aWidth, ARROW_FACTOR * j * aWidth, 0));
+        if (0 != i)  {
+            for (int j =-1; j < 2; j++) { //creating the points for the bottom square
+                if (0 != j) {
+                    points.push_back(CPoint(ARROW_FACTOR * i * aWidth, ARROW_FACTOR * j * aWidth, 0));
+                }
+            }
         }
         for (int k=-1; k<2; k++) { //creating the points for the top square
-            if (0==k) continue;
-            points.push_back(CPoint(ARROW_FACTOR * i * aWidth, ARROW_FACTOR * k * aWidth, (1 - aPCRatio)));
+            if (0 != k) {
+                points.push_back(CPoint(ARROW_FACTOR * i * aWidth, ARROW_FACTOR * k * aWidth, (1 - aPCRatio)));
+            }
         }
     }
     for (int i=-1; i < 2; i++) { //creating the points for the pointer
-        if (0 == i) continue;
-        for (int j = -1; j < 2; j++) {
-            if (0 == j) continue;
-            points.push_back(CPoint(2 * ARROW_FACTOR * i * aWidth, 2 * ARROW_FACTOR * j * aWidth, (1 - aPCRatio) ));
+        if (0 != i) {
+            for (int j = -1; j < 2; j++) {
+                if (0 != j) {
+                    points.push_back(
+                            CPoint(2 * ARROW_FACTOR * i * aWidth, 2 * ARROW_FACTOR * j * aWidth, (1 - aPCRatio)));
+                }
+            }
         }
     }
     points.push_back(CPoint(0, 0, 1)); //the pointer point
 
     //creating faces
     //creating the chest faces
-    faces.push_back(CIndexedFace(vector<size_t>{0, 4, 5, 1}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{2, 6, 7, 3}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{0, 2, 6, 4}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{4, 6, 7, 5}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{5, 7, 3, 1}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{1, 3, 2, 0}, aColor));
-    //creating the pointer faces
-    faces.push_back(CIndexedFace(vector<size_t>{8,  10, 11, 9}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{8,  12, 10}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{10, 12, 11}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{11, 12, 9}, aColor));
-    faces.push_back(CIndexedFace(vector<size_t>{9,  12, 8}, aColor));
+    vector<CIndexedFace> faces={ CIndexedFace(vector<size_t>{0, 4, 5, 1}, aColor),
+                                 CIndexedFace(vector<size_t>{2, 6, 7, 3}, aColor),
+                                 CIndexedFace(vector<size_t>{0, 2, 6, 4}, aColor),
+                                 CIndexedFace(vector<size_t>{4, 6, 7, 5}, aColor),
+                                 CIndexedFace(vector<size_t>{5, 7, 3, 1}, aColor),
+                                 CIndexedFace(vector<size_t>{1, 3, 2, 0}, aColor),
+                                 //creating the pointer faces
+                                 CIndexedFace(vector<size_t>{8,  10, 11, 9}, aColor),
+                                 CIndexedFace(vector<size_t>{8,  12, 10}, aColor),
+                                 CIndexedFace(vector<size_t>{10, 12, 11}, aColor),
+                                 CIndexedFace(vector<size_t>{11, 12, 9}, aColor),
+                                 CIndexedFace(vector<size_t>{9,  12, 8}, aColor) };
 
-    CMesh mesh(points, faces, aLabel, aAlpha);
+    CMesh mesh(points, faces, arLabel, aAlpha);
 
     // Scale the arrow by aDirVec and later rotating the arrow to aDirVec direction
-    CPoint direction_vec  = CPoint(aDirVec[0], aDirVec[1], aDirVec[2]);
-    auto direction_size = direction_vec.Magnitude();
-    CPoint cross_vec = CPoint(0,0,1).Cross(direction_vec);
+    auto direction_size = arDirVec.Magnitude();
+    CPoint cross_vec = CPoint(0,0,1).Cross(arDirVec);
     CPoint normal_vec = cross_vec.Normalize();
     double rotation_angel = acos( CPoint(0,0,1).Dot(normal_vec)); //Note both vec are normalized so it's ok
 
     if (cross_vec.Magnitude() < 0.0001 ) // meaning direction_vec is on the z axis
     {
-        if (direction_vec.Z() < 0)
+        if (arDirVec.Z() < 0)
         {
             direction_size = -1*direction_size;
         }

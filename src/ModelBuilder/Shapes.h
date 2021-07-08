@@ -18,24 +18,24 @@ namespace vivid
 // all 3 vec should be passed with CPoint const&
 
 
-CMesh CreateCubeMesh(double aSize, coord_t aColor, coord_t aAlpha, const CPoint &arCenter);
+CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 /*Creates a Cube*/
 
-CMesh CreateBoxMesh(double sizeX, double aSizeY, double aSizeZ, coord_t aColor, coord_t aAlpha, const CPoint &arCenter);
+CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 /*Creates a Box*/
 
-CMesh CreateSphereMesh(std::size_t aNumOfMeridians, std::size_t aNumOfParallels, double aRadius, const CPoint &arCenter, coord_t aColor, coord_t aAlpha, const std::string aLabel);
+CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, std::size_t aNumOfMeridians, std::size_t aNumOfParallels, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 /*Creates a sphere*/
 
-CMesh CreateEllipsoidMesh(std::size_t aNumOfMeridians, std::size_t aNumOfParallels, std::vector<double> aRadiusVec,
-                          const CPoint &arCenter, std::vector<double> aMajorAxis, std::vector<double> aMiddleAxis, std::vector<double> aMinorAxis,
+CMesh CreateEllipsoidMesh(std::size_t aNumOfMeridians, std::size_t aNumOfParallels, std::vector<coord_t> aRadiusVec,
+                          const CPoint &arCenter, std::vector<coord_t> aMajorAxis, std::vector<coord_t> aMiddleAxis, std::vector<double> aMinorAxis,
                           coord_t aColor, coord_t aAlpha, std::string aLabel);
 
-CMesh CreateEllipsoidByTransformMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec,
-                                     const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis,
-                                     vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel);
+CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arRadiusVec,
+                                     vector<coord_t> aMajorAxis, vector<coord_t> aMiddleAxis,
+                                     vector<coord_t> aMinorAxis, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 
-CMesh CreateArrowMesh(double aWidth, double aPCRatio, const CPoint &arCenter, std::vector<double> aDirVec, double aColor, double aAlpha, std::string aLabel);
+CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 /*Creates a arrow*/
 
 } // namespace vivid

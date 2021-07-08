@@ -8,6 +8,8 @@
 
 typedef double coord_t; //TODO: float64_t and rename!
 
+constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
+
 // TODO const and & and inl file
 
 namespace vivid
@@ -48,7 +50,8 @@ public:
                       mX * arV.Y() - mY * arV.X()); }
     inline coord_t Magnitude() const { return sqrt(Dot(*this)) ;}
     inline CPoint  Normalize() const { return (*this / Magnitude() ); }
-    inline bool    Orthogonal(const CPoint& arV1, const CPoint& arV2) const{ return (0 == arV1.Dot(arV2)); }
+    inline bool    Orthogonal(const CPoint& arV) const{ return (POINT_SIMILARITY_THRESHOLD > (*this).Dot(arV)); }
+
 
     friend std::ostream& operator<<(std::ostream &out, const CPoint& p)
     {

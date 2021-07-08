@@ -7,7 +7,8 @@
 using namespace vivid;
 using namespace std;
 
-constexpr double ARROW_FACTOR = 0.4;
+constexpr double ARROW_WIDTH_FACTOR = 0.4;
+constexpr double ARROW_LENGTH_FACTOR = 0.8;
 
 namespace vivid
 {
@@ -178,18 +179,18 @@ CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, size_t aNumOfMeridi
             if (0==j) continue;
             for (int i=-1; i<2; i++) { //creating the points for the bottom square
                 if (0==i) continue;
-                points.push_back(CPoint(0.4 * j * aWidth, 0.4 * i * aWidth, 0));
+                points.push_back(CPoint(ARROW_WIDTH_FACTOR * j * aWidth, ARROW_WIDTH_FACTOR * i * aWidth, 0));
             }
             for (int k=-1; k<2; k++) { //creating the points for the top square
                 if (0==k) continue;
-                points.push_back(CPoint(0.4 * j * aWidth, 0.4 * k * aWidth, (1 - aPCRatio)));
+                points.push_back(CPoint(ARROW_WIDTH_FACTOR * j * aWidth, ARROW_WIDTH_FACTOR * k * aWidth, (1 - aPCRatio)));
             }
         }
         for (int l=-1; l<2; l++) { //creating the points for the pointer
             if (0==l) continue;
             for (int i = -1; i<2; i++) {
                 if (0==i) continue;
-                points.push_back(CPoint(0.8 * l * aWidth, 0.8 * i * aWidth, (1 - aPCRatio) ));
+                points.push_back(CPoint(ARROW_LENGTH_FACTOR * l * aWidth, ARROW_LENGTH_FACTOR * i * aWidth, (1 - aPCRatio) ));
             }
         }
         points.push_back(CPoint(0, 0, 1)); //the pointer point

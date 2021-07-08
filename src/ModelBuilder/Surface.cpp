@@ -430,13 +430,13 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 }
 
 // TODO Y doesn't it use members?
-CPoint CSurface::GetGeometricCenter(const std::vector<std::vector<double>> &arPoints){
-    coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(0)<arV2.at(0);}))->at(0);
-    coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(0)<arV2.at(0);}))->at(0);
-    coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(1)<arV2.at(1);}))->at(1);
-    coord_t MinY = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(1)<arV2.at(1);}))->at(1);
-    coord_t MaxZ = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(2)<arV2.at(2);}))->at(2);
-    coord_t MinZ = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(2)<arV2.at(2);}))->at(2);
+CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &arPoints){
+    coord_t MaxX = (max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->at(0);
+    coord_t MinX = (min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->at(0);
+    coord_t MaxY = (max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->at(1);
+    coord_t MinY = (min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->at(1);
+    coord_t MaxZ = (max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->at(2);
+    coord_t MinZ = (min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->at(2);
 
     return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
 }

@@ -6,7 +6,6 @@
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
-
 //// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
 #include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
@@ -40,7 +39,7 @@ int RunBasicTests1(){
 }
 
 /* Test surf functionality with cube */
-int RunCubeSurfTests() { //Decimate isn't activated currently
+int RunCubeSurfTests() { //Reduce isn't activated currently
     cout << "Cube Test:" << endl;
 
     vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
@@ -60,9 +59,10 @@ int RunCubeSurfTests() { //Decimate isn't activated currently
 //    cout << quan.size() << " " << points.size() << endl; // TODO: Should've been assert!
 
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
+    surf.CalculateVoronoi();
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Decimate(0.5, 0.4);
+//    mesh.Reduce(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
@@ -108,9 +108,10 @@ int RunPyramidSurfTest(){
     Vmin = 0 ;//*min_element(quan.begin(), quan.end());
 
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    surf.CalculateVoronoi();
     surf.SmoothSurf();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Decimate(0.5, 0.4);
+//    mesh.Reduce(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
 
     return EXIT_SUCCESS;
@@ -129,9 +130,10 @@ int RunMedicaneTests(){
     //model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
+    medicaneSurf.CalculateVoronoi();
     //medicaneSurf.SmoothSurf();
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-    //medicaneMesh.Decimate(0.5, 0.4);
+    //medicaneMesh.Reduce(0.5, 0.4);
     model.AddMesh(medicaneMesh);
     model.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModelTest");
     return EXIT_SUCCESS;
@@ -143,10 +145,6 @@ int main(){
     int ret_value = EXIT_SUCCESS;
 
     ret_value = RunBasicTests1();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    ret_value = RunBasicTests2();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    ret_value = RunBasicTests3();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Cube" << endl;
     ret_value = RunCubeSurfTests();
@@ -277,7 +275,7 @@ int main(){
 //CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
 //surf.SmoothSurf();
 //CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-////        mesh.Decimate(0.5, 0.4);
+////        mesh.Reduce(0.5, 0.4);
 //CModel model1 = CModel(mesh);
 ////model1.ExportToObj("./TestModels/Pyramid_model");
 //mesh.ExportToObj("./TestModels/Pyramid_mesh", 0);
@@ -511,7 +509,7 @@ int main(){
 //    CSurf medicaneSurf = CSurf(data_og.mPoints, data_og.mMask, data_og.mQuan, 0.f, 1.f);
 //    medicaneSurf.smoothSurf();
 //    CMesh medicaneMesh = medicaneSurf.ToMesh("vivid_3d_obj", 1.0);
-//    medicaneMesh.Decimate(0.5, 0.4);
+//    medicaneMesh.Reduce(0.5, 0.4);
 //    model.AddMesh(medicaneMesh);
 //    model.ExportToObj("MedicaneModelTest");
 //

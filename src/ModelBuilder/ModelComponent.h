@@ -10,6 +10,7 @@ namespace vivid
 //TODO splines?
 class CModelComponent {
 private:
+    // Alpha
     std::string mLabel = "";
     // set get
 protected:
@@ -28,6 +29,7 @@ protected:
 
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
+// set pure virtual
 //        /**
 //         * transform CMesh points by transformation matrix
 //         * @param[in] aTrans a 3x3 dimension matrix.

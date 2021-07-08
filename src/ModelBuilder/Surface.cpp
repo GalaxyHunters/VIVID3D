@@ -458,7 +458,7 @@ static pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints){
 
     CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
     CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
-    CPoint box_max = CPoint(x_min, y_min, z_min);        //box max
+    CPoint box_max = CPoint(x_max, y_max, z_max);        //box max
 
     return pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
 }
@@ -471,8 +471,8 @@ void CSurface::RunVorn() {
     pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
     //TODO should not use vec3 here!!! only in lib folder!
     //vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
-    auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
-    //auto vorn_out = compute_vornoi(mInputPoints, box );
+    //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
+    auto vorn_out = compute_vornoi(mInputPoints, box );
     cout << "vorn done" << endl;
     //set the points
     mVecPoints = ConvertFromVorn(get<0>(vorn_out));

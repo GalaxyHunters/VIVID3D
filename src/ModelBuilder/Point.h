@@ -50,6 +50,7 @@ public:
     inline CPoint  Normalize() const { return (*this / Magnitude() ); }
     inline bool    Orthogonal(const CPoint& arV1, const CPoint& arV2) const{ return (0 == arV1.Dot(arV2)); }
 
+
     friend std::ostream& operator<<(std::ostream &out, const CPoint& p)
     {
         out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';

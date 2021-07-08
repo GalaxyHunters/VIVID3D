@@ -7,7 +7,6 @@ using namespace vivid;
 using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
 
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {

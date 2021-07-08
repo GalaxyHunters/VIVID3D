@@ -29,9 +29,9 @@ int RunBasicTests1(){
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     // TODO (Tomer): what does "this sets the center" mean???
-    model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 10, 10, 0.1, 0.8, "sphere1" ));
-    model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 1.0), 0.1, 3, 3, 0.01, 0.2, "sphere2") );
-    model.AddMesh( CreateSphereMesh(CPoint(1, 0, 0), 30, 3, 3, 0.1, 1, "sphere3") );
+    //model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, 0.1, 0.8, "sphere1" ));
+    //model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 1.0), 5, 10, 10, 0.01, 0.2, "sphere2") );
+    //model.AddMesh( CreateSphereMesh(CPoint(1, 0, 0), 30, 3, 3, 0.1, 1, "sphere3") );
     auto arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     model.AddMesh(arrow_x);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Spheres_Arrow"); // /test_models/

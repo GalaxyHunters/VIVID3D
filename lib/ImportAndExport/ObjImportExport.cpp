@@ -4,6 +4,9 @@
 
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
+// GENERAL MESSAGE:
+//TODO MAGIC STRINGS, SHOULD BE included in a special define header
+//TODO also:  to_string(aColor.R), int2str(*apMtlCounter) is a very bad practice. CPP is not python. and file formatting should be exact
 
 using namespace std;
 
@@ -27,6 +30,7 @@ static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
 {
+
     aMTLFile << "newmtl surf_" + int2str(*apMtlCounter) + "\n" + \
 		"Ns 96.078\n" + \
 		"Ka 1.000 1.000 1.000 \n" + \

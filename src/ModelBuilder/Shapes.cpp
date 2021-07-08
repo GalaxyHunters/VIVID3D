@@ -99,94 +99,24 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
 	return mesh;
 }
 
-// TODO: Zohar again VERY UGLY code, please use transformMat
-CMesh CreateEllipsoidMesh(size_t aNumOfMeridians, size_t aNumOfParallels, vector<double> aRadiusVec, const CPoint &arCenter, vector<double> aMajorAxis, vector<double> aMiddleAxis, vector<double> aMinorAxis, coord_t aColor, coord_t aAlpha, string aLabel){
-    //begin by asserting some conditions
-    if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
-        throw "Axis vectors cannot be (0,0,0)";
-    }
-    CMesh Ellipsoid;
-    //use aRadiusVec to create strech matrix and stretch the sphere
-    vector<vector<double>> StretchMatrix;
-    StretchMatrix.push_back(vector<double>{aRadiusVec[0], 0, 0});
-    StretchMatrix.push_back(vector<double>{0, aRadiusVec[1], 0});
-    StretchMatrix.push_back(vector<double>{0, 0, aRadiusVec[2]});
-    //use all axis vectors to create a rotation matrix
-    vector<vector<double>> RotateMatrix;
-    RotateMatrix.push_back(aMajorAxis);
-    RotateMatrix.push_back(aMiddleAxis);
-    RotateMatrix.push_back(aMinorAxis);
-    //apply matrices to points
-    vector<CPoint> points = Ellipsoid.GetPoints();
-    for (int i = 0; i < points.size(); i++)
-    {
-        CPoint& CurrentVector = points[i];
-        //right now im using a refrence to change the vector according to the matrix
-        double CVX = CurrentVector.X();
-        double CVY = CurrentVector.Y();
-        double CVZ = CurrentVector.Z();
-        //first we strech em
-        CurrentVector = CPoint(CVX * StretchMatrix[0][0] + CVY * StretchMatrix[1][0] + CVZ * StretchMatrix[2][0],
-                               CVX * StretchMatrix[0][1] + CVY * StretchMatrix[1][1] + CVZ * StretchMatrix[2][1],
-                               CVX * StretchMatrix[0][2] + CVY * StretchMatrix[1][2] + CVZ * StretchMatrix[2][2]);
-        //now we rotate em
-        CVX = CurrentVector.X();
-        CVY = CurrentVector.Y();
-        CVZ = CurrentVector.Z();
-        CurrentVector = CPoint(arCenter.X() + CVX * RotateMatrix[0][0] + CVY * RotateMatrix[1][0] + CVZ * RotateMatrix[2][0],
-                               arCenter.Y() + CVX * RotateMatrix[0][1] + CVY * RotateMatrix[1][1] + CVZ * RotateMatrix[2][1],
-                               arCenter.Z() + CVX * RotateMatrix[0][2] + CVY * RotateMatrix[1][2] + CVZ * RotateMatrix[2][2]);
-    }
-
-    Ellipsoid.SetPoints(points);
-    return Ellipsoid;
-    //set new info to the mesh
-}
-
-// TODO: Zohar again VERY UGLY code, please use transformMat
-CMesh CreateEllipsoidByTransformMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, vector<coord_t> aMajorAxis, vector<coord_t> aMiddleAxis, vector<coord_t> aMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     /* Asserting conditions */
-    if (aMajorAxis == vector<double>{0,0,0} || aMiddleAxis == vector<double>{0,0,0} || aMinorAxis == vector<double>{0,0,0}) {
-        throw "Axis vectors cannot be (0,0,0)";
-    }
-//    if (!CheckIfPerpindicular(aMajorAxis, aMiddleAxis)) {
-//        throw "Axis vectors must be perpendicular";
-//    }
-//    if (!CheckIfPerpindicular(aMiddleAxis, aMinorAxis)) {
-//        throw "Axis vectors must be perpendicular";
-//    }
-//    if (!CheckIfPerpindicular(aMajorAxis, aMinorAxis)) {
-//        throw "Axis vectors must be perpendicular";
-//    }
-    if (CPoint(aMajorAxis).Dot(CPoint(aMiddleAxis)) < ZERO_COMPARISON_THRESHOLD) {
+    if (!(arMajorAxis.Orthogonal(arMiddleAxis) && arMinorAxis.Orthogonal(arMiddleAxis) && arMajorAxis.Orthogonal(arMinorAxis))) {
         throw "Axis vectors must be perpendicular";
     }
-//    if (CPoint(aMajorAxis[0], aMajorAxis[1], aMajorAxis[2]).Dot(CPoint(aMinorAxis[0], aMinorAxis[1], aMinorAxis[2])) < ZERO_COMPARISON_THRESHOLD) {
-//        throw "Axis vectors must be perpendicular";
-//    }
-//    if (CPoint(aMinorAxis[0], aMinorAxis[1], aMinorAxis[2]).Dot(CPoint(aMiddleAxis[0], aMiddleAxis[1], aMiddleAxis[2])) < ZERO_COMPARISON_THRESHOLD) {
-//        throw "Axis vectors must be perpendicular";
-//    }
 
-    cout << "Passed Checks " << endl;
     CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, aColor, aAlpha, arLabel);
-    cout << "Created Ellipsoid " << endl;
-    //use arScaleVec to create strech matrix and stretch the sphere
-    Ellipsoid.ScaleMesh(arScaleVec);
-    cout << "Stretched Ellipsoid " << endl;
-    // use Axis vecs to rotate the Ellipsoid by matrix multiplication
+    Ellipsoid.ScaleMesh(arScaleVec); //Scaling before the rotation
     coord_t aMat[3][3];
-    aMat[0][0] = aMajorAxis[0]; aMat[0][1] = aMiddleAxis[0]; aMat[0][2] = aMinorAxis[0];
-    aMat[1][0] = aMajorAxis[1]; aMat[1][1] = aMiddleAxis[1]; aMat[1][2] = aMinorAxis[1];
-    aMat[2][0] = aMajorAxis[2]; aMat[2][1] = aMiddleAxis[2]; aMat[2][2] = aMinorAxis[2];
+    aMat[0][0] = arMajorAxis.X(); aMat[0][1] = arMiddleAxis.X(); aMat[0][2] = arMinorAxis.X();
+    aMat[1][0] = arMajorAxis.Y(); aMat[1][1] = arMiddleAxis.Y(); aMat[1][2] = arMinorAxis.Y();
+    aMat[2][0] = arMajorAxis.Z(); aMat[2][1] = arMiddleAxis.Z(); aMat[2][2] = arMinorAxis.Z();
     Ellipsoid.TransformMesh(aMat);
-    cout << "Rotated Ellipsoid " << endl;
 
     return Ellipsoid;
 }
 
-// TODO ask Zohar what kind of arrow is it
 // TODO, THINK about Jill Neiman's arrow and the scale thingy
 CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {

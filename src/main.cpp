@@ -39,40 +39,6 @@ int RunBasicTests1(){
     return EXIT_SUCCESS;
 }
 
-/* Test basic shapes creation, add them to a Model and export to OBJ. */
-int RunBasicTests2(){
-    cout << "Basic Test:" << endl;
-
-    CModel model;
-    model.AddMesh(CreateBoxMesh(CPoint(0,0,0), CPoint(2, 3, 5), 0.5, 0.7, "Box"));
-    model.AddMesh(CreateCubeMesh(CPoint(0,0,3), 5, 0.5, 0.3, "Cube"));
-    model.ExportToObj(TEST_OUTPUT_PATH + "/Cube_Box"); // /test_models/
-
-    return EXIT_SUCCESS;
-}
-
-/* Compare zohar Ellipsoid against new ellipsoid */
-int RunBasicTests3(){
-    cout << "Basic Test:" << endl;
-
-    CModel model;
-    cout << "test1" << endl;
-    model.AddMesh(CreateEllipsoidMesh(10, 10, {5.79, 5.669, 5.044}, CPoint(0, 0, 0),
-                                      {0.40688240892239885, 0.4342208853844512, -0.8036783734837267},
-                                      {0.9060806219738539, -0.30360234902741523, 0.294692246502187},
-                                      {-0.1160371138600758, -0.8481024916606377,-0.5169695850299582},
-                                      0.5, 0.7, "Zohar"));
-    cout << "test2" << endl;
-    model.AddMesh(CreateEllipsoidByTransformMesh(CPoint(0, 0, 0), CPoint(5.79, 5.669, 5.044), 10, 10,
-                                      {0.40688240892239885, 0.4342208853844512, -0.8036783734837267},
-                                      {0.9060806219738539, -0.30360234902741523, 0.294692246502187},
-                                      {-0.1160371138600758, -0.8481024916606377,-0.5169695850299582},
-                                      0.5, 0.7, "Adam"));
-    model.ExportToObj(TEST_OUTPUT_PATH + "/EllipsoidsTest"); // /test_models/
-
-    return EXIT_SUCCESS;
-}
-
 /* Test surf functionality with cube */
 int RunCubeSurfTests() { //Decimate isn't activated currently
     cout << "Cube Test:" << endl;

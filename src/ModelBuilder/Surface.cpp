@@ -25,6 +25,7 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
 
     //model centralization
     mCenVector = GetGeometricCenter(aInputPoints);
+
     vector<CPoint> temp={};
     for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){  //TODO for each
         temp.push_back(CPoint(*it) -= mCenVector);
@@ -428,16 +429,14 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
     return new_vec;
 }
 
-
-
 // TODO Y doesn't it use members?
-CPoint GetGeometricCenter(const std::vector<std::vector<double>> &arPoints){
-    coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
-    coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X()<arV2.X();}))->X();
-    coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
-    coord_t MinY = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y()<arV2.Y();}))->Y();
-    coord_t MaxZ = (std::max_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
-    coord_t MinZ = (std::min_element(arPoints.begin(), arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z()<arV2.Z();}))->Z();
+CPoint CSurface::GetGeometricCenter(const std::vector<std::vector<double>> &arPoints){
+    coord_t MaxX = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(0)<arV2.at(0);}))->at(0);
+    coord_t MinX = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(0)<arV2.at(0);}))->at(0);
+    coord_t MaxY = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(1)<arV2.at(1);}))->at(1);
+    coord_t MinY = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(1)<arV2.at(1);}))->at(1);
+    coord_t MaxZ = (std::max_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(2)<arV2.at(2);}))->at(2);
+    coord_t MinZ = (std::min_element(arPoints.begin(), arPoints.end(), [](const std::vector<double>& arV1, const std::vector<double>& arV2){return arV1.at(2)<arV2.at(2);}))->at(2);
 
     return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
 }
@@ -472,8 +471,8 @@ void CSurface::RunVorn() {
     pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
     //TODO should not use vec3 here!!! only in lib folder!
     //vector<Vector3D> Box = vector<Vector3D>({{box.first.X(), box.first.Y(), box.first.Z() }, {box.second.X(), box.second.Y(), box.second.Z() }});
-    //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
-    auto vorn_out = compute_vornoi(mInputPoints, box );
+    auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
+    //auto vorn_out = compute_vornoi(mInputPoints, box );
     cout << "vorn done" << endl;
     //set the points
     mVecPoints = ConvertFromVorn(get<0>(vorn_out));

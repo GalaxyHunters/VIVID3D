@@ -45,25 +45,25 @@ private:
     std::vector<bool> mMask = {}; //for smooth
     std::vector<coord_t> mQuan = {}; // for smooth
     CPoint mCenVector = {}; // holds the center of the data (used to center the data by 000 and back to original upon export)
+    std::pair<CPoint, CPoint> mBoxPair = {};
+    coord_t mScale = 0;
+
 
     // TODO: Organize with same order as in .cpp
     // Centralization Sub-Methods
-    CPoint GetGeometricCenter(const std::vector<std::vector<double>> &arInputPoints); // find the center of the model (used to transform the data to be centered around 000)
-    double FindContainingRadius(const vector<CPoint>& arPoints); // TODO: Remnant, should be deleted.
-    CPoint FindContainingBox(const vector<CPoint>& arPoints); // Find Box dimensions for Voronoi.
+    double FindContainingRadius(const vector<CPoint>& arPoints); // Used for Scaling
+    std::vector<CPoint> FindContainingBox(const vector<CPoint>& arPoints); // Find Box dimensions for RunVorn.
 
     // Handle Input Sub-Methods
     void PreProcessPoints(); // Centering, scaling, adding noise.
     std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
-    void ScaleParticles(); // Rescales particles to scale __ - __
-    void AddParticleNoise();
 
     // TODO: Add scale_down mesh.
     // TODO: AddNoise function for points. How do we decide if we need to or not? How much noise?
-    // TODO: Voronoi shouldn't be in constructor, and the functions run always after runvorn should be placed into runvorn.
-    // Response: Voronoi doesn't always run clean funcs directly after (as in smooth) so I create a seperate CreateSurface() method to handle it in the public.
+    // TODO: RunVorn shouldn't be in constructor, and the functions run always after runvorn should be placed into runvorn.
+    // Response: RunVorn doesn't always run clean funcs directly after (as in smooth) so I create a seperate CreateSurface() method to handle it in the public.
     //vorn function:
-    void Voronoi();
+    void RunVorn();
 
     // Cleaning Sub-Methods
     void CleanFaces(std::vector<bool>& aMask); // clean the unneeded faces(by mask)
@@ -88,8 +88,8 @@ public:
     // operator =
     CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 
-    void CreateSurface(); // Runs Voronoi plus the other cleaning sub-methods
-    void Smooth();           // Runs Voronoi plus the other smoothing and cleaning sub-methods
+    void CreateSurface(); // Runs RunVorn plus the other cleaning sub-methods
+    void Smooth();           // Runs RunVorn plus the other smoothing and cleaning sub-methods
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
 

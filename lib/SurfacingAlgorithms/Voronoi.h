@@ -7,7 +7,7 @@
 
 namespace vivid
 {
-/* Implementing surfacing by Voronoi algorithm */
+/* Implementing surfacing by RunVorn algorithm */
 class CVoronoi {
 public:
     Voronoi3D mData = {Vector3D(), Vector3D()};

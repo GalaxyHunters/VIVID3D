@@ -271,7 +271,7 @@
     <frame>
       <ip>0x2832B9</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::Voronoi()</fn>
+      <fn>CSurface::RunVorn()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>

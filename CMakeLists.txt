@@ -97,7 +97,7 @@ add_executable(vivid
 
 
 
-# We use VoronoiLib and not Voronoi::mVoronoi because mVoronoi is locally created.
+# We use VoronoiLib and not RunVorn::voronoi  because mVoronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?

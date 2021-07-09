@@ -4,7 +4,7 @@
 namespace vivid
 {
 
-/* Implementing surfacing by Voronoi algorithm */
+/* Implementing surfacing by RunVorn algorithm */
 class VoronoiSurface {
     //TODO c~tor with point clods??
 };

@@ -118,7 +118,7 @@ int RunPyramidSurfTest(){
 
 }
 
-/* Test the Elad Voronoi bug and the pointy faces bugs */
+/* Test the Elad RunVorn bug and the pointy faces bugs */
 int RunMedicaneTests(){
     cout << "Medicane Test:" << endl;
 

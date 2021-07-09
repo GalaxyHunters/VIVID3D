@@ -33,7 +33,6 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
     SetInputPoints(points);
     SetMask(aMask);
     SetQuan(NormQuan(aQuan, aVMin, aVMax));
-    // We can scale them while doing the temp.push_back thing, would be more efficient
     PreProcessPoints();
 }
 
@@ -65,7 +64,7 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
 void CSurface::CreateSurface() {
-    Voronoi();
+    RunVorn();
     CleanEdges();
     CleanFaces(mMask);
     CleanPoints();
@@ -77,20 +76,20 @@ void CSurface::Smooth() {
     vector<size_t> p_in;
     SetPinPout(p_out, p_in);
     UpdateInputPoints(p_out, p_in);
-    Voronoi();
+    RunVorn();
     //begin smooth part 2, adding new points between the cpoints
     UpdatePoutPin(p_out, p_in);
     Stage2AddPoints(p_out, p_in);
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
-    Voronoi();
+    RunVorn();
     CleanEdges();
     MakeMask(p_out.size(), p_in.size());
     CleanFaces(mMask);
     CleanPoints();
     //done.
 }
-// TODO: Not touching this for now, but in theory we shouldn't be re-centralizing this anymore.
+
 const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
@@ -100,7 +99,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
     for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
-        points.push_back(**it); // Used to be -mCenVector
+        points.push_back((**it * mScale) + mCenVector);
         indexes[*it] = counter;
         counter++;
     }
@@ -123,7 +122,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
 
-/* ---------------------------------------------- Handle Voronoi Methods ---------------------------------------------*/
+/* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
 // TODO: Should be static?
 vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
@@ -135,9 +134,9 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 }
 
 // TODO: This is shit name. what do?
-void CSurface::Voronoi() {
-    auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
-    //auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, box);
+void CSurface::RunVorn() {
+    //auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
+    auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
     cout << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
@@ -363,7 +362,7 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
 
-CPoint CSurface::FindContainingBox(const vector<CPoint>& arPoints){
+vector<CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
@@ -371,7 +370,11 @@ CPoint CSurface::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t z_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
     coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
-    return CPoint((x_max+x_min)/2, (y_max+y_min)/2, (z_max+z_min)/2);
+    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
+    CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
+    CPoint box_max = CPoint(x_max, y_max, z_max);        //box max
+    //pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR)
+    return vector<CPoint>{box_dim, box_min, box_max};
 }
 
 // TODO Y doesn't it use members?
@@ -498,4 +501,20 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
     return arQuan;
 }
 
-
+void CSurface::PreProcessPoints() {
+    CPoint box_dim, box_min, box_max;
+    vector<CPoint> box_dimensions = FindContainingBox(mInputPoints);
+    box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
+    mCenVector = (box_min + box_max) / 2;
+    mScale = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
+    vector<CPoint> noise_vec (mInputPoints.size());
+    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
+                                                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
+                                                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   ));
+    // Scales and adds noise to points
+    // TODO: theres got to be a better way of doing this.
+    for (int i = 0; i < mInputPoints.size(); i++){
+        mInputPoints[i] = (mInputPoints[i] - mCenVector + noise_vec[i]) / mScale;
+    }
+    mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};
+}

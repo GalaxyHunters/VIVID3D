@@ -9,9 +9,9 @@ constexpr coord_t NOISE_PERCENTAGE = 0.01; // TODO: Is this the right scale (-10
 
 namespace vivid
 {
-// TODO: Many things need centralization, including the cleanedges part of naftalis code. I recommend to either keep the centralization in CSurface, or move the relevant functions to Voronoi as well. Thoughts?
+// TODO: Many things need centralization, including the cleanedges part of naftalis code. I recommend to either keep the centralization in CSurface, or move the relevant functions to RunVorn as well. Thoughts?
 /* TODO: I feel like at this point I'm just stupidly moving everything from CSurface to Voronoi, and i don't really see a good reason to do so. I also don't think it's smart to make Surface be able to use both
-         Marching cubes and Voronoi, it ends up being too complicated and the user might mistake which function does what. This whole refactor seems pointless to be honest. */
+         Marching cubes and RunVorn, it ends up being too complicated and the user might mistake which function does what. This whole refactor seems pointless to be honest. */
 // TODO: Scale should probably be seperate, but I don't know so for now its like this
 vector<CPoint> CVoronoi::PreProcessPoints(const vector<CPoint> &arPoints) {
     vector<CPoint> box_dimensions = FindContainingBox(arPoints);

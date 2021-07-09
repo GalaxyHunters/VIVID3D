@@ -1207,7 +1207,7 @@ void Voronoi3D::BuildNoBox(vector<Vector3D> const& points, vector<vector<Vector3
   tetra_centers_.clear();
   tetra_centers_.reserve(points.size() * 7);
   del_.Clean();
-  // Voronoi Data
+  // RunVorn Data
   FacesInCell_.clear();
   PointsInFace_.clear();
   FaceNeighbors_.clear();
@@ -1245,7 +1245,7 @@ void Voronoi3D::BuildNoBox(vector<Vector3D> const& points, vector<vector<Vector3
 
   CM_.resize(Norg_);
   volume_.resize(Norg_, 0);
-  // Create Voronoi
+  // Create RunVorn
   BuildVoronoi(order);
 
   CalcAllCM();
@@ -1279,7 +1279,7 @@ void Voronoi3D::BuildDebug(int rank)
 
   CM_.resize(del_.points_.size());
   volume_.resize(Norg_, 0);
-  // Create Voronoi
+  // Create RunVorn
   BuildVoronoi(order);
 
   std::vector<double>().swap(R_);
@@ -1301,7 +1301,7 @@ void Voronoi3D::Build(vector<Vector3D> const & points)
   R_.reserve(points.size() * 11);
   tetra_centers_.clear();
   tetra_centers_.reserve(points.size() * 11);
-  // Voronoi Data
+  // RunVorn Data
   FacesInCell_.clear();
   PointsInFace_.clear();
   FaceNeighbors_.clear();
@@ -1354,7 +1354,7 @@ void Voronoi3D::Build(vector<Vector3D> const & points)
 
   CM_.resize(del_.points_.size());
   volume_.resize(Norg_, 0);
-  // Create Voronoi
+  // Create RunVorn
   BuildVoronoi(order);
 
   std::vector<double>().swap(R_);

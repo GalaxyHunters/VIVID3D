@@ -9,19 +9,23 @@ constexpr coord_t NOISE_PERCENTAGE = 0.01; // TODO: Is this the right scale (-10
 
 namespace vivid
 {
+
 // TODO: Many things need centralization, including the cleanedges part of naftalis code. I recommend to either keep the centralization in CSurface, or move the relevant functions to RunVorn as well. Thoughts?
 /* TODO: I feel like at this point I'm just stupidly moving everything from CSurface to Voronoi, and i don't really see a good reason to do so. I also don't think it's smart to make Surface be able to use both
          Marching cubes and RunVorn, it ends up being too complicated and the user might mistake which function does what. This whole refactor seems pointless to be honest. */
 // TODO: Scale should probably be seperate, but I don't know so for now its like this
-vector<CPoint> CVoronoi::PreProcessPoints(const vector<CPoint> &arPoints) {
-    vector<CPoint> box_dimensions = FindContainingBox(arPoints);
+vector<CPoint> CVoronoi::PreProcessPointsVorn(const vector<CPoint> &arPoints) {
+    vector<CPoint> box_dimensions = FindContainingBoxVorn(arPoints);
     CPoint box_min = box_dimensions.at(1); CPoint box_max = box_dimensions.at(2);
     CPoint center_vec = (box_min + box_max) / 2;
-    coord_t re_scale_val = FindContainingRadius(arPoints) / PARTICLE_SCALE_MAGNITUDE;
+    coord_t re_scale_val = FindContainingRadiusVorn(arPoints) / PARTICLE_SCALE_MAGNITUDE;
     vector<CPoint> noise_vec (arPoints.size());
-    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * center_vec.X() * rand() / RAND_MAX) - center_vec.X()),
-                                                        NOISE_PERCENTAGE*((2 * center_vec.Y() * rand() / RAND_MAX) - center_vec.Z()),
-                                                        NOISE_PERCENTAGE*((2 * center_vec.Z() * rand() / RAND_MAX) - center_vec.Z())   ));
+    srand(time(0));
+    for (int i = 0; i<noise_vec.size(); i++){
+        noise_vec[i] = {NOISE_PERCENTAGE*((2 * center_vec.X() * rand() / RAND_MAX) - center_vec.X()),
+                        NOISE_PERCENTAGE*((2 * center_vec.Y() * rand() / RAND_MAX) - center_vec.Z()),
+                        NOISE_PERCENTAGE*((2 * center_vec.Z() * rand() / RAND_MAX) - center_vec.Z())   };
+    }
     // Scales and adds noise to points
     vector<CPoint> points (arPoints.size());
     // TODO: theres got to be a better way of doing this.
@@ -31,6 +35,8 @@ vector<CPoint> CVoronoi::PreProcessPoints(const vector<CPoint> &arPoints) {
     return points;
 }
 
+
+
 void ConvertToVorn(const vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints) {
 	for (auto it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
 		arNewPoints.push_back(Vector3D(it->X(), it->Y(), it->Z()));
@@ -39,10 +45,10 @@ void ConvertToVorn(const vector<CPoint>& arInputPoints, vector<Vector3D>& arNewP
 
 pair<vector<Vector3D>, vector<vector<size_t>>>  CVoronoi::RunVoronoi(const vector<CPoint>& arInputPoints) {
     // Preprocess all points
-    vector<CPoint> points = PreProcessPoints(arInputPoints);
+    vector<CPoint> points = PreProcessPointsVorn(arInputPoints);
     // Find Box
     CPoint box_dim, box_min, box_max;
-    vector<CPoint> box_dimensions = FindContainingBox(points);
+    vector<CPoint> box_dimensions = FindContainingBoxVorn(points);
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1), box_max = box_dimensions.at(0);
     pair<CPoint,CPoint> box_pair (box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
     // Preprocessing
@@ -119,10 +125,10 @@ pair<vector<Vector3D>, vector<vector<size_t> > > CVoronoi::ComputeVoronoi(vector
 }
 
 // TODO: Make these into one normal function
-double CVoronoi::FindContainingRadius(const vector<CPoint>& arPoints){
+double CVoronoi::FindContainingRadiusVorn(const vector<CPoint>& arPoints){
     return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
-vector<CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints){
+vector<CPoint> CVoronoi::FindContainingBoxVorn(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();

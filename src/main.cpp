@@ -7,7 +7,6 @@
 #include "ModelBuilder/Point.h"
 
 //// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.hpp"
 #include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 #define BOX_SIZE 20
@@ -196,7 +195,7 @@ int main(){
 //    return (dis2 > dis1);
 //}
 //
-//static double FindContainingRadius(vector<CPoint>& aInputPoints) {
+//static double FindContainingRadiusVorn(vector<CPoint>& aInputPoints) {
 //    CPoint zeroPoint(0, 0, 0);
 //    CPoint box_r = *max_element(aInputPoints.begin(), aInputPoints.end(), *ComparePoint);
 //    return box_r.CalcDistance(zeroPoint);
@@ -290,7 +289,7 @@ int main(){
 //    cout << points[0].y << endl;
 //    cout << points[0].z << endl;
 //    //our box version:
-//    //double boxR = FindContainingRadius(aInputPoints);
+//    //double boxR = FindContainingRadiusVorn(aInputPoints);
 //
 //    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
 //    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));
@@ -375,7 +374,7 @@ int main(){
 ////    cout << points[0].y << endl;
 ////    cout << points[0].z << endl;
 ////    //our box version:
-////    //double boxR = FindContainingRadius(aInputPoints);
+////    //double boxR = FindContainingRadiusVorn(aInputPoints);
 ////
 ////    double const xmin1 = * (std :: min_element (x.begin (), x.end ()));
 ////    double const ymin1 = * (std :: min_element (y.begin (), y.end ()));

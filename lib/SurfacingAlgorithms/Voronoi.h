@@ -18,11 +18,11 @@ public:
     }
     CVoronoi(const CVoronoi &arVoronoi) {}
     // FindBox
-    double FindContainingRadius(const vector<CPoint>& arPoints);
+    double FindContainingRadiusVorn(const vector<CPoint>& arPoints);
     // TODO: typedef pair(cpoint, cpoint) for box
-    std::vector<CPoint> FindContainingBox(const vector<CPoint>& arPoints);
+    std::vector<CPoint> FindContainingBoxVorn(const vector<CPoint>& arPoints);
 
-    vector<CPoint> PreProcessPoints(const vector<CPoint> &arPoints);
+    vector<CPoint> PreProcessPointsVorn(const vector<CPoint> &arPoints);
     // Create Voronoi3D and save it
 
     // operator=

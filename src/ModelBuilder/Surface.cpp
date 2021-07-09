@@ -362,7 +362,7 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
 
-vector<CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints){
+vector<CPoint> CSurface::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
@@ -508,10 +508,12 @@ void CSurface::PreProcessPoints() {
     mCenVector = (box_min + box_max) / 2;
     mScale = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
     vector<CPoint> noise_vec (mInputPoints.size());
-    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
-                                                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
-                                                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   ));
-    // Scales and adds noise to points
+    srand(time(0));
+    for (int i = 0; i<noise_vec.size(); i++){
+        noise_vec[i] = {NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
+                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
+                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   };
+    }
     // TODO: theres got to be a better way of doing this.
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i] - mCenVector + noise_vec[i]) / mScale;

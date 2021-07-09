@@ -13,9 +13,14 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <functional>
 
 namespace vivid
 {
+
+/* FTrans_t is a function that changes CPoint to another CPoint */
+typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
+
 
 class CMesh : public CModelComponent{
 
@@ -52,7 +57,11 @@ public:
 
     void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 
-
+    /**
+     * transform CMesh points by transformation function
+     * @param[in] aTrans is a function(CPoint) -> CPoint
+     */
+    void TransformMesh(FTrans_t const aTrans);
     /**
      * transform CMesh points by transformation matrix
      * @param[in] aTrans a 3x3 dimension matrix.

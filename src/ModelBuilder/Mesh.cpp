@@ -64,6 +64,14 @@ void CMesh::SetAlpha(coord_t aAlpha){
     mAlpha = aAlpha;
 }
 
+
+void CMesh::TransformMesh(FTrans_t const aTrans){
+    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
+    {
+        *it = aTrans(*it);
+    }
+}
+
 void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 
     double px,py,pz;

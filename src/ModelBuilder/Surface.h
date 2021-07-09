@@ -19,7 +19,7 @@ namespace vivid
     };
 
 //TODO Should it containd CFace?
-    class CSurfaceFace{
+    class CSurfaceFace {
     public:
         std::vector<std::shared_ptr<CPoint> > mPoints;
         std::pair<size_t, size_t> mPairPoints;

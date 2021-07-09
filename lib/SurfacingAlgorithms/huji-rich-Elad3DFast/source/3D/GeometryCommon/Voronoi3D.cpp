@@ -1377,7 +1377,7 @@ void Voronoi3D::BuildVoronoi(std::vector<size_t> const& order)
   PointsInFace_.resize(Norg_ * 10);
 
   std::array<size_t, 128> temp, temp3;
-  // Build all voronoi points
+  // Build all mVoronoi points
   std::size_t Ntetra = del_.tetras_.size();
   for (size_t i = 0; i < Ntetra; ++i)
     if (ShouldCalcTetraRadius(del_.tetras_[i], Norg_))

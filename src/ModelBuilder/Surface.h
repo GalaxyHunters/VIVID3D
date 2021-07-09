@@ -1,6 +1,7 @@
 #ifndef VIVID_SURFACE_H
 #define VIVID_SURFACE_H
 
+#include "Voronoi.h"
 #include "Mesh.h"
 #include <memory>
 
@@ -9,7 +10,7 @@ namespace vivid
 //TODO Color field needs to be changed everywhere
 //TODO Typedef has to be by const ref
 //TODO Should it containd Cpoint?
-class CSurfacePoint { // used to sort and clean the voronoi input points
+class CSurfacePoint { // used to sort and clean the mVoronoi input points
 public:
     CPoint mPoint = {0, 0, 0};
     coord_t mQuan = 0;
@@ -35,6 +36,8 @@ public:
 //public CMesh
 class CSurface : public CMesh {
 private:
+    CVoronoi mVoronoi;
+
     std::vector<std::shared_ptr<CPoint> > mVecPoints = {};
     std::vector<CSurfaceFace> mVecFaces = {};
 
@@ -47,9 +50,10 @@ private:
     // Centralization Sub-Methods
     CPoint GetGeometricCenter(const std::vector<std::vector<double>> &arInputPoints); // find the center of the model (used to transform the data to be centered around 000)
     double FindContainingRadius(const vector<CPoint>& arPoints); // TODO: Remnant, should be deleted.
-    pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints); // Find Box dimensions for Voronoi.
+    CPoint FindContainingBox(const vector<CPoint>& arPoints); // Find Box dimensions for Voronoi.
 
     // Handle Input Sub-Methods
+    void PreProcessPoints(); // Centering, scaling, adding noise.
     std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
     void ScaleParticles(); // Rescales particles to scale __ - __
     void AddParticleNoise();
@@ -57,7 +61,7 @@ private:
     // TODO: Add scale_down mesh.
     // TODO: AddNoise function for points. How do we decide if we need to or not? How much noise?
     // TODO: RunVorn shouldn't be in constructor, and the functions run always after runvorn should be placed into runvorn.
-    // Response: RunVorn doesn't always run clean funcs directly after (as in smooth) so I create a seperate CalculateVoronoi() method to handle it in the public.
+    // Response: RunVorn doesn't always run clean funcs directly after (as in smooth) so I create a seperate CreateSurface() method to handle it in the public.
     //vorn function:
     void RunVorn();
 
@@ -84,7 +88,7 @@ public:
     // operator =
     CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 
-    void CalculateVoronoi(); // Runs RunVorn plus the other cleaning sub-methods
+    void CreateSurface(); // Runs RunVorn plus the other cleaning sub-methods
     void Smooth();           // Runs RunVorn plus the other smoothing and cleaning sub-methods
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 

@@ -7,7 +7,8 @@ using namespace vivid;
 using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
+constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100; // TODO: Is this the right scale (-100, 100)?
+constexpr coord_t NOISE_PERCENTAGE = 0.01; // TODO: Is this the right scale (-100, 100)?
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     // Check input validity
@@ -23,29 +24,17 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
     }
 
     //model centralization
-    mCenVector = GetGeometricCenter(aInputPoints);
-
-    vector<CPoint> temp={};
-    for (auto it = aInputPoints.begin(); it != aInputPoints.end(); it++){  //TODO for each
-        temp.push_back(CPoint(*it) -= mCenVector);
+    vector<CPoint> points (aInputPoints.size());
+    for (int i = 0; i < points.size(); i++) {  //TODO for each
+        points[i] = aInputPoints[i];
     }
 
-    temp.resize(temp.size()); // Why dont we set temp to be the size of aInputPoints ahead of time?
-    SetInputPoints(temp);
+    points.resize(points.size()); // Why dont we set temp to be the size of aInputPoints ahead of time?
+    SetInputPoints(points);
     SetMask(aMask);
     SetQuan(NormQuan(aQuan, aVMin, aVMax));
     // We can scale them while doing the temp.push_back thing, would be more efficient
-    ScaleParticles();
-
-    // freeing up aInputPoints from memory, at this point it's not needed.
-    // TODO: Not important now. Delete
-    aInputPoints.clear();
-    aInputPoints.shrink_to_fit();
-
-//    RunVorn(); // TODO should not be activate yet
-//    CleanEdges();
-//    CleanFaces(aMask);
-//    CleanPoints();
+    PreProcessPoints();
 }
 
 CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use "this->"? no need
@@ -75,7 +64,7 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
-void CSurface::CalculateVoronoi() {
+void CSurface::CreateSurface() {
     RunVorn();
     CleanEdges();
     CleanFaces(mMask);
@@ -101,7 +90,7 @@ void CSurface::Smooth() {
     CleanPoints();
     //done.
 }
-
+// TODO: Not touching this for now, but in theory we shouldn't be re-centralizing this anymore.
 const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
@@ -111,7 +100,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
     for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
-        points.push_back(**it - mCenVector);
+        points.push_back(**it); // Used to be -mCenVector
         indexes[*it] = counter;
         counter++;
     }
@@ -150,9 +139,11 @@ void CSurface::RunVorn() {
     double box_R = FindContainingRadius(mInputPoints);
     // New version:
     pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
-    //auto vorn_out = compute_vornoi(this->mInputPoints, box_R*2);
-    auto vorn_out = compute_vornoi(mInputPoints, box );
+    //auto vorn_out = ComputeVoronoi(this->mInputPoints, box_R*2);
+    mVoronoi.MosheVoronoi(mInputPoints);
+    auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, box);
     cout << "vorn done" << endl;
+    cout << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
     mVecPoints = ConvertFromVorn(get<0>(vorn_out));
     //set the faces
@@ -306,6 +297,7 @@ void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
 
+//TODO:: what is this?
 void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
     for (int i = 0; (unsigned)i < aPOut.size(); i++) {
         aPOut[i] = i;
@@ -387,14 +379,7 @@ CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &arInputPoints)
     return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
 }
 
-// TODO Y doesn't it use members?
-// TODO maybe should be just cen and radius? and then we won't need mCenVector? what was that bug all about?
-double CSurface::FindContainingRadius(const vector<CPoint>& arPoints){
-    return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
-}
-// TODO Y doesn't it use members?
-// TODO (Adam asks) why did it used to be static?
-pair<CPoint, CPoint> CSurface::FindContainingBox(const vector<CPoint>& arPoints){
+CPoint CSurface::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
@@ -402,11 +387,13 @@ pair<CPoint, CPoint> CSurface::FindContainingBox(const vector<CPoint>& arPoints)
     coord_t z_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
     coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
-    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
-    CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
-    CPoint box_max = CPoint(x_max, y_max, z_max);        //box max
+    return CPoint((x_max+x_min)/2, (y_max+y_min)/2, (z_max+z_min)/2);
+}
 
-    return pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
+// TODO Y doesn't it use members?
+// TODO maybe should be just cen and radius? and then we won't need mCenVector? what was that bug all about?
+double CSurface::FindContainingRadius(const vector<CPoint>& arPoints){
+    return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
@@ -433,7 +420,7 @@ void CSurface::CleanEdges() {
     this->mVecFaces = new_faces;
 }
 
-// takes the data from voronoi and using the mask cleans it so that only the wanted surface is left
+// takes the data from mVoronoi and using the mask cleans it so that only the wanted surface is left
 void CSurface::CleanFaces(vector<bool>& aMask) {
     vector<CSurfaceFace> new_faces;
     size_t mask_len = aMask.size();
@@ -527,20 +514,18 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
     return arQuan;
 }
 
-void CSurface::ScaleParticles() {
-    coord_t reScaleVal = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
+// TODO: Single "pre-processing" func, scale and addnoise together.
+void CSurface::PreProcessPoints() {
+    mCenVector = FindContainingBox(mInputPoints);
+    coord_t re_scale_val = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
+    vector<CPoint> noise_vec (mInputPoints.size());
+    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
+                                                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
+                                                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   ));
+    // Scales and adds noise to points
+
     // TODO: theres got to be a better way of doing this.
     for (int i = 0; i < mInputPoints.size(); i++){
-        mInputPoints[i] = mInputPoints[i] / reScaleVal;
+        mInputPoints[i] = (mInputPoints[i] - mCenVector + noise_vec[i]) / re_scale_val;
     }
-
-    // How to scale particles?             - Scale by dividing each particle by: (MaxRange / DesiredMaxRange)
-    // When to scale particles?            - Always, so they're always normalized to the same distribution
-    // To what scale to rescale particles? - Good question, for now its a scale of 100 (-50 to 50 if centralized).
-}
-
-void CSurface::AddParticleNoise() {
-    // How to add Noise?      - Add random noise to each particle.
-    // How much noise to add? - Experiment with 1% to 5% noise, I don't think it is a big difference, but I've noticed that 1% is not enough while smoothing. This could be because of the remove double points though...
-    // When to add noise?     - Well, we can just always add, or we can add only if on a uniform grid.
 }

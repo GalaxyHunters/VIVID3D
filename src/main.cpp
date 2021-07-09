@@ -59,7 +59,7 @@ int RunCubeSurfTests() { //Reduce isn't activated currently
 //    cout << quan.size() << " " << points.size() << endl; // TODO: Should've been assert!
 
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
-    surf.CalculateVoronoi();
+    surf.CreateSurface();
     surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Reduce(0.5, 0.4);
@@ -108,7 +108,7 @@ int RunPyramidSurfTest(){
     Vmin = 0 ;//*min_element(quan.begin(), quan.end());
 
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    surf.CalculateVoronoi();
+    surf.CreateSurface();
     surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Reduce(0.5, 0.4);
@@ -130,7 +130,7 @@ int RunMedicaneTests(){
     //model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
-    medicaneSurf.CalculateVoronoi();
+    medicaneSurf.CreateSurface();
     //medicaneSurf.Smooth();
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
     //medicaneMesh.Reduce(0.5, 0.4);

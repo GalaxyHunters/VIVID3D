@@ -24,8 +24,8 @@ PYBIND11_MODULE(vivid_py, m) {
 
     py::class_<CMesh>(m, "CMesh")
             .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))
-            .def("Decimate", &CMesh::Decimate,
-                 "input values should be between 0 and 1. A Decimate algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
+            .def("Reduce", &CMesh::Reduce,
+                 "input values should be between 0 and 1. A Reduce algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("aDecimationPercent") = 0.5, py::arg("aError") = 0.1)
             .def("ExportToObj", &CMesh::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     py::class_<CModel>(m, "CModel")
@@ -41,7 +41,7 @@ PYBIND11_MODULE(vivid_py, m) {
     m.def("AnimateTextures", &AnimateTextures, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",py::arg("Models"), py::arg("Interval"), py::arg("OutputFile"));
     m.def("RotateAnimTextures", &RotateAnimTextures, "takes a model and creates an animation of it rotating", py::arg("Model"), py::arg("Length"), py::arg("Duration"), py::arg("RotationAxis"), py::arg("OutputFile"));
 
-    m.def("CreateBoxMesh", &CreateBoxMesh, "Creates a box mesh", py::arg("sizeX"),  py::arg("sizeY"),  py::arg("sizeZ"),  py::arg("color") = 0.5, py::arg("alpha") = 0.9, py::arg("position") = vector<double>{0, 0, 0});
+    m.def("CreateBoxMesh", &CreateBoxMesh, "Creates a box mesh", py::arg("position") = CPoint(0, 0, 0), py::arg("size"),  py::arg("color") = 0.5, py::arg("alpha") = 0.9, py::arg("label"));
     m.def("CreateSphereMesh", &CreateSphereMesh,"Creates a sphere", py::arg("NumOfMeridians"), py::arg("NumOfParallels"), py::arg("Radius"), py::arg("CenterPoint"),py::arg("Color"), py::arg("Alpha"), py::arg("Label"));
     m.def("CreateEllipsoidMesh", &CreateEllipsoidMesh, "Creates ellipsoid mesh", py::arg("NumOfMeridians"), py::arg("NumOfParallels"), py::arg("Radii"), py::arg("CenterPoint"), py::arg("MajorAxis"), py::arg("MiddleAxis"), py::arg("MinorAxis"), py::arg("Color"), py::arg("Alpha"), py::arg("Label"));
     m.def("CreateArrowMesh", &CreateArrowMesh, "Creates an arrow mesh",  py::arg("Width"), py::arg("PointerToChestRatio"), py::arg("BasePoint"), py::arg("DirectionVector"), py::arg("Color"), py::arg("Alpha") = 1, py::arg("Label")="");

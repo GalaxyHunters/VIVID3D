@@ -53,7 +53,7 @@ public:
 	void SetLabel(std::string aLabel);
 	void SetAlpha(coord_t aAlpha);
 
-    void Decimate(coord_t aVerticlePercent, coord_t aError);
+    void Reduce(coord_t aVerticlePercent, coord_t aMaxError);
 
     void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 

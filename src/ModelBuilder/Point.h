@@ -27,13 +27,14 @@ public:
 //	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
     inline CPoint(std::vector<double> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
 	inline ~CPoint(){}
-	inline coord_t Dist(const CPoint& arV) const{ return sqrt(pow(mX - arV.X(), 2) + pow(mY - arV.Y(), 2) + pow(mZ - arV.Z(), 2)); }
+
 	inline const coord_t X() const{ return mX; }
 	inline const coord_t Y() const{ return mY; }
 	inline const coord_t Z() const{ return mZ; }
 	inline void X(coord_t aX) { mX = aX; }
 	inline void Y(coord_t aY) { mY = aY; }
 	inline void Z(coord_t aZ) { mZ = aZ; }
+
 	inline CPoint& operator+= (const CPoint& apV) { mX += apV.mX; mY += apV.mY; mZ += apV.mZ; return *this; }
     inline CPoint& operator-= (const CPoint& apV) { mX -= apV.mX; mY -= apV.mY; mZ -= apV.mZ; return *this; }
     inline CPoint& operator=  (const CPoint& apV) { mX =  apV.mX; mY =  apV.mY; mZ =  apV.mZ; return *this; }
@@ -42,6 +43,7 @@ public:
     inline CPoint  operator*  (const coord_t aSc) const{ return CPoint (aSc * mX, aSc * mY, aSc * mZ); }
     inline CPoint  operator/  (const coord_t aSc) const{ return CPoint (mX / aSc, mY / aSc, mZ / aSc); }
 
+    inline coord_t Dist(const CPoint& arV) const{ return sqrt(pow(mX - arV.X(), 2) + pow(mY - arV.Y(), 2) + pow(mZ - arV.Z(), 2)); }
     inline CPoint& Scale(const CPoint& apV) { mX *= apV.mX; mY *= apV.mY; mZ *= apV.mZ; return *this; }
     inline coord_t Dot  (const CPoint& arV) const{ return (mX * arV.X() + mY * arV.Y() + mZ * arV.Z()); }
     inline CPoint  Cross(const CPoint& arV) const{

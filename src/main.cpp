@@ -60,7 +60,7 @@ int RunCubeSurfTests() { //Reduce isn't activated currently
 
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.CalculateVoronoi();
-    surf.SmoothSurf();
+    surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Reduce(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
@@ -109,7 +109,7 @@ int RunPyramidSurfTest(){
 
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     surf.CalculateVoronoi();
-    surf.SmoothSurf();
+    surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 //    mesh.Reduce(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
@@ -131,7 +131,7 @@ int RunMedicaneTests(){
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.CalculateVoronoi();
-    //medicaneSurf.SmoothSurf();
+    //medicaneSurf.Smooth();
     CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
     //medicaneMesh.Reduce(0.5, 0.4);
     model.AddMesh(medicaneMesh);
@@ -273,7 +273,7 @@ int main(){
 ////--------------------------------------------------------------------run cube/pyramid -----------------------------------------------------------------------
 //try {
 //CSurf surf = CSurf(points, mask, quan, Vmin, Vmax);
-//surf.SmoothSurf();
+//surf.Smooth();
 //CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
 ////        mesh.Reduce(0.5, 0.4);
 //CModel model1 = CModel(mesh);

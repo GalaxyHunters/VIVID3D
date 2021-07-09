@@ -82,7 +82,7 @@ void CSurface::CalculateVoronoi() {
     CleanPoints();
 }
 
-void CSurface::SmoothSurf() {
+void CSurface::Smooth() {
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     vector<size_t> p_out;
     vector<size_t> p_in;

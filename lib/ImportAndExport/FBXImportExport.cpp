@@ -315,7 +315,7 @@ void AnimateTextures(std::vector<CModel> Models, double Interval, const string& 
 //			cord_t Vmin = *min_element(temp.quan.begin(), temp.quan.end());
 //			
 //			CSurface surf = surf.CreateSurf(temp.points, temp.mask, temp.quan, Vmin, Vmax);
-//			surf.SmoothSurf();
+//			surf.Smooth();
 //			CMesh mesh = surf.ToMesh("mesh" + to_string(i), 0.2);
 //
 //			Models[j].AddMesh(mesh);

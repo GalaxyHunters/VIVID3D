@@ -84,8 +84,8 @@ public:
     // operator =
     CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 
-    void CalculateVoronoi();
-    void SmoothSurf();
+    void CalculateVoronoi(); // Runs RunVorn plus the other cleaning sub-methods
+    void Smooth();           // Runs RunVorn plus the other smoothing and cleaning sub-methods
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
 

@@ -2,6 +2,9 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "DataToImage.h"
 
+
+#include <string>
+
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
 // GENERAL MESSAGE:
@@ -30,20 +33,20 @@ static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
 {
-
-    aMTLFile << "newmtl surf_" + int2str(*apMtlCounter) + "\n" + \
-		"Ns 96.078\n" + \
-		"Ka 1.000 1.000 1.000 \n" + \
-		"Kd " + to_string(aColor.R) + " " + to_string(aColor.G) + " " + to_string(aColor.B) + "\n" + \
-		"Ks 0.000 0.000 0.000\n" + \
-		"Ni 1.000000\n" + \
-		"d " + to_string(aAlpha) + "\n" + \
-		"illum 0\n" + \
-		"em 0.000000\n\n\n";
-    aOBJFile << "usemtl surf_" + int2str(*apMtlCounter) + "\n";
-
-    aOBJFile.flush();
+    // TODO talk to tomer about line endings, unix vs windows.
+    aMTLFile << "newmtl surf_%07d" << (*apMtlCounter) <<endl;
+    aMTLFile << "Ns 96.078\nKa 1.000 1.000 1.000\n";
+    aMTLFile << "Kd " + to_string(aColor.R) + " " + to_string(aColor.G) + " " + to_string(aColor.B) + "\n";
+    aMTLFile << "Ks 0.000 0.000 0.000\n";
+    aMTLFile << "Ni 1.000000\n";
+    aMTLFile << "d " + to_string(aAlpha) + "\n";
+    aMTLFile << "illum 0\n";
+    aMTLFile << "em 0.000000\n\n\n";
     aMTLFile.flush();
+
+    aOBJFile << "usemtl surf_" << (*apMtlCounter) << "\n";
+    aOBJFile.flush();
+
 }
 
 void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
@@ -52,7 +55,7 @@ void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
     vector<size_t> face_points = aFace.GetPoints();
     for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
     {
-        aOBJFile << int2str(*ItPoint + 1 + aPointsCounter) + " ";
+        aOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + " "; //TODO formatting
     }
     aOBJFile << "\n";
 }
@@ -149,13 +152,13 @@ void WriteNewFaceTexture(ofstream &aOBJFile, CIndexedFace aFace, size_t aPointsC
     size_t VT = GetColorIndex( aFace.GetColor())+1;
     for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
     {
-        aOBJFile << int2str(*ItPoint + 1 + aPointsCounter) +"/" + int2str(VT) + " ";
+        aOBJFile << to_string(*ItPoint + 1 + aPointsCounter) +"/" + to_string(VT) + " "; //TODO formatting
     }
     aOBJFile << "\n";
 }
 
 void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, coord_t aAlpha) {
-    aMTLFile << "newmtl texture_" + int2str(*mtl_counter) + "\n" + \
+    aMTLFile << "newmtl texture_" + to_string(*mtl_counter) + "\n" + \
 		"Ns 96.078\n"  \
 		"Ka 1.000 1.000 1.000 \n"  \
 		"Kd 1.000 1.000 1.000 \n"  \
@@ -167,7 +170,7 @@ void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counte
 		"map_Ka " + aTextureName + "\n" \
         "map_Kd " + aTextureName + "\n\n\n";
 
-    aOBJFile << "usemtl texture_" + int2str(*mtl_counter) + "\n";
+    aOBJFile << "usemtl texture_" + to_string(*mtl_counter) + "\n";
 }
 
 void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_t * mtl_counter, string aTextureName,

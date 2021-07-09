@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.4)
 message(BLOP)
-#project(VoronoiLib VERSION 1.0.0 DESCRIPTION "Library used for running the mVoronoi algorithm.")
+#project(VoronoiLib VERSION 1.0.0 DESCRIPTION "Library used for running the voronoi algorithm.")
 #Checks if the library is already present, if so, skips this part entirely.
 IF(NOT TARGET VoronoiLib)
 

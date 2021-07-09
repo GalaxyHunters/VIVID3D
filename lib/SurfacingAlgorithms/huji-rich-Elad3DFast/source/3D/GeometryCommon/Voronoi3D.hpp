@@ -72,7 +72,7 @@ private:
 	vector<tetra_vec > PointTetras_; // The tetras containing each point
 	vector<double> R_; // The radius of the sphere of each tetra
 	vector<Vector3D> tetra_centers_;
-	// RunVorn Data
+	// Voronoi Data
 	//vector<vector<std::size_t> > FacesInCell_;
 	vector<face_vec > FacesInCell_;
 	std::vector<point_vec > PointsInFace_; // Right hand with regard to first neighbor

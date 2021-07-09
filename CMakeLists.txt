@@ -28,7 +28,7 @@ find_package(Boost 1.62.0 REQUIRED)
 
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
-# FindPackage mVoronoi creates a new library called VoronoiLib from present local cpp files.
+# FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI REQUIRED)
 find_package(FBX     REQUIRED)
 #find_package(IMPORTANDEXPORT REQUIRED)
@@ -97,7 +97,7 @@ add_executable(vivid
 
 
 
-# We use VoronoiLib and not RunVorn::voronoi  because mVoronoi is locally created.
+# We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?

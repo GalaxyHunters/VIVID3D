@@ -20,7 +20,9 @@ public:
     // FindBox
     double FindContainingRadius(const vector<CPoint>& arPoints);
     // TODO: typedef pair(cpoint, cpoint) for box
-    std::pair<CPoint, CPoint> FindContainingBox(const vector<CPoint>& arPoints);
+    std::vector<CPoint> FindContainingBox(const vector<CPoint>& arPoints);
+
+    vector<CPoint> PreProcessPoints(const vector<CPoint> &arPoints);
     // Create Voronoi3D and save it
 
     // operator=
@@ -29,8 +31,8 @@ public:
     //inline void SetData(const Voronoi3D &arData) { mData = arData; }
 
     //void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints);
-    void MosheVoronoi(std::vector<CPoint>& arInputPoints);
-    std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > ComputeVoronoi(std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
+    std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t>>> MosheVoronoi(const std::vector<CPoint>& arInputPoints);
+    std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t>>> ComputeVoronoi(std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
 };
 
 

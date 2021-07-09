@@ -135,13 +135,8 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 }
 
 void CSurface::RunVorn() {
-    //find the box_r
-    double box_R = FindContainingRadius(mInputPoints);
-    // New version:
-    pair<CPoint, CPoint> box = FindContainingBox(mInputPoints);
-    //auto vorn_out = ComputeVoronoi(this->mInputPoints, box_R*2);
-    mVoronoi.MosheVoronoi(mInputPoints);
-    auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, box);
+    auto vorn_out = mVoronoi.MosheVoronoi(mInputPoints);
+    //auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, box);
     cout << "vorn done" << endl;
     cout << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
@@ -367,18 +362,6 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
 
-// TODO Y doesn't it use members?
-CPoint CSurface::GetGeometricCenter(const vector<vector<double>> &arInputPoints){
-    coord_t MaxX = (max_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->at(0);
-    coord_t MinX = (min_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->at(0);
-    coord_t MaxY = (max_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->at(1);
-    coord_t MinY = (min_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->at(1);
-    coord_t MaxZ = (max_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->at(2);
-    coord_t MinZ = (min_element(arInputPoints.begin(), arInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->at(2);
-
-    return CPoint((MaxX + MinX)/2, (MaxY + MinY)/2, (MaxZ + MinZ)/2);
-}
-
 CPoint CSurface::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
@@ -514,18 +497,4 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
     return arQuan;
 }
 
-// TODO: Single "pre-processing" func, scale and addnoise together.
-void CSurface::PreProcessPoints() {
-    mCenVector = FindContainingBox(mInputPoints);
-    coord_t re_scale_val = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
-    vector<CPoint> noise_vec (mInputPoints.size());
-    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
-                                                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
-                                                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   ));
-    // Scales and adds noise to points
 
-    // TODO: theres got to be a better way of doing this.
-    for (int i = 0; i < mInputPoints.size(); i++){
-        mInputPoints[i] = (mInputPoints[i] - mCenVector + noise_vec[i]) / re_scale_val;
-    }
-}

@@ -5,9 +5,29 @@ using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100; // TODO: Is this the right scale (-100, 100)?
+constexpr coord_t NOISE_PERCENTAGE = 0.01; // TODO: Is this the right scale (-100, 100)?
 
 namespace vivid
 {
+
+// TODO: Scale should probably be seperate, but I don't know so for now its like this
+vector<CPoint> CVoronoi::PreProcessPoints(const vector<CPoint> &arPoints) {
+    vector<CPoint> box_dimensions = FindContainingBox(arPoints);
+    CPoint box_min = box_dimensions.at(1); CPoint box_max = box_dimensions.at(2);
+    CPoint center_vec = (box_min + box_max) / 2;
+    coord_t re_scale_val = FindContainingRadius(arPoints) / PARTICLE_SCALE_MAGNITUDE;
+    vector<CPoint> noise_vec (arPoints.size());
+    generate(noise_vec.begin(), noise_vec.end(), CPoint(NOISE_PERCENTAGE*((2 * center_vec.X() * rand() / RAND_MAX) - center_vec.X()),
+                                                        NOISE_PERCENTAGE*((2 * center_vec.Y() * rand() / RAND_MAX) - center_vec.Z()),
+                                                        NOISE_PERCENTAGE*((2 * center_vec.Z() * rand() / RAND_MAX) - center_vec.Z())   ));
+    // Scales and adds noise to points
+    vector<CPoint> points (arPoints.size());
+    // TODO: theres got to be a better way of doing this.
+    for (int i = 0; i < points.size(); i++){
+        points[i] = (arPoints[i] - center_vec + noise_vec[i]) / re_scale_val;
+    }
+    return points;
+}
 
 void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints) {
 	for (auto it = arInputPoints.begin(); it != arInputPoints.end(); it++) {
@@ -15,11 +35,14 @@ void ConvertToVorn(vector<CPoint>& arInputPoints, vector<Vector3D>& arNewPoints)
 	}
 }
 
-void CVoronoi::MosheVoronoi(vector<CPoint>& arInputPoints) {
-    // Center
-    //     mCenVector = GetGeometricCenter(aInputPoints);
+pair<vector<Vector3D>, vector<vector<size_t>>>  CVoronoi::MosheVoronoi(const vector<CPoint>& arInputPoints) {
+    // Preprocess all points
+    vector<CPoint> points = PreProcessPoints(arInputPoints);
     // Find Box
-    pair<CPoint, CPoint> box_pair = FindContainingBox(arInputPoints);
+    CPoint box_dim, box_min, box_max;
+    vector<CPoint> box_dimensions = FindContainingBox(points);
+    box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1), box_max = box_dimensions.at(0);
+    pair<CPoint,CPoint> box_pair (box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
     // Preprocessing
 
     // Convert points to Vector3D
@@ -70,7 +93,7 @@ pair<vector<Vector3D>, vector<vector<size_t> > > CVoronoi::ComputeVoronoi(vector
 double CVoronoi::FindContainingRadius(const vector<CPoint>& arPoints){
     return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
-pair<CPoint, CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints){
+vector<CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints){
     coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
@@ -81,8 +104,8 @@ pair<CPoint, CPoint> CVoronoi::FindContainingBox(const vector<CPoint>& arPoints)
     CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
     CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
     CPoint box_max = CPoint(x_max, y_max, z_max);        //box max
-
-    return pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR);
+    //pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR)
+    return vector<CPoint>{box_dim, box_min, box_max};
 }
 
 

@@ -78,7 +78,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -211,7 +211,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -339,7 +339,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -529,7 +529,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -957,7 +957,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -1131,7 +1131,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>
@@ -1305,7 +1305,7 @@
     <frame>
       <ip>0x288527</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>CSurface::RunVorn()</fn>
+      <fn>CSurface::Voronoi()</fn>
       <dir>/home/ghil/Development/Vivid/src/ModelBuilder</dir>
       <file>Surf.cpp</file>
       <line>482</line>

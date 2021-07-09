@@ -65,7 +65,7 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
 void CSurface::CreateSurface() {
-    RunVorn();
+    Voronoi();
     CleanEdges();
     CleanFaces(mMask);
     CleanPoints();
@@ -77,13 +77,13 @@ void CSurface::Smooth() {
     vector<size_t> p_in;
     SetPinPout(p_out, p_in);
     UpdateInputPoints(p_out, p_in);
-    RunVorn();
+    Voronoi();
     //begin smooth part 2, adding new points between the cpoints
     UpdatePoutPin(p_out, p_in);
     Stage2AddPoints(p_out, p_in);
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
-    RunVorn();
+    Voronoi();
     CleanEdges();
     MakeMask(p_out.size(), p_in.size());
     CleanFaces(mMask);
@@ -134,8 +134,9 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
     return new_vec;
 }
 
-void CSurface::RunVorn() {
-    auto vorn_out = mVoronoi.MosheVoronoi(mInputPoints);
+// TODO: This is shit name. what do?
+void CSurface::Voronoi() {
+    auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
     //auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, box);
     cout << "vorn done" << endl;
     cout << mVoronoi.mData.GetTotalFacesNumber() << endl;

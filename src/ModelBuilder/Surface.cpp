@@ -72,6 +72,7 @@ void CSurface::CreateSurface() {
 
 void CSurface::Smooth() {
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
+    cout << "Begin Smooth" << endl;
     vector<size_t> p_out;
     vector<size_t> p_in;
     SetPinPout(p_out, p_in);
@@ -138,7 +139,7 @@ void CSurface::RunVorn() {
     //auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
     auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
-    cout << mVoronoi.mData.GetTotalFacesNumber() << endl;
+    cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
     mVecPoints = ConvertFromVorn(get<0>(vorn_out));
     //set the faces
@@ -506,17 +507,24 @@ void CSurface::PreProcessPoints() {
     vector<CPoint> box_dimensions = FindContainingBox(mInputPoints);
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
     mCenVector = (box_min + box_max) / 2;
+    for (int i = 0; i < mInputPoints.size(); i++){
+        mInputPoints[i] = mInputPoints[i] - mCenVector;
+    }
     mScale = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
     vector<CPoint> noise_vec (mInputPoints.size());
+
+    // Option 1
     srand(time(0));
     for (int i = 0; i<noise_vec.size(); i++){
-        noise_vec[i] = {NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
-                        NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
-                        NOISE_PERCENTAGE*((2 * mCenVector.Z() * rand() / RAND_MAX) - mCenVector.Z())   };
+        noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10),
+                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10),
+                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10)   };
     }
+
     // TODO: theres got to be a better way of doing this.
     for (int i = 0; i < mInputPoints.size(); i++){
-        mInputPoints[i] = (mInputPoints[i] - mCenVector + noise_vec[i]) / mScale;
+        mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
     }
+    box_dim = (box_dim - mCenVector) / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};
 }

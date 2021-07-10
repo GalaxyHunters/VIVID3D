@@ -93,6 +93,7 @@ pair<vector<Vector3D>, vector<vector<size_t>>>  CVoronoi::RunVoronoi(const vecto
 pair<vector<Vector3D>, vector<vector<size_t> > > CVoronoi::ComputeVoronoi(vector<CPoint>& arInputPoints, pair<CPoint,CPoint> Box) {
     vector<Vector3D> vorn_points;
     ConvertToVorn(arInputPoints, vorn_points);
+    cout << "VornPoints # = " << vorn_points.size() << endl;
     vector<Vector3D> box = vector<Vector3D>({{Box.first.X(), Box.first.Y(), Box.first.Z() }, {Box.second.X(), Box.second.Y(), Box.second.Z() }});
     mData.SetBox(box.at(0), box.at(1));
     mData.Build(vorn_points);

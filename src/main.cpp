@@ -109,8 +109,9 @@ int RunPyramidSurfTest(){
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     surf.CreateSurface();
     surf.Smooth();
+    surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Reduce(0.5, 0.4);
+    //mesh.Reduce(0.5, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
 
     return EXIT_SUCCESS;

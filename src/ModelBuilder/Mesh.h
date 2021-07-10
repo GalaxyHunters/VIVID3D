@@ -8,8 +8,6 @@
 #include "Decimate.h"
 #include "Utils/ColorMap.h"
 
-
-#include "int2str.hpp"
 #include <string>
 #include <fstream>
 #include <vector>

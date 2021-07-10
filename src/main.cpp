@@ -61,7 +61,7 @@ int RunCubeSurfTests() { //Reduce isn't activated currently
     surf.CreateSurface();
     surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-//    mesh.Reduce(0.5, 0.4);
+    mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
 
     return EXIT_SUCCESS;
@@ -111,7 +111,7 @@ int RunPyramidSurfTest(){
     surf.Smooth();
     surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-    //mesh.Reduce(0.5, 0.4);
+    mesh.Reduce(0.1, 0.25);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
 
     return EXIT_SUCCESS;
@@ -119,11 +119,10 @@ int RunPyramidSurfTest(){
 }
 
 /* Test the Elad RunVorn bug and the pointy faces bugs */
-int RunMedicaneTests(){
-    cout << "Medicane Test:" << endl;
+int RunBlackHoleTests(){
+    cout << "Black Hole Test:" << endl;
 
-    ModelData medicane = ReadBin(DATA_MODEL_PATH + "medicane.bin");
-    ModelData medicaneNoise = ReadBin(DATA_MODEL_PATH + "medicane_noise.bin");
+    ModelData medicane = ReadBin(DATA_MODEL_PATH + "supernova-15.bin");
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
@@ -131,11 +130,11 @@ int RunMedicaneTests(){
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.CreateSurface();
-    //medicaneSurf.Smooth();
-    CMesh medicaneMesh = medicaneSurf.ToMesh("medicane surf", 1.0);
-    //medicaneMesh.Reduce(0.5, 0.4);
+    medicaneSurf.Smooth();
+    CMesh medicaneMesh = medicaneSurf.ToMesh("BlackHole surf", .7);
+    medicaneMesh.Reduce(0.3, 0.3);
     model.AddMesh(medicaneMesh);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModelTest");
+    model.ExportToObj(TEST_OUTPUT_PATH + "/Supernova200k");
     return EXIT_SUCCESS;
 }
 
@@ -144,17 +143,17 @@ int RunMedicaneTests(){
 int main(){
     int ret_value = EXIT_SUCCESS;
 
-    ret_value = RunBasicTests1();
+//    ret_value = RunBasicTests1();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube" << endl;
+//    ret_value = RunCubeSurfTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = RunPyramidSurfTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Black Hole" << endl;
+    ret_value = RunBlackHoleTests();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube" << endl;
-    ret_value = RunCubeSurfTests();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = RunPyramidSurfTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    //cout << "Medicane" << endl;
-    //ret_value = RunMedicaneTests();
-    //if ( EXIT_SUCCESS != RunBasicTests() ) return ret_value;
 
     return EXIT_SUCCESS;
 }

@@ -393,9 +393,12 @@ void CSurface::CleanEdges() {
     vector<CSurfaceFace> new_faces;
     for (auto face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
         for (auto point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
-            if ((**point).Dist(zero_point) > box_R * 1.1) {
+            if (abs((**point).X()) > (mBoxPair.second.X() * 0.4) || abs((**point).Y()) > (mBoxPair.second.Y() * 0.4) || abs((**point).Z()) > (mBoxPair.second.Z() * 0.4)) {
                 is_out_of_radius = true;
             }
+//            if ((**point).Dist(zero_point) > box_R * 1.1) {
+//                is_out_of_radius = true;
+//            }
         }
         if (!is_out_of_radius) { //the face is inside the box Radius and should be kept
             new_faces.push_back(*face);
@@ -444,10 +447,41 @@ void CSurface::CleanPoints() {
 bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) {
     return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
+bool CompPointD(const CPoint& arV1, const CPoint& arV2) {
+    return (arV1.Dist(arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
+}
+
+void CSurface::CleanDoubleInputPoints() {
+    //sort the array
+    sort(mInputPoints.begin(), mInputPoints.end(), CompPointD);
+    // Used to be shared_ptr<CPoint>
+    vector<CPoint> cleaned_points; // Used to be shared_ptr<CPoint>
+    size_t j;                                           //TODO why size_t suddenly?
+    for (size_t i = 0; i < mInputPoints.size(); i++) {
+        j = i + 1;
+        cleaned_points.push_back(mInputPoints[i]); // push the point to the cleaned data
+        if (j >= mInputPoints.size())
+        {
+            break;
+        }
+        // Used to be *mVecPoints (pointer)
+        while ((mInputPoints[i]).Dist((mInputPoints[j])) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
+            j += 1;
+            if (j >= mInputPoints.size())
+            {
+                break;
+            }
+            //cout << "removed point" << endl;
+        }
+        i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
+    }
+
+    mInputPoints = cleaned_points;
+}
 
 void CSurface::CleanDoublePoints() {
     //sort the array
-    std::sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
+    sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
     size_t j;                                           //TODO why size_t suddenly?
@@ -503,6 +537,7 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
 }
 
 void CSurface::PreProcessPoints() {
+    CleanDoubleInputPoints();
     CPoint box_dim, box_min, box_max;
     vector<CPoint> box_dimensions = FindContainingBox(mInputPoints);
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
@@ -516,15 +551,28 @@ void CSurface::PreProcessPoints() {
     // Option 1
     srand(time(0));
     for (int i = 0; i<noise_vec.size(); i++){
-        noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10)   };
+        noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
+                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
+                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
     }
 
     // TODO: theres got to be a better way of doing this.
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
     }
-    box_dim = (box_dim - mCenVector) / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
+
+    cout << "mCenVec = " << mCenVector << endl;
+
+    cout << "Box dim, min, max, (max+dim) * 0.4" << endl;
+    cout << box_dim << endl;
+    cout << box_min << endl;
+    cout << box_max << endl;
+    box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
+    cout << "after center and scale" << endl;
+    cout << box_dim << endl;
+    cout << box_min << endl;
+    cout << box_max << endl;
+
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};
+    cout << mBoxPair.second * 0.4 << endl;
 }

@@ -66,6 +66,7 @@ private:
     void RunVorn();
 
     // Cleaning Sub-Methods
+    void CleanDoubleInputPoints(); // remove all the double input points
     void CleanFaces(std::vector<bool>& aMask); // clean the unneeded faces(by mask)
     void CleanPoints(); // removes all the unused points (TODO (Tomer asks): clean points that are not on rlevant faces?)
     void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)

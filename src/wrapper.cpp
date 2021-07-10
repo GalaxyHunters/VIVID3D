@@ -18,9 +18,7 @@ PYBIND11_MODULE(vivid_py, m) {
             .def(py::init<const CSurface &> (), "copy constructor for CSurface", py::arg("surf"))
             .def("Smooth", &CSurface::Smooth, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
             .def("ToMesh", &CSurface::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
-                 py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1)
-            .def("ExportToObj", &CSurface::ExportToObj, "writes the surface to an OBJ file",
-                 py::arg("aOutputFile"), py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
+                 py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
 
     py::class_<CMesh>(m, "CMesh")
             .def(py::init<const CMesh &> (), "copy constructor for CMesh", py::arg("Mesh"))

@@ -16,12 +16,11 @@ vector<Vector3D> CVoronoi::ConvertToVorn(const vector<CPoint>& arInputPoints) {
 void CVoronoi::ComputeVoronoi(const vector<CPoint>& arInputPoints, pair<CPoint,CPoint> Box) {
     vector<Vector3D> vorn_points = ConvertToVorn(arInputPoints);
     cout << "VornPoints # = " << vorn_points.size() << endl;
-    vector<Vector3D> box = vector<Vector3D>({{Box.first.X(), Box.first.Y(), Box.first.Z() }, {Box.second.X(), Box.second.Y(), Box.second.Z() }});
-    mData.SetBox(box.at(0), box.at(1));
+    mData.SetBox({Box.first.X(), Box.first.Y(), Box.first.Z() }, {Box.second.X(), Box.second.Y(), Box.second.Z() });
     mData.Build(vorn_points);
 }
 
-std::vector<std::vector<size_t>> CVoronoi::GetFaces() {
+vector<vector<size_t>> CVoronoi::GetFaces() {
     vector<vector<size_t> > faces;
     size_t total_cells = mData.GetAllCellFaces().size();
     face_vec cell;

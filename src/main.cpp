@@ -69,7 +69,7 @@ int RunCubeSurfTests() { //Reduce isn't activated currently
 
 /* Test surf functionality by cubic 3D pyramid (with square base) */
 int RunPyramidSurfTest(){
-    cout << "pyramid Test:" << endl;
+    cout << "Pyramid Test:" << endl;
 
     vector<vector<double >> points;
     vector<bool> mask;
@@ -77,7 +77,6 @@ int RunPyramidSurfTest(){
     coord_t Vmin, Vmax;
     vector<double> temp;
 //----------------------------------------------------------------------pyramid ---------------------------------------
-    cout << "but why" << endl;
     int a = 0;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
         for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
@@ -102,7 +101,6 @@ int RunPyramidSurfTest(){
         }
     }
 
-    cout << quan.size() << " " << points.size() << endl;
     Vmax = 0 ; //*max_element(quan.begin(), quan.end());
     Vmin = 0 ;//*min_element(quan.begin(), quan.end());
 
@@ -146,12 +144,12 @@ int main(){
 //    cout << "Cube" << endl;
 //    ret_value = RunCubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = RunPyramidSurfTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Black Hole" << endl;
-    ret_value = RunBlackHoleTests();
+    cout << "Pyramid" << endl;
+    ret_value = RunPyramidSurfTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Black Hole" << endl;
+//    ret_value = RunBlackHoleTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 
     return EXIT_SUCCESS;
 }

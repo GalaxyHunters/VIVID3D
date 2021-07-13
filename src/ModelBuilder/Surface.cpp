@@ -80,7 +80,7 @@ void CSurface::Smooth() {
     SetPinPout(p_out, p_in);
     UpdateInputPoints(p_out, p_in);
     RunVorn();
-    //begin smooth part 2, adding new points between the cpoints
+    //begin smooth  part 2, adding new points between the cpoints
     UpdatePoutPin(p_out, p_in);
     Stage2AddPoints(p_out, p_in);
     //begin smooth part 3, running the model and cleaning it
@@ -125,9 +125,9 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
-vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
+vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints) {
     vector<shared_ptr<CPoint> > new_vec;
-    for (auto it = aVornPoints.begin(); it != aVornPoints.end(); it++) {
+    for (auto it = arVornPoints.begin(); it != arVornPoints.end(); it++) {
         new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z))); //TODO y not copy c~tor?
     }
     return new_vec;
@@ -146,7 +146,7 @@ void CSurface::RunVorn() {
     size_t c_point1;
     size_t c_point2;
     coord_t quan;
-    vector<shared_ptr<CPoint> > face_points;
+    vector<shared_ptr<CPoint>> face_points;
     for (auto face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
         c_point1 = face->back();
         face->pop_back();
@@ -206,8 +206,8 @@ void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) 
         quan.push_back(mQuan[*it]);
     }
     for (auto it = arPIn.begin(); it != arPIn.end(); it++) {
-        new_points.push_back(this->mInputPoints[*it]);
-        quan.push_back(this->mQuan[*it]);
+        new_points.push_back(mInputPoints[*it]);
+        quan.push_back(mQuan[*it]);
     }
     mInputPoints = new_points;
     mQuan = quan;
@@ -389,7 +389,6 @@ coord_t CSurface::FindContainingRadius(){
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
 void CSurface::CleanEdges() {
-    CPoint zero_point = CPoint(0, 0, 0);
     bool is_out_of_radius = false;
     vector<CSurfaceFace> new_faces;
     for (auto face = mVecFaces.begin(); face != mVecFaces.end(); face++) {
@@ -401,10 +400,7 @@ void CSurface::CleanEdges() {
         if (!is_out_of_radius) { //the face is inside the box Radius and should be kept
             new_faces.push_back(*face);
         }
-        else
-        {
-            is_out_of_radius = false;
-        }
+        is_out_of_radius = false;
     }
     mVecFaces = new_faces;
 }
@@ -538,7 +534,7 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
 }
 
 void CSurface::PreProcessPoints() {
-    CleanDoubleInputPoints();
+    //CleanDoubleInputPoints();
     CPoint box_dim, box_min, box_max;
     vector<CPoint> box_dimensions = FindContainingBox();
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
@@ -559,6 +555,7 @@ void CSurface::PreProcessPoints() {
 
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
+        //mInputPoints[i] = mInputPoints[i] / mScale;
     }
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;

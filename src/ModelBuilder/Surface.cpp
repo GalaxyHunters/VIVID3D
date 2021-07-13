@@ -283,7 +283,7 @@ void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, 
     (*apNewPoints).push_back(CPoint(x, y, z));
     (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
     (*apNewIndex)++;
-
+     //Adding only 1 point from each side, handshake style
     (*apPVec).push_back(*apNewIndex);
     x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
     y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
@@ -326,8 +326,10 @@ void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData) {
     //sort the array
     std::sort(arData.begin(), arData.end(), CompPointData_t);
+
     vector<CSurfacePoint> cleaned_data;
     size_t j;
+    int removed_points =0;
     for (size_t i = 0; i < arData.size(); i++) {
         j = i+1;
         cleaned_data.push_back(arData[i]); // push the point to the cleaned data
@@ -341,10 +343,12 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
             {
                 break;
             }
+            removed_points ++;
             //cout << "removed point" << endl;
         }
         i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
     }
+    cout << "Removed Points: " << removed_points << endl;
 
     return cleaned_data;
 }

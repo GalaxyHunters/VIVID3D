@@ -108,9 +108,9 @@ int PyramidSurfTest(){
     CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     surf.CreateSurface();
     surf.Smooth();
-    surf.Smooth();
+    //surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-    mesh.Reduce(0.1, 0.25);
+    mesh.Reduce(0.1, 0.4);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
 
     return EXIT_SUCCESS;
@@ -129,9 +129,9 @@ int RunBlackHoleTests(){
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.CreateSurface();
-    //medicaneSurf.Smooth();
+    medicaneSurf.Smooth();
     CMesh medicaneMesh = medicaneSurf.ToMesh("BlackHole surf", .7);
-    medicaneMesh.Reduce(0.3, 0.25);
+    //medicaneMesh.Reduce(0.3, 0.25);
     model.AddMesh(medicaneMesh);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Supernova200k");
     return EXIT_SUCCESS;
@@ -140,14 +140,14 @@ int RunBlackHoleTests(){
 int main(){
     int ret_value = EXIT_SUCCESS;
 
-    ret_value = ShapesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube" << endl;
-    ret_value = CubeSurfTests();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSurfTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    ret_value = ShapesTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube" << endl;
+//    ret_value = CubeSurfTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSurfTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Black Hole" << endl;
     ret_value = RunBlackHoleTests();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;

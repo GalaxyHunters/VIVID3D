@@ -24,7 +24,8 @@ public:
     //inline void SetData(const Voronoi3D &arData) { mData = arData; }
 
     std::vector<Vector3D> ConvertToVorn(const std::vector<CPoint>& arInputPoints);
-    std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t>>> ComputeVoronoi(const std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
+    void ComputeVoronoi(const std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
+    std::vector<std::vector<size_t>> GetFaces();
 };
 
 

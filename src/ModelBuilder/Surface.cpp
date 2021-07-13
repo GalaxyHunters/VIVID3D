@@ -8,7 +8,9 @@ using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100; // TODO: Is this the right scale (-100, 100)?
-constexpr coord_t NOISE_PERCENTAGE = 0.01; // TODO: Is this the right scale (-100, 100)?
+constexpr coord_t NOISE_PERCENTAGE = 0.01;        // TODO: Is this the right noise percentage (-1%, 1%)
+
+// TODO: Many for loops can be replaced by foreach loops here.
 
 CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
     // Check input validity
@@ -23,20 +25,20 @@ CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bo
         throw ("ValueError - mask must contain both true and false values"); //TODO find better sentence and put all of it in ErrMsg.h
     }
 
-    //model centralization
+    //converting <double> to <CPoint>
     vector<CPoint> points (aInputPoints.size());
-    for (int i = 0; i < points.size(); i++) {  //TODO for each
+    for (int i = 0; i < points.size(); i++) {
         points[i] = aInputPoints[i];
     }
 
-    points.resize(points.size()); // Why dont we set temp to be the size of aInputPoints ahead of time?
+    // Why using setter inside of the class?
     SetInputPoints(points);
     SetMask(aMask);
     SetQuan(NormQuan(aQuan, aVMin, aVMax));
     PreProcessPoints();
 }
 
-CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use "this->"? no need
+CSurface::CSurface(const CSurface &surf){
     mInputPoints = surf.mInputPoints;
     mMask = surf.mMask;
     mQuan = surf.mQuan;
@@ -66,7 +68,7 @@ CSurface::CSurface(const CSurface &surf){ //TODO: why like this? why do you use 
 void CSurface::CreateSurface() {
     RunVorn();
     CleanEdges();
-    CleanFaces(mMask);
+    CleanFaces();
     CleanPoints();
 }
 
@@ -83,14 +85,12 @@ void CSurface::Smooth() {
     Stage2AddPoints(p_out, p_in);
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
-    RunVorn();
-    CleanEdges();
     MakeMask(p_out.size(), p_in.size());
-    CleanFaces(mMask);
-    CleanPoints();
+    CreateSurface();
     //done.
 }
 
+// TODO: CSurface is currently inheriting from Mesh, need to discuss this
 const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
@@ -125,7 +125,6 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
-// TODO: Should be static?
 vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
     vector<shared_ptr<CPoint> > new_vec;
     for (auto it = aVornPoints.begin(); it != aVornPoints.end(); it++) {
@@ -134,17 +133,15 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
     return new_vec;
 }
 
-// TODO: This is shit name. what do?
 void CSurface::RunVorn() {
-    //auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
     cout << "start vorn" << endl;
-    auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
+    mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
     cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
-    mVecPoints = ConvertFromVorn(get<0>(vorn_out));
+    mVecPoints = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
     //set the faces
-    vector<vector<size_t> > vorn_faces = get<1>(vorn_out);
+    vector<vector<size_t> > vorn_faces = mVoronoi.GetFaces();
     vector<CSurfaceFace> new_faces;
     size_t c_point1;
     size_t c_point2;
@@ -167,8 +164,67 @@ void CSurface::RunVorn() {
 }
 
 /*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
+/*----------------------------------------------------- Part 1 -------------------------------------------------------*/
 
-bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
+void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
+    map<size_t, bool> p_in_map;
+    map<size_t, bool> p_out_map;
+    size_t c_point1;
+    size_t c_point2;
+    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
+        c_point1 = get<0>(it->mPairPoints);
+        c_point2 = get<1>(it->mPairPoints);
+        if (mMask[c_point1]) {
+            if (p_in_map.count(c_point1) == 0) {
+                arPIn.push_back(c_point1);
+                p_in_map[c_point1] = true;
+            }
+            if (p_out_map.count(c_point2) == 0) {
+                arPOut.push_back(c_point2);
+                p_out_map[c_point2] = true;
+            }
+        }
+        else
+        {
+            if (p_in_map.count(c_point2) == 0) {
+                arPIn.push_back(c_point2);
+                p_in_map[c_point2] = true;
+            }
+            if (p_out_map.count(c_point1) == 0) {
+                arPOut.push_back(c_point1);
+                p_out_map[c_point1] = true;
+            }
+        }
+    }
+}
+
+void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
+    vector<CPoint> new_points;
+    vector<coord_t> quan;
+    for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
+        new_points.push_back(mInputPoints[*it]);
+        quan.push_back(mQuan[*it]);
+    }
+    for (auto it = arPIn.begin(); it != arPIn.end(); it++) {
+        new_points.push_back(this->mInputPoints[*it]);
+        quan.push_back(this->mQuan[*it]);
+    }
+    mInputPoints = new_points;
+    mQuan = quan;
+}
+
+/*----------------------------------------------------- Part 2 -------------------------------------------------------*/
+
+void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
+    for (int i = 0; (unsigned)i < aPOut.size(); i++) {
+        aPOut[i] = i;
+    }
+    for (int i = 0; (unsigned)i < aPIn.size(); i++) {
+        aPIn[i] = i + aPOut.size();
+    }
+}
+
+bool CompPointData_t(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
     if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
         if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
             if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
@@ -188,6 +244,53 @@ bool CompPointData_t(CSurfacePoint aObj1, CSurfacePoint aObj2) { //TODO SIMILAR 
     {
         return aObj1.mPoint.X() > aObj2.mPoint.X();
     }
+}
+
+void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
+    size_t c_point1;
+    size_t c_point2;
+    size_t p_out_size = arPOut.size();
+    size_t p_in_size = p_out_size + arPIn.size();
+    vector<CPoint> new_points;
+    vector<coord_t> new_quan;
+    arPIn.clear();
+    arPOut.clear();
+    size_t new_index = 0; // the index for the new point to be added
+    //go over pout
+    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
+        c_point1 = get<0>(it->mPairPoints);
+        c_point2 = get<1>(it->mPairPoints);
+        if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+        {
+            AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2);
+        }
+        //go over pin
+        if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+        {
+            AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2);
+        }
+    }
+    CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
+}
+
+void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
+{
+    coord_t x, y, z;
+    (*apPVec).push_back(*apNewIndex);
+    x = (mInputPoints[aCPoint1].X() * 2 + mInputPoints[aCPoint2].X()) / 3.0;
+    y = (mInputPoints[aCPoint1].Y() * 2 + mInputPoints[aCPoint2].Y()) / 3.0;
+    z = (mInputPoints[aCPoint1].Z() * 2 + mInputPoints[aCPoint2].Z()) / 3.0;
+    (*apNewPoints).push_back(CPoint(x, y, z));
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
+    (*apNewIndex)++;
+
+    (*apPVec).push_back(*apNewIndex);
+    x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
+    y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
+    z = (mInputPoints[aCPoint1].Z() + mInputPoints[aCPoint2].Z() * 2) / 3.0;
+    (*apNewPoints).push_back(CPoint(x, y, z));
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
+    (*apNewIndex)++;
 }
 
 void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
@@ -246,110 +349,10 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
     return cleaned_data;
 }
 
-void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
-{
-    //TODO ugly and wrong func name
-    coord_t x, y, z;
-    (*apPVec).push_back(*apNewIndex);
-    x = (mInputPoints[aCPoint1].X() * 2 + mInputPoints[aCPoint2].X()) / 3.0;
-    y = (mInputPoints[aCPoint1].Y() * 2 + mInputPoints[aCPoint2].Y()) / 3.0;
-    z = (mInputPoints[aCPoint1].Z() * 2 + mInputPoints[aCPoint2].Z()) / 3.0;
-    (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
-    (*apNewIndex)++;
 
-    (*apPVec).push_back(*apNewIndex);
-    x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
-    y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
-    z = (mInputPoints[aCPoint1].Z() + mInputPoints[aCPoint2].Z() * 2) / 3.0;
-    (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
-    (*apNewIndex)++;
-}
 
-void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
-    size_t c_point1;
-    size_t c_point2;
-    size_t p_out_size = arPOut.size();
-    size_t p_in_size = p_out_size + arPIn.size();
-    vector<CPoint> new_points;
-    vector<coord_t> new_quan;
-    arPIn.clear();
-    arPOut.clear();
-    size_t new_index = 0; // the index for the new point to be added
-    //go over pout
-    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
-        c_point1 = get<0>(it->mPairPoints);
-        c_point2 = get<1>(it->mPairPoints);
-        if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-        {
-            AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2);
-        }
-        //go over pin
-        if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-        {
-            AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2);
-        }
-    }
-    CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
-}
+/*----------------------------------------------------- Part 3 -------------------------------------------------------*/
 
-//TODO:: what is this?
-void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
-    for (int i = 0; (unsigned)i < aPOut.size(); i++) {
-        aPOut[i] = i;
-    }
-    for (int i = 0; (unsigned)i < aPIn.size(); i++) {
-        aPIn[i] = i + aPOut.size();
-    }
-
-}
-void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
-    map<size_t, bool> p_in_map;
-    map<size_t, bool> p_out_map;
-    size_t c_point1;
-    size_t c_point2;
-    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
-        c_point1 = get<0>(it->mPairPoints);
-        c_point2 = get<1>(it->mPairPoints);
-        if (mMask[c_point1]) {
-            if (p_in_map.count(c_point1) == 0) {
-                arPIn.push_back(c_point1);
-                p_in_map[c_point1] = true;
-            }
-            if (p_out_map.count(c_point2) == 0) {
-                arPOut.push_back(c_point2);
-                p_out_map[c_point2] = true;
-            }
-        }
-        else
-        {
-            if (p_in_map.count(c_point2) == 0) {
-                arPIn.push_back(c_point2);
-                p_in_map[c_point2] = true;
-            }
-            if (p_out_map.count(c_point1) == 0) {
-                arPOut.push_back(c_point1);
-                p_out_map[c_point1] = true;
-            }
-        }
-    }
-}
-
-void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
-    vector<CPoint> new_points;
-    vector<coord_t> quan;
-    for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
-        new_points.push_back(mInputPoints[*it]);
-        quan.push_back(mQuan[*it]);
-    }
-    for (auto it = arPIn.begin(); it != arPIn.end(); it++) {
-        new_points.push_back(this->mInputPoints[*it]);
-        quan.push_back(this->mQuan[*it]);
-    }
-    mInputPoints = new_points;
-    mQuan = quan;
-}
 void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
     vector<bool> new_mask;
     for (size_t i = 0; i < aPOutSize; i++) { //TODO might be faster using fill or something similar in vector
@@ -364,42 +367,36 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
 
-vector<CPoint> CSurface::FindContainingBox(const vector<CPoint>& arPoints){
-    coord_t x_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
-    coord_t x_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
-    coord_t y_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
-    coord_t y_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
-    coord_t z_max = (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
-    coord_t z_min = (min_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+vector<CPoint> CSurface::FindContainingBox(){
+    coord_t x_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t x_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    coord_t y_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t y_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    coord_t z_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+    coord_t z_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
-    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min); //box dimensions
-    CPoint box_min = CPoint(x_min, y_min, z_min);        //box min
-    CPoint box_max = CPoint(x_max, y_max, z_max);        //box max
-    //pair<CPoint,CPoint>(box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR)
+    CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min);
+    CPoint box_min = CPoint(x_min, y_min, z_min);
+    CPoint box_max = CPoint(x_max, y_max, z_max);
+
     return vector<CPoint>{box_dim, box_min, box_max};
 }
 
-// TODO Y doesn't it use members?
-// TODO maybe should be just cen and radius? and then we won't need mCenVector? what was that bug all about?
-double CSurface::FindContainingRadius(const vector<CPoint>& arPoints){
-    return (max_element(arPoints.begin(),arPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
+coord_t CSurface::FindContainingRadius(){
+    return (max_element(mInputPoints.begin(),mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
 void CSurface::CleanEdges() {
     CPoint zero_point = CPoint(0, 0, 0);
-    double box_R = FindContainingRadius(this->mInputPoints);
     bool is_out_of_radius = false;
     vector<CSurfaceFace> new_faces;
-    for (auto face = this->mVecFaces.begin(); face != mVecFaces.end(); face++) {
+    for (auto face = mVecFaces.begin(); face != mVecFaces.end(); face++) {
         for (auto point = face->mPoints.begin(); point != face->mPoints.end(); point++) {
-            if (abs((**point).X()) > (mBoxPair.second.X() * 0.4) || abs((**point).Y()) > (mBoxPair.second.Y() * 0.4) || abs((**point).Z()) > (mBoxPair.second.Z() * 0.4)) {
+            if (abs((**point).X()) > (mBoxPair.second.X() * 0.35) || abs((**point).Y()) > (mBoxPair.second.Y() * 0.35) || abs((**point).Z()) > (mBoxPair.second.Z() * 0.35)) {
                 is_out_of_radius = true;
             }
-//            if ((**point).Dist(zero_point) > box_R * 1.1) {
-//                is_out_of_radius = true;
-//            }
         }
         if (!is_out_of_radius) { //the face is inside the box Radius and should be kept
             new_faces.push_back(*face);
@@ -409,20 +406,20 @@ void CSurface::CleanEdges() {
             is_out_of_radius = false;
         }
     }
-    this->mVecFaces = new_faces;
+    mVecFaces = new_faces;
 }
 
 // takes the data from mVoronoi and using the mask cleans it so that only the wanted surface is left
-void CSurface::CleanFaces(vector<bool>& aMask) {
+void CSurface::CleanFaces() {
     vector<CSurfaceFace> new_faces;
-    size_t mask_len = aMask.size();
+    size_t mask_len = mMask.size();
     size_t c_point1;
     size_t c_point2;
     for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         c_point1 = get<0>(it->mPairPoints);
         c_point2 = get<1>(it->mPairPoints);
         if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
-            if (aMask[c_point1] != aMask[c_point2]) { //the face is a part of the surf
+            if (mMask[c_point1] != mMask[c_point2]) { //the face is a part of the surf
                 new_faces.push_back(*it);
                 new_faces.back().mColor = (mQuan[c_point1] + mQuan[c_point2]) / 2; //TODO 0.5* +0.5* is better
             }
@@ -445,19 +442,22 @@ void CSurface::CleanPoints() {
 }
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
+
+// TODO: Should use different sorting algorithm
 bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) {
     return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
 bool CompPointD(const CPoint& arV1, const CPoint& arV2) {
-    return (arV1.Dist(arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
+    return (arV1.Dist(arV2) <= POINT_SIMILARITY_THRESHOLD);
 }
 
+// TODO: Repeating code. Why?
 void CSurface::CleanDoubleInputPoints() {
     //sort the array
     sort(mInputPoints.begin(), mInputPoints.end(), CompPointD);
     // Used to be shared_ptr<CPoint>
     vector<CPoint> cleaned_points; // Used to be shared_ptr<CPoint>
-    size_t j;                                           //TODO why size_t suddenly?
+    size_t j;
     for (size_t i = 0; i < mInputPoints.size(); i++) {
         j = i + 1;
         cleaned_points.push_back(mInputPoints[i]); // push the point to the cleaned data
@@ -485,7 +485,7 @@ void CSurface::CleanDoublePoints() {
     sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
-    size_t j;                                           //TODO why size_t suddenly?
+    size_t j;
     for (size_t i = 0; i < mVecPoints.size(); i++) {
         j = i + 1;
         cleaned_points.push_back(mVecPoints[i]); // push the point to the cleaned data
@@ -540,16 +540,16 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
 void CSurface::PreProcessPoints() {
     CleanDoubleInputPoints();
     CPoint box_dim, box_min, box_max;
-    vector<CPoint> box_dimensions = FindContainingBox(mInputPoints);
+    vector<CPoint> box_dimensions = FindContainingBox();
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
     mCenVector = (box_min + box_max) / 2;
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = mInputPoints[i] - mCenVector;
     }
-    mScale = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
+    mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
     vector<CPoint> noise_vec (mInputPoints.size());
 
-    // Option 1
+    // Consider generator here.
     srand(time(0));
     for (int i = 0; i<noise_vec.size(); i++){
         noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
@@ -557,7 +557,6 @@ void CSurface::PreProcessPoints() {
                         1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
     }
 
-    // TODO: theres got to be a better way of doing this.
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
     }

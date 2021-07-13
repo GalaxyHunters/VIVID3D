@@ -13,15 +13,15 @@ vector<Vector3D> CVoronoi::ConvertToVorn(const vector<CPoint>& arInputPoints) {
 	return vorn_points;
 }
 
-pair<vector<Vector3D>, vector<vector<size_t> > > CVoronoi::ComputeVoronoi(const vector<CPoint>& arInputPoints, pair<CPoint,CPoint> Box) {
+void CVoronoi::ComputeVoronoi(const vector<CPoint>& arInputPoints, pair<CPoint,CPoint> Box) {
     vector<Vector3D> vorn_points = ConvertToVorn(arInputPoints);
     cout << "VornPoints # = " << vorn_points.size() << endl;
     vector<Vector3D> box = vector<Vector3D>({{Box.first.X(), Box.first.Y(), Box.first.Z() }, {Box.second.X(), Box.second.Y(), Box.second.Z() }});
     mData.SetBox(box.at(0), box.at(1));
     mData.Build(vorn_points);
+}
 
-    vorn_points = mData.GetFacePoints();
-
+std::vector<std::vector<size_t>> CVoronoi::GetFaces() {
     vector<vector<size_t> > faces;
     size_t total_cells = mData.GetAllCellFaces().size();
     face_vec cell;
@@ -43,8 +43,8 @@ pair<vector<Vector3D>, vector<vector<size_t> > > CVoronoi::ComputeVoronoi(const 
             }
         }
     }
-    pair<vector<Vector3D>, vector<vector<size_t> > > output(vorn_points, faces);
-    return output;
+
+    return faces;
 }
 
 } // namespace vivid

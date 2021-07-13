@@ -130,15 +130,13 @@ int RunBlackHoleTests(){
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.CreateSurface();
-    medicaneSurf.Smooth();
+    //medicaneSurf.Smooth();
     CMesh medicaneMesh = medicaneSurf.ToMesh("BlackHole surf", .7);
     medicaneMesh.Reduce(0.3, 0.3);
     model.AddMesh(medicaneMesh);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Supernova200k");
     return EXIT_SUCCESS;
 }
-
-
 
 int main(){
     int ret_value = EXIT_SUCCESS;

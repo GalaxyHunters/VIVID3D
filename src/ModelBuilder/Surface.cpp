@@ -137,6 +137,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(vector<Vector3D> aVornPoints) {
 // TODO: This is shit name. what do?
 void CSurface::RunVorn() {
     //auto vorn_out = mVoronoi.RunVoronoi(mInputPoints);
+    cout << "start vorn" << endl;
     auto vorn_out = mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
     cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
@@ -561,18 +562,8 @@ void CSurface::PreProcessPoints() {
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
     }
 
-    cout << "mCenVec = " << mCenVector << endl;
-
-    cout << "Box dim, min, max, (max+dim) * 0.4" << endl;
-    cout << box_dim << endl;
-    cout << box_min << endl;
-    cout << box_max << endl;
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
-    cout << "after center and scale" << endl;
-    cout << box_dim << endl;
-    cout << box_min << endl;
-    cout << box_max << endl;
 
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};
-    cout << mBoxPair.second * 0.4 << endl;
+
 }

@@ -74,8 +74,9 @@ private:
     void UpdateInputPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
     // Part 2
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
-    void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
-    void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2);
+    void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
+    void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
+                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor);
     void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
     std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
     // Part 3
@@ -87,7 +88,7 @@ public:
     CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 
     void CreateSurface(); // Runs RunVorn plus the other cleaning sub-methods
-    void Smooth();           // Runs RunVorn plus the other smoothing and cleaning sub-methods
+    void Smooth(int aSmoothFactor);           // Runs RunVorn plus the other smoothing and cleaning sub-methods
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
 

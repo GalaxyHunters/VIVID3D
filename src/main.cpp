@@ -9,8 +9,10 @@
 //// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
-#define BOX_SIZE 50
-#define HEIGHT 25
+#define BOX_SIZE 30
+
+
+#define HEIGHT 15
 
 
 using namespace vivid;
@@ -23,6 +25,8 @@ const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
 int ShapesTest(){
     cout << "Basic Test:" << endl;
+
+
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
@@ -38,7 +42,6 @@ int ShapesTest(){
 }
 
 /* Test surf functionality with cube */
-// Seems to be broken.
 int CubeSurfTests() { //Reduce isn't activated currently
     cout << "Cube Test:" << endl;
 
@@ -60,7 +63,6 @@ int CubeSurfTests() { //Reduce isn't activated currently
 
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.CreateSurface();
-    //surf.Smooth();
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
     //mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
@@ -69,7 +71,7 @@ int CubeSurfTests() { //Reduce isn't activated currently
 }
 
 /* Test surf functionality by cubic 3D pyramid (with square base) */
-int PyramidSurfTest(){
+int PyramidSmoothTest(){
     cout << "Pyramid Test:" << endl;
 
     vector<vector<double >> points;
@@ -77,7 +79,6 @@ int PyramidSurfTest(){
     vector<coord_t> quan;
     coord_t Vmin, Vmax;
     vector<double> temp;
-//----------------------------------------------------------------------pyramid ---------------------------------------
     int a = 0;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
         for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
@@ -105,14 +106,29 @@ int PyramidSurfTest(){
     Vmax = 0 ; //*max_element(quan.begin(), quan.end());
     Vmin = 0 ;//*min_element(quan.begin(), quan.end());
 
-    CSurface surf = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    surf.CreateSurface();
-    surf.Smooth();
-    //surf.Smooth();
-    CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-    mesh.Reduce(0.1, 0.4);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
-
+    CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    smooth1.CreateSurface();
+    smooth1.Smooth(1);
+    CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
+    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth1");
+    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    smooth3.CreateSurface();
+    smooth3.Smooth(3);
+    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
+    mesh3.Reduce(0.4, 0.3);
+    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
+    CSurface smooth6 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    smooth6.CreateSurface();
+    smooth6.Smooth(6);
+    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
+    mesh6.Reduce(0.25, 0.3);
+    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
+    CSurface smooth8 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    smooth8.CreateSurface();
+    smooth8.Smooth(8);
+    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
+    mesh8.Reduce(0.2, 0.3);
+    mesh8.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth8");
     return EXIT_SUCCESS;
 
 }
@@ -124,12 +140,10 @@ int RunBlackHoleTests(){
     ModelData medicane = ReadBin(DATA_MODEL_PATH + "supernova-15.bin");
 
     CModel model;
-    // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    //model.AddMesh( CreateSphereMesh(10, 10, 0.1, vector<double>{0, 0, 0}, 5, 0.01, "sphere") );
 
     CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
     medicaneSurf.CreateSurface();
-    medicaneSurf.Smooth();
+    medicaneSurf.Smooth(1);
     CMesh medicaneMesh = medicaneSurf.ToMesh("BlackHole surf", .7);
     //medicaneMesh.Reduce(0.3, 0.25);
     model.AddMesh(medicaneMesh);
@@ -145,12 +159,12 @@ int main(){
 //    cout << "Cube" << endl;
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = PyramidSurfTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Black Hole" << endl;
-    ret_value = RunBlackHoleTests();
+    cout << "Pyramid" << endl;
+    ret_value = PyramidSmoothTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Black Hole" << endl;
+//    ret_value = RunBlackHoleTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 
     return EXIT_SUCCESS;
 }

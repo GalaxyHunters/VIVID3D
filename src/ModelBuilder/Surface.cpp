@@ -72,7 +72,10 @@ void CSurface::CreateSurface() {
     CleanPoints();
 }
 
-void CSurface::Smooth() {
+void CSurface::Smooth(int aSmoothFactor) {
+    if (aSmoothFactor < 1 || aSmoothFactor > 8) {
+        throw "Smooth Factor must be a positive integer between 1 and 8";
+    }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     cout << "Begin Smooth" << endl;
     vector<size_t> p_out;
@@ -80,9 +83,9 @@ void CSurface::Smooth() {
     SetPinPout(p_out, p_in);
     UpdateInputPoints(p_out, p_in);
     RunVorn();
-    //begin smooth  part 2, adding new points between the cpoints
+    //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
     UpdatePoutPin(p_out, p_in);
-    Stage2AddPoints(p_out, p_in);
+    Stage2AddPoints(p_out, p_in, aSmoothFactor);
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
     MakeMask(p_out.size(), p_in.size());
@@ -246,7 +249,7 @@ bool CompPointData_t(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //T
     }
 }
 
-void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
+void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor) {
     size_t c_point1;
     size_t c_point2;
     size_t p_out_size = arPOut.size();
@@ -262,35 +265,29 @@ void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
         c_point2 = get<1>(it->mPairPoints);
         if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
         {
-            AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2);
+            AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, aSmoothFactor);
         }
         //go over pin
         if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
         {
-            AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2);
+            AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, aSmoothFactor);
         }
     }
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
 
-void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2)
+void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
 {
     coord_t x, y, z;
-    (*apPVec).push_back(*apNewIndex);
-    x = (mInputPoints[aCPoint1].X() * 2 + mInputPoints[aCPoint2].X()) / 3.0;
-    y = (mInputPoints[aCPoint1].Y() * 2 + mInputPoints[aCPoint2].Y()) / 3.0;
-    z = (mInputPoints[aCPoint1].Z() * 2 + mInputPoints[aCPoint2].Z()) / 3.0;
-    (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
-    (*apNewIndex)++;
-     //Adding only 1 point from each side, handshake style
-    (*apPVec).push_back(*apNewIndex);
-    x = (mInputPoints[aCPoint1].X() + mInputPoints[aCPoint2].X() * 2) / 3.0;
-    y = (mInputPoints[aCPoint1].Y() + mInputPoints[aCPoint2].Y() * 2) / 3.0;
-    z = (mInputPoints[aCPoint1].Z() + mInputPoints[aCPoint2].Z() * 2) / 3.0;
-    (*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2]) / 2.0);
-    (*apNewIndex)++;
+    for (int i = 1; i <= aSmoothFactor; i++){
+        (*apPVec).push_back(*apNewIndex);
+        x = (mInputPoints[aCPoint1].X() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].X() * i) / (aSmoothFactor+1);
+        y = (mInputPoints[aCPoint1].Y() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Y() * i) / (aSmoothFactor+1);
+        z = (mInputPoints[aCPoint1].Z() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Z() * i) / (aSmoothFactor+1);
+        (*apNewPoints).push_back(CPoint(x, y, z));
+        (*apNewQuan).push_back((mQuan[aCPoint1] * (aSmoothFactor + 1 - i) + mQuan[aCPoint2] * i) / aSmoothFactor);
+        (*apNewIndex)++;
+    }
 }
 
 void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)

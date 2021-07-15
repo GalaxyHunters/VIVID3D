@@ -11,7 +11,7 @@ namespace vivid
 class CModel
 {
 private:
-    std::string mLabel = ""; //TODO should it be default string
+    std::string mLabel = "";
     std::vector<CMesh> mMeshes = {}; //TODO ModelComponent refactor
 
 public:

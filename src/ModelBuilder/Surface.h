@@ -12,7 +12,7 @@ namespace vivid
 //TODO Should it containd Cpoint?
 class CSurfacePoint { // used to sort and clean the mVoronoi input points
 public:
-    CPoint mPoint = {0, 0, 0};
+    CPoint mPoint = {};
     coord_t mQuan = 0;
     bool mIsIn = false;
 
@@ -24,7 +24,7 @@ public:
 class CSurfaceFace{
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints = {};
-    std::pair<size_t, size_t> mPairPoints = {0,0};
+    std::pair<size_t, size_t> mPairPoints = {};
     coord_t mColor = 0;
 
     CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
@@ -55,6 +55,7 @@ private:
     std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
     // Handle Input Sub-Methods
+    // TODO: Fix CleanDoubleInputPoints
     void CleanDoubleInputPoints();           // remove all the double input points
     void PreProcessPoints();                 // Centering, scaling, adding noise.
     std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
@@ -63,9 +64,9 @@ private:
     void RunVorn();
 
     // Cleaning Sub-Methods
-    void CleanFaces(); // clean the unneeded faces(by mMask)
-    void CleanPoints(); // removes all the unused points
-    void CleanEdges(); // cleans faces that are out of the box radius (happens as a result of too little points as input)
+    void CleanFaces();        // clean the unneeded faces(by mMask)
+    void CleanPoints();       // removes all the unused points
+    void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
     void CleanDoublePoints(); // remove all the double face points from the model
 
     // Smoothing Sub-Methods
@@ -76,32 +77,60 @@ private:
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
     void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
     void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
-                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor);
-    void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan, std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut);
-    std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
+                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor); // Adds points between every pair by aSmoothFactor
+    void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan,
+                               std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut); // Handles the reallocation after RemoveDoublesVornInput
+    std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);   // Called by CleanDoublePointsVorn
     // Part 3
     void MakeMask(size_t aPOutSize, size_t aPInSize);
 
 public:
-    CSurface(const CSurface &surf); //copy constructor
+    /**
+     * CSurface Constructor
+     * @param[in] arInputPoints the input point data in x,y,z form.
+     * @param[in] arMask a boolean mask of true and false points
+     * @param[in] arQuan a vector containing the quantity of each point
+     * @param[in] aVMin the minimum value in arQuan, anything below will be set to aVMin
+     * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
+     */
+    CSurface(const std::vector<std::vector<double >> &arInputPoints, const std::vector<bool> &arMask,
+             std::vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax);
+    /**
+     * CSurface Copy-Constructor
+     */
+    CSurface(const CSurface &surf);
     // operator =
-    CSurface(std::vector<std::vector<double >> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax); //TODO should be const and by ref, why vector<vector<double >> instead of CPOINTS?
 
-    void CreateSurface(); // Runs RunVorn plus the other cleaning sub-methods
-    void Smooth(int aSmoothFactor);           // Runs RunVorn plus the other smoothing and cleaning sub-methods
+    /**
+     * Create the surfaces using the input data
+     */
+    void CreateSurface();
+
+    /**
+     * Smooth method
+     * @param[in] aSmoothFactor An integer value between 1 and 8
+     */
+    void Smooth(int aSmoothFactor = 2);
+
+    /**
+     * Convert the CSurface object to CMesh object
+     * @param[in] aLabel the label to assign to the new mesh
+     * @param[in] aAlpha the alpha to assign to the new mesh
+     * @returns CMesh converted mesh
+     */
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
-
+    // Getters, Setters
     // TODO: which gets do we really need and why?
-    inline std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
-    inline std::vector<bool>& GetMask() { return mMask; }
-    inline std::vector<coord_t>& GetQuan() { return mQuan; }
-    inline std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
-    inline std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
+    inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
+    inline const std::vector<bool>& GetMask() { return mMask; }
+    inline const std::vector<coord_t>& GetQuan() { return mQuan; }
+    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
+    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
 
-    inline void SetInputPoints(std::vector<CPoint>& aInputPoints) { mInputPoints = aInputPoints; }
-    inline void SetMask(std::vector<bool>& aMask) { mMask = aMask; }
-    inline void SetQuan(std::vector<coord_t>& aQuan) { mQuan = aQuan; }
+    inline void SetInputPoints(const std::vector<CPoint> &arInputPoints) { mInputPoints = arInputPoints; }
+    inline void SetMask(const std::vector<bool> &arMask) { mMask = arMask; }
+    inline void SetQuan(std::vector<coord_t> &arQuan) { mQuan = arQuan; }
 };
 
 } // namespace vivid

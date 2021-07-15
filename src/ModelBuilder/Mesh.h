@@ -28,8 +28,6 @@ private:
 	vector<CPoint> mPoints ={};
 	vector<CIndexedFace> mFaces ={};
 
-//    CPoint mCenVector; // TODO, should be handeled only in surf, here there is no meaning to cen. holds the center of the data (used to center the data by 000 and back to original upon export)
-
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
@@ -41,16 +39,11 @@ public:
 	//operator =
 	~CMesh();
 
-    std::string GetLabel();
-	coord_t GetAlpha();
-    std::vector<CPoint> GetPoints();
-    std::vector<CIndexedFace> GetFaces();
-
-    void SetFaces(std::vector<CIndexedFace> aFaces);
-	void SetPoints(std::vector<CPoint> aPoints);
-	void SetLabel(std::string aLabel);
-	void SetAlpha(coord_t aAlpha);
-
+    /**
+     * Decimate faces on CMesh to reduce file size
+     * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain
+     * @param[in] aMaxError is a normalized double of how much to retain the original shape of the faces
+     */
     void Reduce(coord_t aVerticlePercent, coord_t aMaxError);
 
     void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
@@ -81,6 +74,23 @@ public:
      * @param[in] aScaleVec the x,y.z direction to move by it.
      */
     void ScaleMesh(CPoint aScaleVec);
+
+    // Getters, Setters
+    std::string GetLabel() { return mLabel; }
+    coord_t GetAlpha() { return mAlpha; }
+    std::vector<CPoint> GetPoints() { return mPoints; }
+    std::vector<CIndexedFace> GetFaces() { return mFaces; }
+
+    void SetFaces(std::vector<CIndexedFace> aFaces) { mFaces = aFaces; }
+    void SetPoints(std::vector<CPoint> aPoints) { mPoints = aPoints; }
+    void SetLabel(std::string aLabel) { mLabel = aLabel; }
+    void SetAlpha(coord_t aAlpha) {
+        //check input valdilty
+        if(aAlpha > 1 || aAlpha < 0){
+            throw "Alpha must be between 0 and 1";
+        }
+        mAlpha = aAlpha;
+    }
 
 };
 

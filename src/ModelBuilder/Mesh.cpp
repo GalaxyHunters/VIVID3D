@@ -6,7 +6,6 @@
 //#include <stdio.h>
 
 
-
 using namespace vivid;
 using namespace boost::algorithm;
 
@@ -15,10 +14,7 @@ using namespace boost::algorithm;
 
 CMesh::~CMesh() {}
 
-
-void CMesh::ExportToObj(string aOutput, bool WithTexture){
-    CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
-}
+/*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
 void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 {
@@ -38,32 +34,11 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 	mFaces = get<1>(temp);
 }
 
-vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
-    vector<CIndexedFace> aTriangles = vector<CIndexedFace>();
-	for (auto fIt = mFaces.begin(); fIt != mFaces.end(); fIt++) {
-		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
-            aTriangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
-		}
-	}
-	return aTriangles;
-}
-//geters seters
-
-string CMesh::GetLabel() { return mLabel; }
-coord_t CMesh::GetAlpha() { return mAlpha; }
-vector<CPoint> CMesh::GetPoints() { return mPoints; }
-vector<CIndexedFace> CMesh::GetFaces() { return mFaces; }
-void CMesh::SetFaces(vector<CIndexedFace> aFaces) { mFaces = aFaces; }
-void CMesh::SetPoints(vector<CPoint> aPoints) { mPoints = aPoints; }
-void CMesh::SetLabel(string aLabel) { mLabel = aLabel; }
-void CMesh::SetAlpha(coord_t aAlpha){
-    //check input valdilty
-    if(aAlpha > 1 || aAlpha < 0){
-        throw "Alpha must be between 0 and 1";
-    }
-    mAlpha = aAlpha;
+void CMesh::ExportToObj(string aOutput, bool WithTexture){
+    CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
 }
 
+/*--------------------------------------------- Transformation Methods -----------------------------------------------*/
 
 void CMesh::TransformMesh(FTrans_t const aTrans){
     for (auto it = mPoints.begin(); it != mPoints.end(); it++)
@@ -90,7 +65,7 @@ void CMesh::TransformMesh(coord_t const aTrans[3][3]){
 }
 
 void CMesh::RotateMesh(CPoint aNormVec, double aRadAngel){
-    // Trig operations are expansive
+    // Trig operations are expensive
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);
     // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
@@ -130,6 +105,7 @@ void CMesh::ScaleMesh(CPoint aScaleVec){
     auto z_scale = aScaleVec.Z();
     for (auto it = mPoints.begin(); it != mPoints.end(); it++)
     {
+        //(*it).Scale(aScaleVec); // TODO: Why not this?
         it->X(x_scale * it->X());
         it->Y(y_scale * it->Y());
         it->Z(z_scale * it->Z());
@@ -137,4 +113,16 @@ void CMesh::ScaleMesh(CPoint aScaleVec){
         // We should change all to vectorized operators.
         // May the god of compilers forgive us all for our sins.
     }
+}
+
+/*------------------------------------------------- Private Methods --------------------------------------------------*/
+
+vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
+    vector<CIndexedFace> aTriangles = vector<CIndexedFace>();
+    for (auto fIt = mFaces.begin(); fIt != mFaces.end(); fIt++) {
+        for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles
+            aTriangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
+        }
+    }
+    return aTriangles;
 }

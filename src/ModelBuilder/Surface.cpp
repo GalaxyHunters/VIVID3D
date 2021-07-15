@@ -12,38 +12,38 @@ constexpr coord_t NOISE_PERCENTAGE = 0.01;        // TODO: Is this the right noi
 
 // TODO: Many for loops can be replaced by foreach loops here.
 
-CSurface::CSurface(std::vector<std::vector<double>> aInputPoints, std::vector<bool> aMask, std::vector<coord_t> aQuan, coord_t aVMin, coord_t aVMax) {
+CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax) {
     // Check input validity
-    if((aInputPoints.size() != aMask.size()) || (aInputPoints.size() != aQuan.size())){
+    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
         throw ("ValueError - input vectors have not the same size"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    if(aInputPoints.empty() || aInputPoints.empty() || aQuan.empty()) {
+    if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
         throw ("ValueError - input vectors is empty"); //TODO find better sentence and put all of it in ErrMsg.h
     }
-    if( (find(aMask.begin(),aMask.end(),true) == aMask.end()) || std::find(aMask.begin(), aMask.end(), false) == aMask.end() ){
+    if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
 
         throw ("ValueError - mask must contain both true and false values"); //TODO find better sentence and put all of it in ErrMsg.h
     }
 
     //converting <double> to <CPoint>
-    vector<CPoint> points (aInputPoints.size());
+    vector<CPoint> points (arInputPoints.size());
     for (int i = 0; i < points.size(); i++) {
-        points[i] = aInputPoints[i];
+        points[i] = arInputPoints[i];
     }
 
-    // Why using setter inside of the class?
-    SetInputPoints(points);
-    SetMask(aMask);
-    SetQuan(NormQuan(aQuan, aVMin, aVMax));
+    mInputPoints = points;
+    mMask = arMask;
+    mQuan = NormQuan(arQuan, aVMin, aVMax);
     PreProcessPoints();
 }
 
+// TODO: This doesn't seem to work, SEGSEGV Memory error.
 CSurface::CSurface(const CSurface &surf){
     mInputPoints = surf.mInputPoints;
     mMask = surf.mMask;
     mQuan = surf.mQuan;
 
-    std::map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_to_new_Points;
+    map <shared_ptr<CPoint>, shared_ptr<CPoint>> old_to_new_Points;
     mVecPoints.clear();
     for (size_t i = 0; i < surf.mVecPoints.size(); i++) { //TODO: should it be iterator?
         mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf.mVecPoints[i]))));
@@ -227,7 +227,7 @@ void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
     }
 }
 
-bool CompPointData_t(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
+bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
     if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
         if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
             if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
@@ -322,7 +322,7 @@ void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t
 
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData) {
     //sort the array
-    std::sort(arData.begin(), arData.end(), CompPointData_t);
+    sort(arData.begin(), arData.end(), CompPointData);
 
     vector<CSurfacePoint> cleaned_data;
     size_t j;
@@ -513,7 +513,7 @@ void CSurface::CleanDoublePoints() {
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 
-vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax) { //TODO should be one line with some std function
+vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax) { //TODO should be one line with some std function
     if (arQuan.size() == 0){ //incase the user doesnt input any color
         arQuan = vector<coord_t>(mMask.size(), 1);
         return arQuan;
@@ -523,7 +523,7 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t>& arQuan, coord_t aVMin, coor
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
     if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<coord_t>(arQuan.size(), 1);
+        arQuan = vector<coord_t>(arQuan.size(), 1);++) {++) {
         return arQuan;
     }
     for (vector<coord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {
@@ -547,7 +547,7 @@ void CSurface::PreProcessPoints() {
     vector<CPoint> noise_vec (mInputPoints.size());
 
     // Consider generator here.
-    srand(time(0));
+    srand(time(NULL));
     for (int i = 0; i<noise_vec.size(); i++){
         noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
                         1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),

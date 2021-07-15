@@ -10,7 +10,8 @@ namespace vivid
 //TODO Color field needs to be changed everywhere
 //TODO Typedef has to be by const ref
 //TODO Should it containd Cpoint?
-class CSurfacePoint { // used to sort and clean the mVoronoi input points
+class CSurfacePoint
+{ // used to sort and clean the mVoronoi input points
 public:
     CPoint mPoint = {};
     coord_t mQuan = 0;
@@ -21,7 +22,8 @@ public:
 };
 
 //TODO Should it containd CFace?
-class CSurfaceFace{
+class CSurfaceFace
+{
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints = {};
     std::pair<size_t, size_t> mPairPoints = {};
@@ -34,7 +36,8 @@ public:
 };
 
 //public CMesh
-class CSurface : public CMesh {
+class CSurface : public CMesh
+{
 private:
     CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad
 

@@ -20,8 +20,8 @@ namespace vivid
 typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
 
-class CMesh : public CModelComponent{
-
+class CMesh : public CModelComponent
+{
 private:
     string mLabel = "";
 	coord_t mAlpha = 0;

@@ -23,10 +23,9 @@ const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
-int ShapesTest(){
+int ShapesTest()
+{
     cout << "Basic Test:" << endl;
-
-
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
@@ -42,7 +41,8 @@ int ShapesTest(){
 }
 
 /* Test surf functionality with cube */
-int CubeSurfTests() { //Reduce isn't activated currently
+int CubeSurfTests()
+{
     cout << "Cube Test:" << endl;
 
     vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
@@ -71,7 +71,8 @@ int CubeSurfTests() { //Reduce isn't activated currently
 }
 
 /* Test surf functionality by cubic 3D pyramid (with square base) */
-int PyramidSmoothTest(){
+int PyramidSmoothTest()
+{
     cout << "Pyramid Test:" << endl;
 
     vector<vector<double >> points;
@@ -134,7 +135,8 @@ int PyramidSmoothTest(){
 }
 
 /* Test the Elad RunVorn bug and the pointy faces bugs */
-int RunBlackHoleTests(){
+int RunBlackHoleTests()
+{
     cout << "Black Hole Test:" << endl;
 
     ModelData medicane = ReadBin(DATA_MODEL_PATH + "supernova-15.bin");
@@ -151,7 +153,8 @@ int RunBlackHoleTests(){
     return EXIT_SUCCESS;
 }
 
-int main(){
+int main()
+{
     int ret_value = EXIT_SUCCESS;
 
 //    ret_value = ShapesTest();

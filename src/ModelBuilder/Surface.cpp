@@ -12,7 +12,8 @@ constexpr coord_t NOISE_PERCENTAGE = 0.01;        // TODO: Is this the right noi
 
 // TODO: Many for loops can be replaced by foreach loops here.
 
-CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax) {
+CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+{
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
         throw ("ValueError - input vectors have not the same size"); //TODO find better sentence and put all of it in ErrMsg.h
@@ -38,7 +39,8 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
 }
 
 // TODO: This doesn't seem to work, SEGSEGV Memory error.
-CSurface::CSurface(const CSurface &surf){
+CSurface::CSurface(const CSurface &surf)
+{
     mInputPoints = surf.mInputPoints;
     mMask = surf.mMask;
     mQuan = surf.mQuan;
@@ -65,14 +67,16 @@ CSurface::CSurface(const CSurface &surf){
 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
-void CSurface::CreateSurface() {
+void CSurface::CreateSurface()
+{
     RunVorn();
     CleanEdges();
     CleanFaces();
     CleanPoints();
 }
 
-void CSurface::Smooth(int aSmoothFactor) {
+void CSurface::Smooth(int aSmoothFactor)
+{
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
         throw "Smooth Factor must be a positive integer between 1 and 8";
     }
@@ -94,7 +98,8 @@ void CSurface::Smooth(int aSmoothFactor) {
 }
 
 // TODO: CSurface is currently inheriting from Mesh, need to discuss this
-const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
+const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha)
+{
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
         throw "Alpha must be between 0 and 1";
@@ -128,7 +133,8 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) {
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
-vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints) {
+vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints)
+{
     vector<shared_ptr<CPoint> > new_vec;
     for (auto it = arVornPoints.begin(); it != arVornPoints.end(); it++) {
         new_vec.push_back(shared_ptr<CPoint>(new CPoint(it->x, it->y, it->z))); //TODO y not copy c~tor?
@@ -136,7 +142,8 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints
     return new_vec;
 }
 
-void CSurface::RunVorn() {
+void CSurface::RunVorn()
+{
     cout << "start vorn" << endl;
     mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
@@ -169,7 +176,8 @@ void CSurface::RunVorn() {
 /*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
 /*----------------------------------------------------- Part 1 -------------------------------------------------------*/
 
-void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //define pin and pout
+void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn)
+{
     map<size_t, bool> p_in_map;
     map<size_t, bool> p_out_map;
     size_t c_point1;
@@ -201,7 +209,8 @@ void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn) { //def
     }
 }
 
-void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) {
+void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn)
+{
     vector<CPoint> new_points;
     vector<coord_t> quan;
     for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
@@ -218,7 +227,8 @@ void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn) 
 
 /*----------------------------------------------------- Part 2 -------------------------------------------------------*/
 
-void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
+void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn)
+{
     for (int i = 0; (unsigned)i < aPOut.size(); i++) {
         aPOut[i] = i;
     }
@@ -226,8 +236,9 @@ void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn) {
         aPIn[i] = i + aPOut.size();
     }
 }
-
-bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //TODO SIMILAR to THE OLDER CODE OF CompPointRD
+//TODO SIMILAR to THE OLDER CODE OF CompPointRD
+bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2)
+{
     if (abs(aObj1.mPoint.X() - aObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) { //the x value is nurmallcly the same
         if (abs(aObj1.mPoint.Y() - aObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) { //the y value is nurmallcly the same
             if (abs(aObj1.mPoint.Z() - aObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) { //the z value is nurmallcly the same
@@ -249,7 +260,8 @@ bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2) { //TOD
     }
 }
 
-void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor) {
+void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor)
+{
     size_t c_point1;
     size_t c_point2;
     size_t p_out_size = arPOut.size();
@@ -320,7 +332,8 @@ void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t
     mQuan = arNewQuan;
 }
 
-vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData) {
+vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
+{
     //sort the array
     sort(arData.begin(), arData.end(), CompPointData);
 
@@ -351,13 +364,14 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 }
 
 
-
 /*----------------------------------------------------- Part 3 -------------------------------------------------------*/
 
-void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
+void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize)
+{
     vector<bool> new_mask;
     for (size_t i = 0; i < aPOutSize; i++) { //TODO might be faster using fill or something similar in vector
         new_mask.push_back(false);
+
     }
     for (size_t i = 0; i < aPInSize; i++) {
         new_mask.push_back(true);
@@ -365,10 +379,10 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize) {
     mMask = new_mask;
 }
 
-
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
 
-vector<CPoint> CSurface::FindContainingBox(){
+vector<CPoint> CSurface::FindContainingBox()
+{
     coord_t x_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t x_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
     coord_t y_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
@@ -383,13 +397,16 @@ vector<CPoint> CSurface::FindContainingBox(){
     return vector<CPoint>{box_dim, box_min, box_max};
 }
 
-coord_t CSurface::FindContainingRadius(){
+
+coord_t CSurface::FindContainingRadius()
+{
     return (max_element(mInputPoints.begin(),mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
-void CSurface::CleanEdges() {
+void CSurface::CleanEdges()
+{
     bool is_out_of_radius = false;
     vector<CSurfaceFace> new_faces;
     for (auto face = mVecFaces.begin(); face != mVecFaces.end(); face++) {
@@ -407,7 +424,8 @@ void CSurface::CleanEdges() {
 }
 
 // takes the data from mVoronoi and using the mask cleans it so that only the wanted surface is left
-void CSurface::CleanFaces() {
+void CSurface::CleanFaces()
+{
     vector<CSurfaceFace> new_faces;
     size_t mask_len = mMask.size();
     size_t c_point1;
@@ -427,7 +445,8 @@ void CSurface::CleanFaces() {
 
 // Do to the removal of many unneeded faces in CSurface::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
 // this function cleans both
-void CSurface::CleanPoints() {
+void CSurface::CleanPoints()
+{
     vector<shared_ptr<CPoint> > new_points;
     for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
         if (it->use_count() > 1) { // the points is also being called from another obj, other then this vector
@@ -441,15 +460,18 @@ void CSurface::CleanPoints() {
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
 // TODO: Should use different sorting algorithm
-bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) {
+bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2)
+{
     return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
-bool CompPointD(const CPoint& arV1, const CPoint& arV2) {
+bool CompPointD(const CPoint& arV1, const CPoint& arV2)
+{
     return (arV1.Dist(arV2) <= POINT_SIMILARITY_THRESHOLD);
 }
 
 // TODO: Repeating code. Why?
-void CSurface::CleanDoubleInputPoints() {
+void CSurface::CleanDoubleInputPoints()
+{
     //sort the array
     sort(mInputPoints.begin(), mInputPoints.end(), CompPointD);
     // Used to be shared_ptr<CPoint>
@@ -477,7 +499,8 @@ void CSurface::CleanDoubleInputPoints() {
     mInputPoints = cleaned_points;
 }
 
-void CSurface::CleanDoublePoints() {
+void CSurface::CleanDoublePoints()
+{
     //sort the array
     sort(mVecPoints.begin(), mVecPoints.end(), CompPointRD);
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
@@ -512,8 +535,9 @@ void CSurface::CleanDoublePoints() {
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-
-vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax) { //TODO should be one line with some std function
+//TODO should be one line with some std function
+vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+{
     if (arQuan.size() == 0){ //incase the user doesnt input any color
         arQuan = vector<coord_t>(mMask.size(), 1);
         return arQuan;
@@ -534,7 +558,8 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
     return arQuan;
 }
 
-void CSurface::PreProcessPoints() {
+void CSurface::PreProcessPoints()
+{
     //CleanDoubleInputPoints();
     CPoint box_dim, box_min, box_max;
     vector<CPoint> box_dimensions = FindContainingBox();

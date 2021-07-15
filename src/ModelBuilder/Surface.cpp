@@ -523,7 +523,7 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
     if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<coord_t>(arQuan.size(), 1);++) {++) {
+        arQuan = vector<coord_t>(arQuan.size(), 1);
         return arQuan;
     }
     for (vector<coord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {

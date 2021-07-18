@@ -44,6 +44,8 @@ private:
     std::vector<std::shared_ptr<CPoint> > mVecPoints = {};
     std::vector<CSurfaceFace> mVecFaces = {};
 
+    std::vector<std::vector<size_t>> mPointsInFaces = {}; // For mapping which faces contain which points
+
     std::vector<CPoint> mInputPoints = {};   // for smooth
     std::vector<bool> mMask = {};            // for smooth
     std::vector<coord_t> mQuan = {};         // for smooth
@@ -78,6 +80,9 @@ private:
     void UpdateInputPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
     // Part 2
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
+    void Stage2ModifyPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
+    void AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
+                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3); // Adds points between every pair by aSmoothFactor
     void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
     void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
                    size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor); // Adds points between every pair by aSmoothFactor

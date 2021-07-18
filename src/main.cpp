@@ -10,10 +10,7 @@
 #include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 #define BOX_SIZE 30
-
-
 #define HEIGHT 15
-
 
 using namespace vivid;
 using namespace std;
@@ -110,26 +107,27 @@ int PyramidSmoothTest()
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
     smooth1.Smooth(1);
+    //smooth1.Smooth(1);
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth1");
-    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    smooth3.CreateSurface();
-    smooth3.Smooth(3);
-    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-    mesh3.Reduce(0.4, 0.3);
-    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
-    CSurface smooth6 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    smooth6.CreateSurface();
-    smooth6.Smooth(6);
-    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
-    mesh6.Reduce(0.25, 0.3);
-    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
-    CSurface smooth8 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    smooth8.CreateSurface();
-    smooth8.Smooth(8);
-    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
-    mesh8.Reduce(0.2, 0.3);
-    mesh8.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth8");
+//    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    smooth3.CreateSurface();
+//    smooth3.Smooth(3);
+//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
+//    mesh3.Reduce(0.4, 0.3);
+//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
+//    CSurface smooth6 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    smooth6.CreateSurface();
+//    smooth6.Smooth(6);
+//    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
+//    mesh6.Reduce(0.25, 0.3);
+//    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
+//    CSurface smooth8 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    smooth8.CreateSurface();
+//    smooth8.Smooth(8);
+//    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
+//    mesh8.Reduce(0.2, 0.3);
+//    mesh8.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth8");
     return EXIT_SUCCESS;
 
 }

@@ -16,14 +16,14 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
-        throw ("ValueError - input vectors have not the same size"); //TODO find better sentence and put all of it in ErrMsg.h
+        throw "ValueError - input vectors have not the same size"; //TODO find better sentence and put all of it in ErrMsg.h
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        throw ("ValueError - input vectors is empty"); //TODO find better sentence and put all of it in ErrMsg.h
+        throw "ValueError - input vectors is empty"; //TODO find better sentence and put all of it in ErrMsg.h
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
 
-        throw ("ValueError - mask must contain both true and false values"); //TODO find better sentence and put all of it in ErrMsg.h
+        throw "ValueError - mask must contain both true and false values"; //TODO find better sentence and put all of it in ErrMsg.h
     }
 
     //converting <double> to <CPoint>
@@ -78,7 +78,7 @@ void CSurface::CreateSurface()
 void CSurface::Smooth(int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        throw "Smooth Factor must be a positive integer between 1 and 8";
+        throw ("Smooth Factor must be a positive integer between 1 and 8");
     }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     cout << "Begin Smooth" << endl;
@@ -89,7 +89,8 @@ void CSurface::Smooth(int aSmoothFactor)
     RunVorn();
     //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
     UpdatePoutPin(p_out, p_in);
-    Stage2AddPoints(p_out, p_in, aSmoothFactor);
+    Stage2ModifyPoints(p_out, p_in);
+    //Stage2AddPoints(p_out, p_in, aSmoothFactor);
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
     MakeMask(p_out.size(), p_in.size());
@@ -258,6 +259,72 @@ bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2)
     {
         return aObj1.mPoint.X() > aObj2.mPoint.X();
     }
+}
+
+// Alt Stage2AddPoints
+void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
+{
+    /* Concept:
+     * Create a list where each point knows which faces its contained in (*shared_ptr?)
+     * going over each mVecFace, find which additional face has the second point, and get a third point from that face
+     * add smoothPoint by 121 average ratio to pin/pout by same technique as stage2addPoints
+     */
+    size_t c_point1;
+    size_t c_point2;
+    size_t c_point3;
+    size_t p_out_size = arPOut.size();
+    size_t p_in_size = p_out_size + arPIn.size();
+    vector<CPoint> new_points;
+    vector<coord_t> new_quan;
+    arPIn.clear();
+    arPOut.clear();
+    size_t new_index = 0; // the index for the new point to be added
+    //go over pout
+    // TODO: Map instead of double for loop
+    // TODO: Add points only if angle isn't near 180
+    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
+        c_point1 = get<0>(it->mPairPoints);
+        c_point2 = get<1>(it->mPairPoints);
+        // TODO: Add get c_point3 func
+        for (auto it2 = mVecFaces.begin(); it2 != mVecFaces.end(); it2++) {
+            if (it != it2){
+                if ((*it2).mPairPoints.first == c_point2) {
+                    c_point3 = get<1>(it->mPairPoints);
+                }
+                else if ((*it2).mPairPoints.second == c_point2) {
+                    c_point3 = get<0>(it->mPairPoints);
+                }
+                if (c_point3 != 0) {
+
+                    if (c_point1 < p_out_size && c_point2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+                    {
+                        AddPointsAlt(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
+                    }
+                    //go over pin
+                    if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size) &&
+                        (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+                    {
+                        AddPointsAlt(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
+                    }
+                    c_point3 = 0;
+                }
+            }
+        }
+    }
+    CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
+}
+
+void CSurface::AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
+                            size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
+{
+    // TODO: Add Points only if there isn't already a point there.
+    coord_t x, y, z;
+    (*apPVec).push_back(*apNewIndex);
+    CPoint new_point = (mInputPoints[aCPoint1] + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 3.;
+    (*apNewPoints).push_back(new_point);
+    //(*apNewPoints).push_back(CPoint(x, y, z));
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3);
+    (*apNewIndex)++;
 }
 
 void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor)

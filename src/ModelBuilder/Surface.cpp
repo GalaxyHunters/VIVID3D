@@ -325,9 +325,9 @@ void CSurface::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints,
                             size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
 {
     arPVec.push_back(arNewIndex);
-    CPoint new_point = (mInputPoints[aCPoint1] + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 3.;
+    CPoint new_point = (mInputPoints[aCPoint1] * 2 + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 4.;
     arNewPoints.push_back(new_point);
-    arNewQuan.push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3); // Results in color washing, need to consider
+    arNewQuan.push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 4); // Results in color washing, need to consider
     arNewIndex++;
 }
 

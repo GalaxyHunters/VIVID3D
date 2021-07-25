@@ -7,8 +7,8 @@
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
-#define BOX_SIZE 20
-#define HEIGHT 10
+#define BOX_SIZE 30
+#define HEIGHT 15
 
 using namespace vivid;
 using namespace std;
@@ -106,6 +106,7 @@ int PyramidSmoothTest()
     smooth1.Smooth(1);
     //smooth1.Smooth(1);
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
+    mesh1.Reduce(0.3, 0.5);
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth1");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();

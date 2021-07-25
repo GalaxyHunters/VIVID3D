@@ -81,10 +81,10 @@ private:
     // Part 2
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
     void Stage2ModifyPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
-    void FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, CSurfaceFace &arFace,
-                        vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex);
-    void AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
-                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3); // Adds points between every pair by aSmoothFactor
+    void FindPairPoints(size_t aCPoint1, size_t aCPoint2, std::vector<size_t> &arPIn, std::vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
+                        CSurfaceFace &arFace, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan, size_t &arIndex);
+    void AddPointsAlt(std::vector<size_t> &arPVec, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan,
+                      size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3); // Adds points between every pair by aSmoothFactor
     void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
     void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
                    size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor); // Adds points between every pair by aSmoothFactor

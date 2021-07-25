@@ -278,32 +278,27 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
 
     vector<CPoint> new_points;
     vector<coord_t> new_quan;
+    size_t p_out_size = arPOut.size();
+    size_t p_in_size = p_out_size + arPIn.size();
     arPIn.clear();
     arPOut.clear();
     size_t new_index = 0; // the index for the new point to be added
     //go over pout
-    // TODO: Add points only if certain p_in and p_out conditions are met
     for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         c_point1 = get<0>(it->mPairPoints);
         c_point2 = get<1>(it->mPairPoints);
-        cout << "finding cpoint3" << endl;
-        // TODO: Change below to an external function and run for both c_point1 and c_point2
-        FindPairPoints(c_point1, c_point2, arPIn, arPOut, *it, new_points, new_quan, new_index);
-        FindPairPoints(c_point2, c_point1, arPIn, arPOut, *it, new_points, new_quan, new_index);
+        FindPairPoints(c_point1, c_point2, arPIn, arPOut, p_out_size, p_in_size, *it, new_points, new_quan, new_index);
+        FindPairPoints(c_point2, c_point1, arPIn, arPOut, p_out_size, p_in_size, *it, new_points, new_quan, new_index);
     }
-    cout << "Cleaning doubles" << endl;
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
 
-void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, CSurfaceFace &arFace,
-                              vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex)
+void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
+                              CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex)
 {
-    size_t p_out_size = arPOut.size();
-    size_t p_in_size = p_out_size + arPIn.size();
     size_t c_point3;
     for (auto f_index = mPointsInFaces[aCPoint1].begin(); f_index != mPointsInFaces[aCPoint1].end(); f_index++)
     {
-        cout << "C_point " << *f_index << endl;
         CSurfaceFace face = mVecFaces[*f_index];
         if (face.mPairPoints != arFace.mPairPoints) {
             if (face.mPairPoints.first == aCPoint1) {
@@ -311,28 +306,29 @@ void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &
             } else {
                 c_point3 = get<0>(face.mPairPoints);
             }
-            if (aCPoint1 < p_out_size && aCPoint2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+            // TODO: Add points only if certain p_in and p_out conditions are met
+            if (aCPoint1 < aPOutSize && aCPoint2 < aPOutSize && c_point3 < aPOutSize) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
             {
-                AddPointsAlt(&arPIn, &arNewPoints, &arNewQuan, &arIndex, aCPoint1, aCPoint2, c_point3);
+                AddPointsAlt(arPIn, arNewPoints, arNewQuan, arIndex, aCPoint1, aCPoint2, c_point3);
             }
             //go over pin
-            if ((p_in_size > aCPoint1 && aCPoint1 >= p_out_size) && (p_in_size > aCPoint2 && aCPoint2 >= p_out_size) &&
-                (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+            if ((aPInSize > aCPoint1 && aCPoint1 >= aPOutSize) && (aPInSize > aCPoint2 && aCPoint2 >= aPOutSize) &&
+                (aPInSize > c_point3 && c_point3 >= aPOutSize)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
             {
-                AddPointsAlt(&arPOut, &arNewPoints, &arNewQuan, &arIndex, aCPoint1, aCPoint2, c_point3);
+                AddPointsAlt(arPOut, arNewPoints, arNewQuan, arIndex, aCPoint1, aCPoint2, c_point3);
             }
         }
     }
 }
 
-void CSurface::AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
-                            size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
+void CSurface::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan,
+                            size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
 {
-    (*apPVec).push_back(*apNewIndex);
+    arPVec.push_back(arNewIndex);
     CPoint new_point = (mInputPoints[aCPoint1] + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 3.;
-    (*apNewPoints).push_back(new_point);
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3); // Results in color washing, need to consider
-    (*apNewIndex)++;
+    arNewPoints.push_back(new_point);
+    arNewQuan.push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3); // Results in color washing, need to consider
+    arNewIndex++;
 }
 
 void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor)

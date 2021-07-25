@@ -7,15 +7,14 @@
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
-#define BOX_SIZE 30
-#define HEIGHT 15
+#define BOX_SIZE 20
+#define HEIGHT 10
 
 using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
 const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
-
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
 int ShapesTest()
@@ -153,14 +152,14 @@ int main()
 {
     int ret_value = EXIT_SUCCESS;
 
-    ret_value = ShapesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube" << endl;
-    ret_value = CubeSurfTests();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = PyramidSmoothTest();
+//    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube" << endl;
+//    ret_value = CubeSurfTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Black Hole" << endl;
 //    ret_value = RunBlackHoleTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

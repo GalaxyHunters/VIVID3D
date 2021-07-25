@@ -275,8 +275,7 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
     size_t c_point1;
     size_t c_point2;
     size_t c_point3;
-    size_t p_out_size = arPOut.size();
-    size_t p_in_size = p_out_size + arPIn.size();
+
     vector<CPoint> new_points;
     vector<coord_t> new_quan;
     arPIn.clear();
@@ -289,30 +288,41 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
         c_point2 = get<1>(it->mPairPoints);
         cout << "finding cpoint3" << endl;
         // TODO: Change below to an external function and run for both c_point1 and c_point2
-        for (auto f_index = mPointsInFaces[c_point1].begin(); f_index != mPointsInFaces[c_point1].end(); f_index++){
-            cout << "C_point " << *f_index << endl;
-            CSurfaceFace face = mVecFaces[*f_index];
-            if (face.mPairPoints != (*it).mPairPoints) {
-                if (face.mPairPoints.first == c_point1) {
-                    c_point3 = get<1>(face.mPairPoints);
-                } else {
-                    c_point3 = get<0>(face.mPairPoints);
-                }
-                if (c_point1 < p_out_size && c_point2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-                {
-                    AddPointsAlt(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
-                }
-                //go over pin
-                if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size) &&
-                    (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-                {
-                    AddPointsAlt(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
-                }
-            }
-        }
+        FindPairPoints(c_point1, c_point2, arPIn, arPOut, *it, new_points, new_quan, new_index);
+        FindPairPoints(c_point2, c_point1, arPIn, arPOut, *it, new_points, new_quan, new_index);
     }
     cout << "Cleaning doubles" << endl;
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
+}
+
+void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, CSurfaceFace &arFace,
+                              vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex)
+{
+    size_t p_out_size = arPOut.size();
+    size_t p_in_size = p_out_size + arPIn.size();
+    size_t c_point3;
+    for (auto f_index = mPointsInFaces[aCPoint1].begin(); f_index != mPointsInFaces[aCPoint1].end(); f_index++)
+    {
+        cout << "C_point " << *f_index << endl;
+        CSurfaceFace face = mVecFaces[*f_index];
+        if (face.mPairPoints != arFace.mPairPoints) {
+            if (face.mPairPoints.first == aCPoint1) {
+                c_point3 = get<1>(face.mPairPoints);
+            } else {
+                c_point3 = get<0>(face.mPairPoints);
+            }
+            if (aCPoint1 < p_out_size && aCPoint2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+            {
+                AddPointsAlt(&arPIn, &arNewPoints, &arNewQuan, &arIndex, aCPoint1, aCPoint2, c_point3);
+            }
+            //go over pin
+            if ((p_in_size > aCPoint1 && aCPoint1 >= p_out_size) && (p_in_size > aCPoint2 && aCPoint2 >= p_out_size) &&
+                (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+            {
+                AddPointsAlt(&arPOut, &arNewPoints, &arNewQuan, &arIndex, aCPoint1, aCPoint2, c_point3);
+            }
+        }
+    }
 }
 
 void CSurface::AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,

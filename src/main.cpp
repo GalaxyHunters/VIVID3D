@@ -1,3 +1,4 @@
+#include <boost/container/small_vector.hpp>
 #include <vector>
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
@@ -5,9 +6,6 @@
 #include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
-
-//// TODO TOMER YYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#include "../lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.hpp"
 
 #define BOX_SIZE 30
 #define HEIGHT 15
@@ -155,14 +153,14 @@ int main()
 {
     int ret_value = EXIT_SUCCESS;
 
-//    ret_value = ShapesTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Cube" << endl;
-//    ret_value = CubeSurfTests();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSmoothTest();
+    ret_value = ShapesTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Cube" << endl;
+    ret_value = CubeSurfTests();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Black Hole" << endl;
 //    ret_value = RunBlackHoleTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

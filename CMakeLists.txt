@@ -7,7 +7,6 @@ set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 
 message(${PROJECT_SOURCE_DIR})
 
-
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast; ${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX;)
 
 # TODO: Choose between Linux\Windows\mac
@@ -24,8 +23,7 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
-find_package(Boost 1.62.0 REQUIRED)
-
+find_package( Boost 1.62.0 REQUIRED)
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
@@ -99,6 +97,8 @@ add_executable(vivid
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
+
+target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 

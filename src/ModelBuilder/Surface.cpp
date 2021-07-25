@@ -154,12 +154,14 @@ void CSurface::RunVorn()
     //set the faces
     vector<vector<size_t> > vorn_faces = mVoronoi.GetFaces();
     vector<CSurfaceFace> new_faces;
+    vector<vector<size_t>> points_map (mInputPoints.size());
     size_t c_point1;
     size_t c_point2;
     coord_t quan;
     vector<shared_ptr<CPoint>> face_points;
     for (auto face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
         c_point1 = face->back();
+
         face->pop_back();
         c_point2 = face->back();
         face->pop_back();
@@ -170,8 +172,11 @@ void CSurface::RunVorn()
             face_points.push_back(mVecPoints[*point]);
         }
         new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
+        points_map.at(c_point1).push_back(new_faces.size()-1);
+        points_map.at(c_point2).push_back(new_faces.size()-1);
     }
     mVecFaces = new_faces;
+    mPointsInFaces = points_map;
 }
 
 /*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
@@ -264,14 +269,9 @@ bool CompPointData(const CSurfacePoint aObj1, const CSurfacePoint aObj2)
 // Alt Stage2AddPoints
 void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
 {
-    /* Concept:
-     * Create a list where each point knows which faces its contained in (*shared_ptr?)
-     * going over each mVecFace, find which additional face has the second point, and get a third point from that face
-     * add smoothPoint by 121 average ratio to pin/pout by same technique as stage2addPoints
-     */
     size_t c_point1;
     size_t c_point2;
-    size_t c_point3;
+    size_t c_point3 = NULL;
     size_t p_out_size = arPOut.size();
     size_t p_in_size = p_out_size + arPIn.size();
     vector<CPoint> new_points;
@@ -281,35 +281,62 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
     size_t new_index = 0; // the index for the new point to be added
     //go over pout
     // TODO: Map instead of double for loop
-    // TODO: Add points only if angle isn't near 180
+    // TODO: Add points only if certain p_in and p_out conditions are met
     for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         c_point1 = get<0>(it->mPairPoints);
         c_point2 = get<1>(it->mPairPoints);
-        // TODO: Add get c_point3 func
-        for (auto it2 = mVecFaces.begin(); it2 != mVecFaces.end(); it2++) {
-            if (it != it2){
-                if ((*it2).mPairPoints.first == c_point2) {
-                    c_point3 = get<1>(it->mPairPoints);
+        // TODO: Change below to an external function and run for both c_point1 and c_point2
+        for (auto f_index = mPointsInFaces[c_point1].begin(); f_index != mPointsInFaces[c_point1].end(); c_point3++){
+            CSurfaceFace face = mVecFaces[*f_index];
+            if (face == it) {
+                if (mVecFaces[*f_index].mPairPoints.first == c_point1) {
+                    c_point3 = get<1>(face.mPairPoints);
+                } else {
+                    c_point3 = get<0>(face.mPairPoints);
                 }
-                else if ((*it2).mPairPoints.second == c_point2) {
-                    c_point3 = get<0>(it->mPairPoints);
+                if (c_point1 < p_out_size && c_point2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+                {
+                    AddPointsAlt(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
                 }
-                if (c_point3 != 0) {
-
-                    if (c_point1 < p_out_size && c_point2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-                    {
-                        AddPointsAlt(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
-                    }
-                    //go over pin
-                    if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size) &&
-                        (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-                    {
-                        AddPointsAlt(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
-                    }
-                    c_point3 = 0;
+                //go over pin
+                if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size) &&
+                    (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+                {
+                    AddPointsAlt(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
                 }
             }
         }
+
+//        for (auto it2 = mVecFaces.begin(); it2 != mVecFaces.end(); it2++) {
+//            if (it != it2){
+//                if ((*it2).mPairPoints.first == c_point2) {
+//                    c_point3 = get<1>(it2->mPairPoints);
+//                }
+//                else if ((*it2).mPairPoints.second == c_point2) {
+//                    c_point3 = get<0>(it2->mPairPoints);
+//                }
+//                else if ((*it2).mPairPoints.first == c_point1) {
+//                    c_point3 = get<0>(it2->mPairPoints);
+//                }
+//                else if ((*it2).mPairPoints.second == c_point1) {
+//                    c_point3 = get<0>(it2->mPairPoints);
+//                }
+//                if (c_point3 != NULL) {
+//
+//                    if (c_point1 < p_out_size && c_point2 < p_out_size && c_point3 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
+//                    {
+//                        AddPointsAlt(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
+//                    }
+//                    //go over pin
+//                    if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size) &&
+//                        (p_in_size > c_point3 && c_point3 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
+//                    {
+//                        AddPointsAlt(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, c_point3);
+//                    }
+//                    c_point3 = NULL;
+//                }
+//            }
+//        }
     }
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
@@ -317,13 +344,10 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
 void CSurface::AddPointsAlt(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
                             size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
 {
-    // TODO: Add Points only if there isn't already a point there.
-    coord_t x, y, z;
     (*apPVec).push_back(*apNewIndex);
     CPoint new_point = (mInputPoints[aCPoint1] + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 3.;
     (*apNewPoints).push_back(new_point);
-    //(*apNewPoints).push_back(CPoint(x, y, z));
-    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3);
+    (*apNewQuan).push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 3); // Results in color washing, need to consider
     (*apNewIndex)++;
 }
 

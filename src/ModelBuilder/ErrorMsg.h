@@ -6,16 +6,18 @@
 
 namespace vivid {
 
-static std::ofstream LOG_FILE;
+static std::ofstream LOG_FILE; // TODO: read about static global parameter and why it is consoder bad practice
 
-enum class e_LogType
+enum class e_LogType // TODO: convention...
 {
-    ARRAYS_NOT_EQUAL, ARRAYS_EMPTY, MISSING_BOOLEAN_VALUES, INVALID_SMOOTH_FACTOR, INVALID_ALPHA_VALUE
+    ARRAYS_NOT_EQUAL, ARRAYS_EMPTY, MISSING_BOOLEAN_VALUES, INVALID_SMOOTH_FACTOR, INVALID_ALPHA_VALUE //TODO: initialize the enum so the values would remain even when changing the order
 };
 
-typedef void (*LogCallBackFunction)(const e_LogType &a);
+typedef void (*LogCallBackFunction)(const e_LogType &a); //TODO: use functional, this way is a c way not cpp
+    
+//TODO: use constexpr map of enum and errmsg    
 
-static std::string GetFromEnum(const e_LogType &a)
+static std::string GetFromEnum(const e_LogType &a) //TODO should be map
 {
     std::string msg;
     switch (a) {
@@ -41,7 +43,7 @@ static std::string GetFromEnum(const e_LogType &a)
     return msg;
 }
 
-static void WriteToLog(const e_LogType &a)
+static void WriteToLog(const e_LogType &a) //TODO shouldn't be static, may get next to the enum also some parameter or two of the report (if we need one)
 {
     std::string msg = GetFromEnum(a);
     std::cerr << msg << std::endl;

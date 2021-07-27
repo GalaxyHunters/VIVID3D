@@ -1,6 +1,4 @@
 #include "Surface.h"
-#include "Voronoi.h"
-
 #include <map>
 
 using namespace vivid;
@@ -16,14 +14,14 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
-        throw "ValueError - input vectors have not the same size"; //TODO find better sentence and put all of it in ErrMsg.h
+        cout << arInputPoints.size() << arMask.size() << arQuan.size() << endl;
+        if (mLogFile) (*mLogFile)(e_LogType::ARRAYS_NOT_EQUAL);
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        throw "ValueError - input vectors is empty"; //TODO find better sentence and put all of it in ErrMsg.h
+        if (mLogFile) (*mLogFile)(e_LogType::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-
-        throw "ValueError - mask must contain both true and false values"; //TODO find better sentence and put all of it in ErrMsg.h
+        if (mLogFile) (*mLogFile)(e_LogType::MISSING_BOOLEAN_VALUES);
     }
 
     //converting <double> to <CPoint>
@@ -75,10 +73,21 @@ void CSurface::CreateSurface()
     CleanPoints();
 }
 
-void CSurface::Smooth(int aSmoothFactor)
+void CSurface::VecCSurf()
+{
+    vector<CPoint> new_points;
+    for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
+        new_points.push_back(**it);
+    }
+    mInputPoints = new_points;
+    RunVorn();
+    CleanEdges();
+}
+
+void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        throw ("Smooth Factor must be a positive integer between 1 and 8");
+        if (mLogFile) (*mLogFile)(e_LogType::INVALID_SMOOTH_FACTOR);
     }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     cout << "Begin Smooth" << endl;
@@ -87,11 +96,18 @@ void CSurface::Smooth(int aSmoothFactor)
     SetPinPout(p_out, p_in);
     UpdateInputPoints(p_out, p_in);
     RunVorn();
+    cout << mVecFaces.size() << " " << mVecPoints.size() << " " << mInputPoints.size()<< endl;
     cout << "Begin Smooth part 2" << endl;
     //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
     UpdatePoutPin(p_out, p_in);
-    Stage2ModifyPoints(p_out, p_in);
-    //Stage2AddPoints(p_out, p_in, aSmoothFactor);
+    if (aSuperSmooth)
+    {
+        Stage2ModifyPoints(p_out, p_in);
+    }
+    else
+    {
+        Stage2AddPoints(p_out, p_in, aSmoothFactor);
+    }
     //begin smooth part 3, running the model and cleaning it
     UpdateInputPoints(p_out, p_in);
     MakeMask(p_out.size(), p_in.size());
@@ -104,12 +120,14 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha)
 {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
-        throw "Alpha must be between 0 and 1";
+        if (mLogFile) (*mLogFile)(e_LogType::INVALID_ALPHA_VALUE);
     }
+
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
     for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
+        //points.push_back(**it);
         points.push_back((**it * mScale) + mCenVector);
         indexes[*it] = counter;
         counter++;
@@ -368,7 +386,7 @@ void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, 
         y = (mInputPoints[aCPoint1].Y() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Y() * i) / (aSmoothFactor+1);
         z = (mInputPoints[aCPoint1].Z() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Z() * i) / (aSmoothFactor+1);
         (*apNewPoints).push_back(CPoint(x, y, z));
-        (*apNewQuan).push_back((mQuan[aCPoint1] * (aSmoothFactor + 1 - i) + mQuan[aCPoint2] * i) / aSmoothFactor);
+        (*apNewQuan).push_back((mQuan[aCPoint1] * (aSmoothFactor + 1 - i) + mQuan[aCPoint2] * i) / (aSmoothFactor+1));
         (*apNewIndex)++;
     }
 }
@@ -622,7 +640,7 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
         arQuan = vector<coord_t>(arQuan.size(), 1);
         return arQuan;
     }
-    for (vector<coord_t>::iterator it = arQuan.begin(); it != arQuan.end(); it++) {
+    for (auto it = arQuan.begin(); it != arQuan.end(); it++) {
         *it = 1- ((*it - aVMax) / (aVMin - aVMax));
         if (*it > 1) *it = 1;
         if (*it < 0) *it = 0;

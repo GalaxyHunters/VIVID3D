@@ -1,4 +1,3 @@
-#include <boost/container/small_vector.hpp>
 #include <vector>
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
@@ -103,11 +102,10 @@ int PyramidSmoothTest()
 
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
-    smooth1.Smooth(1);
-    //smooth1.Smooth(1);
+    smooth1.VecCSurf();
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
-    mesh1.Reduce(0.3, 0.5);
-    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth1");
+    //mesh1.Reduce(0.3, 0.5);
+    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    smooth3.Smooth(3);
@@ -131,28 +129,40 @@ int PyramidSmoothTest()
 }
 
 /* Test the Elad RunVorn bug and the pointy faces bugs */
-int RunBlackHoleTests()
+int RunSupernovaTests()
 {
     cout << "Black Hole Test:" << endl;
-
-    ModelData medicane = ReadBin(DATA_MODEL_PATH + "supernova-15.bin");
+    vector<ModelData> data (3);
+    cout << "Loading Data" << endl;
+    //data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");Quan
+    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
+    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
+    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
+    //data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
+    //data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
+    //data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
 
     CModel model;
-
-    CSurface medicaneSurf = CSurface(medicane.points, medicane.mask, medicane.quan, medicane.quan[0], medicane.quan[0] );
-    medicaneSurf.CreateSurface();
-    medicaneSurf.Smooth(1);
-    CMesh medicaneMesh = medicaneSurf.ToMesh("BlackHole surf", .7);
-    //medicaneMesh.Reduce(0.3, 0.25);
-    model.AddMesh(medicaneMesh);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/Supernova200k");
+    cout << "Running VIVID" << endl;
+    
+    for (int i = 0; i < data.size(); i++) {
+        CSurface surf = CSurface(data[i].points, data[i].mask, data[i].quan, -7., 2.5);
+        surf.CreateSurface();
+        surf.Smooth(false, 1);
+        CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
+        //medicaneMesh.Reduce(0.3, 0.25);
+        model.AddMesh(mesh);
+        mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
+    }
+    model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModelSmoothFalse2NoReduce");
     return EXIT_SUCCESS;
 }
 
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-
+    vector<vector<double>> points = {{0, 0}}; vector<bool> mask = {true}; vector<coord_t> quan = {1};
+    CSurface surf = CSurface(points, mask, quan, 0, 0);
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
@@ -162,7 +172,7 @@ int main()
     ret_value = PyramidSmoothTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Black Hole" << endl;
-//    ret_value = RunBlackHoleTests();
+//    ret_value = RunSupernovaTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 
     return EXIT_SUCCESS;

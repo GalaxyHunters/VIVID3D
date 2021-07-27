@@ -3,6 +3,7 @@
 
 #include "Voronoi.h"
 #include "Mesh.h"
+#include "ErrorMsg.h"
 #include <memory>
 
 namespace vivid
@@ -39,6 +40,12 @@ public:
 class CSurface : public CMesh
 {
 private:
+    static void CallBack(const e_LogType &a)
+    {
+        WriteToLog(a);
+    }
+    LogCallBackFunction mLogFile = CallBack;
+
     CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad
 
     std::vector<std::shared_ptr<CPoint> > mVecPoints = {};
@@ -53,8 +60,6 @@ private:
     std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
     coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
 
-
-    // TODO: Organize with same order as in .cpp
     // Centralization Sub-Methods
     coord_t FindContainingRadius();          // Used for Scaling
     std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
@@ -118,9 +123,10 @@ public:
 
     /**
      * Smooth method
+     * @param[in] aSuperSmooth boolean value for activating SuperSmooth Algorithm
      * @param[in] aSmoothFactor An integer value between 1 and 8
      */
-    void Smooth(int aSmoothFactor = 2);
+    void Smooth(bool aSuperSmooth = false, int aSmoothFactor = 2);
 
     /**
      * Convert the CSurface object to CMesh object
@@ -129,6 +135,8 @@ public:
      * @returns CMesh converted mesh
      */
     const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
+
+    void VecCSurf();
 
     // Getters, Setters
     // TODO: which gets do we really need and why?

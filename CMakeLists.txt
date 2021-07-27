@@ -61,6 +61,7 @@ include_directories(lib/pybind11/include)
 include_directories(lib/ImportAndExport)
 include_directories(lib/ImportAndExport/lodepng)
 
+
 add_executable(vivid
         #external
         lib/Decimate.cpp
@@ -71,7 +72,6 @@ add_executable(vivid
         lib/ImportAndExport/ObjImportExport.cpp
         lib/ImportAndExport/FbxCode.cpp
         lib/ImportAndExport/FBXImportExport.cpp
-        lib/ImportAndExport/AssimpImportExport.cpp
         #vivid
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/ModelComponent.cpp
@@ -91,7 +91,7 @@ add_executable(vivid
         src/Extra/Analysis.h
 
         #main
-        src/main.cpp )
+        src/main.cpp)
 
 
 

@@ -3,7 +3,7 @@
 
 #include "Voronoi.h"
 #include "Mesh.h"
-#include "ErrorMsg.h"
+#include "LogFile.h"
 #include <memory>
 
 namespace vivid
@@ -40,11 +40,11 @@ public:
 class CSurface : public CMesh
 {
 private:
-    static void CallBack(const e_LogType &a)
+    static void CallBack(const vivid::CLogFile::ELogType a)
     {
-        WriteToLog(a);
+        CLogFile::GetInstance()->WriteToLog(a);
     }
-    LogCallBackFunction mLogFile = CallBack;
+    CLogFile::LogCallBackFunction mLogFile = CallBack;
 
     CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad
 

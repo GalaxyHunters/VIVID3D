@@ -42,7 +42,7 @@ class CSurface : public CMesh
 private:
     static void CallBack(const vivid::CLogFile::ELogType a)
     {
-        CLogFile::GetInstance()->WriteToLog(a);
+        CLogFile::GetInstance().WriteToLog(a);
     }
     CLogFile::LogCallBackFunction mLogFile = CallBack;
 

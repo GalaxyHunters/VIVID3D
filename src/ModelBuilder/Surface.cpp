@@ -15,15 +15,15 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
         cout << arInputPoints.size() << arMask.size() << arQuan.size() << endl;
-        if (mLogFile) (*mLogFile)(CLogFile::ELogType::ARRAYS_NOT_EQUAL);
+        if (mLogFile) (mLogFile)(CLogFile::ELogType::ARRAYS_NOT_EQUAL);
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        if (mLogFile) (*mLogFile)(CLogFile::ELogType::ARRAYS_EMPTY);
+        if (mLogFile) (mLogFile)(CLogFile::ELogType::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-        if (mLogFile) (*mLogFile)(CLogFile::ELogType::MISSING_BOOLEAN_VALUES);
+        if (mLogFile) (mLogFile)(CLogFile::ELogType::MISSING_BOOLEAN_VALUES);
     }
-
+    if (mLogFile) (mLogFile)(CLogFile::ELogType::MISSING_BOOLEAN_VALUES);
     //converting <double> to <CPoint>
     vector<CPoint> points (arInputPoints.size());
     for (int i = 0; i < points.size(); i++) {
@@ -87,7 +87,7 @@ void CSurface::VecCSurf()
 void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        if (mLogFile) (*mLogFile)(CLogFile::ELogType::INVALID_SMOOTH_FACTOR);
+        if (mLogFile) (mLogFile)(CLogFile::ELogType::INVALID_SMOOTH_FACTOR);
     }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     cout << "Begin Smooth" << endl;
@@ -120,7 +120,7 @@ const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha)
 {
     //check input valdilty
     if(aAlpha > 1 || aAlpha < 0){
-        if (mLogFile) (*mLogFile)(CLogFile::ELogType::INVALID_ALPHA_VALUE);
+        if (mLogFile) (mLogFile)(CLogFile::ELogType::INVALID_ALPHA_VALUE);
     }
 
     vector<CPoint> points;

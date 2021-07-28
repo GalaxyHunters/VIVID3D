@@ -11,20 +11,20 @@ class CLogFile
 {
 protected:
     CLogFile() {};
-    static CLogFile* singleton;
-    static std::ofstream LOG_FILE;
+    CLogFile(CLogFile const&);
+    void operator=(CLogFile const&);
+
+    std::ofstream LOG_FILE;
 
 public:
 
-    static CLogFile *GetInstance()
+    static CLogFile &GetInstance()
     {
-        if (singleton ==nullptr)
-        {
-            singleton = new CLogFile();
-        }
+        static CLogFile singleton;
         return singleton;
     }
 
+    //TODO: These enum variables aren't to conventions, but they are more like global warnings/messages so I think its fine.
     enum class ELogCode
     {
         LOG_ERROR=0, LOG_WARNING=1, LOG_INFO=2
@@ -41,7 +41,6 @@ public:
         INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4
     };
 
-
     const std::map<ELogType, std::string> TypeMap { {ELogType::ARRAYS_NOT_EQUAL,"ValueError - Input vectors have not the same size"},
                                                     {ELogType::ARRAYS_EMPTY,"ValueError - Input vectors are empty"},
                                                     {ELogType::MISSING_BOOLEAN_VALUES,"ValueError - Mask must contain both true and false values" },
@@ -50,24 +49,21 @@ public:
                                                     };
 
 
-    //typedef std::function<void (const ELogType aType)> (*LogCallBackFunction); Does not Work for some reason
-    typedef void (*LogCallBackFunction)(const ELogType aType);
+    typedef std::function<void (const ELogType aType)> (LogCallBackFunction);
 
-    void WriteToLog(const ELogType aType) //TODO may get next to the enum also some parameter or two of the report (if we need one)
+    void WriteToLog(const ELogType aType) //TODO Use ELogCode + ELogMessage depending on LogCode.
     {
-        std::string msg = TypeMap.find(aType)->second;
+        std::string msg = GetInstance().TypeMap.find(aType)->second;
         std::cerr << msg << std::endl;
-        if (!LOG_FILE.is_open()) {
+        if (!GetInstance().LOG_FILE.is_open()) {
             time_t now = time(0);
             std::string file_path = "./VIVID_LOG";
             file_path.append(std::ctime(&now));
-            LOG_FILE.open(file_path + ".txt");
+            GetInstance().LOG_FILE.open(file_path + ".txt");
         }
-        LOG_FILE << msg << '\n';
+        GetInstance().LOG_FILE << msg << '\n';
     }
 };
-
-CLogFile* CLogFile::singleton = nullptr;
 
 }// namespace vivid
 #endif //VIVID_LOGFILE_H

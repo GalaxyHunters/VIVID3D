@@ -16,7 +16,7 @@ private:
 public:
     //Constructor and Copy Constructor
     CPointCloud(){}
-    CPointCloud(const std::vector<CPoint> &arPoints, const std::string arLabel) : mPoints(arPoints), CModelComponent(arLabel){}
+    CPointCloud(const std::vector<CPoint> &arPoints, const coord_t aAlpha, const std::string arLabel) : mPoints(arPoints), CModelComponent(aAlpha, arLabel){}
     CPointCloud(const CPointCloud &arPC) : mPoints(arPC.mPoints), CModelComponent(arPC){}
     ~CPointCloud(){}
 

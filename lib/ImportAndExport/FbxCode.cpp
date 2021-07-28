@@ -5,7 +5,7 @@
 using namespace vivid;
 using namespace std;
 
-
+// TODO: Is this even worth refactoring if Assimp will let us do this in a second?
 void FbxSceneExport(FbxScene* scene, const string& outputfile)
 {
     FbxManager* manager = FbxManager::Create();
@@ -51,7 +51,7 @@ vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh)
 //        vector<Color_t> MeshColors;
 //        cout << faces[l].GetColor() << endl;
 //        MeshColors.GetColor(0.3);
-        colors.push_back(FbxDouble3(GetColor(faces[l].GetColor()).R, GetColor(faces[l].GetColor()).G, GetColor(faces[l].GetColor()).B));
+        colors.push_back(FbxDouble3(mesh.GetClm().GetColor(faces[l].GetColor()).R, mesh.GetClm().GetColor(faces[l].GetColor()).G, mesh.GetClm().GetColor(faces[l].GetColor()).B));
     }
 
     return colors;
@@ -133,14 +133,14 @@ int GetCPSize(CMesh mesh)
 //
 
 
-void CreateTexture(FbxScene* scene, FbxMesh* FMesh, double AlphaFactor, const string& outputpath){
+void CreateTexture(FbxScene* scene, FbxMesh* FMesh, CMesh mesh, double AlphaFactor, const string& outputpath){
 
     //checks if a texture png file already exists, if not, it creates the texture file
 //    const char *TexturePath;
     if (CheckTexture(string(outputpath) + string("_texture.png")) == false) {
         cout << "no texture found, creating texture" << endl;
         vector<unsigned char> texture;
-        texture = GetColorTexture();
+        texture = mesh.GetClm().GetColorTexture();
         encodePNG( string(outputpath + "_texture.png"), texture, 1, texture.size() / 4);
 //        TexturePath = ();
         cout << "texture creation done" << endl;
@@ -220,7 +220,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
     //create faces for the mesh
     for (int k1 = 0; k1 < CFaces.size(); ++k1){
         vector<size_t> FacePoints = CFaces[k1].GetPoints();
-        int FaceColorIndex = GetColorIndex(CFaces[k1].GetColor());
+        int FaceColorIndex = mesh.GetClm().GetColorIndex(CFaces[k1].GetColor());
         FMesh->BeginPolygon(-1, -1, false); //was j
 
         for (int m1 = 0; m1 < FacePoints.size(); ++m1)
@@ -254,7 +254,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
     Node->SetShadingMode(FbxNode::eTextureShading);
 
     //create texture using function
-    CreateTexture(scene, FMesh, 0.8, outputpath);
+    CreateTexture(scene, FMesh, mesh, 0.8, outputpath);
 
     //pray to the gods of fbx sdk that this shit works
 

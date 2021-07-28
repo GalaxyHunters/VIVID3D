@@ -34,7 +34,7 @@ vector<vector<size_t>> CVoronoi::GetFaces() {
             if (!(c_point1 < i) && !(c_point2 < i)) { //the face doent belong to a cell we read already
                 faces.push_back(vector<size_t>());
                 face_points = mData.GetPointsInFace(*face);
-                for (point_vec::iterator point = face_points.begin(); point != face_points.end(); point++) {
+                for (auto point = face_points.begin(); point != face_points.end(); point++) {
                     faces.back().push_back(*point);
                 }
                 faces.back().push_back(c_point1);

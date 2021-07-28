@@ -40,9 +40,9 @@ public:
 class CSurface : public CMesh
 {
 private:
-    static void CallBack(const vivid::CLogFile::ELogType a)
+    static void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)
     {
-        CLogFile::GetInstance().WriteToLog(a);
+        CLogFile::GetInstance().WriteToLog(aCode, aMsg);
     }
     CLogFile::LogCallBackFunction mLogFile = CallBack;
 
@@ -82,7 +82,7 @@ private:
     // Smoothing Sub-Methods
     // Part 1
     void SetPinPout(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
-    void UpdateInputPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
+    void UpdateInput(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
     // Part 2
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
     void Stage2ModifyPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);

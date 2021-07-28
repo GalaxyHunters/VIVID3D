@@ -2,6 +2,9 @@
 #define VIVID_MODELCOMPONENT_H
 
 #include <string>
+#include <functional>
+#include <ColorMap.h>
+#include <map>
 
 namespace vivid
 {
@@ -9,22 +12,24 @@ namespace vivid
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
 //TODO splines?
 class CModelComponent {
-private:
-    // Alpha
-    std::string mLabel = "";
-    // set get
 protected:
+    coord_t mAlpha = 1.;
+    std::string mLabel = "";
+    CColorMap mClm;
     //Constructor, Copy Constructor, Destructor
     CModelComponent(){}
-    CModelComponent(const std::string &arLabel) : mLabel(arLabel){}
-    CModelComponent(const CModelComponent &arModel) : mLabel(arModel.mLabel){}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel) : mAlpha(aAlpha), mLabel(arLabel), mClm() {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mClm(arClm) {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const vector<color_t> &arClm) : mAlpha(aAlpha), mLabel(arLabel), mClm(arClm) {}
+    CModelComponent(const CModelComponent &arModel) : mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mClm(arModel.mClm) {}
     virtual ~CModelComponent() = 0;
 
     // Operator=
     inline CModelComponent& operator= (const CModelComponent& arModel) { mLabel = arModel.mLabel; return *this; }
-
+public:
     // set get
-    inline const std::string GetLabel() const{ return mLabel; }
+    inline const CColorMap GetClm() const { return mClm; }
+    inline const std::string GetLabel() const { return mLabel; }
     inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
 
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;

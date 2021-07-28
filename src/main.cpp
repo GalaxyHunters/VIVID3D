@@ -44,7 +44,7 @@ int CubeSurfTests()
         for (int j = 2; j >= -2; j -= 2) {
             for (int k = 2; k >= -2; k -= 2) {
                 points.push_back( vector<double> {(double)i, (double)j, (double)k} );
-                quan.push_back(0.5);
+                quan.push_back(j);
                 mask.push_back(false);
                 if (i == j && j == k && k == 0) {
                     mask.back() = true;
@@ -52,10 +52,11 @@ int CubeSurfTests()
             }
         }
     }
-//    cout << quan.size() << " " << points.size() << endl; // TODO: Should've been assert!
 
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.CreateSurface();
+//    cerr << "Initiating Copy Constructor" << endl;
+//    CSurface surf_copy = CSurface(surf);
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
     //mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
@@ -102,7 +103,8 @@ int PyramidSmoothTest()
 
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
-    smooth1.VecCSurf();
+    CSurface surf_copy = CSurface(smooth1);
+//    smooth1.VecCSurf();
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
     //mesh1.Reduce(0.3, 0.5);
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
@@ -161,16 +163,14 @@ int RunSupernovaTests()
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-    vector<vector<double>> points = {{0, 0}}; vector<bool> mask = {true}; vector<coord_t> quan = {1};
-    CSurface surf = CSurface(points, mask, quan, 0, 0);
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Cube" << endl;
-//    ret_value = CubeSurfTests();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSmoothTest();
+    cout << "Cube" << endl;
+    ret_value = CubeSurfTests();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Black Hole" << endl;
 //    ret_value = RunSupernovaTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

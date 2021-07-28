@@ -15,15 +15,14 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
         cout << arInputPoints.size() << arMask.size() << arQuan.size() << endl;
-        if (mLogFile) (mLogFile)(CLogFile::ELogType::ARRAYS_NOT_EQUAL);
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::ARRAYS_NOT_EQUAL);
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        if (mLogFile) (mLogFile)(CLogFile::ELogType::ARRAYS_EMPTY);
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-        if (mLogFile) (mLogFile)(CLogFile::ELogType::MISSING_BOOLEAN_VALUES);
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::MISSING_BOOLEAN_VALUES);
     }
-    if (mLogFile) (mLogFile)(CLogFile::ELogType::MISSING_BOOLEAN_VALUES);
     //converting <double> to <CPoint>
     vector<CPoint> points (arInputPoints.size());
     for (int i = 0; i < points.size(); i++) {
@@ -42,13 +41,24 @@ CSurface::CSurface(const CSurface &surf)
     mInputPoints = surf.mInputPoints;
     mMask = surf.mMask;
     mQuan = surf.mQuan;
+    mCenVector = surf.mCenVector;
+    mBoxPair = surf.mBoxPair;
+    mScale = surf.mScale;
 
     map <shared_ptr<CPoint>, shared_ptr<CPoint>> old_to_new_Points;
     mVecPoints.clear();
-    for (size_t i = 0; i < surf.mVecPoints.size(); i++) { //TODO: should it be iterator?
-        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf.mVecPoints[i]))));
-        old_to_new_Points[surf.mVecPoints[i]] = mVecPoints.back();
+    size_t counter = 0;
+    map < shared_ptr<CPoint>, size_t> indexes;
+    for (auto it = surf.mVecPoints.begin(); it != surf.mVecPoints.end(); it++) {
+        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(**it)));
+        indexes[*it] = counter;
+        counter++;
     }
+//    cout << surf.mVecPoints[0] << endl;
+//    for (size_t i = 0; i < surf.mVecPoints.size(); i++) { //TODO: should it be iterator?
+//        mVecPoints.push_back(shared_ptr<CPoint>(new CPoint(*(surf.mVecPoints[i]))));
+//        old_to_new_Points[surf.mVecPoints[i]] = mVecPoints.back();
+//    }
     mVecFaces.clear();
     CSurfaceFace temp;
     for (auto it = (surf.mVecFaces).begin(); it != surf.mVecFaces.end(); it++) {
@@ -56,11 +66,45 @@ CSurface::CSurface(const CSurface &surf)
         temp.mColor = (*it).mColor;
         temp.mPairPoints = (*it).mPairPoints;
         temp.mPoints.clear();
+//        for (auto point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
+//            if (set_points.count(indexes[*point]) == 0) {
+//                face_points.push_back(indexes[*point]);
+//                set_points.insert(indexes[*point]);
+//            }
+//        }
         for (auto pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
-            temp.mPoints.push_back(old_to_new_Points[*pIt]);
+            temp.mPoints.push_back(mVecPoints[indexes[*pIt]]);
+        }
+        if (it == (surf.mVecFaces).begin()) {
+            cout << "4 Works till here" << endl;
         }
         mVecFaces.push_back(temp);
     }
+
+//    vector<CPoint> points;
+//    size_t counter = 0;
+//    map < shared_ptr<CPoint>, size_t> indexes;
+//    for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
+//        //points.push_back(**it);
+//        points.push_back((**it * mScale) + mCenVector);
+//        indexes[*it] = counter;
+//        counter++;
+//    }
+//    vector<CIndexedFace> faces;
+//    vector<size_t> face_points;
+//    set<size_t> set_points;
+//    for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
+//        for (auto point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
+//            if (set_points.count(indexes[*point]) == 0) {
+//                face_points.push_back(indexes[*point]);
+//                set_points.insert(indexes[*point]);
+//            }
+//        }
+//        faces.push_back(CIndexedFace(face_points, it->mColor));
+//        face_points = vector<size_t>();
+//        set_points.clear();
+//    }
+//
 }
 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
@@ -68,6 +112,7 @@ CSurface::CSurface(const CSurface &surf)
 void CSurface::CreateSurface()
 {
     RunVorn();
+    cout << "Cleaning Surface" << endl;
     CleanEdges();
     CleanFaces();
     CleanPoints();
@@ -87,14 +132,14 @@ void CSurface::VecCSurf()
 void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        if (mLogFile) (mLogFile)(CLogFile::ELogType::INVALID_SMOOTH_FACTOR);
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_SMOOTH_FACTOR);
     }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     cout << "Begin Smooth" << endl;
     vector<size_t> p_out;
     vector<size_t> p_in;
     SetPinPout(p_out, p_in);
-    UpdateInputPoints(p_out, p_in);
+    UpdateInput(p_out, p_in);
     RunVorn();
     cout << mVecFaces.size() << " " << mVecPoints.size() << " " << mInputPoints.size()<< endl;
     cout << "Begin Smooth part 2" << endl;
@@ -109,7 +154,7 @@ void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
         Stage2AddPoints(p_out, p_in, aSmoothFactor);
     }
     //begin smooth part 3, running the model and cleaning it
-    UpdateInputPoints(p_out, p_in);
+    UpdateInput(p_out, p_in);
     MakeMask(p_out.size(), p_in.size());
     CreateSurface();
     //done.
@@ -119,8 +164,10 @@ void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha)
 {
     //check input valdilty
-    if(aAlpha > 1 || aAlpha < 0){
-        if (mLogFile) (mLogFile)(CLogFile::ELogType::INVALID_ALPHA_VALUE);
+    if(aAlpha > 1 || aAlpha <= 0){
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_WARNING, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
+        if (aAlpha > 1) { aAlpha = 1; }
+        if (aAlpha < 0) { aAlpha = 0.1; }
     }
 
     vector<CPoint> points;
@@ -170,16 +217,19 @@ void CSurface::RunVorn()
     cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
     mVecPoints = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
+    cout << "Vec Points # = " << mVecPoints.size() << endl;
     //set the faces
     vector<vector<size_t> > vorn_faces = mVoronoi.GetFaces();
     vector<CSurfaceFace> new_faces;
     vector<vector<size_t>> points_map;
+    // TODO: What is c_point1 and c_point2 really, and what size to make the points_map?
     points_map.resize(mVoronoi.mData.GetTotalFacesNumber(), vector<size_t>(0));
     //points_map.reserve(mVoronoi.mData.GetTotalFacesNumber());
     size_t c_point1;
     size_t c_point2;
     coord_t quan;
     vector<shared_ptr<CPoint>> face_points;
+    int counter =0;
     for (auto face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
         c_point1 = face->back();
         face->pop_back();
@@ -192,12 +242,14 @@ void CSurface::RunVorn()
             face_points.push_back(mVecPoints[*point]);
         }
         new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
-
-        points_map[c_point1].push_back(new_faces.size()-1);
-        points_map[c_point2].push_back(new_faces.size()-1);
+        cout << c_point1 << " " << c_point2 << endl;
+//        points_map[c_point1].push_back(new_faces.size()-1);
+//        points_map[c_point2].push_back(new_faces.size()-1);
+        counter++;
     }
+
     mVecFaces = new_faces;
-    mPointsInFaces = points_map;
+//    mPointsInFaces = points_map;
 }
 
 /*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
@@ -236,7 +288,7 @@ void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn)
     }
 }
 
-void CSurface::UpdateInputPoints(vector<size_t>& arPOut, vector<size_t>& arPIn)
+void CSurface::UpdateInput(vector<size_t>& arPOut, vector<size_t>& arPIn)
 {
     vector<CPoint> new_points;
     vector<coord_t> quan;

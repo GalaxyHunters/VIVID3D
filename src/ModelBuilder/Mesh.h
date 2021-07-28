@@ -19,12 +19,11 @@ namespace vivid
 /* FTrans_t is a function that changes CPoint to another CPoint */
 typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
-
+// TODO: CSurface inherits CModelComponent, CMesh inherits CSurface, and CSurface gets hidden constructor so its virtual
+// TODO: CSurface automatically converts ToMesh everytime
 class CMesh : public CModelComponent
 {
 private:
-    string mLabel = "";
-	coord_t mAlpha = 0;
 	vector<CPoint> mPoints ={};
 	vector<CIndexedFace> mFaces ={};
 
@@ -33,9 +32,9 @@ private:
 public:
 	CMesh() {};
     CMesh(const CMesh &aMesh) :
-        mLabel(aMesh.mLabel), mAlpha(aMesh.mAlpha), mPoints(aMesh.mPoints), mFaces(aMesh.mFaces), CModelComponent(aMesh){};
+        mPoints(aMesh.mPoints), mFaces(aMesh.mFaces), CModelComponent(aMesh){};
 	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha):
-	    mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha), CModelComponent(aLabel){}
+	    mPoints(aPoints), mFaces(aFaces), CModelComponent(aAlpha, aLabel){}
 	//operator =
 	~CMesh();
 
@@ -55,7 +54,15 @@ public:
     void TransformMesh(FTrans_t const aTrans);
     /**
      * transform CMesh points by transformation matrix
-     * @param[in] aTrans a 3x3 dimension matrix.
+     * @param[in] aTrans a 3x3 dimension matrix.Hey
+Im trying to understand what exactly is c_point1 and c_point2 in each face
+I understand its indexes, but I don't understand of what
+VornPoints # = 27
+Vorn Faces # = 169
+this is the cube data
+but c_point1 reaches like 189 as the max num, and c_point2 only 26
+but later you use it to access the mInputPoints by index somehow...
+I don't really understand how it works
      */
     void TransformMesh(coord_t const aTrans[3][3]);
     /**
@@ -76,10 +83,10 @@ public:
     void ScaleMesh(CPoint aScaleVec);
 
     // Getters, Setters
-    std::string GetLabel() { return mLabel; }
-    coord_t GetAlpha() { return mAlpha; }
-    std::vector<CPoint> GetPoints() { return mPoints; }
-    std::vector<CIndexedFace> GetFaces() { return mFaces; }
+    const std::string GetLabel() { return mLabel; }
+    const coord_t GetAlpha() { return mAlpha; }
+    const std::vector<CPoint> GetPoints() { return mPoints; }
+    const std::vector<CIndexedFace> GetFaces() { return mFaces; }
 
     void SetFaces(std::vector<CIndexedFace> aFaces) { mFaces = aFaces; }
     void SetPoints(std::vector<CPoint> aPoints) { mPoints = aPoints; }

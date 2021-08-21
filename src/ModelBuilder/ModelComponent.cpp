@@ -2,4 +2,4 @@
 
 using namespace vivid;
 
-CModelComponent::~CModelComponent() {}
+//CModelComponent::~CModelComponent() {}

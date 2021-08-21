@@ -35,7 +35,7 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
     PreProcessPoints();
 }
 
-// TODO: This doesn't seem to work, SEGSEGV Memory error.
+// TODO: Test if works now, then delete commented code
 CSurface::CSurface(const CSurface &surf)
 {
     mInputPoints = surf.mInputPoints;
@@ -118,17 +118,6 @@ void CSurface::CreateSurface()
     CleanPoints();
 }
 
-void CSurface::VecCSurf()
-{
-    vector<CPoint> new_points;
-    for (auto it = mVecPoints.begin(); it != mVecPoints.end(); it++) {
-        new_points.push_back(**it);
-    }
-    mInputPoints = new_points;
-    RunVorn();
-    CleanEdges();
-}
-
 void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
@@ -161,8 +150,7 @@ void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 }
 
 // TODO: CSurface is currently inheriting from Mesh, need to discuss this
-const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha)
-{
+const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
     //check input valdilty
     if(aAlpha > 1 || aAlpha <= 0){
         if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_WARNING, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
@@ -217,14 +205,12 @@ void CSurface::RunVorn()
     cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
     //set the points
     mVecPoints = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
-    cout << "Vec Points # = " << mVecPoints.size() << endl;
+    cout << "Total Points # = " << mVoronoi.mData.GetTotalPointNumber() << endl;
     //set the faces
     vector<vector<size_t> > vorn_faces = mVoronoi.GetFaces();
     vector<CSurfaceFace> new_faces;
     vector<vector<size_t>> points_map;
-    // TODO: What is c_point1 and c_point2 really, and what size to make the points_map?
-    points_map.resize(mVoronoi.mData.GetTotalFacesNumber(), vector<size_t>(0));
-    //points_map.reserve(mVoronoi.mData.GetTotalFacesNumber());
+    points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1;
     size_t c_point2;
     coord_t quan;
@@ -235,16 +221,15 @@ void CSurface::RunVorn()
         face->pop_back();
         c_point2 = face->back();
         face->pop_back();
-        quan = 0; //quan will be defiened later in the program(clean faces) so for now this will be a place holder
+        quan = 0; //quan will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
         for (auto point = face->begin(); point != face->end(); point++) {
             face_points.push_back(mVecPoints[*point]);
         }
         new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
-        cout << c_point1 << " " << c_point2 << endl;
-//        points_map[c_point1].push_back(new_faces.size()-1);
-//        points_map[c_point2].push_back(new_faces.size()-1);
+        points_map[c_point1].push_back(new_faces.size()-1);
+        points_map[c_point2].push_back(new_faces.size()-1);
         counter++;
     }
 
@@ -692,8 +677,9 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
         arQuan = vector<coord_t>(arQuan.size(), 1);
         return arQuan;
     }
+    coord_t divide_by = 1./(aVMax-aVMin);
     for (auto it = arQuan.begin(); it != arQuan.end(); it++) {
-        *it = 1- ((*it - aVMax) / (aVMin - aVMax));
+        *it = (*it - aVMin) * divide_by;
         if (*it > 1) *it = 1;
         if (*it < 0) *it = 0;
     }

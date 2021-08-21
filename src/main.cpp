@@ -2,6 +2,7 @@
 #include "Utils/ReadBinFile.h"
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
+#include "ModelBuilder/SurfByFunc.h"
 #include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
@@ -23,13 +24,57 @@ int ShapesTest()
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
     // TODO (Tomer): what does "this sets the center" mean???
-    model.AddMesh( CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, 0.1, 0.8, "sphere1" ));
-    auto arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
-    model.AddMesh(arrow_x);
-    model.AddMesh(CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box"));
-    model.AddMesh(CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube"));
+    CMesh sphere = CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, 0.1, 0.8, "sphere1" );
+    CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
+    CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
+    CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube");
+    vector<CModelComponent> list = {sphere, arrow_x, box, cube};
+    model.AddMeshes(list);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Shapes"); // /test_models/
 
+    return EXIT_SUCCESS;
+}
+
+coord_t TestFunc(const coord_t x, const coord_t y) {
+    //return (7*x*y)/pow(2,x*x+y*y);
+//    return 1./(y-x*x);
+//    if ((4-x*x-y*y) >= -0.1 & (4-x*x-y*y) <= 0.01) {
+//        return 0;
+//    }
+    return sqrt(4-x*x-y*y);
+}
+coord_t Sphere2Func(const coord_t x, const coord_t y) {
+
+    return -sqrt(4-x*x-y*y);
+}
+
+int SurfByFuncTest()
+{
+    F3D_t func = TestFunc;
+    CMesh mesh = SurfByFunc(func, 3, 1., "Test_Func");
+    F3D_t func2 = Sphere2Func;
+    CMesh mesh2 = SurfByFunc(func2, 3, 1., "Test_Func");
+    CModel model = CModel({mesh, mesh2});
+    model.ExportToObj(TEST_OUTPUT_PATH + "SurfByFunc");
+    return EXIT_SUCCESS;
+}
+
+CPoint ParametricTest(const coord_t u, const coord_t v)
+{
+    coord_t x = sin(v);
+    coord_t y = (2+cos(v))*sin(u);
+    coord_t z = (2+cos(v))*cos(u);
+//    coord_t x = v*cos(u);
+//    coord_t y = v*sin(u);
+//    coord_t z = v+sin(3*v)/3-4;
+    return CPoint(x,y,z);
+}
+
+int ParametricSurfByFuncTest()
+{
+    FParametric_t func = ParametricTest;
+    CMesh mesh = ParametricSurface(func, 50, 0, 2*M_PI, 0, 2*M_PI, 1., "Parametric");
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "ParametricTestAlt");
     return EXIT_SUCCESS;
 }
 
@@ -52,15 +97,37 @@ int CubeSurfTests()
             }
         }
     }
-
+    CModel model;
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.CreateSurface();
 //    cerr << "Initiating Copy Constructor" << endl;
 //    CSurface surf_copy = CSurface(surf);
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+    mesh.SetClm("Red");
     //mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
+    CMesh mesh2 = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
+    mesh2.SetClm("Green");
+    CMesh mesh3 = CreateBoxMesh(CPoint(-4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
+    mesh3.SetClm("Blue");
+    vector<CModelComponent> meshes = {mesh2, mesh3};
+    model.AddMesh(mesh2);
+    model.ExportToObj(TEST_OUTPUT_PATH + "/CubeShape");
+    return EXIT_SUCCESS;
+}
 
+/* Test Colormap functionality by many cubemeshes */
+int ColorMapTest()
+{
+    CModel model;
+    vector<string> colors = {"Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"};
+    vector<CPoint> loc = {{0,0,0}, {1,0,0}, {2,0,0},{0,0,1},{1,0,1},{2,0,1},{0,0,2},{1,0,2}};
+    for (int i = 0; i < colors.size(); i++) {
+        CMesh box = CreateCubeMesh(loc[i]*3,0.5,1,1,colors[i]);
+        box.SetClm(colors[i]);
+        model.AddMesh(box);
+    }
+    model.ExportToObj(TEST_OUTPUT_PATH + "/ColorsTest");
     return EXIT_SUCCESS;
 }
 
@@ -104,7 +171,6 @@ int PyramidSmoothTest()
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
     CSurface surf_copy = CSurface(smooth1);
-//    smooth1.VecCSurf();
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
     //mesh1.Reduce(0.3, 0.5);
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
@@ -163,11 +229,17 @@ int RunSupernovaTests()
 int main()
 {
     int ret_value = EXIT_SUCCESS;
+    cout << "ParametricSurfByFuncTest" << endl;
+    ret_value = ParametricSurfByFuncTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube" << endl;
-    ret_value = CubeSurfTests();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube" << endl;
+//    ret_value = CubeSurfTests();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Colors" <<endl;
+//    ret_value = ColorMapTest();
+//    if ( EXIT_SUCCESS != ret_value) return ret_value;
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

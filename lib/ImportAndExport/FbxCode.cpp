@@ -40,7 +40,7 @@ void FbxNodeExport(FbxNode* Node, char* output)
 }
 
 
-vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh)
+vector<FbxDouble3> MeshToFbxMaterials(CModelComponent mesh)
 {
     //colors.clear();
     vector<CIndexedFace> faces = mesh.GetFaces();
@@ -57,7 +57,7 @@ vector<FbxDouble3> MeshToFbxMaterials(CMesh mesh)
     return colors;
 }
 
-FbxNode* OneMeshToFbx(CMesh CMesh)
+FbxNode* OneMeshToFbx(CModelComponent CMesh)
 {
     FbxManager* manager = FbxManager::Create();
     FbxMesh* FMesh = FbxMesh::Create(manager, "mesh");
@@ -109,7 +109,7 @@ FbxNode* OneMeshToFbx(CMesh CMesh)
 FbxNode* OneModelToFbx(CModel Model)
 {
     FbxManager* manager = FbxManager::Create();
-    vector<CMesh> Meshes = Model.GetMeshes();
+    vector<CModelComponent> Meshes = Model.GetMeshes();
     vector<FbxNode*> Nodes(Meshes.size());
     FbxNode* ParentNode = FbxNode::Create(manager, "ParentNode");
     for (int l = 0; l < Meshes.size(); ++l)
@@ -120,7 +120,7 @@ FbxNode* OneModelToFbx(CModel Model)
     return ParentNode;
 }
 
-int GetCPSize(CMesh mesh)
+int GetCPSize(CModelComponent mesh)
 {
     int CPSize = 0;
     vector<CIndexedFace> faces = mesh.GetFaces();
@@ -133,7 +133,7 @@ int GetCPSize(CMesh mesh)
 //
 
 
-void CreateTexture(FbxScene* scene, FbxMesh* FMesh, CMesh mesh, double AlphaFactor, const string& outputpath){
+void CreateTexture(FbxScene* scene, FbxMesh* FMesh, CModelComponent mesh, double AlphaFactor, const string& outputpath){
 
     //checks if a texture png file already exists, if not, it creates the texture file
 //    const char *TexturePath;
@@ -181,7 +181,7 @@ void CreateTexture(FbxScene* scene, FbxMesh* FMesh, CMesh mesh, double AlphaFact
     }
 }
 
-FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputpath)
+FbxNode* OneMeshToFbxTextures(CModelComponent mesh, FbxScene* scene, const string& outputpath)
 {
     //Initialize node + mesh and connect them
     FbxNode* Node = FbxNode::Create(scene, "convee");
@@ -264,7 +264,7 @@ FbxNode* OneMeshToFbxTextures(CMesh mesh, FbxScene* scene, const string& outputp
 
 FbxNode* OneModelToFbxTextures(CModel model, FbxScene* scene, const string& outputpath){
     FbxNode* ParentNode = FbxNode::Create(scene, "model");
-    vector<CMesh> meshes = model.GetMeshes();
+    vector<CModelComponent> meshes = model.GetMeshes();
     for (int l = 0; l < meshes.size(); ++l) {
         ParentNode->AddChild(OneMeshToFbxTextures(meshes[l], scene, outputpath));
     }

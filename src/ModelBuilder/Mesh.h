@@ -4,6 +4,7 @@
 #include "ModelComponent.h"
 
 #include "Point.h"
+//#include "LogFile.h"
 #include "IndexedFace.h"
 #include "Decimate.h"
 #include "Utils/ColorMap.h"
@@ -24,17 +25,33 @@ typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use 
 class CMesh : public CModelComponent
 {
 private:
-	vector<CPoint> mPoints ={};
-	vector<CIndexedFace> mFaces ={};
+    // TODO: maybe should be part of modelComponent
+//    static void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)
+//    {
+//        CLogFile::GetInstance().WriteToLog(aCode, aMsg);
+//    }
+//    CLogFile::LogCallBackFunction mLogFile = CallBack;
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};
-    CMesh(const CMesh &aMesh) :
-        mPoints(aMesh.mPoints), mFaces(aMesh.mFaces), CModelComponent(aMesh){};
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha):
-	    mPoints(aPoints), mFaces(aFaces), CModelComponent(aAlpha, aLabel){}
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha) :
+        CModelComponent(aAlpha, aLabel){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
+	   CModelComponent(aAlpha, aLabel, arClm, arCName){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const string &arClm) :
+	    CModelComponent(aAlpha, aLabel, arClm){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(const CMesh &arMesh) :
+	    CModelComponent(arMesh){
+        mPoints = arMesh.mPoints; mFaces = arMesh.mFaces;
+    };
 	//operator =
 	~CMesh();
 
@@ -54,15 +71,7 @@ public:
     void TransformMesh(FTrans_t const aTrans);
     /**
      * transform CMesh points by transformation matrix
-     * @param[in] aTrans a 3x3 dimension matrix.Hey
-Im trying to understand what exactly is c_point1 and c_point2 in each face
-I understand its indexes, but I don't understand of what
-VornPoints # = 27
-Vorn Faces # = 169
-this is the cube data
-but c_point1 reaches like 189 as the max num, and c_point2 only 26
-but later you use it to access the mInputPoints by index somehow...
-I don't really understand how it works
+     * @param[in] aTrans a 3x3 dimension matrix.
      */
     void TransformMesh(coord_t const aTrans[3][3]);
     /**
@@ -82,22 +91,6 @@ I don't really understand how it works
      */
     void ScaleMesh(CPoint aScaleVec);
 
-    // Getters, Setters
-    const std::string GetLabel() { return mLabel; }
-    const coord_t GetAlpha() { return mAlpha; }
-    const std::vector<CPoint> GetPoints() { return mPoints; }
-    const std::vector<CIndexedFace> GetFaces() { return mFaces; }
-
-    void SetFaces(std::vector<CIndexedFace> aFaces) { mFaces = aFaces; }
-    void SetPoints(std::vector<CPoint> aPoints) { mPoints = aPoints; }
-    void SetLabel(std::string aLabel) { mLabel = aLabel; }
-    void SetAlpha(coord_t aAlpha) {
-        //check input valdilty
-        if(aAlpha > 1 || aAlpha < 0){
-            throw "Alpha must be between 0 and 1";
-        }
-        mAlpha = aAlpha;
-    }
 
 };
 

@@ -16,7 +16,7 @@ PYBIND11_MODULE(vivid_py, m) {
             .def(py::init<vector<vector<double >>, vector<bool>, vector<coord_t>, coord_t, coord_t>(), "constructor function for surf",
                  py::arg("aInputPoints"), py::arg("aMask"), py::arg("aQuan") = vector<double>(0), py::arg("aVMin") = 0, py::arg("aVMax") = 0) // = vector<double>(0)
             .def(py::init<const CSurface &> (), "copy constructor for CSurface", py::arg("surf"))
-            .def("Smooth", &CSurface::Smooth, "A smoothing algorithm for the surface, improves visibility and helps the decimation algorithm in the next stage")
+            .def("Smooth", &CSurface::Smooth, "A smoothing algorithm -for the surface, improves visibility and helps the decimation algorithm in the next stage")
             .def("ToMesh", &CSurface::ToMesh, "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("aLabel") = "VIVID_3D_MODEL", py::arg("aAlpha") = 1);
 

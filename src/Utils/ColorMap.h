@@ -21,7 +21,6 @@ public:
     double B;
 
 	inline color_t(double R, double G, double B) : R(R), G(G), B(B) {}
-//	inline color_t(int8_t R, int8_t G, int8_t B) : R(R), G(G), B(B) {}
 };
 class CColorMap
 {
@@ -29,22 +28,48 @@ private:
     typedef std::function<vector<color_t>()> FColor_t;
 
     // TODO: Expand and move to different section
-    static vector<color_t> Red()
+    static std::vector<color_t> Black()
     {
-        return vector<color_t> {color_t(1., 0., 0.),};
+        return std::vector<color_t> {color_t(0., 0., 0.),};
     }
-    static vector<color_t> Green()
+    static std::vector<color_t> White()
     {
-        return vector<color_t> {color_t(0., 1., 0.),};
+        return std::vector<color_t> {color_t(1., 1., 1.),};
     }
-    static vector<color_t> Blue()
+    static std::vector<color_t> Red()
     {
-        return vector<color_t> {color_t(0., 0., 1.),};
+        return std::vector<color_t> {color_t(1., 0., 0.),};
+    }
+    static std::vector<color_t> Green()
+    {
+        return std::vector<color_t> {color_t(0., 1., 0.),};
+    }
+    static std::vector<color_t> Blue()
+    {
+        return std::vector<color_t> {color_t(0., 0., 1.),};
+    }
+    static std::vector<color_t> Yellow()
+    {
+        return std::vector<color_t> {color_t(1., 1., 0.),};
+    }
+    static std::vector<color_t> Purple()
+    {
+        return std::vector<color_t> {color_t(1., 0., 1.),};
+    }
+    static std::vector<color_t> Cyan()
+    {
+        return std::vector<color_t> {color_t(0., 1., 1.),};
     }
 
-    std::map<std::string, FColor_t> ColorFunc {        {"Red", Red},
+
+    std::map<std::string, FColor_t> ColorFunc {        {"White", White},
+                                                       {"Black", Black},
+                                                       {"Red", Red},
                                                        {"Green", Green},
                                                        {"Blue", Blue},
+                                                       {"Yellow", Yellow},
+                                                       {"Purple", Purple},
+                                                       {"Cyan", Cyan},
     };
 
     // Default Clm when none provided
@@ -129,11 +154,18 @@ private:
 
 public:
     CColorMap() : Clm(ClmPlasma), ClmName("Plasma") {}
-    CColorMap(const vector<color_t> &arClm) : Clm(arClm) {}
+    CColorMap(const vector<color_t> &arClm, const string &arCName) : Clm(arClm), ClmName(arCName) {}
     CColorMap(const string &arCName) : Clm(ColorFunc[arCName]()), ClmName(arCName) {}
+    inline CColorMap& operator= (const CColorMap& arClm) { Clm=arClm.Clm; ClmName=arClm.ClmName; return *this; }
 
-    //TODO: Set colormap function
-    void SetColorMap() {}
+    void SetColorMap(const vector<color_t> &arClm, const string &arCName) {
+        Clm = arClm; ClmName = arCName;
+    }
+
+    void SetColorMap(const string &arClm) {
+        Clm = ColorFunc[arClm]();
+        ClmName = arClm;
+    }
 
     int GetColorIndex(double aVal) const {
         if (Clm.empty()){ // TODO: Does this still happen?

@@ -1,6 +1,7 @@
 #ifndef VIVID_SURFACE_H
 #define VIVID_SURFACE_H
 
+
 #include "Voronoi.h"
 #include "Mesh.h"
 #include "LogFile.h"
@@ -15,11 +16,11 @@ class CSurfacePoint
 { // used to sort and clean the mVoronoi input points
 public:
     CPoint mPoint = {};
-    coord_t mQuan = 0;
+    quan_t mQuan = 0;
     bool mIsIn = false;
 
     CSurfacePoint() {};
-    CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+    CSurfacePoint(CPoint aPoint, quan_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
 };
 
 //TODO Should it containd CFace?
@@ -28,9 +29,9 @@ class CSurfaceFace
 public:
     std::vector<std::shared_ptr<CPoint> > mPoints = {};
     std::pair<size_t, size_t> mPairPoints = {};
-    coord_t mColor = 0;
+    quan_t mColor = 0;
 
-    CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
+    CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, quan_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
             mPoints(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
     CSurfaceFace() {};
     ~CSurfaceFace() {};
@@ -55,20 +56,20 @@ private:
 
     std::vector<CPoint> mInputPoints = {};   // for smooth
     std::vector<bool> mMask = {};            // for smooth
-    std::vector<coord_t> mQuan = {};         // for smooth
+    std::vector<quan_t> mQuan = {};         // for smooth
     CPoint mCenVector = {};                  // holds the center of the data (used to center the data by 000 and back to original upon export)
     std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
-    coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
+    quan_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
 
     // Centralization Sub-Methods
-    coord_t FindContainingRadius();          // Used for Scaling
+    quan_t FindContainingRadius();          // Used for Scaling
     std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
     // Handle Input Sub-Methods
     // TODO: Fix CleanDoubleInputPoints
     void CleanDoubleInputPoints();           // remove all the double input points
     void PreProcessPoints();                 // Centering, scaling, adding noise.
-    std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+    std::vector<quan_t>& NormQuan(std::vector<quan_t>& arQuan, quan_t aVMin, quan_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
     //vorn function:
     void RunVorn();
@@ -87,13 +88,13 @@ private:
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
     void Stage2ModifyPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
     void FindPairPoints(size_t aCPoint1, size_t aCPoint2, std::vector<size_t> &arPIn, std::vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
-                        CSurfaceFace &arFace, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan, size_t &arIndex);
-    void AddPointsAlt(std::vector<size_t> &arPVec, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan,
+                        CSurfaceFace &arFace, std::vector<CPoint> &arNewPoints, std::vector<quan_t> &arNewQuan, size_t &arIndex);
+    void AddPointsAlt(std::vector<size_t> &arPVec, std::vector<CPoint> &arNewPoints, std::vector<quan_t> &arNewQuan,
                       size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3); // Adds points between every pair by aSmoothFactor
     void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
-    void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
+    void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<quan_t> * apNewQuan,
                    size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor); // Adds points between every pair by aSmoothFactor
-    void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan,
+    void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<quan_t>& arNewQuan,
                                std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut); // Handles the reallocation after RemoveDoublesVornInput
     std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);   // Called by CleanDoublePointsVorn
     // Part 3
@@ -109,7 +110,7 @@ public:
      * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
      */
     CSurface(const std::vector<std::vector<double >> &arInputPoints, const std::vector<bool> &arMask,
-             std::vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax);
+             std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax);
     /**
      * CSurface Copy-Constructor
      */
@@ -134,21 +135,19 @@ public:
      * @param[in] aAlpha the alpha to assign to the new mesh
      * @returns CMesh converted mesh
      */
-    const CMesh ToMesh(string aLabel, coord_t aAlpha); // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
-
-    void VecCSurf();
+    const CMesh ToMesh(string aLabel, quan_t aAlpha) const; // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
     // Getters, Setters
     // TODO: which gets do we really need and why?
     inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
     inline const std::vector<bool>& GetMask() { return mMask; }
-    inline const std::vector<coord_t>& GetQuan() { return mQuan; }
+    inline const std::vector<quan_t>& GetQuan() { return mQuan; }
     inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
     inline const std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
 
     inline void SetInputPoints(const std::vector<CPoint> &arInputPoints) { mInputPoints = arInputPoints; }
     inline void SetMask(const std::vector<bool> &arMask) { mMask = arMask; }
-    inline void SetQuan(std::vector<coord_t> &arQuan) { mQuan = arQuan; }
+    inline void SetQuan(std::vector<quan_t> &arQuan) { mQuan = arQuan; }
 };
 
 } // namespace vivid

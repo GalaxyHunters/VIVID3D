@@ -3,7 +3,9 @@
 
 #include "ModelComponent.h"
 #include <vector>
+#include <algorithm>
 #include "Point.h"
+#include "IndexedFace.h"
 
 namespace vivid
 {
@@ -13,11 +15,20 @@ class CPointCloud : public CModelComponent{
 private:
     /* mPoints - Points in the 3D space */
     std::vector<CPoint> mPoints = {};
+    std::vector<CIndexedFace> mFaces ={};
 public:
     //Constructor and Copy Constructor
     CPointCloud(){}
-    CPointCloud(const std::vector<CPoint> &arPoints, const coord_t aAlpha, const std::string arLabel) : mPoints(arPoints), CModelComponent(aAlpha, arLabel){}
-    CPointCloud(const CPointCloud &arPC) : mPoints(arPC.mPoints), CModelComponent(arPC){}
+    CPointCloud(const std::vector<CPoint> &arPoints, const coord_t aAlpha, vector<quan_t> &arQuan, const std::string arLabel) : mPoints(arPoints), CModelComponent(aAlpha, arLabel){
+        quan_t v_max = *std::max_element(arQuan.begin(), arQuan.end());
+        quan_t v_min = *std::min_element(arQuan.begin(), arQuan.end());
+        quan_t divide_by = 1./(v_max - v_min);
+        for (size_t i = 0; i < arPoints.size(); i++){
+            quan_t quan = (arQuan[i] - v_min) * divide_by;
+            mFaces.push_back(CIndexedFace({i}, quan));
+        }
+    }
+    CPointCloud(const CPointCloud &arPC) : mPoints(arPC.mPoints), mFaces(arPC.mFaces), CModelComponent(arPC){}
     ~CPointCloud(){}
 
     // Operator=

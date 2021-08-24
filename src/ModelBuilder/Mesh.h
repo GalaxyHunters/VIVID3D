@@ -4,6 +4,7 @@
 #include "ModelComponent.h"
 
 #include "Point.h"
+//#include "LogFile.h"
 #include "IndexedFace.h"
 #include "Decimate.h"
 #include "Utils/ColorMap.h"
@@ -19,23 +20,38 @@ namespace vivid
 /* FTrans_t is a function that changes CPoint to another CPoint */
 typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
-
+// TODO: CSurface inherits CModelComponent, CMesh inherits CSurface, and CSurface gets hidden constructor so its virtual
+// TODO: CSurface automatically converts ToMesh everytime
 class CMesh : public CModelComponent
 {
 private:
-    string mLabel = "";
-	coord_t mAlpha = 0;
-	vector<CPoint> mPoints ={};
-	vector<CIndexedFace> mFaces ={};
+    // TODO: maybe should be part of modelComponent
+//    static void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)
+//    {
+//        CLogFile::GetInstance().WriteToLog(aCode, aMsg);
+//    }
+//    CLogFile::LogCallBackFunction mLogFile = CallBack;
 
     vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};
-    CMesh(const CMesh &aMesh) :
-        mLabel(aMesh.mLabel), mAlpha(aMesh.mAlpha), mPoints(aMesh.mPoints), mFaces(aMesh.mFaces), CModelComponent(aMesh){};
-	CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha):
-	    mPoints(aPoints), mFaces(aFaces), mLabel(aLabel), mAlpha(aAlpha), CModelComponent(aLabel){}
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha) :
+        CModelComponent(aAlpha, aLabel){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
+	   CModelComponent(aAlpha, aLabel, arClm, arCName){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const string &arClm) :
+	    CModelComponent(aAlpha, aLabel, arClm){
+        mPoints = aPoints; mFaces = aFaces;
+    }
+    CMesh(const CMesh &arMesh) :
+	    CModelComponent(arMesh){
+        mPoints = arMesh.mPoints; mFaces = arMesh.mFaces;
+    };
 	//operator =
 	~CMesh();
 
@@ -75,22 +91,6 @@ public:
      */
     void ScaleMesh(CPoint aScaleVec);
 
-    // Getters, Setters
-    std::string GetLabel() { return mLabel; }
-    coord_t GetAlpha() { return mAlpha; }
-    std::vector<CPoint> GetPoints() { return mPoints; }
-    std::vector<CIndexedFace> GetFaces() { return mFaces; }
-
-    void SetFaces(std::vector<CIndexedFace> aFaces) { mFaces = aFaces; }
-    void SetPoints(std::vector<CPoint> aPoints) { mPoints = aPoints; }
-    void SetLabel(std::string aLabel) { mLabel = aLabel; }
-    void SetAlpha(coord_t aAlpha) {
-        //check input valdilty
-        if(aAlpha > 1 || aAlpha < 0){
-            throw "Alpha must be between 0 and 1";
-        }
-        mAlpha = aAlpha;
-    }
 
 };
 

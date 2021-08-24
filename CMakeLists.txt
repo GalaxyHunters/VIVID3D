@@ -91,7 +91,7 @@ add_executable(vivid
         src/Extra/Analysis.h
 
         #main
-        src/main.cpp)
+        src/main.cpp src/ModelBuilder/SurfByFunc.cpp src/ModelBuilder/SurfByFunc.h)
 
 
 

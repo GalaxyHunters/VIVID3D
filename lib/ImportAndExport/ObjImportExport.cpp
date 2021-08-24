@@ -2,7 +2,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "DataToImage.h"
 
-
 #include <string>
 
 //TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
@@ -16,9 +15,8 @@ using namespace std;
 namespace vivid
 {  // TODO temp fix most of the functions here should be rewritten or become out of scope
 
-
-color_t static Quan2Color(coord_t aQuan) { // calls function from ColorMap.h
-    return GetColor(aQuan);
+color_t static Quan2Color(CColorMap aClm, coord_t aQuan) { // calls function from ColorMap.h
+    return aClm.GetColor(aQuan);
 }
 
 bool static CompareColor(color_t aColor1, color_t aColor2) {
@@ -65,7 +63,7 @@ void WriteNewPoint(ofstream& aOBJFile, CPoint aPoint)
     aOBJFile << "v " << to_string(aPoint.X()) + " " + to_string(aPoint.Y()) + " " + to_string(aPoint.Z()) + "\n";
 }
 
-void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * apMtlCounter, size_t aPointsCounter)
+void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CModelComponent * apMesh, size_t * apMtlCounter, size_t aPointsCounter)
 {
     aOBJFile << "o " + apMesh->GetLabel() + "\n";
     //cout << apMesh->GetPoints().begin() << endl;
@@ -84,17 +82,18 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CMesh * apMesh, size_t * a
     //sort vecFaces by color
     sort(Faces.begin(), Faces.end(), CompFace); // NlogN
     //write faces to obj file + write colors to mtl file
-    color_t color = Quan2Color((apMesh->GetFaces())[0].GetColor());
+    color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetColor());
     WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
     for (auto it = Faces.begin(); it != Faces.end(); it++)
     {
-        if (CompareColor(color, Quan2Color(it->GetColor()))) //if true write the face to the obj file
+
+        if (CompareColor(color, Quan2Color(apMesh->GetClm(), it->GetColor()))) //if true write the face to the obj file
         {
             WriteNewFace(aOBJFile, *it, aPointsCounter);
         }
         else // we reached a new color, and we need to write it in mtl before using it
         {
-            color = Quan2Color(it->GetColor());
+            color = Quan2Color(apMesh->GetClm(), it->GetColor());
             (*apMtlCounter)++;
             WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
             // now we can write the face in the obj file
@@ -132,7 +131,7 @@ void ExportToObjMaterial(CModel &aModel, string aOutput){
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    vector<CMesh> meshes = aModel.GetMeshes();
+    vector<CModelComponent> meshes = aModel.GetMeshes();
     for (auto it = meshes.begin(); it != meshes.end(); it++)
     {
 //	    cout << it->GetLabel() << endl;
@@ -146,15 +145,15 @@ void ExportToObjMaterial(CModel &aModel, string aOutput){
 }
 
 
-void WriteNewFaceTexture(ofstream &aOBJFile, CIndexedFace aFace, size_t aPointsCounter) {
-    aOBJFile << "f ";
+void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CIndexedFace aFace, size_t aPointsCounter) {
+    arOBJFile << "f ";
     vector<size_t> face_points = aFace.GetPoints();
-    size_t VT = GetColorIndex( aFace.GetColor())+1;
+    size_t VT = apMesh->GetClm().GetColorIndex( aFace.GetColor())+1;
     for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
     {
-        aOBJFile << to_string(*ItPoint + 1 + aPointsCounter) +"/" + to_string(VT) + " "; //TODO formatting
+        arOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + "/" + to_string(VT) + " "; //TODO formatting
     }
-    aOBJFile << "\n";
+    arOBJFile << "\n";
 }
 
 void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, coord_t aAlpha) {
@@ -173,12 +172,12 @@ void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counte
     aOBJFile << "usemtl texture_" + to_string(*mtl_counter) + "\n";
 }
 
-void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_t * mtl_counter, string aTextureName,
-                             coord_t aTextureSize, size_t aPointsCounter) {
-    aOBJFile << "o " + aMesh->GetLabel() + "\n";
+void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CModelComponent *apMesh, size_t * mtl_counter, string aTextureName,
+                     coord_t aTextureSize, size_t aPointsCounter) {
+    aOBJFile << "o " + apMesh->GetLabel() + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
-    // CPoint cen_point = aMesh->getCenVector();
-    vector<CPoint> points = aMesh->GetPoints();
+    // CPoint cen_point = apMesh->getCenVector();
+    vector<CPoint> points = apMesh->GetPoints();
     //write points to obj file
     for (auto it = points.begin(); it != points.end(); it++)
     {
@@ -191,14 +190,14 @@ void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CMesh *aMesh, size_
         aOBJFile << "vt 0 " + to_string(i/aTextureSize) + "\n";
     }
     //write faces
-    WriteMtlTexture(aOBJFile, aMTLFile,  mtl_counter, aTextureName, aMesh->GetAlpha());
-    vector<CIndexedFace> faces = aMesh->GetFaces();
+    WriteMtlTexture(aOBJFile, aMTLFile, mtl_counter, aTextureName, apMesh->GetAlpha());
+    vector<CIndexedFace> faces = apMesh->GetFaces();
     for (vector<CIndexedFace>::iterator it = faces.begin(); it != faces.end(); it++){
-        WriteNewFaceTexture(aOBJFile, *it, aPointsCounter);
+        WriteNewFaceTexture(aOBJFile, apMesh, *it, aPointsCounter);
     }
 }
 
-void ExportToObjTexture(CModel &aModel, string aOutput) {
+void ExportToObjTexture(CModel &arModel, string aOutput) {
     if (boost::ends_with(aOutput, ".obj") )  { //check if the output file ends with .obj, and delete it if it does
         aOutput.erase(aOutput.length() - 4, 4);
     }
@@ -220,9 +219,12 @@ void ExportToObjTexture(CModel &aModel, string aOutput) {
         mtl = mtl.substr(mtl.find(lines) + 1, string::npos);
     }
     //write texture
-    vector<unsigned char> texture;
-    texture = GetColorTexture();
-    encodePNG( string(aOutput + "_texture.png"), texture, 1, texture.size()/4);
+    vector<CModelComponent> meshes = arModel.GetMeshes();
+    vector<vector<unsigned char>> textures;
+    for (auto it = meshes.begin(); it != meshes.end(); it++) {
+        textures.push_back(it->GetClm().GetColorTexture());
+        encodePNG( string(aOutput + it->GetClm().GetName() + "_texture.png"), textures.back(), 1, textures.back().size()/4);
+    }
     //write obj file starter
     o << "# This 3D code was produced by Vivid \n\n\n";
     o << "mtllib " + mtl + "\n";
@@ -231,12 +233,12 @@ void ExportToObjTexture(CModel &aModel, string aOutput) {
 
     size_t mtl_counter = 0; // will be used to count the newmtl
     size_t points_counter = 0; // will be used to count how many points the former obj wrote to the file
-    vector<CMesh> meshes = aModel.GetMeshes();
-    for (auto ItMesh = meshes.begin(); ItMesh != meshes.end(); ++ItMesh)
+    for (auto it = meshes.begin(); it != meshes.end(); ++it)
     {
-//	    cout << ItMesh->GetLabel() << endl;
-        WriteObjTexture(o, m, &(*ItMesh), &mtl_counter, mtl + "_texture.png", texture.size()/4, points_counter);
-        points_counter += ItMesh->GetPoints().size();
+//	    cout << it->GetLabel() << endl;
+        WriteObjTexture(o, m, &(*it), &mtl_counter, mtl + it->GetClm().GetName() + "_texture.png",
+                        textures[mtl_counter].size() / 4, points_counter);
+        points_counter += it->GetPoints().size();
         mtl_counter = mtl_counter + 1;
     }
 

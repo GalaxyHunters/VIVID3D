@@ -14,14 +14,15 @@ public:
 	inline CIndexedFace(size_t aPoint1, size_t aPoint2, size_t aPoint3, coord_t aColor); // used after triangulation and decimation
 	//operator=
 	inline ~CIndexedFace();
-	inline std::vector<size_t> GetPoints() { return mPoints; }
+	inline const std::vector<size_t> GetPoints() { return mPoints; }
 	inline size_t operator[](size_t I) {return mPoints[I];}
-	inline coord_t GetColor() { return mColor; }
-	inline void SetColor(coord_t aColor) { mColor = aColor; }
-	inline void SetPoints(std::vector<size_t> aPoints) { mPoints = aPoints; }
+	inline const coord_t GetColor() const { return mColor; }
+	inline void SetColor(const coord_t aColor) { mColor = aColor; }
+	inline void SetPoints(const std::vector<size_t> &arPoints) { mPoints = arPoints; }
 
 private:
     std::vector<size_t> mPoints;
+	// TODO: VERY BAD SHOULD BE mQuan BECAUSE OTHERWISE MULTIPLE FUNCTIONS SUCH AS GetColor() etc. BAD BAD BAD !!!
 	coord_t mColor;
 };
 

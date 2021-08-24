@@ -6,18 +6,23 @@ using namespace vivid;
 using namespace std;
 
 
-CModel::CModel(vector<CSurface> aSurfs, string aLabel, coord_t aAlpha){
-    for (auto it = aSurfs.begin(); it != aSurfs.end(); it++){ //TODO should be for each.
+CModel::CModel(const vector<CSurface> &arSurfs, string aLabel, coord_t aAlpha){
+    for (auto it = arSurfs.begin(); it != arSurfs.end(); it++){ //TODO should be for each.
         mMeshes.push_back( (*it).ToMesh(aLabel, aAlpha) );
     }
 }
-
-void CModel::AddMesh(CMesh aMesh) {
-	mMeshes.push_back(aMesh);
+void CModel::AddMeshes(const vector<CModelComponent> &arMeshes) {
+    for (auto it = arMeshes.begin(); it != arMeshes.end(); it ++) {
+        mMeshes.push_back(*it);
+    }
 }
 
-void CModel::AddSurf(CSurface aSurf, string aLabel, coord_t aAlpha){
-    mMeshes.push_back(aSurf.ToMesh(aLabel, aAlpha));
+void CModel::AddMesh(const CModelComponent &arMesh) {
+	mMeshes.push_back(arMesh);
+}
+
+void CModel::AddSurf(const CSurface &arSurf, string aLabel, coord_t aAlpha){
+    mMeshes.push_back(arSurf.ToMesh(aLabel, aAlpha));
 }
 
 

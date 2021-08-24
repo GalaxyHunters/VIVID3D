@@ -20,10 +20,10 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
-        throw "input error, DecimationPercent must be between 0 and 1";
+//        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
     }
     if( aMaxError < 0 || aMaxError > 1){
-        throw "input error, MaxError must be between 0 and 1";
+//        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
     }
 
 	//call decimation from External
@@ -38,6 +38,7 @@ void CMesh::ExportToObj(string aOutput, bool WithTexture){
     CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
 }
 
+// TODO: SHOULD BE MOVED TO MODELCOMPONENT.CPP
 /*--------------------------------------------- Transformation Methods -----------------------------------------------*/
 
 void CMesh::TransformMesh(FTrans_t const aTrans){

@@ -35,33 +35,34 @@ public:
                                                     {ELogCode::LOG_INFO,"INFO: "},
                                                     };
 
-    enum class ELogType
+    enum class ELogMessage
     {
         ARRAYS_NOT_EQUAL=0, ARRAYS_EMPTY=1, MISSING_BOOLEAN_VALUES=2,
         INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4
     };
 
-    const std::map<ELogType, std::string> TypeMap { {ELogType::ARRAYS_NOT_EQUAL,"ValueError - Input vectors have not the same size"},
-                                                    {ELogType::ARRAYS_EMPTY,"ValueError - Input vectors are empty"},
-                                                    {ELogType::MISSING_BOOLEAN_VALUES,"ValueError - Mask must contain both true and false values" },
-                                                    {ELogType::INVALID_SMOOTH_FACTOR,"ValueError - Smooth Factor must be between 1 and 8"},
-                                                    {ELogType::INVALID_ALPHA_VALUE,"ValueError - Alpha must be between 1 and 8"},
+    const std::map<ELogMessage, std::string> TypeMap {{ELogMessage::ARRAYS_NOT_EQUAL,       "ValueError - Input vectors have not the same size"},
+                                                      {ELogMessage::ARRAYS_EMPTY,           "ValueError - Input vectors are empty"},
+                                                      {ELogMessage::MISSING_BOOLEAN_VALUES, "ValueError - Mask must contain both true and false values" },
+                                                      {ELogMessage::INVALID_SMOOTH_FACTOR,  "ValueError - Smooth Factor must be between 1 and 8"},
+                                                      {ELogMessage::INVALID_ALPHA_VALUE,    "ValueError - Alpha must be between 1 and 8"},
                                                     };
 
+    typedef std::function<void (const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)> (LogCallBackFunction);
 
-    typedef std::function<void (const ELogType aType)> (LogCallBackFunction);
-
-    void WriteToLog(const ELogType aType) //TODO Use ELogCode + ELogMessage depending on LogCode.
+    void WriteToLog(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) //TODO Use ELogCode + ELogMessage depending on LogCode.
     {
-        std::string msg = GetInstance().TypeMap.find(aType)->second;
+        std::string code = GetInstance().CodeMap.find(aCode)->second;
+        std::string msg = GetInstance().TypeMap.find(aMsg)->second;
         std::cerr << msg << std::endl;
         if (!GetInstance().LOG_FILE.is_open()) {
             time_t now = time(0);
             std::string file_path = "./VIVID_LOG";
-            file_path.append(std::ctime(&now));
+            // file_path.append(std::ctime(&now));
             GetInstance().LOG_FILE.open(file_path + ".txt");
         }
-        GetInstance().LOG_FILE << msg << '\n';
+        // TODO: DateTimeString before each line.
+        GetInstance().LOG_FILE << code << msg << '\n';
     }
 };
 

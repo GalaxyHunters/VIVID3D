@@ -6,7 +6,6 @@
 
 //#include <functional>
 
-
 namespace vivid
 {
 

@@ -18,7 +18,7 @@ private:
 public:
     //Constructor and Copy Constructor
     CLine(){}
-    CLine(const std::vector<CPoint> &arPoints, const std::string arLabel) : mPoints(arPoints), CModelComponent(arLabel){}
+    CLine(const std::vector<CPoint> &arPoints, const coord_t aAlpha, const std::string &arLabel) : mPoints(arPoints), CModelComponent(aAlpha, arLabel){}
     CLine(const CLine &arLine) : mPoints(arLine.mPoints), CModelComponent(arLine) {}
     ~CLine(){}
 

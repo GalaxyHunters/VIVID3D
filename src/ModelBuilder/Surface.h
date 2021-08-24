@@ -43,7 +43,7 @@ class CSurface : public CMesh
 private:
     static void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)
     {
-        CLogFile::GetInstance().WriteToLog(aCode, aMsg);
+        CLogFile::GetInstance().Write(aCode, aMsg);
     }
     CLogFile::LogCallBackFunction mLogFile = CallBack;
 

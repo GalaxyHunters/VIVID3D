@@ -1,7 +1,6 @@
 #ifndef VIVID_SURFACE_H
 #define VIVID_SURFACE_H
 
-
 #include "Voronoi.h"
 #include "Mesh.h"
 #include "LogFile.h"
@@ -9,6 +8,8 @@
 
 namespace vivid
 {
+//TODO **explanation**
+
 //TODO Color field needs to be changed everywhere
 //TODO Typedef has to be by const ref
 //TODO Should it containd Cpoint?
@@ -16,8 +17,8 @@ class CSurfacePoint
 { // used to sort and clean the mVoronoi input points
 public:
     CPoint mPoint = {};
-    quan_t mQuan = 0;
-    bool mIsIn = false;
+    quan_t mQuan = 0; //TODO rename quan to something better
+    bool mIsIn = false; //TODO MaskIsTrue or similar
 
     CSurfacePoint() {};
     CSurfacePoint(CPoint aPoint, quan_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
@@ -41,25 +42,24 @@ public:
 class CSurface : public CMesh
 {
 private:
-    static void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)
-    {
-        CLogFile::GetInstance().Write(aCode, aMsg);
-    }
-    CLogFile::LogCallBackFunction mLogFile = CallBack;
+    inline void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) { CLogFile::GetInstance().Write(aCode, aMsg);} //tODO  func, methods etc after members!
+    CLogFile::LogCallBackFunction mLogFile = CallBack; //rename
 
-    CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad
+    CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad //TODO bad comment
 
-    std::vector<std::shared_ptr<CPoint> > mVecPoints = {};
-    std::vector<CSurfaceFace> mVecFaces = {};
+    std::vector<std::shared_ptr<CPoint> > mVecPoints = {}; //TODO rename mSPoints
+    std::vector<CSurfaceFace> mVecFaces = {};  //TODO rename mSFaces
 
-    std::vector<std::vector<size_t>> mPointsInFaces = {}; // For mapping which faces contain which points
+    std::vector<std::vector<size_t>> mPointsInFaces = {}; // TODO rename mFacesPoints // Hold the faces defining points
 
-    std::vector<CPoint> mInputPoints = {};   // for smooth
-    std::vector<bool> mMask = {};            // for smooth
-    std::vector<quan_t> mQuan = {};         // for smooth
-    CPoint mCenVector = {};                  // holds the center of the data (used to center the data by 000 and back to original upon export)
+    std::vector<CPoint> mInputPoints = {};   // for smooth //TODO rename mCreatingPoints? mSpanningPoints
+    std::vector<bool> mMask = {};            // for smooth //TODO rename mInnerPointsMask
+    std::vector<quan_t> mQuan = {};         // for smooth  //TODO should we need it?
+
     std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
+    CPoint mCenVector = {};               // holds the center of the data (used to center the data by 000 and back to original upon export)
     quan_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
+
 
     // Centralization Sub-Methods
     quan_t FindContainingRadius();          // Used for Scaling
@@ -82,7 +82,7 @@ private:
 
     // Smoothing Sub-Methods
     // Part 1
-    void SetPinPout(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
+    void SetPinPout (std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
     void UpdateInput(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
     // Part 2
     void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
@@ -110,7 +110,7 @@ public:
      * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
      */
     CSurface(const std::vector<std::vector<double >> &arInputPoints, const std::vector<bool> &arMask,
-             std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax);
+             std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax); // TODO get reporting function?
     /**
      * CSurface Copy-Constructor
      */
@@ -142,8 +142,10 @@ public:
     inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
     inline const std::vector<bool>& GetMask() { return mMask; }
     inline const std::vector<quan_t>& GetQuan() { return mQuan; }
-    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
-    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
+
+    // TODO maybe the following should be deleted
+//    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
+//    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
 
     inline void SetInputPoints(const std::vector<CPoint> &arInputPoints) { mInputPoints = arInputPoints; }
     inline void SetMask(const std::vector<bool> &arMask) { mMask = arMask; }

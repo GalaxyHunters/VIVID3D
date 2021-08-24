@@ -15,8 +15,8 @@ namespace vivid
 //TODO splines?
 class CModelComponent {
 protected:
-    vector<CPoint> mPoints ={};
-    vector<CIndexedFace> mFaces ={};
+    vector<CPoint> mPoints = {};
+    vector<CIndexedFace> mFaces = {};
 
     coord_t mAlpha = 1.;
     std::string mLabel = "";

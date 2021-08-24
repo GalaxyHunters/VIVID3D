@@ -37,6 +37,7 @@ public:
                                                     {ELogCode::LOG_INFO,"INFO: "},
                                                     };
     // TODO Errors.h
+    // TODO in Erros.h: typedef CLogFile::LogCallBackFunction reportCB_t
     enum ELogMessage //Same here
     {
         ARRAYS_NOT_EQUAL=0, ARRAYS_EMPTY=1, MISSING_BOOLEAN_VALUES=2,
@@ -50,7 +51,7 @@ public:
                                                       {ELogMessage::INVALID_ALPHA_VALUE,    "ValueError - Alpha must be between 1 and 8"},
                                                     };
 
-    typedef std::function<void (const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)> (LogCallBackFunction);
+    typedef std::function<void (const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg)> (LogCallBackFunction); // TODO why defined inside the class? naming andmake sure you use the instance !
 
     void Write(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) //TODO Use ELogCode + ELogMessage depending on LogCode. //TODO get String instead of CLogFile::ELogMessage
     {

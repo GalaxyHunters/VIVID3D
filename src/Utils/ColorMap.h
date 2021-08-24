@@ -13,14 +13,14 @@ using namespace std;
 
 typedef double quan_t;
 
-class color_t
+class color_t // TODO struct
 {
 public:
     double R;
     double G;
     double B;
 
-	inline color_t(double R, double G, double B) : R(R), G(G), B(B) {}
+	inline color_t(double R, double G, double B) : R(R), G(G), B(B) {} //TODO is it needed?
 };
 class CColorMap
 {
@@ -61,7 +61,7 @@ private:
         return std::vector<color_t> {color_t(0., 1., 1.),};
     }
 
-
+    // TODO in a consColors.h
     std::map<std::string, FColor_t> ColorFunc {        {"White", White},
                                                        {"Black", Black},
                                                        {"Red", Red},
@@ -73,6 +73,7 @@ private:
     };
 
     // Default Clm when none provided
+    // TODO in it's own h file
     const vector<color_t> ClmPlasma{       color_t(0.050383, 0.029803, 0.52797),
                                            color_t(0.086222, 0.026125, 0.54266),
                                            color_t(0.11512, 0.023556, 0.55547),
@@ -153,7 +154,7 @@ private:
     string ClmName = "";
 
 public:
-    CColorMap() : Clm(ClmPlasma), ClmName("Plasma") {}
+    CColorMap() : Clm(ClmPlasma), ClmName("Plasma") {} //TODO should hold func anf name...
     CColorMap(const vector<color_t> &arClm, const string &arCName) : Clm(arClm), ClmName(arCName) {}
     CColorMap(const string &arCName) : Clm(ColorFunc[arCName]()), ClmName(arCName) {}
     inline CColorMap& operator= (const CColorMap& arClm) { Clm=arClm.Clm; ClmName=arClm.ClmName; return *this; }

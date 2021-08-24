@@ -14,7 +14,7 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
-        cout << arInputPoints.size() << arMask.size() << arQuan.size() << endl;
+        cout << arInputPoints.size() << arMask.size() << arQuan.size() << endl; // TODO: no cout anymore. cout only in report
         if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::ARRAYS_NOT_EQUAL);
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
@@ -23,7 +23,7 @@ CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<boo
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
         if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::MISSING_BOOLEAN_VALUES);
     }
-    //converting <double> to <CPoint>
+    //converting input points to CPoint format
     vector<CPoint> points (arInputPoints.size());
     for (int i = 0; i < points.size(); i++) {
         points[i] = arInputPoints[i];
@@ -107,12 +107,13 @@ CSurface::CSurface(const CSurface &surf)
 //
 }
 
-/*-------------------------------------------------- Public Methods --------------------------------------------------*/
-
+//   ------------------------------------------------ Public Methods ------------------------------------------------>>>
+//   <<<--------------------------------------------- Public Methods ---------------------------------------------------
+//TODO
 void CSurface::CreateSurface()
 {
     RunVorn();
-    cout << "Cleaning Surface" << endl;
+    cout << "Cleaning Surface" << endl; //todo cout
     CleanEdges();
     CleanFaces();
     CleanPoints();
@@ -121,12 +122,11 @@ void CSurface::CreateSurface()
 void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 {
     if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_SMOOTH_FACTOR);
+        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_SMOOTH_FACTOR); //TODO
     }
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
-    cout << "Begin Smooth" << endl;
-    vector<size_t> p_out;
-    vector<size_t> p_in;
+    cout << "Begin Smooth" << endl; //TODO
+    vector<size_t> p_out, p_in;
     SetPinPout(p_out, p_in);
     UpdateInput(p_out, p_in);
     RunVorn();
@@ -151,11 +151,13 @@ void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 
 // TODO: CSurface is currently inheriting from Mesh, need to discuss this
 const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
+    // TODO why aAlpha is a coord_t type?
     //check input valdilty
     if(aAlpha > 1 || aAlpha <= 0){
         if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_WARNING, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
         if (aAlpha > 1) { aAlpha = 1; }
         if (aAlpha < 0) { aAlpha = 0.1; }
+//        aAlpha = min(0.1 , max(aAlpha ,1)) //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
     }
 
     vector<CPoint> points;
@@ -199,7 +201,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints
 
 void CSurface::RunVorn()
 {
-    cout << "start vorn" << endl;
+    cout << "start vorn" << endl; //TODO cout
     mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     cout << "vorn done" << endl;
     cout << "Vorn Faces # = " << mVoronoi.mData.GetTotalFacesNumber() << endl;
@@ -211,8 +213,7 @@ void CSurface::RunVorn()
     vector<CSurfaceFace> new_faces;
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
-    size_t c_point1;
-    size_t c_point2;
+    size_t c_point1, c_point2;
     coord_t quan;
     vector<shared_ptr<CPoint>> face_points;
     int counter =0;
@@ -244,8 +245,7 @@ void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn)
 {
     map<size_t, bool> p_in_map;
     map<size_t, bool> p_out_map;
-    size_t c_point1;
-    size_t c_point2;
+    size_t c_point1, c_point2; // TODO why size_t? didn't we got rid of it?
     for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         c_point1 = get<0>(it->mPairPoints);
         c_point2 = get<1>(it->mPairPoints);
@@ -275,6 +275,7 @@ void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn)
 
 void CSurface::UpdateInput(vector<size_t>& arPOut, vector<size_t>& arPIn)
 {
+    // TODO should we update quan instead of updating arPOut & arPIn?
     vector<CPoint> new_points;
     vector<coord_t> quan;
     for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
@@ -587,7 +588,7 @@ void CSurface::CleanPoints()
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
 // TODO: Should use different sorting algorithm
-bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2)
+bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) //TODO this 1st func is the same as the one after!
 {
     return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }

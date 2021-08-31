@@ -34,7 +34,7 @@ public:
     inline CPointCloud& operator= (const CPointCloud& arPC) { mPoints = arPC.mPoints; CModelComponent::operator=(arPC); return *this; }
 
     // Add
-    inline void AddPoints(const std::vector<CPoint> &arPoints) { mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end()); }
+    void AddPoints(const std::vector<CPoint> &arPoints, vector<quan_t> &arQuan);
 };
 
 }; // namespace vivid

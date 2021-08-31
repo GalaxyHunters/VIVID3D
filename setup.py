@@ -58,10 +58,10 @@ class CMakeBuild(build_ext):
 
 setup(
     name='vivid_py',
-    version='0.0.1',
-    author='Naftali Deutsch',
+    version='0.9.0',
+    author='GalaxyHuntersIL',
     # author_email='naftalide',
-    description='A 3D visualisation tool for cosmological simulations',
+    description='A 3D visualisation tool for simulations',
     long_description='',
     ext_modules=[CMakeExtension('Vivid')],
     cmdclass=dict(build_ext=CMakeBuild),

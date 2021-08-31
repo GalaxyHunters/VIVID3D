@@ -115,8 +115,11 @@ pybind11_add_module(vivid_py
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Line.cpp
+        src/ModelBuilder/PointCloud.cpp
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/Shapes.cpp
+        src/ModelBuilder/Animation.cpp
         src/Extra/Analysis.h
         lib/ImportAndExport/FBXImportExport.cpp
 

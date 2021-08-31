@@ -43,7 +43,7 @@ class CSurface : public CMesh
 {
 private:
     inline void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) { CLogFile::GetInstance().Write(aCode, aMsg);} //tODO  func, methods etc after members!
-    CLogFile::LogCallBackFunction mLogFile = CallBack; //rename
+    CLogFile::LogCallBackFunction mLogFile;// = CallBack; //rename
 
     CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad //TODO bad comment
 

@@ -2,6 +2,7 @@
 #define VIVID_SHAPES_H
 
 #include "Mesh.h"
+#include "Line.h"
 #include "ColorMap.h"
 
 //#include <functional>
@@ -27,6 +28,8 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 
 CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio,
                       coord_t aColor, coord_t aAlpha, const std::string &arLabel);
+
+std::pair<CLine, CLine> CreateGrid(const size_t aDimensions);
 
 } // namespace vivid
 #endif //VIVID_SHAPES_H

@@ -47,9 +47,9 @@ void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, 
 
 }
 
-void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter)
+void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter, string aWriteType)
 {
-    aOBJFile << "f ";
+    aOBJFile << aWriteType+" ";
     vector<size_t> face_points = aFace.GetPoints();
     for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
     {
@@ -83,21 +83,23 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CModelComponent * apMesh, 
     sort(Faces.begin(), Faces.end(), CompFace); // NlogN
     //write faces to obj file + write colors to mtl file
     color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetColor());
-    WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
+    string write_type = apMesh->GetObjType();
+    coord_t alpha = apMesh->GetAlpha();
+    WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
     for (auto it = Faces.begin(); it != Faces.end(); it++)
     {
 
         if (CompareColor(color, Quan2Color(apMesh->GetClm(), it->GetColor()))) //if true write the face to the obj file
         {
-            WriteNewFace(aOBJFile, *it, aPointsCounter);
+            WriteNewFace(aOBJFile, *it, aPointsCounter, write_type);
         }
         else // we reached a new color, and we need to write it in mtl before using it
         {
             color = Quan2Color(apMesh->GetClm(), it->GetColor());
             (*apMtlCounter)++;
-            WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, apMesh->GetAlpha());
+            WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
             // now we can write the face in the obj file
-            WriteNewFace(aOBJFile, *it, aPointsCounter);
+            WriteNewFace(aOBJFile, *it, aPointsCounter, write_type);
         }
     }
 }
@@ -146,7 +148,7 @@ void ExportToObjMaterial(CModel &aModel, string aOutput){
 
 
 void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CIndexedFace aFace, size_t aPointsCounter) {
-    arOBJFile << "f ";
+    arOBJFile << apMesh->GetObjType()+" ";
     vector<size_t> face_points = aFace.GetPoints();
     size_t VT = apMesh->GetClm().GetColorIndex( aFace.GetColor())+1;
     for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)

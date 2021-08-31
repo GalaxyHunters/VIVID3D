@@ -17,28 +17,29 @@ class CModelComponent {
 protected:
     vector<CPoint> mPoints = {};
     vector<CIndexedFace> mFaces = {};
-
+    std::string mObjType = "f";
     coord_t mAlpha = 1.;
     std::string mLabel = "";
     CColorMap mClm;
     //Constructor, Copy Constructor, Destructor
     CModelComponent(){}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel) : mAlpha(aAlpha), mLabel(arLabel), mClm() {}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mClm(arClm) {}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(aAlpha), mLabel(arLabel), mClm(arClm, arCName) {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm() {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
     //virtual ~CModelComponent() = 0;
 
 public:
-    CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mClm(arModel.mClm) {}
+    CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
     // Operator=
-    inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces; mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mClm=arModel.mClm; return *this; }
+    inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces; mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
 
     // Getters, Setters
-    inline const std::vector<CPoint> GetPoints() { return mPoints; }
-    inline const std::vector<CIndexedFace> GetFaces() { return mFaces; }
-    inline const std::string GetLabel() { return mLabel; }
-    inline const coord_t GetAlpha() { return mAlpha; }
-    inline const CColorMap GetClm() const { return mClm; }
+    inline std::vector<CPoint> GetPoints() const { return mPoints; }
+    inline std::vector<CIndexedFace> GetFaces() const { return mFaces; }
+    inline std::string GetLabel() const { return mLabel; }
+    inline coord_t GetAlpha() const { return mAlpha; }
+    inline CColorMap GetClm() const { return mClm; }
+    inline std::string GetObjType() const { return mObjType; }
 
     inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
     inline void SetFaces(std::vector<CIndexedFace> &arFaces) { mFaces = arFaces; }

@@ -198,6 +198,36 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
     return mesh;
 }
 
+pair<CLine, CLine> CreateGrid(const size_t aDimensions) {
+    /// Create x,y,z
+//    vector<int> dimensions = {static_cast<int>(abs(arDimensions.X())), static_cast<int>(abs(arDimensions.Y())), static_cast<int>(abs(arDimensions.Z()))};
+    coord_t size = static_cast<coord_t>(aDimensions);
+    pair<CLine, CLine> grid_lines;
+
+//    grid_lines.push_back(CLine({ {CPoint(-dimensions[0],0,0), CPoint(dimensions[0],0,0)},
+//                                         {CPoint(0,0,-dimensions[2]), CPoint(0,0,dimensions[2])},
+//                                         {CPoint(0,-dimensions[1],0), CPoint(0,dimensions[1],0)}}, 1., "WhiteLines"));
+    grid_lines.first = CLine({ {CPoint(-size, 0, 0), CPoint(size, 0, 0)},
+                                 {CPoint(0,0,-size),   CPoint(0, 0, size)},
+                                 {CPoint(0, -size, 0), CPoint(0, size, 0)}}, 1., "WhiteLines");
+
+    // Add x,y,z sub lines
+    vector<vector<CPoint>> line_points;
+    for (int i = -size; i <= size; i++) {
+        if (i != 0) {
+            line_points.push_back({CPoint(-size, i, 0), CPoint(size, i, 0)});
+            line_points.push_back({CPoint(-size, 0, i), CPoint(size, 0, i)});
+            line_points.push_back({CPoint(i, -size, 0), CPoint(i, size, 0)});
+            line_points.push_back({CPoint(0, -size, i), CPoint(0, size, i)});
+            line_points.push_back({CPoint(i, 0, -size), CPoint(i, 0, size)});
+            line_points.push_back({CPoint(0, i, -size), CPoint(0, i, size)});
+        }
+    }
+    grid_lines.second = CLine(line_points, 0.15, "GreyLines");
+
+    return grid_lines;
+}
+
 } // namespace vivid
 
 

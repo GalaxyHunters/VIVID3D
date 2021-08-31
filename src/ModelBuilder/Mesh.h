@@ -37,20 +37,19 @@ private:
 public:
 	CMesh() {};
     CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha) :
-        CModelComponent(aAlpha, aLabel){
+        CModelComponent(aAlpha, aLabel, "f"){
         mPoints = aPoints; mFaces = aFaces;
     }
     CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
-	   CModelComponent(aAlpha, aLabel, arClm, arCName){
+	   CModelComponent(aAlpha, aLabel, "f", arClm, arCName){
         mPoints = aPoints; mFaces = aFaces;
     }
     CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const string &arClm) :
-	    CModelComponent(aAlpha, aLabel, arClm){
+	    CModelComponent(aAlpha, aLabel, "f", arClm){
         mPoints = aPoints; mFaces = aFaces;
     }
     CMesh(const CMesh &arMesh) :
 	    CModelComponent(arMesh){
-        mPoints = arMesh.mPoints; mFaces = arMesh.mFaces;
     };
 	//operator =
 	~CMesh();

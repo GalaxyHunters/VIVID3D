@@ -28,7 +28,8 @@ int ShapesTest()
     CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
     CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube");
-    vector<CModelComponent> list = {sphere, arrow_x, box, cube};
+    pair<CLine, CLine> grid = CreateGrid(7);
+    vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
     model.AddMeshes(list);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Shapes"); // /test_models/
 
@@ -131,6 +132,7 @@ int ColorMapTest()
     return EXIT_SUCCESS;
 }
 
+
 /* Test surf functionality by cubic 3D pyramid (with square base) */
 int PyramidSmoothTest()
 {
@@ -229,11 +231,12 @@ int RunSupernovaTests()
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-    cout << "ParametricSurfByFuncTest" << endl;
-    ret_value = ParametricSurfByFuncTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    ret_value = ShapesTest();
+//    cout << "ParametricSurfByFuncTest" << endl;
+//    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Testing All Shapes" << endl;
+    ret_value = ShapesTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

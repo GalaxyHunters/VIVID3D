@@ -161,7 +161,7 @@ struct constructor {
     template <typename Class, typename... Extra, enable_if_t<!Class::has_alias, int> = 0>
     static void execute(Class &cl, const Extra&... extra) {
         cl.def("__init__", [](value_and_holder &v_h, Args... args) {
-            v_h.value_ptr() = new Cpp<Class>{std::forward<Args>(args)...};
+            v_h.value_ptr() = new Cpp<Class>{static_cast<const vector<CPoint>>(std::forward<Args>(args))...};
         }, is_new_style_constructor(), extra...);
     }
 

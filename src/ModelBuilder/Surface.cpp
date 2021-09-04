@@ -4,13 +4,13 @@
 using namespace vivid;
 using namespace std;
 
-constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100; // TODO: Is this the right scale (-100, 100)?
-constexpr coord_t NOISE_PERCENTAGE = 0.01;        // TODO: Is this the right noise percentage (-1%, 1%)
+constexpr quan_t BOX_EXPAND_FACTOR = 1;
+constexpr quan_t PARTICLE_SCALE_MAGNITUDE = 100; // TODO: Is this the right scale (-100, 100)?
+constexpr quan_t NOISE_PERCENTAGE = 0.01;        // TODO: Is this the right noise percentage (-1%, 1%)
 
 // TODO: Many for loops can be replaced by foreach loops here.
 
-CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
@@ -109,10 +109,11 @@ CSurface::CSurface(const CSurface &surf)
 
 //   ------------------------------------------------ Public Methods ------------------------------------------------>>>
 //   <<<--------------------------------------------- Public Methods ---------------------------------------------------
-//TODO
+
 void CSurface::CreateSurface()
 {
     RunVorn();
+
     cout << "Cleaning Surface" << endl; //todo cout
     CleanEdges();
     CleanFaces();
@@ -150,8 +151,8 @@ void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
 }
 
 // TODO: CSurface is currently inheriting from Mesh, need to discuss this
-const CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
-    // TODO why aAlpha is a coord_t type?
+const CMesh CSurface::ToMesh(string aLabel, quan_t aAlpha) const {
+    // TODO why aAlpha is a quan_t type?
     //check input valdilty
     if(aAlpha > 1 || aAlpha <= 0){
         if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_WARNING, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
@@ -214,7 +215,7 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    coord_t quan;
+    quan_t quan;
     vector<shared_ptr<CPoint>> face_points;
     int counter =0;
     for (auto face = vorn_faces.begin(); face != vorn_faces.end(); face++) {
@@ -235,7 +236,7 @@ void CSurface::RunVorn()
     }
 
     mVecFaces = new_faces;
-//    mPointsInFaces = points_map;
+    mPointsInFaces = points_map;
 }
 
 /*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
@@ -277,7 +278,7 @@ void CSurface::UpdateInput(vector<size_t>& arPOut, vector<size_t>& arPIn)
 {
     // TODO should we update quan instead of updating arPOut & arPIn?
     vector<CPoint> new_points;
-    vector<coord_t> quan;
+    vector<quan_t> quan;
     for (auto it = arPOut.begin(); it != arPOut.end(); it++) {
         new_points.push_back(mInputPoints[*it]);
         quan.push_back(mQuan[*it]);
@@ -333,7 +334,7 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
     size_t c_point3;
 
     vector<CPoint> new_points;
-    vector<coord_t> new_quan;
+    vector<quan_t> new_quan;
     size_t p_out_size = arPOut.size();
     size_t p_in_size = p_out_size + arPIn.size();
     arPIn.clear();
@@ -350,7 +351,7 @@ void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
 }
 
 void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
-                              CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex)
+                              CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<quan_t> &arNewQuan, size_t &arIndex)
 {
     size_t c_point3;
     for (auto f_index = mPointsInFaces[aCPoint1].begin(); f_index != mPointsInFaces[aCPoint1].end(); f_index++)
@@ -377,7 +378,7 @@ void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &
     }
 }
 
-void CSurface::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan,
+void CSurface::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<quan_t> &arNewQuan,
                             size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
 {
     arPVec.push_back(arNewIndex);
@@ -394,7 +395,7 @@ void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, in
     size_t p_out_size = arPOut.size();
     size_t p_in_size = p_out_size + arPIn.size();
     vector<CPoint> new_points;
-    vector<coord_t> new_quan;
+    vector<quan_t> new_quan;
     arPIn.clear();
     arPOut.clear();
     size_t new_index = 0; // the index for the new point to be added
@@ -415,9 +416,9 @@ void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, in
     CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
 }
 
-void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
+void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<quan_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
 {
-    coord_t x, y, z;
+    quan_t x, y, z;
     for (int i = 1; i <= aSmoothFactor; i++){
         (*apPVec).push_back(*apNewIndex);
         x = (mInputPoints[aCPoint1].X() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].X() * i) / (aSmoothFactor+1);
@@ -429,7 +430,7 @@ void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, 
     }
 }
 
-void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
+void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<quan_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
 {
     vector<CSurfacePoint> data;
     data.clear();
@@ -510,12 +511,12 @@ void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize)
 
 vector<CPoint> CSurface::FindContainingBox()
 {
-    coord_t x_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
-    coord_t x_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
-    coord_t y_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
-    coord_t y_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
-    coord_t z_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
-    coord_t z_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+    quan_t x_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    quan_t x_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.X() < arV2.X();}))->X();
+    quan_t y_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    quan_t y_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Y() < arV2.Y();}))->Y();
+    quan_t z_max = (max_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
+    quan_t z_min = (min_element(mInputPoints.begin(), mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Z() < arV2.Z();}))->Z();
 
     CPoint box_dim = CPoint(x_max-x_min, y_max-y_min, z_max-z_min);
     CPoint box_min = CPoint(x_min, y_min, z_min);
@@ -525,7 +526,7 @@ vector<CPoint> CSurface::FindContainingBox()
 }
 
 
-coord_t CSurface::FindContainingRadius()
+quan_t CSurface::FindContainingRadius()
 {
     return (max_element(mInputPoints.begin(),mInputPoints.end(), [](const CPoint& arV1, const CPoint& arV2){return arV1.Magnitude() < arV2.Magnitude();}))->Magnitude();
 }
@@ -664,10 +665,10 @@ void CSurface::CleanDoublePoints()
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 //TODO should be one line with some std function
-vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+vector<quan_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
 {
     if (arQuan.size() == 0){ //incase the user doesnt input any color
-        arQuan = vector<coord_t>(mMask.size(), 1);
+        arQuan = vector<quan_t>(mMask.size(), 1);
         return arQuan;
     }
     if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
@@ -675,10 +676,10 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
     if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<coord_t>(arQuan.size(), 1);
+        arQuan = vector<quan_t>(arQuan.size(), 1);
         return arQuan;
     }
-    coord_t divide_by = 1./(aVMax-aVMin);
+    quan_t divide_by = 1. / (aVMax - aVMin);
     for (auto it = arQuan.begin(); it != arQuan.end(); it++) {
         *it = (*it - aVMin) * divide_by;
         if (*it > 1) *it = 1;
@@ -703,9 +704,9 @@ void CSurface::PreProcessPoints()
     // Consider generator here.
     srand(time(NULL));
     for (int i = 0; i<noise_vec.size(); i++){
-        noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
+        noise_vec[i] = {1 + NOISE_PERCENTAGE*((quan_t)(rand() % 20 - 10) / 10.),
+                        1 + NOISE_PERCENTAGE*((quan_t)(rand() % 20 - 10) / 10.),
+                        1 + NOISE_PERCENTAGE*((quan_t)(rand() % 20 - 10) / 10.)   };
     }
 
     for (int i = 0; i < mInputPoints.size(); i++){

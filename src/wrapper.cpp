@@ -31,10 +31,10 @@ PYBIND11_MODULE(vivid_py, m) {
              py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     py::class_<CLine>(m, "Line")
-        .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
+        .def(py::init<const vector<CPoint>&, const quan_t, const string& >(),
                 "Constructor for line",
                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
-        .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
+        .def(py::init<const vector<vector<CPoint>>&, const quan_t, const string&>(),
                 "Constructor for line",
                 py::arg("list_of_points"), py::arg("alpha")=1., py::arg("label")="")
         .def(py::init<const CLine&>(),
@@ -45,7 +45,7 @@ PYBIND11_MODULE(vivid_py, m) {
              py::arg("points"));
 
     py::class_<CPointCloud>(m, "PointCloud")
-        .def(py::init<const vector<CPoint>&, const coord_t, vector<quan_t>&, const string& >(),
+        .def(py::init<const vector<CPoint>&, const quan_t, vector<quan_t>&, const string& >(),
                 "Constructor for Point Cloud",
                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
         .def(py::init<const CPointCloud&>(),
@@ -72,7 +72,7 @@ PYBIND11_MODULE(vivid_py, m) {
         .def(py::init<vector<CModelComponent>& >(),
                 "constructor for CModel, from meshes, lines, and point clouds",
                 py::arg("meshes"))
-        .def(py::init<vector<CSurface>&, string, coord_t> (),
+        .def(py::init<vector<CSurface>&, string, quan_t> (),
                 "constructor for CModel, from surfs",
                 py::arg("surfaces"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
         .def("add_meshes", &CModel::AddMesh,

@@ -1,7 +1,7 @@
 #include "Mesh.h"
 #include "Model.h" // TODO TOMER!! Y?
 #include "Decimate.h"
-
+#include "ProgressBar.h"
 #include "boost/algorithm/string/predicate.hpp"
 //#include <stdio.h>
 
@@ -16,7 +16,7 @@ CMesh::~CMesh() {}
 
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
-void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
+void CMesh::Reduce(quan_t aVerticlePercent, quan_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
@@ -34,10 +34,81 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 	mFaces = get<1>(temp);
 }
 
+
+
+void CMesh::LaplacianSmooth(size_t aNumIterations, double aAlphaFactor, double aBetaFactor)
+{
+    vector<CPoint> curr_points = mPoints;
+
+    for (int i = 0; i < aNumIterations; i++) {
+        vector<CPoint> next_points (mPoints.size());
+        vector<CPoint> curr_beta_points (mPoints.size());
+        // Laplacian Smooth
+        for (size_t j = 0; j < mPoints.size(); j++) {
+            if (mPointNeighbours[j].size() != 0) {
+                for (auto it = mPointNeighbours[j].begin(); it != mPointNeighbours[j].end(); it++) {
+                    next_points[j] += curr_points[*it];
+                }
+                next_points[j] = next_points[j] / (mPointNeighbours[j].size());
+
+                curr_beta_points[j] = next_points[j] - (mPoints[j] * aAlphaFactor + curr_points[j] * (1. - aAlphaFactor));
+            } else {
+                next_points[j] = mPoints [j];
+            }
+        }
+        // HC Algorithm
+        if (aBetaFactor > 0) {
+            for (size_t j = 0; j < mPoints.size(); j++) {
+                if (mPointNeighbours[j].size() != 0) {
+                    CPoint next_beta;
+                    for (auto it = mPointNeighbours[j].begin(); it != mPointNeighbours[j].end(); it++) {
+                        next_beta += curr_beta_points[*it];
+                    }
+                    next_points[j] -= curr_beta_points[j] * aBetaFactor + next_beta*((1. - aBetaFactor) / mPointNeighbours[j].size());
+                }
+            }
+        }
+
+        curr_points = next_points;
+    }
+    mPoints = curr_points;
+}
+
 void CMesh::ExportToObj(string aOutput, bool WithTexture){
     CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
 }
 
+void CMesh::CalculatePointsNeighbours() {
+    for (int i = 0; i < mPoints.size(); i++) {
+        printProgress(static_cast<double>(i)/mPoints.size());
+        for (auto it = mFaces.begin(); it != mFaces.end(); it++) {
+            vector<size_t> v = it->GetPoints();
+            for (int j = 0; j < v.size();j++) {
+                if (v[j] == i) {
+                    // Face contains point i, so get one before and one after,
+                    size_t prev, next;
+                    if (j == 0) {
+                        prev = v[v.size()-1];
+                        next = v[j+1];
+                    } else if (j == (v.size() -1)) {
+                        prev = v[j-1];
+                        next = v[0];
+                    } else {
+                        prev = v[j-1];
+                        next = v[j+1];
+                    }
+                    if (!(std::find(mPointNeighbours[i].begin(), mPointNeighbours[i].end(), prev) != mPointNeighbours[i].end())) {
+                        mPointNeighbours[i].push_back(prev);
+                    }
+                    if (!(std::find(mPointNeighbours[i].begin(), mPointNeighbours[i].end(), next) != mPointNeighbours[i].end())) {
+                        mPointNeighbours[i].push_back(next);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
 // TODO: SHOULD BE MOVED TO MODELCOMPONENT.CPP
 /*--------------------------------------------- Transformation Methods -----------------------------------------------*/
 
@@ -48,7 +119,7 @@ void CMesh::TransformMesh(FTrans_t const aTrans){
     }
 }
 
-void CMesh::TransformMesh(coord_t const aTrans[3][3]){
+void CMesh::TransformMesh(quan_t const aTrans[3][3]){
 
     double px,py,pz;
     for (auto it = mPoints.begin(); it != mPoints.end(); it++)
@@ -74,7 +145,7 @@ void CMesh::RotateMesh(CPoint aNormVec, double aRadAngel){
     auto ny = aNormVec.Y();
     auto nz = aNormVec.Z();
 
-    coord_t const rotation_mat[3][3] = {
+    quan_t const rotation_mat[3][3] = {
             cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
 
             ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,

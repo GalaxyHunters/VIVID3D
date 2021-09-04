@@ -31,27 +31,30 @@ private:
 //        CLogFile::GetInstance().Write(aCode, aMsg);
 //    }
 //    CLogFile::LogCallBackFunction mLogFile = CallBack;
-
-    vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
+    std::map<size_t, std::vector<size_t>> mPointNeighbours = {};
+    std::vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
+    void CalculatePointsNeighbours();
 
 public:
 	CMesh() {};
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha) :
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha) :
         CModelComponent(aAlpha, aLabel, "f"){
         mPoints = aPoints; mFaces = aFaces;
+        CalculatePointsNeighbours();
     }
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
 	   CModelComponent(aAlpha, aLabel, "f", arClm, arCName){
         mPoints = aPoints; mFaces = aFaces;
+        CalculatePointsNeighbours();
     }
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, coord_t aAlpha, const string &arClm) :
+    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha, const string &arClm) :
 	    CModelComponent(aAlpha, aLabel, "f", arClm){
         mPoints = aPoints; mFaces = aFaces;
+        CalculatePointsNeighbours();
     }
     CMesh(const CMesh &arMesh) :
-	    CModelComponent(arMesh){
-    };
-	//operator =
+	    CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
+
 	~CMesh();
 
     /**
@@ -59,7 +62,15 @@ public:
      * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain
      * @param[in] aMaxError is a normalized double of how much to retain the original shape of the faces
      */
-    void Reduce(coord_t aVerticlePercent, coord_t aMaxError);
+    void Reduce(quan_t aVerticlePercent, quan_t aMaxError);
+
+    /**
+     * Smooth faces on CMesh by Laplacian Smooth
+     * @param[in] aNumIterations number of iterations to run for, recommended to be even
+     * @param[in] aAlphaFactor weighted value for smoothing, recommended range 0.2<a<0.8
+     * @param[in] aBetaFactor weighted value for volume retention, recommended range 0.5<b<1.0
+     */
+    void LaplacianSmooth(size_t aNumIterations, double aAlphaFactor = 0.5, double aBetaFactor = 0.5);
 
     void ExportToObj(string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
 
@@ -72,7 +83,7 @@ public:
      * transform CMesh points by transformation matrix
      * @param[in] aTrans a 3x3 dimension matrix.
      */
-    void TransformMesh(coord_t const aTrans[3][3]);
+    void TransformMesh(quan_t const aTrans[3][3]);
     /**
      * Rotate the CMesh points around a normal vector by an angel, counterclockwise
      * @param[in] aNormVec the x,y.z normal to rotate around.

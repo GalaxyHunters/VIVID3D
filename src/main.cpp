@@ -36,7 +36,7 @@ int ShapesTest()
     return EXIT_SUCCESS;
 }
 
-coord_t TestFunc(const coord_t x, const coord_t y) {
+quan_t TestFunc(const quan_t x, const quan_t y) {
     //return (7*x*y)/pow(2,x*x+y*y);
 //    return 1./(y-x*x);
 //    if ((4-x*x-y*y) >= -0.1 & (4-x*x-y*y) <= 0.01) {
@@ -44,7 +44,7 @@ coord_t TestFunc(const coord_t x, const coord_t y) {
 //    }
     return sqrt(4-x*x-y*y);
 }
-coord_t Sphere2Func(const coord_t x, const coord_t y) {
+quan_t Sphere2Func(const quan_t x, const quan_t y) {
 
     return -sqrt(4-x*x-y*y);
 }
@@ -60,14 +60,14 @@ int SurfByFuncTest()
     return EXIT_SUCCESS;
 }
 
-CPoint ParametricTest(const coord_t u, const coord_t v)
+CPoint ParametricTest(const quan_t u, const quan_t v)
 {
-    coord_t x = sin(v);
-    coord_t y = (2+cos(v))*sin(u);
-    coord_t z = (2+cos(v))*cos(u);
-//    coord_t x = v*cos(u);
-//    coord_t y = v*sin(u);
-//    coord_t z = v+sin(3*v)/3-4;
+    quan_t x = sin(v);
+    quan_t y = (2 + cos(v)) * sin(u);
+    quan_t z = (2 + cos(v)) * cos(u);
+//    quan_t x = v*cos(u);
+//    quan_t y = v*sin(u);
+//    quan_t z = v+sin(3*v)/3-4;
     return CPoint(x,y,z);
 }
 
@@ -84,7 +84,7 @@ int CubeSurfTests()
 {
     cout << "Cube Test:" << endl;
 
-    vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
+    vector<vector<double >> points; vector<quan_t> quan; vector<bool> mask;
 
     for (int i = 2; i >= -2; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
         for (int j = 2; j >= -2; j -= 2) {
@@ -140,8 +140,8 @@ int PyramidSmoothTest()
 
     vector<vector<double >> points;
     vector<bool> mask;
-    vector<coord_t> quan;
-    coord_t Vmin, Vmax;
+    vector<quan_t> quan;
+    quan_t Vmin, Vmax;
     vector<double> temp;
     int a = 0;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
@@ -172,10 +172,19 @@ int PyramidSmoothTest()
 
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
-    CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", 1.0);
+    //CSurface surf_copy = CSurface(smooth1);
+    CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", .5);
     //mesh1.Reduce(0.3, 0.5);
-    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
+//    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
+    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+    smooth3.CreateSurface();
+    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
+    mesh3.LaplacianSmooth(10, 0.7, 0);
+    mesh3.LaplacianSmooth(150, 0.25, 0.7);
+    mesh3.Reduce(0.25, 0.7);
+    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
+    CModel model = CModel({mesh3, mesh1});
+    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    smooth3.Smooth(3);
@@ -202,29 +211,36 @@ int PyramidSmoothTest()
 int RunSupernovaTests()
 {
     cout << "Black Hole Test:" << endl;
-    vector<ModelData> data (3);
-    cout << "Loading Data" << endl;
-    //data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");Quan
-    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
-    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
-    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
-    //data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
-    //data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
-    //data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
-
+//    vector<ModelData> data (7);
+//    cout << "Loading Data" << endl;
+////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
+//    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
+//    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
+//    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
+//    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
+//    data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
+//    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
+    vector<string> sufix = {"1_5", "2_5", "6", "7_5", "10", "15"};
+    ModelData nova;
     CModel model;
     cout << "Running VIVID" << endl;
     
-    for (int i = 0; i < data.size(); i++) {
-        CSurface surf = CSurface(data[i].points, data[i].mask, data[i].quan, -7., 2.5);
+    for (int i = 0; i < 7; i++) {
+        nova = ReadBin(DATA_MODEL_PATH + "Supernova-"+sufix[i]+".bin");
+        CSurface surf = CSurface(nova.points, nova.mask, nova.quan, -7., 2.5);
         surf.CreateSurface();
-        surf.Smooth(false, 1);
+        //surf.Smooth(false, 1);
+        cout << "Convert to Mesh" << endl;
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
+        cout << "Smooth Step 1" << endl;
+        mesh.LaplacianSmooth(10, 0.7, 0);
+        cout << "Smooth Step 2" << endl;
+        mesh.LaplacianSmooth(50, 0.25, 0.7);
         //medicaneMesh.Reduce(0.3, 0.25);
         model.AddMesh(mesh);
         mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
     }
-    model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModelSmoothFalse2NoReduce");
+    model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModel");
     return EXIT_SUCCESS;
 }
 
@@ -234,9 +250,9 @@ int main()
 //    cout << "ParametricSurfByFuncTest" << endl;
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Testing All Shapes" << endl;
-    ret_value = ShapesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Testing All Shapes" << endl;
+//    ret_value = ShapesTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
@@ -246,9 +262,9 @@ int main()
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Black Hole" << endl;
-//    ret_value = RunSupernovaTests();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Black Hole" << endl;
+    ret_value = RunSupernovaTests();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 
     return EXIT_SUCCESS;
 }

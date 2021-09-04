@@ -13,13 +13,13 @@ using namespace std;
 struct ModelData { // TODO: code repetition!
 	vector<vector<double >> points;
 	vector<bool> mask;
-	vector<coord_t> quan;
+	vector<quan_t> quan;
 };
 
 struct ModelDataMultipleMasks {
 	vector<vector<double >> points;
 	vector<vector<bool> > mask;
-	vector<coord_t> quan;
+	vector<quan_t> quan;
 };
 
 
@@ -31,7 +31,7 @@ static ModelData ReadBin(string file_loc) {
 	    throw "File does not exist";
 	}
 	float x, y, z; //will hold the temporary x, y ,z values
-    coord_t temp_quan; //will hold the temporary color values
+    quan_t temp_quan; //will hold the temporary color values
 	bool temp_mask; //will hold the temporary mask values
 	int length; //will hold the length of the input
 	ModelData output = ModelData();
@@ -60,7 +60,7 @@ static ModelData ReadBin(string file_loc) {
 static ModelDataMultipleMasks ReadBinMultipleMasks(string file_loc) {
 	ifstream binFile(file_loc, ios::in | ios::binary);
 	float x, y, z; //will hold the temporary x, y ,z values
-    coord_t temp_quan; //will hold the temporary color values
+    quan_t temp_quan; //will hold the temporary color values
 	bool temp_mask; //will hold the temporary mask values
 	int length; //will hold the length of the input
 	int maskNum; //will hold the number of masks to read

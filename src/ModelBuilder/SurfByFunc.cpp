@@ -6,7 +6,7 @@
 namespace vivid
 {
 
-CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::string &arLabel, bool RemoveFlatSurfaces) {
+CMesh SurfByFunc(const F3D_t &func, int aBoxSize, quan_t aAlpha, const std::string &arLabel, bool RemoveFlatSurfaces) {
     // Creating Wireframe
     aBoxSize *= SUBDIVISION_FACTOR;
     vector<CPoint> points = {};
@@ -16,12 +16,12 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
 //        }
 //    }
     vector<quan_t> quan = {};
-    coord_t temp_x, temp_y;
+    quan_t temp_x, temp_y;
 
     for (int x = -aBoxSize; x <= aBoxSize; x += 1) {
         for (int y = -aBoxSize; y <= aBoxSize; y += 1) {
             temp_x = x/SUBDIVISION_FACTOR; temp_y = y/SUBDIVISION_FACTOR;
-            coord_t z = func(temp_x,temp_y);
+            quan_t z = func(temp_x, temp_y);
             if (z > 2*aBoxSize/SUBDIVISION_FACTOR) {
                 z = 2*aBoxSize/SUBDIVISION_FACTOR;
             }
@@ -77,8 +77,8 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
     return mesh;
 }
 
-CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t aThetaMin, coord_t aThetaMax,
-                        coord_t aPhiMin, coord_t aPhiMax, coord_t aAlpha, const std::string &arLabel)
+CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, quan_t aThetaMin, quan_t aThetaMax,
+                        quan_t aPhiMin, quan_t aPhiMax, quan_t aAlpha, const std::string &arLabel)
 {
     vector<CPoint> points = {};
     vector<quan_t> quan = {};
@@ -86,9 +86,9 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
     double phi_step = aPhiMax / aNumberOfSteps;
     double theta_step = aThetaMax / aNumberOfSteps;
     for (int i = 0; i <= aNumberOfSteps; i += 1) {
-        coord_t theta = aThetaMin + i * theta_step;
+        quan_t theta = aThetaMin + i * theta_step;
         for (int j = 0; j <= aNumberOfSteps; j += 1) {
-            coord_t phi = aPhiMin + j * phi_step;
+            quan_t phi = aPhiMin + j * phi_step;
             CPoint point = func(phi, theta);
             points.push_back(point);
             quan.push_back(point.Magnitude());

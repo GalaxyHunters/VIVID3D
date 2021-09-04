@@ -21,7 +21,7 @@ public:
     // TODO: Make this work
     CModel(const std::vector<CModelComponent> &arMeshes) : mMeshes(arMeshes){};
     //TODO: Remove this when Mesh/Surface refactor done
-    CModel(const std::vector<CSurface> &arSurfs, std::string aLabel, coord_t aAlpha);
+    CModel(const std::vector<CSurface> &arSurfs, std::string aLabel, quan_t aAlpha);
 	~CModel();
 
     // TODO: Make this work
@@ -29,7 +29,7 @@ public:
 	void AddMesh(const CModelComponent &arMesh);
 	//remove Mesh by label maybe?
     //List of meshes by label?
-	void AddSurf(const CSurface &arSurf, std::string aLabel, coord_t aAlpha);
+	void AddSurf(const CSurface &arSurf, std::string aLabel, quan_t aAlpha);
 	inline const vector<CModelComponent> GetMeshes() {return mMeshes;}
 
 	// Add Importers

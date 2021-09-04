@@ -17,13 +17,13 @@ private:
 public:
     //Constructor and Copy Constructor
     CLine(){}
-    CLine(const std::vector<CPoint> &arPoints, const coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", "White"){
+    CLine(const std::vector<CPoint> &arPoints, const quan_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", "White"){
         mPoints = arPoints;
         std::vector<size_t> points (arPoints.size());
         for (int i = 0; i < arPoints.size(); i++) { points[i] = i; }
         mFaces = {CIndexedFace(points, 0)};
     }
-    CLine(const std::vector<std::vector<CPoint>> &arPoints, const coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", "White"){
+    CLine(const std::vector<std::vector<CPoint>> &arPoints, const quan_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", "White"){
         size_t size = 0;
         for (auto it = arPoints.begin(); it != arPoints.end(); it++) {
             std::vector<size_t> points (it->size());

@@ -5,20 +5,20 @@
 using namespace vivid;
 using namespace std;
 
-constexpr coord_t ZERO_COMPARISON_THRESHOLD = 0.0001;
+constexpr quan_t ZERO_COMPARISON_THRESHOLD = 0.0001;
 constexpr double ARROW_BASE = 0.4;
 constexpr double ARROW_LENGTH = 0.8;
 
 namespace vivid
 {
 
-CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateCubeMesh(const CPoint &arCenter, quan_t aSize, quan_t aColor, quan_t aAlpha, const string &arLabel)
 {
     CMesh mesh = CreateBoxMesh(arCenter, CPoint(aSize, aSize, aSize), aColor, aAlpha, arLabel);
     return mesh;
 }
 
-CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, quan_t aColor, quan_t aAlpha, const string &arLabel)
 {
     vector<CPoint> points= { CPoint(-1, -1, -1),
                              CPoint(-1, -1, +1),
@@ -44,7 +44,7 @@ CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor
     return mesh;
 }
 
-CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMeridians, size_t aNumOfParallels, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateSphereMesh(const CPoint &arCenter, quan_t aRadius, size_t aNumOfMeridians, size_t aNumOfParallels, quan_t aColor, quan_t aAlpha, const string &arLabel)
 {
     vector<CPoint> points;
     vector<CIndexedFace> faces;
@@ -99,7 +99,7 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
 	return mesh;
 }
 
-CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, quan_t aColor, quan_t aAlpha, const string &arLabel)
 {
     /* Asserting conditions */
     if (!(arMajorAxis.Orthogonal(arMiddleAxis) && arMinorAxis.Orthogonal(arMiddleAxis) && arMajorAxis.Orthogonal(arMinorAxis))) {
@@ -108,7 +108,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 
     CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, aColor, aAlpha, arLabel);
     Ellipsoid.ScaleMesh(arScaleVec); //Scaling before the rotation
-    coord_t aMat[3][3];
+    quan_t aMat[3][3];
     aMat[0][0] = arMajorAxis.X(); aMat[0][1] = arMiddleAxis.X(); aMat[0][2] = arMinorAxis.X();
     aMat[1][0] = arMajorAxis.Y(); aMat[1][1] = arMiddleAxis.Y(); aMat[1][2] = arMinorAxis.Y();
     aMat[2][0] = arMajorAxis.Z(); aMat[2][1] = arMiddleAxis.Z(); aMat[2][2] = arMinorAxis.Z();
@@ -118,7 +118,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 }
 
 // TODO, THINK about Jill Neiman's arrow and the scale thingy
-CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const string &arLabel)
+CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, quan_t aWidth, quan_t aPCRatio, quan_t aColor, quan_t aAlpha, const string &arLabel)
 {
     //before we run, lets check Exceptions
     if (0 == arDirVec.Magnitude())  {
@@ -201,7 +201,7 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
 pair<CLine, CLine> CreateGrid(const size_t aDimensions) {
     /// Create x,y,z
 //    vector<int> dimensions = {static_cast<int>(abs(arDimensions.X())), static_cast<int>(abs(arDimensions.Y())), static_cast<int>(abs(arDimensions.Z()))};
-    coord_t size = static_cast<coord_t>(aDimensions);
+    quan_t size = static_cast<quan_t>(aDimensions);
     pair<CLine, CLine> grid_lines;
 
 //    grid_lines.push_back(CLine({ {CPoint(-dimensions[0],0,0), CPoint(dimensions[0],0,0)},

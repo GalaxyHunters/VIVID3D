@@ -15,7 +15,7 @@ using namespace std;
 namespace vivid
 {  // TODO temp fix most of the functions here should be rewritten or become out of scope
 
-color_t static Quan2Color(CColorMap aClm, coord_t aQuan) { // calls function from ColorMap.h
+color_t static Quan2Color(CColorMap aClm, quan_t aQuan) { // calls function from ColorMap.h
     return aClm.GetColor(aQuan);
 }
 
@@ -29,7 +29,7 @@ bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
 static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
 
 
-void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
+void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, quan_t aAlpha)
 {
     // TODO talk to tomer about line endings, unix vs windows.
     aMTLFile << "newmtl surf_%07d" << (*apMtlCounter) <<endl;
@@ -84,7 +84,7 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CModelComponent * apMesh, 
     //write faces to obj file + write colors to mtl file
     color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetColor());
     string write_type = apMesh->GetObjType();
-    coord_t alpha = apMesh->GetAlpha();
+    quan_t alpha = apMesh->GetAlpha();
     WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
     for (auto it = Faces.begin(); it != Faces.end(); it++)
     {
@@ -158,7 +158,7 @@ void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CI
     arOBJFile << "\n";
 }
 
-void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, coord_t aAlpha) {
+void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, quan_t aAlpha) {
     aMTLFile << "newmtl texture_" + to_string(*mtl_counter) + "\n" + \
 		"Ns 96.078\n"  \
 		"Ka 1.000 1.000 1.000 \n"  \
@@ -175,7 +175,7 @@ void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counte
 }
 
 void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CModelComponent *apMesh, size_t * mtl_counter, string aTextureName,
-                     coord_t aTextureSize, size_t aPointsCounter) {
+                     quan_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + apMesh->GetLabel() + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
     // CPoint cen_point = apMesh->getCenVector();

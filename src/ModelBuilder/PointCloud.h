@@ -17,7 +17,7 @@ private:
 public:
     //Constructor and Copy Constructor
     CPointCloud(){}
-    CPointCloud(const std::vector<CPoint> &arPoints, const coord_t aAlpha, vector<quan_t> &arQuan, const std::string arLabel) : CModelComponent(aAlpha, arLabel, "p"){
+    CPointCloud(const std::vector<CPoint> &arPoints, const quan_t aAlpha, vector<quan_t> &arQuan, const std::string arLabel) : CModelComponent(aAlpha, arLabel, "p"){
         mPoints = arPoints;
         quan_t v_max = *std::max_element(arQuan.begin(), arQuan.end());
         quan_t v_min = *std::min_element(arQuan.begin(), arQuan.end());

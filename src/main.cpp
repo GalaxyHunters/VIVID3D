@@ -220,23 +220,25 @@ int RunSupernovaTests()
 //    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
 //    data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
 //    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
-    vector<string> sufix = {"1_5", "2_5", "6", "7_5", "10", "15"};
+    vector<string> sufix = {"0", "1_5", "2_5", "6", "7_5", "10", "15"};
+    vector<quan_t> why = {0, 1.5, -2.5, -6, -7. -10., -15.};
     ModelData nova;
     CModel model;
     cout << "Running VIVID" << endl;
     
     for (int i = 0; i < 7; i++) {
         nova = ReadBin(DATA_MODEL_PATH + "Supernova-"+sufix[i]+".bin");
-        CSurface surf = CSurface(nova.points, nova.mask, nova.quan, -7., 2.5);
+        for (int j = 0; j < nova.quan.size(); j++) {
+            nova.quan[j] = why[i];
+        }
+        CSurface surf = CSurface(nova.points, nova.mask, nova.quan, -15.1, 1.51);
         surf.CreateSurface();
         //surf.Smooth(false, 1);
         cout << "Convert to Mesh" << endl;
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
-        cout << "Smooth Step 1" << endl;
         mesh.LaplacianSmooth(10, 0.7, 0);
-        cout << "Smooth Step 2" << endl;
         mesh.LaplacianSmooth(50, 0.25, 0.7);
-        //medicaneMesh.Reduce(0.3, 0.25);
+        mesh.Reduce(0.5, 0.7);
         model.AddMesh(mesh);
         mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
     }

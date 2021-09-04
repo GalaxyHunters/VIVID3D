@@ -79,34 +79,32 @@ void CMesh::ExportToObj(string aOutput, bool WithTexture){
 }
 
 void CMesh::CalculatePointsNeighbours() {
-    for (int i = 0; i < mPoints.size(); i++) {
-        printProgress(static_cast<double>(i)/mPoints.size());
-        for (auto it = mFaces.begin(); it != mFaces.end(); it++) {
-            vector<size_t> v = it->GetPoints();
-            for (int j = 0; j < v.size();j++) {
-                if (v[j] == i) {
-                    // Face contains point i, so get one before and one after,
-                    size_t prev, next;
-                    if (j == 0) {
-                        prev = v[v.size()-1];
-                        next = v[j+1];
-                    } else if (j == (v.size() -1)) {
-                        prev = v[j-1];
-                        next = v[0];
-                    } else {
-                        prev = v[j-1];
-                        next = v[j+1];
-                    }
-                    if (!(std::find(mPointNeighbours[i].begin(), mPointNeighbours[i].end(), prev) != mPointNeighbours[i].end())) {
-                        mPointNeighbours[i].push_back(prev);
-                    }
-                    if (!(std::find(mPointNeighbours[i].begin(), mPointNeighbours[i].end(), next) != mPointNeighbours[i].end())) {
-                        mPointNeighbours[i].push_back(next);
-                    }
-                    break;
-                }
+    cout << mFaces.size() << endl;
+    int i = 0;
+    for (auto it = mFaces.begin(); it != mFaces.end(); it++) {
+        printProgress(static_cast<double>(i)/mFaces.size());
+        vector<size_t> v = it->GetPoints();
+        for (int j = 0; j < v.size();j++) {
+            // Face contains point i, so get one before and one after,
+            size_t prev, next;
+            if (j == 0) {
+                prev = v[v.size()-1];
+                next = v[j+1];
+            } else if (j == (v.size() -1)) {
+                prev = v[j-1];
+                next = v[0];
+            } else {
+                prev = v[j-1];
+                next = v[j+1];
+            }
+            if (!(std::find(mPointNeighbours[v[j]].begin(), mPointNeighbours[v[j]].end(), prev) != mPointNeighbours[v[j]].end())) {
+                mPointNeighbours[v[j]].push_back(prev);
+            }
+            if (!(std::find(mPointNeighbours[v[j]].begin(), mPointNeighbours[v[j]].end(), next) != mPointNeighbours[v[j]].end())) {
+                mPointNeighbours[v[j]].push_back(next);
             }
         }
+        i++;
     }
 }
 // TODO: SHOULD BE MOVED TO MODELCOMPONENT.CPP

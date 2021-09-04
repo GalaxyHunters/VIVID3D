@@ -1,4 +1,5 @@
 #include "ModelBuilder/Surface.h"
+#include "ModelBuilder/ModelComponent.h"
 #include "ModelBuilder/Mesh.h"
 #include "ModelBuilder/Line.h"
 #include "ModelBuilder/PointCloud.h"
@@ -15,12 +16,23 @@ using namespace std;
 namespace py = pybind11;
 
 PYBIND11_MODULE(vivid_py, m) {
+    py::class_<CModelComponent> model_component (m, "ModelComponent");
+    py::class_<CPoint>(m, "Point")
+        .def(py::init<const CPoint &>(),
+                "copy constructor for Point",
+                py::arg("point"))
+        .def(py::init<quan_t, quan_t, quan_t>(),
+                "Constructor for point",
+                py::arg("x"), py::arg("y"), py::arg("z"))
+        .def(py::init<std::vector<double>>(),
+                "Constructor for point",
+                py::arg("3d_vector"));
     py::class_<CSurface>(m, "Surface")
         .def(py::init<const vector<vector<double>>&, const vector<bool>&, vector<quan_t>&, quan_t, quan_t>(),
                 "constructor function for surface",
                 py::arg("points"), py::arg("mask"), py::arg("quan") = vector<quan_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
         .def(py::init<const CSurface &> (),
-                "copy constructor for CSurface",
+                "copy constructor for Surface",
                 py::arg("surf"))
         .def("create_surface", &CSurface::CreateSurface,
              "Calculate the surface from input data")
@@ -30,7 +42,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
              py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
-    py::class_<CLine>(m, "Line")
+    py::class_<CLine>(m, "Line", model_component)
         .def(py::init<const vector<CPoint>&, const quan_t, const string& >(),
                 "Constructor for line",
                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
@@ -44,7 +56,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "Add another line",
              py::arg("points"));
 
-    py::class_<CPointCloud>(m, "PointCloud")
+    py::class_<CPointCloud>(m, "PointCloud", model_component)
         .def(py::init<const vector<CPoint>&, const quan_t, vector<quan_t>&, const string& >(),
                 "Constructor for Point Cloud",
                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
@@ -55,9 +67,9 @@ PYBIND11_MODULE(vivid_py, m) {
              "Add Points to the Point Cloud",
              py::arg("points"), py::arg("quan"));
 
-    py::class_<CMesh>(m, "Mesh")
+    py::class_<CMesh>(m, "Mesh", model_component)
         .def(py::init<const CMesh &> (),
-                "copy constructor for CMesh",
+                "copy constructor for Mesh",
                 py::arg("mesh"))
         .def("reduce", &CMesh::Reduce,
              "input values should be between 0 and 1. A Reduce algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
@@ -91,18 +103,18 @@ PYBIND11_MODULE(vivid_py, m) {
              py::arg("output_file"), py::arg("with_texture") = 1); //TODO make sure it sent as True to the bool param
 
     //Animations:
-    m.def("animation", &Animate,
-          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
-          py::arg("models"),py::arg("interval"), py::arg("output_file"));
-    m.def("rotating_animation", &RotateAnim,
-          "takes a model and creates an animation of it rotating",
-          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
-    m.def("animation_textures", &AnimateTextures,
-          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
-          py::arg("models"), py::arg("interval"),py::arg("output_file"));
-    m.def("rotating_animation_textures", &RotateAnimTextures,
-          "takes a model and creates an animation of it rotating",
-          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
+//    m.def("animation", &Animate,
+//          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
+//          py::arg("models"),py::arg("interval"), py::arg("output_file"));
+//    m.def("rotating_animation", &RotateAnim,
+//          "takes a model and creates an animation of it rotating",
+//          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
+//    m.def("animation_textures", &AnimateTextures,
+//          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
+//          py::arg("models"), py::arg("interval"),py::arg("output_file"));
+//    m.def("rotating_animation_textures", &RotateAnimTextures,
+//          "takes a model and creates an animation of it rotating",
+//          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
 
     //Shapes:
     m.def("create_cube", &CreateCubeMesh,

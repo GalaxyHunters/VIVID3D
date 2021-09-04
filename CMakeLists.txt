@@ -48,7 +48,9 @@ find_package(FBX     REQUIRED)
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-#set(PY_ROOT "C:/Users/zorik/Miniconda2")
+set (DPYBIND11_PYTHON_VERSION 3.8.5)
+set(PY_ROOT "/usr/bin/python3.8")
+find_package(PythonLibs 3.8)
 add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name

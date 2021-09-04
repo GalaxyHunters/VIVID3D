@@ -33,7 +33,7 @@ private:
 //    CLogFile::LogCallBackFunction mLogFile = CallBack;
     std::map<size_t, std::vector<size_t>> mPointNeighbours = {};
     std::vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
-    void CalculatePointsNeighbours();
+
 
 public:
 	CMesh() {};
@@ -56,7 +56,7 @@ public:
 	    CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
 
 	~CMesh();
-
+    void CalculatePointsNeighbours();
     /**
      * Decimate faces on CMesh to reduce file size
      * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain

@@ -4,6 +4,9 @@
 #define PBWIDTH 60
 
 void printProgress(double percentage) {
+    if (percentage >= 0.999) {
+        percentage = 1.0;
+    }
     int val = (int) (percentage * 100);
     int lpad = (int) (percentage * PBWIDTH);
     int rpad = PBWIDTH - lpad;

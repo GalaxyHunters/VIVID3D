@@ -75,9 +75,6 @@ CSurface::CSurface(const CSurface &surf)
         for (auto pIt = it->mPoints.begin(); pIt != it->mPoints.end(); pIt++){
             temp.mPoints.push_back(mVecPoints[indexes[*pIt]]);
         }
-        if (it == (surf.mVecFaces).begin()) {
-            cout << "4 Works till here" << endl;
-        }
         mVecFaces.push_back(temp);
     }
 
@@ -173,6 +170,9 @@ const CMesh CSurface::ToMesh(string aLabel, quan_t aAlpha) const {
     vector<CIndexedFace> faces;
     vector<size_t> face_points;
     set<size_t> set_points;
+    map<size_t, vector<size_t>> points_neighbours;
+    //TODO: Re-implement the FindPointNeighbours here, because it's slow as fuck.
+
     for (auto it = mVecFaces.begin(); it != mVecFaces.end(); it++) {
         for (auto point = it->mPoints.begin(); point != it->mPoints.end(); point++) {
             if (set_points.count(indexes[*point]) == 0) {

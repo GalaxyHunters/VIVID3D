@@ -43,7 +43,7 @@ void FbxNodeExport(FbxNode* Node, char* output)
 vector<FbxDouble3> MeshToFbxMaterials(CModelComponent mesh)
 {
     //colors.clear();
-    vector<CIndexedFace> faces = mesh.GetFaces();
+    vector<CFace> faces = mesh.GetFaces();
     vector<FbxDouble3> colors;
 
     for (int l = 0; l < faces.size(); ++l)
@@ -66,7 +66,7 @@ FbxNode* OneMeshToFbx(CModelComponent CMesh)
     vector<FbxSurfacePhong*> FbxMaterials(ColorValues.size());
 
     vector<CPoint> CMeshPoints = CMesh.GetPoints();
-    vector<CIndexedFace> CMeshFaces = CMesh.GetFaces();
+    vector<CFace> CMeshFaces = CMesh.GetFaces();
 
     FbxGeometryElementMaterial* MaterialElement = FMesh->CreateElementMaterial();
     MaterialElement->SetMappingMode(FbxGeometryElement::eByPolygon);
@@ -123,7 +123,7 @@ FbxNode* OneModelToFbx(CModel Model)
 int GetCPSize(CModelComponent mesh)
 {
     int CPSize = 0;
-    vector<CIndexedFace> faces = mesh.GetFaces();
+    vector<CFace> faces = mesh.GetFaces();
     for (int l = 0; l < faces.size(); ++l)
     {
         CPSize = CPSize + faces[l].GetPoints().size();
@@ -190,7 +190,7 @@ FbxNode* OneMeshToFbxTextures(CModelComponent mesh, FbxScene* scene, const strin
 
     //Create control points for the mesh
     vector<CPoint> CPoints = mesh.GetPoints();
-    vector<CIndexedFace> CFaces = mesh.GetFaces();
+    vector<CFace> CFaces = mesh.GetFaces();
     //int PointsSize = CPoints.size();                                        //maybe useless, for memory purposes
     int FacesSize = CFaces.size();
     FMesh->InitControlPoints(GetCPSize(mesh));                              //Initialize the control point (aka vertex) array of the FBX mesh

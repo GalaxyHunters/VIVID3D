@@ -5,7 +5,7 @@
 
 #include "Point.h"
 //#include "LogFile.h"
-#include "IndexedFace.h"
+#include "Face.h"
 #include "Decimate.h"
 #include "Utils/ColorMap.h"
 
@@ -13,6 +13,7 @@
 #include <fstream>
 #include <vector>
 #include <functional>
+#include <unordered_set>
 
 namespace vivid
 {
@@ -31,25 +32,27 @@ private:
 //        CLogFile::GetInstance().Write(aCode, aMsg);
 //    }
 //    CLogFile::LogCallBackFunction mLogFile = CallBack;
-    std::map<size_t, std::vector<size_t>> mPointNeighbours = {};
-    std::vector<CIndexedFace> GetFacesAsTriangles(); // TODO BADDD!!!
-
+    std::map<size_t, std::unordered_set<size_t>> mPointNeighbours = {};
+    void GetFacesAsTriangles(); // TODO BADDD!!!
 
 public:
 	CMesh() {};
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha) :
-        CModelComponent(aAlpha, aLabel, "f"){
-        mPoints = aPoints; mFaces = aFaces;
+    CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha) :
+        CModelComponent(aAlpha, arLabel, "f") {
+        mPoints = arPoints; mFaces = arFaces;
+        GetFacesAsTriangles();
+    }
+
+    CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
+	   CModelComponent(aAlpha, arLabel, "f", arClm, arCName){
+        mPoints = arPoints; mFaces = arFaces;
+        GetFacesAsTriangles();
         CalculatePointsNeighbours();
     }
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
-	   CModelComponent(aAlpha, aLabel, "f", arClm, arCName){
-        mPoints = aPoints; mFaces = aFaces;
-        CalculatePointsNeighbours();
-    }
-    CMesh(std::vector<CPoint> aPoints, std::vector<CIndexedFace> aFaces, std::string aLabel, quan_t aAlpha, const string &arClm) :
-	    CModelComponent(aAlpha, aLabel, "f", arClm){
-        mPoints = aPoints; mFaces = aFaces;
+    CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, const string &arClm) :
+	    CModelComponent(aAlpha, arLabel, "f", arClm){
+        mPoints = arPoints; mFaces = arFaces;
+        GetFacesAsTriangles();
         CalculatePointsNeighbours();
     }
     CMesh(const CMesh &arMesh) :
@@ -62,7 +65,10 @@ public:
      * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain
      * @param[in] aMaxError is a normalized double of how much to retain the original shape of the faces
      */
-    void Reduce(quan_t aVerticlePercent, quan_t aMaxError);
+    void Reduce(coord_t aVerticlePercent, coord_t aMaxError);
+    void SubdivideLargeFaces(coord_t aAboveAverageThreshold=5.);
+    void RemoveLargeFaces(coord_t aAboveAverageThreshold=2.);
+    void RemovePointyFaces(coord_t aThetaThreshold = 15.);
 
     /**
      * Smooth faces on CMesh by Laplacian Smooth
@@ -83,7 +89,7 @@ public:
      * transform CMesh points by transformation matrix
      * @param[in] aTrans a 3x3 dimension matrix.
      */
-    void TransformMesh(quan_t const aTrans[3][3]);
+    void TransformMesh(coord_t const aTrans[3][3]);
     /**
      * Rotate the CMesh points around a normal vector by an angel, counterclockwise
      * @param[in] aNormVec the x,y.z normal to rotate around.

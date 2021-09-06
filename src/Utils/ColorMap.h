@@ -11,7 +11,7 @@
 // TODO: Refactor
 using namespace std;
 
-typedef double quan_t;
+typedef double coord_t;
 
 class color_t // TODO struct
 {

@@ -71,11 +71,11 @@ namespace MeshDecimation
         inline size_t                           GetNVertices()const {return m_nVertices;};
         inline size_t                           GetNTriangles() const {return m_nTriangles;};
         inline size_t                           GetNEdges() const {return m_nEdges;};
-        void                                    GetMeshData(std::vector<Vec3<Float> > * apPoints, std::vector<Vec3<int> > * apTriangles) const;
+        void                                    GetMeshData(std::vector<Vec3<Float> > * apPoints, std::vector<Vec3<size_t> > * apTriangles) const;
         void                                    ReleaseMemory();
         void                                    Initialize(size_t nVertices, size_t nTriangles, 
                                                            Vec3<Float> *  points, 
-                                                           Vec3<int> * triangles);        
+                                                           Vec3<size_t> * triangles);
         bool                                    Decimate(size_t targetNVertices = 100, 
                                                          size_t targetNTriangles = 0, 
                                                          double targetError = std::numeric_limits<double>::max());
@@ -94,7 +94,7 @@ namespace MeshDecimation
         double                                  ComputeEdgeCost(int v1, int v2, Vec3<Float> & pos) const;
         bool                                    EdgeCollapse(double & error);
     private:
-        Vec3<int> *                             m_triangles;
+        Vec3<size_t> *                             m_triangles;
         Vec3<Float> *                           m_points;
         size_t                                  m_nPoints;
         size_t                                  m_nInitialTriangles;

@@ -15,7 +15,7 @@ using namespace std;
 namespace vivid
 {  // TODO temp fix most of the functions here should be rewritten or become out of scope
 
-color_t static Quan2Color(CColorMap aClm, quan_t aQuan) { // calls function from ColorMap.h
+color_t static Quan2Color(CColorMap aClm, coord_t aQuan) { // calls function from ColorMap.h
     return aClm.GetColor(aQuan);
 }
 
@@ -23,13 +23,13 @@ bool static CompareColor(color_t aColor1, color_t aColor2) {
     return (aColor1.R == aColor2.R && aColor1.G == aColor2.G && aColor1.B == aColor2.B);
 }
 
-bool static CompareQuan(CIndexedFace aFace1, CIndexedFace aFace2) {
+bool static CompareQuan(CFace aFace1, CFace aFace2) {
     return (aFace1.GetColor() > aFace2.GetColor());
 }
-static bool(*CompFace)(CIndexedFace, CIndexedFace) = CompareQuan;
+static bool(*CompFace)(CFace, CFace) = CompareQuan;
 
 
-void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, quan_t aAlpha)
+void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
 {
     // TODO talk to tomer about line endings, unix vs windows.
     aMTLFile << "newmtl surf_%07d" << (*apMtlCounter) <<endl;
@@ -47,7 +47,7 @@ void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, 
 
 }
 
-void WriteNewFace(ofstream& aOBJFile, CIndexedFace aFace, size_t aPointsCounter, string aWriteType)
+void WriteNewFace(ofstream& aOBJFile, CFace aFace, size_t aPointsCounter, string aWriteType)
 {
     aOBJFile << aWriteType+" ";
     vector<size_t> face_points = aFace.GetPoints();
@@ -71,7 +71,7 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CModelComponent * apMesh, 
     //write points to obj file
     CPoint temp_point = CPoint(0, 0, 0);
     vector<CPoint> Points = apMesh->GetPoints();
-    vector<CIndexedFace> Faces = apMesh->GetFaces();
+    vector<CFace> Faces = apMesh->GetFaces();
     for (auto it = Points.begin(); it != Points.end(); it++)
     {
         temp_point = *it; // + apMesh->getCenVector() ; //add the CenVector to return model to the original centralization.
@@ -84,7 +84,7 @@ void WriteObj(ofstream& aOBJFile, ofstream& aMTLFile, CModelComponent * apMesh, 
     //write faces to obj file + write colors to mtl file
     color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetColor());
     string write_type = apMesh->GetObjType();
-    quan_t alpha = apMesh->GetAlpha();
+    coord_t alpha = apMesh->GetAlpha();
     WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
     for (auto it = Faces.begin(); it != Faces.end(); it++)
     {
@@ -147,7 +147,7 @@ void ExportToObjMaterial(CModel &aModel, string aOutput){
 }
 
 
-void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CIndexedFace aFace, size_t aPointsCounter) {
+void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CFace aFace, size_t aPointsCounter) {
     arOBJFile << apMesh->GetObjType()+" ";
     vector<size_t> face_points = aFace.GetPoints();
     size_t VT = apMesh->GetClm().GetColorIndex( aFace.GetColor())+1;
@@ -158,7 +158,7 @@ void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CI
     arOBJFile << "\n";
 }
 
-void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, quan_t aAlpha) {
+void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counter, string aTextureName, coord_t aAlpha) {
     aMTLFile << "newmtl texture_" + to_string(*mtl_counter) + "\n" + \
 		"Ns 96.078\n"  \
 		"Ka 1.000 1.000 1.000 \n"  \
@@ -175,7 +175,7 @@ void WriteMtlTexture(ofstream& aOBJFile, ofstream& aMTLFile, size_t * mtl_counte
 }
 
 void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CModelComponent *apMesh, size_t * mtl_counter, string aTextureName,
-                     quan_t aTextureSize, size_t aPointsCounter) {
+                     coord_t aTextureSize, size_t aPointsCounter) {
     aOBJFile << "o " + apMesh->GetLabel() + "\n";
     CPoint temp_point = CPoint(0, 0, 0);
     // CPoint cen_point = apMesh->getCenVector();
@@ -193,8 +193,8 @@ void WriteObjTexture(ofstream &aOBJFile, ofstream &aMTLFile, CModelComponent *ap
     }
     //write faces
     WriteMtlTexture(aOBJFile, aMTLFile, mtl_counter, aTextureName, apMesh->GetAlpha());
-    vector<CIndexedFace> faces = apMesh->GetFaces();
-    for (vector<CIndexedFace>::iterator it = faces.begin(); it != faces.end(); it++){
+    vector<CFace> faces = apMesh->GetFaces();
+    for (vector<CFace>::iterator it = faces.begin(); it != faces.end(); it++){
         WriteNewFaceTexture(aOBJFile, apMesh, *it, aPointsCounter);
     }
 }

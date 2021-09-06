@@ -5,7 +5,7 @@
 #include <functional>
 #include <ColorMap.h>
 #include <map>
-#include "IndexedFace.h"
+#include "Face.h"
 
 namespace vivid
 {
@@ -16,16 +16,16 @@ namespace vivid
 class CModelComponent {
 protected:
     vector<CPoint> mPoints = {};
-    vector<CIndexedFace> mFaces = {};
+    vector<CFace> mFaces = {};
     std::string mObjType = "f";
-    quan_t mAlpha = 1.;
+    coord_t mAlpha = 1.;
     std::string mLabel = "";
     CColorMap mClm;
     //Constructor, Copy Constructor, Destructor
     CModelComponent(){}
-    CModelComponent(const quan_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm() {}
-    CModelComponent(const quan_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
-    CModelComponent(const quan_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm() {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
+    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
     //virtual ~CModelComponent() = 0;
 
 public:
@@ -35,16 +35,16 @@ public:
 
     // Getters, Setters
     inline std::vector<CPoint> GetPoints() const { return mPoints; }
-    inline std::vector<CIndexedFace> GetFaces() const { return mFaces; }
+    inline std::vector<CFace> GetFaces() const { return mFaces; }
     inline std::string GetLabel() const { return mLabel; }
-    inline quan_t GetAlpha() const { return mAlpha; }
+    inline coord_t GetAlpha() const { return mAlpha; }
     inline CColorMap GetClm() const { return mClm; }
     inline std::string GetObjType() const { return mObjType; }
 
     inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
-    inline void SetFaces(std::vector<CIndexedFace> &arFaces) { mFaces = arFaces; }
+    inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
     inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
-    inline void SetAlpha(quan_t aAlpha) {
+    inline void SetAlpha(coord_t aAlpha) {
         //check input valdilty
         if(aAlpha > 1 || aAlpha < 0){
             throw "Alpha must be between 0 and 1";
@@ -60,7 +60,7 @@ public:
 //         * transform CMesh points by transformation matrix
 //         * @param[in] aTrans a 3x3 dimension matrix.
 //         */
-//        void TransformMesh(quan_t const aTrans[3][3]);
+//        void TransformMesh(coord_t const aTrans[3][3]);
 //        /**
 //         * Rotate the CMesh points around a normal vector by an angel, counterclockwise
 //         * @param[in] aNormVec the x,y.z normal to rotate around.

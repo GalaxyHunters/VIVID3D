@@ -28,7 +28,7 @@ int ShapesTest()
     CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
     CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube");
-    pair<CLine, CLine> grid = CreateGrid(7);
+    pair<CLines, CLines> grid = CreateGrid(7);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
     model.AddMeshes(list);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Shapes"); // /test_models/
@@ -36,7 +36,7 @@ int ShapesTest()
     return EXIT_SUCCESS;
 }
 
-quan_t TestFunc(const quan_t x, const quan_t y) {
+coord_t TestFunc(const coord_t x, const coord_t y) {
     //return (7*x*y)/pow(2,x*x+y*y);
 //    return 1./(y-x*x);
 //    if ((4-x*x-y*y) >= -0.1 & (4-x*x-y*y) <= 0.01) {
@@ -44,7 +44,7 @@ quan_t TestFunc(const quan_t x, const quan_t y) {
 //    }
     return sqrt(4-x*x-y*y);
 }
-quan_t Sphere2Func(const quan_t x, const quan_t y) {
+coord_t Sphere2Func(const coord_t x, const coord_t y) {
 
     return -sqrt(4-x*x-y*y);
 }
@@ -60,14 +60,14 @@ int SurfByFuncTest()
     return EXIT_SUCCESS;
 }
 
-CPoint ParametricTest(const quan_t u, const quan_t v)
+CPoint ParametricTest(const coord_t u, const coord_t v)
 {
-    quan_t x = sin(v);
-    quan_t y = (2 + cos(v)) * sin(u);
-    quan_t z = (2 + cos(v)) * cos(u);
-//    quan_t x = v*cos(u);
-//    quan_t y = v*sin(u);
-//    quan_t z = v+sin(3*v)/3-4;
+    coord_t x = sin(v);
+    coord_t y = (2 + cos(v)) * sin(u);
+    coord_t z = (2 + cos(v)) * cos(u);
+//    coord_t x = v*cos(u);
+//    coord_t y = v*sin(u);
+//    coord_t z = v+sin(3*v)/3-4;
     return CPoint(x,y,z);
 }
 
@@ -84,7 +84,7 @@ int CubeSurfTests()
 {
     cout << "Cube Test:" << endl;
 
-    vector<vector<double >> points; vector<quan_t> quan; vector<bool> mask;
+    vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
 
     for (int i = 2; i >= -2; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
         for (int j = 2; j >= -2; j -= 2) {
@@ -140,8 +140,8 @@ int PyramidSmoothTest()
 
     vector<vector<double >> points;
     vector<bool> mask;
-    vector<quan_t> quan;
-    quan_t Vmin, Vmax;
+    vector<coord_t> quan;
+    coord_t Vmin, Vmax;
     vector<double> temp;
     int a = 0;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
@@ -221,9 +221,9 @@ int RunSupernovaTests()
 //    data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
 //    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
     vector<string> sufix = {"0", "1_5", "2_5", "6", "7_5", "10", "15"};
-    vector<quan_t> why = {0, 1.5, -2.5, -6, -7. -10., -15.};
+    vector<coord_t> why = {0, 1.5, -2.5, -6, -7. - 10., -15.};
     ModelData nova;
-    CModel model;
+    CModel nova_model;
     cout << "Running VIVID" << endl;
     
     for (int i = 0; i < 7; i++) {
@@ -236,13 +236,50 @@ int RunSupernovaTests()
         //surf.Smooth(false, 1);
         cout << "Convert to Mesh" << endl;
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
-        mesh.LaplacianSmooth(10, 0.7, 0);
-        mesh.LaplacianSmooth(50, 0.25, 0.7);
-        mesh.Reduce(0.5, 0.7);
-        model.AddMesh(mesh);
+        mesh.SubdivideLargeFaces(4);
+        mesh.RemovePointyFaces(20);
+        mesh.LaplacianSmooth(5, 0.7, 0);
+        mesh.LaplacianSmooth(50, 0.4, 0.7);
+        mesh.RemovePointyFaces();
+        mesh.Reduce(0.25, 0.7);
         mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
+        nova_model.AddMesh(mesh);
     }
-    model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModel");
+    nova_model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModel");
+    return EXIT_SUCCESS;
+}
+
+int RemovePointyFacesTest() {
+    cout << "Remove Pointy Faces Test:" << endl;
+    cout << "Loading Data" << endl;
+////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
+//    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
+//    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
+//    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
+//    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
+    ModelData nova = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
+//    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
+
+    for (int j = 0; j < nova.quan.size(); j++) {
+        nova.quan[j] = 0;
+    }
+    CSurface surf = CSurface(nova.points, nova.mask, nova.quan, 0, 0);
+    surf.CreateSurface();
+    //surf.Smooth(false, 1);
+    cout << "Convert to Mesh" << endl;
+    CMesh mesh = surf.ToMesh("pointytest", .7);
+    vector<CFace> test;
+    cout << test.max_size() << endl;
+    mesh.SubdivideLargeFaces();
+    cout << mesh.GetFaces().size() << endl;
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_no_processing");
+    mesh.RemovePointyFaces();
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_pointy_removal_test");
+    mesh.LaplacianSmooth(2, 0.7, 0);
+    mesh.LaplacianSmooth(50, 0.55, 0.7);
+    mesh.RemovePointyFaces();
+//    mesh.Reduce(0.2, 0.7);
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_pointy_removal_test_smooth");
     return EXIT_SUCCESS;
 }
 
@@ -264,9 +301,9 @@ int main()
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Black Hole" << endl;
     ret_value = RunSupernovaTests();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
-
+    vector<CFace> v;
+    cout << v.max_size() << endl;
     return EXIT_SUCCESS;
 }

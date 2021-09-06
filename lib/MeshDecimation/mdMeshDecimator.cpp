@@ -47,7 +47,7 @@ namespace MeshDecimation
         m_trianglesTags             = 0;
     }
 
-    void MeshDecimator::Initialize(size_t nVertices, size_t nTriangles,   Vec3<Float> * points,  Vec3<int> * triangles)
+    void MeshDecimator::Initialize(size_t nVertices, size_t nTriangles,   Vec3<Float> * points,  Vec3<size_t> * triangles)
     {
         m_nVertices         = nVertices;
         m_nTriangles        = nTriangles;
@@ -277,11 +277,11 @@ namespace MeshDecimation
         return false;
     }
 
-    void MeshDecimator::GetMeshData(std::vector<Vec3<Float> > * apPoints, std::vector<Vec3<int> > * apTriangles) const
+    void MeshDecimator::GetMeshData(std::vector<Vec3<Float> > * apPoints, std::vector<Vec3<size_t> > * apTriangles) const
     {
-		std::vector<int> map(m_nPoints);
+		std::vector<size_t> map(m_nPoints);
 		//int * map = new int [m_nPoints];
-        int counter = 0;
+        size_t counter = 0;
         for (size_t v = 0; v < m_nPoints; ++v)
         {
             if (m_vertices[v].m_tag) // m_vertices[v].m_tag
@@ -295,7 +295,7 @@ namespace MeshDecimation
         {
             if ( m_trianglesTags[t] )
             {
-				apTriangles->push_back(Vec3<int>(map[m_triangles[t].X()], map[m_triangles[t].Y()], map[m_triangles[t].Z()], m_triangles[t].mQuan));
+				apTriangles->push_back(Vec3<size_t>(map[m_triangles[t].X()], map[m_triangles[t].Y()], map[m_triangles[t].Z()], m_triangles[t].mQuan));
             }
         }
         //delete [] map;

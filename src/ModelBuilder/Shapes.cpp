@@ -5,20 +5,20 @@
 using namespace vivid;
 using namespace std;
 
-constexpr quan_t ZERO_COMPARISON_THRESHOLD = 0.0001;
+constexpr coord_t ZERO_COMPARISON_THRESHOLD = 0.0001;
 constexpr double ARROW_BASE = 0.4;
 constexpr double ARROW_LENGTH = 0.8;
 
 namespace vivid
 {
 
-CMesh CreateCubeMesh(const CPoint &arCenter, quan_t aSize, quan_t aColor, quan_t aAlpha, const string &arLabel)
+CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     CMesh mesh = CreateBoxMesh(arCenter, CPoint(aSize, aSize, aSize), aColor, aAlpha, arLabel);
     return mesh;
 }
 
-CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, quan_t aColor, quan_t aAlpha, const string &arLabel)
+CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     vector<CPoint> points= { CPoint(-1, -1, -1),
                              CPoint(-1, -1, +1),
@@ -29,12 +29,12 @@ CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, quan_t aColor,
                              CPoint(+1, +1, -1),
                              CPoint(+1, +1, +1)      };
 
-    vector<CIndexedFace> faces = { CIndexedFace(vector<size_t>{3, 2, 6, 7}, aColor),
-                                   CIndexedFace(vector<size_t>{6, 2, 0, 4}, aColor),
-                                   CIndexedFace(vector<size_t>{7, 6, 4, 5}, aColor),
-                                   CIndexedFace(vector<size_t>{3, 7, 5, 1}, aColor),
-                                   CIndexedFace(vector<size_t>{2, 3, 1, 0}, aColor),
-                                   CIndexedFace(vector<size_t>{1, 5, 4, 0}, aColor)     };
+    vector<CFace> faces = {CFace(vector<size_t>{3, 2, 6, 7}, aColor),
+                           CFace(vector<size_t>{6, 2, 0, 4}, aColor),
+                           CFace(vector<size_t>{7, 6, 4, 5}, aColor),
+                           CFace(vector<size_t>{3, 7, 5, 1}, aColor),
+                           CFace(vector<size_t>{2, 3, 1, 0}, aColor),
+                           CFace(vector<size_t>{1, 5, 4, 0}, aColor)     };
 
 
     CMesh mesh(points, faces, arLabel, aAlpha);
@@ -44,10 +44,10 @@ CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, quan_t aColor,
     return mesh;
 }
 
-CMesh CreateSphereMesh(const CPoint &arCenter, quan_t aRadius, size_t aNumOfMeridians, size_t aNumOfParallels, quan_t aColor, quan_t aAlpha, const string &arLabel)
+CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMeridians, size_t aNumOfParallels, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     vector<CPoint> points;
-    vector<CIndexedFace> faces;
+    vector<CFace> faces;
 
     /* Adds points around sphere*/
     points.push_back(CPoint(0, 0,  1)); //Creating the top polar
@@ -69,28 +69,28 @@ CMesh CreateSphereMesh(const CPoint &arCenter, quan_t aRadius, size_t aNumOfMeri
     /* Add triangle faces around top point (0, 0, 1) */
     for (int i = 0; i < aNumOfMeridians - 1; i++)
     {
-        faces.push_back(CIndexedFace(vector<size_t>{0, 2 + (i + 1) * aNumOfParallels, 2 + i * aNumOfParallels}, aColor)); //creates triangles
+        faces.push_back(CFace(vector<size_t>{0, 2 + (i + 1) * aNumOfParallels, 2 + i * aNumOfParallels}, aColor)); //creates triangles
     }
-    faces.push_back(CIndexedFace(vector<size_t>{0, 2, 2 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
+    faces.push_back(CFace(vector<size_t>{0, 2, 2 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
 
     /* Add rectangular faces around center */
     for (int i = 2; i < 1 + aNumOfParallels; i++)
     {
         for (int j = 0; j < aNumOfMeridians - 1; j++)
         {
-            faces.push_back(CIndexedFace(vector<size_t>{i + j * aNumOfParallels, i + (j + 1) * aNumOfParallels,
+            faces.push_back(CFace(vector<size_t>{i + j * aNumOfParallels, i + (j + 1) * aNumOfParallels,
                                                         i + 1 + (j + 1) * aNumOfParallels, i + 1 + j * aNumOfParallels}, aColor));
         }
-        faces.push_back(CIndexedFace(vector<size_t>{i + (aNumOfMeridians - 1) * aNumOfParallels,
-                                                    (size_t)i, (size_t)(i + 1),
+        faces.push_back(CFace(vector<size_t>{i + (aNumOfMeridians - 1) * aNumOfParallels,
+                                             (size_t)i, (size_t)(i + 1),
                                                     i + 1 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
     }
     /* Add triangle faces around bottom point (0, 0, -1) */
     for (int i = 0; i < aNumOfMeridians - 1; i++)
     {
-        faces.push_back(CIndexedFace(vector<size_t>{1, 1 + (i + 1) * aNumOfParallels, 1 + (i + 2) * aNumOfParallels}, aColor));
+        faces.push_back(CFace(vector<size_t>{1, 1 + (i + 1) * aNumOfParallels, 1 + (i + 2) * aNumOfParallels}, aColor));
     }
-    faces.push_back(CIndexedFace(vector<size_t>{1, 1 + (aNumOfMeridians) * aNumOfParallels, 1 + aNumOfParallels}, aColor));
+    faces.push_back(CFace(vector<size_t>{1, 1 + (aNumOfMeridians) * aNumOfParallels, 1 + aNumOfParallels}, aColor));
 
     CMesh mesh(points, faces, arLabel, aAlpha);
     mesh.MoveMesh(arCenter);
@@ -99,7 +99,7 @@ CMesh CreateSphereMesh(const CPoint &arCenter, quan_t aRadius, size_t aNumOfMeri
 	return mesh;
 }
 
-CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, quan_t aColor, quan_t aAlpha, const string &arLabel)
+CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     /* Asserting conditions */
     if (!(arMajorAxis.Orthogonal(arMiddleAxis) && arMinorAxis.Orthogonal(arMiddleAxis) && arMajorAxis.Orthogonal(arMinorAxis))) {
@@ -108,7 +108,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 
     CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, aColor, aAlpha, arLabel);
     Ellipsoid.ScaleMesh(arScaleVec); //Scaling before the rotation
-    quan_t aMat[3][3];
+    coord_t aMat[3][3];
     aMat[0][0] = arMajorAxis.X(); aMat[0][1] = arMiddleAxis.X(); aMat[0][2] = arMinorAxis.X();
     aMat[1][0] = arMajorAxis.Y(); aMat[1][1] = arMiddleAxis.Y(); aMat[1][2] = arMinorAxis.Y();
     aMat[2][0] = arMajorAxis.Z(); aMat[2][1] = arMiddleAxis.Z(); aMat[2][2] = arMinorAxis.Z();
@@ -118,7 +118,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 }
 
 // TODO, THINK about Jill Neiman's arrow and the scale thingy
-CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, quan_t aWidth, quan_t aPCRatio, quan_t aColor, quan_t aAlpha, const string &arLabel)
+CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     //before we run, lets check Exceptions
     if (0 == arDirVec.Magnitude())  {
@@ -160,18 +160,18 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, quan_t aWi
 
     //creating faces
     //creating the chest faces
-    vector<CIndexedFace> faces={ CIndexedFace(vector<size_t>{0, 4, 5, 1}, aColor),
-                                 CIndexedFace(vector<size_t>{2, 6, 7, 3}, aColor),
-                                 CIndexedFace(vector<size_t>{0, 2, 6, 4}, aColor),
-                                 CIndexedFace(vector<size_t>{4, 6, 7, 5}, aColor),
-                                 CIndexedFace(vector<size_t>{5, 7, 3, 1}, aColor),
-                                 CIndexedFace(vector<size_t>{1, 3, 2, 0}, aColor),
+    vector<CFace> faces={CFace(vector<size_t>{0, 4, 5, 1}, aColor),
+                         CFace(vector<size_t>{2, 6, 7, 3}, aColor),
+                         CFace(vector<size_t>{0, 2, 6, 4}, aColor),
+                         CFace(vector<size_t>{4, 6, 7, 5}, aColor),
+                         CFace(vector<size_t>{5, 7, 3, 1}, aColor),
+                         CFace(vector<size_t>{1, 3, 2, 0}, aColor),
                                  //creating the pointer faces
-                                 CIndexedFace(vector<size_t>{8,  10, 11, 9}, aColor),
-                                 CIndexedFace(vector<size_t>{8,  12, 10}, aColor),
-                                 CIndexedFace(vector<size_t>{10, 12, 11}, aColor),
-                                 CIndexedFace(vector<size_t>{11, 12, 9}, aColor),
-                                 CIndexedFace(vector<size_t>{9,  12, 8}, aColor) };
+                                 CFace(vector<size_t>{8, 10, 11, 9}, aColor),
+                         CFace(vector<size_t>{8, 12, 10}, aColor),
+                         CFace(vector<size_t>{10, 12, 11}, aColor),
+                         CFace(vector<size_t>{11, 12, 9}, aColor),
+                         CFace(vector<size_t>{9, 12, 8}, aColor) };
 
     CMesh mesh(points, faces, arLabel, aAlpha);
 
@@ -198,20 +198,18 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, quan_t aWi
     return mesh;
 }
 
-pair<CLine, CLine> CreateGrid(const size_t aDimensions) {
+// TODO: num of ticks, Cpoint aScale maybe, bool LogScale
+pair<CLines, CLines> CreateGrid(const size_t aDimensions) {
     /// Create x,y,z
 //    vector<int> dimensions = {static_cast<int>(abs(arDimensions.X())), static_cast<int>(abs(arDimensions.Y())), static_cast<int>(abs(arDimensions.Z()))};
-    quan_t size = static_cast<quan_t>(aDimensions);
-    pair<CLine, CLine> grid_lines;
+    coord_t size = static_cast<coord_t>(aDimensions);
+    pair<CLines, CLines> grid_lines;
+    // Major axes
+    grid_lines.first = CLines({{CPoint(-size, 0, 0), CPoint(size, 0, 0)},
+                               {CPoint(0,0,-size),   CPoint(0, 0, size)},
+                               {CPoint(0, -size, 0), CPoint(0, size, 0)}}, 1., "WhiteLines");
 
-//    grid_lines.push_back(CLine({ {CPoint(-dimensions[0],0,0), CPoint(dimensions[0],0,0)},
-//                                         {CPoint(0,0,-dimensions[2]), CPoint(0,0,dimensions[2])},
-//                                         {CPoint(0,-dimensions[1],0), CPoint(0,dimensions[1],0)}}, 1., "WhiteLines"));
-    grid_lines.first = CLine({ {CPoint(-size, 0, 0), CPoint(size, 0, 0)},
-                                 {CPoint(0,0,-size),   CPoint(0, 0, size)},
-                                 {CPoint(0, -size, 0), CPoint(0, size, 0)}}, 1., "WhiteLines");
-
-    // Add x,y,z sub lines
+    // Add x,y,z tick lines
     vector<vector<CPoint>> line_points;
     for (int i = -size; i <= size; i++) {
         if (i != 0) {
@@ -223,7 +221,7 @@ pair<CLine, CLine> CreateGrid(const size_t aDimensions) {
             line_points.push_back({CPoint(0, i, -size), CPoint(0, i, size)});
         }
     }
-    grid_lines.second = CLine(line_points, 0.15, "GreyLines");
+    grid_lines.second = CLines(line_points, 0.15, "GreyLines");
 
     return grid_lines;
 }

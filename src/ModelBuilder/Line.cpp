@@ -3,7 +3,7 @@
 using namespace vivid;
 using namespace std;
 
-void CLine::AddLine(const vector<CPoint> &arPoints)
+void CLines::AddLine(const vector<CPoint> &arPoints)
 {
     size_t size = mPoints.size();
     vector<size_t> points (arPoints.size());
@@ -12,5 +12,5 @@ void CLine::AddLine(const vector<CPoint> &arPoints)
         mPoints.push_back(arPoints[i]);
         points[i] = size + i;
     }
-    mFaces.push_back(CIndexedFace(points, 0));
+    mFaces.push_back(CFace(points, 0));
 }

@@ -16,48 +16,52 @@ using namespace std;
 namespace py = pybind11;
 
 PYBIND11_MODULE(vivid_py, m) {
+    m.doc() = "VIVID: Creating 3D animations in one line of code";
+    // add model component base functions
     py::class_<CModelComponent> model_component (m, "ModelComponent");
     py::class_<CPoint>(m, "Point")
         .def(py::init<const CPoint &>(),
                 "copy constructor for Point",
                 py::arg("point"))
-        .def(py::init<quan_t, quan_t, quan_t>(),
+        .def(py::init<coord_t, coord_t, coord_t>(),
                 "Constructor for point",
                 py::arg("x"), py::arg("y"), py::arg("z"))
         .def(py::init<std::vector<double>>(),
                 "Constructor for point",
                 py::arg("3d_vector"));
     py::class_<CSurface>(m, "Surface")
-        .def(py::init<const vector<vector<double>>&, const vector<bool>&, vector<quan_t>&, quan_t, quan_t>(),
-                "constructor function for surface",
-                py::arg("points"), py::arg("mask"), py::arg("quan") = vector<quan_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
+        .def(py::init<const vector<vector<double>>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
+             "constructor function for surface",
+             py::arg("points"), py::arg("mask"), py::arg("quan") = vector<coord_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
         .def(py::init<const CSurface &> (),
                 "copy constructor for Surface",
                 py::arg("surf"))
         .def("create_surface", &CSurface::CreateSurface,
-             "Calculate the surface from input data")
+             R"-(
+             .. py:function:: create_surface()
+             :return: Calculate the surface from input data)-")
         .def("smooth", &CSurface::Smooth,
              "A smoothing algorithm -for the surface, improves visibility and helps the decimation algorithm in the next stage", py::arg("super_smooth"), py::arg("smooth_factor"))
         .def("to_mesh", &CSurface::ToMesh,
              "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
              py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
-    py::class_<CLine>(m, "Line", model_component)
-        .def(py::init<const vector<CPoint>&, const quan_t, const string& >(),
-                "Constructor for line",
+    py::class_<CLines>(m, "Lines", model_component)
+        .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
+                "Constructor for Lines",
                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
-        .def(py::init<const vector<vector<CPoint>>&, const quan_t, const string&>(),
-                "Constructor for line",
-                py::arg("list_of_points"), py::arg("alpha")=1., py::arg("label")="")
-        .def(py::init<const CLine&>(),
-                "Copy Constructor for Line",
-                py::arg("line"))
-        .def("add_line", &CLine::AddLine,
+        .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
+                "Constructor for Lines",
+                py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
+        .def(py::init<const CLines&>(),
+                "Copy Constructor for Lines",
+                py::arg("Lines"))
+        .def("add_line", &CLines::AddLine,
              "Add another line",
              py::arg("points"));
 
     py::class_<CPointCloud>(m, "PointCloud", model_component)
-        .def(py::init<const vector<CPoint>&, const quan_t, vector<quan_t>&, const string& >(),
+        .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
                 "Constructor for Point Cloud",
                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
         .def(py::init<const CPointCloud&>(),
@@ -76,7 +80,10 @@ PYBIND11_MODULE(vivid_py, m) {
              py::arg("decimation_percent") = 0.5, py::arg("error") = 0.1)
         .def("export_to_obj", &CMesh::ExportToObj,
              "writes the surface to an OBJ file, by materials or textures",
-             py::arg("output_file"), py::arg("with_texture") = 1); //TODO make sure it sent as True to the bool param
+             py::arg("output_file"), py::arg("with_texture") = 1)
+        .def("laplacian_smooth", &CMesh::LaplacianSmooth,
+             "Smooths the surface by HC Laplacian Algorithm.",
+             py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
         //TODO: Add transform mesh functions
 
     py::class_<CModel>(m, "Model")
@@ -84,7 +91,7 @@ PYBIND11_MODULE(vivid_py, m) {
         .def(py::init<vector<CModelComponent>& >(),
                 "constructor for CModel, from meshes, lines, and point clouds",
                 py::arg("meshes"))
-        .def(py::init<vector<CSurface>&, string, quan_t> (),
+        .def(py::init<vector<CSurface>&, string, coord_t> (),
                 "constructor for CModel, from surfs",
                 py::arg("surfaces"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
         .def("add_meshes", &CModel::AddMesh,
@@ -94,7 +101,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "add another mesh, lines, or point clouds to Model",
              py::arg("mesh"))
         .def("add_surf", &CModel::AddSurf,
-             "add another mesh, lines, or point clouds to model, using surf",
+             "add another surf to model",
              py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
         .def("get_meshes", &CModel::GetMeshes,
              "Returns the list of meshes held by model")
@@ -141,4 +148,6 @@ PYBIND11_MODULE(vivid_py, m) {
     m.def("create_grid", &CreateGrid,
           "Creates a grid",
           py::arg("size")=5);
+
+    //SurfByFunc:
 }

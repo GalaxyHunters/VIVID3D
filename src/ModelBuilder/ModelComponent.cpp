@@ -30,13 +30,13 @@ void CModelComponent::TransformMesh(coord_t const aTrans[3][3]){
     }
 }
 
-void CModelComponent::RotateMesh(CPoint aNormVec, double aRadAngel){
+void CModelComponent::RotateMesh(const CPoint& arNormVec, double aRadAngel){
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);
     // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
-    auto nx = aNormVec.X();
-    auto ny = aNormVec.Y();
-    auto nz = aNormVec.Z();
+    auto nx = arNormVec.X();
+    auto ny = arNormVec.Y();
+    auto nz = arNormVec.Z();
 
     coord_t const rotation_mat[3][3] = {
             cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,

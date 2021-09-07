@@ -1,17 +1,11 @@
 #include <numeric>
 #include "Mesh.h"
-#include "Model.h" // TODO TOMER!! Y?
+#include "Model.h"
 #include "Decimate.h"
 #include "ProgressBar.h"
-#include "boost/algorithm/string/predicate.hpp"
-//#include <stdio.h>
-
 
 using namespace vivid;
 using namespace boost::algorithm;
-
-
-// TODO: to place the methods in order and in substructure
 
 CMesh::~CMesh() {}
 

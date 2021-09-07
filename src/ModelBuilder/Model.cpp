@@ -7,13 +7,13 @@ using namespace std;
 
 
 CModel::CModel(const vector<CSurface> &arSurfs, string aLabel, coord_t aAlpha){
-    for (auto it = arSurfs.begin(); it != arSurfs.end(); it++){ //TODO should be for each.
-        mMeshes.push_back( (*it).ToMesh(aLabel, aAlpha) );
+    for (const auto & arSurf : arSurfs){
+        mMeshes.push_back( arSurf.ToMesh(aLabel, aAlpha) );
     }
 }
 void CModel::AddMeshes(const vector<CModelComponent> &arMeshes) {
-    for (auto it = arMeshes.begin(); it != arMeshes.end(); it ++) {
-        mMeshes.push_back(*it);
+    for (const auto & arMesh : arMeshes) {
+        mMeshes.push_back(arMesh);
     }
 }
 

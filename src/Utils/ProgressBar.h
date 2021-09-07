@@ -12,6 +12,6 @@ void printProgress(double percentage) {
     }
     int val = (int) (percentage * 100);
     string str = "%  ["+ PROG_LINES.substr(0, val/(100/PROG_LENGTH)) + PROG_SPACES.substr(0, PROG_LENGTH-(val/(100/PROG_LENGTH))) + "]";
-    cout << "\r" << val<<str;;
+    cout << "\r" << val<<str;
 }
 #endif //VIVID_PROGRESSBAR_H

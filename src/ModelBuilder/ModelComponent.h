@@ -33,7 +33,8 @@ protected:
 public:
     CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
     // Operator=
-    inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces; mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
+    inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
+        mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
 
     // Getters, Setters
     inline std::vector<CPoint> GetPoints() const { return mPoints; }
@@ -49,7 +50,7 @@ public:
     inline void SetAlpha(coord_t aAlpha) {
         //check input valdilty
         if(aAlpha > 1 || aAlpha < 0){
-            throw "Alpha must be between 0 and 1";
+
         }
         mAlpha = aAlpha;
     }
@@ -69,10 +70,10 @@ public:
         void TransformMesh(coord_t const aTrans[3][3]);
         /**
          * Rotate the CMesh points around a normal vector by an angel, counterclockwise
-         * @param[in] aNormVec the x,y.z normal to rotate around.
+         * @param[in] arNormVec the x,y.z normal to rotate around.
          * @param[in] aRadAngel the angel to rotate by (in radians).
          */
-        void RotateMesh(CPoint aNormVec, double aRadAngel);
+        void RotateMesh(const CPoint& arNormVec, double aRadAngel);
         /**
          * Change CMesh points location by addition of x,y,z.
          * @param[in] aDirectionVec the x,y.z direction to move by it.

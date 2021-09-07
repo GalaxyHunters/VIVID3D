@@ -31,7 +31,7 @@ public:
     ~CPointCloud(){}
 
     // Operator=
-    inline CPointCloud& operator= (const CPointCloud& arPC) { mPoints = arPC.mPoints; CModelComponent::operator=(arPC); return *this; }
+    inline CPointCloud& operator= (const CPointCloud& arPC) { CModelComponent::operator=(arPC); return *this; }
 
     // Add
     void AddPoints(const std::vector<CPoint> &arPoints, vector<coord_t> &arQuan);

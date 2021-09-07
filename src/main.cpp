@@ -23,7 +23,6 @@ int ShapesTest()
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    // TODO (Tomer): what does "this sets the center" mean???
     CMesh sphere = CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, 0.1, 0.8, "sphere1" );
     CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");

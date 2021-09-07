@@ -10,9 +10,6 @@
 namespace vivid
 {
 
-// TODO: get ride of size_t
-
-// TODO These functions should be static and go by the naming conventions (and better naming, consistant naming...)
 // TODO also, use Doxygen commenting standards
 
 CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
@@ -29,7 +26,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio,
                       coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 
-std::pair<CLines, CLines> CreateGrid(const size_t aDimensions);
+std::pair<CLines, CLines> CreateGrid(size_t aDimensions);
 
 } // namespace vivid
 #endif //VIVID_SHAPES_H

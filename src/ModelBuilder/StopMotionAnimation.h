@@ -23,7 +23,7 @@ public:
     inline CStopMotionAnimation& operator= (const CStopMotionAnimation& arSMA) { mModels = arSMA.mModels; CAnimation::operator=(arSMA); return *this; }
 
     // Set and Get
-    inline const std::vector<CModel> GetModels() const{ return mModels; }
+    inline std::vector<CModel> GetModels() const{ return mModels; }
     inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
 
     // Add

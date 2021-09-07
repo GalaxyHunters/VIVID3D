@@ -18,28 +18,28 @@ class CSurfacePoint
 public:
     CPoint mPoint = {};
     coord_t mQuan = 0; //TODO rename quan to something better
-    bool mIsIn = false; //TODO MaskIsTrue or similar
+    bool mMaskIsTrue = false;
 
     CSurfacePoint() {};
-    CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mIsIn(aIsIn) {}
+    CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mMaskIsTrue(aIsIn) {}
 };
 
 //TODO Should it containd CFace?
 class CSurfaceFace
 {
 public:
-    std::vector<std::shared_ptr<CPoint> > mPoints = {};
+    std::vector<std::shared_ptr<CPoint> > mVertices = {};
     std::pair<size_t, size_t> mPairPoints = {};
     coord_t mColor = 0;
 
     CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
-            mPoints(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
+            mVertices(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
     CSurfaceFace() {};
     ~CSurfaceFace() {};
 };
 
 //public CMesh
-class CSurface : public CMesh
+class CSurface
 {
 private:
     inline void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) { CLogFile::GetInstance().Write(aCode, aMsg);} //tODO  func, methods etc after members!
@@ -47,17 +47,17 @@ private:
 
     CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad //TODO bad comment
 
-    std::vector<std::shared_ptr<CPoint> > mVecPoints = {}; //TODO rename mSPoints
-    std::vector<CSurfaceFace> mVecFaces = {};  //TODO rename mSFaces
+    std::vector<std::shared_ptr<CPoint> > mVertices = {};
+    std::vector<CSurfaceFace> mSurfFaces = {};  //TODO rename mSFaces
 
     std::vector<std::vector<size_t>> mPointsInFaces = {}; // TODO rename mFacesPoints // Hold the faces defining points
 
     std::vector<CPoint> mInputPoints = {};   // for smooth //TODO rename mCreatingPoints? mSpanningPoints
-    std::vector<bool> mMask = {};            // for smooth //TODO rename mInnerPointsMask
+    std::vector<bool> mCreationMask = {};    // for smooth //TODO rename mInnerPointsMask
     std::vector<coord_t> mQuan = {};         // for smooth  //TODO should we need it?
 
     std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
-    CPoint mCenVector = {};               // holds the center of the data (used to center the data by 000 and back to original upon export)
+    CPoint mCenVector = {};                  // holds the center of the data (used to center the data by 000 and back to original upon export)
     coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
 
 
@@ -66,16 +66,15 @@ private:
     std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
     // Handle Input Sub-Methods
-    // TODO: Fix CleanDoubleInputPoints
-    void CleanDoubleInputPoints();           // remove all the double input points
-    void PreProcessPoints();                 // Centering, scaling, adding noise.
+    void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
+    void PreProcessPoints(vector<CSurfacePoint> &arPoints);                 // Centering, scaling, adding noise.
     std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
     //vorn function:
     void RunVorn();
 
     // Cleaning Sub-Methods
-    void CleanFaces();        // clean the unneeded faces(by mMask)
+    void CleanFaces();        // clean the unneeded faces(by mCreationMask)
     void CleanPoints();       // removes all the unused points
     void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
     void CleanDoublePoints(); // remove all the double face points from the model
@@ -135,20 +134,20 @@ public:
      * @param[in] aAlpha the alpha to assign to the new mesh
      * @returns CMesh converted mesh
      */
-    const CMesh ToMesh(string aLabel, coord_t aAlpha) const; // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
+    CMesh ToMesh(string aLabel, coord_t aAlpha) const; // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
 
     // Getters, Setters
     // TODO: which gets do we really need and why?
     inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
-    inline const std::vector<bool>& GetMask() { return mMask; }
+    inline const std::vector<bool>& GetMask() { return mCreationMask; }
     inline const std::vector<coord_t>& GetQuan() { return mQuan; }
 
     // TODO maybe the following should be deleted
-//    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVecPoints; }
-//    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mVecFaces; }
+//    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVertices; }
+//    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mSurfFaces; }
 
     inline void SetInputPoints(const std::vector<CPoint> &arInputPoints) { mInputPoints = arInputPoints; }
-    inline void SetMask(const std::vector<bool> &arMask) { mMask = arMask; }
+    inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
     inline void SetQuan(std::vector<coord_t> &arQuan) { mQuan = arQuan; }
 };
 

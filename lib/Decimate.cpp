@@ -40,12 +40,12 @@ pair<vector<CPoint>, vector<CFace> > DecimateMesh(vector<CPoint>& aPoints, vecto
 	vector<CPoint> out_points;
 	out_points.clear();
 	vector<CFace> out_faces;
-	//out_faces.clear();
-	for (auto pIt = decimated_points.begin(); pIt != decimated_points.end(); pIt++) {
-		out_points.push_back(CPoint(pIt->X(), pIt->Y(), pIt->Z()));
+	out_faces.clear();
+	for (auto & decimated_point : decimated_points) {
+		out_points.push_back(CPoint(decimated_point.X(), decimated_point.Y(), decimated_point.Z()));
 	}
-	for (auto fIt = decimated_triangles.begin(); fIt != decimated_triangles.end(); fIt++) {
-		out_faces.push_back(CFace({(*fIt)[0], (*fIt)[1], (*fIt)[2]}, fIt->mQuan)); //, fIt->quan
+	for (auto & decimated_triangle : decimated_triangles) {
+		out_faces.push_back(CFace({decimated_triangle[0], decimated_triangle[1], decimated_triangle[2]}, decimated_triangle.mQuan)); //, fIt->quan
 	}
 	pair<vector<CPoint>, vector<CFace> > output(out_points, out_faces);
 	return output;

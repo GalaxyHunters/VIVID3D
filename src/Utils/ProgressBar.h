@@ -1,16 +1,17 @@
 #ifndef VIVID_PROGRESSBAR_H
 #define VIVID_PROGRESSBAR_H
-#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-#define PBWIDTH 60
+
+
 
 void printProgress(double percentage) {
+    string PROG_LINES = "||||||||||||||||||||||||||||||||||||||||||||||||||";
+    string PROG_SPACES = "                                                  ";
+    int PROG_LENGTH = 50;
     if (percentage >= 0.999) {
         percentage = 1.0;
     }
     int val = (int) (percentage * 100);
-    int lpad = (int) (percentage * PBWIDTH);
-    int rpad = PBWIDTH - lpad;
-    printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
-    fflush(stdout);
+    string str = "%  ["+ PROG_LINES.substr(0, val/(100/PROG_LENGTH)) + PROG_SPACES.substr(0, PROG_LENGTH-(val/(100/PROG_LENGTH))) + "]";
+    cout << "\r" << val<<str;;
 }
 #endif //VIVID_PROGRESSBAR_H

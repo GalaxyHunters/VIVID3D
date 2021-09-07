@@ -236,13 +236,14 @@ int RunSupernovaTests()
         //surf.Smooth(false, 1);
         cout << "Convert to Mesh" << endl;
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
-        mesh.SubdivideLargeFaces(4);
-        mesh.RemovePointyFaces(20);
-        mesh.LaplacianSmooth(5, 0.7, 0);
+        //mesh.SubdivideLargeFaces(4);
+//        mesh.RemovePointyFaces(20);
+        mesh.CalculatePointsNeighbours();
+        mesh.LaplacianSmooth(6, 0.7, 0);
         mesh.LaplacianSmooth(50, 0.4, 0.7);
-        mesh.RemovePointyFaces();
-        mesh.Reduce(0.25, 0.7);
-        mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
+        //mesh.RemovePointyFaces();
+        mesh.Reduce(0.1, 0.8);
+        //mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
         nova_model.AddMesh(mesh);
     }
     nova_model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModel");
@@ -268,18 +269,21 @@ int RemovePointyFacesTest() {
     //surf.Smooth(false, 1);
     cout << "Convert to Mesh" << endl;
     CMesh mesh = surf.ToMesh("pointytest", .7);
-    vector<CFace> test;
-    cout << test.max_size() << endl;
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_no_processing");
+    mesh.SubdivideLargeFaces();
+    mesh.SubdivideLargeFaces();
     mesh.SubdivideLargeFaces();
     cout << mesh.GetFaces().size() << endl;
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_no_processing");
     mesh.RemovePointyFaces();
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_pointy_removal_test");
-    mesh.LaplacianSmooth(2, 0.7, 0);
-    mesh.LaplacianSmooth(50, 0.55, 0.7);
-    mesh.RemovePointyFaces();
-//    mesh.Reduce(0.2, 0.7);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_subdivision_pointy_removal_test_smooth");
+    mesh.LaplacianSmooth(20, 0.7, 0);
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_smooth_1");
+    mesh.LaplacianSmooth(150, 0.25, 0.55);
+    //mesh.RemoveLargeFaces(4);
+
+    mesh.RemovePointyFaces(20);
+    mesh.RemovePointyFaces(20);
+    mesh.Reduce(0.25, .7);
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_smooth_reduce");
     return EXIT_SUCCESS;
 }
 
@@ -301,9 +305,7 @@ int main()
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    ret_value = RunSupernovaTests();
+    ret_value = RemovePointyFacesTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    vector<CFace> v;
-    cout << v.max_size() << endl;
     return EXIT_SUCCESS;
 }

@@ -25,6 +25,11 @@ void CModel::AddSurf(const CSurface &arSurf, string aLabel, coord_t aAlpha){
     mMeshes.push_back(arSurf.ToMesh(aLabel, aAlpha));
 }
 
+void CModel::AddModel(const CModel &arModel) {
+    for (auto & it : arModel.GetMeshes()) {
+        mMeshes.push_back(it);
+    }
+}
 
 void CModel::ExportToObj(string aOutput, bool WithTexture){
     OBJExporter(*this, aOutput, WithTexture);

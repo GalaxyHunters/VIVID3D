@@ -62,20 +62,20 @@ namespace MeshDecimation
         {
             m_vertices[v].m_tag = true;
         }
-        int tri[3];
+        size_t tri[3];
         MDEdge edge;
         edge.m_tag = true;
         edge.m_onBoundary = true;
-        int nEdges = 0;
-        int idEdge;
-        int nTris = static_cast<int>(m_nTriangles);
-        for(int t = 0; t < nTris; ++t)
+        size_t nEdges = 0;
+        size_t idEdge;
+        size_t nTris = static_cast<size_t>(m_nTriangles);
+        for(size_t t = 0; t < nTris; ++t)
         {
             tri[0] = m_triangles[t].X();
             tri[1] = m_triangles[t].Y();
             tri[2] = m_triangles[t].Z();
             m_trianglesTags[t] = true;
-            for(int k = 0; k < 3; ++k)
+            for(size_t k = 0; k < 3; ++k)
             {
                 edge.m_v1 = tri[k];
                 edge.m_v2 = tri[(k+1)%3];
@@ -109,10 +109,10 @@ namespace MeshDecimation
             }
         }
     }
-    int MeshDecimator::GetTriangle(int v1, int v2, int v3) const
+    size_t MeshDecimator::GetTriangle(size_t v1, size_t v2, size_t v3) const
     {
-        int i, j, k;
-        int idTriangle;
+        size_t i, j, k;
+        size_t idTriangle;
         for(size_t it = 0; it < m_vertices[v1].m_triangles.Size(); ++it)
         {
             idTriangle = m_vertices[v1].m_triangles[it];
@@ -128,9 +128,9 @@ namespace MeshDecimation
         }
         return -1;
     }
-    int MeshDecimator::GetEdge(int v1, int v2) const
+    size_t MeshDecimator::GetEdge(size_t v1, size_t v2) const
     {
-        int idEdge;
+        size_t idEdge;
         for(size_t it = 0; it < m_vertices[v1].m_edges.Size(); ++it)
         {
             idEdge = m_vertices[v1].m_edges[it];
@@ -142,11 +142,11 @@ namespace MeshDecimation
         }
         return -1;
     }
-    void MeshDecimator::EdgeCollapse(int v1, int v2)
+    void MeshDecimator::EdgeCollapse(size_t v1, size_t v2)
     {
-        int u, w;
-        int shift;
-        int idTriangle;
+        size_t u, w;
+        size_t shift;
+        size_t idTriangle;
         for(size_t itT = 0; itT < m_vertices[v2].m_triangles.Size(); ++itT)
         {
             idTriangle =  m_vertices[v2].m_triangles[itT];
@@ -189,7 +189,7 @@ namespace MeshDecimation
                 m_nTriangles--;
             }
         }
-        int idEdge;
+        size_t idEdge;
         for(size_t itE = 0; itE < m_vertices[v2].m_edges.Size(); ++itE)
         {
             idEdge = m_vertices[v2].m_edges[itE];
@@ -216,7 +216,7 @@ namespace MeshDecimation
         m_vertices[v2].m_tag = false;
         m_nVertices--;
         // update boundary edges
-        SArray<int, 64> incidentVertices;
+        SArray<size_t, 64> incidentVertices;
         incidentVertices.PushBack(v1);
         for(size_t itE = 0; itE < m_vertices[v1].m_edges.Size(); ++itE)
         {
@@ -225,7 +225,7 @@ namespace MeshDecimation
             m_edges[idEdge].m_onBoundary = (IsBoundaryEdge(m_edges[idEdge].m_v1, m_edges[idEdge].m_v2) != -1);
         }        
         // update boundary vertices
-        int idVertex;
+        size_t idVertex;
         for(size_t itV = 0; itV < incidentVertices.Size(); ++itV)
         {
             idVertex = incidentVertices[itV];
@@ -241,10 +241,10 @@ namespace MeshDecimation
             }
         }        
     }
-    int MeshDecimator::IsBoundaryEdge(int v1, int v2) const
+    size_t MeshDecimator::IsBoundaryEdge(size_t v1, size_t v2) const
     {
-        int commonTri = -1;
-        int itTriangle1, itTriangle2;
+        size_t commonTri = -1;
+        size_t itTriangle1, itTriangle2;
         for(size_t itT1 = 0; itT1 < m_vertices[v1].m_triangles.Size(); ++itT1)
         {
             itTriangle1 = m_vertices[v1].m_triangles[itT1];
@@ -266,9 +266,9 @@ namespace MeshDecimation
         }
         return commonTri;
     }
-    bool MeshDecimator::IsBoundaryVertex(int v) const
+    bool MeshDecimator::IsBoundaryVertex(size_t v) const
     {
-        int idEdge;
+        size_t idEdge;
         for(size_t itE = 0; itE < m_vertices[v].m_edges.Size(); ++itE)
         {
             idEdge =  m_vertices[v].m_edges[itE];
@@ -319,14 +319,14 @@ namespace MeshDecimation
         coordMax -= coordMin;
         m_diagBB = coordMax.GetNorm();
 
-        int i, j, k;
+        size_t i, j, k;
         Vec3<Float> n;    
         Float d = 0;
         Float area = 0;
         for(size_t v = 0; v < m_nPoints; ++v)
         {
             memset(m_vertices[v].m_Q, 0, 10 * sizeof(Float));
-            int idTriangle;
+            size_t idTriangle;
             for(size_t itT = 0; itT < m_vertices[v].m_triangles.Size(); ++itT)
             {
                 idTriangle = m_vertices[v].m_triangles[itT];
@@ -351,7 +351,7 @@ namespace MeshDecimation
         }
         Vec3<Float> u1, u2;
         const Float w = static_cast<Float>(1000);
-        int t, v1, v2, v3;
+        size_t t, v1, v2, v3;
         for(size_t e = 0; e < m_edges.size(); ++e)
         {
             v1 = m_edges[e].m_v1;
@@ -401,7 +401,7 @@ namespace MeshDecimation
         double progress = 0.0;    
         char msg[1024];
         double ptgStep = 1.0;
-        int v1, v2;
+        size_t v1, v2;
         MDEdgePriorityQueue pqEdge;
         size_t nE = m_edges.size();
         for(size_t e = 0; e < nE; ++e)
@@ -421,18 +421,18 @@ namespace MeshDecimation
                 if ( (!m_ecolManifoldConstraint) || (ManifoldConstraint(v1, v2)))
                 {
                     pqEdge.m_qem = m_edges[e].m_qem = ComputeEdgeCost(v1, v2, m_edges[e].m_pos);
-                    pqEdge.m_name = static_cast<int>(e);
+                    pqEdge.m_name = static_cast<size_t>(e);
                     m_pqueue.push(pqEdge);
                 }
             }
         }
     }
-    double MeshDecimator::ComputeEdgeCost(int v1, int v2, Vec3<Float> & newPos) const
+    double MeshDecimator::ComputeEdgeCost(size_t v1, size_t v2, Vec3<Float> & newPos) const
     {
         double Q[10];
         double M[12];
         Vec3<double> pos;
-        for(int i = 0; i < 10; ++i) Q[i] = m_vertices[v1].m_Q[i] + m_vertices[v2].m_Q[i];
+        for(size_t i = 0; i < 10; ++i) Q[i] = m_vertices[v1].m_Q[i] + m_vertices[v2].m_Q[i];
         M[0] = Q[0]; // (0, 0)
         M[1] = Q[1]; // (0, 1) 
         M[2] = Q[2]; // (0, 2)
@@ -481,14 +481,14 @@ namespace MeshDecimation
         Vec3<Float> oldPosV1 =  m_points[v1];
         Vec3<Float> oldPosV2 =  m_points[v2];
 
-        SArray<int, SARRAY_DEFAULT_MIN_SIZE> triangles = m_vertices[v1].m_triangles;
-        int idTriangle;
+        SArray<size_t, SARRAY_DEFAULT_MIN_SIZE> triangles = m_vertices[v1].m_triangles;
+        size_t idTriangle;
         for(size_t itT = 0; itT < m_vertices[v2].m_triangles.Size(); ++itT)
         {
             idTriangle = m_vertices[v2].m_triangles[itT];
             triangles.Insert(idTriangle);
         }
-        int a[3];
+        size_t a[3];
         for(size_t itT = 0; itT != triangles.Size(); ++itT)
         {
             idTriangle = triangles[itT];
@@ -523,13 +523,13 @@ namespace MeshDecimation
         }
         return qem;
     }
-    bool MeshDecimator::ManifoldConstraint(int v1, int v2) const
+    bool MeshDecimator::ManifoldConstraint(size_t v1, size_t v2) const
     {
-        std::set<int> vertices;
-        int a, b;
-        int idEdge1;
-        int idEdge2;
-        int idEdgeV1V2 = 0;
+        std::set<size_t> vertices;
+        size_t a, b;
+        size_t idEdge1;
+        size_t idEdge2;
+        size_t idEdgeV1V2 = 0;
         for(size_t itE1 = 0; itE1 < m_vertices[v1].m_edges.Size(); ++itE1)
         {
             idEdge1 = m_vertices[v1].m_edges[itE1];
@@ -565,7 +565,7 @@ namespace MeshDecimation
     bool MeshDecimator::EdgeCollapse(double & qem)
     {
         MDEdgePriorityQueue currentEdge;
-        int v1, v2;
+        size_t v1, v2;
         bool done = false;
         do
         {
@@ -590,12 +590,12 @@ namespace MeshDecimation
         qem = currentEdge.m_qem;
         EdgeCollapse(v1, v2);
         m_points[v1] = m_edges[currentEdge.m_name].m_pos ;
-        for(int k = 0; k < 10; k++) m_vertices[v1].m_Q[k] += m_vertices[v2].m_Q[k];
+        for(size_t k = 0; k < 10; k++) m_vertices[v1].m_Q[k] += m_vertices[v2].m_Q[k];
 
         // Update priority queue
-        int idEdge;
-        int a, b;
-        SArray<int, SARRAY_DEFAULT_MIN_SIZE> incidentVertices;
+        size_t idEdge;
+        size_t a, b;
+        SArray<size_t, SARRAY_DEFAULT_MIN_SIZE> incidentVertices;
         for(size_t itE = 0; itE < m_vertices[v1].m_edges.Size(); ++itE)
         {
             idEdge = m_vertices[v1].m_edges[itE];
@@ -607,7 +607,7 @@ namespace MeshDecimation
             pqEdge.m_name = idEdge;
             m_pqueue.push(pqEdge);
         }
-        int idVertex;
+        size_t idVertex;
         for(size_t itV = 0; itV< incidentVertices.Size(); ++itV)
         {
             idVertex = incidentVertices[itV];
@@ -663,7 +663,7 @@ namespace MeshDecimation
             progress = 100.0 - m_nVertices * 100.0 / m_nPoints;
             if (fabs(progress-progressOld) > ptgStep && m_callBack)
             {
-                sprintf(msg, "%3.2f %% V = %u \t QEM = %f \t \t \r", progress, static_cast<unsigned int>(m_nVertices), qem);
+                sprintf(msg, "%3.2f %% V = %u \t QEM = %f \t \t \r", progress, static_cast<size_t>(m_nVertices), qem);
                 (*m_callBack)(msg);
                 progressOld = progress;
             }

@@ -9,6 +9,8 @@
 
 namespace vivid
 {
+/* FTrans_t is a function that changes CPoint to another CPoint */
+typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
 // TODO: Which setters and getters are really needed?
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
@@ -55,28 +57,32 @@ public:
     inline void SetClm(const std::vector<color_t> &arClm, const std::string &arCName) { mClm.SetColorMap(arClm, arCName); }
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
-// set pure virtual
-//        /**
-//         * transform CMesh points by transformation matrix
-//         * @param[in] aTrans a 3x3 dimension matrix.
-//         */
-//        void TransformMesh(coord_t const aTrans[3][3]);
-//        /**
-//         * Rotate the CMesh points around a normal vector by an angel, counterclockwise
-//         * @param[in] aNormVec the x,y.z normal to rotate around.
-//         * @param[in] aRadAngel the angel to rotate by (in radians).
-//         */
-//        void RotateMesh(CPoint aNormVec, double aRadAngel);
-//        /**
-//         * Change CMesh points location by addition of x,y,z.
-//         * @param[in] aDirectionVec the x,y.z direction to move by it.
-//         */
-//        void MoveMesh(CPoint aDirectionVec);
-//        /**
-//         * Change CMesh points scale in x,y,z direction by x,y,z of the scale vector
-//         * @param[in] aScaleVec the x,y.z direction to move by it.
-//         */
-//        void ScaleMesh(CPoint aScaleVec);
+        /**
+         * transform CMesh points by transformation function
+         * @param[in] aTrans is a function(CPoint) -> CPoint
+         */
+        void TransformMesh(FTrans_t const &arTrans);
+        /**
+         * transform CMesh points by transformation matrix
+         * @param[in] aTrans a 3x3 dimension matrix.
+         */
+        void TransformMesh(coord_t const aTrans[3][3]);
+        /**
+         * Rotate the CMesh points around a normal vector by an angel, counterclockwise
+         * @param[in] aNormVec the x,y.z normal to rotate around.
+         * @param[in] aRadAngel the angel to rotate by (in radians).
+         */
+        void RotateMesh(CPoint aNormVec, double aRadAngel);
+        /**
+         * Change CMesh points location by addition of x,y,z.
+         * @param[in] aDirectionVec the x,y.z direction to move by it.
+         */
+        void MoveMesh(CPoint aDirectionVec);
+        /**
+         * Change CMesh points scale in x,y,z direction by x,y,z of the scale vector
+         * @param[in] aScaleVec the x,y.z direction to move by it.
+         */
+        void ScaleMesh(CPoint aScaleVec);
 
 
 };

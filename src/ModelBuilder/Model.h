@@ -27,10 +27,11 @@ public:
     // TODO: Make this work
 	void AddMeshes(const vector<CModelComponent> &arMeshes);
 	void AddMesh(const CModelComponent &arMesh);
+    void AddModel(const CModel &arModel);
 	//remove Mesh by label maybe?
     //List of meshes by label?
 	void AddSurf(const CSurface &arSurf, std::string aLabel, coord_t aAlpha);
-	inline const vector<CModelComponent> GetMeshes() {return mMeshes;}
+	inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
 
 	// Add Importers
     void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath

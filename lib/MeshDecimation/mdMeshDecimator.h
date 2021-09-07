@@ -28,8 +28,8 @@ namespace MeshDecimation
 	typedef float Float;
 	struct MDVertex
     {
-        SArray<int, SARRAY_DEFAULT_MIN_SIZE>    m_edges;    
-        SArray<int, SARRAY_DEFAULT_MIN_SIZE>    m_triangles;    
+        SArray<size_t, SARRAY_DEFAULT_MIN_SIZE>    m_edges;
+        SArray<size_t, SARRAY_DEFAULT_MIN_SIZE>    m_triangles;
         Float                                   m_Q[10];
                                                 // 0 1 2 3
                                                 //   4 5 6
@@ -41,8 +41,8 @@ namespace MeshDecimation
     
     struct MDEdge
     {
-        int                                     m_v1;
-        int                                     m_v2;
+        size_t                                     m_v1;
+        size_t                                     m_v2;
         double                                  m_qem;
         Vec3<Float>                             m_pos;
         bool                                    m_onBoundary;
@@ -50,7 +50,7 @@ namespace MeshDecimation
     };
     struct MDEdgePriorityQueue
     {
-        int                                     m_name;
+        size_t                                     m_name;
         double                                  m_qem;
         inline    friend bool                   operator<(const MDEdgePriorityQueue & lhs, const MDEdgePriorityQueue & rhs) { return (lhs.m_qem > rhs.m_qem);}
         inline    friend bool                   operator>(const MDEdgePriorityQueue & lhs, const MDEdgePriorityQueue & rhs) { return (lhs.m_qem < rhs.m_qem);}
@@ -83,15 +83,15 @@ namespace MeshDecimation
                                                 MeshDecimator(void);
                                                 ~MeshDecimator(void);
     private : 
-        void                                    EdgeCollapse(int v1, int v2);
-        int                                     GetTriangle(int v1, int v2, int v3) const;
-        int                                     GetEdge(int v1, int v2) const;
-        int                                     IsBoundaryEdge(int v1, int v2) const;
-        bool                                    IsBoundaryVertex(int v) const;
+        void                                    EdgeCollapse(size_t v1, size_t v2);
+        size_t                                     GetTriangle(size_t v1, size_t v2, size_t v3) const;
+        size_t                                     GetEdge(size_t v1, size_t v2) const;
+        size_t                                     IsBoundaryEdge(size_t v1, size_t v2) const;
+        bool                                    IsBoundaryVertex(size_t v) const;
         void                                    InitializePriorityQueue();
         void                                    InitializeQEM();
-        bool                                    ManifoldConstraint(int v1, int v2) const;
-        double                                  ComputeEdgeCost(int v1, int v2, Vec3<Float> & pos) const;
+        bool                                    ManifoldConstraint(size_t v1, size_t v2) const;
+        double                                  ComputeEdgeCost(size_t v1, size_t v2, Vec3<Float> & pos) const;
         bool                                    EdgeCollapse(double & error);
     private:
         Vec3<size_t> *                             m_triangles;

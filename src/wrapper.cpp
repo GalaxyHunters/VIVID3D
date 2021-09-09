@@ -55,6 +55,7 @@ namespace pybind11 { namespace detail {
 //            }
 //        };
 //
+// TODO: Check if this works:
         template <> struct type_caster<std::vector<CPoint>>
     {
         public:

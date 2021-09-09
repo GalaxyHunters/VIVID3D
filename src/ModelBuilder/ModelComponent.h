@@ -6,7 +6,7 @@
 #include <ColorMap.h>
 #include <map>
 #include "Face.h"
-
+#include "PointVector.h"
 namespace vivid
 {
 /* FTrans_t is a function that changes CPoint to another CPoint */

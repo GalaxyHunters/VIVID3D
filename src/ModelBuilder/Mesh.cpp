@@ -3,7 +3,7 @@
 #include "Model.h"
 #include "Decimate.h"
 #include "ProgressBar.h"
-
+#include "boost/algorithm/string/predicate.hpp"
 using namespace vivid;
 using namespace boost::algorithm;
 
@@ -116,7 +116,7 @@ void CMesh::RemovePointyFaces(coord_t aThetaThreshold)
                 coord_t theta = acos(ab_vec.Dot(bc_vec)) * (180/M_PI);
                 if (theta <= aThetaThreshold) {
                     // Laplacian Smooth
-                    next_points[it->GetPoints()[k]] = {0,0,0};
+                    next_points[it->GetPoints()[k]] = CPoint(0,0,0);
                     for (auto jt = mPointNeighbours[it->GetPoints()[k]].begin(); jt != mPointNeighbours[it->GetPoints()[k]].end(); jt++) {
                         next_points[it->GetPoints()[k]] += mPoints[*jt];
                     }

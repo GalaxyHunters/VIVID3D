@@ -26,6 +26,7 @@ public:
 	inline CPoint(coord_t x, coord_t y, coord_t z): mX(x), mY(y), mZ(z) {}
 //	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
     inline CPoint(std::vector<double> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
+
 	inline ~CPoint(){}
 
 	inline const coord_t X() const{ return mX; }
@@ -38,6 +39,7 @@ public:
 	inline CPoint& operator+= (const CPoint& apV) { mX += apV.mX; mY += apV.mY; mZ += apV.mZ; return *this; }
     inline CPoint& operator-= (const CPoint& apV) { mX -= apV.mX; mY -= apV.mY; mZ -= apV.mZ; return *this; }
     inline CPoint& operator=  (const CPoint& apV) { mX =  apV.mX; mY =  apV.mY; mZ =  apV.mZ; return *this; }
+    inline CPoint operator=  (const std::vector<coord_t>& arV) { return CPoint(arV[0], arV[1], arV[2]); }
     inline CPoint  operator+  (const CPoint& apV) const{ return CPoint (mX + apV.mX, mY + apV.mY, mZ + apV.mZ); }
     inline CPoint  operator-  (const CPoint& apV) const{ return CPoint (mX - apV.mX, mY - apV.mY, mZ - apV.mZ); }
     inline CPoint  operator*  (const coord_t aSc) const{ return CPoint (aSc * mX, aSc * mY, aSc * mZ); }

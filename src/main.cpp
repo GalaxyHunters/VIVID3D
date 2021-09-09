@@ -6,7 +6,7 @@
 #include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
-
+#include "ModelBuilder/PointVector.h"
 #define BOX_SIZE 30
 #define HEIGHT 15
 
@@ -15,6 +15,18 @@ using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
 const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
+
+/* Test vector<CPoint> */
+int PointVectorTest()
+{
+    vector<CPoint> points;
+    vector<vector<coord_t>> size = {{0,1,2}, {0,1,2}};
+    points = size;
+//    cout << points[0].X() << endl;
+
+    return EXIT_SUCCESS;
+}
+
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
 int ShapesTest()
@@ -27,7 +39,7 @@ int ShapesTest()
     CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
     CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
     CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube");
-    pair<CLines, CLines> grid = CreateGrid(7);
+    pair<CLines, CLines> grid = CreateGrid(100, 10);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
     model.AddMeshes(list);
     model.ExportToObj(TEST_OUTPUT_PATH + "/Shapes"); // /test_models/
@@ -296,15 +308,15 @@ int main()
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
-//    ret_value = CubeSurfTests();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    ret_value = PointVectorTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    ret_value = RemovePointyFacesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    ret_value = RemovePointyFacesTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;
 }

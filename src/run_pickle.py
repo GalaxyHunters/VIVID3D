@@ -1,5 +1,4 @@
 import sys
-sys.path.insert(0, "/home/zohar/Documents/Vivid/cmake-build-debug")
 
 import vivid_py as vivid
 import numpy as np

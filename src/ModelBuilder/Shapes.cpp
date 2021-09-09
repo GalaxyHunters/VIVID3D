@@ -198,30 +198,33 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
     return mesh;
 }
 
-// TODO: num of ticks, Cpoint aScale maybe, bool LogScale
-pair<CLines, CLines> CreateGrid(const size_t aDimensions) {
-    /// Create x,y,z
+// TODO: Cpoint aScale maybe, bool LogScale
+pair<CLines, CLines> CreateGrid(coord_t aScale, size_t aNumOfTicks, coord_t aTickSize) {
 //    vector<int> dimensions = {static_cast<int>(abs(arDimensions.X())), static_cast<int>(abs(arDimensions.Y())), static_cast<int>(abs(arDimensions.Z()))};
-    coord_t size = static_cast<coord_t>(aDimensions);
+    aScale = round(aScale);
     pair<CLines, CLines> grid_lines;
     // Major axes
-    grid_lines.first = CLines({{CPoint(-size, 0, 0), CPoint(size, 0, 0)},
-                               {CPoint(0,0,-size),   CPoint(0, 0, size)},
-                               {CPoint(0, -size, 0), CPoint(0, size, 0)}}, 1., "WhiteLines");
+    grid_lines.first = CLines({{CPoint(-aScale, 0, 0), CPoint(aScale, 0, 0)},
+                               {CPoint(0,0,-aScale),   CPoint(0, 0, aScale)},
+                               {CPoint(0, -aScale, 0), CPoint(0, aScale, 0)}}, 1., "WhiteLines");
 
     // Add x,y,z tick lines
-    vector<vector<CPoint>> line_points;
-    for (int i = -size; i <= size; i++) {
-        if (i != 0) {
-            line_points.push_back({CPoint(-size, i, 0), CPoint(size, i, 0)});
-            line_points.push_back({CPoint(-size, 0, i), CPoint(size, 0, i)});
-            line_points.push_back({CPoint(i, -size, 0), CPoint(i, size, 0)});
-            line_points.push_back({CPoint(0, -size, i), CPoint(0, size, i)});
-            line_points.push_back({CPoint(i, 0, -size), CPoint(i, 0, size)});
-            line_points.push_back({CPoint(0, i, -size), CPoint(0, i, size)});
+    vector<vector<CPoint>> tick_lines;
+    coord_t increase_by = aScale/(double)aNumOfTicks;
+
+    for (int i = 1; i <= aNumOfTicks; i++) {
+        // Drawing ticks equally on + and -, along xyz
+        for (int j = -1; j <= 1; j++){
+            coord_t pos = j * i * increase_by;
+            tick_lines.push_back({CPoint(-aTickSize, pos, 0), CPoint(aTickSize, pos, 0)});
+            tick_lines.push_back({CPoint(-aTickSize, 0, pos), CPoint(aTickSize, 0, pos)});
+            tick_lines.push_back({CPoint(pos, -aTickSize, 0), CPoint(pos, aTickSize, 0)});
+            tick_lines.push_back({CPoint(0, -aTickSize, pos), CPoint(0, aTickSize, pos)});
+            tick_lines.push_back({CPoint(pos, 0, -aTickSize), CPoint(pos, 0, aTickSize)});
+            tick_lines.push_back({CPoint(0, pos, -aTickSize), CPoint(0, pos, aTickSize)});
         }
     }
-    grid_lines.second = CLines(line_points, 0.15, "GreyLines");
+    grid_lines.second = CLines(tick_lines, 0.15, "GreyLines");
 
     return grid_lines;
 }

@@ -174,7 +174,7 @@ void CMesh::ExportToObj(string aOutput, bool WithTexture){
 void CMesh::CalculatePointsNeighbours() {
     size_t i =0;
     for (auto & mFace : mFaces) {
-        if (i%100==0) { printProgress(static_cast<double>(i)/mFaces.size()); }
+        if (i%100==0) { printProgress(i/mFaces.size()); }
 
         size_t n_points = mFace.GetPoints().size();
         for (int j = 0; j < n_points; j++) {

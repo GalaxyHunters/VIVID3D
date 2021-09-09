@@ -6,6 +6,7 @@
 #include "ModelBuilder/Shapes.h"
 #include "ImportAndExport/FBXImportExport.h"
 
+#include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/functional.h>
@@ -16,7 +17,7 @@ using namespace std;
 
 namespace py = pybind11;
 
-//namespace pybind11 { namespace detail {
+namespace pybind11 { namespace detail {
 //
 //        template <> struct type_caster<CPoint>
 //        {
@@ -54,53 +55,64 @@ namespace py = pybind11;
 //            }
 //        };
 //
-////        template <> struct type_caster<std::vector<CPoint>>
-////    {
-////        public:
-////
-////        PYBIND11_TYPE_CASTER(vector<CPoint>, _("CPointVector"));
-////
-////        // Conversion part 1 (Python -> C++)
-////        bool load(const py::array_t<py::array_t<double>>& src, bool convert)
-////        {
-//////            if ( !convert and !py::array_t<double>::check_(src) )
-//////                return false;
-//////
-////            if ( !src )
-////                return false;
-////
-////            auto dims = src.shape();
-////            if ( dims[1] != 3  )
-////                if (src.ndim() != 2)
-////                    return false;
-////
-////
-////            std::vector<CPoint> shape; //(len(src));
-////
-////            for ( int i = 0 ; i < len(src) ; i++ )
-////                shape.push_back({src.at(i).at(0), src.at(i).at(1), src.at(i).at(2)} );
-////
-////            value = shape;
-////
-////            return true;
-////        }
-////
-////        //Conversion part 2 (C++ -> Python)
-////        static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
-////        {
-////            std::vector<std::vector<double>> shape;
-////
-////            for ( int i = 0 ; i < src.size() ; i++ ) {
-////                shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
-////            }
-////
-////            py::array ret = py::cast(shape);
-////
-////            return ret;
-////
-////        }
-////    };
-//}} // namespace pybind11::detail
+        template <> struct type_caster<std::vector<CPoint>>
+    {
+        public:
+
+        PYBIND11_TYPE_CASTER(vector<CPoint>, _("CPointVector"));
+
+        // Conversion part 1 (Python -> C++)
+        bool load(py::handle src, bool convert)
+        {
+            if ( !convert and !py::array_t<double>::check_(src) )
+                return false;
+
+            if ( !src )
+                return false;
+
+            auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
+            if ( !buf )
+                return false;
+
+            auto dims = buf.ndim();
+
+            std::vector<CPoint> point_vector (len(buf));
+
+            auto *ptr = (coord_t *) buf.ptr();
+            size_t X = buf.shape()[0];
+            size_t Y = buf.shape()[1];
+
+            if ( dims != 2 & Y != 3)
+                return false;
+            for (size_t idx = 0; idx < X; idx++) {
+                point_vector[idx] = ptr[idx];
+            }
+//            for (size_t idx = 0; idx < X; idx++) {
+//                for (size_t idy = 0; idy < Y; idy++) {
+//                    point_vector[idx*Y + idy] = ptr[idx*Y+ idy];
+//                }
+//            }
+            value = point_vector;
+
+            return true;
+        }
+
+        //Conversion part 2 (C++ -> Python)
+        static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
+        {
+            std::vector<std::vector<double>> shape;
+
+            for ( int i = 0 ; i < src.size() ; i++ ) {
+                shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
+            }
+
+            py::array ret = py::cast(shape);
+
+            return ret;
+
+        }
+    };
+}} // namespace pybind11::detail
 
 PYBIND11_MODULE(vivid_py, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
@@ -220,7 +232,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "Returns the list of meshes held by model")
         .def("export_to_obj", &CModel::ExportToObj,
              "writes the surface to an OBJ file, by materials or textures",
-             py::arg("output_file"), py::arg("with_texture") = 1); //TODO make sure it sent as True to the bool param
+             py::arg("output_file"), py::arg("with_texture") = 1);
 
     //Animations:
 //    m.def("animation", &Animate,

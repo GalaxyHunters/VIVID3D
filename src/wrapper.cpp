@@ -18,44 +18,57 @@ using namespace std;
 namespace py = pybind11;
 
 namespace pybind11 { namespace detail {
+        template <> struct type_caster<CPoint>
+        {
+        public:
+
+        PYBIND11_TYPE_CASTER(CPoint, _("CPoint"));
+
+            // Conversion part 1 (Python -> C++)
+            bool load(py::handle src, bool convert) {
+                if (!convert and !py::array_t<double>::check_(src))
+                    return false;
+
+                if (!src)
+                    return false;
+
+                //auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
+                py::buffer_info buffer = py::array_t<double>::ensure(src).request();
+
+                auto dims = buffer.ndim;
+                if (dims != 1)
+                    return false;
+//            auto *ptr = (coord_t *) buf.ptr();
+                size_t X = buffer.shape[0];
+
+                CPoint point;
+
+                auto *ptr = (coord_t *) buffer.ptr;
+
+                point = {ptr[0], ptr[1], ptr[2]};
+
+                value = point;
+
+                return true;
+            }
+
+            //Conversion part 2 (C++ -> Python)
+            static py::handle cast(const CPoint& src, py::return_value_policy policy, py::handle parent)
+            {
+                std::vector<double> shape;
+
+                shape[0] = src.X();
+                shape[1] = src.Y();
+                shape[2] = src.Z();
+
+                py::array ret = py::cast(shape);
+
+                return ret;
+
+            }
+        };
 //
-//        template <> struct type_caster<CPoint>
-//        {
-//        public:
-//
-//        PYBIND11_TYPE_CASTER(CPoint, _("CPoint"));
-//
-//            // Conversion part 1 (Python -> C++)
-//            bool load(const py::array_t<double>& src, bool convert)
-//            {
-////            if ( !convert and !py::array_t<double>::check_(src) )
-////                return false;
-////
-//                if ( !src )
-//                    return false;
-//
-//                value = CPoint(src.at(0), src.at(1), src.at(2));
-//
-//                return true;
-//            }
-//
-//            //Conversion part 2 (C++ -> Python)
-//            static py::handle cast(const CPoint& src, py::return_value_policy policy, py::handle parent)
-//            {
-//                std::vector<double> shape;
-//
-//                shape[0] = src.X();
-//                shape[1] = src.Y();
-//                shape[2] = src.Z();
-//
-//                py::array ret = py::cast(shape);
-//
-//                return ret;
-//
-//            }
-//        };
-//
-// TODO: Check if this works:
+// TODO: Check if conversion part 2 works
         template <> struct type_caster<std::vector<CPoint>>
     {
         public:
@@ -63,6 +76,7 @@ namespace pybind11 { namespace detail {
         PYBIND11_TYPE_CASTER(vector<CPoint>, _("CPointVector"));
 
         // Conversion part 1 (Python -> C++)
+//        bool load(py::array_t<double> src, bool convert)
         bool load(py::handle src, bool convert)
         {
             if ( !convert and !py::array_t<double>::check_(src) )
@@ -72,27 +86,27 @@ namespace pybind11 { namespace detail {
                 return false;
 
             auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
-            if ( !buf )
-                return false;
+            py::buffer_info buffer = py::array_t<double>::ensure(src).request();
 
-            auto dims = buf.ndim();
+            auto dims = buffer.ndim;
+            cout << "buffer.ndim" << dims << endl;
+            cout << "buf.ndim" << buf.ndim() << endl;
 
-            std::vector<CPoint> point_vector (len(buf));
+//            auto *ptr = (coord_t *) buf.ptr();
+            size_t X = buffer.shape[0];
+            size_t Y = buffer.shape[1];
 
-            auto *ptr = (coord_t *) buf.ptr();
-            size_t X = buf.shape()[0];
-            size_t Y = buf.shape()[1];
+            std::vector<CPoint> point_vector (X);
 
             if ( dims != 2 & Y != 3)
                 return false;
+            auto *ptr = (coord_t *) buffer.ptr;
+
             for (size_t idx = 0; idx < X; idx++) {
-                point_vector[idx] = ptr[idx];
+//                point_vector[idx] = {coord_t(buf[idx]), coord_t(buf[idx+1]), coord_t(buf[idx+2])};
+                point_vector[idx] = {ptr[idx*3+0], ptr[idx*3+1], ptr[idx*3+2]};
             }
-//            for (size_t idx = 0; idx < X; idx++) {
-//                for (size_t idy = 0; idy < Y; idy++) {
-//                    point_vector[idx*Y + idy] = ptr[idx*Y+ idy];
-//                }
-//            }
+
             value = point_vector;
 
             return true;
@@ -118,28 +132,28 @@ namespace pybind11 { namespace detail {
 PYBIND11_MODULE(vivid_py, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
     // add model component base functions
-    py::class_<CModelComponent> (m, "ModelComponent")
-        .def(py::init<const CModelComponent&> (),
-                "Constructor for ModelComponent",
-                py::arg("model_component"))
-        //TODO: Add transform mesh functions
-//        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
-//        .def("transform", &CModelComponent::TransformMesh,
-//             "Transform Model Component points by transformation function",
-//             py::arg("function"))
-//        .def("transform", &CModelComponent::TransformMesh,
-//             "Transform Model Component points by transformation matrix",
-//             py::arg("matrix"))
-        .def("RotateMesh", &CModelComponent::RotateMesh,
-             "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-             py::arg("norm_vec"), py::arg("radians_angle"))
-        .def("MoveMesh", &CModelComponent::MoveMesh,
-             "Add direction_vec to Model Component points.",
-             py::arg("direction_vec"))
-        .def("ScaleMesh", &CModelComponent::ScaleMesh,
-             "Scale Model Component points by multiplying by scale_vec.",
-             py::arg("scale_vec"));
-
+//    py::class_<CModelComponent> (m, "ModelComponent")
+//        .def(py::init<const CModelComponent&> (),
+//                "Constructor for ModelComponent",
+//                py::arg("model_component"))
+//        //TODO: Add transform mesh functions
+////        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+////        .def("transform", &CModelComponent::TransformMesh,
+////             "Transform Model Component points by transformation function",
+////             py::arg("function"))
+////        .def("transform", &CModelComponent::TransformMesh,
+////             "Transform Model Component points by transformation matrix",
+////             py::arg("matrix"))
+//        .def("RotateMesh", &CModelComponent::RotateMesh,
+//             "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
+//             py::arg("norm_vec"), py::arg("radians_angle"))
+//        .def("MoveMesh", &CModelComponent::MoveMesh,
+//             "Add direction_vec to Model Component points.",
+//             py::arg("direction_vec"))
+//        .def("ScaleMesh", &CModelComponent::ScaleMesh,
+//             "Scale Model Component points by multiplying by scale_vec.",
+//             py::arg("scale_vec"));
+    py::class_<CModelComponent> model_component (m, "ModelComponent");
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
 //        .def(py::init<const CPoint &>(),
@@ -169,7 +183,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
              py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
-    py::class_<CLines, CModelComponent>(m, "Lines")
+    py::class_<CLines>(m, "Lines", model_component)
         .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                 "Constructor for Lines",
                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
@@ -186,7 +200,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "Add array of lines",
              py::arg("points_matrix"));
 
-    py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
+    py::class_<CPointCloud>(m, "PointCloud", model_component)
         .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
                 "Constructor for Point Cloud",
                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
@@ -197,7 +211,7 @@ PYBIND11_MODULE(vivid_py, m) {
              "Add Points to the Point Cloud",
              py::arg("points"), py::arg("quan"));
 
-    py::class_<CMesh, CModelComponent>(m, "Mesh")
+    py::class_<CMesh>(m, "Mesh", model_component)
         .def(py::init<const CMesh &> (),
                 "copy constructor for Mesh",
                 py::arg("mesh"))
@@ -210,7 +224,6 @@ PYBIND11_MODULE(vivid_py, m) {
         .def("laplacian_smooth", &CMesh::LaplacianSmooth,
              "Smooths the surface by HC Laplacian Algorithm.",
              py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
-
 
     py::class_<CModel>(m, "Model")
         .def(py::init<> (), "default constructor for CModel")

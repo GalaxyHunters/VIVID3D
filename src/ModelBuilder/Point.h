@@ -24,8 +24,8 @@ public:
 	inline CPoint(){}
 	inline CPoint(const CPoint &arV) : mX(arV.mX), mY(arV.mY), mZ(arV.mZ) {}
 	inline CPoint(coord_t x, coord_t y, coord_t z): mX(x), mY(y), mZ(z) {}
-//	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
-    inline CPoint(std::vector<coord_t> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
+	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
+    //inline CPoint(std::vector<double> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
 
 	inline ~CPoint(){}
 

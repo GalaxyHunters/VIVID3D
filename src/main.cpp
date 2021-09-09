@@ -21,7 +21,6 @@ int PointVectorTest()
 {
     vector<CPoint> points;
     vector<vector<coord_t>> size = {{0,1,2}, {0,1,2}};
-    points = size;
 //    cout << points[0].X() << endl;
 
     return EXIT_SUCCESS;

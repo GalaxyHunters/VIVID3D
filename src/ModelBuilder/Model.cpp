@@ -5,12 +5,6 @@
 using namespace vivid;
 using namespace std;
 
-
-CModel::CModel(const vector<CSurface> &arSurfs, string aLabel, coord_t aAlpha){
-    for (const auto & arSurf : arSurfs){
-        mMeshes.push_back( arSurf.ToMesh(aLabel, aAlpha) );
-    }
-}
 void CModel::AddMeshes(const vector<CModelComponent> &arMeshes) {
     for (const auto & arMesh : arMeshes) {
         mMeshes.push_back(arMesh);
@@ -18,11 +12,7 @@ void CModel::AddMeshes(const vector<CModelComponent> &arMeshes) {
 }
 
 void CModel::AddMesh(const CModelComponent &arMesh) {
-	mMeshes.push_back(arMesh);
-}
-
-void CModel::AddSurf(const CSurface &arSurf, string aLabel, coord_t aAlpha){
-    mMeshes.push_back(arSurf.ToMesh(aLabel, aAlpha));
+    mMeshes.push_back(arMesh);
 }
 
 void CModel::AddModel(const CModel &arModel) {
@@ -31,8 +21,8 @@ void CModel::AddModel(const CModel &arModel) {
     }
 }
 
-void CModel::ExportToObj(string aOutput, bool WithTexture){
-    OBJExporter(*this, aOutput, WithTexture);
+void CModel::ExportToObj(const string &arOutputFilePath, bool WithTexture){
+    OBJExporter(*this, arOutputFilePath, WithTexture);
 }
 
 CModel::~CModel() = default;

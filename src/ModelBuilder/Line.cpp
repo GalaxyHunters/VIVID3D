@@ -15,8 +15,8 @@ void CLines::AddLine(const vector<CPoint> &arPoints)
     mFaces.push_back(CFace(points, 0));
 }
 
-void CLines::AddLines(const vector<vector<CPoint>> &arPoints) {
-    for (auto & points : arPoints) {
+void CLines::AddLines(const vector<vector<CPoint>> &arPointsMatrix) {
+    for (auto & points : arPointsMatrix) {
         AddLine(points);
     }
 }

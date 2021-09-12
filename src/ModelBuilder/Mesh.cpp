@@ -7,31 +7,33 @@
 using namespace vivid;
 using namespace boost::algorithm;
 
-CMesh::~CMesh() {}
-
 /*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
 void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
-//        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
+        aVerticlePercent = max(0.05, min(aVerticlePercent, .9));
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_ALPHA_VALUE);
     }
     if( aMaxError < 0 || aMaxError > 1){
-//        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
+        aMaxError = max(0.05, min(aMaxError, .9));
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_ALPHA_VALUE);
     }
-    if (!mFacesAreTriangles) { GetFacesAsTriangles(); }
-	//call decimation from External
-	int targetVerticesN = int(aVerticlePercent * mPoints.size());
-	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	auto temp = DecimateMesh(mPoints, mFaces, targetVerticesN, targetTrianglesN, aMaxError);
-	mPoints = get<0>(temp);
-	mFaces = get<1>(temp);
+    if (!mFacesAreTriangles) { TriangulizeFaces(); }
+    //call decimation from External
+    int targetVerticesN = int(aVerticlePercent * mPoints.size());
+    int targetTrianglesN = int(aVerticlePercent * mFaces.size());
+    auto temp = DecimateMesh(mPoints, mFaces, targetVerticesN, targetTrianglesN, aMaxError);
+    mPoints = get<0>(temp);
+    mFaces = get<1>(temp);
 }
+
+// TODO: Fix similar methods, fix RemovePointyFaces
 
 void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
 {
-    if(!mFacesAreTriangles) { GetFacesAsTriangles(); }
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
 
     vector<coord_t> face_areas;
     vector<CFace> new_faces;
@@ -58,10 +60,10 @@ void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
             mPoints.push_back((mPoints[vertices[2]] + mPoints[vertices[0]])/2);
 
             // 4 New faces
-            new_faces.push_back(CFace({vertices[0], last_size, last_size+2}, mFaces[i].GetColor()));
-            new_faces.push_back(CFace({vertices[1], last_size, last_size+1}, mFaces[i].GetColor()));
-            new_faces.push_back(CFace({vertices[2], last_size+1, last_size+2}, mFaces[i].GetColor()));
-            new_faces.push_back(CFace({last_size, last_size+1, last_size+2}, mFaces[i].GetColor()));
+            new_faces.push_back(CFace({vertices[0], last_size, last_size+2}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({vertices[1], last_size, last_size+1}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({vertices[2], last_size+1, last_size+2}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({last_size, last_size+1, last_size+2}, mFaces[i].GetQuan()));
         }
     }
     mFaces = new_faces;
@@ -70,7 +72,7 @@ void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
 
 void CMesh::RemoveLargeFaces(coord_t aAboveAverageThreshold)
 {
-    if(!mFacesAreTriangles) { GetFacesAsTriangles(); }
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
 
     vector<coord_t> face_areas;
     vector<CFace> new_faces;
@@ -94,7 +96,7 @@ void CMesh::RemoveLargeFaces(coord_t aAboveAverageThreshold)
 
 void CMesh::RemovePointyFaces(coord_t aThetaThreshold)
 {
-    if(!mFacesAreTriangles) { GetFacesAsTriangles(); }
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
 
     vector<CPoint> next_points = mPoints;
 
@@ -167,8 +169,8 @@ void CMesh::LaplacianSmooth(size_t aNumIterations, double aAlphaFactor, double a
     mPoints = curr_points;
 }
 
-void CMesh::ExportToObj(string aOutput, bool WithTexture){
-    CModel(*this).ExportToObj(aOutput, WithTexture);
+void CMesh::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
+    CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
 }
 
 void CMesh::CalculatePointsNeighbours() {
@@ -195,24 +197,24 @@ void CMesh::CalculatePointsNeighbours() {
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
 
-void CMesh::GetFacesAsTriangles() {
+void CMesh::TriangulizeFaces() {
     vector<CFace> triangle_faces;
     for (auto &mFace : mFaces) {
         size_t prev_0=0, prev_1=1, prev_2=2;
         for (size_t i = 1; i < mFace.GetPoints().size()-1; i++) {
             // Add faces along alternating diagonals
-//            if (i%2 == 1){
-//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetColor()));
-//            } else {
-//                prev_1 = mFace.GetPoints().size()-prev_1;
-//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetColor()));
-//                if (prev_0 == 0) { prev_0 = 3;}
-//                else { prev_0++;}
-//                prev_1+=prev_2;
-//                prev_2=prev_1-prev_2;
-//                prev_1-=prev_2;
-//            }
-            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetColor()));
+            if (i%2 == 1){
+                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
+            } else {
+                prev_1 = mFace.GetPoints().size()-prev_1;
+                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
+                if (prev_0 == 0) { prev_0 = 3;}
+                else { prev_0++;}
+                prev_1+=prev_2;
+                prev_2=prev_1-prev_2;
+                prev_1-=prev_2;
+            }
+//            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetQuan()));
         }
     }
     mFaces = triangle_faces;
@@ -228,37 +230,27 @@ void CMesh::TransformMesh(FTrans_t const &arTrans){
     }
 }
 
-void CMesh::TransformMesh(coord_t const aTrans[3][3]){
-
-    double px,py,pz;
+void CMesh::TransformMesh(const array<CPoint, 3>& aTrans)
+{
     for (auto & mPoint : mPoints)
     {
-
-        px= mPoint.X(); py= mPoint.Y(); pz= mPoint.Z();
-
-        mPoint.X(aTrans[0][0] * px + aTrans[0][1] * py + aTrans[0][2] * pz);
-        mPoint.Y(aTrans[1][0] * px + aTrans[1][1] * py + aTrans[1][2] * pz);
-        mPoint.Z(aTrans[2][0] * px + aTrans[2][1] * py + aTrans[2][2] * pz);
-
-        // We should change all to vectorized operators.
-        // May the god of compilers forgive us all for our sins.
+        mPoint = {mPoint.Dot(aTrans[0]), mPoint.Dot(aTrans[1]), mPoint.Dot(aTrans[2])};
     }
 }
 
-void CMesh::RotateMesh(const CPoint& arNormVec, double aRadAngel){
+void CMesh::RotateMesh(const CPoint& arNormVec, double aRadAngel)
+{
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);
-    // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
+    auto one_min_cos_a = 1-cos_a;
     auto nx = arNormVec.X();
     auto ny = arNormVec.Y();
     auto nz = arNormVec.Z();
 
-    coord_t const rotation_mat[3][3] = {
-            cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
-
-            ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,
-
-            nz*nx*(1-cos_a) - ny*sin_a,     nz*ny*(1-cos_a) + nx*sin_a,     cos_a + nz*nz*(1-cos_a),
+    array<CPoint, 3> rotation_mat =  {
+            CPoint(cos_a + nx*nx*one_min_cos_a,    nx*ny*one_min_cos_a - nz*sin_a, nx*nz*one_min_cos_a + ny*sin_a),
+            CPoint(ny*nx*one_min_cos_a + nz*sin_a, cos_a + ny*ny*one_min_cos_a,    ny*nz*one_min_cos_a - nx*sin_a),
+            CPoint(nz*nx*one_min_cos_a - ny*sin_a, nz*ny*one_min_cos_a + nx*sin_a, cos_a + nz*nz*one_min_cos_a),
     };
     TransformMesh(rotation_mat);
 }

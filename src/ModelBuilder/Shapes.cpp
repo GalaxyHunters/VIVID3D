@@ -79,11 +79,11 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
         for (int j = 0; j < aNumOfMeridians - 1; j++)
         {
             faces.push_back(CFace(vector<size_t>{i + j * aNumOfParallels, i + (j + 1) * aNumOfParallels,
-                                                        i + 1 + (j + 1) * aNumOfParallels, i + 1 + j * aNumOfParallels}, aColor));
+                                                 i + 1 + (j + 1) * aNumOfParallels, i + 1 + j * aNumOfParallels}, aColor));
         }
         faces.push_back(CFace(vector<size_t>{i + (aNumOfMeridians - 1) * aNumOfParallels,
                                              (size_t)i, (size_t)(i + 1),
-                                                    i + 1 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
+                                             i + 1 + (aNumOfMeridians - 1) * aNumOfParallels}, aColor));
     }
     /* Add triangle faces around bottom point (0, 0, -1) */
     for (int i = 0; i < aNumOfMeridians - 1; i++)
@@ -96,7 +96,7 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
     mesh.MoveMesh(arCenter);
     mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
 
-	return mesh;
+    return mesh;
 }
 
 CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size_t aNumOfMeridians, size_t aNumOfParallels, const CPoint &arMajorAxis, const CPoint &arMiddleAxis, const CPoint &arMinorAxis, coord_t aColor, coord_t aAlpha, const string &arLabel)
@@ -108,27 +108,26 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 
     CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, aColor, aAlpha, arLabel);
     Ellipsoid.ScaleMesh(arScaleVec); //Scaling before the rotation
-    coord_t aMat[3][3];
-    aMat[0][0] = arMajorAxis.X(); aMat[0][1] = arMiddleAxis.X(); aMat[0][2] = arMinorAxis.X();
-    aMat[1][0] = arMajorAxis.Y(); aMat[1][1] = arMiddleAxis.Y(); aMat[1][2] = arMinorAxis.Y();
-    aMat[2][0] = arMajorAxis.Z(); aMat[2][1] = arMiddleAxis.Z(); aMat[2][2] = arMinorAxis.Z();
-    Ellipsoid.TransformMesh(aMat);
+    array<CPoint, 3> transform_mat = {
+            CPoint(arMajorAxis.X(), arMiddleAxis.X(), arMinorAxis.X()),
+            CPoint(arMajorAxis.Y(), arMiddleAxis.Y(), arMinorAxis.Y()),
+            CPoint(arMajorAxis.Z(), arMiddleAxis.Z(), arMinorAxis.Z())
+    };
+    Ellipsoid.TransformMesh(transform_mat);
 
     return Ellipsoid;
 }
 
-// TODO, THINK about Jill Neiman's arrow and the scale thingy
 CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aWidth, coord_t aPCRatio, coord_t aColor, coord_t aAlpha, const string &arLabel)
 {
     //before we run, lets check Exceptions
-    if (0 == arDirVec.Magnitude())  {
+    if (ZERO_COMPARISON_THRESHOLD >= arDirVec.Magnitude())  {
         throw "Direction Vector cannot be (0,0,0)";
     }
-    if (0 == aWidth || 0 == aPCRatio) {
+    if (ZERO_COMPARISON_THRESHOLD >= aWidth || ZERO_COMPARISON_THRESHOLD >= aPCRatio) {
         throw "aWidth and aPCRatio must be different then 0";
     }
-//    assert(("Direction Vector cannot be (0,0,0)", aDirVec != vector<double>{0,0,0}));
-//    assert(("aWidth and aPCRatio must be different then 0", aWidth != 0 && aPCRatio != 0));
+
     // Create arrow pointing from (0,0,0) to (0,0,1)
     vector<CPoint> points ={};
 
@@ -166,8 +165,8 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
                          CFace(vector<size_t>{4, 6, 7, 5}, aColor),
                          CFace(vector<size_t>{5, 7, 3, 1}, aColor),
                          CFace(vector<size_t>{1, 3, 2, 0}, aColor),
-                                 //creating the pointer faces
-                                 CFace(vector<size_t>{8, 10, 11, 9}, aColor),
+            //creating the pointer faces
+                         CFace(vector<size_t>{8, 10, 11, 9}, aColor),
                          CFace(vector<size_t>{8, 12, 10}, aColor),
                          CFace(vector<size_t>{10, 12, 11}, aColor),
                          CFace(vector<size_t>{11, 12, 9}, aColor),
@@ -198,9 +197,8 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
     return mesh;
 }
 
-// TODO: Cpoint aScale maybe, bool LogScale
+
 pair<CLines, CLines> CreateGrid(coord_t aScale, size_t aNumOfTicks, coord_t aTickSize) {
-//    vector<int> dimensions = {static_cast<int>(abs(arDimensions.X())), static_cast<int>(abs(arDimensions.Y())), static_cast<int>(abs(arDimensions.Z()))};
     aScale = round(aScale);
     pair<CLines, CLines> grid_lines;
     // Major axes
@@ -235,6 +233,5 @@ pair<CLines, CLines> CreateGrid(coord_t aScale, size_t aNumOfTicks, coord_t aTic
 ////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
 //vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
 //    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-
 
 

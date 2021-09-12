@@ -3,59 +3,63 @@
 
 #include <string>
 #include <functional>
-#include <ColorMap.h>
 #include <map>
+
+#include "./Utils/LogFile.h"
+
+#include "Point.h"
 #include "Face.h"
-#include "PointVector.h"
+#include "ColorMap.h"
+
 namespace vivid
 {
 /* FTrans_t is a function that changes CPoint to another CPoint */
-typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
+    typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
-// TODO: Which setters and getters are really needed?
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
-//TODO splines?
-class CModelComponent {
-protected:
-    vector<CPoint> mPoints = {};
-    vector<CFace> mFaces = {};
-    std::string mObjType = "f";
-    coord_t mAlpha = 1.;
-    std::string mLabel = "";
-    CColorMap mClm;
-    //Constructor, Copy Constructor, Destructor
-    CModelComponent(){}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm() {}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::string &arClm) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
-    CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(aAlpha), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
-    //virtual ~CModelComponent() = 0;
+    class CModelComponent {
+    protected:
+        //CLogFile& mLogFile = CLogFile::GetInstance();
 
-public:
-    CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
-    // Operator=
-    inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
-        mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
+        vector<CPoint> mPoints = {};
+        vector<CFace> mFaces = {};
+        std::string mObjType = "f";
+        coord_t mAlpha = 1.;
+        std::string mLabel = "";
+        CColorMap mClm;
+        //Constructor, Copy Constructor, Destructor
+        CModelComponent(){}
+        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}
+        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, std::string &arClm) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
+        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
+        //virtual ~CModelComponent() = 0;
 
-    // Getters, Setters
-    inline std::vector<CPoint> GetPoints() const { return mPoints; }
-    inline std::vector<CFace> GetFaces() const { return mFaces; }
-    inline std::string GetLabel() const { return mLabel; }
-    inline coord_t GetAlpha() const { return mAlpha; }
-    inline CColorMap GetClm() const { return mClm; }
-    inline std::string GetObjType() const { return mObjType; }
+    public:
+        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
+        // Operator=
+        inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
+            mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
 
-    inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
-    inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
-    inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
-    inline void SetAlpha(coord_t aAlpha) {
-        //check input valdilty
-        if(aAlpha > 1 || aAlpha < 0){
+        // Getters, Setters
+        inline std::vector<CPoint> GetPoints() const { return mPoints; }
+        inline std::vector<CFace> GetFaces() const { return mFaces; }
+        inline std::string GetLabel() const { return mLabel; }
+        inline coord_t GetAlpha() const { return mAlpha; }
+        inline CColorMap GetClm() const { return mClm; }
+        inline std::string GetObjType() const { return mObjType; }
 
+        inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
+        inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
+        inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
+        inline void SetAlpha(coord_t aAlpha) {
+            //check input valdilty
+            if(aAlpha > 1 || aAlpha < 0){
+
+            }
+            mAlpha = aAlpha;
         }
-        mAlpha = aAlpha;
-    }
-    inline void SetClm(const string &arClm) { mClm.SetColorMap(arClm); }
-    inline void SetClm(const std::vector<color_t> &arClm, const std::string &arCName) { mClm.SetColorMap(arClm, arCName); }
+        inline void SetClm(string arClm) { mClm.SetColorMap(arClm); }
+        inline void SetClm(const std::vector<color_t> &arClm, const std::string &arCName) { mClm.SetColorMap(arClm, arCName); }
 //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
 //        /**
@@ -86,7 +90,7 @@ public:
 //        void ScaleMesh(const CPoint& arScaleVec);
 
 
-};
+    };
 
 }; // namespace vivid
 #endif //VIVID_MODELCOMPONENT_H

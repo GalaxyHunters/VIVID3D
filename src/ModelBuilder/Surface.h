@@ -10,146 +10,158 @@ namespace vivid
 {
 //TODO **explanation**
 
-//TODO Color field needs to be changed everywhere
 //TODO Typedef has to be by const ref
-//TODO Should it containd Cpoint?
-class CSurfacePoint
-{ // used to sort and clean the mVoronoi input points
-public:
-    CPoint mPoint = {};
-    coord_t mQuan = 0; //TODO rename quan to something better
-    bool mMaskIsTrue = false;
+    struct CSurfacePoint
+    { // used to sort and clean the mVoronoi input points
+        CPoint mPoint = {};
+        quan_t mQuan = 0;
+        bool mMaskIsTrue = false;
 
-    CSurfacePoint() {};
-    CSurfacePoint(CPoint aPoint, coord_t aQuan, bool aIsIn): mPoint(aPoint), mQuan(aQuan), mMaskIsTrue(aIsIn) {}
-};
+        CSurfacePoint() {};
+        CSurfacePoint(const CPoint& arPoint, quan_t aQuan, bool aIsIn): mPoint(arPoint), mQuan(aQuan), mMaskIsTrue(aIsIn) {}
+    };
 
-//TODO Should it containd CFace?
-class CSurfaceFace
-{
-public:
-    std::vector<std::shared_ptr<CPoint> > mVertices = {};
-    std::pair<size_t, size_t> mPairPoints = {};
-    coord_t mColor = 0;
+// For the cleaning stage
+    struct CSurfaceFace
+    {
+    public:
+        std::vector<std::shared_ptr<CPoint> > mVertices = {};
+        std::pair<size_t, size_t> mPairPoints = {};
+        quan_t mColor = 0;
 
-    CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
-            mVertices(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
-    CSurfaceFace() {};
-    ~CSurfaceFace() {};
-};
+        CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, quan_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
+                mVertices(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
+        CSurfaceFace() {};
+        ~CSurfaceFace() {};
+    };
 
 //public CMesh
-class CSurface
-{
-private:
-    inline void CallBack(const CLogFile::ELogCode aCode, const CLogFile::ELogMessage aMsg) { CLogFile::GetInstance().Write(aCode, aMsg);} //tODO  func, methods etc after members!
-    CLogFile::LogCallBackFunction mLogFile;// = CallBack; //rename
+    class CSurface
+    {
+    private:
+        CVoronoi mVoronoi;                       // CVoronoi class for running Voronoi Surfacing algorithm
 
-    CVoronoi mVoronoi;                       // CVoronoi contains the ComputeVoronoi and other functions for interfacing with Elad //TODO bad comment
+        // Input Data:
+        std::vector<CPoint> mInputPoints = {};
+        std::vector<bool> mCreationMask = {};
+        std::vector<quan_t> mQuan = {};
 
-    std::vector<std::shared_ptr<CPoint> > mVertices = {};
-    std::vector<CSurfaceFace> mSurfFaces = {};  //TODO rename mSFaces
+        // PreProcessing Data
+        std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
+        CPoint mCenVector = {};                  // holds the center of the data (used to center the data by 000 and back to original upon export)
+        coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
 
-    std::vector<std::vector<size_t>> mPointsInFaces = {}; // TODO rename mFacesPoints // Hold the faces defining points
-
-    std::vector<CPoint> mInputPoints = {};   // for smooth //TODO rename mCreatingPoints? mSpanningPoints
-    std::vector<bool> mCreationMask = {};    // for smooth //TODO rename mInnerPointsMask
-    std::vector<coord_t> mQuan = {};         // for smooth  //TODO should we need it?
-
-    std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
-    CPoint mCenVector = {};                  // holds the center of the data (used to center the data by 000 and back to original upon export)
-    coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
+        // Voronoi Data
+        std::vector<std::shared_ptr<CPoint> > mVertices = {};
+        std::vector<CSurfaceFace> mSurfFaces = {};
 
 
-    // Centralization Sub-Methods
-    coord_t FindContainingRadius();          // Used for Scaling
-    std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
+        // Centralization Sub-Methods
+        coord_t FindContainingRadius();          // Used for Scaling
+        std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
-    // Handle Input Sub-Methods
-    void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
-    void PreProcessPoints(vector<CSurfacePoint> &arPoints);                 // Centering, scaling, adding noise.
-    std::vector<coord_t>& NormQuan(std::vector<coord_t>& arQuan, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+        // Handle Input Sub-Methods
+        void PreProcessPoints(vector<CSurfacePoint> &arPoints);                 // Centering, scaling, adding noise.
+        void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
 
-    //vorn function:
-    void RunVorn();
+        // TODO: Should be in util, even better should be typedef with min 0. and max 1.
+        std::vector<coord_t>& NormQuan(std::vector<quan_t>& arQuan, quan_t aVMin, quan_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
-    // Cleaning Sub-Methods
-    void CleanFaces();        // clean the unneeded faces(by mCreationMask)
-    void CleanPoints();       // removes all the unused points
-    void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
-    void CleanDoublePoints(); // remove all the double face points from the model
+        //vorn function:
+        void RunVorn();
 
-    // Smoothing Sub-Methods
-    // Part 1
-    void SetPinPout (std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
-    void UpdateInput(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn);
-    // Part 2
-    void UpdatePoutPin(std::vector<size_t>& aPOut, std::vector<size_t>& aPIn);
-    void Stage2ModifyPoints(vector<size_t>& arPOut, vector<size_t>& arPIn);
-    void FindPairPoints(size_t aCPoint1, size_t aCPoint2, std::vector<size_t> &arPIn, std::vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
-                        CSurfaceFace &arFace, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan, size_t &arIndex);
-    void AddPointsAlt(std::vector<size_t> &arPVec, std::vector<CPoint> &arNewPoints, std::vector<coord_t> &arNewQuan,
-                      size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3); // Adds points between every pair by aSmoothFactor
-    void Stage2AddPoints(std::vector<size_t>& arPOut, std::vector<size_t>& arPIn, int aSmoothFactor);
-    void AddPoints(std::vector<size_t> * apPVec, std::vector<CPoint> * apNewPoints, std::vector<coord_t> * apNewQuan,
-                   size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor); // Adds points between every pair by aSmoothFactor
-    void CleanDoublePointsVorn(std::vector<CPoint>& arNewPoints, std::vector<coord_t>& arNewQuan,
-                               std::vector<size_t>& arNewIn, std::vector<size_t>& arNewOut); // Handles the reallocation after RemoveDoublesVornInput
-    std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);   // Called by CleanDoublePointsVorn
-    // Part 3
-    void MakeMask(size_t aPOutSize, size_t aPInSize);
+        // Cleaning Sub-Methods
+        void CleanFaces();        // clean the unneeded faces(by mCreationMask)
+        void CleanPoints();       // removes all the unused points
+        void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
+        void CleanDoublePoints(); // remove all the double face points from the model
 
-public:
-    /**
-     * CSurface Constructor
-     * @param[in] arInputPoints the input point data in x,y,z form.
-     * @param[in] arMask a boolean mask of true and false points
-     * @param[in] arQuan a vector containing the quantity of each point
-     * @param[in] aVMin the minimum value in arQuan, anything below will be set to aVMin
-     * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
-     */
-    CSurface(const std::vector<std::vector<double >> &arInputPoints, const std::vector<bool> &arMask,
-             std::vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax); // TODO get reporting function?
-    /**
-     * CSurface Copy-Constructor
-     */
-    CSurface(const CSurface &surf);
-    // operator =
+    public:
+        /**
+         * CSurface Constructor
+         * @param[in] arInputPoints the input point data in x,y,z form.
+         * @param[in] arMask a boolean mask of true and false points
+         * @param[in] arQuan a vector containing the quantity of each point
+         * @param[in] aVMin the minimum value in arQuan, anything below will be set to aVMin
+         * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
+         */
+        CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
+                 std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax);
+        /**
+         * CSurface Copy-Constructor
+         */
+        CSurface(const CSurface &surf);
+        // operator =
 
-    /**
-     * Create the surfaces using the input data
-     */
-    void CreateSurface();
+        /**
+         * Create the surfaces using the input data
+         */
+        void CreateSurface(bool aPostProcessing = true);
 
-    /**
-     * Smooth method
-     * @param[in] aSuperSmooth boolean value for activating SuperSmooth Algorithm
-     * @param[in] aSmoothFactor An integer value between 1 and 8
-     */
-    void Smooth(bool aSuperSmooth = false, int aSmoothFactor = 2);
+        /**
+         * Convert the CSurface object to CMesh object
+         * @param[in] arLabel the label to assign to the new mesh
+         * @param[in] aAlpha the alpha to assign to the new mesh
+         * @returns CMesh converted mesh
+         */
+        CMesh ToMesh(const string& arLabel, coord_t aAlpha) const;
 
-    /**
-     * Convert the CSurface object to CMesh object
-     * @param[in] aLabel the label to assign to the new mesh
-     * @param[in] aAlpha the alpha to assign to the new mesh
-     * @returns CMesh converted mesh
-     */
-    CMesh ToMesh(string aLabel, coord_t aAlpha) const; // TODO: When inheritance from mesh, this wont be needed because it will always become mesh
+        std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 
-    // Getters, Setters
-    // TODO: which gets do we really need and why?
-    inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
-    inline const std::vector<bool>& GetMask() { return mCreationMask; }
-    inline const std::vector<coord_t>& GetQuan() { return mQuan; }
+        // Getters, Setters
+        // Used primarily in deprecated smoothing
+        inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
+        inline const std::vector<bool>& GetMask() { return mCreationMask; }
+        inline const std::vector<quan_t>& GetQuan() { return mQuan; }
+        inline const std::vector<CSurfaceFace>& GetFaces() { return mSurfFaces; }
+        inline const CVoronoi& GetVoronoiData() { return mVoronoi; }
 
-    // TODO maybe the following should be deleted
-//    inline const std::vector<std::shared_ptr<CPoint> >& GetVecPoints() { return mVertices; }
-//    inline const std::vector<CSurfaceFace>& GetVecfaces() { return mSurfFaces; }
+        inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }
+        inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
+        inline void SetQuan(const std::vector<quan_t> &arQuan) { mQuan = arQuan; }
 
-    inline void SetInputPoints(const std::vector<CPoint> &arInputPoints) { mInputPoints = arInputPoints; }
-    inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
-    inline void SetQuan(std::vector<coord_t> &arQuan) { mQuan = arQuan; }
-};
+
+// Plan: we will use surf functionality, so also surf will have this functionality ?
+
+//density, neighbours...
+
+
+        vector<double> GetParticlesVolume() {
+            return mVoronoi.mData.GetAllVolumes();
+        } //CalcCellCMVolume
+
+        vector<double> GetParticlesDensity(const std::vector<double> &arMassField) {
+            vector<double> volumes = GetParticlesVolume();
+
+            vector<double> densities (arMassField.size());
+            for (int i = 0; i < arMassField.size(); i++) {
+                densities[i] = arMassField[i]/volumes[i];
+            }
+            return densities;
+        }
+
+        vector<double> CalculateFlux(const CPoint &arField) {
+            vector<double> flux (mSurfFaces.size());
+            for (int i = 0; i<mSurfFaces.size(); i++) {
+                CPoint norm = mInputPoints[mSurfFaces[i].mPairPoints.second] - mInputPoints[mSurfFaces[i].mPairPoints.first];
+            }
+            return flux;
+        }
+
+        void WhatAreTheseThingsElad() {
+            cout << mVoronoi.mData.GetAllVolumes().size() << endl;
+            cout << mVoronoi.mData.GetAllArea().size() << endl;
+            cout << mVoronoi.mData.GetAllCM().size() << endl;
+            cout << mVoronoi.mData.GetAllCellFaces().size() << endl;
+            cout << mVoronoi.mData.GetPointNo() << endl;
+            // Useless data:
+            cout << mVoronoi.mData.GetSelfIndex().size() << endl;
+            cout << mVoronoi.mData.GetSentProcs().size() << endl;
+            cout << mVoronoi.mData.GetSentPoints().size() << endl;
+        } //?
+
+
+    };
 
 } // namespace vivid
 #endif //VIVID_SURFACE_H

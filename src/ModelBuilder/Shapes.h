@@ -10,8 +10,6 @@
 namespace vivid
 {
 
-// TODO also, use Doxygen commenting standards
-
 CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, coord_t aColor, coord_t aAlpha, const std::string &arLabel);
 
 CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, coord_t aColor, coord_t aAlpha, const std::string &arLabel);

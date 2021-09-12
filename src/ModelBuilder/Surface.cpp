@@ -8,24 +8,24 @@ constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
 constexpr coord_t NOISE_PERCENTAGE = 0.005;
 
-CSurface::CSurface(const vector<vector<double>> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::ARRAYS_NOT_EQUAL);
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_NOT_EQUAL);
     }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::ARRAYS_EMPTY);
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::MISSING_BOOLEAN_VALUES);
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
-    vector<coord_t> norm_quan = NormQuan(arQuan, aVMin, aVMax);
+    vector<quan_t> norm_quan = NormQuan(arQuan, aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
         points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), norm_quan[i], arMask[i]));
-        mInputPoints.push_back(arInputPoints[i]);
     }
+    mInputPoints = arInputPoints;
     PreProcessPoints(points);
 }
 
@@ -64,55 +64,21 @@ CSurface::CSurface(const CSurface &surf)
 //   ------------------------------------------------ Public Methods ------------------------------------------------>>>
 //   <<<--------------------------------------------- Public Methods ---------------------------------------------------
 
-void CSurface::CreateSurface()
+void CSurface::CreateSurface(bool aPostProcessing)
 {
     RunVorn();
-
-    cout << "Cleaning Surface" << endl; //todo cout
     CleanEdges();
-    CleanFaces();
-    CleanPoints();
+    if (aPostProcessing) {
+        CleanFaces();
+        CleanPoints();
+    }
 }
 
-void CSurface::Smooth(bool aSuperSmooth, int aSmoothFactor)
-{
-    if (aSmoothFactor < 1 || aSmoothFactor > 8) {
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_ERROR, CLogFile::ELogMessage::INVALID_SMOOTH_FACTOR); //TODO
-    }
-    //begin smooth part 1, collecting all the cpoints from the faces on the surf
-    cout << "Begin Smooth" << endl; //TODO
-    vector<size_t> p_out, p_in;
-    SetPinPout(p_out, p_in);
-    UpdateInput(p_out, p_in);
-    RunVorn();
-    cout << mSurfFaces.size() << " " << mVertices.size() << " " << mInputPoints.size() << endl;
-    cout << "Begin Smooth part 2" << endl;
-    //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
-    UpdatePoutPin(p_out, p_in);
-    if (aSuperSmooth)
-    {
-        Stage2ModifyPoints(p_out, p_in);
-    }
-    else
-    {
-        Stage2AddPoints(p_out, p_in, aSmoothFactor);
-    }
-    //begin smooth part 3, running the model and cleaning it
-    UpdateInput(p_out, p_in);
-    MakeMask(p_out.size(), p_in.size());
-    CreateSurface();
-    //done.
-}
-
-// TODO: CSurface is currently inheriting from Mesh, need to discuss this
-CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
-    // TODO why aAlpha is a coord_t type?
-    //check input valdilty
+CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
+    //check input validity
     if(aAlpha > 1 || aAlpha <= 0){
-        if (mLogFile) (mLogFile)(CLogFile::ELogCode::LOG_WARNING, CLogFile::ELogMessage::INVALID_ALPHA_VALUE);
-        if (aAlpha > 1) { aAlpha = 1; }
-        if (aAlpha < 0) { aAlpha = 0.1; }
-//        aAlpha = min(0.1 , max(aAlpha ,1)) //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
+        CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
+        aAlpha = max(0.1 , min(aAlpha ,1.)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
     }
 
     vector<CPoint> points;
@@ -128,8 +94,6 @@ CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
     vector<size_t> face_points;
     set<size_t> set_points;
     map<size_t, vector<size_t>> points_neighbours;
-    //TODO: Re-implement the FindPointNeighbours here, because it's slow as fuck.
-
     for (const auto & mVecFace : mSurfFaces) {
         for (const auto & mPoint : mVecFace.mVertices) {
             if (set_points.count(indexes[mPoint]) == 0) {
@@ -141,7 +105,7 @@ CMesh CSurface::ToMesh(string aLabel, coord_t aAlpha) const {
         face_points = vector<size_t>();
         set_points.clear();
     }
-    return CMesh(points, faces, aLabel, aAlpha);
+    return CMesh(points, faces, arLabel, aAlpha);
 }
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
@@ -159,9 +123,8 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints
 
 void CSurface::RunVorn()
 {
-    cout << "start vorn" << endl; //TODO cout
+    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Begin Compute Voronoi");
     mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
-    cout << "vorn done" << endl;
     //set the points
     mVertices = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
     //set the faces
@@ -170,9 +133,9 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    coord_t quan;
+    quan_t quan;
     vector<shared_ptr<CPoint>> face_points;
-    int counter =0;
+
     for (auto & vorn_face : vorn_faces) {
         c_point1 = vorn_face.back();
         vorn_face.pop_back();
@@ -181,283 +144,15 @@ void CSurface::RunVorn()
         quan = 0; //quan will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
-        for (auto point = vorn_face.begin(); point != vorn_face.end(); point++) {
-            face_points.push_back(mVertices[*point]);
+        for (size_t & point : vorn_face) {
+            face_points.push_back(mVertices[point]);
         }
         new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
-        points_map[c_point1].push_back(new_faces.size()-1);
-        points_map[c_point2].push_back(new_faces.size()-1);
-        counter++;
     }
 
     mSurfFaces = new_faces;
-    mPointsInFaces = points_map;
-}
 
-/*---------------------------------------------- Smoothing Sub-Methods -----------------------------------------------*/
-/*----------------------------------------------------- Part 1 -------------------------------------------------------*/
-
-void CSurface::SetPinPout(vector<size_t>& arPOut, vector<size_t>& arPIn)
-{
-    map<size_t, bool> p_in_map;
-    map<size_t, bool> p_out_map;
-    size_t c_point1, c_point2;
-    for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        if (mCreationMask[c_point1]) {
-            if (p_in_map.count(c_point1) == 0) {
-                arPIn.push_back(c_point1);
-                p_in_map[c_point1] = true;
-            }
-            if (p_out_map.count(c_point2) == 0) {
-                arPOut.push_back(c_point2);
-                p_out_map[c_point2] = true;
-            }
-        }
-        else
-        {
-            if (p_in_map.count(c_point2) == 0) {
-                arPIn.push_back(c_point2);
-                p_in_map[c_point2] = true;
-            }
-            if (p_out_map.count(c_point1) == 0) {
-                arPOut.push_back(c_point1);
-                p_out_map[c_point1] = true;
-            }
-        }
-    }
-}
-
-void CSurface::UpdateInput(vector<size_t>& arPOut, vector<size_t>& arPIn)
-{
-    // TODO should we update quan instead of updating arPOut & arPIn?
-    vector<CPoint> new_points;
-    vector<coord_t> quan;
-    for (auto & it : arPOut) {
-        new_points.push_back(mInputPoints[it]);
-        quan.push_back(mQuan[it]);
-    }
-    for (auto & it : arPIn) {
-        new_points.push_back(mInputPoints[it]);
-        quan.push_back(mQuan[it]);
-    }
-    mInputPoints = new_points;
-    mQuan = quan;
-}
-
-/*----------------------------------------------------- Part 2 -------------------------------------------------------*/
-
-void CSurface::UpdatePoutPin(vector<size_t>& aPOut, vector<size_t>& aPIn)
-{
-    for (size_t i = 0; i < aPOut.size(); i++) {
-        aPOut[i] = i;
-    }
-    for (size_t i = 0; i < aPIn.size(); i++) {
-        aPIn[i] = i + aPOut.size();
-    }
-}
-//TODO SIMILAR to THE OLDER CODE OF CompPointRD
-bool CompPointData(const CSurfacePoint &arObj1, const CSurfacePoint &arObj2)
-{
-    if (abs(arObj1.mPoint.X() - arObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) {
-        if (abs(arObj1.mPoint.Y() - arObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) {
-            if (abs(arObj1.mPoint.Z() - arObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) {
-                return false;
-            }
-            else
-            { // we compare the points by z to see who needs to go first
-                return arObj1.mPoint.Z() > arObj2.mPoint.Z();
-            }
-        }
-        else // we compare by y to see who needs to go first
-        {
-            return arObj1.mPoint.Y() > arObj2.mPoint.Y();
-        }
-    }
-    else // we compare by x to see who goes first
-    {
-        return arObj1.mPoint.X() > arObj2.mPoint.X();
-    }
-}
-
-// Alt Stage2AddPoints
-void CSurface::Stage2ModifyPoints(vector<size_t> &arPOut, vector<size_t> &arPIn)
-{
-    size_t c_point1;
-    size_t c_point2;
-    size_t c_point3;
-
-    vector<CPoint> new_points;
-    vector<coord_t> new_quan;
-    size_t p_out_size = arPOut.size();
-    size_t p_in_size = p_out_size + arPIn.size();
-    arPIn.clear();
-    arPOut.clear();
-    size_t new_index = 0; // the index for the new point to be added
-    //go over pout
-    for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        FindPairPoints(c_point1, c_point2, arPIn, arPOut, p_out_size, p_in_size, mVecFace, new_points, new_quan, new_index);
-        FindPairPoints(c_point2, c_point1, arPIn, arPOut, p_out_size, p_in_size, mVecFace, new_points, new_quan, new_index);
-    }
-    CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
-}
-
-void CSurface::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &arPIn, vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
-                              CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan, size_t &arIndex)
-{
-    size_t c_point3;
-    for (auto & f_index : mPointsInFaces[aCPoint1])
-    {
-        CSurfaceFace face = mSurfFaces[f_index];
-        if (face.mPairPoints != arFace.mPairPoints) {
-            if (face.mPairPoints.first == aCPoint1) {
-                c_point3 = get<1>(face.mPairPoints);
-            } else {
-                c_point3 = get<0>(face.mPairPoints);
-            }
-            if (aCPoint1 < aPOutSize && aCPoint2 < aPOutSize && c_point3 < aPOutSize) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-            {
-                AddPointsAlt(arPIn, arNewPoints, arNewQuan, arIndex, aCPoint1, aCPoint2, c_point3);
-            }
-            //go over pin
-            if ((aPInSize > aCPoint1 && aCPoint1 >= aPOutSize) && (aPInSize > aCPoint2 && aCPoint2 >= aPOutSize) &&
-                (aPInSize > c_point3 && c_point3 >= aPOutSize)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-            {
-                AddPointsAlt(arPOut, arNewPoints, arNewQuan, arIndex, aCPoint1, aCPoint2, c_point3);
-            }
-        }
-    }
-}
-
-void CSurface::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<coord_t> &arNewQuan,
-                            size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
-{
-    arPVec.push_back(arNewIndex);
-    CPoint new_point = (mInputPoints[aCPoint1] * 2 + mInputPoints[aCPoint2] + mInputPoints[aCPoint3]) / 4.;
-    arNewPoints.push_back(new_point);
-    arNewQuan.push_back((mQuan[aCPoint1] + mQuan[aCPoint2] + mQuan[aCPoint3]) / 4); // Results in color washing, need to consider
-    arNewIndex++;
-}
-
-void CSurface::Stage2AddPoints(vector<size_t>& arPOut, vector<size_t>& arPIn, int aSmoothFactor)
-{
-    size_t c_point1;
-    size_t c_point2;
-    size_t p_out_size = arPOut.size();
-    size_t p_in_size = p_out_size + arPIn.size();
-    vector<CPoint> new_points;
-    vector<coord_t> new_quan;
-    arPIn.clear();
-    arPOut.clear();
-    size_t new_index = 0; // the index for the new point to be added
-    //go over pout
-    for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        if (c_point1 < p_out_size && c_point2 < p_out_size) //pout - [1,2,3,4...pout.size] so we are checking if cpoint is a part of pout
-        {
-            AddPoints(&arPIn, &new_points, &new_quan, &new_index, c_point1, c_point2, aSmoothFactor);
-        }
-        //go over pin
-        if ((p_in_size > c_point1 && c_point1 >= p_out_size) && (p_in_size > c_point2 && c_point2 >= p_out_size)) //pin - [pout.size...pout.size+pin.size] so we are checking if cpoint is a part of pin
-        {
-            AddPoints(&arPOut, &new_points, &new_quan, &new_index, c_point1, c_point2, aSmoothFactor);
-        }
-    }
-    CleanDoublePointsVorn(new_points, new_quan, arPIn, arPOut);
-}
-
-void CSurface::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<coord_t> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
-{
-    coord_t x, y, z;
-    for (int i = 1; i <= aSmoothFactor; i++){
-        (*apPVec).push_back(*apNewIndex);
-        x = (mInputPoints[aCPoint1].X() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].X() * i) / (aSmoothFactor+1);
-        y = (mInputPoints[aCPoint1].Y() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Y() * i) / (aSmoothFactor+1);
-        z = (mInputPoints[aCPoint1].Z() * (aSmoothFactor + 1 - i) + mInputPoints[aCPoint2].Z() * i) / (aSmoothFactor+1);
-        (*apNewPoints).push_back(CPoint(x, y, z));
-        (*apNewQuan).push_back((mQuan[aCPoint1] * (aSmoothFactor + 1 - i) + mQuan[aCPoint2] * i) / (aSmoothFactor+1));
-        (*apNewIndex)++;
-    }
-}
-
-void CSurface::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<coord_t>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
-{
-    vector<CSurfacePoint> data;
-    data.clear();
-    for (auto & it : arNewIn) {
-        data.push_back(CSurfacePoint(arNewPoints[it], arNewQuan[it], true));
-    }
-    for (auto & it : arNewOut) {
-        data.push_back(CSurfacePoint(arNewPoints[it], arNewQuan[it], false));
-    }
-    data = RemoveDoublesVornInput(data);
-    arNewPoints.clear();
-    arNewQuan.clear();
-    arNewIn.clear();
-    arNewOut.clear();
-    for (size_t i = 0; i < data.size(); i++) {
-        arNewPoints.push_back(data[i].mPoint);
-        arNewQuan.push_back(data[i].mQuan);
-        if (data[i].mMaskIsTrue) {
-            arNewIn.push_back(i);
-        }
-        else
-        {
-            arNewOut.push_back(i);
-        }
-    }
-    mInputPoints = arNewPoints;
-    mQuan = arNewQuan;
-}
-
-vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
-{
-    //sort the array
-    sort(arData.begin(), arData.end(), CompPointData);
-
-    vector<CSurfacePoint> cleaned_data;
-    size_t j;
-    int removed_points =0;
-    for (size_t i = 0; i < arData.size(); i++) {
-        j = i+1;
-        cleaned_data.push_back(arData[i]); // push the point to the cleaned data
-        if (j >= arData.size())
-        {
-            break;
-        }
-        while (arData[i].mPoint.Dist(arData[j].mPoint) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
-            j += 1;
-            if (j >= arData.size())
-            {
-                break;
-            }
-            removed_points ++;
-        }
-        i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
-    }
-    cout << "Removed Points: " << removed_points << endl;
-
-    return cleaned_data;
-}
-
-
-/*----------------------------------------------------- Part 3 -------------------------------------------------------*/
-
-void CSurface::MakeMask(size_t aPOutSize, size_t aPInSize)
-{
-    vector<bool> new_mask;
-    for (size_t i = 0; i < aPOutSize; i++) { //TODO might be faster using fill or something similar in vector
-        new_mask.push_back(false);
-
-    }
-    for (size_t i = 0; i < aPInSize; i++) {
-        new_mask.push_back(true);
-    }
-    mCreationMask = new_mask;
+    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Finished Compute Voronoi");
 }
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
@@ -520,6 +215,9 @@ void CSurface::CleanFaces()
                 new_faces.push_back(mVecFace);
                 new_faces.back().mColor = mQuan[c_point1]*0.5 + mQuan[c_point2]*0.5;
             }
+        } else {
+            new_faces.push_back(mVecFace);
+            new_faces.back().mColor = 0;
         }
 
     }
@@ -548,6 +246,60 @@ bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2)
     return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
 
+//TODO SIMILAR to THE OLDER CODE OF CompPointRD
+bool CompPointData(const CSurfacePoint &arObj1, const CSurfacePoint &arObj2)
+{
+    if (abs(arObj1.mPoint.X() - arObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) {
+        if (abs(arObj1.mPoint.Y() - arObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) {
+            if (abs(arObj1.mPoint.Z() - arObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) {
+                return false;
+            }
+            else
+            { // we compare the points by z to see who needs to go first
+                return arObj1.mPoint.Z() > arObj2.mPoint.Z();
+            }
+        }
+        else // we compare by y to see who needs to go first
+        {
+            return arObj1.mPoint.Y() > arObj2.mPoint.Y();
+        }
+    }
+    else // we compare by x to see who goes first
+    {
+        return arObj1.mPoint.X() > arObj2.mPoint.X();
+    }
+}
+
+vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
+{
+    //sort the array
+    sort(arData.begin(), arData.end(), CompPointData);
+
+    vector<CSurfacePoint> cleaned_data;
+    size_t j;
+    int removed_points =0;
+    for (size_t i = 0; i < arData.size(); i++) {
+        j = i+1;
+        cleaned_data.push_back(arData[i]); // push the point to the cleaned data
+        if (j >= arData.size())
+        {
+            break;
+        }
+        while (arData[i].mPoint.Dist(arData[j].mPoint) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
+            j += 1;
+            if (j >= arData.size())
+            {
+                break;
+            }
+            removed_points ++;
+        }
+        i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
+    }
+    string str = "Removed Points = " + removed_points;
+    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, str);
+
+    return cleaned_data;
+}
 void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 {
     vector<CSurfacePoint> new_points = RemoveDoublesVornInput(arPoints);
@@ -597,11 +349,10 @@ void CSurface::CleanDoublePoints()
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-//TODO should be one line with some std function
-vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coord_t aVMax)
+vector<coord_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
 {
     if (arQuan.size() == 0){ //incase the user doesnt input any color
-        arQuan = vector<coord_t>(mCreationMask.size(), 1);
+        arQuan = vector<quan_t>(mCreationMask.size(), 1);
         return arQuan;
     }
     if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
@@ -623,10 +374,12 @@ vector<coord_t>& CSurface::NormQuan(vector<coord_t> &arQuan, coord_t aVMin, coor
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 {
+    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Preprocessing Data");
+
     CPoint box_dim, box_min, box_max;
     vector<CPoint> box_dimensions = FindContainingBox();
     box_dim = box_dimensions.at(0); box_min = box_dimensions.at(1); box_max = box_dimensions.at(2);
-    mCenVector = (box_min + box_max) / 2;
+    mCenVector = (box_min + box_max) / 2.;
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] -= mCenVector;
     }
@@ -634,11 +387,11 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
     vector<CPoint> noise_vec (mInputPoints.size());
 
     // Consider generator here.
-    srand(time(NULL));
-    for (int i = 0; i<noise_vec.size(); i++){
-        noise_vec[i] = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-                        1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
+    srand(time(nullptr));
+    for (auto & i : noise_vec){
+        i = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
+             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
+             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
     }
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;

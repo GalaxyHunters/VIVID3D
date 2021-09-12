@@ -6,25 +6,14 @@
 #include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
-#include "ModelBuilder/PointVector.h"
-#define BOX_SIZE 30
-#define HEIGHT 15
+constexpr int BOX_SIZE = 30;
+constexpr int HEIGHT   = 15;
 
 using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
 const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
-
-/* Test vector<CPoint> */
-int PointVectorTest()
-{
-    vector<CPoint> points;
-    vector<vector<coord_t>> size = {{0,1,2}, {0,1,2}};
-//    cout << points[0].X() << endl;
-
-    return EXIT_SUCCESS;
-}
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
@@ -94,12 +83,12 @@ int CubeSurfTests()
 {
     cout << "Cube Test:" << endl;
 
-    vector<vector<double >> points; vector<coord_t> quan; vector<bool> mask;
+    vector<CPoint> points; vector<coord_t> quan; vector<bool> mask;
 
     for (int i = 2; i >= -2; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
         for (int j = 2; j >= -2; j -= 2) {
             for (int k = 2; k >= -2; k -= 2) {
-                points.push_back( vector<double> {(double)i, (double)j, (double)k} );
+                points.push_back( {(double)i, (double)j, (double)k} );
                 quan.push_back(j);
                 mask.push_back(false);
                 if (i == j && j == k && k == 0) {
@@ -148,7 +137,7 @@ int PyramidSmoothTest()
 {
     cout << "Pyramid Test:" << endl;
 
-    vector<vector<double >> points;
+    vector<CPoint> points;
     vector<bool> mask;
     vector<coord_t> quan;
     coord_t Vmin, Vmax;
@@ -158,7 +147,7 @@ int PyramidSmoothTest()
         for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
             for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
                 temp = vector<double>(3);
-    		    temp[0] = i ; temp[1] = j; temp[2] = z;
+                temp[0] = i ; temp[1] = j; temp[2] = z;
                 points.push_back(temp);
                 if (z >= 0 && HEIGHT >= z) {
                     a = HEIGHT - z;
@@ -182,19 +171,20 @@ int PyramidSmoothTest()
 
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
+    smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", .5);
-    //mesh1.Reduce(0.3, 0.5);
-//    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/Pyramid");
-    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    smooth3.CreateSurface();
-    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-    mesh3.LaplacianSmooth(10, 0.7, 0);
-    mesh3.LaplacianSmooth(150, 0.25, 0.7);
-    mesh3.Reduce(0.25, 0.7);
-    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
-    CModel model = CModel({mesh3, mesh1});
-    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
+//    //mesh1.Reduce(0.3, 0.5);
+    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidNoProcessing");
+//    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    smooth3.CreateSurface();
+//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
+//    mesh3.LaplacianSmooth(10, 0.7, 0);
+//    mesh3.LaplacianSmooth(150, 0.25, 0.7);
+//    mesh3.Reduce(0.25, 0.7);
+//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
+//    CModel model = CModel({mesh3, mesh1});
+//    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    smooth3.Smooth(3);
@@ -235,13 +225,15 @@ int RunSupernovaTests()
     ModelData nova;
     CModel nova_model;
     cout << "Running VIVID" << endl;
-    
+
     for (int i = 0; i < 7; i++) {
+        vector<CPoint> points (nova.points.size());
         nova = ReadBin(DATA_MODEL_PATH + "Supernova-"+sufix[i]+".bin");
         for (int j = 0; j < nova.quan.size(); j++) {
             nova.quan[j] = why[i];
+            points[i] = nova.points[i];
         }
-        CSurface surf = CSurface(nova.points, nova.mask, nova.quan, -15.1, 1.51);
+        CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
         surf.CreateSurface();
         //surf.Smooth(false, 1);
         cout << "Convert to Mesh" << endl;
@@ -270,11 +262,12 @@ int RemovePointyFacesTest() {
 //    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
     ModelData nova = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
 //    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
-
+    vector<CPoint> points (nova.points.size());
     for (int j = 0; j < nova.quan.size(); j++) {
         nova.quan[j] = 0;
+        points[j] = nova.points[j];
     }
-    CSurface surf = CSurface(nova.points, nova.mask, nova.quan, 0, 0);
+    CSurface surf = CSurface(points, nova.mask, nova.quan, 0, 0);
     surf.CreateSurface();
     //surf.Smooth(false, 1);
     cout << "Convert to Mesh" << endl;
@@ -307,14 +300,13 @@ int main()
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
-    ret_value = PointVectorTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;

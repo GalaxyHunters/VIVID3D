@@ -93,7 +93,7 @@ add_executable(vivid
         src/Extra/Analysis.h
 
         #main
-        src/main.cpp src/ModelBuilder/SurfByFunc.cpp src/ModelBuilder/SurfByFunc.h src/Utils/ProgressBar.h src/ModelBuilder/PointVector.h src/Utils/ColorDefs.cpp src/Utils/ColorDefs.h src/Utils/Errors.h src/Utils/Plasma.cpp src/Utils/Plasma.h src/Utils/LogFile.cpp)
+        src/main.cpp src/ModelBuilder/SurfByFunc.cpp src/ModelBuilder/SurfByFunc.h src/Utils/ProgressBar.h src/ModelBuilder/PointVector.h src/Utils/ColorDefs.cpp src/Utils/ColorDefs.h src/Utils/Errors.h src/Utils/Plasma.cpp src/Utils/Plasma.h src/Utils/LogFile.cpp src/Wrapping/TypeCasting.h)
 
 
 
@@ -126,7 +126,7 @@ pybind11_add_module(vivid_py
         lib/ImportAndExport/FBXImportExport.cpp
 
         #wrapper
-        src/wrapper.cpp
+        src/Wrapping/wrapper.cpp
         )
 
 

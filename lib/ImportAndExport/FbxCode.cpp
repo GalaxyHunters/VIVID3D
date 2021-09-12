@@ -51,7 +51,7 @@ vector<FbxDouble3> MeshToFbxMaterials(CModelComponent mesh)
 //        vector<Color_t> MeshColors;
 //        cout << faces[l].GetColor() << endl;
 //        MeshColors.GetColor(0.3);
-        colors.push_back(FbxDouble3(mesh.GetClm().GetColor(faces[l].GetColor()).R, mesh.GetClm().GetColor(faces[l].GetColor()).G, mesh.GetClm().GetColor(faces[l].GetColor()).B));
+        colors.push_back(FbxDouble3(mesh.GetClm().GetColor(faces[l].GetQuan()).R, mesh.GetClm().GetColor(faces[l].GetQuan()).G, mesh.GetClm().GetColor(faces[l].GetQuan()).B));
     }
 
     return colors;
@@ -220,7 +220,7 @@ FbxNode* OneMeshToFbxTextures(CModelComponent mesh, FbxScene* scene, const strin
     //create faces for the mesh
     for (int k1 = 0; k1 < CFaces.size(); ++k1){
         vector<size_t> FacePoints = CFaces[k1].GetPoints();
-        int FaceColorIndex = mesh.GetClm().GetColorIndex(CFaces[k1].GetColor());
+        int FaceColorIndex = mesh.GetClm().GetColorIndex(CFaces[k1].GetQuan());
         FMesh->BeginPolygon(-1, -1, false); //was j
 
         for (int m1 = 0; m1 < FacePoints.size(); ++m1)

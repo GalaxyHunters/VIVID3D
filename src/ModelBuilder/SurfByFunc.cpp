@@ -100,11 +100,11 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
 //            points.push_back(func(phi, theta));    //creating the points
 //        }
 //    }
-    double phi_step = (aPhiMax + aPhiMin) / (aNumberOfSteps + 1);
+    double phi_step = (aPhiMax - aPhiMin) / (aNumberOfSteps + 1);
     double theta_step = aThetaMax / aNumberOfSteps;
-    for (int i = 0; i <= aNumberOfSteps; i ++) {
+    for (int i = 0; i < aNumberOfSteps; i ++) {
         coord_t theta = aThetaMin + i * theta_step;
-        for (int j = 1; j <= aNumberOfSteps; j ++) {
+        for (int j = 1; j < aNumberOfSteps; j ++) {
             coord_t phi = aPhiMax - j * phi_step;
 //            CPoint point = func(phi, theta);
             points.push_back(func(phi, theta));

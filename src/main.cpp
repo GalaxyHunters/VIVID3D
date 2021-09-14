@@ -62,10 +62,14 @@ int SurfByFuncTest()
 
 CPoint ParametricTest(const coord_t u, const coord_t v)
 {
+    //Cylinder:
+    coord_t x = cos(u);
+    coord_t y = sin(u);
+    coord_t z = v;
     // cone:
-    coord_t x = u*cos(v);
-    coord_t y = u*sin(v);
-    coord_t z = u;
+//    coord_t x = u*cos(v);
+//    coord_t y = u*sin(v);
+//    coord_t z = u;
     // Moebuis:
 //    coord_t x = (1+0.5*v*cos(u*.5))*cos(u);
 //    coord_t y = (1+0.5*v*cos(u*.5))*sin(u);
@@ -78,13 +82,13 @@ CPoint ParametricTest(const coord_t u, const coord_t v)
 //    coord_t x = v*cos(u);
 //    coord_t y = v*sin(u);
 //    coord_t z = v+sin(3*v)/3-4;
-    return CPoint(x,y,z);
+    return {x,y,z};
 }
 
 int ParametricSurfByFuncTest()
 {
     FParametric_t func = ParametricTest;
-    CMesh mesh = ParametricSurface(func, 7, 0, 2*M_PI, M_PI * 0.5, M_PI,  1., "Parametric");
+    CMesh mesh = ParametricSurface(func, 7, 0, 2*M_PI, -1, 2,  1., "Parametric");
     mesh.ExportToObj(TEST_OUTPUT_PATH + "ParametricTestAlt");
     return EXIT_SUCCESS;
 }

@@ -84,7 +84,7 @@ CPoint ParametricTest(const coord_t u, const coord_t v)
 int ParametricSurfByFuncTest()
 {
     FParametric_t func = ParametricTest;
-    CMesh mesh = ParametricSurface(func, 20, 0, 2*M_PI,0, 1,  1., "Parametric");
+    CMesh mesh = ParametricSurface(func, 7, 0, 2*M_PI,0, 1,  1., "Parametric");
     mesh.ExportToObj(TEST_OUTPUT_PATH + "ParametricTestAlt");
     return EXIT_SUCCESS;
 }

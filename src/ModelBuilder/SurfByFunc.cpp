@@ -80,49 +80,102 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
 CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t aThetaMin, coord_t aThetaMax,
                         coord_t aPhiMin, coord_t aPhiMax, coord_t aAlpha, const std::string &arLabel)
 {
-    vector<CPoint> points = {};
-    vector<coord_t> quan = {};
+    vector<CPoint> points;
+    vector<CFace> faces;
+    coord_t aColor = 0.5;
 
-    double phi_step = aPhiMax / aNumberOfSteps;
-    double theta_step = aThetaMax / aNumberOfSteps;
-    for (int i = 0; i <= aNumberOfSteps; i += 1) {
-        coord_t theta = aThetaMin + i * theta_step;
-        for (int j = 0; j <= aNumberOfSteps; j += 1) {
-            coord_t phi = aPhiMin + j * phi_step;
-            CPoint point = func(phi, theta);
-            points.push_back(point);
-            quan.push_back(point.Magnitude());
+    /* Adds points around sphere*/
+    points.push_back(CPoint(0, 0,  1)); //Creating the top polar
+    points.push_back(CPoint(0, 0, -1)); //Creating the bottom polar
+
+    double phi_step = M_PI / (aNumberOfSteps + 1);
+    double theta_step = (2 * M_PI) / aNumberOfSteps;
+
+    for (int i = 0; i < aNumberOfSteps; i++)
+    {
+        double theta = i * theta_step;
+        for (int j = 1; j < aNumberOfSteps + 1; j++)
+        {
+            double phi = (M_PI / 2) - (j * phi_step);
+            points.push_back(func(theta, phi));    //creating the points
         }
     }
 
-    coord_t v_max = *max_element(quan.begin(), quan.end());
-    coord_t v_min = *min_element(quan.begin(), quan.end());
-
-    coord_t divide_by = 1. / (v_max - v_min);
-
-    for (int i = 0; i < points.size(); i++) {
-        quan[i] = (quan[i] - v_min) * divide_by;
+    /* Add triangle faces around top point (0, 0, 1) */
+    for (int i = 0; i < aNumberOfSteps - 1; i++)
+    {
+        faces.push_back(CFace(vector<size_t>{0, 2 + (i + 1) * aNumberOfSteps, 2 + i * aNumberOfSteps}, aColor)); //creates triangles
     }
-    vector<CFace> faces;
+    faces.push_back(CFace(vector<size_t>{0, 2, 2 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
 
     /* Add rectangular faces around center */
-    for (size_t i = 0; i < aNumberOfSteps; i++)
+    for (int i = 2; i < 1 + aNumberOfSteps; i++)
     {
-        for (size_t j = 0; j < aNumberOfSteps; j++)
+        for (int j = 0; j < aNumberOfSteps - 1; j++)
         {
-            coord_t color = (quan[i + j * aNumberOfSteps] + quan[i + (j + 1) * aNumberOfSteps] +
-                             quan[ i + 1 + (j + 1) * aNumberOfSteps] + quan[i + 1 + j * aNumberOfSteps]) / 4.;
-
-            faces.push_back(CFace({i + j * aNumberOfSteps, i + (j + 1) * aNumberOfSteps,
-                                          i + 1 + (j + 1) * aNumberOfSteps, i + 1 + j * aNumberOfSteps}, color));
+            faces.push_back(CFace(vector<size_t>{i + j * aNumberOfSteps, i + (j + 1) * aNumberOfSteps,
+                                                 i + 1 + (j + 1) * aNumberOfSteps, i + 1 + j * aNumberOfSteps}, aColor));
         }
-//        faces.push_back(CFace({i + (aNumberOfSteps - 1) * aNumberOfSteps,
-//                                                    i, (i + 1),
-//                                                    i + 1 + (aNumberOfSteps - 1) * aNumberOfSteps}, 0));
+        faces.push_back(CFace(vector<size_t>{i + (aNumberOfSteps - 1) * aNumberOfSteps,
+                                             (size_t)i, (size_t)(i + 1),
+                                             i + 1 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
     }
+    /* Add triangle faces around bottom point (0, 0, -1) */
+    for (int i = 0; i < aNumberOfSteps - 1; i++)
+    {
+        faces.push_back(CFace(vector<size_t>{1, 1 + (i + 1) * aNumberOfSteps, 1 + (i + 2) * aNumberOfSteps}, aColor));
+    }
+    faces.push_back(CFace(vector<size_t>{1, 1 + (aNumberOfSteps) * aNumberOfSteps, 1 + aNumberOfSteps}, aColor));
 
-    CMesh mesh = CMesh(points, faces, arLabel, aAlpha);
+    CMesh mesh(points, faces, arLabel, aAlpha);
+//    mesh.MoveMesh(arCenter);
+//    mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
+
     return mesh;
+
+//    vector<CPoint> points = {};
+//    vector<coord_t> quan = {};
+//
+//    double phi_step = aPhiMax / aNumberOfSteps;
+//    double theta_step = aThetaMax / aNumberOfSteps;
+//    for (int i = 0; i <= aNumberOfSteps; i += 1) {
+//        coord_t theta = aThetaMin + i * theta_step;
+//        for (int j = 0; j <= aNumberOfSteps; j += 1) {
+//            coord_t phi = aPhiMin + j * phi_step;
+//            CPoint point = func(phi, theta);
+//            points.push_back(point);
+//            quan.push_back(point.Magnitude());
+//        }
+//    }
+//
+//    coord_t v_max = *max_element(quan.begin(), quan.end());
+//    coord_t v_min = *min_element(quan.begin(), quan.end());
+//
+//    coord_t divide_by = 1. / (v_max - v_min);
+//
+//    for (int i = 0; i < points.size(); i++) {
+//        quan[i] = (quan[i] - v_min) * divide_by;
+//    }
+//    vector<CFace> faces;
+//
+//    /* Add rectangular faces around center */
+//    for (size_t i = 0; i < aNumberOfSteps; i++)
+//    {
+//        for (size_t j = 0; j < aNumberOfSteps; j++)
+//        {
+//            coord_t color = (quan[i + j * aNumberOfSteps] + quan[i + (j + 1) * aNumberOfSteps] +
+//                             quan[ i + 1 + (j + 1) * aNumberOfSteps] + quan[i + 1 + j * aNumberOfSteps]) / 4.;
+//
+//            faces.push_back(CFace({i + j * aNumberOfSteps, i + (j + 1) * aNumberOfSteps,
+//                                          i + 1 + (j + 1) * aNumberOfSteps, i + 1 + j * aNumberOfSteps}, color));
+//        }
+////        faces.push_back(CFace({i + (aNumberOfSteps - 1) * aNumberOfSteps,
+////                                                    i, (i + 1),
+////                                                    i + 1 + (aNumberOfSteps - 1) * aNumberOfSteps}, 0));
+//    }
+//
+//    CMesh mesh = CMesh(points, faces, arLabel, aAlpha);
+//    return mesh;
 }
 
 } // namespace vivid

@@ -6,6 +6,7 @@
 #include "ImportAndExport/FBXImportExport.h"
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
+
 constexpr int BOX_SIZE = 30;
 constexpr int HEIGHT   = 15;
 
@@ -61,9 +62,19 @@ int SurfByFuncTest()
 
 CPoint ParametricTest(const coord_t u, const coord_t v)
 {
-    coord_t x = sin(v);
-    coord_t y = (2 + cos(v)) * sin(u);
-    coord_t z = (2 + cos(v)) * cos(u);
+    // cone:
+    coord_t x = u*cos(v);
+    coord_t y = u*sin(v);
+    coord_t z = u;
+    // Moebuis:
+//    coord_t x = (1+0.5*v*cos(u*.5))*cos(u);
+//    coord_t y = (1+0.5*v*cos(u*.5))*sin(u);
+//    coord_t z = v*0.5*sin(u*0.5);
+    // Torus:
+//    coord_t x = sin(v);
+//    coord_t y = (2 + cos(v)) * sin(u);
+//    coord_t z = (2 + cos(v)) * cos(u);
+    // Sphere:
 //    coord_t x = v*cos(u);
 //    coord_t y = v*sin(u);
 //    coord_t z = v+sin(3*v)/3-4;
@@ -73,7 +84,7 @@ CPoint ParametricTest(const coord_t u, const coord_t v)
 int ParametricSurfByFuncTest()
 {
     FParametric_t func = ParametricTest;
-    CMesh mesh = ParametricSurface(func, 50, 0, 2*M_PI, 0, 2*M_PI, 1., "Parametric");
+    CMesh mesh = ParametricSurface(func, 20, 0, 2*M_PI,0, 1,  1., "Parametric");
     mesh.ExportToObj(TEST_OUTPUT_PATH + "ParametricTestAlt");
     return EXIT_SUCCESS;
 }
@@ -293,8 +304,8 @@ int RemovePointyFacesTest() {
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-//    cout << "ParametricSurfByFuncTest" << endl;
-//    ret_value = ParametricSurfByFuncTest();
+    cout << "ParametricSurfByFuncTest" << endl;
+    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Testing All Shapes" << endl;
 //    ret_value = ShapesTest();
@@ -304,9 +315,9 @@ int main()
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;

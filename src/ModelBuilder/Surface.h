@@ -121,33 +121,6 @@ namespace vivid
         inline void SetQuan(const std::vector<quan_t> &arQuan) { mQuan = arQuan; }
 
 
-// Plan: we will use surf functionality, so also surf will have this functionality ?
-
-//density, neighbours...
-
-
-        vector<double> GetParticlesVolume() {
-            return mVoronoi.mData.GetAllVolumes();
-        } //CalcCellCMVolume
-
-        vector<double> GetParticlesDensity(const std::vector<double> &arMassField) {
-            vector<double> volumes = GetParticlesVolume();
-
-            vector<double> densities (arMassField.size());
-            for (int i = 0; i < arMassField.size(); i++) {
-                densities[i] = arMassField[i]/volumes[i];
-            }
-            return densities;
-        }
-
-        vector<double> CalculateFlux(const CPoint &arField) {
-            vector<double> flux (mSurfFaces.size());
-            for (int i = 0; i<mSurfFaces.size(); i++) {
-                CPoint norm = mInputPoints[mSurfFaces[i].mPairPoints.second] - mInputPoints[mSurfFaces[i].mPairPoints.first];
-            }
-            return flux;
-        }
-
         void WhatAreTheseThingsElad() {
             cout << mVoronoi.mData.GetAllVolumes().size() << endl;
             cout << mVoronoi.mData.GetAllArea().size() << endl;

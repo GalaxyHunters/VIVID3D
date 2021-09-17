@@ -1,4 +1,4 @@
-#include "Typecasting.h"
+#include "TypeCasting.h"
 #include "./ModelBuilder/Surface.h"
 #include "./ModelBuilder/ModelComponent.h"
 #include "./ModelBuilder/Mesh.h"
@@ -54,7 +54,7 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("3d_vector"));
 
     py::class_<CSurface>(m, "Surface")
-            .def(py::init<const vector<vector<double>>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
+            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
                  "constructor function for surface",
                  py::arg("points"), py::arg("mask"), py::arg("quan") = vector<coord_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
             .def(py::init<const CSurface &> (),
@@ -64,8 +64,6 @@ PYBIND11_MODULE(vivid_py, m) {
                  R"-(
              .. py:function:: create_surface()
              :return: Calculate the surface from input data)-")
-            .def("smooth", &CSurface::Smooth,
-                 "A smoothing algorithm -for the surface, improves visibility and helps the decimation algorithm in the next stage", py::arg("super_smooth"), py::arg("smooth_factor"))
             .def("to_mesh", &CSurface::ToMesh,
                  "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
@@ -117,18 +115,12 @@ PYBIND11_MODULE(vivid_py, m) {
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
                  py::arg("meshes"))
-            .def(py::init<vector<CSurface>&, string, coord_t> (),
-                 "constructor for CModel, from surfs",
-                 py::arg("surfaces"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("add_meshes", &CModel::AddMesh,
                  "add more meshes, lines, or point clouds to Model",
                  py::arg("meshes"))
             .def("add_mesh", &CModel::AddMesh,
                  "add another mesh, lines, or point clouds to Model",
                  py::arg("mesh"))
-            .def("add_surf", &CModel::AddSurf,
-                 "add another surf to model",
-                 py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("get_meshes", &CModel::GetMeshes,
                  "Returns the list of meshes held by model")
             .def("export_to_obj", &CModel::ExportToObj,

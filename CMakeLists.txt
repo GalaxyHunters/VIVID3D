@@ -90,7 +90,7 @@ add_executable(vivid
         src/ModelBuilder/Animation.cpp
         src/ModelBuilder/StopMotionAnimation.cpp
 
-        src/Extra/Analysis.h
+        src/Extra/Analysis.cpp
 
         #main
         src/main.cpp src/ModelBuilder/SurfByFunc.cpp src/ModelBuilder/SurfByFunc.h src/Utils/ProgressBar.h src/Utils/ColorDefs.cpp src/Utils/ColorDefs.h src/Utils/Errors.h src/Utils/Plasma.cpp src/Utils/Plasma.h src/Utils/LogFile.cpp src/Wrapping/TypeCasting.h src/Extra/VoronoiSmoothing.cpp src/Extra/VoronoiSmoothing.h)

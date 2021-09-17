@@ -1,5 +1,7 @@
 #include "Analysis.h"
 
+using namespace vivid;
+
 vector<double> GetParticlesVolume(const CSurface &arSurf) {
     return arSurf.GetVoronoiData().mData.GetAllVolumes();
 } //CalcCellCMVolume

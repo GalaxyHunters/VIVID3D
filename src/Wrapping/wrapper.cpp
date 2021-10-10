@@ -16,8 +16,21 @@ using namespace std;
 
 namespace py = pybind11;
 
+py::array_t<double> make_cpoint(const double aValue) {
+    py::array_t<double> array (3);
+    py::buffer_info buffer = array.request();
+    auto ptr = static_cast<double *>(buffer.ptr);
+    for (int i = 0; i < 3; i++) {
+        ptr[i] = aValue;
+    }
+    return array;
+}
+
+
 PYBIND11_MODULE(vivid_py, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
+
+    // TODO: FIX THIS!!!
     // add model component base functions
 //    py::class_<CModelComponent> (m, "ModelComponent")
 //        .def(py::init<const CModelComponent&> (),
@@ -41,11 +54,13 @@ PYBIND11_MODULE(vivid_py, m) {
 //             "Scale Model Component points by multiplying by scale_vec.",
 //             py::arg("scale_vec"));
     py::class_<CModelComponent> model_component (m, "ModelComponent");
+
+    // Mostly unneeded classes
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
-//        .def(py::init<const CPoint &>(),
-//                "copy constructor for Point",
-//                py::arg("point"))
+        .def(py::init<const CPoint &>(),
+                "copy constructor for Point",
+                py::arg("point"))
             .def(py::init<coord_t, coord_t, coord_t>(),
                  "Constructor for point",
                  py::arg("x"), py::arg("y"), py::arg("z"))
@@ -68,6 +83,7 @@ PYBIND11_MODULE(vivid_py, m) {
                  "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
+    // Main Classes
     py::class_<CLines>(m, "Lines", model_component)
             .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                  "Constructor for Lines",
@@ -144,24 +160,24 @@ PYBIND11_MODULE(vivid_py, m) {
     //Shapes:
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
-          py::arg("position") = CPoint(0,0,0), py::arg("size") = 1,
+          py::arg("position") = make_cpoint(0), py::arg("size") = 1,
           py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_box", &CreateBoxMesh,
           "Creates a box mesh",
-          py::arg("position") = CPoint(0, 0, 0), py::arg("size") = CPoint(1,1,1),
+          py::arg("position") = make_cpoint(0), py::arg("size") = make_cpoint(1),
           py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_sphere", &CreateSphereMesh,
           "Creates a sphere",
-          py::arg("position")=CPoint(0,0,0),py::arg("radius")=1,py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
+          py::arg("position")=make_cpoint(0),py::arg("radius")=1,py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
           py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_ellipsoid", &CreateEllipsoidMesh,
           "Creates ellipsoid mesh",
-          py::arg("position")=CPoint(0,0,0),py::arg("radii"),py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
+          py::arg("position")=make_cpoint(0),py::arg("radii"),py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
           py::arg("major_axis"), py::arg("middle_axis"), py::arg("minor_axis"),
           py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_arrow", &CreateArrowMesh,
           "Creates an arrow mesh",
-          py::arg("position")=CPoint(0,0,0), py::arg("direction"),py::arg("width")=0.5, py::arg("pointer_chest_ratio")=0.4,
+          py::arg("position")=make_cpoint(0), py::arg("direction"),py::arg("width")=0.5, py::arg("pointer_chest_ratio")=0.4,
           py::arg("color")=0.5, py::arg("alpha") = 1, py::arg("label")="");
     m.def("create_grid", &CreateGrid,
           "Creates a grid",

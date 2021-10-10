@@ -22,21 +22,21 @@ vector<double> GetSurfaceAreas(const CSurface &arSurf)
     vector<coord_t> face_areas;
     for (auto & mFace : arSurf.GetFaces()) {
         // calculating areas faces
-        vector<CPoint> verts = mFace.mVertices;
-        if (verts == 3) {
-            CPoint ab_vec = (verts[0]-verts[1]).Normalize();
-            CPoint ac_vec = (verts[0]-verts[2]).Normalize();
+        vector<shared_ptr<CPoint>> verts = mFace.mVertices;
+        if (verts.size() == 3) {
+            CPoint ab_vec = (*verts[0]-*verts[1]).Normalize();
+            CPoint ac_vec = (*verts[0]-*verts[2]).Normalize();
             face_areas.push_back(0.5 * ab_vec.Cross(ac_vec).Magnitude());
         }
         else {
             coord_t face_area = 0;
             for (size_t i = 1; i < verts.size()-1; i++) {
             // Subdivide by diagonals from 0 point
-                CPoint ab_vec = (verts[0]-verts[i]).Normalize();
-                CPoint ac_vec = (verts[0]-verts[i+1]).Normalize();
+                CPoint ab_vec = (*verts[0]-*verts[i]).Normalize();
+                CPoint ac_vec = (*verts[0]-*verts[i+1]).Normalize();
                 face_area += 0.5 * ab_vec.Cross(ac_vec).Magnitude();
             }
-            face_areas.push_back(face_area)
+            face_areas.push_back(face_area);
         }
     }
 
@@ -45,11 +45,13 @@ vector<double> GetSurfaceAreas(const CSurface &arSurf)
 
 
 vector<double> CalculateFlux(const CSurface &arSurf, const CPoint &arField) {
-    vector<double> flux (mSurfFaces.size());
+    vector<CSurfaceFace> faces = arSurf.GetFaces();
+    vector<double> flux (faces.size());
     vector<double> areas = GetSurfaceAreas(arSurf);
-    for (int i = 0; i<arSurf.mSurfFaces.size(); i++) {
+    vector<CPoint> input_points = arSurf.GetInputPoints();
+    for (int i = 0; i<flux.size(); i++) {
         // Face Normal Calculate
-        CPoint norm = arSurf.mInputPoints[arSurf.mSurfFaces[i].mPairPoints.second] - arSurf.mInputPoints[arSurf.mSurfFaces[i].mPairPoints.first];
+        CPoint norm = input_points[faces[i].mPairPoints.second] - input_points[faces[i].mPairPoints.first];
         // Local Flux calculation : loop over the arField, summing the flux of the ones that cross the surface
         //flux[i] = arField[i].Magnitude() * arField[i].Dot(norm) * areas[i];
     }

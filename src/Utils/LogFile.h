@@ -97,6 +97,9 @@ public:
     void SetPrintToConsole(bool aWrite) { mPrintToConsole = aWrite; }
 };
 
-void SetLogFile(bool aWriteToLog, bool aPrintToConsole);
+inline void SetLogFile(bool aWriteToLog, bool aPrintToConsole) {
+    CLogFile::GetInstance().SetWriteToLog(aWriteToLog);
+    CLogFile::GetInstance().SetPrintToConsole(aPrintToConsole);
+}
 
 #endif //VIVID_LOGFILE_H

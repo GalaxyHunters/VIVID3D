@@ -1,7 +1,7 @@
 #ifndef VIVID_PROGRESSBAR_H
 #define VIVID_PROGRESSBAR_H
 
-void printProgress(double percentage) {
+inline void printProgress(double percentage) {
     string PROG_LINES = "||||||||||||||||||||||||||||||||||||||||||||||||||";
     string PROG_SPACES = "                                                  ";
     int PROG_LENGTH = 50;

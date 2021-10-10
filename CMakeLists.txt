@@ -91,9 +91,17 @@ add_executable(vivid
         src/ModelBuilder/StopMotionAnimation.cpp
 
         src/Extra/Analysis.cpp
+        src/ModelBuilder/SurfByFunc.cpp
+        src/ModelBuilder/SurfByFunc.h
+        src/Utils/ProgressBar.h
+        src/Utils/ColorDefs.h
+        src/Utils/Errors.h
+        src/Utils/Plasma.h
+        src/Wrapping/TypeCasting.h
+        src/Extra/VoronoiSmoothing.cpp
 
         #main
-        src/main.cpp src/ModelBuilder/SurfByFunc.cpp src/ModelBuilder/SurfByFunc.h src/Utils/ProgressBar.h src/Utils/ColorDefs.cpp src/Utils/ColorDefs.h src/Utils/Errors.h src/Utils/Plasma.cpp src/Utils/Plasma.h src/Utils/LogFile.cpp src/Wrapping/TypeCasting.h src/Extra/VoronoiSmoothing.cpp src/Extra/VoronoiSmoothing.h)
+        src/main.cpp)
 
 
 
@@ -124,6 +132,14 @@ pybind11_add_module(vivid_py
         src/ModelBuilder/Animation.cpp
         src/Extra/Analysis.h
         lib/ImportAndExport/FBXImportExport.cpp
+
+        src/ModelBuilder/SurfByFunc.cpp
+        src/ModelBuilder/SurfByFunc.h
+        src/Utils/ProgressBar.h
+        src/Utils/ColorDefs.h
+        src/Utils/Errors.h
+        src/Utils/Plasma.h
+        src/Extra/VoronoiSmoothing.cpp
 
         #wrapper
         src/Wrapping/wrapper.cpp

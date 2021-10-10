@@ -3,9 +3,10 @@
 
 #include "./ModelBuilder/Surface.h"
 
-namespace vivid {
+//namespace vivid {
 
 // Plan: we will use surf functionality, so also surf will have this functionality ?
+using namespace vivid;
 
 // neighbours...
 
@@ -14,5 +15,5 @@ vector<double> GetParticlesDensity(const CSurface &arSurf, const std::vector<dou
 vector<double> GetSurfaceAreas(const CSurface &arSurf);
 vector<double> CalculateFlux(const CSurface &arSurf, const CPoint &arField);
 
-} // namespace vivid
+//} // namespace vivid
 #endif //VIVID_ANALYSIS_H

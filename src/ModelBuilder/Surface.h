@@ -110,10 +110,10 @@ namespace vivid
 
         // Getters, Setters
         // Used primarily in deprecated smoothing
-        inline const std::vector<CPoint>& GetInputPoints() { return mInputPoints; }
+        inline const std::vector<CPoint>& GetInputPoints() const { return mInputPoints; }
         inline const std::vector<bool>& GetMask() { return mCreationMask; }
         inline const std::vector<quan_t>& GetQuan() { return mQuan; }
-        inline const std::vector<CSurfaceFace>& GetFaces() { return mSurfFaces; }
+        inline const std::vector<CSurfaceFace>& GetFaces() const { return mSurfFaces; }
         inline const CVoronoi& GetVoronoiData() const { return mVoronoi; }
 
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }

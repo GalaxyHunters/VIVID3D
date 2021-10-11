@@ -7,7 +7,6 @@ set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 
 message(${PROJECT_SOURCE_DIR})
 
-
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast; ${CMAKE_CURRENT_SOURCE_DIR}/lib/ImportAndExport/FBX;)
 
 # TODO: Choose between Linux\Windows\mac
@@ -24,8 +23,7 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
-find_package(Boost 1.62.0 REQUIRED)
-
+find_package( Boost 1.62.0 REQUIRED)
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
@@ -50,7 +48,9 @@ find_package(FBX     REQUIRED)
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-#set(PY_ROOT "C:/Users/zorik/Miniconda2")
+set (DPYBIND11_PYTHON_VERSION 3.8.5)
+set(PY_ROOT "/usr/bin/python3.8")
+find_package(PythonLibs 3.8)
 add_subdirectory(pybind11)
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
@@ -62,6 +62,7 @@ include_directories(lib/SurfacingAlgorithms)
 include_directories(lib/pybind11/include)
 include_directories(lib/ImportAndExport)
 include_directories(lib/ImportAndExport/lodepng)
+
 
 add_executable(vivid
         #external
@@ -89,17 +90,25 @@ add_executable(vivid
         src/ModelBuilder/Animation.cpp
         src/ModelBuilder/StopMotionAnimation.cpp
 
-        src/Extra/Analysis.h
+        src/Extra/Analysis.cpp
+        src/ModelBuilder/SurfByFunc.cpp
+        src/ModelBuilder/SurfByFunc.h
+        src/Utils/ProgressBar.h
+        src/Utils/ColorDefs.h
+        src/Utils/Errors.h
+        src/Utils/Plasma.h
+        src/Wrapping/TypeCasting.h
+        src/Extra/VoronoiSmoothing.cpp
 
         #main
-        src/main.cpp
+        src/main.cpp)
 
-        src/ModelBuilder/VoronoiSurface.cpp
-        src/ModelBuilder/MarchingCubesSurface.cpp src/ModelBuilder/ErrorMsg.h)
 
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
+
+target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
@@ -116,13 +125,24 @@ pybind11_add_module(vivid_py
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
+        src/ModelBuilder/Line.cpp
+        src/ModelBuilder/PointCloud.cpp
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/Shapes.cpp
+        src/ModelBuilder/Animation.cpp
         src/Extra/Analysis.h
         lib/ImportAndExport/FBXImportExport.cpp
 
+        src/ModelBuilder/SurfByFunc.cpp
+        src/ModelBuilder/SurfByFunc.h
+        src/Utils/ProgressBar.h
+        src/Utils/ColorDefs.h
+        src/Utils/Errors.h
+        src/Utils/Plasma.h
+        src/Extra/VoronoiSmoothing.cpp
+
         #wrapper
-        src/wrapper.cpp
+        src/Wrapping/wrapper.cpp
         )
 
 

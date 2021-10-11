@@ -6,7 +6,7 @@
 
 namespace vivid
 {
-
+//TODO: THIS SHOULD REALLLY NOT BE EMPTY!!!
 //output functions
 //TODO should habe return value, and maybe exception!
 void OBJExporter(CModel &aModel, std::string aOutPutFile, bool WithTexture); //=1

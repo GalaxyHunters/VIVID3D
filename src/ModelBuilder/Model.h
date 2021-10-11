@@ -8,33 +8,35 @@
 namespace vivid
 {
 
-class CModel
-{
-private:
-    std::string mLabel = ""; //TODO should it be default string
-    std::vector<CMesh> mMeshes = {}; //TODO ModelComponent refactor
+    class CModel
+    {
+    private:
+        std::vector<CModelComponent> mMeshes = {};
 
-public:
-    // TODO Think! should we pass param by reference? should we use const?
-    // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
-    CModel(){};
-	CModel(CMesh aMesh) {mMeshes.push_back(aMesh);};
-    //operator =
-	CModel(std::vector<CMesh> aMeshes) : mMeshes(aMeshes){};
-	CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha);
-	~CModel();
+    public:
+        // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
+        CModel(){};
+        CModel(const CModelComponent &arMesh) {mMeshes.push_back(arMesh);};
+        //operator =
+        // TODO: Make this work
+        CModel(const std::vector<CModelComponent> &arMeshes) : mMeshes(arMeshes){};
+        ~CModel();
 
-	void AddMesh(CMesh aMesh);
-	//remove Mesh?
-	void AddSurf(CSurface aSurf, std::string aLabel, coord_t aAlpha);
-	vector<CMesh> GetMeshes() {return mMeshes;}
+        // TODO: Make this work
+        void AddMeshes(const vector<CModelComponent> &arMeshes);
+        void AddMesh(const CModelComponent &arMesh);
+        void AddModel(const CModel &arModel);
+        //remove Mesh by label maybe?
+        //List of meshes by label?
+        inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
 
-	// Add Importers
-    void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
+        // Add Importers
+        // void ImportModel(const std::string &arInputFilePath)
+        void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
 //    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
-    //TODO export to BLOB
-};
+        //TODO export to BLOB
+    };
 
 }; // namespace vivid
 #endif //VIVID_MODEL_H

@@ -154,7 +154,7 @@
     <frame>
       <ip>0x2A8EE6</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>compute_vornoi(std::vector&lt;CPoint, std::allocator&lt;CPoint&gt; &gt;&amp;, double)</fn>
+      <fn>ComputeVoronoi(std::vector&lt;CPoint, std::allocator&lt;CPoint&gt; &gt;&amp;, double)</fn>
       <dir>/home/ghil/Development/Vivid/lib</dir>
       <file>External.cpp</file>
       <line>14</line>
@@ -263,7 +263,7 @@
     <frame>
       <ip>0x2A8EE6</ip>
       <obj>/home/ghil/Development/Vivid/vivid</obj>
-      <fn>compute_vornoi(std::vector&lt;CPoint, std::allocator&lt;CPoint&gt; &gt;&amp;, double)</fn>
+      <fn>ComputeVoronoi(std::vector&lt;CPoint, std::allocator&lt;CPoint&gt; &gt;&amp;, double)</fn>
       <dir>/home/ghil/Development/Vivid/lib</dir>
       <file>External.cpp</file>
       <line>14</line>

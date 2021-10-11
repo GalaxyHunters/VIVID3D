@@ -58,11 +58,21 @@ class CMakeBuild(build_ext):
 
 setup(
     name='vivid_py',
-    version='0.0.1',
-    author='Naftali Deutsch',
-    # author_email='naftalide',
-    description='A 3D visualisation tool for cosmological simulations',
-    long_description='',
+    version='1.0.0',
+    author='GalaxyHuntersIL',
+    url='https://galaxyhuntersil.wixsite.com/labs/vivid',
+    description='A 3D visualisation tool for simulations',
+    long_description='''
+    We present VIVID, an innovative method for easy particle simulation data visualization.
+    
+    VIVID uses an implementation of the voronoi algorithm for a 3D space made by Dr. Elad Stiennberg. 
+    It takes simulation data as an input and produces an interactive 3D mesh model. The intuitive code allows for:
+    
+    - Animated models through time
+    - Labeled surfaces
+    - Color and opacity control
+    - Shape creation
+    - And more.''',
     ext_modules=[CMakeExtension('Vivid')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,

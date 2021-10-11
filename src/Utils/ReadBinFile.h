@@ -26,6 +26,10 @@ struct ModelDataMultipleMasks {
 // TODO: why inline #facepalm^100
 static ModelData ReadBin(string file_loc) {
 	ifstream binFile(file_loc, ios::in | ios::binary);
+	if (!binFile.is_open()) {
+	    cout << "File does not exist" << endl;
+	    throw "File does not exist";
+	}
 	float x, y, z; //will hold the temporary x, y ,z values
     coord_t temp_quan; //will hold the temporary color values
 	bool temp_mask; //will hold the temporary mask values

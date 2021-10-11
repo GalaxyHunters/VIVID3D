@@ -7,12 +7,27 @@
 
 namespace vivid
 {
+/* Implementing surfacing by RunVorn algorithm */
+class CVoronoi {
+public:
+    Voronoi3D mData = {Vector3D(), Vector3D()};
 
-//void ConvertToVorn(std::vector<CPoint>& arInputPoints, std::vector<Vector3D>& arNewPoints);
 
-// TODO: Alt compute_vornoi func
-std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, double aBoxR);
-std::pair<std::vector<Vector3D>, std::vector<std::vector<size_t> > > compute_vornoi(std::vector<CPoint>& arInputPoints, std::vector<Vector3D> Box);
+    CVoronoi() {
+
+    }
+    CVoronoi(const CVoronoi &arVoronoi) {}
+
+    // operator=
+    // set get
+
+    //inline void SetData(const Voronoi3D &arData) { mData = arData; }
+
+    std::vector<Vector3D> ConvertToVorn(const std::vector<CPoint>& arInputPoints);
+    void ComputeVoronoi(const std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
+    std::vector<std::vector<size_t>> GetFaces();
+};
+
 
 
 }; // namespace vivid

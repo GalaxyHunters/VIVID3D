@@ -1,132 +1,269 @@
+#include <numeric>
 #include "Mesh.h"
-#include "Model.h" // TODO TOMER!! Y?
+#include "Model.h"
 #include "Decimate.h"
-
+#include "ProgressBar.h"
 #include "boost/algorithm/string/predicate.hpp"
-//#include <stdio.h>
-
-
-
 using namespace vivid;
 using namespace boost::algorithm;
 
+/*-------------------------------------------------- Public Methods --------------------------------------------------*/
 
-// TODO: to place the methods in order and in substructure
-
-CMesh::~CMesh() {}
-
-
-void CMesh::ExportToObj(string aOutput, bool WithTexture){
-    CModel(*this).ExportToObj(aOutput, WithTexture); //TODO NAFTALI This is how it done.
-}
-
-void CMesh::Decimate(coord_t aVerticlePercent, coord_t aMaxError)
+void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
-        throw "input error, DecimationPercent must be between 0 and 1";
+        aVerticlePercent = max(0.05, min(aVerticlePercent, .9));
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_ALPHA_VALUE);
     }
     if( aMaxError < 0 || aMaxError > 1){
-        throw "input error, MaxError must be between 0 and 1";
+        aMaxError = max(0.05, min(aMaxError, .9));
+        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_ALPHA_VALUE);
     }
-
-	//call decimation from External
-	int targetVerticesN = int(aVerticlePercent * mPoints.size());
-	int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-	auto temp = DecimateMesh(mPoints, GetFacesAsTriangles(), targetVerticesN, targetTrianglesN, aMaxError);
-	mPoints = get<0>(temp);
-	mFaces = get<1>(temp);
+    if (!mFacesAreTriangles) { TriangulizeFaces(); }
+    //call decimation from External
+    int targetVerticesN = int(aVerticlePercent * mPoints.size());
+    int targetTrianglesN = int(aVerticlePercent * mFaces.size());
+    auto temp = DecimateMesh(mPoints, mFaces, targetVerticesN, targetTrianglesN, aMaxError);
+    mPoints = get<0>(temp);
+    mFaces = get<1>(temp);
 }
 
-vector<CIndexedFace> CMesh::GetFacesAsTriangles() {
-    vector<CIndexedFace> aTriangles = vector<CIndexedFace>();
-	for (auto fIt = mFaces.begin(); fIt != mFaces.end(); fIt++) {
-		for (size_t i = 1; i < fIt->GetPoints().size()-1; i++) { // go over all the vertices from 1 to n-1 and connect them with vertice 0 to create triangles 
-            aTriangles.push_back(CIndexedFace((*fIt)[0], (*fIt)[i], (*fIt)[i + 1], fIt->GetColor()));
-		}
-	}
-	return aTriangles;
-}
-//geters seters
+// TODO: Fix similar methods, fix RemovePointyFaces
 
-string CMesh::GetLabel() { return mLabel; }
-coord_t CMesh::GetAlpha() { return mAlpha; }
-vector<CPoint> CMesh::GetPoints() { return mPoints; }
-vector<CIndexedFace> CMesh::GetFaces() { return mFaces; }
-void CMesh::SetFaces(vector<CIndexedFace> aFaces) { mFaces = aFaces; }
-void CMesh::SetPoints(vector<CPoint> aPoints) { mPoints = aPoints; }
-void CMesh::SetLabel(string aLabel) { mLabel = aLabel; }
-void CMesh::SetAlpha(coord_t aAlpha){
-    //check input valdilty
-    if(aAlpha > 1 || aAlpha < 0){
-        throw "Alpha must be between 0 and 1";
+void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
+{
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
+
+    vector<coord_t> face_areas;
+    vector<CFace> new_faces;
+    for (auto & mFace : mFaces) {
+        // calculating areas faces
+        CPoint ab_vec = (mPoints[mFace[0]]-mPoints[mFace[1]]).Normalize();
+        CPoint ac_vec = (mPoints[mFace[0]]-mPoints[mFace[2]]).Normalize();
+
+        face_areas.push_back(0.5 * ab_vec.Cross(ac_vec).Magnitude());
     }
-    mAlpha = aAlpha;
+    coord_t average = accumulate(face_areas.begin(), face_areas.end(), 0.0) / face_areas.size();
+
+    for (int i = 0; i < mFaces.size(); i++) {
+        if (face_areas[i] <= average * aAboveAverageThreshold) {
+            new_faces.push_back(mFaces[i]);
+        } else {
+            // Subdivide
+            vector<size_t> vertices = mFaces[i].GetPoints();
+            vector<CPoint> new_vertices (3);
+            size_t last_size = mPoints.size();
+            // 3 New points
+            mPoints.push_back((mPoints[vertices[0]] + mPoints[vertices[1]])/2);
+            mPoints.push_back((mPoints[vertices[1]] + mPoints[vertices[2]])/2);
+            mPoints.push_back((mPoints[vertices[2]] + mPoints[vertices[0]])/2);
+
+            // 4 New faces
+            new_faces.push_back(CFace({vertices[0], last_size, last_size+2}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({vertices[1], last_size, last_size+1}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({vertices[2], last_size+1, last_size+2}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({last_size, last_size+1, last_size+2}, mFaces[i].GetQuan()));
+        }
+    }
+    mFaces = new_faces;
+    CalculatePointsNeighbours();
 }
 
-void CMesh::TransformMesh(coord_t const aTrans[3][3]){
+void CMesh::RemoveLargeFaces(coord_t aAboveAverageThreshold)
+{
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
 
-    double px,py,pz;
-    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
+    vector<coord_t> face_areas;
+    vector<CFace> new_faces;
+    for (auto it = mFaces.begin(); it != mFaces.end(); it++) {
+        // calculating areas faces
+        CPoint ab_vec = (mPoints[it->GetPoints()[0]]-mPoints[it->GetPoints()[1]]).Normalize();
+        CPoint ac_vec = (mPoints[it->GetPoints()[0]]-mPoints[it->GetPoints()[2]]).Normalize();
+
+        face_areas.push_back(0.5 * ab_vec.Cross(ac_vec).Magnitude());
+    }
+    coord_t average = accumulate(face_areas.begin(), face_areas.end(), 0.0) / face_areas.size();
+
+    for (int i = 0; i < mFaces.size(); i++) {
+        if (face_areas[i] <= average * aAboveAverageThreshold) {
+            new_faces.push_back(mFaces[i]);
+        }
+    }
+    mFaces = new_faces;
+    CalculatePointsNeighbours();
+}
+
+void CMesh::RemovePointyFaces(coord_t aThetaThreshold)
+{
+    if(!mFacesAreTriangles) { TriangulizeFaces(); }
+
+    vector<CPoint> next_points = mPoints;
+
+    for (int i = 0; i < 40; i++) {
+
+        for (auto it = mFaces.begin(); it != mFaces.end(); it++) {
+            // Filtering pointy faces
+            for (int k = 0; k < it->GetPoints().size(); k++){
+                int prev = k-1;
+                int next = k+1;
+                if (k == 0) {
+                    prev = 2;
+                } else if (k == 2) {
+                    next = 0;
+                }
+
+                CPoint ab_vec = (mPoints[it->GetPoints()[prev]]-mPoints[it->GetPoints()[k]]).Normalize();
+                CPoint bc_vec = (mPoints[it->GetPoints()[next]]-mPoints[it->GetPoints()[k]]).Normalize();
+                coord_t theta = acos(ab_vec.Dot(bc_vec)) * (180/M_PI);
+                if (theta <= aThetaThreshold) {
+                    // Laplacian Smooth
+                    next_points[it->GetPoints()[k]] = CPoint(0,0,0);
+                    for (auto jt = mPointNeighbours[it->GetPoints()[k]].begin(); jt != mPointNeighbours[it->GetPoints()[k]].end(); jt++) {
+                        next_points[it->GetPoints()[k]] += mPoints[*jt];
+                    }
+                    next_points[it->GetPoints()[k]] = next_points[it->GetPoints()[k]] / (mPointNeighbours[it->GetPoints()[k]].size());
+                    break;
+                }
+            }
+        }
+        mPoints = next_points;
+    }
+}
+
+void CMesh::LaplacianSmooth(size_t aNumIterations, double aAlphaFactor, double aBetaFactor)
+{
+    vector<CPoint> curr_points = mPoints;
+
+    for (int i = 0; i < aNumIterations; i++) {
+        vector<CPoint> next_points (mPoints.size());
+        vector<CPoint> curr_beta_points (mPoints.size());
+        // Laplacian Smooth
+        for (size_t j = 0; j < mPoints.size(); j++) {
+            if (!mPointNeighbours[j].empty()) {
+                for (auto it = mPointNeighbours[j].begin(); it != mPointNeighbours[j].end(); it++) {
+                    next_points[j] += curr_points[*it];
+                }
+                next_points[j] = next_points[j] / (mPointNeighbours[j].size());
+
+                curr_beta_points[j] = next_points[j] - (mPoints[j] * aAlphaFactor + curr_points[j] * (1. - aAlphaFactor));
+            } else {
+                next_points[j] = mPoints [j];
+            }
+        }
+        // HC Algorithm
+        if (aBetaFactor > 0) {
+            for (size_t j = 0; j < mPoints.size(); j++) {
+                if (!mPointNeighbours[j].empty()) {
+                    CPoint next_beta;
+                    for (auto it = mPointNeighbours[j].begin(); it != mPointNeighbours[j].end(); it++) {
+                        next_beta += curr_beta_points[*it];
+                    }
+                    next_points[j] -= curr_beta_points[j] * aBetaFactor + next_beta*((1. - aBetaFactor) / mPointNeighbours[j].size());
+                }
+            }
+        }
+
+        curr_points = next_points;
+    }
+    mPoints = curr_points;
+}
+
+void CMesh::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
+    CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
+}
+
+void CMesh::CalculatePointsNeighbours() {
+    size_t i =0;
+    for (auto & mFace : mFaces) {
+        if (i%100==0) { printProgress(i/mFaces.size()); }
+
+        size_t n_points = mFace.GetPoints().size();
+        for (int j = 0; j < n_points; j++) {
+            // Face contains point i, so get one before and one after,
+            size_t prev = mFace[j-1];
+            size_t next = mFace[j+1];
+            if (j == 0) {
+                prev = mFace[n_points-1];
+            } else if (j == (n_points-1)) {
+                next = mFace[0];
+            }
+            mPointNeighbours[mFace[j]].insert(prev);
+            mPointNeighbours[mFace[j]].insert(next);
+        }
+        i++;
+    }
+}
+
+/*------------------------------------------------- Private Methods --------------------------------------------------*/
+
+void CMesh::TriangulizeFaces() {
+    vector<CFace> triangle_faces;
+    for (auto &mFace : mFaces) {
+        size_t prev_0=0, prev_1=1, prev_2=2;
+        for (size_t i = 1; i < mFace.GetPoints().size()-1; i++) {
+            // Add faces along alternating diagonals
+            if (i%2 == 1){
+                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
+            } else {
+                prev_1 = mFace.GetPoints().size()-prev_1;
+                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
+                if (prev_0 == 0) { prev_0 = 3;}
+                else { prev_0++;}
+                prev_1+=prev_2;
+                prev_2=prev_1-prev_2;
+                prev_1-=prev_2;
+            }
+//            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetQuan()));
+        }
+    }
+    mFaces = triangle_faces;
+    mFacesAreTriangles = true;
+}
+
+/*--------------------------------------------- Transformation Methods -----------------------------------------------*/
+
+void CMesh::TransformMesh(FTrans_t const &arTrans){
+    for (auto & mPoint : mPoints)
     {
-
-        px= it->X(); py= it->Y(); pz= it->Z();
-
-        it->X(aTrans[0][0] * px + aTrans[0][1] * py + aTrans[0][2] * pz);
-        it->Y(aTrans[1][0] * px + aTrans[1][1] * py + aTrans[1][2] * pz);
-        it->Z(aTrans[2][0] * px + aTrans[2][1] * py + aTrans[2][2] * pz);
-
-        // We should change all to vectorized operators.
-        // May the god of compilers forgive us all for our sins.
+        mPoint = arTrans(mPoint);
     }
 }
 
-void CMesh::RotateMesh(CPoint aNormVec, double aRadAngel){
-    // Trig operations are expansive
+void CMesh::TransformMesh(const array<CPoint, 3>& aTrans)
+{
+    for (auto & mPoint : mPoints)
+    {
+        mPoint = {mPoint.Dot(aTrans[0]), mPoint.Dot(aTrans[1]), mPoint.Dot(aTrans[2])};
+    }
+}
+
+void CMesh::RotateMesh(const CPoint& arNormVec, double aRadAngel)
+{
     auto cos_a = cos(aRadAngel);
     auto sin_a = sin(aRadAngel);
-    // auto one_min_cos_a = 1-cos_a; for optimization it's better but it's less readable...
-    auto nx = aNormVec.X();
-    auto ny = aNormVec.Y();
-    auto nz = aNormVec.Z();
+    auto one_min_cos_a = 1-cos_a;
+    auto nx = arNormVec.X();
+    auto ny = arNormVec.Y();
+    auto nz = arNormVec.Z();
 
-    coord_t const rotation_mat[3][3] = {
-            cos_a + nx*nx*(1-cos_a),        nx*ny*(1-cos_a) - nz*sin_a,     nx*nz*(1-cos_a) + ny*sin_a,
-
-            ny*nx*(1-cos_a) + nz*sin_a,     cos_a + ny*ny*(1-cos_a),        ny*nz*(1-cos_a) - nx*sin_a,
-
-            nz*nx*(1-cos_a) - ny*sin_a,     nz*ny*(1-cos_a) + nx*sin_a,     cos_a + nz*nz*(1-cos_a),
+    array<CPoint, 3> rotation_mat =  {
+            CPoint(cos_a + nx*nx*one_min_cos_a,    nx*ny*one_min_cos_a - nz*sin_a, nx*nz*one_min_cos_a + ny*sin_a),
+            CPoint(ny*nx*one_min_cos_a + nz*sin_a, cos_a + ny*ny*one_min_cos_a,    ny*nz*one_min_cos_a - nx*sin_a),
+            CPoint(nz*nx*one_min_cos_a - ny*sin_a, nz*ny*one_min_cos_a + nx*sin_a, cos_a + nz*nz*one_min_cos_a),
     };
     TransformMesh(rotation_mat);
 }
 
-void CMesh::MoveMesh(CPoint aDirectionVec){
-//    auto x_movement = aDirectionVec.X();
-//    auto y_movement = aDirectionVec.Y();
-//    auto z_movement = aDirectionVec.Z();
-    for (auto it = mPoints.begin(); it != mPoints.end(); it++)
+void CMesh::MoveMesh(const CPoint& arDirectionVec){
+    for (auto & mPoint : mPoints)
     {
-        *it += aDirectionVec;
-//        it->X(x_movement + it->X());
-//        it->Y(y_movement + it->Y());
-//        it->Z(z_movement + it->Z());
-        // The only reason I let it pass like that, is because this is an inline code.
-        // We should change all to vectorized operators.
-        // May the god of compilers forgive us all for our sins.
+        mPoint += arDirectionVec;
     }
 }
 
-void CMesh::ScaleMesh(CPoint aScaleVec){
-    auto x_scale = aScaleVec.X();
-    auto y_scale = aScaleVec.Y();
-    auto z_scale = aScaleVec.Z();
-    for (auto it = this->mPoints.begin(); it != this->mPoints.end(); it++)
-    {
-        it->X(x_scale * it->X());
-        it->Y(y_scale * it->Y());
-        it->Z(z_scale * it->Z());
-        // The only reason I let it pass like that, is because this is an inline code.
-        // We should change all to vectorized operators.
-        // May the god of compilers forgive us all for our sins.
+void CMesh::ScaleMesh(const CPoint& arScaleVec) {
+    for (auto &mPoint: mPoints) {
+        mPoint.Scale(arScaleVec);
     }
 }

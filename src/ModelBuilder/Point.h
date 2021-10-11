@@ -6,82 +6,61 @@
 #include <vector>
 #include <string>
 
-typedef double coord_t; //TODO: float64_t and rename!
+typedef double coord_t;
 
-//TODO TODO TODO struct MathVector{double size;
-//    vector<double> direction;};
-
-
-// TODO CPoint should be typedef of vector calculation object by size 3 of maximum float.
-// TODO const and & and inl file
+constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
 
 namespace vivid
 {
 
-class CPoint
-{
-private:
-    coord_t mX, mY, mZ;
+    class CPoint
+    {
+    private:
+        coord_t mX=0, mY=0, mZ=0;
 
-public:
-	inline CPoint(){}
-	inline CPoint(const CPoint &aV) : mX(aV.mX), mY(aV.mY), mZ(aV.mZ) {} //copy constructor
-	inline CPoint(coord_t x, coord_t y, coord_t z): mX(x), mY(y), mZ(z) {}
-	inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
-	inline ~CPoint(){}
-	inline coord_t Dist(CPoint& aVec) { return sqrt(pow(mX - aVec.X(), 2) + pow(mY - aVec.Y(), 2) + pow(mZ - aVec.Z(), 2)); }
-	inline const coord_t X() const{ return mX; }
-	inline const coord_t Y() const{ return mY; }
-	inline const coord_t Z() const{ return mZ; }
-	inline void X(coord_t aX) { mX = aX; }
-	inline void Y(coord_t aY) { mY = aY; }
-	inline void Z(coord_t aZ) { mZ = aZ; }
-	inline CPoint& operator+= (const CPoint& apV) { mX += apV.mX; mY += apV.mY; mZ += apV.mZ; return *this; }
-    inline CPoint& operator-= (const CPoint& apV) { mX -= apV.mX; mY -= apV.mY; mZ -= apV.mZ; return *this; }
-    inline CPoint& operator=  (const CPoint& apV) { mX =  apV.mX; mY =  apV.mY; mZ =  apV.mZ; return *this; }
-    inline CPoint  operator+  (const CPoint& apV) const{ return CPoint (mX + apV.mX, mY + apV.mY, mZ + apV.mZ); }
-    inline CPoint  operator-  (const CPoint& apV) const{ return CPoint (mX - apV.mX, mY - apV.mY, mZ - apV.mZ); }
-    inline CPoint  operator*  (const coord_t aSc) const{ return CPoint (aSc * mX, aSc * mY, aSc * mZ); }
-//    inline CPoint  operator *  (const coord_t aSc, const CPoint& apV) { return CPoint (aSc * apV.X(), aSc * apV.Y(), aSc * apV.Z()); }
-    inline CPoint  operator/  (const coord_t aSc) {
-        if (0 == aSc)
+    public:
+        inline CPoint(){}
+        inline CPoint(const CPoint &arV) : mX(arV.mX), mY(arV.mY), mZ(arV.mZ) {}
+        inline CPoint(coord_t x, coord_t y, coord_t z): mX(x), mY(y), mZ(z) {}
+        inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
+        //inline CPoint(std::vector<double> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
+
+        inline ~CPoint(){}
+
+        inline coord_t X() const{ return mX; }
+        inline coord_t Y() const{ return mY; }
+        inline coord_t Z() const{ return mZ; }
+        inline void X(coord_t aX) { mX = aX; }
+        inline void Y(coord_t aY) { mY = aY; }
+        inline void Z(coord_t aZ) { mZ = aZ; }
+
+        inline CPoint& operator+= (const CPoint& arV) { mX += arV.mX; mY += arV.mY; mZ += arV.mZ; return *this; }
+        inline CPoint& operator-= (const CPoint& arV) { mX -= arV.mX; mY -= arV.mY; mZ -= arV.mZ; return *this; }
+        inline CPoint& operator=  (const CPoint& arV) { mX =  arV.mX; mY =  arV.mY; mZ =  arV.mZ; return *this; }
+        inline CPoint  operator+  (const CPoint& arV) const{ return {mX + arV.mX, mY + arV.mY, mZ + arV.mZ}; }
+        inline CPoint  operator-  (const CPoint& arV) const{ return {mX - arV.mX, mY - arV.mY, mZ - arV.mZ}; }
+        inline CPoint  operator*  (const coord_t aSc) const{ return {aSc * mX, aSc * mY, aSc * mZ}; }
+        inline CPoint  operator/  (const coord_t aSc) const{ return {mX / aSc, mY / aSc, mZ / aSc}; }
+
+        inline coord_t Dist(const CPoint& arV) const{ return sqrt(pow(mX - arV.X(), 2) + pow(mY - arV.Y(), 2) + pow(mZ - arV.Z(), 2)); }
+        inline CPoint& Scale(const CPoint& arV) { mX *= arV.mX; mY *= arV.mY; mZ *= arV.mZ; return *this; }
+        inline coord_t Dot  (const CPoint& arV) const{ return (mX * arV.X() + mY * arV.Y() + mZ * arV.Z()); }
+        inline CPoint  Cross(const CPoint& arV) const{
+            return {mY * arV.Z() - mZ * arV.Y(),
+                    mZ * arV.X() - mX * arV.Z(),
+                    mX * arV.Y() - mY * arV.X()}; }
+        inline coord_t Magnitude() const { return sqrt(Dot(*this)) ;}
+        inline CPoint  Normalize() const { return (*this / Magnitude() ); }
+        inline bool    Orthogonal(const CPoint& arV) const{ return (POINT_SIMILARITY_THRESHOLD > (*this).Dot(arV)); }
+
+
+        friend std::ostream& operator<<(std::ostream &out, const CPoint& p)
         {
-            return CPoint(0,0,0);
+            out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';
+            return out;
         }
-	    return CPoint (mX / aSc, mY / aSc, mZ / aSc);
-	}
 
-
-    inline coord_t Dot  (CPoint aVec){ return (mX * aVec.X() + mY * aVec.Y() + mZ * aVec.Z()); }
-    inline CPoint  Cross(CPoint aVec){
-        return CPoint(mY * aVec.Z() - mZ * aVec.Y(),
-                      mZ * aVec.X() - mX * aVec.Z(),
-                      mX * aVec.Y() - mY * aVec.X()); }
-
-    inline coord_t Norm(){ return sqrt(Dot(*this)) ;}
-    inline CPoint  Normalize()
-    {
-        return (*this / this->Norm() );
-    }
-    inline bool Orthogonal(CPoint aV1, CPoint aV2)
-    {
-        if (0 == aV1.Dot(aV2)) {
-            return true;
-        }
-        return false;
-    }
-
-
-    friend std::ostream& operator<<(std::ostream &out, const CPoint &p)
-    {
-        out << '(' << p.mX << ',' << p.mY << ',' << p.mZ << ')';
-        return out;
-    }
-
-
-};
-
-
+    };
 
 }; // namespace vivid
 #endif //VIVID_POINT_H

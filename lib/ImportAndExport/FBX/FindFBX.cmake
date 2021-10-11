@@ -76,6 +76,9 @@ ENDIF()
 # TODO: try to add linux path here!
 SET(FBX_SEARCH_PATHS
         $ENV{FBX_DIR}
+        "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2020.2.1"
+        "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2020.2.1"
+        "/Applications/Autodesk/FBX SDK/2020.2.1"
         "$ENV{ProgramW6432}/Autodesk/FBX/FBX SDK/2020.0.1"
         "$ENV{PROGRAMFILES}/Autodesk/FBX/FBX SDK/2020.0.1"
         "/Applications/Autodesk/FBX SDK/2020.0.1"
@@ -311,29 +314,50 @@ IF(UNIX)
     #    ADD_LIBRARY(LIBXML2 STATIC IMPORTED)
 
     MESSAGE(RUNNING_FBX_FINDER_UNIX)
-    SET(FBX_ROOT "/usr")              #TODO this needs to be expanded
+    IF(APPLE)
+        SET(FBX_ROOT "/Applications/Autodesk/FBX SDK/2020.2.1")
+        IS_FOUND(FBX_ROOT)
 
-    IS_FOUND(FBX_ROOT)
+        #setting FBX_INCLUDE_DIR
+        SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)
+        IS_FOUND(FBX_INCLUDE_DIR)
 
-    #setting FBX_INCLUDE_DIR
-    SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)
-    IS_FOUND(FBX_INCLUDE_DIR)
+        #setting FBX_LIBRARY
+        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/clang/release/libfbxsdk.dylib)
+        IS_FOUND(FBX_LIBRARY_SHARED_RELEASE)
 
-    #setting FBX_LIBRARY
-    SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.so)
-    IS_FOUND(FBX_LIBRARY_SHARED_RELEASE)
+        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/clang/release/libfbxsdk.a)
+        IS_FOUND(FBX_LIBRARY_STATIC_RELEASE)
 
-    SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.a)
-    IS_FOUND(FBX_LIBRARY_STATIC_RELEASE)
+        #setting FBX_LIBRARY_DEBUG
+        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/clang/debug/libfbxsdk.dylib)
+        IS_FOUND(FBX_LIBRARY_SHARED_DEBUG)
+
+        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/clang/debug/libfbxsdk.a)
+        IS_FOUND(FBX_LIBRARY_STATIC_DEBUG)
+    ELSE()
+        SET(FBX_ROOT "/usr")              #TODO this needs to be expanded
+        IS_FOUND(FBX_ROOT)
+
+        #setting FBX_INCLUDE_DIR
+        SET(FBX_INCLUDE_DIR ${FBX_ROOT}/include)
+        IS_FOUND(FBX_INCLUDE_DIR)
+
+        #setting FBX_LIBRARY
+        SET(FBX_LIBRARY_SHARED_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.so)
+        IS_FOUND(FBX_LIBRARY_SHARED_RELEASE)
+
+        SET(FBX_LIBRARY_STATIC_RELEASE ${FBX_ROOT}/lib/gcc/x64/release/libfbxsdk.a)
+        IS_FOUND(FBX_LIBRARY_STATIC_RELEASE)
 
 
-    #setting FBX_LIBRARY_DEBUG
-    SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.so)
-    IS_FOUND(FBX_LIBRARY_SHARED_DEBUG)
+        #setting FBX_LIBRARY_DEBUG
+        SET(FBX_LIBRARY_SHARED_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.so)
+        IS_FOUND(FBX_LIBRARY_SHARED_DEBUG)
 
-    SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.a)
-    IS_FOUND(FBX_LIBRARY_STATIC_DEBUG)
-
+        SET(FBX_LIBRARY_STATIC_DEBUG ${FBX_ROOT}/lib/gcc/x64/debug/libfbxsdk.a)
+        IS_FOUND(FBX_LIBRARY_STATIC_DEBUG)
+    ENDIF()
         #Creating the imported target FBX::fbx
     IF(NOT TARGET FBX::fbx)
         ADD_LIBRARY(FBX::fbx STATIC IMPORTED GLOBAL)
@@ -343,6 +367,7 @@ IF(UNIX)
         SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
         #            ADD_DEPENDENCIES(FBX::fbx LibXml2::LibXml2)
         MESSAGE(FBX::fbx=CREATED)
+
     ENDIF()
 ENDIF()
 

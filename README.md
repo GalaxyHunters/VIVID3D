@@ -1,4 +1,6 @@
 # Vivid
+![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
+
 We present VIVID, an innovative method for research using 3D technology.
 
 Vivid uses an implementation of Voronoi algorithm for a 3d space made by Dr. Elad Stiennberg. The package takes simulated data as input and produces an interactive 3D model that is compatible with the 3D industry.  

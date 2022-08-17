@@ -28,7 +28,7 @@ find_package( Boost 1.62.0 REQUIRED)
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI REQUIRED)
-find_package(FBX     REQUIRED)
+#find_package(FBX     REQUIRED)
 #find_package(IMPORTANDEXPORT REQUIRED)
 
 #set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/vivid27_test")
@@ -72,8 +72,8 @@ add_executable(vivid
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
         lib/ImportAndExport/ObjImportExport.cpp
-        lib/ImportAndExport/FbxCode.cpp
-        lib/ImportAndExport/FBXImportExport.cpp
+        #lib/ImportAndExport/FbxCode.cpp
+        #lib/ImportAndExport/FBXImportExport.cpp
         #vivid
         src/ModelBuilder/Model.cpp
         src/ModelBuilder/ModelComponent.cpp
@@ -110,7 +110,7 @@ target_link_libraries(vivid VoronoiLib)
 
 target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
-target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
+#target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
 
 pybind11_add_module(vivid_py
@@ -121,7 +121,7 @@ pybind11_add_module(vivid_py
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
         lib/ImportAndExport/ObjImportExport.cpp
-        lib/ImportAndExport/FbxCode.cpp
+        #lib/ImportAndExport/FbxCode.cpp
         #vivid
         src/ModelBuilder/Surface.cpp
         src/ModelBuilder/Mesh.cpp
@@ -131,7 +131,7 @@ pybind11_add_module(vivid_py
         src/ModelBuilder/Shapes.cpp
         src/ModelBuilder/Animation.cpp
         src/Extra/Analysis.h
-        lib/ImportAndExport/FBXImportExport.cpp
+        #lib/ImportAndExport/FBXImportExport.cpp
 
         src/ModelBuilder/SurfByFunc.cpp
         src/ModelBuilder/SurfByFunc.h
@@ -148,4 +148,4 @@ pybind11_add_module(vivid_py
 
 target_link_libraries(vivid_py PRIVATE VoronoiLib)
 target_link_libraries(vivid_py PRIVATE Boost::boost)
-target_link_libraries(vivid_py PRIVATE FBX::fbx)
+#target_link_libraries(vivid_py PRIVATE FBX::fbx)

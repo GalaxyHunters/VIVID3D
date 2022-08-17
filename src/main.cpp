@@ -3,7 +3,7 @@
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
 #include "ModelBuilder/SurfByFunc.h"
-#include "ImportAndExport/FBXImportExport.h"
+/*include "ImportAndExport/FBXImportExport.h"*/
 #include "ModelBuilder/Surface.h"
 #include "ModelBuilder/Point.h"
 
@@ -308,20 +308,20 @@ int RemovePointyFacesTest() {
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-    cout << "ParametricSurfByFuncTest" << endl;
-    ret_value = ParametricSurfByFuncTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "ParametricSurfByFuncTest" << endl;
+//    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Testing All Shapes" << endl;
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Cube" << endl;
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Colors" <<endl;
-//    ret_value = ColorMapTest();
-//    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Cube" << endl;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Colors" <<endl;
+    ret_value = ColorMapTest();
+    if ( EXIT_SUCCESS != ret_value) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;

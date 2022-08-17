@@ -1,8 +1,8 @@
 #include <numeric>
 #include "Mesh.h"
 #include "Model.h"
-#include "Decimate.h"
-#include "ProgressBar.h"
+#include "../../lib/Decimate.h"
+#include "../Utils/ProgressBar.h"
 #include "boost/algorithm/string/predicate.hpp"
 using namespace vivid;
 using namespace boost::algorithm;

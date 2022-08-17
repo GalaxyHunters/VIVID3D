@@ -189,7 +189,7 @@ int PyramidSmoothTest()
     smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", .5);
-    mesh1.LaplacianSmooth(1000);
+    mesh1.LaplacianSmooth(40);
 //    //mesh1.Reduce(0.3, 0.5);
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidProcessing");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
@@ -347,10 +347,10 @@ int RemovePointyFacesTest() {
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-    RunMedicaneTest();
-//    cout << "ParametricSurfByFuncTest" << endl;
-//    ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    RunMedicaneTest();
+    cout << "ParametricSurfByFuncTest" << endl;
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Testing All Shapes" << endl;
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

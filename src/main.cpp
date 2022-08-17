@@ -189,8 +189,9 @@ int PyramidSmoothTest()
     smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
     CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", .5);
+    mesh1.LaplacianSmooth(1000);
 //    //mesh1.Reduce(0.3, 0.5);
-    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidNoProcessing");
+    mesh1.ExportToObj(TEST_OUTPUT_PATH + "/PyramidProcessing");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
@@ -222,6 +223,37 @@ int PyramidSmoothTest()
 
 }
 
+int RunMedicaneTest()
+{
+    cout << "Medicane Test:" << endl;
+    ModelData nova;
+    cout << "Running VIVID" << endl;
+
+    nova = ReadBin(DATA_MODEL_PATH + "medicane.bin");
+    vector<CPoint> points (nova.points.size());
+    for (int j = 0; j < nova.quan.size(); j++) {
+        nova.quan[j] = 0.5;
+        points[j] = nova.points[j];
+    }
+    CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
+    surf.CreateSurface();
+    //surf.Smooth(false, 1);
+    cout << "Convert to Mesh" << endl;
+    CMesh mesh = surf.ToMesh("SurfMedicane", 1);
+    //mesh.SubdivideLargeFaces(4);
+//        mesh.RemovePointyFaces(20);
+    mesh.CalculatePointsNeighbours();
+    mesh.LaplacianSmooth(6, 0.7, 0);
+    mesh.LaplacianSmooth(50, 0.4, 0.7);
+    //mesh.RemovePointyFaces();
+    mesh.Reduce(0.1, 0.8);
+    //mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
+
+    mesh.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModel");
+    return EXIT_SUCCESS;
+
+}
+
 /* Test the Elad RunVorn bug and the pointy faces bugs */
 int RunSupernovaTests()
 {
@@ -240,6 +272,13 @@ int RunSupernovaTests()
     ModelData nova;
     CModel nova_model;
     cout << "Running VIVID" << endl;
+
+    nova = ReadBin(DATA_MODEL_PATH + "medicane.bin");
+    vector<CPoint> points (nova.points.size());
+    for (int j = 0; j < nova.quan.size(); j++) {
+        nova.quan[j] = 0.5;
+        points[j] = nova.points[j];
+    }
 
     for (int i = 0; i < 7; i++) {
         vector<CPoint> points (nova.points.size());
@@ -308,20 +347,21 @@ int RemovePointyFacesTest() {
 int main()
 {
     int ret_value = EXIT_SUCCESS;
+    RunMedicaneTest();
 //    cout << "ParametricSurfByFuncTest" << endl;
 //    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Testing All Shapes" << endl;
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube" << endl;
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Colors" <<endl;
-    ret_value = ColorMapTest();
-    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube" << endl;
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Colors" <<endl;
+//    ret_value = ColorMapTest();
+//    if ( EXIT_SUCCESS != ret_value) return ret_value;
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;

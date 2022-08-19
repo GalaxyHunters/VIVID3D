@@ -1,6 +1,6 @@
 project(vivid)
 
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 14)
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
@@ -23,6 +23,7 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
+set(Boost_INCLUDE_DIR "/home/naf/projects/boost_1_80_0")
 find_package( Boost 1.62.0 REQUIRED)
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
@@ -48,10 +49,20 @@ find_package(VORONOI REQUIRED)
 #set(bindings_python_version 2.7 REQUIRED)
 #add_subdirectory(pybind11 bindings_python_version)
 #message(${PYTHON_LIBRARIES})
-set (DPYBIND11_PYTHON_VERSION 3.8.5)
-set(PY_ROOT "/usr/bin/python3.8")
-find_package(PythonLibs 3.8)
+#set (DPYBIND11_PYTHON_VERSION 3.8.5)
+
+#find_package(PythonLibs 3.9 REQUIRED)
+#find_package(Python 3.9 COMPONENTS Interpreter Development REQUIRED)
+
 add_subdirectory(pybind11)
+
+set(PYBIND11_FINDPYTHON ON)
+set(PYBIND11_PYTHON_VERSION 3.9)
+set(PYTHON_LIBRARIES "/home/naf/anaconda3/lib")
+set(PYTHON_INCLUDE_DIR "/home/naf/anaconda3/include/python3.9")
+set(CMAKE_MODULE_PATH "/home/naf/anaconda3")
+
+
 
 include_directories(src) #TODO: (TOMER) I prefer to include headers by name
 include_directories(src/ModelBuilder)
@@ -112,6 +123,7 @@ target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 #target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
+project(vivid_py)
 
 pybind11_add_module(vivid_py
         #external

@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so"
+  "/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.pdb"
+  "CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o"
+  "CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o.d"
+  "CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o"
+  "CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/vivid_py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

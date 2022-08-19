@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/libVoronoiLib.pdb"
+  "/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/libVoronoiLib.so"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/VoronoiLib.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

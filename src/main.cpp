@@ -243,10 +243,10 @@ int RunMedicaneTest()
     //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
     mesh.CalculatePointsNeighbours();
-    mesh.LaplacianSmooth(6, 0.7, 0);
-    mesh.LaplacianSmooth(50, 0.4, 0.7);
-    //mesh.RemovePointyFaces();
-    mesh.Reduce(0.1, 0.8);
+    mesh.LaplacianSmooth(10, 0.7, 0);
+//    mesh.LaplacianSmooth(50, 0.4, 0.7);
+//    mesh.RemovePointyFaces();
+//    mesh.Reduce(0.1, 0.8);
     //mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
 
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModel");
@@ -347,18 +347,20 @@ int RemovePointyFacesTest() {
 int main()
 {
     int ret_value = EXIT_SUCCESS;
-//    RunMedicaneTest();
+    cout << "MedicaneTestTest" << endl;
+    ret_value =RunMedicaneTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "ParametricSurfByFuncTest" << endl;
-    ret_value = PyramidSmoothTest();
+    ret_value = ParametricSurfByFuncTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Testing All Shapes" << endl;
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Colors" <<endl;
-//    ret_value = ColorMapTest();
-//    if ( EXIT_SUCCESS != ret_value) return ret_value;
+    cout << "Colors" <<endl;
+    ret_value = ColorMapTest();
+    if ( EXIT_SUCCESS != ret_value) return ret_value;
 //    cout << "Pyramid" << endl;
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

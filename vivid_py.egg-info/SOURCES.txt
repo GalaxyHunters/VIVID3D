@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 vivid_py.egg-info/PKG-INFO

@@ -5,7 +5,8 @@
 #include "./ModelBuilder/Line.h"
 #include "./ModelBuilder/PointCloud.h"
 #include "./ModelBuilder/Shapes.h"
-#include "./ImportAndExport/FBXImportExport.h"
+#include "./ModelBuilder/Model.h"
+/*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>

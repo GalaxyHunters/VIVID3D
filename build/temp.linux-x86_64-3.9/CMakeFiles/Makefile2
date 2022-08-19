@@ -151,15 +151,15 @@ CMakeFiles/vivid.dir/clean:
 # Target rules for target CMakeFiles/vivid_py.dir
 
 # All Build rule for target.
-CMakeFiles/vivid_py.dir/all: CMakeFiles/VoronoiLib.dir/all
+CMakeFiles/vivid_py.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vivid_py.dir/build.make CMakeFiles/vivid_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56 "Built target vivid_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72 "Built target vivid_py"
 .PHONY : CMakeFiles/vivid_py.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/vivid_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/vivid_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles 0
 .PHONY : CMakeFiles/vivid_py.dir/rule

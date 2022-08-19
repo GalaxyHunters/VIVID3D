@@ -69,10 +69,234 @@ include CMakeFiles/vivid_py.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/vivid_py.dir/flags.make
 
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.s
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o: CMakeFiles/vivid_py.dir/flags.make
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp > CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.i
+
+CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.s
+
 CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o: /home/naf/projects/Vivid/Vivid/lib/Decimate.cpp
 CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o -MF CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/Decimate.cpp
 
 CMakeFiles/vivid_py.dir/lib/Decimate.cpp.i: cmake_force
@@ -86,7 +310,7 @@ CMakeFiles/vivid_py.dir/lib/Decimate.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o: /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/Voronoi.cpp
 CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o -MF CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/Voronoi.cpp
 
 CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.i: cmake_force
@@ -100,7 +324,7 @@ CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o: /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdMeshDecimator.cpp
 CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o -MF CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdMeshDecimator.cpp
 
 CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.i: cmake_force
@@ -114,7 +338,7 @@ CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o: /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/DataToImage.cpp
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o -MF CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/DataToImage.cpp
 
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.i: cmake_force
@@ -128,7 +352,7 @@ CMakeFiles/vivid_py.dir/lib/ImportAndExport/DataToImage.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o: /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.cpp
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o -MF CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.cpp
 
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.i: cmake_force
@@ -142,7 +366,7 @@ CMakeFiles/vivid_py.dir/lib/ImportAndExport/lodepng/lodepng.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o: /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/ObjImportExport.cpp
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o -MF CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o.d -o CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.o -c /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/ObjImportExport.cpp
 
 CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.i: cmake_force
@@ -156,7 +380,7 @@ CMakeFiles/vivid_py.dir/lib/ImportAndExport/ObjImportExport.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Surface.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Surface.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.i: cmake_force
@@ -170,7 +394,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Surface.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Mesh.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Mesh.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.i: cmake_force
@@ -184,7 +408,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Mesh.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Line.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Line.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.i: cmake_force
@@ -198,7 +422,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Line.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/PointCloud.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/PointCloud.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.i: cmake_force
@@ -212,7 +436,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/PointCloud.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.i: cmake_force
@@ -226,7 +450,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Model.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Shapes.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Shapes.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.i: cmake_force
@@ -240,7 +464,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Shapes.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Animation.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Animation.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.i: cmake_force
@@ -254,7 +478,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/Animation.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/SurfByFunc.cpp
 CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o -MF CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o.d -o CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.o -c /home/naf/projects/Vivid/Vivid/src/ModelBuilder/SurfByFunc.cpp
 
 CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.i: cmake_force
@@ -268,7 +492,7 @@ CMakeFiles/vivid_py.dir/src/ModelBuilder/SurfByFunc.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o: /home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.cpp
 CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o -MF CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o.d -o CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o -c /home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.cpp
 
 CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.i: cmake_force
@@ -282,7 +506,7 @@ CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.s: cmake_force
 CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o: CMakeFiles/vivid_py.dir/flags.make
 CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o: /home/naf/projects/Vivid/Vivid/src/Wrapping/wrapper.cpp
 CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o: CMakeFiles/vivid_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o -MF CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o.d -o CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o -c /home/naf/projects/Vivid/Vivid/src/Wrapping/wrapper.cpp
 
 CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.i: cmake_force
@@ -295,6 +519,22 @@ CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.s: cmake_force
 
 # Object files for target vivid_py
 vivid_py_OBJECTS = \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o" \
+"CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o" \
 "CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o" \
 "CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o" \
 "CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o" \
@@ -315,6 +555,22 @@ vivid_py_OBJECTS = \
 # External object files for target vivid_py
 vivid_py_EXTERNAL_OBJECTS =
 
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp.o
+/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp.o
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/Decimate.cpp.o
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/lib/MeshDecimation/mdMeshDecimator.cpp.o
@@ -332,9 +588,8 @@ vivid_py_EXTERNAL_OBJECTS =
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/src/Extra/VoronoiSmoothing.cpp.o
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/src/Wrapping/wrapper.cpp.o
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/build.make
-/home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/libVoronoiLib.so
 /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so: CMakeFiles/vivid_py.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX shared module /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Linking CXX shared module /home/naf/projects/Vivid/Vivid/build/lib.linux-x86_64-3.9/vivid_py.cpython-39-x86_64-linux-gnu.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vivid_py.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -645,384 +645,343 @@ CMakeFiles/vivid.dir/lib/ImportAndExport/ObjImportExport.cpp.o: /home/naf/projec
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -1036,90 +995,71 @@ CMakeFiles/vivid.dir/lib/ImportAndExport/ObjImportExport.cpp.o: /home/naf/projec
   /usr/include/c++/5/bits/shared_ptr_atomic.h \
   /usr/include/c++/5/bits/atomic_base.h \
   /usr/include/c++/5/backward/auto_ptr.h \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/as_literal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/functions.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/size_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/difference_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/has_range_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/concepts.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept_check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/general.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/backward_compatibility.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/has_constraints.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/conditional.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/conversion_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/usage.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/concept_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/for_each_i.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/for.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/for.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/limits/for_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/for_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/seq.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/elem_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/size_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/detail/is_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/enum_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/concept_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_concepts.hpp \
-  /home/naf/projects/boost_1_80_0/boost/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/value_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/misc_concept.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/make_unsigned.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_signed.hpp \
-  /usr/include/c++/5/climits \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_unsigned.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/has_member_size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/base_from_member.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_binary_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat_from_to.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/deduce_d.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/transform.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/mod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/div_base.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/less_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_1_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/identity_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/function_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/checked_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/distance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/distance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/algorithm/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/safe_bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_plus.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/has_binary_operator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/make_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_plus_assign.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_minus.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_minus_assign.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/advance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range_io.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/str_types.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/compare.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/find.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/finder.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/constants.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/finder.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/predicate.hpp \
+  /usr/include/boost/algorithm/string/predicate.hpp \
+  /usr/include/boost/algorithm/string/config.hpp \
+  /usr/include/boost/range/as_literal.hpp \
+  /usr/include/boost/range/iterator_range.hpp \
+  /usr/include/boost/range/iterator_range_core.hpp \
+  /usr/include/boost/range/functions.hpp \
+  /usr/include/boost/range/size.hpp \
+  /usr/include/boost/range/size_type.hpp \
+  /usr/include/boost/range/difference_type.hpp \
+  /usr/include/boost/range/concepts.hpp \
+  /usr/include/boost/concept_check.hpp \
+  /usr/include/boost/concept/assert.hpp \
+  /usr/include/boost/concept/detail/general.hpp \
+  /usr/include/boost/concept/detail/backward_compatibility.hpp \
+  /usr/include/boost/concept/detail/has_constraints.hpp \
+  /usr/include/boost/type_traits/conversion_traits.hpp \
+  /usr/include/boost/concept/usage.hpp \
+  /usr/include/boost/concept/detail/concept_def.hpp \
+  /usr/include/boost/preprocessor/seq/for_each_i.hpp \
+  /usr/include/boost/preprocessor/repetition/for.hpp \
+  /usr/include/boost/preprocessor/repetition/detail/for.hpp \
+  /usr/include/boost/preprocessor/seq/seq.hpp \
+  /usr/include/boost/preprocessor/seq/elem.hpp \
+  /usr/include/boost/preprocessor/seq/size.hpp \
+  /usr/include/boost/preprocessor/seq/enum.hpp \
+  /usr/include/boost/concept/detail/concept_undef.hpp \
+  /usr/include/boost/iterator/iterator_concepts.hpp \
+  /usr/include/boost/limits.hpp \
+  /usr/include/boost/range/value_type.hpp \
+  /usr/include/boost/range/detail/misc_concept.hpp \
+  /usr/include/boost/utility/enable_if.hpp \
+  /usr/include/boost/core/enable_if.hpp \
+  /usr/include/boost/type_traits/make_unsigned.hpp \
+  /usr/include/boost/range/detail/has_member_size.hpp \
+  /usr/include/boost/cstdint.hpp \
+  /usr/include/boost/utility.hpp \
+  /usr/include/boost/utility/base_from_member.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/include/boost/utility/binary.hpp \
+  /usr/include/boost/preprocessor/control/deduce_d.hpp \
+  /usr/include/boost/preprocessor/seq/cat.hpp \
+  /usr/include/boost/preprocessor/seq/fold_left.hpp \
+  /usr/include/boost/preprocessor/seq/transform.hpp \
+  /usr/include/boost/preprocessor/arithmetic/mod.hpp \
+  /usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+  /usr/include/boost/preprocessor/comparison/less_equal.hpp \
+  /usr/include/boost/preprocessor/logical/not.hpp \
+  /usr/include/boost/utility/identity_type.hpp \
+  /usr/include/boost/type_traits/function_traits.hpp \
+  /usr/include/boost/checked_delete.hpp \
+  /usr/include/boost/core/checked_delete.hpp \
+  /usr/include/boost/range/distance.hpp \
+  /usr/include/boost/range/empty.hpp \
+  /usr/include/boost/range/has_range_iterator.hpp \
+  /usr/include/boost/range/algorithm/equal.hpp \
+  /usr/include/boost/range/detail/safe_bool.hpp \
+  /usr/include/boost/range/iterator_range_io.hpp \
+  /usr/include/boost/range/detail/str_types.hpp \
+  /usr/include/boost/algorithm/string/compare.hpp \
+  /usr/include/boost/algorithm/string/find.hpp \
+  /usr/include/boost/algorithm/string/finder.hpp \
+  /usr/include/boost/algorithm/string/constants.hpp \
+  /usr/include/boost/algorithm/string/detail/finder.hpp \
+  /usr/include/boost/algorithm/string/detail/predicate.hpp \
   /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/DataToImage.h
 
 CMakeFiles/vivid.dir/lib/ImportAndExport/lodepng/lodepng.cpp.o: /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.cpp \
@@ -1739,276 +1679,275 @@ CMakeFiles/vivid.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o: /home/naf/projects/V
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/string3.h \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
   /usr/include/c++/5/array \
   /usr/include/c++/5/set \
@@ -2016,115 +1955,75 @@ CMakeFiles/vivid.dir/lib/SurfacingAlgorithms/Voronoi.cpp.o: /home/naf/projects/V
   /usr/include/c++/5/ext/aligned_buffer.h \
   /usr/include/c++/5/bits/stl_set.h \
   /usr/include/c++/5/bits/stl_multiset.h \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/deque \
   /usr/include/c++/5/bits/stl_deque.h \
@@ -2371,276 +2270,275 @@ CMakeFiles/vivid.dir/src/Extra/Analysis.cpp.o: /home/naf/projects/Vivid/Vivid/sr
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/string3.h \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
   /usr/include/c++/5/array \
   /usr/include/c++/5/set \
@@ -2648,115 +2546,75 @@ CMakeFiles/vivid.dir/src/Extra/Analysis.cpp.o: /home/naf/projects/Vivid/Vivid/sr
   /usr/include/c++/5/ext/aligned_buffer.h \
   /usr/include/c++/5/bits/stl_set.h \
   /usr/include/c++/5/bits/stl_multiset.h \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/deque \
   /usr/include/c++/5/bits/stl_deque.h \
@@ -3064,276 +2922,275 @@ CMakeFiles/vivid.dir/src/Extra/VoronoiSmoothing.cpp.o: /home/naf/projects/Vivid/
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/string3.h \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
   /usr/include/c++/5/array \
   /usr/include/c++/5/set \
@@ -3341,115 +3198,75 @@ CMakeFiles/vivid.dir/src/Extra/VoronoiSmoothing.cpp.o: /home/naf/projects/Vivid/
   /usr/include/c++/5/ext/aligned_buffer.h \
   /usr/include/c++/5/bits/stl_set.h \
   /usr/include/c++/5/bits/stl_multiset.h \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/deque \
   /usr/include/c++/5/bits/stl_deque.h \
@@ -4146,384 +3963,343 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o: /home/naf/projects/Vivid/Vivid
   /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavecintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h \
   /usr/include/c++/5/bits/random.tcc \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -4539,90 +4315,71 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Mesh.cpp.o: /home/naf/projects/Vivid/Vivid
   /usr/include/c++/5/backward/auto_ptr.h \
   /home/naf/projects/Vivid/Vivid/lib/Decimate.h \
   /home/naf/projects/Vivid/Vivid/src/Utils/ProgressBar.h \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/as_literal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/functions.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/size_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/difference_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/has_range_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/concepts.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept_check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/general.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/backward_compatibility.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/has_constraints.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/conditional.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/conversion_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/usage.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/concept_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/for_each_i.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/for.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/for.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/limits/for_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/for_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/seq.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/elem_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/size_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/detail/is_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/enum_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/concept/detail/concept_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_concepts.hpp \
-  /home/naf/projects/boost_1_80_0/boost/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/value_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/misc_concept.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/make_unsigned.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_signed.hpp \
-  /usr/include/c++/5/climits \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_unsigned.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/has_member_size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/base_from_member.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_binary_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat_from_to.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/deduce_d.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/seq/transform.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/mod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/div_base.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/less_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_1_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/identity_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/function_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/checked_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/distance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/distance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/algorithm/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/safe_bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_plus.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/has_binary_operator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/make_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_plus_assign.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_minus.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/has_minus_assign.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/advance.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator_range_io.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/str_types.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/compare.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/find.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/finder.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/constants.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/finder.hpp \
-  /home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/predicate.hpp
+  /usr/include/boost/algorithm/string/predicate.hpp \
+  /usr/include/boost/algorithm/string/config.hpp \
+  /usr/include/boost/range/as_literal.hpp \
+  /usr/include/boost/range/iterator_range.hpp \
+  /usr/include/boost/range/iterator_range_core.hpp \
+  /usr/include/boost/range/functions.hpp \
+  /usr/include/boost/range/size.hpp \
+  /usr/include/boost/range/size_type.hpp \
+  /usr/include/boost/range/difference_type.hpp \
+  /usr/include/boost/range/concepts.hpp \
+  /usr/include/boost/concept_check.hpp \
+  /usr/include/boost/concept/assert.hpp \
+  /usr/include/boost/concept/detail/general.hpp \
+  /usr/include/boost/concept/detail/backward_compatibility.hpp \
+  /usr/include/boost/concept/detail/has_constraints.hpp \
+  /usr/include/boost/type_traits/conversion_traits.hpp \
+  /usr/include/boost/concept/usage.hpp \
+  /usr/include/boost/concept/detail/concept_def.hpp \
+  /usr/include/boost/preprocessor/seq/for_each_i.hpp \
+  /usr/include/boost/preprocessor/repetition/for.hpp \
+  /usr/include/boost/preprocessor/repetition/detail/for.hpp \
+  /usr/include/boost/preprocessor/seq/seq.hpp \
+  /usr/include/boost/preprocessor/seq/elem.hpp \
+  /usr/include/boost/preprocessor/seq/size.hpp \
+  /usr/include/boost/preprocessor/seq/enum.hpp \
+  /usr/include/boost/concept/detail/concept_undef.hpp \
+  /usr/include/boost/iterator/iterator_concepts.hpp \
+  /usr/include/boost/limits.hpp \
+  /usr/include/boost/range/value_type.hpp \
+  /usr/include/boost/range/detail/misc_concept.hpp \
+  /usr/include/boost/utility/enable_if.hpp \
+  /usr/include/boost/core/enable_if.hpp \
+  /usr/include/boost/type_traits/make_unsigned.hpp \
+  /usr/include/boost/range/detail/has_member_size.hpp \
+  /usr/include/boost/cstdint.hpp \
+  /usr/include/boost/utility.hpp \
+  /usr/include/boost/utility/base_from_member.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /usr/include/boost/utility/binary.hpp \
+  /usr/include/boost/preprocessor/control/deduce_d.hpp \
+  /usr/include/boost/preprocessor/seq/cat.hpp \
+  /usr/include/boost/preprocessor/seq/fold_left.hpp \
+  /usr/include/boost/preprocessor/seq/transform.hpp \
+  /usr/include/boost/preprocessor/arithmetic/mod.hpp \
+  /usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+  /usr/include/boost/preprocessor/comparison/less_equal.hpp \
+  /usr/include/boost/preprocessor/logical/not.hpp \
+  /usr/include/boost/utility/identity_type.hpp \
+  /usr/include/boost/type_traits/function_traits.hpp \
+  /usr/include/boost/checked_delete.hpp \
+  /usr/include/boost/core/checked_delete.hpp \
+  /usr/include/boost/range/distance.hpp \
+  /usr/include/boost/range/empty.hpp \
+  /usr/include/boost/range/has_range_iterator.hpp \
+  /usr/include/boost/range/algorithm/equal.hpp \
+  /usr/include/boost/range/detail/safe_bool.hpp \
+  /usr/include/boost/range/iterator_range_io.hpp \
+  /usr/include/boost/range/detail/str_types.hpp \
+  /usr/include/boost/algorithm/string/compare.hpp \
+  /usr/include/boost/algorithm/string/find.hpp \
+  /usr/include/boost/algorithm/string/finder.hpp \
+  /usr/include/boost/algorithm/string/constants.hpp \
+  /usr/include/boost/algorithm/string/detail/finder.hpp \
+  /usr/include/boost/algorithm/string/detail/predicate.hpp
 
 CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o: /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.cpp \
   /usr/include/stdc-predef.h \
@@ -4925,384 +4682,343 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Model.cpp.o: /home/naf/projects/Vivid/Vivi
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -5822,384 +5538,343 @@ CMakeFiles/vivid.dir/src/ModelBuilder/PointCloud.cpp.o: /home/naf/projects/Vivid
   /usr/include/assert.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/lazy_list.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -6748,384 +6423,343 @@ CMakeFiles/vivid.dir/src/ModelBuilder/StopMotionAnimation.cpp.o: /home/naf/proje
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -7669,276 +7303,275 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Surface.cpp.o: /home/naf/projects/Vivid/Vi
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/string3.h \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
   /usr/include/c++/5/array \
   /usr/include/c++/5/set \
@@ -7946,115 +7579,75 @@ CMakeFiles/vivid.dir/src/ModelBuilder/Surface.cpp.o: /home/naf/projects/Vivid/Vi
   /usr/include/c++/5/ext/aligned_buffer.h \
   /usr/include/c++/5/bits/stl_set.h \
   /usr/include/c++/5/bits/stl_multiset.h \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/deque \
   /usr/include/c++/5/bits/stl_deque.h \
@@ -8430,384 +8023,343 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
   /usr/include/c++/5/bits/random.tcc \
   /usr/include/c++/5/numeric \
   /usr/include/c++/5/bits/stl_numeric.h \
-  /home/naf/projects/boost_1_80_0/boost/foreach.hpp \
+  /usr/include/boost/foreach.hpp \
   /usr/include/c++/5/cstddef \
-  /home/naf/projects/boost_1_80_0/boost/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/user.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp \
+  /usr/include/boost/config.hpp \
+  /usr/include/boost/config/user.hpp \
+  /usr/include/boost/config/select_compiler_config.hpp \
+  /usr/include/boost/config/compiler/gcc.hpp \
+  /usr/include/boost/config/select_stdlib_config.hpp \
+  /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/getopt.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/not.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/config/select_platform_config.hpp \
+  /usr/include/boost/config/platform/linux.hpp \
+  /usr/include/boost/config/posix_features.hpp \
+  /usr/include/boost/config/suffix.hpp \
+  /usr/include/boost/detail/workaround.hpp \
+  /usr/include/boost/mpl/if.hpp \
+  /usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /usr/include/boost/mpl/aux_/static_cast.hpp \
+  /usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /usr/include/boost/mpl/aux_/config/integral.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /usr/include/boost/mpl/aux_/config/eti.hpp \
+  /usr/include/boost/mpl/aux_/na_spec.hpp \
+  /usr/include/boost/mpl/lambda_fwd.hpp \
+  /usr/include/boost/mpl/void_fwd.hpp \
+  /usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /usr/include/boost/mpl/aux_/config/adl.hpp \
+  /usr/include/boost/mpl/aux_/config/intel.hpp \
+  /usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /usr/include/boost/mpl/aux_/na.hpp \
+  /usr/include/boost/mpl/bool.hpp \
+  /usr/include/boost/mpl/bool_fwd.hpp \
+  /usr/include/boost/mpl/integral_c_tag.hpp \
+  /usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /usr/include/boost/mpl/int.hpp \
+  /usr/include/boost/mpl/int_fwd.hpp \
+  /usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /usr/include/boost/preprocessor/cat.hpp \
+  /usr/include/boost/preprocessor/config/config.hpp \
+  /usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /usr/include/boost/mpl/aux_/arity.hpp \
+  /usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /usr/include/boost/preprocessor/comma_if.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /usr/include/boost/preprocessor/control/if.hpp \
+  /usr/include/boost/preprocessor/control/iif.hpp \
+  /usr/include/boost/preprocessor/logical/bool.hpp \
+  /usr/include/boost/preprocessor/facilities/empty.hpp \
+  /usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /usr/include/boost/preprocessor/repeat.hpp \
+  /usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /usr/include/boost/preprocessor/debug/error.hpp \
+  /usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /usr/include/boost/preprocessor/tuple/eat.hpp \
+  /usr/include/boost/preprocessor/inc.hpp \
+  /usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /usr/include/boost/mpl/limits/arity.hpp \
+  /usr/include/boost/preprocessor/logical/and.hpp \
+  /usr/include/boost/preprocessor/logical/bitand.hpp \
+  /usr/include/boost/preprocessor/identity.hpp \
+  /usr/include/boost/preprocessor/facilities/identity.hpp \
+  /usr/include/boost/preprocessor/empty.hpp \
+  /usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /usr/include/boost/preprocessor/control/while.hpp \
+  /usr/include/boost/preprocessor/list/fold_left.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /usr/include/boost/preprocessor/list/adt.hpp \
+  /usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /usr/include/boost/preprocessor/detail/check.hpp \
+  /usr/include/boost/preprocessor/logical/compl.hpp \
+  /usr/include/boost/preprocessor/list/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /usr/include/boost/preprocessor/list/reverse.hpp \
+  /usr/include/boost/preprocessor/control/detail/while.hpp \
+  /usr/include/boost/preprocessor/tuple/elem.hpp \
+  /usr/include/boost/preprocessor/facilities/expand.hpp \
+  /usr/include/boost/preprocessor/facilities/overload.hpp \
+  /usr/include/boost/preprocessor/variadic/size.hpp \
+  /usr/include/boost/preprocessor/tuple/rem.hpp \
+  /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /usr/include/boost/preprocessor/variadic/elem.hpp \
+  /usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /usr/include/boost/mpl/assert.hpp \
+  /usr/include/boost/mpl/not.hpp \
+  /usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /usr/include/boost/mpl/aux_/yes_no.hpp \
+  /usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /usr/include/boost/mpl/logical.hpp \
+  /usr/include/boost/mpl/or.hpp \
+  /usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /usr/include/boost/preprocessor/stringize.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /usr/include/boost/mpl/and.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /usr/include/boost/mpl/eval_if.hpp \
+  /usr/include/boost/noncopyable.hpp \
+  /usr/include/boost/core/noncopyable.hpp \
+  /usr/include/boost/range/end.hpp \
+  /usr/include/boost/range/config.hpp \
+  /usr/include/boost/range/detail/implementation_help.hpp \
+  /usr/include/boost/range/detail/common.hpp \
+  /usr/include/boost/range/detail/sfinae.hpp \
+  /usr/include/boost/type_traits/is_array.hpp \
+  /usr/include/boost/type_traits/config.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/template_arity_spec.hpp \
+  /usr/include/boost/type_traits/integral_constant.hpp \
+  /usr/include/boost/mpl/integral_c.hpp \
+  /usr/include/boost/mpl/integral_c_fwd.hpp \
+  /usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /usr/include/boost/type_traits/is_void.hpp \
+  /usr/include/boost/type_traits/detail/ice_or.hpp \
+  /usr/include/boost/type_traits/is_same.hpp \
+  /usr/include/boost/range/iterator.hpp \
+  /usr/include/boost/range/range_fwd.hpp \
+  /usr/include/boost/range/mutable_iterator.hpp \
+  /usr/include/boost/range/detail/extract_optional_type.hpp \
+  /usr/include/boost/mpl/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /usr/include/boost/preprocessor/array/elem.hpp \
+  /usr/include/boost/preprocessor/array/data.hpp \
+  /usr/include/boost/preprocessor/array/size.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /usr/include/boost/type_traits/remove_reference.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
+  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
+  /usr/include/boost/iterator/iterator_traits.hpp \
+  /usr/include/boost/detail/iterator.hpp \
   /usr/include/c++/5/iterator \
   /usr/include/c++/5/bits/stream_iterator.h \
-  /home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rend.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp \
-  /home/naf/projects/boost_1_80_0/boost/static_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/use_default.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp \
-  /home/naf/projects/boost_1_80_0/boost/version.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/always.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/void.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp \
-  /home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp \
+  /usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /usr/include/boost/range/const_iterator.hpp \
+  /usr/include/boost/type_traits/remove_const.hpp \
+  /usr/include/boost/type_traits/is_volatile.hpp \
+  /usr/include/boost/type_traits/detail/cv_traits_impl.hpp \
+  /usr/include/boost/type_traits/is_const.hpp \
+  /usr/include/boost/type_traits/is_reference.hpp \
+  /usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/ice.hpp \
+  /usr/include/boost/type_traits/detail/ice_and.hpp \
+  /usr/include/boost/type_traits/detail/ice_not.hpp \
+  /usr/include/boost/type_traits/detail/ice_eq.hpp \
+  /usr/include/boost/range/begin.hpp \
+  /usr/include/boost/range/rend.hpp \
+  /usr/include/boost/range/reverse_iterator.hpp \
+  /usr/include/boost/iterator/reverse_iterator.hpp \
+  /usr/include/boost/next_prior.hpp \
+  /usr/include/boost/type_traits/is_unsigned.hpp \
+  /usr/include/boost/type_traits/is_integral.hpp \
+  /usr/include/boost/type_traits/is_enum.hpp \
+  /usr/include/boost/type_traits/intrinsics.hpp \
+  /usr/include/boost/type_traits/remove_cv.hpp \
+  /usr/include/boost/type_traits/integral_promotion.hpp \
+  /usr/include/boost/mpl/identity.hpp \
+  /usr/include/boost/type_traits/make_signed.hpp \
+  /usr/include/boost/type_traits/is_signed.hpp \
+  /usr/include/boost/type_traits/add_const.hpp \
+  /usr/include/boost/type_traits/add_volatile.hpp \
+  /usr/include/boost/static_assert.hpp \
+  /usr/include/boost/type_traits/has_plus.hpp \
+  /usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /usr/include/boost/type_traits/is_base_of.hpp \
+  /usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /usr/include/boost/type_traits/is_class.hpp \
+  /usr/include/boost/type_traits/is_convertible.hpp \
+  /usr/include/boost/type_traits/is_arithmetic.hpp \
+  /usr/include/boost/type_traits/is_float.hpp \
+  /usr/include/boost/type_traits/is_abstract.hpp \
+  /usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /usr/include/boost/type_traits/add_reference.hpp \
+  /usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /usr/include/boost/type_traits/is_function.hpp \
+  /usr/include/boost/type_traits/detail/false_result.hpp \
+  /usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+  /usr/include/boost/utility/declval.hpp \
+  /usr/include/boost/type_traits/is_fundamental.hpp \
+  /usr/include/boost/type_traits/is_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_pointer.hpp \
+  /usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+  /usr/include/boost/type_traits/remove_pointer.hpp \
+  /usr/include/boost/type_traits/has_plus_assign.hpp \
+  /usr/include/boost/type_traits/has_minus.hpp \
+  /usr/include/boost/type_traits/has_minus_assign.hpp \
+  /usr/include/boost/iterator.hpp \
+  /usr/include/boost/iterator/iterator_adaptor.hpp \
+  /usr/include/boost/iterator/iterator_categories.hpp \
+  /usr/include/boost/iterator/detail/config_def.hpp \
+  /usr/include/boost/mpl/placeholders.hpp \
+  /usr/include/boost/mpl/arg.hpp \
+  /usr/include/boost/mpl/arg_fwd.hpp \
+  /usr/include/boost/mpl/aux_/na_assert.hpp \
+  /usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /usr/include/boost/iterator/detail/config_undef.hpp \
+  /usr/include/boost/iterator/iterator_facade.hpp \
+  /usr/include/boost/iterator/interoperable.hpp \
+  /usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /usr/include/boost/detail/indirect_traits.hpp \
+  /usr/include/boost/iterator/detail/enable_if.hpp \
+  /usr/include/boost/utility/addressof.hpp \
+  /usr/include/boost/core/addressof.hpp \
+  /usr/include/boost/type_traits/add_pointer.hpp \
+  /usr/include/boost/type_traits/is_pod.hpp \
+  /usr/include/boost/type_traits/is_scalar.hpp \
+  /usr/include/boost/mpl/always.hpp \
+  /usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /usr/include/boost/mpl/apply.hpp \
+  /usr/include/boost/mpl/apply_fwd.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /usr/include/boost/mpl/apply_wrap.hpp \
+  /usr/include/boost/mpl/aux_/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /usr/include/boost/mpl/lambda.hpp \
+  /usr/include/boost/mpl/bind.hpp \
+  /usr/include/boost/mpl/bind_fwd.hpp \
+  /usr/include/boost/mpl/aux_/config/bind.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /usr/include/boost/mpl/next.hpp \
+  /usr/include/boost/mpl/next_prior.hpp \
+  /usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /usr/include/boost/mpl/protect.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /usr/include/boost/mpl/quote.hpp \
+  /usr/include/boost/mpl/void.hpp \
+  /usr/include/boost/mpl/aux_/has_type.hpp \
+  /usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /usr/include/boost/mpl/aux_/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /usr/include/boost/range/rbegin.hpp \
+  /usr/include/boost/foreach_fwd.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/assert.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/core.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/vector.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/iterator.hpp \
-  /home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp \
+  /usr/include/boost/container/flat_set.hpp \
+  /usr/include/boost/container/detail/config_begin.hpp \
+  /usr/include/boost/container/detail/workaround.hpp \
+  /usr/include/boost/container/detail/config_end.hpp \
+  /usr/include/boost/container/allocator_traits.hpp \
+  /usr/include/boost/container/container_fwd.hpp \
+  /usr/include/boost/container/detail/std_fwd.hpp \
+  /usr/include/boost/container/detail/mpl.hpp \
+  /usr/include/boost/container/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/type_traits.hpp \
+  /usr/include/boost/move/detail/config_begin.hpp \
+  /usr/include/boost/move/detail/workaround.hpp \
+  /usr/include/boost/move/detail/meta_utils.hpp \
+  /usr/include/boost/move/detail/meta_utils_core.hpp \
+  /usr/include/boost/assert.hpp \
+  /usr/include/boost/move/detail/config_end.hpp \
+  /usr/include/boost/container/detail/placement_new.hpp \
+  /usr/include/boost/intrusive/pointer_traits.hpp \
+  /usr/include/boost/intrusive/detail/config_begin.hpp \
+  /usr/include/boost/intrusive/detail/workaround.hpp \
+  /usr/include/boost/intrusive/pointer_rebind.hpp \
+  /usr/include/boost/intrusive/detail/pointer_element.hpp \
+  /usr/include/boost/intrusive/detail/mpl.hpp \
+  /usr/include/boost/intrusive/detail/config_end.hpp \
+  /usr/include/boost/move/utility_core.hpp \
+  /usr/include/boost/move/core.hpp \
+  /usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp \
+  /usr/include/boost/move/detail/fwd_macros.hpp \
+  /usr/include/boost/container/new_allocator.hpp \
+  /usr/include/boost/container/throw_exception.hpp \
+  /usr/include/boost/container/detail/flat_tree.hpp \
+  /usr/include/boost/container/detail/pair.hpp \
+  /usr/include/boost/move/adl_move_swap.hpp \
+  /usr/include/boost/intrusive/detail/minimal_pair_header.hpp \
+  /usr/include/boost/container/vector.hpp \
+  /usr/include/boost/container/detail/advanced_insert_int.hpp \
+  /usr/include/boost/container/detail/copy_move_algo.hpp \
+  /usr/include/boost/container/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/iterator.hpp \
+  /usr/include/boost/intrusive/detail/std_fwd.hpp \
+  /usr/include/boost/move/detail/iterator_traits.hpp \
+  /usr/include/boost/container/detail/iterator_to_raw_pointer.hpp \
+  /usr/include/boost/container/detail/to_raw_pointer.hpp \
+  /usr/include/boost/intrusive/detail/to_raw_pointer.hpp \
+  /usr/include/boost/move/iterator.hpp \
+  /usr/include/boost/core/no_exceptions_support.hpp \
   /usr/include/c++/5/cstring \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/traits.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/cstdint.hpp \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp \
-  /home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp \
+  /usr/include/boost/container/detail/destroyers.hpp \
+  /usr/include/boost/container/detail/version_type.hpp \
+  /usr/include/boost/container/detail/iterators.hpp \
+  /usr/include/boost/intrusive/detail/reverse_iterator.hpp \
+  /usr/include/boost/container/detail/variadic_templates_tools.hpp \
+  /usr/include/boost/container/detail/algorithm.hpp \
+  /usr/include/boost/intrusive/detail/algorithm.hpp \
+  /usr/include/boost/container/detail/alloc_helpers.hpp \
+  /usr/include/boost/container/detail/allocation_type.hpp \
+  /usr/include/boost/container/detail/next_capacity.hpp \
+  /usr/include/boost/container/detail/min_max.hpp \
+  /usr/include/boost/move/traits.hpp \
+  /usr/include/boost/move/detail/move_helpers.hpp \
+  /usr/include/boost/container/detail/value_init.hpp \
+  /usr/include/boost/move/make_unique.hpp \
+  /usr/include/boost/move/unique_ptr.hpp \
+  /usr/include/boost/move/detail/unique_ptr_meta_utils.hpp \
+  /usr/include/boost/move/default_delete.hpp \
+  /usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp \
-  /home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp \
+  /usr/include/boost/container/small_vector.hpp \
   /usr/include/c++/5/stack \
   /usr/include/c++/5/bits/stl_stack.h \
   /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.hpp \
@@ -8828,6 +8380,8 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
   /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Point.h
 
 
+/home/naf/projects/Vivid/Vivid/src/Utils/ReadBinFile.h:
+
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/VoronoiSurface.h:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Surface.cpp:
@@ -8838,89 +8392,87 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/StopMotionAnimation.h:
 
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/ModelComponent.cpp:
-
 /home/naf/projects/Vivid/Vivid/src/Utils/ProgressBar.h:
-
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/MarchingCubesSurface.h:
-
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Line.h:
-
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Animation.h:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/PointCloud.h:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Animation.cpp:
 
-/home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.h:
+/home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/predicate.hpp:
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/constants.hpp:
+/home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdMeshDecimator.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/compare.hpp:
+/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/detail/has_binary_operator.hpp:
+/usr/include/boost/algorithm/string/detail/predicate.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/safe_bool.hpp:
+/usr/include/boost/algorithm/string/finder.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/empty.hpp:
+/usr/include/boost/algorithm/string/find.hpp:
 
-/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/Voronoi.cpp:
+/usr/include/boost/range/detail/safe_bool.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/function_traits.hpp:
+/usr/include/boost/range/algorithm/equal.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/mod.hpp:
+/usr/include/boost/range/empty.hpp:
 
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Shapes.cpp:
+/usr/include/boost/core/checked_delete.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/transform.hpp:
+/usr/include/boost/checked_delete.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/fold_left.hpp:
+/usr/include/boost/type_traits/function_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/deduce_d.hpp:
+/usr/include/boost/preprocessor/comparison/less_equal.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/utility/base_from_member.hpp:
+/usr/include/boost/preprocessor/seq/transform.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/has_member_size.hpp:
+/usr/include/boost/utility/binary.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_volatile.hpp:
+/usr/include/boost/preprocessor/repetition/repeat_from_to.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/concept/detail/concept_undef.hpp:
+/usr/include/boost/utility/base_from_member.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/enum_256.hpp:
+/usr/include/boost/utility.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/detail/is_empty.hpp:
+/usr/include/boost/type_traits/make_unsigned.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/limits/for_256.hpp:
+/usr/include/boost/range/detail/misc_concept.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/for_each_i.hpp:
+/usr/include/boost/limits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/concept/detail/concept_def.hpp:
+/usr/include/boost/preprocessor/seq/enum.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/elem_256.hpp:
+/usr/include/boost/preprocessor/seq/size.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/conditional.hpp:
+/usr/include/boost/preprocessor/seq/seq.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/has_range_iterator.hpp:
+/usr/include/boost/concept/detail/concept_def.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/difference_type.hpp:
+/usr/include/boost/concept/detail/backward_compatibility.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/functions.hpp:
+/usr/include/boost/concept/detail/general.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/config.hpp:
+/usr/include/linux/limits.h:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/predicate.hpp:
+/usr/include/boost/range/concepts.hpp:
+
+/usr/include/boost/range/functions.hpp:
+
+/usr/include/boost/range/as_literal.hpp:
+
+/usr/include/boost/algorithm/string/predicate.hpp:
 
 /usr/include/c++/5/bits/atomic_base.h:
 
+/usr/include/c++/5/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/5/bits/allocated_ptr.h:
+
 /usr/include/c++/5/bits/shared_ptr_base.h:
 
-/usr/include/c++/5/bits/shared_ptr.h:
-
 /usr/include/c++/5/ext/concurrence.h:
-
-/home/naf/projects/boost_1_80_0/boost/range/iterator_range.hpp:
 
 /usr/include/c++/5/memory:
 
@@ -8928,403 +8480,329 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/bits/stl_stack.h:
 
+/usr/include/boost/container/small_vector.hpp:
+
+/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp:
+
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/pdqsort.hpp:
+/usr/include/boost/intrusive/detail/minimal_less_equal_header.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/concept/detail/general.hpp:
+/usr/include/boost/move/default_delete.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/unique_ptr.hpp:
+/usr/include/boost/move/unique_ptr.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/has_plus_assign.hpp:
+/usr/include/boost/move/traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/is_container.hpp:
+/usr/include/boost/container/detail/alloc_helpers.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/is_sorted.hpp:
+/usr/include/boost/intrusive/detail/algorithm.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+/usr/include/boost/container/detail/algorithm.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+/usr/include/boost/container/detail/version_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat_from_to.hpp:
+/usr/include/boost/container/detail/destroyers.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+/usr/include/c++/5/cstring:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h:
+/usr/include/boost/move/iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/heap_sort.hpp:
+/usr/include/boost/container/detail/iterator_to_raw_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge_sort.hpp:
+/usr/include/boost/container/detail/iterators.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/placement_new.hpp:
+/usr/include/boost/move/detail/iterator_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/predicate.hpp:
+/usr/include/boost/intrusive/detail/std_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/algorithm/equal.hpp:
+/usr/include/boost/container/detail/copy_move_algo.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/move.hpp:
+/usr/include/boost/container/detail/advanced_insert_int.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/adaptive_sort_merge.hpp:
+/usr/include/boost/move/adl_move_swap.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_merge.hpp:
+/usr/include/boost/container/detail/pair.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/iterator_range_core.hpp:
+/usr/include/boost/container/detail/flat_tree.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/traits.hpp:
+/usr/include/boost/type_traits/conversion_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/value_functors.hpp:
+/usr/include/boost/container/throw_exception.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/allocation_type.hpp:
+/usr/include/boost/move/detail/fwd_macros.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/version_type.hpp:
+/usr/include/boost/move/core.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/unique.hpp:
+/usr/include/boost/intrusive/detail/config_end.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/destroyers.hpp:
+/usr/include/boost/range/iterator_range.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/reverse_iterator.hpp:
+/usr/include/boost/intrusive/detail/mpl.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/value_init.hpp:
+/usr/include/boost/intrusive/detail/config_begin.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/construct_in_place.hpp:
+/usr/include/boost/intrusive/pointer_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/iterator.hpp:
+/usr/include/boost/move/detail/config_end.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/pack_options.hpp:
+/usr/include/boost/preprocessor/repetition/enum_binary_params.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/options.hpp:
+/usr/include/boost/assert.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/vector.hpp:
+/usr/include/boost/move/detail/config_begin.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_pair_header.hpp:
+/usr/include/boost/container/detail/mpl.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/adl_move_swap.hpp:
+/usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/is_pair.hpp:
+/usr/include/boost/container/detail/std_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/has_minus.hpp:
+/usr/include/boost/container/allocator_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/throw_exception.hpp:
+/usr/include/boost/container/detail/config_begin.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/pointer_element.hpp:
+/usr/include/boost/container/flat_set.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/pointer_rebind.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/unique_ptr_meta_utils.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/config_end.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_end.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/config_begin.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/utility/identity_type.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/mpl.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/assert.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/config_end.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/type_traits.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/mpl.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/container_fwd.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/allocator_traits.hpp:
-
-/home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.cpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/workaround.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/config_begin.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_unsigned.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/flat_set.hpp:
+/usr/include/boost/preprocessor/repetition/for.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
+/usr/include/boost/foreach_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
+/usr/include/boost/range/rbegin.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/quote.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
 
-/home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdMeshDecimator.cpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Line.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bcc.hpp:
+/usr/include/boost/mpl/aux_/template_arity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_type.hpp:
+/usr/include/boost/mpl/void.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/full_lambda.hpp:
+/usr/include/boost/mpl/quote.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind.hpp:
+/usr/include/boost/mpl/aux_/full_lambda.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/protect.hpp:
+/usr/include/boost/mpl/protect.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/next_prior.hpp:
+/usr/include/boost/intrusive/detail/pointer_element.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/next.hpp:
+/usr/include/boost/mpl/aux_/common_name_wknd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp:
+/usr/include/boost/mpl/next.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/bind.hpp:
+/usr/include/boost/mpl/aux_/config/bind.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
+/usr/include/boost/range/value_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/msvc_never_true.hpp:
+/usr/include/boost/mpl/bind_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/make_void.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_apply.hpp:
+/usr/include/boost/mpl/aux_/msvc_never_true.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/detail/finder.hpp:
+/usr/include/boost/mpl/aux_/config/has_apply.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_base_and_derived.hpp:
+/usr/include/boost/mpl/aux_/has_apply.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/has_apply.hpp:
+/usr/include/boost/range/detail/str_types.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
+/usr/include/boost/mpl/apply_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/is_contiguous_container.hpp:
+/usr/include/boost/detail/indirect_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/apply_fwd.hpp:
+/usr/include/boost/iterator/detail/config_undef.hpp:
 
-/usr/include/linux/limits.h:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/apply.hpp:
+/usr/include/boost/intrusive/detail/to_raw_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_pod.hpp:
+/usr/include/boost/mpl/aux_/arg_typedef.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_pointer.hpp:
+/usr/include/boost/mpl/aux_/arity_spec.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_const.hpp:
+/usr/include/boost/container/detail/iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/core/addressof.hpp:
+/usr/include/boost/mpl/arg.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/placement_new.hpp:
+/usr/include/boost/mpl/placeholders.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/detail/select_type.hpp:
+/usr/include/boost/iterator/detail/config_def.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/remove_pointer.hpp:
+/usr/include/boost/iterator/iterator_categories.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/remove_cv.hpp:
+/usr/include/boost/iterator/iterator_adaptor.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_member_pointer.hpp:
+/usr/include/boost/type_traits/has_plus_assign.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_member_function_pointer.hpp:
+/usr/include/boost/type_traits/remove_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_class.hpp:
+/usr/include/boost/type_traits/is_member_function_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_pointer.hpp:
+/usr/include/boost/type_traits/is_member_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/detail/facade_iterator_category.hpp:
+/usr/include/boost/type_traits/is_fundamental.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/interoperable.hpp:
+/usr/include/boost/utility/declval.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/iterator_facade.hpp:
+/usr/include/boost/type_traits/detail/is_function_ptr_helper.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/detail/config_undef.hpp:
+/home/naf/projects/Vivid/Vivid/src/Extra/VoronoiSmoothing.h:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_reference.hpp:
+/usr/include/boost/type_traits/is_function.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_abstract.hpp:
+/usr/include/boost/type_traits/add_rvalue_reference.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_integral.hpp:
+/usr/include/boost/type_traits/add_reference.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_function_cxx_11.hpp:
+/usr/include/boost/type_traits/add_lvalue_reference.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_rvalue_reference.hpp:
+/usr/include/boost/type_traits/is_abstract.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_complete.hpp:
+/usr/include/boost/type_traits/is_arithmetic.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/version.hpp:
+/usr/include/boost/type_traits/is_class.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/detail/config.hpp:
+/usr/include/boost/type_traits/has_plus.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/intrinsics.hpp:
+/usr/include/boost/type_traits/add_const.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_convertible.hpp:
+/usr/include/boost/type_traits/make_signed.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/core.hpp:
+/usr/include/boost/mpl/identity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/ModelComponent.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/arg.hpp:
+/usr/include/boost/type_traits/remove_cv.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity_spec.hpp:
+/usr/include/boost/type_traits/intrinsics.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/concept/detail/has_constraints.hpp:
+/usr/include/boost/next_prior.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_assert.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/MarchingCubesSurface.h:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/detail/config_def.hpp:
+/usr/include/boost/iterator/reverse_iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/static_assert.hpp:
+/usr/include/boost/range/reverse_iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/iterator_adaptor.hpp:
+/usr/include/boost/range/rend.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/foreach_fwd.hpp:
+/usr/include/boost/container/detail/value_init.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/reverse_iterator.hpp:
+/usr/include/boost/type_traits/detail/ice_and.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/move_helpers.hpp:
+/usr/include/boost/type_traits/is_const.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/reverse_iterator.hpp:
+/usr/include/boost/type_traits/detail/cv_traits_impl.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/rend.hpp:
+/usr/include/boost/range/const_iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_rvalue_reference.hpp:
+/usr/include/boost/mpl/aux_/has_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/begin.hpp:
+/usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_const.hpp:
+/usr/include/boost/detail/iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/remove_const.hpp:
+/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/core/checked_delete.hpp:
+/usr/include/boost/iterator/iterator_traits.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/msvc_has_iterator_workaround.hpp:
+/usr/include/c++/5/bits/shared_ptr.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/destruct_n.hpp:
+/usr/include/boost/type_traits/detail/type_trait_undef.hpp:
 
-/usr/include/c++/5/iterator:
+/usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/advance.hpp:
+/usr/include/boost/preprocessor/repetition/enum_params.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/detail/enable_if.hpp:
+/usr/include/boost/preprocessor/array/data.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_trailing_params.hpp:
+/usr/include/boost/type_traits/integral_promotion.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_params.hpp:
+/usr/include/boost/preprocessor/array/elem.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/apply_wrap.hpp:
+/usr/include/boost/type_traits/is_convertible.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/array/size.hpp:
+/usr/include/boost/mpl/aux_/config/msvc_typename.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/has_xxx.hpp:
+/usr/include/boost/mpl/aux_/config/has_xxx.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/type_wrapper.hpp:
+/usr/include/boost/core/enable_if.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_arithmetic.hpp:
+/usr/include/boost/mpl/aux_/type_wrapper.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/has_xxx.hpp:
+/usr/include/boost/mpl/arg_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/mutable_iterator.hpp:
+/usr/include/boost/mpl/has_xxx.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/range_fwd.hpp:
+/usr/include/boost/range/detail/extract_optional_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/std_fwd.hpp:
+/usr/include/boost/range/range_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/iterator.hpp:
+/usr/include/boost/preprocessor/repetition/detail/for.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_same.hpp:
+/usr/include/boost/range/iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/detail/yes_no_type.hpp:
+/usr/include/boost/type_traits/is_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/common.hpp:
+/usr/include/boost/type_traits/detail/ice_or.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/config.hpp:
+/usr/include/boost/type_traits/detail/yes_no_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/core/noncopyable.hpp:
+/usr/include/boost/iterator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/noncopyable.hpp:
+/usr/include/boost/type_traits/detail/bool_trait_undef.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_scalar.hpp:
+/usr/include/boost/type_traits/has_minus_assign.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/and.hpp:
+/usr/include/boost/mpl/integral_c.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/range/size_type.hpp:
+/usr/include/boost/type_traits/detail/template_arity_spec.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/stringize.hpp:
+/usr/include/boost/type_traits/detail/bool_trait_def.hpp:
 
-/usr/include/c++/5/bits/shared_ptr_atomic.h:
+/usr/include/boost/range/detail/sfinae.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/cstdint.hpp:
+/usr/include/boost/range/detail/common.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/compiler.hpp:
+/usr/include/boost/range/detail/implementation_help.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/include_preprocessed.hpp:
+/usr/include/boost/range/config.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/use_preprocessed.hpp:
+/usr/include/boost/range/end.hpp:
+
+/usr/include/boost/core/noncopyable.hpp:
+
+/usr/include/boost/noncopyable.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/or.hpp:
+/usr/include/boost/mpl/eval_if.hpp:
 
-/home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.cpp:
+/usr/include/boost/core/no_exceptions_support.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/logical.hpp:
+/usr/include/boost/utility/addressof.hpp:
 
-/usr/include/c++/5/bits/allocated_ptr.h:
+/usr/include/boost/type_traits/is_rvalue_reference.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp:
+/usr/include/boost/mpl/and.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/pp_counter.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gpu.hpp:
+/usr/include/boost/mpl/aux_/config/use_preprocessed.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/arrays.hpp:
+/usr/include/boost/mpl/apply.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/nested_type_wknd.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/assert.hpp:
-
-/home/naf/projects/Vivid/Vivid/src/Utils/ReadBinFile.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/size.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_support.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/range/detail/misc_concept.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/overload_resolution.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/to_raw_pointer.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/not.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/next_prior.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/common_name_wknd.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/yes_no.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/maximum_number.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/pair.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/limits/not_equal_256.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/rem.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/size_64.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/ModelComponent.h:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/placeholders.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/enum.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/iterator.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_floating_point.hpp:
+/usr/include/boost/container/detail/config_end.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/DataToImage.h:
-
-/home/naf/projects/boost_1_80_0/boost/range/const_iterator.hpp:
-
-/usr/include/c++/5/ext/alloc_traits.h:
 
 /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/DataToImage.cpp:
 
@@ -9334,33 +8812,35 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/string.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/elem.hpp:
-
 /usr/include/math.h:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/reverse_iterator.hpp:
+/usr/include/boost/range/iterator_range_io.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdVector.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
+/usr/include/boost/move/detail/meta_utils.hpp:
+
 /usr/include/c++/5/clocale:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils_core.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/debug/error.hpp:
 
 /usr/include/c++/5/bits/stl_set.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/str_types.hpp:
-
 /usr/include/x86_64-linux-gnu/c++/5/bits/error_constants.h:
 
-/home/naf/projects/boost_1_80_0/boost/core/use_default.hpp:
+/usr/include/c++/5/bits/localefwd.h:
+
+/usr/include/boost/type_traits/is_void.hpp:
 
 /usr/include/c++/5/bits/stl_deque.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/is_sorted.hpp:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/boost/preprocessor/logical/compl.hpp:
+
+/usr/include/boost/algorithm/string/config.hpp:
+
+/usr/include/boost/container/detail/type_traits.hpp:
 
 /usr/include/c++/5/deque:
 
@@ -9370,25 +8850,21 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/stack:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/flat_tree.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/fwd_macros.hpp:
-
 /usr/include/c++/5/ext/type_traits.h:
-
-/home/naf/projects/boost_1_80_0/boost/range/as_literal.hpp:
-
-/usr/include/c++/5/bits/localefwd.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/intel.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/config.hpp:
 
 /usr/include/c++/5/bits/stl_tree.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc_typename.hpp:
-
 /usr/include/c++/5/bits/uses_allocator.h:
+
+/usr/include/boost/preprocessor/detail/check.hpp:
+
+/usr/include/c++/5/array:
+
+/usr/include/c++/5/functional:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h:
+
+/usr/include/boost/preprocessor/arithmetic/sub.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/MarchingCubesSurface.cpp:
 
@@ -9404,127 +8880,125 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Face.h:
-
-/usr/include/c++/5/bits/stl_construct.h:
-
-/home/naf/projects/boost_1_80_0/boost/range/detail/sfinae.hpp:
-
 /usr/include/c++/5/bits/hash_bytes.h:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/algorithm.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.cpp:
+
+/usr/include/boost/utility/identity_type.hpp:
+
+/usr/include/c++/5/ext/atomicity.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h:
+
+/usr/include/boost/type_traits/is_array.hpp:
+
+/usr/include/boost/preprocessor/detail/auto_rec.hpp:
 
 /usr/include/c++/5/bits/istream.tcc:
 
 /usr/include/c++/5/istream:
 
-/home/naf/projects/boost_1_80_0/boost/iterator/distance.hpp:
-
-/usr/include/c++/5/functional:
-
-/home/naf/projects/boost_1_80_0/boost/config/detail/select_compiler_config.hpp:
+/usr/include/boost/mpl/aux_/lambda_support.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/PointCloud.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity.hpp:
-
 /usr/include/x86_64-linux-gnu/c++/5/bits/ctype_base.h:
+
+/usr/include/boost/type_traits/is_base_and_derived.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/c++io.h:
 
 /usr/include/wctype.h:
 
+/usr/include/boost/mpl/lambda.hpp:
+
+/usr/include/boost/type_traits/is_float.hpp:
+
 /usr/include/c++/5/cwctype:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/min_max.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/integral_constant.hpp:
+/usr/include/boost/mpl/aux_/config/compiler.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdio.h:
 
-/usr/include/c++/5/streambuf:
+/usr/include/boost/mpl/aux_/nttp_decl.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/ObjImportExport.cpp:
 
 /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdVector.inl:
 
+/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
+
 /usr/include/c++/5/bits/stl_bvector.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
+
+/usr/include/boost/mpl/void_fwd.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessor/enum.hpp:
 
 /usr/include/asm-generic/errno.h:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/std_fwd.hpp:
-
 /usr/include/x86_64-linux-gnu/c++/5/bits/c++config.h:
-
-/usr/include/linux/errno.h:
 
 /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdSArray.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma_if.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/basic_op.hpp:
+/usr/include/x86_64-linux-gnu/sys/sysmacros.h:
 
 /usr/include/errno.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/iterator_traits.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/arg_fwd.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/sub.hpp:
-
 /usr/include/c++/5/bits/stl_iterator_base_types.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/5/include/popcntintrin.h:
 
 /usr/include/c++/5/ext/aligned_buffer.h:
 
 /usr/include/c++/5/cerrno:
 
-/home/naf/projects/boost_1_80_0/boost/utility.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/detail/auto_rec.hpp:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
+/usr/include/boost/intrusive/detail/workaround.hpp:
+
 /usr/include/libio.h:
 
-/usr/include/c++/5/bits/stl_pair.h:
+/usr/include/boost/preprocessor/variadic/elem.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/boost/intrusive/pointer_rebind.hpp:
 
 /usr/include/alloca.h:
-
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/insertion_sort.hpp:
 
 /usr/include/libintl.h:
 
 /usr/include/c++/5/sstream:
 
-/home/naf/projects/boost_1_80_0/boost/range/value_type.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/variadic_templates_tools.hpp:
+/usr/include/boost/mpl/aux_/arity.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/iterator_range_io.hpp:
-
 /usr/include/stdlib.h:
+
+/usr/include/boost/type_traits/has_minus.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/next_capacity.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Shapes.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/static_cast.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/has_plus.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/equal.hpp:
+/usr/include/boost/preprocessor/tuple/elem.hpp:
 
 /usr/include/c++/5/ext/string_conversions.h:
+
+/usr/include/c++/5/bits/basic_string.h:
 
 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.hpp:
+
+/usr/include/boost/mpl/aux_/config/nttp.hpp:
 
 /usr/include/c++/5/bits/range_access.h:
 
@@ -9532,63 +9006,71 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/backward/auto_ptr.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/end.hpp:
+/usr/include/boost/type_traits/add_volatile.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512vbmivlintrin.h:
 
+/usr/include/boost/mpl/bool.hpp:
+
+/usr/include/boost/mpl/integral_c_fwd.hpp:
+
 /usr/include/c++/5/backward/binders.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/has_opt.hpp:
+/usr/include/boost/container/detail/to_raw_pointer.hpp:
 
 /usr/include/c++/5/bits/cxxabi_forced.h:
 
+/usr/include/x86_64-linux-gnu/bits/wchar2.h:
+
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Mesh.cpp:
+
+/usr/include/boost/preprocessor/arithmetic/mod.hpp:
+
+/usr/include/boost/mpl/next_prior.hpp:
 
 /usr/include/features.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/always.hpp:
+/usr/include/boost/range/difference_type.hpp:
 
 /usr/include/c++/5/initializer_list:
 
-/usr/include/x86_64-linux-gnu/bits/errno.h:
+/usr/include/boost/container/detail/allocation_type.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/bind_fwd.hpp:
+/usr/include/boost/preprocessor/debug/error.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/mathdef.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/fma4intrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/distance.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/config/workaround.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/or.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512vbmiintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/lambda.hpp:
+/usr/include/boost/concept/usage.hpp:
+
+/usr/include/boost/iterator/detail/enable_if.hpp:
 
 /usr/include/stdio.h:
 
+/usr/include/boost/mpl/aux_/config/static_constant.hpp:
+
+/usr/include/boost/intrusive/detail/reverse_iterator.hpp:
+
 /usr/include/c++/5/bits/exception_ptr.h:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/pointer_traits.hpp:
+/usr/include/boost/move/detail/move_helpers.hpp:
+
+/usr/include/boost/mpl/always.hpp:
 
 /usr/include/c++/5/ext/numeric_traits.h:
 
 /usr/include/c++/5/bits/vector.tcc:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/seq.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/new_allocator.hpp:
-
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/alloc_helpers.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/identity.hpp:
+/usr/include/boost/container/container_fwd.hpp:
 
 /usr/include/xlocale.h:
+
+/usr/include/boost/type_traits/is_reference.hpp:
 
 /usr/include/c++/5/bits/stl_iterator.h:
 
@@ -9596,9 +9078,17 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/clwbintrin.h:
 
+/usr/include/c++/5/ext/new_allocator.h:
+
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/c++/5/new:
+
+/usr/include/c++/5/queue:
+
+/usr/include/c++/5/bits/stringfwd.h:
+
+/usr/include/boost/range/iterator_range_core.hpp:
 
 /usr/include/c++/5/bits/stl_uninitialized.h:
 
@@ -9606,61 +9096,59 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/src/Extra/Analysis.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/utility/addressof.hpp:
-
 /usr/include/c++/5/ios:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/remove_reference.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repeat.hpp:
+/usr/include/boost/mpl/aux_/config/intel.hpp:
 
 /usr/include/c++/5/iostream:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/add_lvalue_reference.hpp:
+/usr/include/boost/range/size_type.hpp:
+
+/usr/include/boost/core/addressof.hpp:
 
 /usr/include/c++/5/bits/locale_facets.h:
-
-/home/naf/projects/boost_1_80_0/boost/move/algo/adaptive_sort.hpp:
 
 /usr/include/c++/5/bits/stl_algobase.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mmintrin.h:
 
+/usr/include/c++/5/bits/streambuf.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/conversion_traits.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_fwd.hpp:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
+/usr/include/boost/range/distance.hpp:
+
+/usr/include/boost/type_traits/is_same.hpp:
+
 /usr/include/c++/5/bits/stl_vector.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/overload.hpp:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.h:
 
-/usr/include/c++/5/bits/hashtable_policy.h:
+/usr/include/x86_64-linux-gnu/bits/huge_vall.h:
 
-/home/naf/projects/boost_1_80_0/boost/core/ignore_unused.hpp:
+/usr/include/boost/concept_check.hpp:
 
-/usr/include/c++/5/bits/ios_base.h:
+/usr/include/boost/mpl/aux_/config/eti.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/na.hpp:
+/usr/include/c++/5/cwchar:
 
 /usr/include/c++/5/bits/nested_exception.h:
 
-/home/naf/projects/boost_1_80_0/boost/config/user.hpp:
+/usr/include/boost/type_traits/remove_const.hpp:
 
 /usr/include/c++/5/exception:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/quote.hpp:
-
 /usr/include/c++/5/typeinfo:
+
+/usr/include/boost/type_traits/integral_constant.hpp:
 
 /usr/include/c++/5/debug/debug.h:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/empty.hpp:
 
 /usr/include/c++/5/cstddef:
 
@@ -9676,21 +9164,31 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/bits/basic_ios.tcc:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/limits/while_256.hpp:
+/usr/include/boost/preprocessor/punctuation/comma_if.hpp:
 
 /usr/include/stdc-predef.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/detail/implementation_help.hpp:
+/usr/include/c++/5/bits/stl_queue.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/expand.hpp:
+/usr/include/boost/concept/assert.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Mesh.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include/ammintrin.h:
+/usr/include/boost/preprocessor/seq/fold_left.hpp:
+
+/usr/include/boost/mpl/int_fwd.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/5/bits/gthr-default.h:
 
 /usr/include/c++/5/map:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/adt.hpp:
+/usr/include/boost/container/detail/placement_new.hpp:
+
+/usr/include/c++/5/set:
+
+/usr/include/c++/5/bits/ostream_insert.h:
+
+/usr/include/boost/mpl/aux_/na_assert.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
@@ -9698,71 +9196,49 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/limits.h:
 
+/usr/include/boost/move/make_unique.hpp:
+
+/usr/include/boost/type_traits/is_pod.hpp:
+
 /usr/include/c++/5/bits/deque.tcc:
 
+/usr/include/boost/container/vector.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/select.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/not_equal.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-
-/home/naf/projects/Vivid/Vivid/src/Utils/Plasma.h:
 
 /usr/include/c++/5/bits/locale_classes.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/huge_valf.h:
 
+/usr/include/boost/iterator/detail/facade_iterator_category.hpp:
+
 /usr/include/c++/5/bits/streambuf_iterator.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/check_empty.hpp:
+/usr/include/boost/algorithm/string/compare.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512vldqintrin.h:
 
-/usr/include/x86_64-linux-gnu/bits/inf.h:
-
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.cpp:
-
-/usr/include/c++/5/ext/atomicity.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/dtp.hpp:
-
 /home/naf/projects/Vivid/Vivid/lib/Decimate.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/dec_256.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/make_unsigned.hpp:
-
 /usr/include/locale.h:
+
+/usr/include/boost/move/detail/meta_utils_core.hpp:
 
 /usr/include/c++/5/bits/algorithmfwd.h:
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
-/home/naf/projects/boost_1_80_0/boost/core/enable_if.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/rtmintrin.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/fold_left_256.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/comma_if.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/config/limits.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.hpp:
 
 /usr/include/c++/5/bits/stl_relops.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/na_spec.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/sigset.h:
-
-/usr/include/endian.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/div_base.hpp:
+/usr/include/boost/range/detail/has_member_size.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/boost/intrusive/detail/minimal_pair_header.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/ia32intrin.h:
 
@@ -9770,25 +9246,29 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mm_malloc.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/adl.hpp:
+/usr/include/x86_64-linux-gnu/bits/huge_val.h:
+
+/usr/include/boost/algorithm/string/detail/finder.hpp:
+
+/usr/include/boost/type_traits/is_integral.hpp:
+
+/usr/include/boost/mpl/aux_/static_cast.hpp:
+
+/usr/include/boost/container/detail/next_capacity.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:
 
 /usr/include/c++/5/bits/locale_facets.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathinline.h:
 
-/usr/include/c++/5/climits:
-
-/usr/include/asm-generic/errno-base.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/and.hpp:
-
 /usr/include/c++/5/stdexcept:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/void.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/ctype_inline.h:
 
@@ -9796,19 +9276,13 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/cpu_defines.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/workaround.hpp:
+/usr/include/x86_64-linux-gnu/c++/5/bits/gthr.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/limits/bool_256.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/enum.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/advanced_insert_int.hpp:
+/usr/include/c++/5/bits/char_traits.h:
 
 /usr/include/c++/5/cctype:
 
 /usr/include/time.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_right.hpp:
 
 /usr/include/c++/5/bits/functexcept.h:
 
@@ -9816,69 +9290,55 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/default_delete.hpp:
+/usr/include/boost/mpl/aux_/config/bcc.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/config_begin.hpp:
+/usr/lib/gcc/x86_64-linux-gnu/5/include/ammintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/void_fwd.hpp:
+/usr/include/boost/mpl/aux_/na.hpp:
 
 /usr/include/c++/5/bits/concept_check.h:
 
-/home/naf/projects/boost_1_80_0/boost/range/rbegin.hpp:
-
 /usr/include/c++/5/type_traits:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/copy_move_algo.hpp:
+/usr/include/boost/container/new_allocator.hpp:
+
+/usr/include/boost/preprocessor/detail/is_binary.hpp:
 
 /usr/include/c++/5/bits/stl_function.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitor.hpp:
+/usr/include/c++/5/streambuf:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/finder.hpp:
+/usr/include/boost/mpl/aux_/lambda_arity_param.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/5/bits/atomic_word.h:
-
-/usr/include/sched.h:
+/usr/include/boost/preprocessor/stringize.hpp:
 
 /usr/include/c++/5/iosfwd:
 
-/home/naf/projects/boost_1_80_0/boost/core/no_exceptions_support.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/iterator.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/iterator/iterator_categories.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/dec.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/fold_left.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/detail/indirect_traits.hpp:
+/usr/include/boost/container/detail/workaround.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
+/usr/include/boost/mpl/bool_fwd.hpp:
+
 /usr/include/c++/5/bits/predefined_ops.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/limits/elem_64.hpp:
+/usr/include/boost/intrusive/detail/has_member_function_callable_with.hpp:
 
 /usr/include/c++/5/bits/ptr_traits.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_right.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512ifmaintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/limits.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/range/concepts.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/config/helper_macros.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/iterator/iterator_concepts.hpp:
-
 /usr/include/c++/5/bits/unordered_set.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/boost/move/detail/unique_ptr_meta_utils.hpp:
+
+/usr/include/boost/preprocessor/control/while.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Point.h:
 
@@ -9890,14 +9350,6 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/src/Utils/ColorDefs.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/detail/is_single_return.hpp:
-
-/usr/include/c++/5/ostream:
-
-/usr/include/c++/5/array:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/add.hpp:
-
 /usr/include/x86_64-linux-gnu/c++/5/bits/c++allocator.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/adxintrin.h:
@@ -9906,39 +9358,35 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/locale:
 
-/usr/include/x86_64-linux-gnu/bits/huge_val.h:
+/usr/include/boost/mpl/logical.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/variadic/size.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/for.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/utility_core.hpp:
+/usr/include/boost/mpl/aux_/config/ttp.hpp:
 
 /usr/include/c++/5/bits/stl_multiset.h:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/VoronoiSurface.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_enum.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/basic_file.h:
 
-/usr/include/c++/5/ext/new_allocator.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/repeat.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/array/elem.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/range/detail/extract_optional_type.hpp:
-
 /usr/include/c++/5/bits/ostream.tcc:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/has_minus_assign.hpp:
+/usr/include/boost/cstdint.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/c++/5/bits/basic_string.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp:
+
+/usr/include/boost/type_traits/remove_reference.hpp:
+
+/usr/include/linux/errno.h:
+
+/usr/include/boost/config/suffix.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/Extra/Analysis.h:
 
@@ -9950,13 +9398,13 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/ObjImportExport.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/detail/for.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/bind.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
 
+/usr/include/boost/type_traits/is_volatile.hpp:
+
 /usr/include/pthread.h:
+
+/usr/include/boost/preprocessor/control/deduce_d.hpp:
 
 /usr/include/c++/5/string:
 
@@ -9964,33 +9412,35 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/src/Utils/LogFile.h:
 
+/usr/include/boost/type_traits/is_base_of.hpp:
+
 /usr/include/c++/5/iomanip:
+
+/usr/include/boost/type_traits/detail/false_result.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.h:
 
 /usr/include/c++/5/bits/locale_facets_nonio.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/elem.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/identity.hpp:
-
 /usr/include/c++/5/ctime:
 
-/home/naf/projects/Vivid/Vivid/src/main.cpp:
+/usr/include/boost/concept/detail/concept_undef.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/has_member_function_callable_with.hpp:
+/usr/include/boost/preprocessor/arithmetic/add.hpp:
+
+/home/naf/projects/Vivid/Vivid/src/main.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/messages_members.h:
 
-/usr/include/c++/5/bits/stream_iterator.h:
+/usr/include/boost/algorithm/string/constants.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/int_fwd.hpp:
+/usr/include/c++/5/bits/stream_iterator.h:
 
 /usr/include/c++/5/fstream:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/comparison/less_equal.hpp:
+/usr/include/boost/foreach.hpp:
 
 /usr/include/c++/5/bits/cpp_type_traits.h:
 
@@ -9998,9 +9448,13 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/bits/codecvt.h:
 
+/usr/include/boost/preprocessor/control/if.hpp:
+
 /usr/include/c++/5/bits/locale_facets_nonio.tcc:
 
 /usr/include/c++/5/bits/locale_conv.h:
+
+/usr/include/boost/mpl/bind.hpp:
 
 /usr/include/c++/5/bits/atomic_lockfree_defines.h:
 
@@ -10010,41 +9464,47 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/bits/quoted_string.h:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/declval.hpp:
-
 /usr/include/c++/5/bits/functional_hash.h:
 
 /usr/include/c++/5/bits/sstream.tcc:
 
-/home/naf/projects/boost_1_80_0/boost/range/size.hpp:
-
 /home/naf/projects/Vivid/Vivid/src/Utils/Errors.h:
 
+/usr/include/boost/detail/workaround.hpp:
+
+/usr/include/boost/preprocessor/facilities/empty.hpp:
+
 /home/naf/projects/Vivid/Vivid/src/Utils/ColorMap.h:
+
+/usr/include/boost/type_traits/is_scalar.hpp:
 
 /usr/include/c++/5/bits/allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
-/usr/include/c++/5/bits/streambuf.tcc:
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Animation.h:
 
-/usr/include/x86_64-linux-gnu/bits/environments.h:
+/usr/include/boost/container/detail/variadic_templates_tools.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/integral_wrapper.hpp:
+/usr/include/boost/type_traits/detail/type_trait_def.hpp:
+
+/usr/include/boost/preprocessor/list/fold_left.hpp:
+
+/usr/include/boost/mpl/or.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Line.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/for_256.hpp:
+/usr/include/boost/concept/detail/has_constraints.hpp:
 
 /usr/include/c++/5/bits/locale_classes.h:
 
 /usr/include/c++/5/unordered_set:
 
-/usr/include/c++/5/bits/hashtable.h:
-
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/set_difference.hpp:
+/usr/include/boost/preprocessor/array/size.hpp:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Surface.h:
+
+/usr/include/boost/iterator/iterator_concepts.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/Voronoi.h:
 
@@ -10058,21 +9518,9 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/eat.hpp:
-
 /usr/include/c++/5/cmath:
 
 /usr/include/c++/5/cassert:
-
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Model.h:
-
-/usr/include/x86_64-linux-gnu/bits/huge_vall.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/tuple/elem.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/make_unique.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/lazy_list.hpp:
 
@@ -10080,11 +9528,13 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/algorithm:
 
+/usr/include/boost/type_traits/is_enum.hpp:
+
 /usr/include/c++/5/bits/stl_tempbuf.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/eval_if.hpp:
+/usr/include/boost/type_traits/detail/ice_eq.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/int.hpp:
+/usr/include/boost/preprocessor/list/detail/fold_right.hpp:
 
 /usr/include/c++/5/random:
 
@@ -10092,27 +9542,47 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/include/c++/5/bits/random.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/5/include/avx512fintrin.h:
+
 /usr/include/c++/5/bits/uniform_int_dist.h:
 
 /usr/include/x86_64-linux-gnu/c++/5/bits/opt_random.h:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/meta_utils.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/x86intrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/emmintrin.h:
 
+/usr/include/boost/type_traits/is_unsigned.hpp:
+
 /usr/lib/gcc/x86_64-linux-gnu/5/include/pmmintrin.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/5/include/tmmintrin.h:
+
 /usr/include/unistd.h:
+
+/usr/include/boost/utility/enable_if.hpp:
 
 /usr/include/c++/5/cstdio:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/immintrin.h:
 
+/usr/include/boost/config.hpp:
+
+/usr/include/boost/preprocessor/seq/cat.hpp:
+
+/usr/include/boost/range/size.hpp:
+
+/usr/include/boost/preprocessor/logical/bitand.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/avxintrin.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx2intrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/arity.hpp:
+/usr/include/boost/move/detail/workaround.hpp:
+
+/usr/include/boost/mpl/aux_/template_arity_fwd.hpp:
+
+/usr/include/boost/move/detail/type_traits.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/smmintrin.h:
 
@@ -10120,41 +9590,39 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512bwintrin.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/5/include/avx512dqintrin.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/5/include/mwaitxintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512vlbwintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/avx512ifmavlintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/concept/assert.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/iterator/iterator_traits.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_array.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/empty.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/shaintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/lzcntintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/utility/binary.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/arg.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/bmiintrin.h:
 
+/usr/include/boost/mpl/aux_/config/ctps.hpp:
+
+/usr/include/boost/preprocessor/seq/elem.hpp:
+
+/usr/include/boost/preprocessor/punctuation/comma.hpp:
+
+/usr/include/boost/preprocessor/repetition/repeat.hpp:
+
+/usr/include/boost/intrusive/detail/iterator.hpp:
+
 /usr/include/c++/5/bits/basic_ios.h:
+
+/usr/include/boost/mpl/aux_/preprocessor/params.hpp:
 
 /usr/include/ctype.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/bmi2intrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/search.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_function.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/array/data.hpp:
+/usr/include/boost/type_traits/is_lvalue_reference.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/fmaintrin.h:
 
@@ -10162,45 +9630,41 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/lwpintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_void.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/xtestintrin.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include/mm3dnow.h:
+/usr/include/boost/mpl/aux_/yes_no.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/workaround.hpp:
+/usr/lib/gcc/x86_64-linux-gnu/5/include/mm3dnow.h:
 
 /usr/include/_G_config.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/tbmintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/minimal_less_equal_header.hpp:
+/usr/include/boost/type_traits/detail/ice_not.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ttp.hpp:
+/usr/include/boost/mpl/aux_/config/overload_resolution.hpp:
+
+/usr/include/boost/mpl/aux_/nested_type_wknd.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/rdseedintrin.h:
 
-/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.hpp:
+/usr/include/boost/container/detail/min_max.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/arg_typedef.hpp:
+/usr/include/boost/move/utility_core.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/bool.hpp:
+/usr/include/boost/mpl/apply_wrap.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/xsaveintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/limits/size_256.hpp:
+/usr/include/boost/preprocessor/list/detail/fold_left.hpp:
 
 /usr/include/c++/5/vector:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/xsaveoptintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/container/small_vector.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/algo/detail/merge.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/pcommitintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/algorithm/string/find.hpp:
+/usr/include/boost/range/has_range_iterator.hpp:
 
 /home/naf/projects/Vivid/Vivid/lib/MeshDecimation/mdMeshDecimator.h:
 
@@ -10208,226 +9672,210 @@ CMakeFiles/vivid.dir/src/main.cpp.o: /home/naf/projects/Vivid/Vivid/src/main.cpp
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/clflushoptintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/enum_binary_params.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/concept/detail/backward_compatibility.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_lvalue_reference.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/5/include/xsavecintrin.h:
 
 /home/naf/projects/Vivid/Vivid/src/ModelBuilder/Shapes.h:
 
+/usr/include/boost/preprocessor/control/detail/while.hpp:
+
 /usr/include/c++/5/bits/random.tcc:
-
-/usr/lib/gcc/x86_64-linux-gnu/5/include/avxintrin.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/adl_barrier.hpp:
 
 /usr/include/c++/5/bits/stl_numeric.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/detail/is_1_number.hpp:
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
-/usr/include/c++/5/set:
+/home/naf/projects/Vivid/Vivid/src/Utils/Plasma.h:
 
-/usr/include/c++/5/bits/ostream_insert.h:
+/usr/include/boost/preprocessor/variadic/size.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/foreach.hpp:
+/usr/include/boost/config/user.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/gcc.hpp:
+/usr/include/c++/5/ext/alloc_traits.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/nttp.hpp:
+/usr/include/boost/config/select_compiler_config.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/seq/cat.hpp:
+/usr/include/c++/5/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/5/numeric:
+
+/usr/include/boost/config/compiler/gcc.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/xopintrin.h:
+
+/usr/include/boost/preprocessor/list/reverse.hpp:
+
+/usr/include/boost/config/select_stdlib_config.hpp:
+
+/usr/include/boost/config/stdlib/libstdcpp3.hpp:
+
+/usr/include/boost/preprocessor/seq/for_each_i.hpp:
+
+/usr/include/boost/range/mutable_iterator.hpp:
+
+/usr/include/getopt.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/unistd.h:
+
+/home/naf/projects/Vivid/Vivid/src/ModelBuilder/Face.h:
+
+/usr/include/boost/config/select_platform_config.hpp:
+
+/usr/include/c++/5/bits/stl_construct.h:
+
+/usr/include/boost/config/platform/linux.hpp:
+
+/usr/include/boost/config/posix_features.hpp:
+
+/usr/include/boost/mpl/if.hpp:
 
 /usr/include/wchar.h:
 
 /usr/include/c++/5/bits/stl_map.h:
 
-/home/naf/projects/boost_1_80_0/boost/config/detail/select_stdlib_config.hpp:
+/usr/include/boost/mpl/aux_/value_wknd.hpp:
 
-/usr/include/c++/5/cwchar:
+/home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng/lodepng.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/stdlib/libstdcpp3.hpp:
+/usr/include/boost/range/begin.hpp:
 
-/usr/include/x86_64-linux-gnu/sys/sysmacros.h:
+/usr/include/boost/preprocessor/facilities/expand.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/config/config.hpp:
+/usr/include/boost/mpl/aux_/config/workaround.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/intrusive/detail/algorithm.hpp:
+/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/Voronoi.cpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/limits/while_256.hpp:
+/usr/include/boost/mpl/aux_/config/integral.hpp:
 
-/usr/include/getopt.h:
+/usr/include/boost/mpl/aux_/config/msvc.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/eti.hpp:
+/usr/include/boost/mpl/aux_/na_spec.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/unistd.h:
+/usr/include/boost/mpl/lambda_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/addressof.hpp:
+/usr/include/boost/mpl/assert.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/platform/linux.hpp:
+/usr/include/boost/mpl/aux_/adl_barrier.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/5/bits/gthr.h:
+/usr/lib/gcc/x86_64-linux-gnu/5/include/popcntintrin.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bool.hpp:
+/usr/include/boost/mpl/aux_/config/adl.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/detail/posix_features.hpp:
+/usr/include/boost/mpl/aux_/config/gcc.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/default_params.hpp:
+/usr/include/boost/iterator/interoperable.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/detail/suffix.hpp:
+/usr/include/boost/mpl/integral_c_tag.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/if.hpp:
+/usr/include/c++/5/iterator:
 
-/usr/include/c++/5/bits/stl_raw_storage_iter.h:
+/usr/include/boost/mpl/aux_/na_fwd.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_volatile.hpp:
+/usr/include/c++/5/ostream:
 
-/usr/include/c++/5/numeric:
+/usr/include/boost/mpl/aux_/config/lambda.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/detail/cxx_composite.hpp:
+/usr/include/boost/mpl/int.hpp:
 
-/usr/include/c++/5/bits/char_traits.h:
+/usr/include/boost/mpl/aux_/integral_wrapper.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/value_wknd.hpp:
+/usr/include/c++/5/bits/hashtable.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_right_256.hpp:
+/usr/include/boost/preprocessor/cat.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/detail/check.hpp:
+/usr/include/boost/preprocessor/logical/not.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_signed.hpp:
+/usr/include/boost/type_traits/add_pointer.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/detail/workaround.hpp:
+/usr/include/c++/5/bits/stl_pair.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/integral.hpp:
+/usr/include/boost/preprocessor/config/config.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/msvc.hpp:
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_end.hpp:
+/usr/include/boost/mpl/aux_/config/dtp.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/detail/select_platform_config.hpp:
+/usr/include/boost/type_traits/detail/has_binary_operator.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/detail/limits/auto_rec_256.hpp:
+/usr/include/x86_64-linux-gnu/bits/inf.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/lambda_fwd.hpp:
+/usr/include/boost/preprocessor/control/iif.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/not.hpp:
+/usr/include/boost/preprocessor/arithmetic/inc.hpp:
 
-/home/naf/projects/Vivid/Vivid/src/ModelBuilder/ModelComponent.h:
+/usr/include/boost/mpl/aux_/config/preprocessor.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/limits/fold_left_256.hpp:
+/usr/include/boost/type_traits/ice.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/template_arity_fwd.hpp:
+/usr/include/x86_64-linux-gnu/bits/errno.h:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/iterators.hpp:
+/usr/include/boost/preprocessor/comma_if.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/reverse.hpp:
+/usr/include/boost/mpl/not.hpp:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include/xopintrin.h:
+/usr/include/boost/type_traits/config.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/bool_fwd.hpp:
+/usr/include/boost/preprocessor/logical/bool.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/wchar2.h:
+/usr/include/boost/preprocessor/repeat.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/integral_c_tag.hpp:
+/usr/include/boost/static_assert.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/utility/enable_if.hpp:
+/usr/include/boost/preprocessor/empty.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/static_constant.hpp:
+/usr/include/c++/5/bits/hashtable_policy.h:
 
-/usr/include/c++/5/bits/basic_string.h:
+/usr/include/boost/preprocessor/tuple/eat.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/ctps.hpp:
+/usr/include/boost/preprocessor/inc.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/concept/usage.hpp:
+/usr/include/x86_64-linux-gnu/c++/5/bits/atomic_word.h:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/iterator_to_raw_pointer.hpp:
+/usr/include/sched.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/lambda.hpp:
+/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/nttp_decl.hpp:
+/usr/include/boost/mpl/limits/arity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/cat.hpp:
+/usr/include/boost/mpl/aux_/include_preprocessed.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/move/detail/std_ns_begin.hpp:
+/usr/include/boost/preprocessor/identity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/repetition/limits/repeat_256.hpp:
+/usr/include/boost/preprocessor/logical/and.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/params.hpp:
+/usr/include/boost/preprocessor/facilities/identity.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/type_traits/is_reference.hpp:
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/preprocessor.hpp:
+/usr/include/boost/preprocessor/arithmetic/dec.hpp:
 
-/usr/include/c++/5/queue:
+/usr/include/boost/preprocessor/control/expr_iif.hpp:
 
-/usr/include/c++/5/bits/stringfwd.h:
+/usr/include/boost/iterator/iterator_facade.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/if.hpp:
+/usr/include/boost/type_traits/is_signed.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/iif.hpp:
+/usr/include/asm-generic/errno-base.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdio2.h:
+/usr/include/boost/preprocessor/list/adt.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/punctuation/comma.hpp:
+/usr/include/boost/preprocessor/list/fold_right.hpp:
 
-/usr/include/c++/5/bits/stl_queue.h:
+/usr/include/boost/preprocessor/facilities/overload.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/config/compiler/gcc.hpp:
+/usr/include/x86_64-linux-gnu/bits/sigset.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/inc.hpp:
+/usr/include/endian.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include/avx512fintrin.h:
+/usr/include/boost/preprocessor/tuple/rem.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/inc.hpp:
+/usr/include/c++/5/bits/ios_base.h:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/detail/while.hpp:
+/usr/include/boost/mpl/aux_/config/arrays.hpp:
 
-/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h:
+/usr/include/boost/mpl/aux_/config/gpu.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/preprocessor/arithmetic/limits/inc_256.hpp:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
 
-/home/naf/projects/boost_1_80_0/boost/container/detail/type_traits.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/5/include/avx512dqintrin.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/preprocessor/def_params_tail.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/concept_check.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/move/detail/force_ptr.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/5/include/tmmintrin.h:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/limits/arity.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/bitand.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/facilities/identity.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/while.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/config/workaround.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/mpl/aux_/lambda_arity_param.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/fold_left.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/5/bits/gthr-default.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/control/expr_iif.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/and.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/detail/is_binary.hpp:
-
-/home/naf/projects/boost_1_80_0/boost/container/detail/value_functors.hpp:
-
-/usr/include/c++/5/cstring:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/logical/compl.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/timex.h:
-
-/home/naf/projects/boost_1_80_0/boost/preprocessor/list/detail/limits/fold_left_256.hpp:
+/usr/include/boost/mpl/aux_/config/pp_counter.hpp:

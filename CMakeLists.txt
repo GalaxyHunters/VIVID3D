@@ -23,8 +23,8 @@ execute_process(
         OUTPUT_VARIABLE TGT_MACHINEpy
 )
 
-set(Boost_INCLUDE_DIR "/home/naf/projects/boost_1_80_0")
-find_package( Boost 1.62.0 REQUIRED)
+#set(Boost_INCLUDE_DIR "/home/naf/projects/boost_1_80_0")
+find_package( Boost 1.58.0 REQUIRED)
 # TODO =============================================================> IF SOME PACKAGE IS NOT FOUND, WRITE A MESSAGE TO INSTALL THE LIB (AND VERSIONS? )
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
@@ -58,9 +58,6 @@ add_subdirectory(pybind11)
 
 set(PYBIND11_FINDPYTHON ON)
 set(PYBIND11_PYTHON_VERSION 3.9)
-set(PYTHON_LIBRARIES "/home/naf/anaconda3/lib")
-set(PYTHON_INCLUDE_DIR "/home/naf/anaconda3/include/python3.9")
-set(CMAKE_MODULE_PATH "/home/naf/anaconda3")
 
 
 
@@ -123,9 +120,46 @@ target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 #target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?
 
+include_directories(lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon)
+include_directories(lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/)
+
 project(vivid_py)
 
 pybind11_add_module(vivid_py
+        #voronoi
+        # source/3D/GeometryCommon
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Voronoi3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Delaunay3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Face.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Intersections.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tessellation3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Tetrahedron.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Vector3D.cpp
+
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
+
+        # source/3D/r3d
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/universal_error.cpp
+
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/int2str.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp
+        lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
+        #                #source/misc
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/bisection.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/horner.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
+        #                #extra
+        #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
         #external
         lib/Decimate.cpp
         lib/SurfacingAlgorithms/Voronoi.cpp
@@ -158,6 +192,5 @@ pybind11_add_module(vivid_py
         )
 
 
-target_link_libraries(vivid_py PRIVATE VoronoiLib)
 target_link_libraries(vivid_py PRIVATE Boost::boost)
 #target_link_libraries(vivid_py PRIVATE FBX::fbx)

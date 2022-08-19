@@ -17,6 +17,9 @@
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=Boost_DIR-NOTFOUND
 
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -309,9 +312,6 @@ vivid_py_BINARY_DIR:STATIC=/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_6
 //Value Computed by CMake
 vivid_py_IS_TOP_LEVEL:STATIC=ON
 
-//Dependencies for the target
-vivid_py_LIB_DEPENDS:STATIC=general;VoronoiLib;
-
 //Value Computed by CMake
 vivid_py_SOURCE_DIR:STATIC=/home/naf/projects/Vivid/Vivid
 
@@ -322,6 +322,8 @@ vivid_py_SOURCE_DIR:STATIC=/home/naf/projects/Vivid/Vivid
 
 //ADVANCED property for variable: Boost_DIR
 Boost_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -498,7 +500,7 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Boost
-FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/home/naf/projects/boost_1_80_0][c ][v1.80.0(1.62.0)]
+FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/include][c ][v1.58.0(1.58.0)]
 //Details about finding PYTHON
 FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=/home/naf/anaconda3/bin/python3
 //Details about finding PythonInterp
@@ -518,7 +520,7 @@ PYTHON_MODULE_PREFIX:INTERNAL=
 //Components requested for this build tree.
 _Boost_COMPONENTS_SEARCHED:INTERNAL=
 //Last used Boost_INCLUDE_DIR value.
-_Boost_INCLUDE_DIR_LAST:INTERNAL=/home/naf/projects/boost_1_80_0
+_Boost_INCLUDE_DIR_LAST:INTERNAL=/usr/include
 //Last used Boost_NAMESPACE value.
 _Boost_NAMESPACE_LAST:INTERNAL=boost
 //Last used Boost_USE_MULTITHREADED value.

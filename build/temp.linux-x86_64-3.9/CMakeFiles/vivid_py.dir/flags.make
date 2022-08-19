@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -Dvivid_py_EXPORTS
 
-CXX_INCLUDES = -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc -I/home/naf/projects/Vivid/Vivid/src -I/home/naf/projects/Vivid/Vivid/src/ModelBuilder -I/home/naf/projects/Vivid/Vivid/src/Utils -I/home/naf/projects/Vivid/Vivid/lib -I/home/naf/projects/Vivid/Vivid/lib/MeshDecimation -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms -I/home/naf/projects/Vivid/Vivid/lib/pybind11/include -I/home/naf/projects/Vivid/Vivid/lib/ImportAndExport -I/home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng -I/home/naf/projects/Vivid/Vivid/pybind11/include -I/home/naf/anaconda3/include/python3.9 -isystem /home/naf/projects/boost_1_80_0
+CXX_INCLUDES = -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc -I/home/naf/projects/Vivid/Vivid/src -I/home/naf/projects/Vivid/Vivid/src/ModelBuilder -I/home/naf/projects/Vivid/Vivid/src/Utils -I/home/naf/projects/Vivid/Vivid/lib -I/home/naf/projects/Vivid/Vivid/lib/MeshDecimation -I/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms -I/home/naf/projects/Vivid/Vivid/lib/pybind11/include -I/home/naf/projects/Vivid/Vivid/lib/ImportAndExport -I/home/naf/projects/Vivid/Vivid/lib/ImportAndExport/lodepng -I/home/naf/projects/Vivid/Vivid/pybind11/include -I/home/naf/anaconda3/include/python3.9
 
 CXX_FLAGS = -DVERSION_INFO=\"1.0.0\" -O3 -DNDEBUG -fPIC -fvisibility=hidden -std=gnu++14
 

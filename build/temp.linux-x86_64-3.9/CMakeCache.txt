@@ -279,7 +279,7 @@ PYBIND11_PYTHON_VERSION:STRING=
 PYBIND11_TEST:BOOL=OFF
 
 //Path to a program.
-PYTHON_EXECUTABLE:FILEPATH=/home/naf/anaconda3/bin/python3
+PYTHON_EXECUTABLE:FILEPATH=/home/naf/anaconda3/bin/python
 
 //Path to a library.
 PYTHON_LIBRARY:FILEPATH=/home/naf/anaconda3/lib/libpython3.9.so
@@ -502,9 +502,9 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Boost
 FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/include][c ][v1.58.0(1.58.0)]
 //Details about finding PYTHON
-FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=/home/naf/anaconda3/bin/python3
+FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=/home/naf/anaconda3/bin/python
 //Details about finding PythonInterp
-FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/home/naf/anaconda3/bin/python3][v3.9.12()]
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/home/naf/anaconda3/bin/python][v3.9.12()]
 PYBIND11_INCLUDE_DIR:INTERNAL=/home/naf/projects/Vivid/Vivid/pybind11/include
 PYBIND11_VERSION_MAJOR:INTERNAL=2
 PYBIND11_VERSION_MINOR:INTERNAL=2

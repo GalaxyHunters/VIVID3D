@@ -1,8 +1,0 @@
-LICENSE
-README.md
-setup.py
-vivid.egg-info/PKG-INFO
-vivid.egg-info/SOURCES.txt
-vivid.egg-info/dependency_links.txt
-vivid.egg-info/not-zip-safe
-vivid.egg-info/top_level.txt

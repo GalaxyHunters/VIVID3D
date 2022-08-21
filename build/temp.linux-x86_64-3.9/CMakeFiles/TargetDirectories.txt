@@ -1,7 +1,0 @@
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles/VoronoiLib.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles/vivid.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles/vivid_py.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles/edit_cache.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/CMakeFiles/rebuild_cache.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/pybind11/CMakeFiles/edit_cache.dir
-/home/naf/projects/Vivid/Vivid/build/temp.linux-x86_64-3.9/pybind11/CMakeFiles/rebuild_cache.dir

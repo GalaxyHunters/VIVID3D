@@ -1,0 +1,5 @@
+recursive-include pybind11 *
+graft pybind11
+recursive-include lib *
+recursive-include src *
+include *.md *.png CMakeLists.txt

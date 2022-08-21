@@ -58,8 +58,9 @@ class CMakeBuild(build_ext):
 
 setup(
     name='vivid_py',
-    version='1.0.0',
+    version='0.0.7',
     author='GalaxyHuntersIL',
+    author_email='galaxyhuntersil@gmail.com',
     url='https://galaxyhuntersil.wixsite.com/labs/vivid',
     description='A 3D visualisation tool for simulations',
     long_description='''
@@ -73,7 +74,9 @@ setup(
     - Color and opacity control
     - Shape creation
     - And more.''',
-    ext_modules=[CMakeExtension('Vivid')],
+    ext_modules=[CMakeExtension("vivid_py")],
     cmdclass=dict(build_ext=CMakeBuild),
+    install_requires = 'setuptools>=61.0',
     zip_safe=False,
+    python_requires=">=3.6",
 )

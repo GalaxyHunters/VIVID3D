@@ -5,7 +5,8 @@
 #include "./ModelBuilder/Line.h"
 #include "./ModelBuilder/PointCloud.h"
 #include "./ModelBuilder/Shapes.h"
-#include "./ImportAndExport/FBXImportExport.h"
+#include "./ModelBuilder/Model.h"
+/*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -76,9 +77,8 @@ PYBIND11_MODULE(vivid_py, m) {
                  "copy constructor for Surface",
                  py::arg("surf"))
             .def("create_surface", &CSurface::CreateSurface,
-                 R"-(
-             .. py:function:: create_surface()
-             :return: Calculate the surface from input data)-")
+                 "Calculate the surface from input data)",
+                 py::arg("Processing") = true)
             .def("to_mesh", &CSurface::ToMesh,
                  "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);

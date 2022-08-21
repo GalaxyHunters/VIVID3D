@@ -63,7 +63,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
             //            }
             if (!(isnan(points[i+j].Y()) & isnan(points[i+j+1].Y()) & isnan(points[i+j+2+2*aBoxSize].Y()) & isnan(points[i+j+1+2*aBoxSize].Y()))) {
                 if (RemoveFlatSurfaces) {
-                    if (!(iszero(points[i+j].Y()) & iszero(points[i+j+1].Y()) & iszero(points[i+j+2+2*aBoxSize].Y()) & iszero(points[i+j+1+2*aBoxSize].Y()))) {
+                    if ((points[i+j].Y() != 0 & points[i+j+1].Y() != 0 & points[i+j+2+2*aBoxSize].Y() != 0 & points[i+j+1+2*aBoxSize].Y() != 0)) {
                         faces.push_back(CFace({i + j, i + (j + 1), i + 2 * aBoxSize + (j + 2), i + 2 * aBoxSize + j + 1}, color));
                     }
                 } else {
@@ -112,16 +112,16 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
     }
 
     /* Add triangle faces around top point (0, 0, 1) */
-    for (int i = 0; i < aNumberOfSteps - 1; i++)
+    for (size_t i = 0; i < aNumberOfSteps - 1; i++)
     {
         faces.push_back(CFace(vector<size_t>{0, 2 + (i + 1) * aNumberOfSteps, 2 + i * aNumberOfSteps}, aColor)); //creates triangles
     }
     faces.push_back(CFace(vector<size_t>{0, 2, 2 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
 
     /* Add rectangular faces around center */
-    for (int i = 2; i < 1 + aNumberOfSteps; i++)
+    for (size_t i = 2; i < 1 + aNumberOfSteps; i++)
     {
-        for (int j = 0; j < aNumberOfSteps - 1; j++)
+        for (size_t j = 0; j < aNumberOfSteps - 1; j++)
         {
             faces.push_back(CFace(vector<size_t>{i + j * aNumberOfSteps, i + (j + 1) * aNumberOfSteps,
                                                  i + 1 + (j + 1) * aNumberOfSteps, i + 1 + j * aNumberOfSteps}, aColor));
@@ -131,7 +131,7 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
                                              i + 1 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
     }
     /* Add triangle faces around bottom point (0, 0, -1) */
-    for (int i = 0; i < aNumberOfSteps - 1; i++)
+    for (size_t i = 0; i < aNumberOfSteps - 1; i++)
     {
         faces.push_back(CFace(vector<size_t>{1, 1 + (i + 1) * aNumberOfSteps, 1 + (i + 2) * aNumberOfSteps}, aColor));
     }

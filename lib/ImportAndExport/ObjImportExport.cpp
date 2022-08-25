@@ -1,6 +1,7 @@
 #include "ObjImportExport.h"
 #include <boost/algorithm/string/predicate.hpp>
 #include "DataToImage.h"
+#include "AssimpImportExport.h"
 
 #include <string>
 
@@ -253,7 +254,8 @@ namespace vivid
             ExportToObjMaterial(aModel, aOutPutFile);
         }
         else{
-            ExportToObjTexture(aModel, aOutPutFile);
+            ModelExporter3(aModel, "obj", aOutPutFile, WithTexture);
+            ExportToObjTexture(aModel, aOutPutFile+"_Vivid");
         }
     }
 

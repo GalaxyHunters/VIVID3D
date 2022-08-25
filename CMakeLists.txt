@@ -29,6 +29,7 @@ find_package( Boost 1.58.0 REQUIRED)
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI REQUIRED)
+find_package(assimp REQUIRED)
 #find_package(FBX     REQUIRED)
 #find_package(IMPORTANDEXPORT REQUIRED)
 
@@ -80,6 +81,7 @@ add_executable(vivid
         lib/ImportAndExport/DataToImage.cpp
         lib/ImportAndExport/lodepng/lodepng.cpp
         lib/ImportAndExport/ObjImportExport.cpp
+        lib/ImportAndExport/AssimpImportExport.cpp
         #lib/ImportAndExport/FbxCode.cpp
         #lib/ImportAndExport/FBXImportExport.cpp
         #vivid
@@ -115,7 +117,7 @@ add_executable(vivid
 
 # We use VoronoiLib and not Voronoi::voronoi because voronoi is locally created.
 target_link_libraries(vivid VoronoiLib)
-
+target_link_libraries(vivid assimp)
 target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 #target_link_libraries(vivid ${FBX_LIBRARY_SHARED_DEBUG} xml2) # TODO Y FBX::fbx?

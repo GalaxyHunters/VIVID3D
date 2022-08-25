@@ -149,6 +149,22 @@ namespace vivid {
 
     aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh){
         aiMaterial *material = new aiMaterial();
+
+        const aiString *name = new aiString(mesh.GetLabel()+"_mat");
+        material->AddProperty(name, AI_MATKEY_NAME);
+
+        const aiColor3D *diffuse_color = new aiColor3D(1,1,1);
+        material->AddProperty(diffuse_color, 3,AI_MATKEY_COLOR_DIFFUSE);
+
+        const aiColor3D *specular_color = new aiColor3D(1,1,1);
+        material->AddProperty(specular_color, 3,AI_MATKEY_COLOR_SPECULAR);
+
+        const aiColor3D *ambient_color = new aiColor3D(1,1,1);
+        material->AddProperty(ambient_color, 3,AI_MATKEY_COLOR_AMBIENT);
+
+        const float *opacity = new float(mesh.GetAlpha());
+        material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
+
         return material;
     }
 

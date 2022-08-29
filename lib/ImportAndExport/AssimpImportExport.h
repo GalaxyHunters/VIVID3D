@@ -15,18 +15,16 @@
 
 namespace vivid
 {
-    void ModelExporter(CModel &arModel, std::string arFileType, std::string &arOutputPath, bool aWithTexture); //=1
-    void ModelExporter2(CModel &arModel, std::string arFileType, std::string &arOutputPath, bool aWithTexture); //=1
-    void ModelExporter3(CModel &arModel, std::string arFileType, std::string arOutputPath, bool aWithTexture); //=1
+    void ModelExporter(CModel &arModel, std::string arFileType, std::string arOutputPath); //=1
 
     void AnimationExporter(CAnimation &arAnimation, std::string arFileType, std::string &arOutputPath, bool aWithTexture);
 
-    aiScene * GenerateScene(CModel& model, string filename);
-    aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh);
-    aiMesh * GenerateMesh(vivid::CModelComponent& mesh);
+    aiScene * GenerateScene(CModel& model, std::string arFileType);
+    aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh, string aTextureName);
+    aiMesh * GenerateMesh(vivid::CModelComponent * apMesh);
 
 
-    vector<size_t> GetTextureIndexesList(vivid::CModelComponent* mesh);
+    vector<size_t> GetTextureIndexesList(vivid::CModelComponent* mesh); // REDACTED
 
 
     // TODO export to BLOB

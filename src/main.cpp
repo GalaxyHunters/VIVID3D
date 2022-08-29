@@ -362,7 +362,12 @@ void assimpTest(string file){
                                         aiProcess_CalcTangentSpace |
                                         aiProcess_JoinIdenticalVertices |
                                         aiProcess_SortByPType);
-//    aiMaterial* mat = scene->mMaterials[1];
+    aiMaterial* mat = scene->mMaterials[1];
+    aiMaterialProperty prop;
+    for(int i = 0; i < mat->mNumProperties; i++){
+        cout << mat->mProperties[i]->mKey.C_Str(), mat->mProperties[i]->mData;
+    }
+
 //    aiString matString;
 //    aiColor3D color(0,0,0);
 //    mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
@@ -371,11 +376,13 @@ void assimpTest(string file){
 //        cout << scene->mMeshes[0]->mTextureCoords[0][i][0], scene->mMeshes[0]->mTextureCoords[0][i][1];
 //    }
 //    mat->Get(AI_MATKEY_TEXTURE(t matString);
-    cout << exp.Export(scene, "obj", TEST_OUTPUT_PATH + "TestAssimp.obj") << endl;
+    if (exp.Export(scene, "gltf2", TEST_OUTPUT_PATH + "TestAssimpfromAssimp.gltf") != AI_SUCCESS) {
+        cerr << exp.GetErrorString() << endl;
+    }
 }
 int main()
 {
-//    assimpTest(DATA_MODEL_PATH + "/PyramidProcessing.obj");
+    assimpTest(TEST_OUTPUT_PATH + "/PyramidAssimpTests_Assimp.obj");
     int ret_value = EXIT_SUCCESS;
 //    cout << "MedicaneTestTest" << endl;
 //    ret_value =RunMedicaneTest();

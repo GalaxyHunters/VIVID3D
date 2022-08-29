@@ -1,7 +1,7 @@
 project(vivid)
 
 cmake_minimum_required(VERSION 3.12)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 
@@ -56,7 +56,7 @@ find_package(assimp REQUIRED)
 #find_package(Python 3.9 COMPONENTS Interpreter Development REQUIRED)
 
 add_subdirectory(pybind11)
-
+add_subdirectory(lib/assimp)
 set(PYBIND11_FINDPYTHON ON)
 set(PYBIND11_PYTHON_VERSION 3.9)
 

@@ -29,7 +29,6 @@ find_package( Boost 1.58.0 REQUIRED)
 
 # FindPackage voronoi creates a new library called VoronoiLib from present local cpp files.
 find_package(VORONOI REQUIRED)
-find_package(assimp REQUIRED)
 #find_package(FBX     REQUIRED)
 #find_package(IMPORTANDEXPORT REQUIRED)
 

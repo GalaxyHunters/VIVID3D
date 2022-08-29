@@ -15,16 +15,23 @@
 
 namespace vivid
 {
-    void ModelExporter(CModel &arModel, std::string arFileType, std::string arOutputPath); //=1
+    /**
+     * Assimp export. writes arModel in aFileType format at aOutputPath
+     * @param[in] arModel CModel to be exported
+     * @param[in] aFileType 3D filetype format to write to (out of supported options)
+     * @param[in] aOutputPath Path and name for output file
+     */
+    int ModelExporter(CModel &arModel, std::string aFileType, std::string aOutputPath); //=1
 
-    void AnimationExporter(CAnimation &arAnimation, std::string arFileType, std::string &arOutputPath, bool aWithTexture);
+    void AnimationExporter(CAnimation &arAnimation, std::string aFileType, std::string &arOutputPath, bool aWithTexture);
 
-    aiScene * GenerateScene(CModel& model, std::string arFileType);
+    aiScene * GenerateScene(CModel& model, std::string &arOutputPath, bool aImbeddedTexture = false);
     aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh, string aTextureName);
     aiMesh * GenerateMesh(vivid::CModelComponent * apMesh);
+    string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath);
+    aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture);
 
 
-    vector<size_t> GetTextureIndexesList(vivid::CModelComponent* mesh); // REDACTED
 
 
     // TODO export to BLOB

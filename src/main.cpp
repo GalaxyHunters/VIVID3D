@@ -196,12 +196,12 @@ int PyramidSmoothTest()
 
     CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
     smooth1.CreateSurface();
-    smooth1.WhatAreTheseThingsElad();
+    //smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = smooth1.ToMesh("vivid_3d_obj", .8);
-    mesh1.LaplacianSmooth(20);
+    CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", .8);
+    //mesh1.LaplacianSmooth(20);
 //    //mesh1.Reduce(0.3, 0.5);
-    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidAssimpTests");
+    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
@@ -365,24 +365,69 @@ void assimpTest(string file){
     aiMaterial* mat = scene->mMaterials[1];
     aiMaterialProperty prop;
     for(int i = 0; i < mat->mNumProperties; i++){
-        cout << mat->mProperties[i]->mKey.C_Str(), mat->mProperties[i]->mData;
+        cout << mat->mProperties[i]->mKey.C_Str() << endl; //, mat->mProperties[i]->mData
     }
 
-//    aiString matString;
-//    aiColor3D color(0,0,0);
-//    mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-//    for(int i = 0; i<40; i++){
-//        aiVector3D UV = scene->mMeshes[0]->mTextureCoords[0][i];
-//        cout << scene->mMeshes[0]->mTextureCoords[0][i][0], scene->mMeshes[0]->mTextureCoords[0][i][1];
-//    }
-//    mat->Get(AI_MATKEY_TEXTURE(t matString);
+    //big printing of stuff
+    aiString matString;
+    aiColor3D color(0,0,0);
+    int num1;
+    float float1;
+    mat->Get(AI_MATKEY_NAME, matString);
+    cout << "AI_MATKEY_NAME     "<< matString.C_Str() << endl;
+
+    mat->Get(AI_MATKEY_SHADING_MODEL, num1);
+    cout << "AI_MATKEY_SHADING_MODEL     "<< num1 << endl;
+
+    mat->Get("$mat.illum", 3, 0, num1);
+    cout << "mat.illum     "<< num1 << endl;
+
+    mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
+    cout << "AI_MATKEY_COLOR_AMBIENT     ";
+    cout << color.r << color.g << color.b << endl;
+
+    mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+    cout << "AI_MATKEY_COLOR_DIFFUSE     ";
+    cout << color.r << color.g << color.b << endl;
+
+    mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
+    cout << "AI_MATKEY_COLOR_SPECULAR     ";
+    cout << color.r << color.g << color.b << endl;
+
+    mat->Get(AI_MATKEY_COLOR_EMISSIVE, color);
+    cout << "AI_MATKEY_COLOR_EMISSIVE     ";
+    cout << color.r << color.g << color.b << endl;
+
+
+    mat->Get(AI_MATKEY_COLOR_TRANSPARENT, color);
+    cout << "AI_MATKEY_COLOR_TRANSPARENT     ";
+    cout << color.r << color.g << color.b << endl;
+
+    mat->Get(AI_MATKEY_SHININESS, float1);
+    cout << "AI_MATKEY_SHININESS     "<< float1 << endl;
+
+    mat->Get(AI_MATKEY_OPACITY, float1);
+    cout << "AI_MATKEY_OPACITY     "<< float1 << endl;
+
+    mat->Get(AI_MATKEY_ANISOTROPY_FACTOR, float1);
+    cout << "AI_MATKEY_ANISOTROPY_FACTOR     "<< float1 << endl;
+
+    mat->Get(AI_MATKEY_REFRACTI, float1);
+    cout << "AI_MATKEY_REFRACTI     "<< float1 << endl;
+
+    mat->Get(AI_MATKEY_UVWSRC(aiTextureType_DIFFUSE, 0), num1);
+    cout << "AI_MATKEY_UVWSRC     "<< num1 << endl;
+
+    mat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), matString);
+    cout << "AI_MATKEY_TEXTURE     "<< matString.C_Str() << endl;
+
     if (exp.Export(scene, "gltf2", TEST_OUTPUT_PATH + "TestAssimpfromAssimp.gltf") != AI_SUCCESS) {
         cerr << exp.GetErrorString() << endl;
     }
 }
 int main()
 {
-    assimpTest(TEST_OUTPUT_PATH + "/PyramidAssimpTests_Assimp.obj");
+    //assimpTest(TEST_OUTPUT_PATH + "/PyramidAssimpNewMat_Vivid.obj");
     int ret_value = EXIT_SUCCESS;
 //    cout << "MedicaneTestTest" << endl;
 //    ret_value =RunMedicaneTest();

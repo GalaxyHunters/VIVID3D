@@ -10,7 +10,6 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "DataToImage.h"
-#include "Model.h"
 #include <map>
 
 namespace vivid
@@ -21,7 +20,7 @@ namespace vivid
      * @param[in] aFileType 3D filetype format to write to (out of supported options)
      * @param[in] aOutputPath Path and name for output file
      */
-    int ModelExporter(CModel &arModel, std::string aFileType, std::string aOutputPath); //=1
+    int AssimpExporter(CModel &arModel, std::string aFileType, std::string aOutputPath); //=1
 
     void AnimationExporter(CAnimation &arAnimation, std::string aFileType, std::string &arOutputPath, bool aWithTexture);
 

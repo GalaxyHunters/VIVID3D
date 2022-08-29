@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: vivid-py
+Version: 0.0.8
+Summary: A 3D visualisation tool for simulations
+Home-page: https://galaxyhuntersil.wixsite.com/labs/vivid
+Author: GalaxyHuntersIL
+Author-email: galaxyhuntersil@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6
+License-File: LICENSE
+
+
+    We present VIVID, an innovative method for easy particle simulation data visualization.
+    
+    VIVID uses an implementation of the voronoi algorithm for a 3D space made by Dr. Elad Stiennberg. 
+    It takes simulation data as an input and produces an interactive 3D mesh model. The intuitive code allows for:
+    
+    - Animated models through time
+    - Labeled surfaces
+    - Color and opacity control
+    - Shape creation
+    - And more.
+

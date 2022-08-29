@@ -17,7 +17,7 @@ namespace vivid {
                  aFileType - the assimp-format type of the file
                  aOutputPath - the path of the file, including the name but not including the file ending
      */
-    int ModelExporter(CModel &arModel, std::string aFileType, std::string aOutputPath) {
+    int AssimpExporter(CModel &arModel, std::string aFileType, std::string aOutputPath) {
         Assimp::Exporter exp;
         int RET_VALUE;
 

@@ -71,6 +71,13 @@ namespace vivid
 
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
 
+        /**
+        * Assimp export. writes arModel in aFileType format at aOutputPath
+        * @param[in] aOutputPath Path and name for output file
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        */
+        int Export(const std::string &arOutputFilePath, const std::string &aFileType = "obj");
+
 
         // TODO: Figure out why the wrapper doesn't like it in modelcomponent
         /**

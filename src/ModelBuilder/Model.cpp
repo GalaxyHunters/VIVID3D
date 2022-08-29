@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "Decimate.h"
 #include "ImportAndExport/ObjImportExport.h"
+#include "ImportAndExport/AssimpImportExport.h"
 
 using namespace vivid;
 using namespace std;
@@ -25,4 +26,7 @@ void CModel::ExportToObj(const string &arOutputFilePath, bool WithTexture){
     OBJExporter(*this, arOutputFilePath, WithTexture);
 }
 
+int CModel::Export(const std::string &arOutputFilePath, const std::string &aFileType){
+    AssimpExporter(*this, aFileType, arOutputFilePath);
+}
 CModel::~CModel() = default;

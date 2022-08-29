@@ -192,6 +192,6 @@ pybind11_add_module(vivid_py
         src/Wrapping/wrapper.cpp
         )
 
-
+target_link_libraries(vivid_py PRIVATE assimp)
 target_link_libraries(vivid_py PRIVATE Boost::boost)
 #target_link_libraries(vivid_py PRIVATE FBX::fbx)

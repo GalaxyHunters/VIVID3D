@@ -124,7 +124,10 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("output_file"), py::arg("with_texture") = 1)
             .def("laplacian_smooth", &CMesh::LaplacianSmooth,
                  "Smooths the surface by HC Laplacian Algorithm.",
-                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
+                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
+            .def("export", &CMesh::Export,
+                 "writes CModel to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CModel>(m, "Model")
             .def(py::init<> (), "default constructor for CModel")
@@ -141,7 +144,10 @@ PYBIND11_MODULE(vivid_py, m) {
                  "Returns the list of meshes held by model")
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
-                 py::arg("output_file"), py::arg("with_texture") = 1);
+                 py::arg("output_file"), py::arg("with_texture") = 1)
+            .def("export", &CModel::Export,
+                 "writes CModel to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     //Animations:
 //    m.def("animation", &Animate,

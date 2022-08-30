@@ -84,7 +84,7 @@ PYBIND11_MODULE(vivid_py, m) {
              py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
-    py::class_<CLines>(m, "Lines", model_component)
+    py::class_<CLines, CModelComponent>(m, "Lines")
             .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                  "Constructor for Lines",
                  py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
@@ -116,7 +116,7 @@ PYBIND11_MODULE(vivid_py, m) {
             "Scale Model Component points by multiplying by scale_vec.",
             py::arg("scale_vec"));
 
-    py::class_<CPointCloud>(m, "PointCloud", model_component)
+    py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
             .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
@@ -142,7 +142,7 @@ PYBIND11_MODULE(vivid_py, m) {
             "Scale Model Component points by multiplying by scale_vec.",
             py::arg("scale_vec"));
 
-    py::class_<CMesh>(m, "Mesh", model_component)
+    py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
                  py::arg("mesh"))

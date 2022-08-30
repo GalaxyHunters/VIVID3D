@@ -58,7 +58,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='vivid_py',
-    version='0.0.7',
+    version='0.0.8',
     author='GalaxyHuntersIL',
     author_email='galaxyhuntersil@gmail.com',
     url='https://galaxyhuntersil.wixsite.com/labs/vivid',

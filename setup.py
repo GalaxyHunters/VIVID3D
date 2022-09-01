@@ -4,13 +4,14 @@ import sys
 import platform
 import subprocess
 
+from setuptools import find_packages
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 
 
 class CMakeExtension(Extension):
-    def __init__(self, name, sourcedir=''):
+    def __init__(self, name, sourcedir=""):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)
 
@@ -33,8 +34,9 @@ class CMakeBuild(build_ext):
 
     def build_extension(self, ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
-        cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
+        cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,    #+ "/vivid_py",
                       '-DPYTHON_EXECUTABLE=' + sys.executable]
+        print(extdir)
 
         cfg = 'Debug' if self.debug else 'Release'
         build_args = ['--config', cfg]
@@ -58,7 +60,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='vivid_py',
-    version='0.0.8',
+    version='0.0.12',
     author='GalaxyHuntersIL',
     author_email='galaxyhuntersil@gmail.com',
     url='https://galaxyhuntersil.wixsite.com/labs/vivid',
@@ -74,6 +76,7 @@ setup(
     - Color and opacity control
     - Shape creation
     - And more.''',
+    #packages=find_packages(),
     ext_modules=[CMakeExtension("vivid_py")],
     cmdclass=dict(build_ext=CMakeBuild),
     install_requires = 'setuptools>=61.0',

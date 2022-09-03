@@ -5,7 +5,7 @@
 #include "ModelBuilder/SurfByFunc.h"
 /*include "ImportAndExport/FBXImportExport.h"*/
 #include "ModelBuilder/Surface.h"
-#include "ModelBuilder/Point.h"
+#include "Point.h"
 #include "AssimpImportExport.h"
 #include "DataToImage.h"
 #include "Model.h"
@@ -24,7 +24,7 @@ using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
-const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
+const std::string TEST_OUTPUT_PATH = "/home/naf/projects/Vivid/Vivid/tests/test_models/"; //"./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
@@ -201,6 +201,7 @@ int PyramidSmoothTest()
     CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", .8);
     //mesh1.LaplacianSmooth(20);
 //    //mesh1.Reduce(0.3, 0.5);
+    cout << TEST_OUTPUT_PATH + "PyramidAssimpNewMat" << endl;
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();

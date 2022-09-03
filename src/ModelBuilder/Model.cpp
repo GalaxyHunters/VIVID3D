@@ -26,7 +26,7 @@ void CModel::ExportToObj(const string &arOutputFilePath, bool WithTexture){
     OBJExporter(*this, arOutputFilePath, WithTexture);
 }
 
-int CModel::Export(const std::string &arOutputFilePath, const std::string &aFileType){
-    AssimpExporter(*this, aFileType, arOutputFilePath);
+int CModel::Export(const std::string &arOutputFilePath, std::string aFileType){
+    return AssimpExporter(*this, aFileType, arOutputFilePath);
 }
 CModel::~CModel() = default;

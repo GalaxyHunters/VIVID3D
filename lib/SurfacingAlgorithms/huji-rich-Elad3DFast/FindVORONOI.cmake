@@ -1,5 +1,3 @@
-
-
 cmake_minimum_required(VERSION 3.4)
 message(BLOP)
 #project(VoronoiLib VERSION 1.0.0 DESCRIPTION "Library used for running the voronoi algorithm.")
@@ -24,8 +22,8 @@ IF(NOT TARGET VoronoiLib)
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D.cpp
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/Predicates3D.cpp
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/predicates.cxx
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/RoundGrid3D.cpp
 
             # source/3D/r3d
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/serializable.cpp
@@ -35,16 +33,16 @@ IF(NOT TARGET VoronoiLib)
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/io3D.cpp
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/simple_io.cpp
             lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/utils.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
-#                #source/misc
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/bisection.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/horner.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
-#                #extra
-#                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/Intersection3D.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/r3d/r3d.c
+            #                #source/misc
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/bisection.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/func_1_var.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/horner.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator.cpp
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/mesh_generator3D.cpp
+            #                #extra
+            #                lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             )
 
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
-#include "ModelBuilder/Point.h"
+#include "Point.h"
 #include "Plasma.h"
 #include "ColorDefs.h"
 

@@ -2,7 +2,7 @@
 #ifndef READBINFILE
 #define READBINFILE
 
-#include "ModelBuilder/Point.h"
+#include "Point.h"
 #include <vector>
 #include <iostream>
 #include "fstream"

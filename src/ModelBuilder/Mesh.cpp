@@ -173,7 +173,7 @@ void CMesh::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
     CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
 }
 
-int CMesh::Export(const std::string &arOutputFilePath, const std::string &aFileType){
+int CMesh::Export(const std::string &arOutputFilePath, std::string aFileType){
     return CModel(*this).Export(arOutputFilePath, aFileType);
 }
 

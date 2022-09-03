@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Delaunay3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Delaunay3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Face.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Face.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/HilbertOrder3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/HilbertOrder3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/HilbertOrder3D_Utils.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Intersections.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Intersections.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Predicates3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Predicates3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Tessellation3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Tessellation3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Tetrahedron.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Tetrahedron.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Vector3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Vector3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Voronoi3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/3D/GeometryCommon/Voronoi3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/int2str.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/int2str.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/io3D.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/io3D.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/serializable.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/serializable.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/simple_io.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/simple_io.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/universal_error.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/universal_error.cpp.o.d"
+  "CMakeFiles/VoronoiLib.dir/source/misc/utils.cpp.o"
+  "CMakeFiles/VoronoiLib.dir/source/misc/utils.cpp.o.d"
+  "libVoronoiLib.pdb"
+  "libVoronoiLib.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/VoronoiLib.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -7,7 +7,7 @@
 //#include "LogFile.h"
 #include "Face.h"
 #include "Decimate.h"
-#include "Utils/ColorMap.h"
+#include "ColorMap.h"
 
 #include <string>
 #include <fstream>
@@ -76,7 +76,7 @@ namespace vivid
         * @param[in] aOutputPath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string &aFileType = "obj");
+        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
 
 
         // TODO: Figure out why the wrapper doesn't like it in modelcomponent

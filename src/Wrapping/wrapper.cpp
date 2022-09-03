@@ -126,7 +126,7 @@ PYBIND11_MODULE(vivid_py, m) {
                  "Smooths the surface by HC Laplacian Algorithm.",
                  py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
             .def("export", &CMesh::Export,
-                 "writes CModel to a given file format",
+                 "writes CMesh to a given file format",
                  py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CModel>(m, "Model")

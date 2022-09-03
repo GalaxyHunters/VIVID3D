@@ -1,7 +1,7 @@
 #ifndef VIVID_ANALYSIS_H
 #define VIVID_ANALYSIS_H
 
-#include "./ModelBuilder/Surface.h"
+#include "Surface.h"
 
 //namespace vivid {
 

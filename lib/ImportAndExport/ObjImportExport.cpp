@@ -254,7 +254,7 @@ namespace vivid
             ExportToObjMaterial(aModel, aOutPutFile);
         }
         else{
-            AssimpExporter(aModel, "gltf2", aOutPutFile);
+//AssimpExporter(aModel, "gltf2", aOutPutFile);
             ExportToObjTexture(aModel, aOutPutFile+"_Vivid");
         }
     }

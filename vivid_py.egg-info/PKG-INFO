@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: vivid-py
-Version: 0.0.12
+Version: 0.0.13
 Summary: A 3D visualisation tool for simulations
 Home-page: https://galaxyhuntersil.wixsite.com/labs/vivid
 Author: GalaxyHuntersIL
@@ -8,6 +8,7 @@ Author-email: galaxyhuntersil@gmail.com
 License: UNKNOWN
 Platform: UNKNOWN
 Requires-Python: >=3.6
+Provides-Extra: test
 License-File: LICENSE
 
 

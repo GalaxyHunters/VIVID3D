@@ -6,27 +6,18 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 project(vivid
-        VERSION "0.0.14")
+        VERSION "0.1.0")
 
 
 include(GNUInstallDirs)
 
-set(RUN_MAIN ON)
 
 
 find_package( Boost 1.58.0 REQUIRED)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
-#find_package (Python 3.9 COMPONENTS Interpreter Development REQUIRED)
 
 add_subdirectory(lib/assimp)
-
-
-#set(PYBIND11_FINDPYTHON ON)
-#set(PYBIND11_PYTHON_VERSION 3.9)
-#
-#add_subdirectory(${PROJECT_SOURCE_DIR}/pybind11)
-
 
 
 #define used cpp packages
@@ -65,7 +56,6 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Errors.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
-        "${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h"
         "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
         )
 
@@ -81,7 +71,7 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport>
-        #$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include>
+#        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
@@ -104,7 +94,7 @@ install(DIRECTORY
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport"
-        "${PROJECT_SOURCE_DIR}/lib/pybind11/include"
+#        "${PROJECT_SOURCE_DIR}/pybind11/include/pybind11"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING PATTERN "*.h")
 
@@ -138,25 +128,53 @@ install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
         DESTINATION ${VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR})
 
 
+if(DEFINED SKBUILD)
+
+    # prevent an unused variable warning
+    set(ignoreMe "${SKBUILD}")
+
+    add_subdirectory(pybind11)
+    set(PYBIND11_FINDPYTHON ON)
+    set(PYBIND11_PYTHON_VERSION 3.9)
 
 
+    pybind11_add_module(_vivid
+            ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp
+            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h)
 
+#    target_include_directories(vivid_py PUBLIC
+#            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>
+#            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
+#            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+#            )
 
+    target_link_libraries(_vivid PRIVATE vivid)
 
+    # Installing the extension module to the root of the package
+    install(TARGETS _vivid DESTINATION .)
 
-#find_package( Boost 1.58.0 REQUIRED)
-#add_subdirectory(pybind11)
-#add_subdirectory(lib/assimp)
-#set(PYBIND11_FINDPYTHON ON)
-#set(PYBIND11_PYTHON_VERSION 3.9)
+#    configure_file("${PROJECT_SOURCE_DIR}/src/vivid_py/__main__.py.in"
+#            "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py")
 #
-#
-if(RUN_MAIN)
+#    install(FILES "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py" DESTINATION .)
+
+    if(APPLE)
+        set_target_properties(
+                _vivid PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+    else()
+        set_target_properties(_vivid PROPERTIES INSTALL_RPATH
+                "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+    endif()
+else()
     add_executable(vivid_main
             #main
             ${PROJECT_SOURCE_DIR}/src/main.cpp)
     target_link_libraries(vivid_main vivid)
 endif()
+
+
+
+
 #
 #
 #

@@ -1,8 +1,10 @@
-recursive-include vivid/pybind11 *
-graft vivid/pybind11
-recursive-include vivid/lib *
-recursive-include vivid/src *
-recursive-exclude vivid/lib/assimp/.git *
-recursive-exclude vivid/lib/assimp/.github *
-recursive-exclude vivid/lib/assimp/test *
+recursive-include pybind11 *
+graft pybind11
+graft cmake
+recursive-include lib *
+recursive-include src *
+recursive-exclude _skbuild *
+recursive-exclude lib/assimp/.git *
+recursive-exclude lib/assimp/.github *
+recursive-exclude lib/assimp/test *
 include *.md *.png CMakeLists.txt

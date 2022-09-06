@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 project(vivid
-        VERSION "0.1.0")
+        VERSION "0.1.2")
 
 
 include(GNUInstallDirs)
@@ -77,8 +77,8 @@ target_include_directories(vivid PUBLIC
 
 message("VIVID SHARED BUILD")
 
-target_link_libraries(vivid assimp)
 target_link_libraries(vivid VoronoiLib)
+target_link_libraries(vivid assimp)
 target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 

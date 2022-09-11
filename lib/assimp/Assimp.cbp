@@ -1,0 +1,2017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Assimp"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\lib\;CMake Files\lib\assimp\;CMake Files\lib\assimp\cmake-modules\;CMake Files\lib\assimp\include\;CMake Files\lib\assimp\include\assimp\;CMake Files\lib\assimp\contrib\;CMake Files\lib\assimp\contrib\zlib\;CMake Files\lib\assimp\code\;CMake Files\lib\SurfacingAlgorithms\;CMake Files\lib\SurfacingAlgorithms\huji-rich-Elad3DFast\;CMake Files\pybind11\;CMake Files\pybind11\tools\;CMake Files\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/lib/assimp"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zlibstatic">
+				<Option output="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/libzlibstatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DASSIMP_BUILD_NO_M3D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_EXPORTER"/>
+					<Add option="-D_LARGEFILE64_SOURCE=1"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/."/>
+					<Add directory="/home/naf/projects/Vivid/Vivid"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 zlibstatic"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zlibstatic/fast">
+				<Option output="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/libzlibstatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DASSIMP_BUILD_NO_M3D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_EXPORTER"/>
+					<Add option="-D_LARGEFILE64_SOURCE=1"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/."/>
+					<Add directory="/home/naf/projects/Vivid/Vivid"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 zlibstatic/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="assimp">
+				<Option output="/home/naf/projects/Vivid/Vivid/lib/assimp/bin/libassimp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DASSIMP_BUILD_DLL_EXPORT"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_EXPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_C4D_IMPORTER"/>
+					<Add option="-DMINIZ_USE_UNALIGNED_LOADS_AND_STORES=0"/>
+					<Add option="-DASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1"/>
+					<Add option="-DRAPIDJSON_HAS_STDSTRING=1"/>
+					<Add option="-DRAPIDJSON_NOMEMBERITERATORCLASS"/>
+					<Add option="-DOPENDDLPARSER_BUILD"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/."/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/pugixml/src"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/rapidjson/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/unzip"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/openddlparser/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/.."/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 assimp"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="assimp/fast">
+				<Option output="/home/naf/projects/Vivid/Vivid/lib/assimp/bin/libassimp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DASSIMP_BUILD_DLL_EXPORT"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_M3D_EXPORTER"/>
+					<Add option="-DASSIMP_BUILD_NO_C4D_IMPORTER"/>
+					<Add option="-DMINIZ_USE_UNALIGNED_LOADS_AND_STORES=0"/>
+					<Add option="-DASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1"/>
+					<Add option="-DRAPIDJSON_HAS_STDSTRING=1"/>
+					<Add option="-DRAPIDJSON_NOMEMBERITERATORCLASS"/>
+					<Add option="-DOPENDDLPARSER_BUILD"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/."/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/pugixml/src"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/rapidjson/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/unzip"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../contrib/openddlparser/include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/../include"/>
+					<Add directory="/home/naf/projects/Vivid/Vivid/lib/assimp/code/.."/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 assimp/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/lib/assimp/code/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSConverter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3DS/3DSLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/3MFTypes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/3MFXmlTags.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFOpcPackage.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/D3MFOpcPackage.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/XmlSerializer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/3MF/XmlSerializer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AC/ACLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AC/ACLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter_Geometry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter_Material.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter_Node.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/AMF/AMFImporter_Postprocess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/ASE/ASELoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/ASE/ASELoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/ASE/ASEParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/ASE/ASEParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinFileWriter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinFileWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assbin/AssbinLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assjson/cencode.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assjson/cencode.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assjson/json_exporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assjson/mesh_splitter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assjson/mesh_splitter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assxml/AssxmlExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assxml/AssxmlExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assxml/AssxmlFileWriter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Assxml/AssxmlFileWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/B3D/B3DImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/B3D/B3DImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/BVH/BVHLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/BVH/BVHLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderBMesh.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderBMesh.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderCustomData.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderCustomData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderDNA.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderDNA.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderDNA.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderIntermediate.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderModifier.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderModifier.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderScene.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderScene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderSceneGen.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderTessellator.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Blender/BlenderTessellator.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/COB/COBLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/COB/COBLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/COB/COBScene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/CSM/CSMLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/CSM/CSMLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaHelper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Collada/ColladaParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/DXF/DXFHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/DXF/DXFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/DXF/DXFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXBinaryTokenizer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXCompileConfig.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXConverter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXConverter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXDeformer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXDocument.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXDocument.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXDocumentUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXDocumentUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExportNode.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExportNode.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExportProperty.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExportProperty.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXImportSettings.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXMeshGeometry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXMeshGeometry.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXModel.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXNodeAttribute.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXProperties.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXProperties.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXTokenizer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXTokenizer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/FBX/FBXUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/HMP/HMPFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/HMP/HMPLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/HMP/HMPLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/HMP/HalfLifeFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCBoolean.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCCurve.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCGeometry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCOpenings.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCProfile.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCReaderGen1_2x3.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCReaderGen2_2x3.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCReaderGen_2x3.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IFC/IFCUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IQM/IQMImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IQM/IQMImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/IQM/iqm.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRMeshLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRMeshLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRShared.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Irr/IRRShared.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOAnimation.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOBLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWO/LWOMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWS/LWSLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/LWS/LWSLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DMaterials.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DWrapper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/M3DWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/M3D/m3d.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD2/MD2FileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD2/MD2Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD2/MD2Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD2/MD2NormalTable.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD3/MD3FileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD3/MD3Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD3/MD3Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD5/MD5Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD5/MD5Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD5/MD5Parser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MD5/MD5Parser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDC/MDCFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDC/MDCLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDC/MDCLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDC/MDCNormalTable.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1FileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1ImportDefinitions.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1ImportSettings.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1MDLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1MDLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HL1MeshTrivert.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/HalfLifeMDLBaseHeader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/LogFunctions.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/UniqueNameGenerator.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/HalfLife/UniqueNameGenerator.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/MDLDefaultColorMap.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/MDLFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/MDLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/MDLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MDL/MDLMaterialLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDCpp14.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDPmdParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDPmxParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDPmxParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MMD/MMDVmdParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MS3D/MS3DLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/MS3D/MS3DLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/NDO/NDOLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/NDO/NDOLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/NFF/NFFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/NFF/NFFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OFF/OFFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OFF/OFFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileMtlImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileMtlImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Obj/ObjTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreBinarySerializer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreBinarySerializer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreParsingUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreStructs.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreStructs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreXmlSerializer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ogre/OgreXmlSerializer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OpenGEX/OpenGEXExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OpenGEX/OpenGEXExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OpenGEX/OpenGEXImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OpenGEX/OpenGEXImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/OpenGEX/OpenGEXStructs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Ply/PlyParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3BSP/Q3BSPFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3BSP/Q3BSPFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3BSP/Q3BSPFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3BSP/Q3BSPFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3BSP/Q3BSPFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3D/Q3DLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Q3D/Q3DLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Raw/RawLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Raw/RawLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/SIB/SIBImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/SIB/SIBImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/SMD/SMDLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/SMD/SMDLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STEPParser/STEPFileEncoding.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STEPParser/STEPFileEncoding.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STEPParser/STEPFileReader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STEPParser/STEPFileReader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STL/STLExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STL/STLExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STL/STLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/STL/STLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Step/StepExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Step/StepExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Terragen/TerragenLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Terragen/TerragenLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Unreal/UnrealLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/Unreal/UnrealLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X/XFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DExporter.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DGeoHelper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DGeoHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Geometry3D.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Group.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Light.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Macro.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Metadata.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Networking.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Node.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Postprocess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Rendering.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Shape.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DImporter_Texturing.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DXmlHelper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/X3D/X3DXmlHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/XGL/XGLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/XGL/XGLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFAsset.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFAsset.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFAssetWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFAssetWriter.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFCommon.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF/glTFImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Asset.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Asset.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2AssetWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2AssetWriter.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Exporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Exporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Importer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/AssetLib/glTF2/glTF2Importer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/CApi/AssimpCExport.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/CApi/CInterfaceIOWrapper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/CApi/CInterfaceIOWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/AssertHandler.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/AssertHandler.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Assimp.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Base64.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/BaseImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/BaseProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/BaseProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Bitmap.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Compression.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Compression.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/CreateAnimMesh.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/DefaultIOStream.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/DefaultIOSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/DefaultLogger.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/DefaultProgressHandler.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Exceptional.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Exporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/FileLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/IFF.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/IOSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Importer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Importer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/ImporterRegistry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Maybe.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/PolyTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/PostStepRegistry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/RemoveComments.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/SGSpatialSort.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/SceneCombiner.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/ScenePreprocessor.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/ScenePreprocessor.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/ScenePrivate.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/SkeletonMeshBuilder.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/SpatialSort.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/StandardShapes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/StbCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/StdOStreamLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Subdivision.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/TargetAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/TargetAnimation.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Version.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/VertexTriangleAdjacency.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/VertexTriangleAdjacency.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/Win32DebugLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/ZipArchiveIOSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/material.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/scene.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/simd.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Common/simd.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Material/MaterialSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Material/MaterialSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Pbrt/PbrtExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/Pbrt/PbrtExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ArmaturePopulate.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ArmaturePopulate.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/CalcTangentsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/CalcTangentsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ComputeUVMappingProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ComputeUVMappingProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ConvertToLHProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ConvertToLHProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/DeboneProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/DeboneProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/DropFaceNormalsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/DropFaceNormalsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/EmbedTexturesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/EmbedTexturesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindDegenerates.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindDegenerates.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindInstancesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindInstancesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindInvalidDataProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FindInvalidDataProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FixNormalsStep.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/FixNormalsStep.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenBoundingBoxesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenBoundingBoxesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenFaceNormalsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenFaceNormalsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenVertexNormalsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/GenVertexNormalsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ImproveCacheLocality.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ImproveCacheLocality.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/JoinVerticesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/JoinVerticesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/LimitBoneWeightsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/LimitBoneWeightsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/MakeVerboseFormat.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/MakeVerboseFormat.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/OptimizeGraph.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/OptimizeGraph.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/OptimizeMeshes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/OptimizeMeshes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/PretransformVertices.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/PretransformVertices.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ProcessHelper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ProcessHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/RemoveRedundantMaterials.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/RemoveRedundantMaterials.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/RemoveVCProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/RemoveVCProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ScaleProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ScaleProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SortByPTypeProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SortByPTypeProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SplitByBoneCountProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SplitByBoneCountProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SplitLargeMeshes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/SplitLargeMeshes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/TextureTransform.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/TextureTransform.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/TriangulateProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/TriangulateProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ValidateDataStructure.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/PostProcessing/ValidateDataStructure.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcAdjacencyInfo.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcArithmeticCodec.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcArithmeticCodec.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcBinaryStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDVEncodeParams.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDynamicVector.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDynamicVectorDecoder.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDynamicVectorDecoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDynamicVectorEncoder.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcDynamicVectorEncoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcFIFO.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcIndexedFaceSet.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcIndexedFaceSet.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcSC3DMCDecoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcSC3DMCDecoder.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcSC3DMCEncodeParams.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcSC3DMCEncoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcSC3DMCEncoder.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTimer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTools.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleFans.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleFans.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleListDecoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleListDecoder.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleListEncoder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcTriangleListEncoder.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcVector.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/Open3DGC/o3dgcVector.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/clipper/clipper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/clipper/clipper.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/DDLNode.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/OpenDDLCommon.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/OpenDDLExport.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/OpenDDLParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/OpenDDLStream.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/code/Value.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/DDLNode.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/OpenDDLCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/OpenDDLExport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/OpenDDLParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/OpenDDLParserUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/OpenDDLStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/openddlparser/include/openddlparser/Value.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/common/shapes.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/common/shapes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/common/utils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/advancing_front.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/advancing_front.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/cdt.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/cdt.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/sweep.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/sweep.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/sweep_context.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/poly2tri/poly2tri/sweep/sweep_context.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/pugixml/src/pugiconfig.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/pugixml/src/pugixml.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/stb/stb_image.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/crypt.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/crypt.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/ioapi.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/ioapi.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/unzip.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/unzip/unzip.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zip/src/miniz.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zip/src/zip.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zip/src/zip.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/adler32.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/compress.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/crc32.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/crc32.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/deflate.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/deflate.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/gzclose.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/gzguts.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/gzlib.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/gzread.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/gzwrite.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/infback.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inffast.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inffast.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inffixed.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inflate.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inflate.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inftrees.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/inftrees.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/trees.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/trees.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/uncompr.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zconf.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zlib.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zutil.c">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zutil.h">
+			<Option target="zlibstatic"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Base64.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/BaseImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Bitmap.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/BlobIOSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ByteSwapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ColladaMetaData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Compiler/poppack1.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Compiler/pstdint.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Compiler/pushpack1.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/CreateAnimMesh.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/DefaultIOStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/DefaultIOSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/DefaultLogger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Exceptional.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Exporter.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/GenericProperty.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/GltfMaterial.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Hash.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/IOStream.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/IOStreamBuffer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/IOSystem.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Importer.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/LineSplitter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/LogAux.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/LogStream.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Logger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/MathFunctions.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/MemoryIOWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/NullLogger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ObjMaterial.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ParsingUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Profiler.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ProgressHandler.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/RemoveComments.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SGSpatialSort.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SceneCombiner.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SkeletonMeshBuilder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SmallVector.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SmoothingGroups.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SmoothingGroups.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/SpatialSort.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/StandardShapes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/StreamReader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/StreamWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/StringComparison.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/StringUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Subdivision.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/TinyFormatter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/Vertex.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/XMLTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/XmlParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ZipArchiveIOSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/aabb.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/ai_assert.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/anim.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/camera.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/cexport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/cfileio.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/cimport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/color4.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/color4.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/commonMetaData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/config.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/defs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/fast_atof.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/importerdesc.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/light.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/material.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/material.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/matrix3x3.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/matrix3x3.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/matrix4x4.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/matrix4x4.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/mesh.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/metadata.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/pbrmaterial.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/postprocess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/qnan.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/quaternion.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/quaternion.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/scene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/texture.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/types.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/vector2.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/vector2.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/vector3.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/vector3.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/version.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/assimp.pc.in">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/revision.h.in">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindPkgMacros.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindRT.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindZLIB.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/PrecompiledHeader.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/assimp-plain-config.cmake.in">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/config.h.in">
+			<Option virtualFolder="CMake Files\lib\assimp\include\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zconf.h.cmakein">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zlib.pc.cmakein">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\code\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\SurfacingAlgorithms\huji-rich-Elad3DFast\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\pybind11\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/JoinPaths.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/pybind11Common.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/pybind11NewTools.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/cmake/vividConfig.cmake.in">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

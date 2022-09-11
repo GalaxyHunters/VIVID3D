@@ -9,10 +9,10 @@ include(GNUInstallDirs)
 #project(VoronoiLib VERSION 1.0.0 DESCRIPTION "Library used for running the voronoi algorithm.")
 #Checks if the library is already present, if so, skips this part entirely.
 include_directories()
-IF(NOT TARGET VoronoiLib)
+IF(NOT TARGET voronoi)
     # Create a new LIBRARY target as a shared library, note that this creates an so file in the cmake-debug output dir.
     # Adding the source code.
-    add_library(VoronoiLib SHARED
+    add_library(voronoi SHARED
             # source/3D/GeometryCommon
             ${CMAKE_CURRENT_SOURCE_DIR}/source/3D/GeometryCommon/Voronoi3D.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/source/3D/GeometryCommon/Delaunay3D.cpp
@@ -50,7 +50,7 @@ IF(NOT TARGET VoronoiLib)
 #            lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/tessellation/geometry.cpp
             )
     # include_directories(${CMAKE_MODULE_PATH})
-    target_include_directories(VoronoiLib PUBLIC
+    target_include_directories(voronoi PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/3D/GeometryCommon>
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/source/misc>
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
@@ -62,14 +62,14 @@ IF(NOT TARGET VoronoiLib)
             FILES_MATCHING PATTERN "*.h")
 
     install(
-            TARGETS VoronoiLib
-            EXPORT VoronoiLibTargets
+            TARGETS voronoi
+            EXPORT voronoiTargets
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-    set(VORONOI_CMAKE_PACKAGE_INSTALL_SUBDIR "share/voronoi/cmake")
+    set(VORONOI_CMAKE_PACKAGE_INSTALL_SUBDIR "lib/cmake/voronoi") #"share/voronoi/cmake"
 
     install(
-            EXPORT VoronoiLibTargets
+            EXPORT voronoiTargets
             NAMESPACE voronoi::
             DESTINATION ${VORONOI_CMAKE_PACKAGE_INSTALL_SUBDIR})
 

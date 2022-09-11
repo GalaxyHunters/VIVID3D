@@ -90,7 +90,7 @@ target_include_directories(vivid PUBLIC
 
 message("VIVID SHARED BUILD")
 
-target_link_libraries(vivid VoronoiLib)
+target_link_libraries(vivid voronoi)
 target_link_libraries(vivid assimp::assimp)
 target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
@@ -117,7 +117,7 @@ install(
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 
-set(VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR "share/vivid/cmake")
+set(VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR "lib/cmake/vivid")   #"share/vivid/cmake"
 
 install(
         EXPORT vividTargets

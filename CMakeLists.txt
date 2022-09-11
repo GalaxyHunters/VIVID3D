@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 project(vivid
-        VERSION "0.1.2")
+        VERSION "0.1.5")
 
 
 include(GNUInstallDirs)
@@ -17,8 +17,17 @@ find_package( Boost 1.58.0 REQUIRED)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
 
-add_subdirectory(lib/assimp)
+set(ASSIMP_INSTALL OFF CACHE INTERNAL  "")
+set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL  "")
+set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL  "")
 
+set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
+
+add_subdirectory(${ASSIMP_DIR})
+link_directories(${ASSIMP_LIBRARY_DIRS})
+include_directories(${ASSIMP_DIR}/include)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/lib/assimp/cmake-modules)
+#find_package(assimp COMPONENTS assimp REQUIRED)
 
 #define used cpp packages
 
@@ -78,7 +87,7 @@ target_include_directories(vivid PUBLIC
 message("VIVID SHARED BUILD")
 
 target_link_libraries(vivid VoronoiLib)
-target_link_libraries(vivid assimp)
+target_link_libraries(vivid assimp::assimp)
 target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(vivid Boost::boost)
 

@@ -3,7 +3,6 @@
 /CMakeFiles/
 /binding_python_version/
 /venv/
-/tests/test_models/
 /Vivid_py.egg-info/
 /temp-debug changes/
 /dist/
@@ -11,3 +10,4 @@
 /_skbuild/
 /src/vivid3d.egg-info/
 vivid
+vivid_main

@@ -24,7 +24,7 @@ using namespace vivid;
 using namespace std;
 
 const std::string DATA_MODEL_PATH  = "./tests/test_data/";
-const std::string TEST_OUTPUT_PATH = "/home/naf/projects/Vivid/Vivid/tests/test_models/"; //"./tests/test_models/";
+const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 
 
 /* Test basic shapes creation, add them to a Model and export to OBJ. */

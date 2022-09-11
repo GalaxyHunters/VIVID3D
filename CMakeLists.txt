@@ -5,8 +5,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
+
 project(vivid
         VERSION "0.1.5")
+
+set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
+message("${PROJECT_SOURCE_DIR}")
 
 
 include(GNUInstallDirs)
@@ -25,7 +29,6 @@ set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL  "")
 set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
 
 add_subdirectory(${ASSIMP_DIR})
-link_directories(${ASSIMP_LIBRARY_DIRS})
 include_directories(${ASSIMP_DIR}/include)
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/lib/assimp/cmake-modules)
 #find_package(assimp COMPONENTS assimp REQUIRED)

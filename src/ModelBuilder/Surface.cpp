@@ -8,22 +8,22 @@ constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
 constexpr coord_t NOISE_PERCENTAGE = 0.005;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
     // Check input validity
-    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
+    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arColorField.size())){
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_NOT_EQUAL);
     }
-    if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
+    if(arInputPoints.empty() || arInputPoints.empty() || arColorField.empty()) {
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
-    vector<quan_t> norm_quan = NormQuan(arQuan, aVMin, aVMax);
+    vector<coord_t> UV_coords = NormColorField(arColorField, aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), norm_quan[i], arMask[i]));
+        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), UV_coords[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points);
@@ -33,7 +33,7 @@ CSurface::CSurface(const CSurface &surf)
 {
     mInputPoints = surf.mInputPoints;
     mCreationMask = surf.mCreationMask;
-    mQuan = surf.mQuan;
+    mUVcoords = surf.mUVcoords;
     mCenVector = surf.mCenVector;
     mBoxPair = surf.mBoxPair;
     mScale = surf.mScale;
@@ -51,7 +51,7 @@ CSurface::CSurface(const CSurface &surf)
     CSurfaceFace temp;
     for (const auto & mVecFace : surf.mSurfFaces) {
         temp = CSurfaceFace();
-        temp.mColor = mVecFace.mColor;
+        temp.mUVcoord = mVecFace.mUVcoord;
         temp.mPairPoints = mVecFace.mPairPoints;
         temp.mVertices.clear();
         for (const auto & mPoint : mVecFace.mVertices){
@@ -101,7 +101,7 @@ CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
                 set_points.insert(indexes[mPoint]);
             }
         }
-        faces.push_back(CFace(face_points, mVecFace.mColor));
+        faces.push_back(CFace(face_points, mVecFace.mUVcoord));
         face_points = vector<size_t>();
         set_points.clear();
     }
@@ -133,7 +133,7 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    quan_t quan;
+    coord_t color_field;
     vector<shared_ptr<CPoint>> face_points;
 
     for (auto & vorn_face : vorn_faces) {
@@ -141,13 +141,13 @@ void CSurface::RunVorn()
         vorn_face.pop_back();
         c_point2 = vorn_face.back();
         vorn_face.pop_back();
-        quan = 0; //quan will be defined later in the program(clean faces) so for now this will be a placeholder
+        color_field = 0; //color_field will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
         for (size_t & point : vorn_face) {
             face_points.push_back(mVertices[point]);
         }
-        new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
+        new_faces.push_back(CSurfaceFace(face_points, color_field, pair<size_t, size_t>(c_point1, c_point2)));
     }
 
     mSurfFaces = new_faces;
@@ -213,11 +213,11 @@ void CSurface::CleanFaces()
         if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
             if (mCreationMask[c_point1] != mCreationMask[c_point2]) { //the face is a part of the surf
                 new_faces.push_back(mVecFace);
-                new_faces.back().mColor = mQuan[c_point1]*0.5 + mQuan[c_point2]*0.5;
+                new_faces.back().mUVcoord = mUVcoords[c_point1] * 0.5 + mUVcoords[c_point2] * 0.5;
             }
         } else {
             new_faces.push_back(mVecFace);
-            new_faces.back().mColor = 0;
+            new_faces.back().mUVcoord = 0;
         }
 
     }
@@ -304,12 +304,12 @@ void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 {
     vector<CSurfacePoint> new_points = RemoveDoublesVornInput(arPoints);
     mInputPoints.clear();
-    mQuan.clear();
+    mUVcoords.clear();
     mCreationMask.clear();
     for (auto & point : new_points)
     {
         mInputPoints.push_back(point.mPoint);
-        mQuan.push_back(point.mQuan);
+        mUVcoords.push_back(point.UVcoord);
         mCreationMask.push_back(point.mMaskIsTrue);
     }
 }
@@ -349,27 +349,27 @@ void CSurface::CleanDoublePoints()
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-vector<coord_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
+vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
-    if (arQuan.size() == 0){ //incase the user doesnt input any color
-        arQuan = vector<quan_t>(mCreationMask.size(), 1);
-        return arQuan;
+    if (arColorField.size() == 0){ //incase the user doesnt input any color
+        arColorField = vector<coord_t>(mCreationMask.size(), 1);
+        return arColorField;
     }
     if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
-        aVMax = *max_element(arQuan.begin(), arQuan.end());
-        aVMin = *min_element(arQuan.begin(), arQuan.end());
+        aVMax = *max_element(arColorField.begin(), arColorField.end());
+        aVMin = *min_element(arColorField.begin(), arColorField.end());
     }
-    if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<coord_t>(arQuan.size(), 1);
-        return arQuan;
+    if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (arColorField is a vector where all the values are the same)
+        arColorField = vector<coord_t>(arColorField.size(), 1);
+        return arColorField;
     }
     coord_t divide_by = 1. / (aVMax - aVMin);
-    for (auto it = arQuan.begin(); it != arQuan.end(); it++) {
+    for (auto it = arColorField.begin(); it != arColorField.end(); it++) {
         *it = (*it - aVMin) * divide_by;
         if (*it > 1) *it = 1;
         if (*it < 0) *it = 0;
     }
-    return arQuan;
+    return arColorField;
 }
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)

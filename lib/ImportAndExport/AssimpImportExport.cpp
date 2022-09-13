@@ -130,7 +130,7 @@ namespace vivid {
         */
         OutMesh->mTextureCoords[0] = new aiVector3D [vVertices.size()];
         OutMesh->mNumUVComponents[0] = 2; //to be checked
-        //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetQuan(), 0);
+        //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetUVcoords(), 0);
 
 
         //assign faces and find avrage UVcoord per point
@@ -144,9 +144,9 @@ namespace vivid {
             face.mIndices[1] = indexes[1];
             face.mIndices[2] = indexes[2];
             // UV coordinates
-            vetUVcoord[indexes[0]].insert(it->GetQuan());
-            vetUVcoord[indexes[1]].insert(it->GetQuan());
-            vetUVcoord[indexes[2]].insert(it->GetQuan());
+            vetUVcoord[indexes[0]].insert(it->GetUVcoord());
+            vetUVcoord[indexes[1]].insert(it->GetUVcoord());
+            vetUVcoord[indexes[2]].insert(it->GetUVcoord());
         }
 
         //assign points

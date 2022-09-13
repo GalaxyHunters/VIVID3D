@@ -15,7 +15,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
 //            points.push_back(CPoint(i,i,0.));
 //        }
 //    }
-    vector<coord_t> quan = {};
+    vector<coord_t> UV_coords = {};
     coord_t temp_x, temp_y;
 
     for (int x = -aBoxSize; x <= aBoxSize; x += 1) {
@@ -33,7 +33,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
             }
             CPoint point = {temp_x,z,temp_y};
             points.push_back(point);
-            quan.push_back(z);
+            UV_coords.push_back(z);
         }
     }
 
@@ -42,21 +42,21 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
             points[i] = CPoint(points[i].X(), 0, points[i].Z());
         }
     }
-    coord_t v_max = *max_element(quan.begin(), quan.end());
-    coord_t v_min = *min_element(quan.begin(), quan.end());
+    coord_t v_max = *max_element(UV_coords.begin(), UV_coords.end());
+    coord_t v_min = *min_element(UV_coords.begin(), UV_coords.end());
     if (v_max <= 0) {
         v_max = v_min;
-        v_min = *max_element(quan.begin(), quan.end());
+        v_min = *max_element(UV_coords.begin(), UV_coords.end());
     }
     coord_t divide_by = 1. / (v_max - v_min);
 
     for (int i = 0; i < points.size(); i++) {
-        quan[i] = (quan[i] - v_min) * divide_by;
+        UV_coords[i] = (UV_coords[i] - v_min) * divide_by;
     }
     vector<CFace> faces;
     for (size_t i = 0; i < (2*aBoxSize)*(2*aBoxSize); i += aBoxSize*2+1) {
         for (size_t j = 0; j < 2*(aBoxSize); j += 1) {
-            coord_t color = (quan[i + j] + quan[i + j + 1] + quan[i + 2 * aBoxSize + j + 1] + quan[i + 2 * aBoxSize + j]) / 4.;
+            coord_t color = (UV_coords[i + j] + UV_coords[i + j + 1] + UV_coords[i + 2 * aBoxSize + j + 1] + UV_coords[i + 2 * aBoxSize + j]) / 4.;
             //            if (!(isinf(points[i+j].Y()) & isinf(points[i+j+1].Y()) & isinf(points[i+j+2+2*aBoxSize].Y()) & isinf(points[i+j+1+2*aBoxSize].Y()))) {
             //                faces.push_back(CFace({i + j, i + (j + 1), i + 2*aBoxSize + (j + 2), i + 2*aBoxSize + j + 1}, color));
             //                cout << i + j << " " << i + (j + 1) << " " << i + 2*aBoxSize + (j + 2) << " " << i + 2*aBoxSize + j + 1<< endl;

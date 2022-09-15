@@ -4,7 +4,7 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/functional.h>
-#include "./ModelBuilder/Point.h"
+#include "Point.h"
 
 using namespace vivid;
 namespace py = pybind11;

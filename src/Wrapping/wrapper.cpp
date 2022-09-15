@@ -1,11 +1,11 @@
 #include "TypeCasting.h"
-#include "./ModelBuilder/Surface.h"
-#include "./ModelBuilder/ModelComponent.h"
-#include "./ModelBuilder/Mesh.h"
-#include "./ModelBuilder/Line.h"
-#include "./ModelBuilder/PointCloud.h"
-#include "./ModelBuilder/Shapes.h"
-#include "./ModelBuilder/Model.h"
+#include "Surface.h"
+#include "ModelComponent.h"
+#include "Mesh.h"
+#include "Line.h"
+#include "PointCloud.h"
+#include "Shapes.h"
+#include "Model.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -28,7 +28,7 @@ py::array_t<double> make_cpoint(const double aValue) {
 }
 
 
-PYBIND11_MODULE(vivid_py, m) {
+PYBIND11_MODULE(_vivid, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
 
     // TODO: FIX THIS!!!
@@ -72,7 +72,7 @@ PYBIND11_MODULE(vivid_py, m) {
     py::class_<CSurface>(m, "Surface")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("quan") = vector<coord_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
+                 py::arg("points"), py::arg("mask"), py::arg("quan"), py::arg("quan_min") = 0, py::arg("quan_max") = 0) //quan basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
@@ -124,7 +124,10 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("output_file"), py::arg("with_texture") = 1)
             .def("laplacian_smooth", &CMesh::LaplacianSmooth,
                  "Smooths the surface by HC Laplacian Algorithm.",
-                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
+                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
+            .def("export", &CMesh::Export,
+                 "writes CMesh to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CModel>(m, "Model")
             .def(py::init<> (), "default constructor for CModel")
@@ -141,7 +144,10 @@ PYBIND11_MODULE(vivid_py, m) {
                  "Returns the list of meshes held by model")
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
-                 py::arg("output_file"), py::arg("with_texture") = 1);
+                 py::arg("output_file"), py::arg("with_texture") = 1)
+            .def("export", &CModel::Export,
+                 "writes CModel to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     //Animations:
 //    m.def("animation", &Animate,

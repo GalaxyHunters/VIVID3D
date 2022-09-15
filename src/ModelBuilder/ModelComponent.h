@@ -5,7 +5,7 @@
 #include <functional>
 #include <map>
 
-#include "./Utils/LogFile.h"
+#include "LogFile.h"
 
 #include "Point.h"
 #include "Face.h"

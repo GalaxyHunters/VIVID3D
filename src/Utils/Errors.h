@@ -17,7 +17,7 @@ const std::map<ELogCode, std::string> CODE_MAP { {ELogCode::LOG_ERROR,"ERROR: "}
 enum ELogMessage
 {
     ARRAYS_NOT_EQUAL=0, ARRAYS_EMPTY=1, MISSING_BOOLEAN_VALUES=2,
-    INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4
+    INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4, INVALID_FRAME_VALUE=5
 };
 
 //typedef std::function<void (const ELogCode aCode, const ELogMessage aMsg)> (reportCB_t);
@@ -32,6 +32,8 @@ const std::map<ELogMessage, std::string> ERROR_TYPE_STRING {  {ELogMessage::ARRA
                                                                       "ValueError - Smooth Factor must be between 1 and 8"},
                                                               {ELogMessage::INVALID_ALPHA_VALUE,
                                                                       "ValueError - Alpha must be between 0 and 1"},
+                                                              {ELogMessage::INVALID_FRAME_VALUE,
+                                                               "ValueError - frame must bw within Models.size range"}
 };
 
 

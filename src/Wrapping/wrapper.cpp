@@ -72,7 +72,7 @@ PYBIND11_MODULE(_vivid, m) {
     py::class_<CSurface>(m, "Surface")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("quan"), py::arg("quan_min") = 0, py::arg("quan_max") = 0) //quan basic value = vector<coord_t>(0)
+                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0) //color_field basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
@@ -104,13 +104,13 @@ PYBIND11_MODULE(_vivid, m) {
     py::class_<CPointCloud>(m, "PointCloud", model_component)
             .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
                  "Constructor for Point Cloud",
-                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
+                 py::arg("points"), py::arg("color_field"), py::arg("alpha"), py::arg("label"))
             .def(py::init<const CPointCloud&>(),
                  "Copy Constructor for Point Cloud",
                  py::arg("point_cloud"))
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
-                 py::arg("points"), py::arg("quan"));
+                 py::arg("points"), py::arg("color_field"));
 
     py::class_<CMesh>(m, "Mesh", model_component)
             .def(py::init<const CMesh &> (),

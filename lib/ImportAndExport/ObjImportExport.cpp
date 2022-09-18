@@ -47,7 +47,6 @@ namespace vivid
         aOBJFile.flush();
 
     }
-
     void WriteNewFace(ofstream& aOBJFile, CFace aFace, size_t aPointsCounter, string aWriteType)
     {
         aOBJFile << aWriteType+" ";
@@ -254,8 +253,7 @@ namespace vivid
             ExportToObjMaterial(aModel, aOutPutFile);
         }
         else{
-//AssimpExporter(aModel, "gltf2", aOutPutFile);
-            ExportToObjTexture(aModel, aOutPutFile+"_Vivid");
+            ExportToObjTexture(aModel, aOutPutFile);
         }
     }
 

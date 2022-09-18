@@ -61,7 +61,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Animation.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
+        #"${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp" //for now redacted
 
         "${PROJECT_SOURCE_DIR}/src/Extra/Analysis.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"

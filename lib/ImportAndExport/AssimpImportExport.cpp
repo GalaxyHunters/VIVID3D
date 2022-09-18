@@ -11,80 +11,239 @@ namespace vivid {
                     {"fbx",   ".fbx"}
             };
 
+    string CAssimpExport::OutputPath = "";
+    map<string,string> CAssimpExport::TextureNameToIndex = {};
     /*
      Exports the model into a file of a certain type
      parameters: arModel - the model
                  aFileType - the assimp-format type of the file
                  aOutputPath - the path of the file, including the name but not including the file ending
      */
-    int AssimpExporter(CModel &arModel, std::string aFileType, std::string aOutputPath) {
+    int CAssimpExport::AssimpExporter(CModel &arModel, std::string aFileType, std::string aOutputPath) {
         Assimp::Exporter exp;
         int RET_VALUE;
 
-        aOutputPath += "_Assimp"; // debug
-
-        aiScene *scene = GenerateScene(arModel, aOutputPath);
+        OutputPath = aOutputPath;
+        aiScene *scene = GenerateScene(arModel);
 
         aOutputPath +=  fileFormats[aFileType];
         RET_VALUE = exp.Export(scene, aFileType, aOutputPath);
         if (RET_VALUE != AI_SUCCESS) {
             cerr << exp.GetErrorString() << endl;
         }
+
+        TextureNameToIndex.clear();
         delete scene;
         return RET_VALUE;
     }
 
+    //Animation export -------------------------------------------------------------------------------------------------------------------------------------------
+    /*
+     Exports an animation model into a file of a certain type
+     parameters: arAnimation - the model
+                 aFileType - the assimp-format type of the file
+                 aOutputPath - the path of the file, including the name but not including the file ending
+     */
+    int CAssimpExport::AnimationExporter(CAnimation &arAnimation, std::string aFileType, std::string aOutputPath){
+        int RET_VALUE = 1;
+        Assimp::Exporter exp;
 
-    aiScene *GenerateScene(vivid::CModel &model, std::string &arOutputPath, bool aImbeddedTexture) {
+        OutputPath = aOutputPath;
+        aiScene *scene = GenerateAnimationScene(arAnimation);
+
+
+        aOutputPath +=  fileFormats[aFileType];
+        RET_VALUE = exp.Export(scene, aFileType, aOutputPath);
+        if (RET_VALUE != AI_SUCCESS) {
+            cerr << exp.GetErrorString() << endl;
+        }
+
+        TextureNameToIndex.clear();
+        delete scene;
+        return RET_VALUE;
+    }
+
+    aiScene * CAssimpExport::GenerateAnimationScene(CAnimation &arAnimation){
         //setup scene
         aiScene *scene = new aiScene();
         scene->mRootNode = new aiNode();
+        scene->mRootNode->mName = aiString("root_node");
+
+        vector<vivid::CModel> models = arAnimation.GetModels();
+
+        scene->mNumMeshes = arAnimation.GetNumMeshes();
+        scene->mMeshes = new aiMesh *[scene->mNumMeshes];
+
+        scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
+        scene->mNumMaterials = scene->mNumMeshes;
+
+        scene->mRootNode->mNumChildren = 1;
+        scene->mRootNode->mChildren = new aiNode * [1];
+        aiNode *center_node = GenerateNode("center_node", 0, 0);
+        scene->mRootNode->mChildren[0] = center_node;
+        scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
+        center_node->mNumChildren = models.size();
+        center_node->mChildren = new aiNode * [models.size()];
+
+        scene->mNumAnimations = models.size();
+        scene->mAnimations = new aiAnimation *[models.size()];
+
+        vector<vivid::CModelComponent> meshes;
+        string texture_path;
+        size_t mesh_counter = 0;
+        for(int model_index = 0; model_index != models.size(); model_index++){
+            meshes = models[model_index].GetMeshes();
+            center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter, mesh_counter+meshes.size());
+            center_node->mChildren[model_index]->mParent = center_node;
+            for (int mesh_index = 0; mesh_index < scene->mNumMeshes; mesh_index++) {
+                //handle mesh texture
+                texture_path = AddTexture(meshes[mesh_index].GetClm());
+                //setting up the mesh structure
+                scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
+                scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path);
+                scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
+                mesh_counter++;
+            }
+            //do animation
+            //basic animation
+            scene->mAnimations[model_index] = GenerateAnimation(arAnimation, model_index);
+        }
+
+        return scene;
+    }
+
+    aiScene * CAssimpExport::GenerateScene(vivid::CModel &model) {
+        //setup scene
+        aiScene *scene = new aiScene();
+        scene->mRootNode = new aiNode();
+        scene->mRootNode->mName = aiString("root_node");
 
         scene->mNumMeshes = model.GetNumMeshes();
         scene->mMeshes = new aiMesh *[scene->mNumMeshes];
-        scene->mRootNode->mNumMeshes = scene->mNumMeshes;
-        scene->mRootNode->mMeshes = new unsigned int[scene->mRootNode->mNumMeshes];
+
+        scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
+        scene->mNumMaterials = scene->mNumMeshes;
+
+        scene->mRootNode->mNumChildren = 1;
+        scene->mRootNode->mChildren = new aiNode * [1];
+        scene->mRootNode->mChildren[0] = GenerateNode("basic_node", 0, scene->mNumMeshes);
+        scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
+
+
         vector<vivid::CModelComponent> meshes = model.GetMeshes();
 
-        scene->mMaterials = new aiMaterial *[model.GetNumMeshes()];
-        scene->mNumMaterials = model.GetNumMeshes();
-
-        aiTexture** temp_texture_array = new aiTexture * [meshes.size()];
-        map<string,string> TextureNameToIndex{};
         string texture_path;
-        size_t embedded_texture_count = 0;
         for (int i = 0; i < scene->mNumMeshes; i++) {
             //handle mesh texture
-            CColorMap MeshCLM = meshes[i].GetClm();
-            if (TextureNameToIndex.find(MeshCLM.GetName()) != TextureNameToIndex.end()) { //check if texture has been written already
-                texture_path = TextureNameToIndex[MeshCLM.GetName()];
-            } // need to write the texture
-            else{
-                if(!aImbeddedTexture) texture_path = GenerateTexturePNG(MeshCLM, arOutputPath);
-                if(aImbeddedTexture) {
-                    temp_texture_array[embedded_texture_count] = GenerateTextureEmbedded(MeshCLM);
-                    texture_path = '*' + embedded_texture_count;
-                    embedded_texture_count++;
-                }
-                TextureNameToIndex[MeshCLM.GetName()] = texture_path;
-            }
-
+            texture_path = AddTexture(meshes[i].GetClm());
             //setting up the mesh structure
             scene->mMeshes[i] = GenerateMesh(&meshes[i]);
             scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path);
             scene->mMeshes[i]->mMaterialIndex = i;
-            scene->mRootNode->mMeshes[i] = i;
-        }
-        //setup scene->mTextures
-        scene->mTextures = new aiTexture *[embedded_texture_count]; // should be number of texture in models but we dont track that data yet
-        scene->mNumTextures = embedded_texture_count; // should be number of texture in models but we dont track that data yet
-        for(int i = 0; i < embedded_texture_count; i++){
-            scene->mTextures[i] = temp_texture_array[i];
         }
         return scene;
     }
 
-    string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath){
+    void MoveAnimation(aiAnimation* arAnim, CPoint* arAnimValue){
+        if(*arAnimValue != CPoint()){
+            arAnim->mChannels[0]->mNumPositionKeys = int(arAnim->mDuration);
+            arAnim->mChannels[0]->mPositionKeys = new aiVectorKey[int(arAnim->mDuration)];
+            *arAnimValue = (*arAnimValue)/arAnim->mDuration;
+            aiVector3D temp_vec;
+            for(int i = 0; i != arAnim->mDuration; i++){
+                temp_vec = aiVector3D ((arAnimValue->X()*i)+1,(arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1);
+                arAnim->mChannels[0]->mPositionKeys[i] = aiVectorKey(i, temp_vec);
+            }
+        }
+        else
+        {
+            arAnim->mChannels[0]->mNumPositionKeys = 1;
+            arAnim->mChannels[0]->mPositionKeys = new aiVectorKey[1];
+            arAnim->mChannels[0]->mPositionKeys[0] = aiVectorKey(0, aiVector3D (1,1,1));
+        }
+    }
+
+    void RotateAnimation(aiAnimation* arAnim, CPoint* arAnimValue){ // TODO make this work right
+        if(*arAnimValue != CPoint()){
+            arAnim->mChannels[0]->mNumRotationKeys = int(arAnim->mDuration);
+            arAnim->mChannels[0]->mRotationKeys = new aiQuatKey[int(arAnim->mDuration)];
+            *arAnimValue = *arAnimValue/arAnim->mDuration;
+            for(int i = 0; i != arAnim->mDuration; i++){
+                arAnim->mChannels[0]->mRotationKeys[i] = aiQuatKey(i, aiQuaternion (arAnimValue->X()*i,arAnimValue->Y()*i,arAnimValue->Z()*i));
+            }
+        }
+        else
+        {
+            arAnim->mChannels[0]->mNumRotationKeys = 1;
+            arAnim->mChannels[0]->mRotationKeys = new aiQuatKey[1];
+            arAnim->mChannels[0]->mRotationKeys[0] = aiQuatKey(0, aiQuaternion (1,1,1, 1));
+        }
+    }
+
+    void ScaleAnimation(aiAnimation* arAnim, CPoint* arAnimValue){
+        if(*arAnimValue != CPoint()){
+            arAnim->mChannels[0]->mNumScalingKeys = int(arAnim->mDuration);
+            arAnim->mChannels[0]->mScalingKeys = new aiVectorKey[int(arAnim->mDuration)];
+            *arAnimValue = *arAnimValue/arAnim->mDuration;
+            aiVector3D temp_vec;
+            for(int i = 0; i != arAnim->mDuration; i++){
+                temp_vec = aiVector3D ((arAnimValue->X()*i)+1,(arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1);
+                arAnim->mChannels[0]->mScalingKeys[i] = aiVectorKey(i, temp_vec);
+            }
+        }
+        else
+        {
+            arAnim->mChannels[0]->mNumScalingKeys = 1;
+            arAnim->mChannels[0]->mScalingKeys = new aiVectorKey[1];
+            arAnim->mChannels[0]->mScalingKeys[0] = aiVectorKey(0, aiVector3D (1,1,1));
+        }
+    }
+    aiAnimation * CAssimpExport::GenerateAnimation(CAnimation &arAnimation, size_t aIndex){
+        aiAnimation *anim = new aiAnimation;
+        anim->mDuration = arAnimation.GetDuration();
+        anim->mTicksPerSecond = arAnimation.GetTicksPerSecond();
+        anim->mName = aiString("animation_"+to_string(aIndex));
+        anim->mNumChannels = 1;
+        anim->mChannels = new aiNodeAnim * [1];
+        anim->mChannels[0] = new aiNodeAnim;
+        anim->mChannels[0]->mNodeName = aiString("anim_node_" + to_string(aIndex));
+        //Move
+        CPoint animation_value = arAnimation.GetMoveAnim(aIndex);
+        MoveAnimation(anim, &animation_value);
+        //Rotate
+        animation_value = arAnimation.GetRotateAnim(aIndex);
+        RotateAnimation(anim, &animation_value);
+        //Scale
+        animation_value = arAnimation.GetScaleAnim(aIndex);
+        ScaleAnimation(anim, &animation_value);
+
+        return anim;
+    }
+    aiNode * CAssimpExport::GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd){
+        aiNode *node = new aiNode();
+        node->mName = aiString(aNodeName);
+        node->mNumMeshes = aMeshIndexEnd - aMeshIndexStart;
+        node->mMeshes = new unsigned int[node->mNumMeshes];
+        size_t index = 0;
+        for(size_t MeshIndex = aMeshIndexStart; MeshIndex!= aMeshIndexEnd; MeshIndex++){
+            node->mMeshes[index] = MeshIndex;
+        }
+        return node;
+    }
+
+    string CAssimpExport::AddTexture(CColorMap arMeshCLM){
+        string texture_path;
+        if (TextureNameToIndex.find(arMeshCLM.GetName()) != TextureNameToIndex.end()) { //check if texture has been written already
+            texture_path = TextureNameToIndex[arMeshCLM.GetName()];
+        } // need to write the texture
+        else{
+            texture_path = GenerateTexturePNG(arMeshCLM, OutputPath);
+            TextureNameToIndex[arMeshCLM.GetName()] = texture_path;
+        }
+        return texture_path;
+    }
+
+    string CAssimpExport::GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath){
         string textureName = arOutputPath + arMeshTexture.GetName() + "_texture.png";
         vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
         vivid::encodePNG(textureName, ClmBuffer, 1,
@@ -92,7 +251,7 @@ namespace vivid {
         return textureName.substr(textureName.find_last_of("/\\")+1); // remove the path component from the texture name
     }
 
-    aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture){
+    aiTexture *CAssimpExport::GenerateTextureEmbedded(CColorMap &arMeshTexture){ //for now this will be deprecated
         aiTexture *embedded_texture = new aiTexture;
         vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
         embedded_texture->mHeight = ClmBuffer.size() / 4;
@@ -108,7 +267,7 @@ namespace vivid {
         return embedded_texture;
     }
 
-    aiMesh *GenerateMesh(CModelComponent * apMesh) {
+    aiMesh *CAssimpExport::GenerateMesh(CModelComponent * apMesh) {
         //setting up the apMesh structure
         aiMesh *OutMesh = new aiMesh();
         OutMesh->mName = apMesh->GetLabel();
@@ -169,7 +328,7 @@ namespace vivid {
 
     //create new material and define all its properties
     //TODO this should receive our own material class containing any important data (and methods for user interface)
-    aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh, string aTextureName){
+    aiMaterial * CAssimpExport::GenerateMaterial(vivid::CModelComponent& mesh, string aTextureName){
         aiMaterial *material = new aiMaterial();
 
         const aiString *name = new aiString(mesh.GetLabel()+"_mat");

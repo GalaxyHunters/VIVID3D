@@ -11,10 +11,10 @@ constexpr coord_t NOISE_PERCENTAGE = 0.005;
 CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
     // Check input validity
-    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arColorField.size())){
+    if((arInputPoints.size() != arMask.size()) || !arColorField.empty() && (arInputPoints.size() != arColorField.size())){
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_NOT_EQUAL);
     }
-    if(arInputPoints.empty() || arInputPoints.empty() || arColorField.empty()) {
+    if(arInputPoints.empty() || arInputPoints.empty()) {
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
@@ -243,7 +243,26 @@ void CSurface::CleanPoints()
 // TODO: Should use different sorting algorithm
 bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) //TODO this 1st func is the same as the one after!
 {
-    return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
+    if (abs((*arV1).X() - (*arV2).X()) <= POINT_SIMILARITY_THRESHOLD) {
+        if (abs((*arV1).Y() - (*arV2).Y()) <= POINT_SIMILARITY_THRESHOLD) {
+            if (abs((*arV1).Z() - (*arV2).Z()) <= POINT_SIMILARITY_THRESHOLD) {
+                return false;
+            }
+            else
+            { // we compare the points by z to see who needs to go first
+                return (*arV1).Z() > (*arV2).Z();
+            }
+        }
+        else // we compare by y to see who needs to go first
+        {
+            return (*arV1).Y() > (*arV2).Y();
+        }
+    }
+    else // we compare by x to see who goes first
+    {
+        return (*arV1).X() > (*arV2).X();
+    }
+    //return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
 }
 
 //TODO SIMILAR to THE OLDER CODE OF CompPointRD
@@ -318,7 +337,7 @@ void CSurface::CleanDoublePoints()
 {
     //sort the array
     sort(mVertices.begin(), mVertices.end(), CompPointRD);
-    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
+    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fitting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
     size_t j;
     for (size_t i = 0; i < mVertices.size(); i++) {
@@ -351,7 +370,7 @@ void CSurface::CleanDoublePoints()
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
-    if (arColorField.size() == 0){ //incase the user doesnt input any color
+    if (arColorField.size() == 0){ //default python color_field, user didnt input one
         arColorField = vector<coord_t>(mCreationMask.size(), 1);
         return arColorField;
     }
@@ -374,6 +393,8 @@ vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 {
+    CleanDoubleInputPoints(arPoints);
+
     CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Preprocessing Data");
 
     CPoint box_dim, box_min, box_max;
@@ -384,18 +405,23 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
         mInputPoints[i] -= mCenVector;
     }
     mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
-    vector<CPoint> noise_vec (mInputPoints.size());
 
+    vector<CPoint> noise_vec (mInputPoints.size());
+    arPoints.clear();
+    bool do_noise = false; // for now noise is disabled because it breaks the model
     // Consider generator here.
     srand(time(nullptr));
     for (auto & i : noise_vec){
-        i = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
+        i = {1,1,1};
+        if(do_noise) {
+            i = {1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.)};
+        }
     }
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
-        arPoints[i].mPoint = mInputPoints[i];
+        arPoints.push_back(CSurfacePoint(mInputPoints[i], mUVcoords[i], mCreationMask[i]));
     }
 
     CleanDoubleInputPoints(arPoints);

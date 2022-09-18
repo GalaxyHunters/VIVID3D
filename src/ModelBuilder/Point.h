@@ -41,6 +41,8 @@ namespace vivid
         inline CPoint  operator-  (const CPoint& arV) const{ return {mX - arV.mX, mY - arV.mY, mZ - arV.mZ}; }
         inline CPoint  operator*  (const coord_t aSc) const{ return {aSc * mX, aSc * mY, aSc * mZ}; }
         inline CPoint  operator/  (const coord_t aSc) const{ return {mX / aSc, mY / aSc, mZ / aSc}; }
+        inline bool operator== (const CPoint& arV) {return mX == arV.mX && mY == arV.mY && mZ == arV.mZ;}
+        inline bool operator!= (const CPoint& arV) {return mX != arV.mX || mY != arV.mY || mZ != arV.mZ;}
 
         inline coord_t Dist(const CPoint& arV) const{ return sqrt(pow(mX - arV.X(), 2) + pow(mY - arV.Y(), 2) + pow(mZ - arV.Z(), 2)); }
         inline CPoint& Scale(const CPoint& arV) { mX *= arV.mX; mY *= arV.mY; mZ *= arV.mZ; return *this; }

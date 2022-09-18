@@ -62,6 +62,9 @@ public:
 
     void SetTicksPerSecond(int mTicksPerSecond);
 
+    /*
+     * set rotate animation at a set frame. value is in EULER angles
+     */
     void SetRotateAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
@@ -69,6 +72,9 @@ public:
         mRotateAnim[frame] = spin;
     }
 
+    /*
+     * set movement animation at a set frame. value is movement vector
+     */
     void SetMoveAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
@@ -76,6 +82,9 @@ public:
         mMoveAnim[frame] = spin;
     }
 
+    /*
+     * set Scale animation at a set frame. value is scale change vector
+     */
     void SetScaleAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);

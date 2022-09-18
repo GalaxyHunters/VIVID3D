@@ -199,12 +199,13 @@ int PyramidSmoothTest()
     //smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
     CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 1);
-    //mesh1.LaplacianSmooth(20);
+    mesh1.LaplacianSmooth(10);
 //    //mesh1.Reduce(0.3, 0.5);
     cout << TEST_OUTPUT_PATH + "PyramidAssimpAnim" << endl;
     CAnimation anim1 = CAnimation(CModel(mesh1));
-    anim1.SetScaleAnim(0,CPoint(3,3,3));
-    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
+    anim1.SetRotateAnim(0, CPoint(6.28, 0, 0));
+//    anim1.SetScaleAnim(0,CPoint(3,3,3));
+//    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
     vivid::CAssimpExport::AnimationExporter(anim1, "gltf2", TEST_OUTPUT_PATH + "PyramidAssimpAnim");
 //    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpNewMat", "obj");
 //    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidVivid");

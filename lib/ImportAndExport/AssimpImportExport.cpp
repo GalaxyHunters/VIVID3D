@@ -168,8 +168,10 @@ namespace vivid {
             arAnim->mChannels[0]->mNumRotationKeys = int(arAnim->mDuration);
             arAnim->mChannels[0]->mRotationKeys = new aiQuatKey[int(arAnim->mDuration)];
             *arAnimValue = *arAnimValue/arAnim->mDuration;
+            aiQuaternion temp_quat;
             for(int i = 0; i != arAnim->mDuration; i++){
-                arAnim->mChannels[0]->mRotationKeys[i] = aiQuatKey(i, aiQuaternion (arAnimValue->X()*i,arAnimValue->Y()*i,arAnimValue->Z()*i));
+                temp_quat = aiQuaternion ((arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1,(arAnimValue->X()*i)+1);
+                arAnim->mChannels[0]->mRotationKeys[i] = aiQuatKey(i, temp_quat);
             }
         }
         else

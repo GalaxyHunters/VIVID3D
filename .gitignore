@@ -9,5 +9,6 @@
 /build/
 /_skbuild/
 /src/vivid3d.egg-info/
+/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeFiles/
 vivid
 vivid_main

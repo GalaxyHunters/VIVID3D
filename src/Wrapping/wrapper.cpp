@@ -6,6 +6,8 @@
 #include "PointCloud.h"
 #include "Shapes.h"
 #include "Model.h"
+#include "Animation.h"
+#include "StopMotionAnimation.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -55,6 +57,7 @@ PYBIND11_MODULE(_vivid, m) {
 //             "Scale Model Component points by multiplying by scale_vec.",
 //             py::arg("scale_vec"));
     py::class_<CModelComponent> model_component (m, "ModelComponent");
+    //py::class_<CAnimation> Animation (m, "Animation");
 
     // Mostly unneeded classes
     py::class_<CPoint>(m, "Point")
@@ -130,7 +133,7 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CModel>(m, "Model")
-            .def(py::init<> (), "default constructor for CModel")
+            .def(py::init<> (), "default constructor for Model")
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
                  py::arg("meshes"))
@@ -149,19 +152,73 @@ PYBIND11_MODULE(_vivid, m) {
                  "writes CModel to a given file format",
                  py::arg("output_file"), py::arg("file_format") = "obj");
 
-    //Animations:
-//    m.def("animation", &Animate,
-//          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
-//          py::arg("models"),py::arg("interval"), py::arg("output_file"));
-//    m.def("rotating_animation", &RotateAnim,
-//          "takes a model and creates an animation of it rotating",
-//          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
-//    m.def("animation_textures", &AnimateTextures,
-//          "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
-//          py::arg("models"), py::arg("interval"),py::arg("output_file"));
-//    m.def("rotating_animation_textures", &RotateAnimTextures,
-//          "takes a model and creates an animation of it rotating",
-//          py::arg("model"), py::arg("length"), py::arg("duration"), py::arg("rotation_axis"), py::arg("output_file"));
+    py::class_<CAnimation> Animation(m,"Animation");
+        Animation.def(py::init<> (), "default constructor for Animation")
+            .def(py::init<const CModel &> (),
+                 "constructor for Animation from a single Model",
+                 py::arg("model"))
+            .def(py::init<const vector<CModel> &> (),
+                 "constructor for Animation from an np array of Models",
+                 py::arg("models"))
+            .def(py::init<const CAnimation &> (),
+                 "copy constructor for animation",
+                 py::arg("animation"))
+            .def("get_duration", &CAnimation::GetDuration,
+                 "getter function for duration(in ticks)")
+            .def("get_models", &CAnimation::GetModels,
+                 "getter function for models in the animation")
+            .def("get_ticks_per_second", &CAnimation::GetTicksPerSecond,
+                 "getter function for ticks_per_second")
+            .def("set_duration", &CAnimation::SetDuration,
+                 "set animation duration (in ticks)",
+                 py::arg("duration"))
+            .def("set_ticks_per_second", &CAnimation::SetTicksPerSecond,
+                 "set ticks per second",
+                 py::arg("ticks_per_second"))
+            .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("models"))
+            .def("add_models", static_cast<void (CAnimation::*)(const vector<CModel> &)>(&CAnimation::AddModels),"add models to animation", py::arg("models"))
+            .def("set_move_animation", &CAnimation::SetMoveAnim,
+                 "set movement animation for index model",
+                 py::arg("index"), py::arg("move_vector"))
+            .def("set_rotate_animation", &CAnimation::SetRotateAnim,
+                 "set rotate animation for index model",
+                 py::arg("index"), py::arg("anguler_rotate"))
+            .def("set_scale_animation", &CAnimation::SetScaleAnim,
+                 "set scale animation for index model",
+                 py::arg("index"), py::arg("scale_vector"))
+            .def("get_move_animation", &CAnimation::GetMoveAnim,
+                 "get movement animation for given model index",
+                 py::arg("index"))
+            .def("get_rotate_animation", &CAnimation::GetRotateAnim,
+                 "get rotate animation for given model index",
+                 py::arg("index"))
+            .def("get_scale_animation", &CAnimation::GetScaleAnim,
+                 "get scale animation for given model index",
+                 py::arg("index"))
+            .def("export", &CAnimation::Export,
+                 "Exports animation to selected file format",
+            py::arg("output_file"), py::arg("file_format") = "gltf2");
+
+
+    py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation)
+        .def(py::init<> (), "default constructor for StopMotionAnimation")
+        .def(py::init<const CModel &, double> (),
+            "constructor for StopMotionAnimation from a single Model",
+            py::arg("model"), py::arg("mSecondsPerFrame")) //py::arg("model"), py::arg("mSecondsPerFrame")
+        .def(py::init<const vector<CModel> &, double> (),
+            "constructor for StopMotionAnimation from an np array of Models",
+            py::arg("models"), py::arg("mSecondsPerFrame")) //py::arg("models"), py::arg("mSecondsPerFrame")
+        .def(py::init<const CAnimation &, double> (),
+            "constructor for StopMotionAnimation from animation",
+            py::arg("animation"), py::arg("mSecondsPerFrame")) // py::arg("animation"), py::arg("mSecondsPerFrame")
+        .def(py::init<const CStopMotionAnimation &> (),
+            "copy constructor for StopMotionAnimation",
+            py::arg("animation"))
+        .def("get_seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame,
+             "Getter for Seconds per frame")
+        .def("set_seconds_per_frame", &CStopMotionAnimation::SetSecondsPerFrame,
+             "Setter for Seconds per frame",
+             py::arg("SecondsPerFrame"));
 
     //Shapes:
     m.def("create_cube", &CreateCubeMesh,

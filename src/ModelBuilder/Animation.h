@@ -11,7 +11,6 @@ typedef double duration_t;
 
 class CAnimation {
 private:
-    std::string mLabel = "";
     duration_t mDuration = 300; //in ticks
     int mTicksPerSecond = 30;
     std::vector<CModel> mModels = {};
@@ -23,34 +22,31 @@ public:
     //Constructor, Copy Constructor, Destructor
     CAnimation(){}
 
-    CAnimation(const CModel &arModel, const std::string &arLabel = "animation"){
+    CAnimation(const CModel &arModel){
         mModels.push_back(arModel);
         mScaleAnim.push_back(CPoint());
         mMoveAnim.push_back(CPoint());
         mRotateAnim.push_back(CPoint());
-        mLabel = arLabel;
     }
 
-    CAnimation(const std::vector<CModel> &arModels, const std::string &arLabel = "animation"){
+    CAnimation(const std::vector<CModel> &arModels){
         mModels = arModels;
         mScaleAnim = vector<CPoint>(mModels.size(), CPoint());
         mMoveAnim = vector<CPoint>(mModels.size(), CPoint());
         mRotateAnim = vector<CPoint>(mModels.size(), CPoint());
-        mLabel = arLabel;
     }
 
-    CAnimation(const CAnimation &arAnim) : mModels(arAnim.mModels), mLabel(arAnim.mLabel), mDuration(arAnim.mDuration), mTicksPerSecond(arAnim.mTicksPerSecond),
+
+
+    CAnimation(const CAnimation &arAnim) : mModels(arAnim.mModels), mDuration(arAnim.mDuration), mTicksPerSecond(arAnim.mTicksPerSecond),
     mScaleAnim(arAnim.mScaleAnim), mMoveAnim(arAnim.mMoveAnim), mRotateAnim(arAnim.mRotateAnim){}
-    ~CAnimation();
+    inline ~CAnimation() {};
 
     // Operator=
-    inline CAnimation& operator= (const CAnimation& arAnim) { mLabel = arAnim.mLabel; mDuration = arAnim.mDuration; mModels = arAnim.mModels;
+    inline CAnimation& operator= (const CAnimation& arAnim) {  mDuration = arAnim.mDuration; mModels = arAnim.mModels;
         mTicksPerSecond = arAnim.mTicksPerSecond; mScaleAnim = arAnim.mScaleAnim; mMoveAnim = arAnim.mMoveAnim; mRotateAnim = arAnim.mRotateAnim;return *this; }
 
     // Set and Get
-    inline const std::string GetLabel() const{ return mLabel; }
-    inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
-
     inline const duration_t GetDuration() const{ return mDuration; }
     inline void SetDuration(const duration_t &arDuration) { mDuration = arDuration; }
 
@@ -58,14 +54,13 @@ public:
     inline std::vector<CModel> GetModels() const{ return mModels; }
     inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
 
-    int GetTicksPerSecond() const;
-
-    void SetTicksPerSecond(int mTicksPerSecond);
+    inline int GetTicksPerSecond() const {return mTicksPerSecond;}
+    inline void SetTicksPerSecond(int mTicksPerSecond){CAnimation::mTicksPerSecond = mTicksPerSecond;}
 
     /*
      * set rotate animation at a set frame. value is in EULER angles
      */
-    void SetRotateAnim(size_t frame, CPoint spin){
+    inline void SetRotateAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
@@ -75,7 +70,7 @@ public:
     /*
      * set movement animation at a set frame. value is movement vector
      */
-    void SetMoveAnim(size_t frame, CPoint spin){
+    inline void SetMoveAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
@@ -85,48 +80,49 @@ public:
     /*
      * set Scale animation at a set frame. value is scale change vector
      */
-    void SetScaleAnim(size_t frame, CPoint spin){
+    inline void SetScaleAnim(size_t frame, CPoint spin){
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
         mScaleAnim[frame] = spin;
     }
 
-    CPoint GetScaleAnim(size_t frame){
+    inline CPoint GetScaleAnim(size_t frame) const{
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
         return mScaleAnim[frame];
     }
 
-    CPoint GetRotateAnim(size_t frame){
+    inline CPoint GetRotateAnim(size_t frame) const{
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
         return mRotateAnim[frame];
     }
 
-    CPoint GetMoveAnim(size_t frame){
+    inline CPoint GetMoveAnim(size_t frame) const {
         if(frame > mMoveAnim.size()){
             CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
         }
         return mMoveAnim[frame];
     }
 
-    inline size_t GetNumMeshes() {
+    inline size_t GetNumMeshes() const{
         size_t num_meshes = 0;
         for(auto it = mModels.begin(); it != mModels.end(); ++it) {num_meshes += it->GetNumMeshes();}
         return num_meshes;
     }
     // Add
-    inline void AddModels(const std::vector<CModel> &arModels) {
-        mModels.insert(mModels.end(), arModels.begin(), arModels.end());
-        for(int i = 0; i != arModels.size(); i++){
-            mScaleAnim.push_back(CPoint());
-            mMoveAnim.push_back(CPoint());
-            mRotateAnim.push_back(CPoint());
-        }
-    }
+    void AddModels(const std::vector<CModel> &arModels);
+
+    void AddModels(const CModel &arModels);
+
+    //export animation
+    void Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
+
+    //used for stop motion
+    virtual double GetSecondsPerFrame() const {};
 };
 
 }; // namespace vivid

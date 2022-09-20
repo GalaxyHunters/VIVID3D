@@ -24,7 +24,7 @@ namespace vivid
 
         // TODO: Make this work
         void AddMeshes(const vector<CModelComponent> &arMeshes);
-        int GetNumMeshes(){return this->mMeshes.size();}
+        int GetNumMeshes() const {return this->mMeshes.size();}
         void AddMesh(const CModelComponent &arMesh);
         void AddModel(const CModel &arModel);
         //remove Mesh by label maybe?

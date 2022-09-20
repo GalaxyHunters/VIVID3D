@@ -3,7 +3,7 @@
 #define VIVID_ASSIMPIMPORTEXPORT_H
 
 #include "Model.h"
-#include "Animation.h"
+#include "StopMotionAnimation.h"
 #include <assimp/Importer.hpp>
 #include <assimp/Exporter.hpp>
 #include <assimp/types.h>
@@ -14,7 +14,7 @@
 namespace vivid {
     class CAssimpExport {
     public:
-        static map<string,string> TextureNameToIndex;
+        static map<string, string> TextureNameToIndex;
         static string OutputPath;
 
         /**
@@ -24,17 +24,17 @@ namespace vivid {
          * @param[in] aOutputPath Path and name for output file
          */
     public:
-        static int AssimpExporter(vivid::CModel &arModel, std::string aFileType, std::string aOutputPath); //=1
+        static int AssimpExporter(const vivid::CModel &arModel, std::string aFileType, std::string aOutputPath); //=1
         static int AnimationExporter(vivid::CAnimation &arAnimation, std::string aFileType, std::string aOutputPath);
 
     private:
-        CAssimpExport() {TextureNameToIndex = {}, OutputPath = "";};
+        CAssimpExport() { TextureNameToIndex = {}, OutputPath = ""; };
 
         static string AddTexture(CColorMap arMeshCLM);
 
-        static aiNode * GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd);
+        static aiNode *GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd);
 
-        static aiScene *GenerateScene(vivid::CModel &model);
+        static aiScene *GenerateScene(const vivid::CModel &model);
 
         static aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName);
 
@@ -48,9 +48,23 @@ namespace vivid {
         //------------animation helper functions------------------------------------------------------
         static aiScene *GenerateAnimationScene(vivid::CAnimation &arAnimation);
 
-        static aiAnimation * GenerateAnimation(CAnimation &arAnimation, size_t aIndex);
+        static aiAnimation *GenerateAnimation(const CAnimation &arAnimation);
 
+        static aiNodeAnim *GenerateAnimationChannel(const CAnimation &arAnimation, size_t aIndex);
 
+        static aiAnimation *GenerateStopMotionAnimation(CStopMotionAnimation &arSMAnimation);
+
+        static void
+        ScaleAnimation(aiNodeAnim *arAnim, duration_t aDuration, CPoint *arAnimValue, duration_t aStartTime = 0);
+
+        static void StopMotionScaleAnimation(aiNodeAnim *arAnim, duration_t aDuration, CPoint *arAnimValue,
+                                             duration_t aStartTime = 0);
+
+        static void
+        RotateAnimation(aiNodeAnim *arAnim, duration_t aDuration, CPoint *arAnimValue, duration_t aStartTime = 0);
+
+        static void
+        MoveAnimation(aiNodeAnim *arAnim, duration_t aDuration, CPoint *arAnimValue, duration_t aStartTime = 0);
 
 
 
@@ -61,4 +75,5 @@ namespace vivid {
         // void AnimationExporter(CModel &arModel, std::string &arFileType, std::string &arOutputPath, bool aWithTexture)
     };
 }
+
 #endif //VIVID_ASSIMPIMPORTEXPORT_H

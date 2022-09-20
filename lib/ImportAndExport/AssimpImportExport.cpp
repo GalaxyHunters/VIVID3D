@@ -1,6 +1,5 @@
 #include "AssimpImportExport.h"
 
-
 namespace vivid {
     // matches assimp file formats to actual file endings
     std::map<std::string, std::string> fileFormats =
@@ -10,7 +9,6 @@ namespace vivid {
                     {"obj",   ".obj"},
                     {"fbx",   ".fbx"}
             };
-
     string CAssimpExport::OutputPath = "";
     map<string,string> CAssimpExport::TextureNameToIndex = {};
     /*
@@ -19,7 +17,7 @@ namespace vivid {
                  aFileType - the assimp-format type of the file
                  aOutputPath - the path of the file, including the name but not including the file ending
      */
-    int CAssimpExport::AssimpExporter(CModel &arModel, std::string aFileType, std::string aOutputPath) {
+    int CAssimpExport::AssimpExporter(const CModel &arModel, std::string aFileType, std::string aOutputPath) {
         Assimp::Exporter exp;
         int RET_VALUE;
 
@@ -45,10 +43,11 @@ namespace vivid {
                  aOutputPath - the path of the file, including the name but not including the file ending
      */
     int CAssimpExport::AnimationExporter(CAnimation &arAnimation, std::string aFileType, std::string aOutputPath){
-        int RET_VALUE = 1;
+        int RET_VALUE;
         Assimp::Exporter exp;
 
         OutputPath = aOutputPath;
+
         aiScene *scene = GenerateAnimationScene(arAnimation);
 
 
@@ -63,56 +62,7 @@ namespace vivid {
         return RET_VALUE;
     }
 
-    aiScene * CAssimpExport::GenerateAnimationScene(CAnimation &arAnimation){
-        //setup scene
-        aiScene *scene = new aiScene();
-        scene->mRootNode = new aiNode();
-        scene->mRootNode->mName = aiString("root_node");
-
-        vector<vivid::CModel> models = arAnimation.GetModels();
-
-        scene->mNumMeshes = arAnimation.GetNumMeshes();
-        scene->mMeshes = new aiMesh *[scene->mNumMeshes];
-
-        scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
-        scene->mNumMaterials = scene->mNumMeshes;
-
-        scene->mRootNode->mNumChildren = 1;
-        scene->mRootNode->mChildren = new aiNode * [1];
-        aiNode *center_node = GenerateNode("center_node", 0, 0);
-        scene->mRootNode->mChildren[0] = center_node;
-        scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
-        center_node->mNumChildren = models.size();
-        center_node->mChildren = new aiNode * [models.size()];
-
-        scene->mNumAnimations = models.size();
-        scene->mAnimations = new aiAnimation *[models.size()];
-
-        vector<vivid::CModelComponent> meshes;
-        string texture_path;
-        size_t mesh_counter = 0;
-        for(int model_index = 0; model_index != models.size(); model_index++){
-            meshes = models[model_index].GetMeshes();
-            center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter, mesh_counter+meshes.size());
-            center_node->mChildren[model_index]->mParent = center_node;
-            for (int mesh_index = 0; mesh_index < scene->mNumMeshes; mesh_index++) {
-                //handle mesh texture
-                texture_path = AddTexture(meshes[mesh_index].GetClm());
-                //setting up the mesh structure
-                scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
-                scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path);
-                scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
-                mesh_counter++;
-            }
-            //do animation
-            //basic animation
-            scene->mAnimations[model_index] = GenerateAnimation(arAnimation, model_index);
-        }
-
-        return scene;
-    }
-
-    aiScene * CAssimpExport::GenerateScene(vivid::CModel &model) {
+    aiScene * CAssimpExport::GenerateScene(const vivid::CModel &model) {
         //setup scene
         aiScene *scene = new aiScene();
         scene->mRootNode = new aiNode();
@@ -143,83 +93,220 @@ namespace vivid {
         }
         return scene;
     }
+    aiScene * CAssimpExport::GenerateAnimationScene(CAnimation &arAnimation){
+        //setup scene
+        aiScene *scene = new aiScene();
+        scene->mRootNode = new aiNode();
+        scene->mRootNode->mName = aiString("root_node");
 
-    void MoveAnimation(aiAnimation* arAnim, CPoint* arAnimValue){
-        if(*arAnimValue != CPoint()){
-            arAnim->mChannels[0]->mNumPositionKeys = int(arAnim->mDuration);
-            arAnim->mChannels[0]->mPositionKeys = new aiVectorKey[int(arAnim->mDuration)];
-            *arAnimValue = (*arAnimValue)/arAnim->mDuration;
-            aiVector3D temp_vec;
-            for(int i = 0; i != arAnim->mDuration; i++){
-                temp_vec = aiVector3D ((arAnimValue->X()*i)+1,(arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1);
-                arAnim->mChannels[0]->mPositionKeys[i] = aiVectorKey(i, temp_vec);
+        vector<vivid::CModel> models = arAnimation.GetModels();
+
+        scene->mNumMeshes = arAnimation.GetNumMeshes();
+        scene->mMeshes = new aiMesh *[scene->mNumMeshes];
+
+        scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
+        scene->mNumMaterials = scene->mNumMeshes;
+
+        scene->mRootNode->mNumChildren = 1;
+        scene->mRootNode->mChildren = new aiNode * [1];
+        aiNode *center_node = GenerateNode("center_node", 0, 0);
+        scene->mRootNode->mChildren[0] = center_node;
+        scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
+        center_node->mNumChildren = models.size();
+        center_node->mChildren = new aiNode * [models.size()];
+
+        scene->mNumAnimations = 1;//models.size();
+        scene->mAnimations = new aiAnimation *[1]; //models.size()
+
+        //debug
+        string s = typeid(arAnimation).name();
+        CStopMotionAnimation *SMAnimation = dynamic_cast<CStopMotionAnimation*>(&arAnimation);
+        if(!SMAnimation){ //arAnimation.GetAnimType() == "R"
+            //regular animation
+            scene->mAnimations[0] = GenerateAnimation(arAnimation);
+        }
+        else // stop-motion animation
+        {
+            scene->mAnimations[0] = GenerateStopMotionAnimation(*SMAnimation);
+        }
+
+        vector<vivid::CModelComponent> meshes;
+        string texture_path;
+        size_t mesh_counter = 0;
+        for(int model_index = 0; model_index != models.size(); model_index++){
+            meshes = models[model_index].GetMeshes();
+            center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter, mesh_counter+meshes.size());
+            center_node->mChildren[model_index]->mParent = center_node;
+            for (int mesh_index = 0; mesh_index < meshes.size(); mesh_index++) {
+                //handle mesh texture
+                texture_path = AddTexture(meshes[mesh_index].GetClm());
+                //setting up the mesh structure
+                scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
+                scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path);
+                scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
+                mesh_counter++;
             }
         }
-        else
-        {
-            arAnim->mChannels[0]->mNumPositionKeys = 1;
-            arAnim->mChannels[0]->mPositionKeys = new aiVectorKey[1];
-            arAnim->mChannels[0]->mPositionKeys[0] = aiVectorKey(0, aiVector3D (1,1,1));
-        }
+        return scene;
     }
 
-    void RotateAnimation(aiAnimation* arAnim, CPoint* arAnimValue){ // TODO make this work right
-        if(*arAnimValue != CPoint()){
-            arAnim->mChannels[0]->mNumRotationKeys = int(arAnim->mDuration);
-            arAnim->mChannels[0]->mRotationKeys = new aiQuatKey[int(arAnim->mDuration)];
-            *arAnimValue = *arAnimValue/arAnim->mDuration;
-            aiQuaternion temp_quat;
-            for(int i = 0; i != arAnim->mDuration; i++){
-                temp_quat = aiQuaternion ((arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1,(arAnimValue->X()*i)+1);
-                arAnim->mChannels[0]->mRotationKeys[i] = aiQuatKey(i, temp_quat);
-            }
-        }
-        else
-        {
-            arAnim->mChannels[0]->mNumRotationKeys = 1;
-            arAnim->mChannels[0]->mRotationKeys = new aiQuatKey[1];
-            arAnim->mChannels[0]->mRotationKeys[0] = aiQuatKey(0, aiQuaternion (1,1,1, 1));
-        }
-    }
-
-    void ScaleAnimation(aiAnimation* arAnim, CPoint* arAnimValue){
-        if(*arAnimValue != CPoint()){
-            arAnim->mChannels[0]->mNumScalingKeys = int(arAnim->mDuration);
-            arAnim->mChannels[0]->mScalingKeys = new aiVectorKey[int(arAnim->mDuration)];
-            *arAnimValue = *arAnimValue/arAnim->mDuration;
-            aiVector3D temp_vec;
-            for(int i = 0; i != arAnim->mDuration; i++){
-                temp_vec = aiVector3D ((arAnimValue->X()*i)+1,(arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1);
-                arAnim->mChannels[0]->mScalingKeys[i] = aiVectorKey(i, temp_vec);
-            }
-        }
-        else
-        {
-            arAnim->mChannels[0]->mNumScalingKeys = 1;
-            arAnim->mChannels[0]->mScalingKeys = new aiVectorKey[1];
-            arAnim->mChannels[0]->mScalingKeys[0] = aiVectorKey(0, aiVector3D (1,1,1));
-        }
-    }
-    aiAnimation * CAssimpExport::GenerateAnimation(CAnimation &arAnimation, size_t aIndex){
-        aiAnimation *anim = new aiAnimation;
+    aiAnimation * CAssimpExport::GenerateAnimation(const CAnimation &arAnimation){
+        aiAnimation* anim = new aiAnimation;
+        anim->mNumChannels = arAnimation.GetModels().size();
+        anim->mChannels = new aiNodeAnim * [anim->mNumChannels];
         anim->mDuration = arAnimation.GetDuration();
         anim->mTicksPerSecond = arAnimation.GetTicksPerSecond();
-        anim->mName = aiString("animation_"+to_string(aIndex));
-        anim->mNumChannels = 1;
-        anim->mChannels = new aiNodeAnim * [1];
-        anim->mChannels[0] = new aiNodeAnim;
-        anim->mChannels[0]->mNodeName = aiString("anim_node_" + to_string(aIndex));
+        anim->mName = aiString("animation");
+        for(int i = 0; i != anim->mNumChannels; i++) {
+            anim->mChannels[i] = GenerateAnimationChannel(arAnimation, i);
+        }
+        return anim;
+    }
+
+    aiAnimation * CAssimpExport::GenerateStopMotionAnimation(CStopMotionAnimation &arSMAnimation){
+        aiAnimation* anim = new aiAnimation;
+        anim->mNumChannels = arSMAnimation.GetModels().size();
+        anim->mChannels = new aiNodeAnim * [anim->mNumChannels];
+        int ticks_per_frame = arSMAnimation.GetTicksPerSecond()*arSMAnimation.GetSecondsPerFrame();
+        anim->mDuration = anim->mNumChannels*ticks_per_frame;
+        anim->mTicksPerSecond = arSMAnimation.GetTicksPerSecond();
+        anim->mName = aiString("animation");
+        for(int i = 0; i != anim->mNumChannels; i++){
+            anim->mChannels[i] = new aiNodeAnim;
+            anim->mChannels[i]->mNodeName = aiString("anim_node_" + to_string(i));
+//            anim->mChannels[i]->mPreState = aiAnimBehaviour_CONSTANT;
+//            anim->mChannels[i]->mPostState = aiAnimBehaviour_CONSTANT;
+            //Move
+            CPoint animation_value = arSMAnimation.GetMoveAnim(i);
+            MoveAnimation(anim->mChannels[i], (i+1)*ticks_per_frame,&animation_value, i*ticks_per_frame);
+            //Rotate
+            animation_value = arSMAnimation.GetRotateAnim(i);
+            RotateAnimation(anim->mChannels[i], (i+1)*ticks_per_frame,&animation_value, i*ticks_per_frame);
+            //Scale
+            animation_value = arSMAnimation.GetScaleAnim(i);
+            StopMotionScaleAnimation(anim->mChannels[i], (i+1)*ticks_per_frame, &animation_value, i*ticks_per_frame);
+        }
+        return anim;
+    }
+
+    void CAssimpExport::StopMotionScaleAnimation(aiNodeAnim* arAnim, duration_t aDuration, CPoint* arAnimValue, duration_t aStartTime) {
+        if (*arAnimValue != CPoint()) {
+            if (aStartTime == 0) { //make the frame pop out and in when needed
+                arAnim->mNumScalingKeys = int(aDuration - aStartTime) + 3;
+                arAnim->mScalingKeys = new aiVectorKey[int(aDuration - aStartTime) + 3];
+                arAnim->mScalingKeys[0] = aiVectorKey(aStartTime, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[1] = aiVectorKey(aDuration-1, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[int(aDuration - aStartTime) + 2] = aiVectorKey(aDuration, aiVector3D(1e-10, 1e-10, 1e-10));
+            }
+            else {
+                arAnim->mNumScalingKeys = int(aDuration - aStartTime) + 5;
+                arAnim->mScalingKeys = new aiVectorKey[int(aDuration - aStartTime) + 5];
+                arAnim->mScalingKeys[0] = aiVectorKey(0, aiVector3D(1e-10, 1e-10, 1e-10));
+                arAnim->mScalingKeys[1] = aiVectorKey(aStartTime-1, aiVector3D(1e-10, 1e-10, 1e-10));
+                arAnim->mScalingKeys[2] = aiVectorKey(aStartTime, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[int(aDuration - aStartTime) + 3] = aiVectorKey(aStartTime, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[int(aDuration - aStartTime) + 4] = aiVectorKey(aDuration,
+                                                                                    aiVector3D(1e-10, 1e-10, 1e-10));
+            }
+            //do scale anim in the time the user askes for it
+            *arAnimValue = *arAnimValue / (aDuration - aStartTime);
+            aiVector3D temp_vec;
+            for (int i = 0; i != (aDuration - aStartTime); i++) {
+                temp_vec = aiVector3D((arAnimValue->X() * i) + 1, (arAnimValue->Y() * i) + 1,
+                                      (arAnimValue->Z() * i) + 1);
+                arAnim->mScalingKeys[i+2] = aiVectorKey(i + aStartTime, temp_vec);
+            }
+        } else { //no scale animation from user, only do stop motion
+            if (aStartTime == 0) {
+                arAnim->mNumScalingKeys = 3;
+                arAnim->mScalingKeys = new aiVectorKey[3];
+                arAnim->mScalingKeys[0] = aiVectorKey(aStartTime, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[1] = aiVectorKey(aDuration-1, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[2] = aiVectorKey(aDuration, aiVector3D(1e-10, 1e-10, 1e-10));
+            } else {
+                arAnim->mNumScalingKeys = 5;
+                arAnim->mScalingKeys = new aiVectorKey[5];
+                arAnim->mScalingKeys[0] = aiVectorKey(0, aiVector3D(1e-10, 1e-10, 1e-10));
+                arAnim->mScalingKeys[1] = aiVectorKey(aStartTime-1, aiVector3D(1e-10, 1e-10, 1e-10));
+                arAnim->mScalingKeys[2] = aiVectorKey(aStartTime, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[3] = aiVectorKey(aDuration-1, aiVector3D(1, 1, 1));
+                arAnim->mScalingKeys[4] = aiVectorKey(aDuration, aiVector3D(1e-10, 1e-10, 1e-10));
+            }
+        }
+    }
+
+
+    void CAssimpExport::ScaleAnimation(aiNodeAnim* arAnim, duration_t aDuration, CPoint* arAnimValue, duration_t aStartTime){
+        if(*arAnimValue != CPoint()){
+            arAnim->mNumScalingKeys = int(aDuration - aStartTime);
+            arAnim->mScalingKeys = new aiVectorKey[int(aDuration - aStartTime)];
+            *arAnimValue = *arAnimValue/(aDuration - aStartTime);
+            aiVector3D temp_vec;
+            for(int i = 0; i != (aDuration - aStartTime); i++){
+                temp_vec = aiVector3D ((arAnimValue->X()*i)+1,(arAnimValue->Y()*i)+1,(arAnimValue->Z()*i)+1);
+                arAnim->mScalingKeys[i] = aiVectorKey(i+aStartTime, temp_vec);
+            }
+        }
+        else
+        {
+            arAnim->mNumScalingKeys = 1;
+            arAnim->mScalingKeys = new aiVectorKey[1];
+            arAnim->mScalingKeys[0] = aiVectorKey(aStartTime, aiVector3D (1,1,1));
+        }
+    }
+
+    void CAssimpExport::MoveAnimation(aiNodeAnim* arAnim, duration_t aDuration, CPoint* arAnimValue, duration_t aStartTime){
+        if(*arAnimValue != CPoint()){
+            arAnim->mNumPositionKeys = int(aDuration - aStartTime);
+            arAnim->mPositionKeys = new aiVectorKey[int(aDuration-aStartTime)];
+            *arAnimValue = (*arAnimValue)/(aDuration-aStartTime);
+            aiVector3D temp_vec;
+            for(int i = 0; i != aDuration-aStartTime; i++){
+                temp_vec = aiVector3D ((arAnimValue->X()*i),(arAnimValue->Y()*i),(arAnimValue->Z()*i));
+                arAnim->mPositionKeys[i] = aiVectorKey(i+aStartTime, temp_vec);
+            }
+        }
+        else
+        {
+            arAnim->mNumPositionKeys = 1;
+            arAnim->mPositionKeys = new aiVectorKey[1];
+            arAnim->mPositionKeys[0] = aiVectorKey(aStartTime, aiVector3D (0,0,0));
+        }
+    }
+
+    void CAssimpExport::RotateAnimation(aiNodeAnim* arAnim, duration_t aDuration, CPoint* arAnimValue, duration_t aStartTime){
+        if(*arAnimValue != CPoint()){
+            arAnim->mNumRotationKeys = int(aDuration - aStartTime);
+            arAnim->mRotationKeys = new aiQuatKey[int(aDuration - aStartTime)];
+            *arAnimValue = *arAnimValue/(aDuration - aStartTime);
+            aiQuaternion temp_quat;
+            for(int i = 0; i != (aDuration - aStartTime); i++){
+                temp_quat = aiQuaternion ((arAnimValue->Y()*i),(arAnimValue->Z()*i),(arAnimValue->X()*i));
+                arAnim->mRotationKeys[i] = aiQuatKey(i+aStartTime, temp_quat);
+            }
+        }
+        else
+        {
+            arAnim->mNumRotationKeys = 1;
+            arAnim->mRotationKeys = new aiQuatKey[1];
+            arAnim->mRotationKeys[0] = aiQuatKey(aStartTime, aiQuaternion (1,0,0, 0));
+        }
+    }
+
+    aiNodeAnim * CAssimpExport::GenerateAnimationChannel(const CAnimation &arAnimation, size_t aIndex){
+        aiNodeAnim *anim_channel = new aiNodeAnim;
+        anim_channel->mNodeName = aiString("anim_node_" + to_string(aIndex));
         //Move
         CPoint animation_value = arAnimation.GetMoveAnim(aIndex);
-        MoveAnimation(anim, &animation_value);
+        MoveAnimation(anim_channel, arAnimation.GetDuration(),&animation_value);
         //Rotate
         animation_value = arAnimation.GetRotateAnim(aIndex);
-        RotateAnimation(anim, &animation_value);
+        RotateAnimation(anim_channel, arAnimation.GetDuration(),&animation_value);
         //Scale
         animation_value = arAnimation.GetScaleAnim(aIndex);
-        ScaleAnimation(anim, &animation_value);
+        ScaleAnimation(anim_channel, arAnimation.GetDuration(), &animation_value);
 
-        return anim;
+        return anim_channel;
     }
     aiNode * CAssimpExport::GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd){
         aiNode *node = new aiNode();

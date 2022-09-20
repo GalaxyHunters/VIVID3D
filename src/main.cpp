@@ -369,18 +369,37 @@ void assimpTest(string file){
                                         aiProcess_CalcTangentSpace |
                                         aiProcess_JoinIdenticalVertices |
                                         aiProcess_SortByPType);
+
+    aiNodeAnim** channels = scene->mAnimations[0]->mChannels;
+
+    for(int i = 0; i != scene->mAnimations[0]->mNumChannels; i++){
+        cout << "animation channel " << i << endl;
+        cout << "Position Keys: " << endl;
+        for(int P_key = 0; P_key != channels[i]->mNumPositionKeys; P_key++){
+            cout << "Time - " << channels[i]->mPositionKeys[P_key].mTime;
+            cout << " Value - " << channels[i]->mPositionKeys[P_key].mValue.x << " ";
+            cout << channels[i]->mPositionKeys[P_key].mValue.y << " ";
+            cout << channels[i]->mPositionKeys[P_key].mValue.z << endl;
+        }
+        cout << "Rotation Keys: " << endl;
+        for(int P_key = 0; P_key != channels[i]->mNumRotationKeys; P_key++){
+            cout << "Time - " << channels[i]->mRotationKeys[P_key].mTime;
+            cout << " Value - " << channels[i]->mRotationKeys[P_key].mValue.w << " ";
+            cout << channels[i]->mRotationKeys[P_key].mValue.x << " ";
+            cout << channels[i]->mRotationKeys[P_key].mValue.y << " ";
+            cout << channels[i]->mRotationKeys[P_key].mValue.z << endl;
+        }
+        cout << "Scaling Keys: " << endl;
+        for(int P_key = 0; P_key != channels[i]->mNumScalingKeys; P_key++){
+            cout << "Time - " << channels[i]->mScalingKeys[P_key].mTime;
+            cout << " Value - " << channels[i]->mScalingKeys[P_key].mValue.x << " ";
+            cout << channels[i]->mScalingKeys[P_key].mValue.y << " ";
+            cout << channels[i]->mScalingKeys[P_key].mValue.z << endl;
+        }
+    }
+
     aiMaterial* mat = scene->mMaterials[1];
     aiMaterialProperty prop;
-    for(int i = 0; i < mat->mNumProperties; i++){
-        cout << mat->mProperties[i]->mKey.C_Str() << endl; //, mat->mProperties[i]->mData
-    }
-    for(int i = 0; i != scene->mAnimations[0]->mChannels[0]->mNumRotationKeys; i++){
-        cout << scene->mAnimations[0]->mChannels[0]->mRotationKeys[i].mTime << " - ";
-        cout << scene->mAnimations[0]->mChannels[0]->mRotationKeys[i].mValue.w << " - ";
-        cout << scene->mAnimations[0]->mChannels[0]->mRotationKeys[i].mValue.x << " - ";
-        cout << scene->mAnimations[0]->mChannels[0]->mRotationKeys[i].mValue.y << " - ";
-        cout << scene->mAnimations[0]->mChannels[0]->mRotationKeys[i].mValue.z << endl;
-    }
 
 //    //big printing of stuff
 //    aiString matString;
@@ -439,9 +458,35 @@ void assimpTest(string file){
         cerr << exp.GetErrorString() << endl;
     }
 }
+
+int CubeAnimationTest()
+{
+    vector<CModel> models = {};
+    vector<string> colors = {"Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"};
+    vector<CPoint> loc = {{0,0,0}, {1,0,0}, {2,0,0},{0,0,1},{1,0,1},{2,0,1},{0,0,2},{1,0,2}};
+    for (int i = 0; i < colors.size(); i++) {
+        CMesh box = CreateCubeMesh(loc[i]*3,0.5,1,1,colors[i]);
+        box.SetClm(colors[i]);
+        models.push_back((CModel(box)));
+    }
+    //CStopMotionAnimation anim = CStopMotionAnimation(models, 3);
+    CAnimation anim = CAnimation(models);
+    anim.SetDuration(150);
+//    anim.SetRotateAnim(0, CPoint(2.3,0,1));
+//    anim.SetRotateAnim(3, CPoint(0,2.3,1));
+//    anim.SetRotateAnim(2, CPoint(2.3,0,1));
+//    anim.SetRotateAnim(5, CPoint(2.3,2.3,0));
+//    anim.SetMoveAnim(2,CPoint(3,3,3));
+//    anim.SetMoveAnim(7,CPoint(3,3,3));
+    anim.SetScaleAnim(6, CPoint(2,2,2));
+    anim.SetScaleAnim(1, CPoint(5,0,0));
+    CStopMotionAnimation SManim = CStopMotionAnimation(anim, 2);
+    CAssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
+    return EXIT_SUCCESS;
+}
 int main()
 {
-//    assimpTest(TEST_OUTPUT_PATH + "/scene.gltf");
+//    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
 //    cout << "MedicaneTestTest" << endl;
 //    ret_value =RunMedicaneTest();
@@ -457,8 +502,11 @@ int main()
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    cout << "Pyramid" << endl;
-    ret_value = PyramidSmoothTest();
+//    cout << "Pyramid" << endl;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Cube Animation" << endl;
+    ret_value = CubeAnimationTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

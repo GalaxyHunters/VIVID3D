@@ -3,14 +3,14 @@
 
 namespace vivid {
     enum ELogCode {
-        LOG_ERROR = 0, LOG_WARNING = 1, LOG_INFO = 2, LOG_DEBUG = 3, LOG_VIVID = 4
+        LOG_ERROR = 0, LOG_WARNING = 1, LOG_VIVID = 2, LOG_INFO = 3, LOG_DEBUG = 4
     };
 
     const std::map<ELogCode, std::string> CODE_MAP{{LOG_ERROR,   "ERROR:   "},
                                                    {LOG_WARNING, "WARNING: "},
+                                                   {LOG_VIVID,   "VIVID:   "},
                                                    {LOG_INFO,    "INFO:    "},
                                                    {LOG_DEBUG,   "INFO:    "},
-                                                   {LOG_VIVID,   "VIVID:   "},
     };
 
     enum ELogMessage {

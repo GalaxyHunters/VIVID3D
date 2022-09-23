@@ -16,7 +16,6 @@ namespace vivid {
     void Log(const ELogCode aCode, const ELogMessage aMsg);
     void Log(const ELogCode aCode, const string& arMsg);
 
-    void SetWriteToLog(bool aWrite);
-    void SetWriteToConsole(bool aWrite);
+    void ConfigLogging(bool aWriteToConsole, const ELogCode aLogLevel, bool aWriteToFile, const string& arLogFileName);
 }
 #endif //VIVID_LOGFILE_H

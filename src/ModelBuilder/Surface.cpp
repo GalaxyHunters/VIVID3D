@@ -68,10 +68,8 @@ void CSurface::CreateSurface(bool aPostProcessing)
 {
     RunVorn();
     CleanEdges();
-    if (aPostProcessing) {
-        CleanFaces();
-        CleanPoints();
-    }
+    CleanFaces();
+    CleanPoints();
 }
 
 CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
@@ -181,6 +179,7 @@ coord_t CSurface::FindContainingRadius()
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
+// Todo: switch to bool statement, use in CleanFaces
 void CSurface::CleanEdges()
 {
     coord_t clean_by = 0.35;
@@ -205,15 +204,13 @@ void CSurface::CleanFaces()
 {
     vector<CSurfaceFace> new_faces;
     size_t mask_len = mCreationMask.size();
-    size_t c_point1;
-    size_t c_point2;
     for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
-            if (mCreationMask[c_point1] != mCreationMask[c_point2]) { //the face is a part of the surf
-                new_faces.push_back(mVecFace);
-                new_faces.back().mUVcoord = mUVcoords[c_point1] * 0.5 + mUVcoords[c_point2] * 0.5;
+        if (mask_len > mVecFace.mPairPoints.first && mask_len > mVecFace.mPairPoints.second) { //the indexs are both in range and not a part of the box
+            if (mCreationMask[mVecFace.mPairPoints.first] != mCreationMask[mVecFace.mPairPoints.second]) { //the face is a part of the surf
+                vector<CSurfaceFace> triangulized_faces = TriangulizeFace(mVecFace);
+                for (auto & mTriangleFace : triangulized_faces) {
+                    new_faces.push_back(mTriangleFace);
+                }
             }
         } else {
             new_faces.push_back(mVecFace);
@@ -222,6 +219,46 @@ void CSurface::CleanFaces()
 
     }
     mSurfFaces = new_faces;
+}
+
+vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
+{
+    vector<CSurfaceFace> triangulized_faces;
+    for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
+        CSurfaceFace triangle = CSurfaceFace(
+                {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
+                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
+                arFace.mPairPoints);
+        NormalizeFace(triangle);
+        triangulized_faces.push_back(triangle);
+    }
+    return triangulized_faces;
+}
+
+void CSurface::NormalizeFace(CSurfaceFace& arFace)
+{
+    bool c_point1_mask = mCreationMask[arFace.mPairPoints.first];
+    bool c_point2_mask = mCreationMask[arFace.mPairPoints.second];
+    CPoint c_point1 = mInputPoints[arFace.mPairPoints.first];
+    CPoint c_point2 = mInputPoints[arFace.mPairPoints.second];
+
+    // assumption 1
+    // true -> false is normal direction
+    CPoint true_normal;
+    if (c_point1_mask) {
+       true_normal = (c_point2 - c_point1).Normalize();
+    } else {
+        true_normal = (c_point1 - c_point2).Normalize();
+    }
+    // assumption 2
+    // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
+    // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
+    CPoint face_normal = ((*arFace.mVertices[1]-*arFace.mVertices[0]).Cross(*arFace.mVertices[2]-*arFace.mVertices[0])).Normalize();
+    true_normal.Scale(face_normal);
+    // if the direction is opposite
+    if (true_normal.Dot({1,1,1}) < 0) {
+        arFace.mVertices = {arFace.mVertices[0], arFace.mVertices[2], arFace.mVertices[1]};
+    }
 }
 
 // Do to the removal of many unneeded faces in CSurface::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
@@ -424,7 +461,7 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
         arPoints.push_back(CSurfacePoint(mInputPoints[i], mUVcoords[i], mCreationMask[i]));
     }
 
-    CleanDoubleInputPoints(arPoints);
+//    CleanDoubleInputPoints(arPoints);
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};

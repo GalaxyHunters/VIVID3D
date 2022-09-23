@@ -31,20 +31,20 @@ namespace vivid
                 CModelComponent(aAlpha, arLabel, "f") {
             mPoints = arPoints; mFaces = arFaces;
             TriangulizeFaces();
-            CalculatePointsNeighbours();
+//            CalculatePointsNeighbours();
         }
 
         CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
                 CModelComponent(aAlpha, arLabel, "f", arClm, arCName){
             mPoints = arPoints; mFaces = arFaces;
             TriangulizeFaces();
-            CalculatePointsNeighbours();
+//            CalculatePointsNeighbours();
         }
         CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, string &arClm) :
                 CModelComponent(aAlpha, arLabel, "f", arClm){
             mPoints = arPoints; mFaces = arFaces;
             TriangulizeFaces();
-            CalculatePointsNeighbours();
+//            CalculatePointsNeighbours();
         }
         CMesh(const CMesh &arMesh) :
                 CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};

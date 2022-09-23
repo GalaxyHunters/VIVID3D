@@ -72,6 +72,8 @@ namespace vivid
 
         // Cleaning Sub-Methods
         void CleanFaces();        // clean the unneeded faces(by mCreationMask)
+        vector<CSurfaceFace> TriangulizeFace(const CSurfaceFace &arFace);
+        void NormalizeFace(CSurfaceFace& arFace); // normalize face to face correct direction
         void CleanPoints();       // removes all the unused points
         void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
         void CleanDoublePoints(); // remove all the double face points from the model

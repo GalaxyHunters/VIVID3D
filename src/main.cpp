@@ -3,12 +3,12 @@
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
 #include "ModelBuilder/SurfByFunc.h"
-/*include "ImportAndExport/FBXImportExport.h"*/
 #include "ModelBuilder/Surface.h"
 #include "Point.h"
 #include "AssimpImportExport.h"
 #include "DataToImage.h"
 #include "Model.h"
+#include "PointCloud.h"
 #include <map>
 #include <assimp/Importer.hpp>
 #include <assimp/DefaultLogger.hpp>
@@ -189,18 +189,19 @@ int PyramidSmoothTest()
         }
     }
     cout << quan.size() << endl;
-    Vmax = 0 ; //*max_element(quan.begin(), quan.end());
-    Vmin = 0 ;//*min_element(quan.begin(), quan.end());
-
-    CSurface smooth1 = CSurface(points, mask, quan, Vmin, Vmax);
-    smooth1.CreateSurface();
-    //smooth1.WhatAreTheseThingsElad();
+    Vmax = 0.0; //*max_element(quan.begin(), quan.end());
+    Vmin = 0.0;//*min_element(quan.begin(), quan.end());
+    CPointCloud pyramid_points = CPointCloud(points, quan, Vmin, Vmax, 1.0, "vivid_assimp_test");
+//    CSurface smooth1 = CSurface(points, mask, quan, Vmin, Vmax);
+//    smooth1.CreateSurface();
     //CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 1);
-    mesh1.LaplacianSmooth(25);
-    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpSmooth");
+    CMesh pyramid_mesh = pyramid_points.CreateVoronoiSurface(mask);
+    pyramid_mesh.LaplacianSmooth(10, 0.7, 0);
+    pyramid_mesh.LaplacianSmooth(50, 0.25, 0.7);
+    pyramid_mesh.Export(TEST_OUTPUT_PATH + "PyramidAssimpSmooth");
+
     //mesh1.Reduce(0.3, 0.5);
-    cout << TEST_OUTPUT_PATH + "PyramidAssimpAnim" << endl;
+    cout << TEST_OUTPUT_PATH + "PyramidAssimpObj" << endl;
 //    CAnimation anim1 = CAnimation(CModel(mesh1));
 //    anim1.SetRotateAnim(0, CPoint(6.28, 0, 0));
 //    anim1.SetScaleAnim(0,CPoint(3,3,3));

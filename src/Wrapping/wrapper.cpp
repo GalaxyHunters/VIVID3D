@@ -73,9 +73,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("3d_vector"));
 
     py::class_<CSurface>(m, "Surface")
-            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
+            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0) //color_field basic value = vector<coord_t>(0)
+                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
@@ -91,29 +91,32 @@ PYBIND11_MODULE(_vivid, m) {
             .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                  "Constructor for Lines",
                  py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
-            .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
-                 "Constructor for Lines",
-                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
+//            .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
+//                 "Constructor for Lines",
+//                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
             .def(py::init<const CLines&>(),
                  "Copy Constructor for Lines",
                  py::arg("Lines"))
             .def("add_line", &CLines::AddLine,
                  "Add another line",
                  py::arg("points"))
-            .def("add_lines", &CLines::AddLine,
-                 "Add array of lines",
-                 py::arg("points_matrix"));
+//            .def("add_lines", &CLines::AddLine,
+//                 "Add array of lines",
+//                 py::arg("points_matrix"));
 
     py::class_<CPointCloud>(m, "PointCloud", model_component)
-            .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
+            .def(py::init<const std::vector<CPoint>&, vector<coord_t>&, coord_t, coord_t, const coord_t, const std::string>(),
                  "Constructor for Point Cloud",
-                 py::arg("points"), py::arg("color_field"), py::arg("alpha"), py::arg("label"))
+                 py::arg("points"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("alpha") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
             .def(py::init<const CPointCloud&>(),
                  "Copy Constructor for Point Cloud",
                  py::arg("point_cloud"))
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
-                 py::arg("points"), py::arg("color_field"));
+                 py::arg("points"), py::arg("color_field"), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
+             .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
+                  "Generate 3D Mesh using Voronoi Algorithm",
+                  py::arg("mask"), py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh>(m, "Mesh", model_component)
             .def(py::init<const CMesh &> (),

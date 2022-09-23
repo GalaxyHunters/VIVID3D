@@ -54,7 +54,7 @@ namespace vivid
         inline void SetAlpha(coord_t aAlpha) {
             //check input valdilty
             if(aAlpha > 1 || aAlpha < 0){
-
+                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_ALPHA_VALUE);
             }
             mAlpha = aAlpha;
         }

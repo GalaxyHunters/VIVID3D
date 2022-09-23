@@ -8,7 +8,7 @@ constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
 constexpr coord_t NOISE_PERCENTAGE = 0.005;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement)
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || !arColorField.empty() && (arInputPoints.size() != arColorField.size())){
@@ -26,7 +26,7 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
         points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), UV_coords[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
-    PreProcessPoints(points);
+    PreProcessPoints(points, aNoiseDisplacement);
 }
 
 CSurface::CSurface(const CSurface &surf)
@@ -64,7 +64,7 @@ CSurface::CSurface(const CSurface &surf)
 //   ------------------------------------------------ Public Methods ------------------------------------------------>>>
 //   <<<--------------------------------------------- Public Methods ---------------------------------------------------
 
-void CSurface::CreateSurface(bool aPostProcessing)
+void CSurface::CreateSurface()
 {
     RunVorn();
     CleanEdges();
@@ -235,12 +235,12 @@ vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
     return triangulized_faces;
 }
 
-void CSurface::NormalizeFace(CSurfaceFace& arFace)
+void CSurface::NormalizeFace(CSurfaceFace& arTriangleFace)
 {
-    bool c_point1_mask = mCreationMask[arFace.mPairPoints.first];
-    bool c_point2_mask = mCreationMask[arFace.mPairPoints.second];
-    CPoint c_point1 = mInputPoints[arFace.mPairPoints.first];
-    CPoint c_point2 = mInputPoints[arFace.mPairPoints.second];
+    bool c_point1_mask = mCreationMask[arTriangleFace.mPairPoints.first];
+    bool c_point2_mask = mCreationMask[arTriangleFace.mPairPoints.second];
+    CPoint c_point1 = mInputPoints[arTriangleFace.mPairPoints.first];
+    CPoint c_point2 = mInputPoints[arTriangleFace.mPairPoints.second];
 
     // assumption 1
     // true -> false is normal direction
@@ -253,11 +253,11 @@ void CSurface::NormalizeFace(CSurfaceFace& arFace)
     // assumption 2
     // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
     // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
-    CPoint face_normal = ((*arFace.mVertices[1]-*arFace.mVertices[0]).Cross(*arFace.mVertices[2]-*arFace.mVertices[0])).Normalize();
+    CPoint face_normal = ((*arTriangleFace.mVertices[1] - *arTriangleFace.mVertices[0]).Cross(*arTriangleFace.mVertices[2] - *arTriangleFace.mVertices[0])).Normalize();
     true_normal.Scale(face_normal);
     // if the direction is opposite
     if (true_normal.Dot({1,1,1}) < 0) {
-        arFace.mVertices = {arFace.mVertices[0], arFace.mVertices[2], arFace.mVertices[1]};
+        arTriangleFace.mVertices = {arTriangleFace.mVertices[0], arTriangleFace.mVertices[2], arTriangleFace.mVertices[1]};
     }
 }
 
@@ -407,7 +407,7 @@ void CSurface::CleanDoublePoints()
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
-    if (arColorField.size() == 0){ //default python color_field, user didnt input one
+    if (arColorField.size() == 0){ //default python color_field, user didn't input one
         arColorField = vector<coord_t>(mCreationMask.size(), 1);
         return arColorField;
     }
@@ -428,7 +428,7 @@ vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t
     return arColorField;
 }
 
-void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
+void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement)
 {
     CleanDoubleInputPoints(arPoints);
 
@@ -445,15 +445,15 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 
     vector<CPoint> noise_vec (mInputPoints.size());
     arPoints.clear();
-    bool do_noise = false; // for now noise is disabled because it breaks the model
+
     // Consider generator here.
     srand(time(nullptr));
     for (auto & i : noise_vec){
         i = {1,1,1};
-        if(do_noise) {
-            i = {1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.)};
+        if(aNoiseDisplacement) {
+            i = {1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.)};
         }
     }
     for (int i = 0; i < mInputPoints.size(); i++){

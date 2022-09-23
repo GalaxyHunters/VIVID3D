@@ -4,17 +4,12 @@ using namespace std;
 
 namespace vivid {
     namespace {
-//        ofstream LOG_FILE;
-        bool mWriteToLog = false;
+        ofstream LOG_FILE;
+        bool mWriteToLog = true;
         bool mWriteToConsole = true;
-//        int mCountToFlush = 0;
-//        int mMaxBeforeFlush = 5;
-//        string mFilePath = "";
+        string mFilePath = "VIVID_LOG.txt";
 
         void WriteLog(const ELogCode aCode, const string& arMsg) {
-//            mCountToFlush++;
-//            if (mCountToFlush >= mMaxBeforeFlush) { LOG_FILE.flush(); }
-
             string code = (*CODE_MAP.find(aCode)).second;
             time_t now = time(nullptr);
             auto tm = *localtime(&now);
@@ -32,18 +27,13 @@ namespace vivid {
                 }
             }
             if (mWriteToLog) {
-//                if (LOG_FILE.is_open()) {
-//                    string file_path = "./VIVID_LOG"; //TODO should be generic
-//                    LOG_FILE.open(file_path + ".txt");
-//                }
-//
-//                LOG_FILE << time_string << '\n';
-//                LOG_FILE << code << arMsg << '\n';
+                LOG_FILE.open(mFilePath, ios::app);
+                LOG_FILE << log_string << '\n';
+                LOG_FILE.close();
             }
             if (aCode == ELogCode::LOG_ERROR) {
                 throw runtime_error(arMsg);
             }
-//            return 0;
         }
     }
 
@@ -55,8 +45,8 @@ namespace vivid {
         return WriteLog(aCode, arMsg);
     }
 
-    void SetWriteToLog(bool aWrite) {
-        mWriteToLog = aWrite;
+    void SetFileToLog(bool aWrite) {
+        mWriteToLog = true;
     }
     void SetWriteToConsole(bool aWrite) {
         mWriteToConsole = aWrite;

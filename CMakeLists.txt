@@ -71,7 +71,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Errors.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
-        )
+        src/Utils/LogFile.cpp)
 
 
 target_include_directories(vivid PUBLIC

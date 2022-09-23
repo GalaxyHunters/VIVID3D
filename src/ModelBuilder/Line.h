@@ -13,9 +13,6 @@ namespace vivid
     public:
         CLines(){}
         CLines(const std::vector<CPoint> &arPoints, coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", mColor){
-            if(aAlpha > 1 || aAlpha <= 0){
-                CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
-            }
             mPoints = arPoints;
             std::vector<size_t> points (arPoints.size());
             for (int i = 0; i < arPoints.size(); i++) { points[i] = i; }
@@ -23,9 +20,6 @@ namespace vivid
         }
         // probably not usable constructor, possible remake in python wrapper.
         CLines(const std::vector<std::vector<CPoint>> &arPoints, coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", mColor){
-            if(aAlpha > 1 || aAlpha <= 0){
-                CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
-            }
             size_t size = 0;
             for (const auto & arPoint : arPoints) {
                 std::vector<size_t> points (arPoint.size());

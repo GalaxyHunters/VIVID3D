@@ -11,14 +11,14 @@ constexpr coord_t NOISE_PERCENTAGE = 0.005;
 CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
 {
     // Check input validity
-    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
-        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_NOT_EQUAL);
-    }
     if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
-        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_EMPTY);
+        Log(LOG_ERROR, ARRAYS_EMPTY);
+    }
+    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
+        Log(LOG_ERROR, ARRAYS_NOT_EQUAL);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-        CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::MISSING_BOOLEAN_VALUES);
+        Log(LOG_ERROR, MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
     vector<quan_t> norm_quan = NormQuan(arQuan, aVMin, aVMax);
@@ -67,6 +67,7 @@ CSurface::CSurface(const CSurface &surf)
 void CSurface::CreateSurface(bool aPostProcessing)
 {
     RunVorn();
+    Log(LOG_VIVID, "Voronoi Post Processing");
     CleanEdges();
     if (aPostProcessing) {
         CleanFaces();
@@ -77,7 +78,7 @@ void CSurface::CreateSurface(bool aPostProcessing)
 CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
     //check input validity
     if(aAlpha > 1 || aAlpha <= 0){
-        CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
+        Log(LOG_WARNING, INVALID_ALPHA_VALUE);
         aAlpha = max(0.1 , min(aAlpha ,1.)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
     }
 
@@ -123,7 +124,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints
 
 void CSurface::RunVorn()
 {
-    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Begin Compute Voronoi");
+    Log(LOG_VIVID, "Begin Compute Voronoi with "  + to_string(mInputPoints.size()) + " points");
     mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     //set the points
     mVertices = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
@@ -152,7 +153,7 @@ void CSurface::RunVorn()
 
     mSurfFaces = new_faces;
 
-    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Finished Compute Voronoi");
+    Log(LOG_VIVID, "Completed Voronoi Computation");
 }
 
 /* -------------------------------------------- Centralization Sub-Methods -------------------------------------------*/
@@ -295,8 +296,6 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
         }
         i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
     }
-    string str = "Removed Points = " + removed_points;
-    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, str);
 
     return cleaned_data;
 }
@@ -374,7 +373,7 @@ vector<coord_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 {
-    CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Preprocessing Data");
+    Log(ELogCode::LOG_VIVID, "Preprocessing Data");
 
     CPoint box_dim, box_min, box_max;
     vector<CPoint> box_dimensions = FindContainingBox();
@@ -402,5 +401,4 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};
-
 }

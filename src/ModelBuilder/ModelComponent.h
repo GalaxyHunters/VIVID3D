@@ -19,8 +19,6 @@ namespace vivid
 /* Abstract Class defining 3D component for a model. Can be mesh, line, point cloud or anything else. */
     class CModelComponent {
     protected:
-        //CLogFile& mLogFile = CLogFile::GetInstance();
-
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
         std::string mObjType = "f";
@@ -54,7 +52,7 @@ namespace vivid
         inline void SetAlpha(coord_t aAlpha) {
             //check input valdilty
             if(aAlpha > 1 || aAlpha < 0){
-
+                Log(LOG_ERROR, INVALID_ALPHA_VALUE);
             }
             mAlpha = aAlpha;
         }

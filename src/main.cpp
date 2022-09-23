@@ -30,7 +30,7 @@ const std::string TEST_OUTPUT_PATH = "./tests/test_models/";
 /* Test basic shapes creation, add them to a Model and export to OBJ. */
 int ShapesTest()
 {
-    cout << "Basic Test:" << endl;
+    Log(LOG_INFO, "Basic Test:");
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
@@ -106,7 +106,7 @@ int ParametricSurfByFuncTest()
 /* Test surf functionality with cube */
 int CubeSurfTests()
 {
-    cout << "Cube Test:" << endl;
+    Log(LOG_INFO, "Cube Test:");
 
     vector<CPoint> points; vector<coord_t> quan; vector<bool> mask;
 
@@ -125,7 +125,7 @@ int CubeSurfTests()
     CModel model;
     CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
     surf.CreateSurface();
-//    cerr << "Initiating Copy Constructor" << endl;
+//    cerr << "Initiating Copy Constructor");
 //    CSurface surf_copy = CSurface(surf);
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
     mesh.SetClm("Red");
@@ -160,7 +160,7 @@ int ColorMapTest()
 /* Test surf functionality by cubic 3D pyramid (with square base) */
 int PyramidSmoothTest()
 {
-    cout << "Pyramid Test:" << endl;
+    Log(LOG_INFO, "Pyramid Test:");
 
     vector<CPoint> points;
     vector<bool> mask;
@@ -198,10 +198,10 @@ int PyramidSmoothTest()
     smooth1.CreateSurface();
     //smooth1.WhatAreTheseThingsElad();
     //CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", .8);
+    CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 2);
     //mesh1.LaplacianSmooth(20);
 //    //mesh1.Reduce(0.3, 0.5);
-    cout << TEST_OUTPUT_PATH + "PyramidAssimpNewMat" << endl;
+    Log(LOG_INFO, TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
     mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
@@ -236,9 +236,9 @@ int PyramidSmoothTest()
 
 int RunMedicaneTest()
 {
-    cout << "Medicane Test:" << endl;
+    Log(LOG_INFO, "Medicane Test:");
     ModelData nova;
-    cout << "Running VIVID" << endl;
+    Log(LOG_INFO, "Running VIVID");
 
     nova = ReadBin(DATA_MODEL_PATH + "medicane.bin");
     vector<CPoint> points (nova.points.size());
@@ -249,7 +249,7 @@ int RunMedicaneTest()
     CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
     surf.CreateSurface();
     //surf.Smooth(false, 1);
-    cout << "Convert to Mesh" << endl;
+    Log(LOG_INFO, "Convert to Mesh");
     CMesh mesh = surf.ToMesh("SurfMedicane", 1);
     //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
@@ -268,9 +268,9 @@ int RunMedicaneTest()
 /* Test the Elad RunVorn bug and the pointy faces bugs */
 int RunSupernovaTests()
 {
-    cout << "Black Hole Test:" << endl;
+    Log(LOG_INFO, "Black Hole Test:");
 //    vector<ModelData> data (7);
-//    cout << "Loading Data" << endl;
+//    Log(LOG_INFO, "Loading Data");
 ////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
 //    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
 //    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
@@ -282,7 +282,7 @@ int RunSupernovaTests()
     vector<coord_t> why = {0, 1.5, -2.5, -6, -7. - 10., -15.};
     ModelData nova;
     CModel nova_model;
-    cout << "Running VIVID" << endl;
+    Log(LOG_INFO, "Running VIVID");
 
     nova = ReadBin(DATA_MODEL_PATH + "medicane.bin");
     vector<CPoint> points (nova.points.size());
@@ -301,7 +301,7 @@ int RunSupernovaTests()
         CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
         surf.CreateSurface();
         //surf.Smooth(false, 1);
-        cout << "Convert to Mesh" << endl;
+        Log(LOG_INFO, "Convert to Mesh");
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
         //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
@@ -318,8 +318,8 @@ int RunSupernovaTests()
 }
 
 int RemovePointyFacesTest() {
-    cout << "Remove Pointy Faces Test:" << endl;
-    cout << "Loading Data" << endl;
+    Log(LOG_INFO, "Remove Pointy Faces Test:");
+    Log(LOG_INFO, "Loading Data");
 ////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
 //    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
 //    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
@@ -335,13 +335,13 @@ int RemovePointyFacesTest() {
     CSurface surf = CSurface(points, nova.mask, nova.quan, 0, 0);
     surf.CreateSurface();
     //surf.Smooth(false, 1);
-    cout << "Convert to Mesh" << endl;
+    Log(LOG_INFO, "Convert to Mesh");
     CMesh mesh = surf.ToMesh("pointytest", .7);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_no_processing");
     mesh.SubdivideLargeFaces();
     mesh.SubdivideLargeFaces();
     mesh.SubdivideLargeFaces();
-    cout << mesh.GetFaces().size() << endl;
+    Log(LOG_INFO, to_string(mesh.GetFaces().size()));
     mesh.RemovePointyFaces();
     mesh.LaplacianSmooth(20, 0.7, 0);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_smooth_1");
@@ -366,7 +366,7 @@ void assimpTest(string file){
     aiMaterial* mat = scene->mMaterials[1];
     aiMaterialProperty prop;
     for(int i = 0; i < mat->mNumProperties; i++){
-        cout << mat->mProperties[i]->mKey.C_Str() << endl; //, mat->mProperties[i]->mData
+        cout <<  mat->mProperties[i]->mKey.C_Str() << endl; //, mat->mProperties[i]->mData
     }
 
     //big printing of stuff
@@ -392,7 +392,7 @@ void assimpTest(string file){
     cout << color.r << color.g << color.b << endl;
 
     mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
-    cout << "AI_MATKEY_COLOR_SPECULAR     ";
+    cout << "AI_MATKEY_COLOR_SPECULAR     " << endl;
     cout << color.r << color.g << color.b << endl;
 
     mat->Get(AI_MATKEY_COLOR_EMISSIVE, color);
@@ -430,21 +430,21 @@ int main()
 {
     //assimpTest(TEST_OUTPUT_PATH + "/PyramidAssimpNewMat_Vivid.obj");
     int ret_value = EXIT_SUCCESS;
-//    cout << "MedicaneTestTest" << endl;
+//    Log(LOG_INFO, "MedicaneTestTest");
 //    ret_value =RunMedicaneTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "ParametricSurfByFuncTest" << endl;
+//    Log(LOG_INFO, "ParametricSurfByFuncTest");
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Testing All Shapes" << endl;
+//    Log(LOG_INFO, "Testing All Shapes");
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Cube" << endl;
+//    Log(LOG_INFO, "Cube");
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    cout << "Colors" <<endl;
+//    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    cout << "Pyramid" << endl;
+    Log(LOG_INFO, "Pyramid");
     ret_value = PyramidSmoothTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();

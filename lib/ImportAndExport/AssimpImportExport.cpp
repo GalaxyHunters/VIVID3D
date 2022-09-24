@@ -190,13 +190,14 @@ namespace vivid {
         const aiColor3D *specular_color = new aiColor3D(0,0,0);
         material->AddProperty(specular_color, 3,AI_MATKEY_COLOR_SPECULAR);
 
-        const aiColor3D *emissive_color = new aiColor3D(0,0,0);
+        const color_t mat_emissive_color = mesh.GetMaterial().GetEmissionColor();
+        const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color.R, mat_emissive_color.G, mat_emissive_color.B);
         material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
 
         const aiColor3D *color_transparent = new aiColor3D(1,1,1);
         material->AddProperty(color_transparent, 3,AI_MATKEY_COLOR_TRANSPARENT);
 
-        const float *shininess = new float(95);
+        const float *shininess = new float(mesh.GetMaterial().GetRoughness() * 1000);
         material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
         const float *opacity = new float(mesh.GetAlpha());
@@ -205,7 +206,7 @@ namespace vivid {
         const float *anisotrpy_factor = new float(0);
         material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
 
-        const float *emissive_intensity = new float(0.3);
+        const float *emissive_intensity = new float(mesh.GetMaterial().GetEmissionStrength());
         material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
         const float *refracti = new float(1);

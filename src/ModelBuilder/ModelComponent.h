@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"
+#include "Material.h"
 
 namespace vivid
 {
@@ -21,12 +22,13 @@ namespace vivid
     protected:
         //CLogFile& mLogFile = CLogFile::GetInstance();
 
+        std::string mLabel = "";
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
         std::string mObjType = "f";
         coord_t mAlpha = 1.;
-        std::string mLabel = "";
         CColorMap mClm;
+        CMaterial mMaterial = BASE_MAT;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
         CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}
@@ -46,6 +48,7 @@ namespace vivid
         inline std::string GetLabel() const { return mLabel; }
         inline coord_t GetAlpha() const { return mAlpha; }
         inline CColorMap GetClm() const { return mClm; }
+        inline CMaterial GetMaterial() const { return mMaterial; }
         inline std::string GetObjType() const { return mObjType; }
 
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }

@@ -173,6 +173,10 @@ void CMesh::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
     CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
 }
 
+int CMesh::Export(const std::string &arOutputFilePath, std::string aFileType){
+    return CModel(*this).Export(arOutputFilePath, aFileType);
+}
+
 void CMesh::CalculatePointsNeighbours() {
     size_t i =0;
     for (auto & mFace : mFaces) {

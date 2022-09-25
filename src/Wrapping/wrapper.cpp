@@ -1,11 +1,11 @@
 #include "TypeCasting.h"
-#include "./ModelBuilder/Surface.h"
-#include "./ModelBuilder/ModelComponent.h"
-#include "./ModelBuilder/Mesh.h"
-#include "./ModelBuilder/Line.h"
-#include "./ModelBuilder/PointCloud.h"
-#include "./ModelBuilder/Shapes.h"
-#include "./ModelBuilder/Model.h"
+#include "Surface.h"
+#include "ModelComponent.h"
+#include "Mesh.h"
+#include "Line.h"
+#include "PointCloud.h"
+#include "Shapes.h"
+#include "Model.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -28,33 +28,33 @@ py::array_t<double> make_cpoint(const double aValue) {
 }
 
 
-PYBIND11_MODULE(vivid_py, m) {
+PYBIND11_MODULE(_vivid, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
 
     // TODO: FIX THIS!!!
     // add model component base functions
-   py::class_<CModelComponent> (m, "ModelComponent")
-       .def(py::init<const CModelComponent&> (),
-               "Constructor for ModelComponent",
-               py::arg("model_component"))
-       //TODO: Add transform mesh functions
-//        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
-//        .def("transform", &CModelComponent::TransformMesh,
-//             "Transform Model Component points by transformation function",
-//             py::arg("function"))
-     //   .def("transform", &CModelComponent::TransformMesh,
-     //        "Transform Model Component points by transformation matrix",
-     //        py::arg("matrix"))
-       .def("RotateMesh", &CModelComponent::RotateMesh,
-            "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-            py::arg("norm_vec"), py::arg("radians_angle"))
-       .def("MoveMesh", &CModelComponent::MoveMesh,
-            "Add direction_vec to Model Component points.",
-            py::arg("direction_vec"))
-       .def("ScaleMesh", &CModelComponent::ScaleMesh,
-            "Scale Model Component points by multiplying by scale_vec.",
-            py::arg("scale_vec"));
-//     py::class_<CModelComponent> model_component (m, "ModelComponent");
+//    py::class_<CModelComponent> (m, "ModelComponent")
+//        .def(py::init<const CModelComponent&> (),
+//                "Constructor for ModelComponent",
+//                py::arg("model_component"))
+//        //TODO: Add transform mesh functions
+////        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+////        .def("transform", &CModelComponent::TransformMesh,
+////             "Transform Model Component points by transformation function",
+////             py::arg("function"))
+////        .def("transform", &CModelComponent::TransformMesh,
+////             "Transform Model Component points by transformation matrix",
+////             py::arg("matrix"))
+//        .def("RotateMesh", &CModelComponent::RotateMesh,
+//             "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
+//             py::arg("norm_vec"), py::arg("radians_angle"))
+//        .def("MoveMesh", &CModelComponent::MoveMesh,
+//             "Add direction_vec to Model Component points.",
+//             py::arg("direction_vec"))
+//        .def("ScaleMesh", &CModelComponent::ScaleMesh,
+//             "Scale Model Component points by multiplying by scale_vec.",
+//             py::arg("scale_vec"));
+    py::class_<CModelComponent> model_component (m, "ModelComponent");
 
     // Mostly unneeded classes
     py::class_<CPoint>(m, "Point")
@@ -70,21 +70,21 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("3d_vector"));
 
     py::class_<CSurface>(m, "Surface")
-        .def(py::init<const vector<CPoint> &, const vector<bool> &, vector<coord_t> &, coord_t, coord_t>(),
-             "constructor function for surface",
-             py::arg("points"), py::arg("mask"), py::arg("quan") = vector<coord_t>(0), py::arg("quan_min") = 0, py::arg("quan_max") = 0)
-        .def(py::init<const CSurface &>(),
-             "copy constructor for Surface",
-             py::arg("surf"))
-        .def("create_surface", &CSurface::CreateSurface,
-             "Calculate the surface from input data)",
-             py::arg("Processing") = true)
-        .def("to_mesh", &CSurface::ToMesh,
-             "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
-             py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
+            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
+                 "constructor function for surface",
+                 py::arg("points"), py::arg("mask"), py::arg("quan"), py::arg("quan_min") = 0, py::arg("quan_max") = 0) //quan basic value = vector<coord_t>(0)
+            .def(py::init<const CSurface &> (),
+                 "copy constructor for Surface",
+                 py::arg("surf"))
+            .def("create_surface", &CSurface::CreateSurface,
+                 "Calculate the surface from input data)",
+                 py::arg("Processing") = true)
+            .def("to_mesh", &CSurface::ToMesh,
+                 "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
+                 py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
-    py::class_<CLines, CModelComponent>(m, "Lines")
+    py::class_<CLines>(m, "Lines", model_component)
             .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                  "Constructor for Lines",
                  py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
@@ -99,24 +99,9 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("points"))
             .def("add_lines", &CLines::AddLine,
                  "Add array of lines",
-                 py::arg("points_matrix"))
-     //        .def("transform", &CModelComponent::TransformMesh,
-     //             "Transform Model Component points by transformation function",
-     //             py::arg("function"))
-     //   .def("transform", &CModelComponent::TransformMesh,
-     //        "Transform Model Component points by transformation matrix",
-     //        py::arg("matrix"))
-       .def("RotateMesh", &CModelComponent::RotateMesh,
-            "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-            py::arg("norm_vec"), py::arg("radians_angle"))
-       .def("MoveMesh", &CModelComponent::MoveMesh,
-            "Add direction_vec to Model Component points.",
-            py::arg("direction_vec"))
-       .def("ScaleMesh", &CModelComponent::ScaleMesh,
-            "Scale Model Component points by multiplying by scale_vec.",
-            py::arg("scale_vec"));
+                 py::arg("points_matrix"));
 
-    py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
+    py::class_<CPointCloud>(m, "PointCloud", model_component)
             .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
@@ -125,24 +110,9 @@ PYBIND11_MODULE(vivid_py, m) {
                  py::arg("point_cloud"))
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
-                 py::arg("points"), py::arg("quan"))
-     //        .def("transform", &CModelComponent::TransformMesh,
-     //             "Transform Model Component points by transformation function",
-     //             py::arg("function"))
-     //   .def("transform", &CModelComponent::TransformMesh,
-     //        "Transform Model Component points by transformation matrix",
-     //        py::arg("matrix"))
-       .def("RotateMesh", &CModelComponent::RotateMesh,
-            "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-            py::arg("norm_vec"), py::arg("radians_angle"))
-       .def("MoveMesh", &CModelComponent::MoveMesh,
-            "Add direction_vec to Model Component points.",
-            py::arg("direction_vec"))
-       .def("ScaleMesh", &CModelComponent::ScaleMesh,
-            "Scale Model Component points by multiplying by scale_vec.",
-            py::arg("scale_vec"));
+                 py::arg("points"), py::arg("quan"));
 
-    py::class_<CMesh, CModelComponent>(m, "Mesh")
+    py::class_<CMesh>(m, "Mesh", model_component)
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
                  py::arg("mesh"))
@@ -155,21 +125,9 @@ PYBIND11_MODULE(vivid_py, m) {
             .def("laplacian_smooth", &CMesh::LaplacianSmooth,
                  "Smooths the surface by HC Laplacian Algorithm.",
                  py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
-     //        .def("transform", &CModelComponent::TransformMesh,
-     //             "Transform Model Component points by transformation function",
-     //             py::arg("function"))
-     //   .def("transform", &CModelComponent::TransformMesh,
-     //        "Transform Model Component points by transformation matrix",
-     //        py::arg("matrix"))
-       .def("RotateMesh", &CModelComponent::RotateMesh,
-            "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-            py::arg("norm_vec"), py::arg("radians_angle"))
-       .def("MoveMesh", &CModelComponent::MoveMesh,
-            "Add direction_vec to Model Component points.",
-            py::arg("direction_vec"))
-       .def("ScaleMesh", &CModelComponent::ScaleMesh,
-            "Scale Model Component points by multiplying by scale_vec.",
-            py::arg("scale_vec"));
+            .def("export", &CMesh::Export,
+                 "writes CMesh to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CModel>(m, "Model")
             .def(py::init<> (), "default constructor for CModel")
@@ -186,7 +144,10 @@ PYBIND11_MODULE(vivid_py, m) {
                  "Returns the list of meshes held by model")
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
-                 py::arg("output_file"), py::arg("with_texture") = 1);
+                 py::arg("output_file"), py::arg("with_texture") = 1)
+            .def("export", &CModel::Export,
+                 "writes CModel to a given file format",
+                 py::arg("output_file"), py::arg("file_format") = "obj");
 
     //Animations:
 //    m.def("animation", &Animate,

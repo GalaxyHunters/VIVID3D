@@ -7,7 +7,7 @@
 //#include "LogFile.h"
 #include "Face.h"
 #include "Decimate.h"
-#include "Utils/ColorMap.h"
+#include "ColorMap.h"
 
 #include <string>
 #include <fstream>
@@ -70,6 +70,43 @@ namespace vivid
         void LaplacianSmooth(size_t aNumIterations, double aAlphaFactor = 0.5, double aBetaFactor = 0.5);
 
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
+
+        /**
+        * Assimp export. writes arModel in aFileType format at aOutputPath
+        * @param[in] aOutputPath Path and name for output file
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        */
+        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
+
+
+        // TODO: Figure out why the wrapper doesn't like it in modelcomponent
+        /**
+             * transform CMesh points by transformation function
+             * @param[in] aTrans is a function(CPoint) -> CPoint
+             */
+        void TransformMesh(FTrans_t const &arTrans);
+        /**
+         * transform CMesh points by transformation matrix
+         * @param[in] aTrans a 3x3 dimension matrix.
+         */
+        void TransformMesh(const std::array<CPoint, 3>& aTrans);
+        /**
+         * Rotate the CMesh points around a normal vector by an angel, counterclockwise
+         * @param[in] arNormVec the x,y.z normal to rotate around.
+         * @param[in] aRadAngel the angel to rotate by (in radians).
+         */
+        void RotateMesh(const CPoint& arNormVec, double aRadAngel);
+        /**
+         * Change CMesh points location by addition of x,y,z.
+         * @param[in] arDirectionVec the x,y.z direction to move by it.
+         */
+        void MoveMesh(const CPoint& arDirectionVec);
+        /**
+         * Change CMesh points scale in x,y,z direction by x,y,z of the scale vector
+         * @param[in] arScaleVec the x,y.z direction to move by it.
+         */
+        void ScaleMesh(const CPoint& arScaleVec);
+
     };
 
 } // namespace vivid

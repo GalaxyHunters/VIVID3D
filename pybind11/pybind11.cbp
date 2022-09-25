@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="pybind11"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\lib\;CMake Files\lib\assimp\;CMake Files\lib\assimp\cmake-modules\;CMake Files\lib\assimp\include\;CMake Files\lib\assimp\include\assimp\;CMake Files\lib\assimp\contrib\;CMake Files\lib\assimp\contrib\zlib\;CMake Files\lib\assimp\code\;CMake Files\lib\SurfacingAlgorithms\;CMake Files\lib\SurfacingAlgorithms\huji-rich-Elad3DFast\;CMake Files\pybind11\;CMake Files\pybind11\tools\;CMake Files\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/naf/projects/Vivid/Vivid/pybind11"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/pybind11/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/pybind11/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/pybind11/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/naf/projects/Vivid/Vivid/pybind11/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/assimp.pc.in">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/revision.h.in">
+			<Option virtualFolder="CMake Files\lib\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindPkgMacros.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindRT.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/FindZLIB.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/PrecompiledHeader.cmake">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/cmake-modules/assimp-plain-config.cmake.in">
+			<Option virtualFolder="CMake Files\lib\assimp\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/include/assimp/config.h.in">
+			<Option virtualFolder="CMake Files\lib\assimp\include\assimp\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zconf.h.cmakein">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/contrib/zlib/zlib.pc.cmakein">
+			<Option virtualFolder="CMake Files\lib\assimp\contrib\zlib\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/assimp/code/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\assimp\code\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\lib\SurfacingAlgorithms\huji-rich-Elad3DFast\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\pybind11\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/JoinPaths.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/pybind11Common.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/pybind11/tools/pybind11NewTools.cmake">
+			<Option virtualFolder="CMake Files\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/naf/projects/Vivid/Vivid/cmake/vividConfig.cmake.in">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

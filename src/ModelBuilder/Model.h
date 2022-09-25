@@ -24,6 +24,7 @@ namespace vivid
 
         // TODO: Make this work
         void AddMeshes(const vector<CModelComponent> &arMeshes);
+        int GetNumMeshes(){return this->mMeshes.size();}
         void AddMesh(const CModelComponent &arMesh);
         void AddModel(const CModel &arModel);
         //remove Mesh by label maybe?
@@ -33,6 +34,13 @@ namespace vivid
         // Add Importers
         // void ImportModel(const std::string &arInputFilePath)
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
+
+        /**
+        * Assimp export. writes arModel in aFileType format at aOutputPath
+        * @param[in] aOutputPath Path and name for output file
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        */
+        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
 //    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
         //TODO export to BLOB

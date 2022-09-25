@@ -3,6 +3,12 @@
 /CMakeFiles/
 /binding_python_version/
 /venv/
-/tests/test_models/
-/Vivid_py.egg-info
+/Vivid_py.egg-info/
+/temp-debug changes/
+/dist/
+/build/
+/_skbuild/
+/src/vivid3d.egg-info/
+/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeFiles/
 vivid
+vivid_main

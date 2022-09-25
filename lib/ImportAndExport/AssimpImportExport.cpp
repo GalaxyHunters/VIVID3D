@@ -1,5 +1,6 @@
 #include "AssimpImportExport.h"
 
+constexpr float MAX_ROUGHNESS = 1000;
 
 namespace vivid {
     // matches assimp file formats to actual file endings
@@ -197,7 +198,7 @@ namespace vivid {
         const aiColor3D *color_transparent = new aiColor3D(1,1,1);
         material->AddProperty(color_transparent, 3,AI_MATKEY_COLOR_TRANSPARENT);
 
-        const float *shininess = new float(mesh.GetMaterial().GetRoughness() * 1000);
+        const float *shininess = new float(mesh.GetMaterial().GetRoughness() * MAX_ROUGHNESS);
         material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
         const float *opacity = new float(mesh.GetAlpha());

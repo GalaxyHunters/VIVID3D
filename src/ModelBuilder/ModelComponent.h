@@ -28,7 +28,7 @@ namespace vivid
         std::string mObjType = "f";
         coord_t mAlpha = 1.;
         CColorMap mClm;
-        CMaterial mMaterial = BASE_MAT;
+        CMaterial mMaterial;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
         CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}

@@ -70,7 +70,5 @@ namespace vivid {
             return texture;
         }
     };
-
-    static CColorMap BASE_TEXTURE = CColorMap();
 }
 #endif

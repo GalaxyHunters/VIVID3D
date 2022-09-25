@@ -20,8 +20,6 @@ namespace vivid
     class CModelComponent
     {
     protected:
-        // CLogFile& mLogFile = CLogFile::GetInstance();
-
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
         std::string mObjType = "f";
@@ -33,10 +31,10 @@ namespace vivid
         CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}
         CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, std::string &arClm) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
         CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
-        // virtual ~CModelComponent() = 0;
-
     public:
         CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
+        virtual ~CModelComponent() = default;;
+
         // Operator=
         inline CModelComponent &operator=(const CModelComponent &arModel)
         {

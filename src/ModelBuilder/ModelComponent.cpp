@@ -2,8 +2,6 @@
 
 using namespace vivid;
 
-CModelComponent::~CModelComponent() {}
-
 /*--------------------------------------------- Transformation Methods -----------------------------------------------*/
 
 void CModelComponent::TransformMesh(FTrans_t const &arTrans){
@@ -37,6 +35,7 @@ void CModelComponent::RotateMesh(const CPoint& arNormVec, double aRadAngel)
     };
     TransformMesh(rotation_mat);
 }
+
 void CModelComponent::MoveMesh(const CPoint& arDirectionVec){
    for (auto & mPoint : mPoints)
    {

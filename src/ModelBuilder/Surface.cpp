@@ -299,6 +299,37 @@ vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& ar
 
     return cleaned_data;
 }
+
+bool sortPair(const pair<int, int>& arobj1, const pair<int, int>& arobj2) {
+    return (arobj1.first < arobj2.first);
+}
+
+void testMethod1() {
+    std::vector<pair<int, int>> b;
+    for (int i = 0; i < 10; ++i) {
+        int val = rand() % 10;
+        b.push_back({val, i});
+    }
+    cout << "b size = " << b.size() << endl;
+    cout << "--start---\n";
+    for (auto i: b) cout << i.first << ",";
+    cout << endl;
+    sort(b.begin(), b.end(), sortPair);
+
+    vector<int> c;
+
+    map<int, int> map;
+    for (int i = 0; i < b.size(); i++) {
+        map.insert({c.size(), b[i].second});
+        c.push_back(b[i].first);
+        if (i != b.size() - 1) {
+            while (b[i].first == b[i + 1].first) {
+                i++;
+            }
+        }
+    }
+}
+
 void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 {
     vector<CSurfacePoint> new_points = RemoveDoublesVornInput(arPoints);

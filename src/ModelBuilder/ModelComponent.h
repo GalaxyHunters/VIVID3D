@@ -55,6 +55,7 @@ namespace vivid
         inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
         inline void SetColorMap(const std::vector<color_t> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
         inline void SetColorMap(const std::vector<CColor> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
+        inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
         //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
         /**

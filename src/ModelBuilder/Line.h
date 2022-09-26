@@ -10,8 +10,8 @@ namespace vivid
     class CLines : public CModelComponent{
     public:
         CLines(){}
-        CLines(const std::vector<CPoint> &arPoints, coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l"){
-            if(aAlpha > 1 || aAlpha <= 0){
+        CLines(const std::vector<CPoint> &arPoints, normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, "l"){
+            if(aOpacity > 1 || aOpacity <= 0){
                 CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
             }
             mPoints = arPoints;

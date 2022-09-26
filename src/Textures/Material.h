@@ -26,7 +26,9 @@ namespace vivid {
         inline void SetOpacity(normal_float aOpacity) { mOpacity = AssertNormalize((aOpacity)); }
         inline void SetRoughness(normal_float aRoughness) { mRoughness = AssertNormalize((aRoughness)); }
         inline void SetEmissionStrength(float aEmissionStrength) { mEmissionStrength = aEmissionStrength; }
-        inline void SetEmissionColor(color_t& arEmissionColor) { mEmissionColor = arEmissionColor; }
+        inline void SetEmissionColor(const color_t& arEmissionColor) { mEmissionColor = arEmissionColor; }
+        inline void SetEmissionColor(const string& arEmissionColor) { mEmissionColor = COLORS.at(arEmissionColor); }
+
     };
 } // vivid
 

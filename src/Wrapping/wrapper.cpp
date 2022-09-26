@@ -16,6 +16,8 @@ using namespace vivid;
 using namespace std;
 
 namespace py = pybind11;
+using namespace py::literals;
+constexpr auto DEFAULT_COLOR_SHAPES = "lightgray";
 
 py::array_t<double> make_cpoint(const double aValue) {
     py::array_t<double> array (3);
@@ -27,6 +29,15 @@ py::array_t<double> make_cpoint(const double aValue) {
     return array;
 }
 
+py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
+    py::array_t<unsigned char> array (3);
+    py::buffer_info buffer = array.request();
+    auto ptr = static_cast<unsigned char *>(buffer.ptr);
+    for (int i = 0; i < 3; i++) {
+        ptr[i] = aValue;
+    }
+    return array;
+}
 
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
@@ -45,11 +56,31 @@ PYBIND11_MODULE(_vivid, m) {
              "Constructor for point",
              py::arg("3d_vector"));
 
-    py::class_<CModelComponent> (m, "ModelComponent")
+    py::class_<CMaterial>(m, "Material")
+        .def(py::init<normal_float, normal_float, float, const color_t& >(),
+            py::arg("opacity")=1, py::arg("roughness")=0, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0))
+        .def("set_opacity", &CMaterial::SetOpacity, py::arg("opacity"))
+        .def("set_roughness", &CMaterial::SetRoughness, py::arg("roughness"))
+        .def("set_emission_strength", &CMaterial::SetEmissionStrength, py::arg("emission_strength"))
+        .def("set_emission_color", py::overload_cast<const string&>(&CMaterial::SetEmissionColor), py::arg("emission_color_name"));
+//        .def("set_emission_color", py::overload_cast<const string&>(&CModelComponent::SetEmissionColor), py::arg("emission_color"))
+
+py::class_<CModelComponent> (m, "ModelComponent")
         .def(py::init<const CModelComponent&> (),
             "Constructor for ModelComponent",
             py::arg("model_component"))
 //        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+        .def("set_color", &CModelComponent::SetColor,
+             "Set Color", py::arg("color"))
+        .def("set_opacity", &CModelComponent::SetOpacity,
+             "Set Opacity", py::arg("opacity"))
+//        .def("set_color_map", [](const CModelComponent& c, const py::object& arObj ) {
+//            auto clm = arObj.attr("colors").cast<std::vector<std::vector<float>>();
+//            auto name = arObj.attr("name").cast<std::string>();
+//            c.SetColorMap(clm, name);
+//        })
+        .def("set_material", &CModelComponent::SetMaterial,
+             "Set Material", py::arg("Material"))
         .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
              "Transform Model Component by transformation matrix",
              py::arg("matrix"))
@@ -64,7 +95,7 @@ PYBIND11_MODULE(_vivid, m) {
             py::arg("scale_vec"));
 
     py::class_<CSurface>(m, "Surface")
-            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t>(),
+            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float>(),
                  "constructor function for surface",
                  py::arg("points"), py::arg("mask"), py::arg("quan"), py::arg("quan_min") = 0, py::arg("quan_max") = 0) //quan basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
@@ -79,12 +110,12 @@ PYBIND11_MODULE(_vivid, m) {
 
     // Main Classes
     py::class_<CLines, CModelComponent>(m, "Lines")
-            .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
+            .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
-                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
-            .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
-                 "Constructor for Lines",
-                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
+                 py::arg("points"), py::arg("opacity")=1., py::arg("label")="")
+//            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
+//                 "Constructor for Lines",
+//                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
             .def(py::init<const CLines&>(),
                  "Copy Constructor for Lines",
                  py::arg("Lines"))
@@ -96,7 +127,7 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("points_matrix"));
 
     py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
-            .def(py::init<const vector<CPoint>&, const coord_t, vector<coord_t>&, const string& >(),
+            .def(py::init<const vector<CPoint>&, const normal_float, vector<normal_float>&, const string& >(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
             .def(py::init<const CPointCloud&>(),
@@ -161,24 +192,24 @@ PYBIND11_MODULE(_vivid, m) {
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,
-          py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_box", &CreateBoxMesh,
           "Creates a box mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = make_cpoint(1),
-          py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_sphere", &CreateSphereMesh,
           "Creates a sphere",
           py::arg("position")=make_cpoint(0),py::arg("radius")=1,py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
-          py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_ellipsoid", &CreateEllipsoidMesh,
           "Creates ellipsoid mesh",
           py::arg("position")=make_cpoint(0),py::arg("radii"),py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
           py::arg("major_axis"), py::arg("middle_axis"), py::arg("minor_axis"),
-          py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_arrow", &CreateArrowMesh,
           "Creates an arrow mesh",
           py::arg("position")=make_cpoint(0), py::arg("direction"),py::arg("width")=0.5, py::arg("pointer_chest_ratio")=0.4,
-          py::arg("color")=0.5, py::arg("alpha") = 1, py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1, py::arg("label")="");
     m.def("create_grid", &CreateGrid,
           "Creates a grid",
           py::arg("size")=10, py::arg("num_of_ticks")=5, py::arg("tick_size")=1);

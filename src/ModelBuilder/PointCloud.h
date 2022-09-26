@@ -11,18 +11,16 @@ namespace vivid
 
 /* 3D points class*/
     class CPointCloud : public CModelComponent{
-    private:
-
     public:
         //Constructor and Copy Constructor
         CPointCloud(){}
-        CPointCloud(const std::vector<CPoint> &arPoints, const coord_t aAlpha, vector<quan_t> &arQuan, const std::string arLabel) : CModelComponent(aAlpha, arLabel, "p"){
+        CPointCloud(const std::vector<CPoint> &arPoints, const normal_float aOpacity, vector<normal_float> &arQuan, const std::string& arLabel) : CModelComponent(aOpacity, arLabel, "p"){
             mPoints = arPoints;
-            coord_t v_max = *std::max_element(arQuan.begin(), arQuan.end());
-            coord_t v_min = *std::min_element(arQuan.begin(), arQuan.end());
-            coord_t divide_by = 1. / (v_max - v_min);
+            normal_float v_max = *std::max_element(arQuan.begin(), arQuan.end());
+            normal_float v_min = *std::min_element(arQuan.begin(), arQuan.end());
+            normal_float divide_by = (float)1. / (v_max - v_min);
             for (size_t i = 0; i < arPoints.size(); i++){
-                coord_t quan = (arQuan[i] - v_min) * divide_by;
+                normal_float quan = (arQuan[i] - v_min) * divide_by;
                 mFaces.push_back(CFace({i}, quan));
             }
         }

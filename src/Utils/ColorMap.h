@@ -33,10 +33,8 @@ namespace vivid {
 
     public:
         CColorMap() : mClm(PLASMA_CLM.begin(), PLASMA_CLM.end()), mName(PLASMA) {}
-
         CColorMap(const vector<color_t> &arClm, const string &arCName) : mClm(arClm), mName(arCName) {}
         CColorMap(const vector<CColor> &arClm, const string &arCName) : mClm(ToColor_TClm(arClm)), mName(arCName) {}
-
         CColorMap(const string &arCName) : mClm({COLORS.at(ToLower(arCName))}), mName(ToLower(arCName)) {}
 
         inline CColorMap &operator=(const CColorMap &arClm) {

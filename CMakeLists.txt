@@ -66,10 +66,10 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Extra/Analysis.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/ProgressBar.cpp"
+        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/ProgressBar.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Errors.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/LogFile.cpp"
+        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/Errors.h"
+        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/LogFile.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp")
 

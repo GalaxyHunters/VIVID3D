@@ -4,7 +4,7 @@
 using namespace vivid;
 using namespace std;
 
-void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<quan_t> &arQuan)
+void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan)
 {
     quan_t v_max = *std::max_element(arQuan.begin(), arQuan.end());
     quan_t v_min = *std::min_element(arQuan.begin(), arQuan.end());
@@ -26,5 +26,5 @@ CMesh CPointCloud::CreateVoronoiSurface(vector<bool> aMask) {
     }
     CSurface surface = CSurface(mPoints, aMask, quan, 0., 1.);
     surface.CreateSurface();
-    return surface.ToMesh(mLabel, mAlpha);
+    return surface.ToMesh(mLabel, mMaterial.GetOpacity());
 }

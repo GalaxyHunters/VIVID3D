@@ -10,10 +10,10 @@ namespace vivid
     {
     private:
         std::vector<size_t> mPoints = {};
-        quan_t mQuan = 0;
+        normal_float mQuan = 0;
 
     public:
-        inline CFace(const std::vector<size_t> &arPoints, quan_t aColor) : mPoints(arPoints), mQuan(max(0.0 , min(aColor ,1.))){}
+        inline CFace(const std::vector<size_t> &arPoints, normal_float aColor) : mPoints(arPoints), mQuan(aColor){}
         //operator=
         inline ~CFace(){}
 

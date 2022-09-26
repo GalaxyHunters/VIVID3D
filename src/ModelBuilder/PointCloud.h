@@ -33,7 +33,7 @@ namespace vivid
         inline CPointCloud& operator= (const CPointCloud& arPC) { CModelComponent::operator=(arPC); return *this; }
 
         // Add
-        void AddPoints(const std::vector<CPoint> &arPoints, vector<coord_t> &arQuan);
+        void AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan);
 
         // CreateSurface using Voronoi algorithm
         CMesh CreateVoronoiSurface(std::vector<bool> aMask);

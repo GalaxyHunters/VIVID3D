@@ -12,7 +12,7 @@ namespace vivid {
         normal_float mOpacity = 1;
         normal_float mRoughness = 0;
         float mEmissionStrength = 0;
-        color_t mEmissionColor = Black()[0];
+        color_t mEmissionColor = BLACK;
     public:
         CMaterial() {}
         CMaterial(normal_float aOpacity, normal_float aRoughness, float aEmissionStrength, const color_t& arEmissionColor)

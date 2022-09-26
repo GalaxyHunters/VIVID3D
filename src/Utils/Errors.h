@@ -33,7 +33,7 @@ const std::map<ELogMessage, std::string> ERROR_TYPE_STRING {  {ELogMessage::ARRA
                                                               {ELogMessage::INVALID_ALPHA_VALUE,
                                                                       "ValueError - Alpha must be between 0 and 1"},
                                                               {ELogMessage::INVALID_NORMAL_VALUE,
-                                                                      "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},,
+                                                                      "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
 };
 
 

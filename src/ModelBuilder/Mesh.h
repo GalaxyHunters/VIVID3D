@@ -27,27 +27,13 @@ namespace vivid
 
     public:
         CMesh() {};
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha) :
-                CModelComponent(aAlpha, arLabel, "f") {
+        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, normal_float aOpacity) :
+                CModelComponent(aOpacity, arLabel, "f") {
             mPoints = arPoints; mFaces = arFaces;
             TriangulizeFaces();
             CalculatePointsNeighbours();
         }
-
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
-                CModelComponent(aAlpha, arLabel, "f", arClm, arCName){
-            mPoints = arPoints; mFaces = arFaces;
-            TriangulizeFaces();
-            CalculatePointsNeighbours();
-        }
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, string &arClm) :
-                CModelComponent(aAlpha, arLabel, "f", arClm){
-            mPoints = arPoints; mFaces = arFaces;
-            TriangulizeFaces();
-            CalculatePointsNeighbours();
-        }
-        CMesh(const CMesh &arMesh) :
-                CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
+        CMesh(const CMesh &arMesh) : CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
 
         void CalculatePointsNeighbours();
         /**
@@ -63,7 +49,7 @@ namespace vivid
         /**
          * Smooth faces on CMesh by Laplacian Smooth
          * @param[in] aNumIterations number of iterations to run for, recommended to be even
-         * @param[in] aAlphaFactor weighted value for smoothing, recommended range 0.2<a<0.8
+         * @param[in] aOpacityFactor weighted value for smoothing, recommended range 0.2<a<0.8
          * @param[in] aBetaFactor weighted value for volume retention, recommended range 0.5<b<1.0
          */
         void LaplacianSmooth(size_t aNumIterations, double aAlphaFactor = 0.5, double aBetaFactor = 0.5);

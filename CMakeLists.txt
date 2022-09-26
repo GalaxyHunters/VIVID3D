@@ -55,7 +55,6 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/PointCloud.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Surface.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/VoronoiSurface.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/MarchingCubesSurface.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
@@ -67,13 +66,12 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/ProgressBar.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.h"
+        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/Errors.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.h"
-        )
+        "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.h")
 
 
 target_include_directories(vivid PUBLIC

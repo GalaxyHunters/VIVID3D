@@ -10,7 +10,7 @@
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"
-#include "Material.h"
+#include "src/Textures/Material.h"
 
 namespace vivid
 {
@@ -24,29 +24,26 @@ namespace vivid
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
         std::string mObjType = "f";
-        coord_t mAlpha = 1.;
+        std::string mLabel = "";
         CColorMap mClm;
         CMaterial mMaterial;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, std::string &arClm) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(max(0.1, min(aAlpha ,1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
-        //virtual ~CModelComponent() = 0;
-
+        CModelComponent(const normal_float aAlpha, const std::string &arLabel, const std::string &arObjType)
+            : mLabel(arLabel), mObjType(arObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
     public:
-        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
+        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
 
         // Operator=
         inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
-            mAlpha=arModel.mAlpha; mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; return *this; }
+            mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; mMaterial=arModel.mMaterial; return *this; }
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
         inline std::vector<CFace> GetFaces() const { return mFaces; }
         inline std::string GetLabel() const { return mLabel; }
-        inline coord_t GetAlpha() const { return mAlpha; }
+        inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
         inline CColorMap GetClm() const { return mClm; }
         inline CMaterial GetMaterial() const { return mMaterial; }
         inline std::string GetObjType() const { return mObjType; }
@@ -54,16 +51,10 @@ namespace vivid
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
         inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
-        inline void SetAlpha(coord_t aAlpha)
-        {
-            // check input valdilty
-            if (aAlpha > 1 || aAlpha < 0)
-            {
-            }
-            mAlpha = aAlpha;
-        }
-        inline void SetClm(string arClm) { mClm.SetColorMap(arClm); }
-        inline void SetClm(const std::vector<color_t> &arClm, const std::string &arCName) { mClm.SetColorMap(arClm, arCName); }
+        inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
+        inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
+        inline void SetColorMap(const std::vector<color_t> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
+        inline void SetColorMap(const std::vector<CColor> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
         //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
         /**
@@ -93,6 +84,5 @@ namespace vivid
          */
         void ScaleMesh(const CPoint &arScaleVec);
     };
-
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

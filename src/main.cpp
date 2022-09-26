@@ -34,10 +34,10 @@ int ShapesTest()
 
     CModel model;
     // Some 3D viewers are centering the 3D models and change direction. this sets the center
-    CMesh sphere = CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, 0.1, 0.8, "sphere1" );
-    CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.4, 0.8, 0.6, "arrowX");
-    CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
-    CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, 0.5, 0.4, "Cube");
+    CMesh sphere = CreateSphereMesh(CPoint(0.0, 0.0, 0.0), 5, 20, 20, "purple", 0.8, "sphere1" );
+    CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.1, "green", 0.6, "arrowX");
+    CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), "red", 0.4, "Box");
+    CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, "yellow", 0.4, "Cube");
     pair<CLines, CLines> grid = CreateGrid(100, 10);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
     model.AddMeshes(list);
@@ -108,7 +108,7 @@ int CubeSurfTests()
 {
     cout << "Cube Test:" << endl;
 
-    vector<CPoint> points; vector<coord_t> quan; vector<bool> mask;
+    vector<CPoint> points; vector<normal_float> quan; vector<bool> mask;
 
     for (int i = 2; i >= -2; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
         for (int j = 2; j >= -2; j -= 2) {
@@ -128,13 +128,11 @@ int CubeSurfTests()
 //    cerr << "Initiating Copy Constructor" << endl;
 //    CSurface surf_copy = CSurface(surf);
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-    mesh.SetClm("Red");
+    mesh.SetColor("Red");
     //mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
-    CMesh mesh2 = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
-    mesh2.SetClm("Green");
-    CMesh mesh3 = CreateBoxMesh(CPoint(-4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
-    mesh3.SetClm("Blue");
+    CMesh mesh2 = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), "green", 0.4, "Box");
+    CMesh mesh3 = CreateBoxMesh(CPoint(-4,0,0), CPoint(5,3,4), "blue", 0.4, "Box");
     vector<CModelComponent> meshes = {mesh2, mesh3};
     model.AddMesh(mesh2);
     model.ExportToObj(TEST_OUTPUT_PATH + "/CubeShape");
@@ -148,8 +146,7 @@ int ColorMapTest()
     vector<string> colors = {"Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"};
     vector<CPoint> loc = {{0,0,0}, {1,0,0}, {2,0,0},{0,0,1},{1,0,1},{2,0,1},{0,0,2},{1,0,2}};
     for (int i = 0; i < colors.size(); i++) {
-        CMesh box = CreateCubeMesh(loc[i]*3,0.5,1,1,colors[i]);
-        box.SetClm(colors[i]);
+        CMesh box = CreateCubeMesh(loc[i]*3,0.5,colors[i],1,colors[i]);
         model.AddMesh(box);
     }
     model.ExportToObj(TEST_OUTPUT_PATH + "/ColorsTest");
@@ -164,7 +161,7 @@ int PyramidSmoothTest()
 
     vector<CPoint> points;
     vector<bool> mask;
-    vector<coord_t> quan;
+    vector<normal_float> quan;
     coord_t Vmin, Vmax;
     vector<double> temp;
     int a = 0;
@@ -202,7 +199,7 @@ int PyramidSmoothTest()
     //mesh1.LaplacianSmooth(20);
 //    //mesh1.Reduce(0.3, 0.5);
     cout << TEST_OUTPUT_PATH + "PyramidAssimpNewMat" << endl;
-    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
+    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpNewMat");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);

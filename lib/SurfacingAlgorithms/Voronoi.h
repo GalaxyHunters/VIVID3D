@@ -12,10 +12,7 @@ class CVoronoi {
 public:
     Voronoi3D mData = {Vector3D(), Vector3D()};
 
-
-    CVoronoi() {
-
-    }
+    CVoronoi() {}
     CVoronoi(const CVoronoi &arVoronoi) {}
 
     // operator=

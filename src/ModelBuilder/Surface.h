@@ -44,7 +44,7 @@ namespace vivid
         // Input Data:
         std::vector<CPoint> mInputPoints = {};
         std::vector<bool> mCreationMask = {};
-        std::vector<quan_t> mQuan = {};
+        std::vector<normal_float> mQuan = {};
 
         // PreProcessing Data
         std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
@@ -65,7 +65,7 @@ namespace vivid
         void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
 
         // TODO: Should be in util, even better should be typedef with min 0. and max 1.
-        std::vector<coord_t>& NormQuan(std::vector<quan_t>& arQuan, quan_t aVMin, quan_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+        std::vector<normal_float>& NormQuan(std::vector<normal_float>& arQuan, normal_float aVMin, normal_float aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
         //vorn function:
         void RunVorn();
@@ -86,7 +86,7 @@ namespace vivid
          * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
          */
         CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                 std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax);
+                 std::vector<normal_float> &arQuan, normal_float aVMin, normal_float aVMax);
         /**
          * CSurface Copy-Constructor
          */
@@ -104,7 +104,7 @@ namespace vivid
          * @param[in] aAlpha the alpha to assign to the new mesh
          * @returns CMesh converted mesh
          */
-        CMesh ToMesh(const string& arLabel, coord_t aAlpha) const;
+        CMesh ToMesh(const string& arLabel, normal_float aOpacity) const;
 
         std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 

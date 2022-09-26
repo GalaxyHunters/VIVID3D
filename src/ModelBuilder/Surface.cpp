@@ -74,11 +74,11 @@ void CSurface::CreateSurface(bool aPostProcessing)
     }
 }
 
-CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
+CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
     //check input validity
-    if(aAlpha > 1 || aAlpha <= 0){
+    if(aOpacity > 1 || aOpacity <= 0){
         CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
-        aAlpha = max(0.1 , min(aAlpha ,1.)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
+        aOpacity = max((float)0.1 , std::min(aOpacity , (float)1)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
     }
 
     vector<CPoint> points;
@@ -105,7 +105,7 @@ CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
         face_points = vector<size_t>();
         set_points.clear();
     }
-    return CMesh(points, faces, arLabel, aAlpha);
+    return CMesh(points, faces, arLabel, aOpacity);
 }
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
@@ -349,9 +349,9 @@ void CSurface::CleanDoublePoints()
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-vector<coord_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
+vector<normal_float>& CSurface::NormQuan(vector<normal_float> &arQuan, normal_float aVMin, normal_float aVMax)
 {
-    if (arQuan.size() == 0){ //incase the user doesnt input any color
+    if (arQuan.size() == 0){ //incase the user doesn't input any color
         arQuan = vector<quan_t>(mCreationMask.size(), 1);
         return arQuan;
     }
@@ -360,7 +360,7 @@ vector<coord_t>& CSurface::NormQuan(vector<quan_t> &arQuan, quan_t aVMin, quan_t
         aVMin = *min_element(arQuan.begin(), arQuan.end());
     }
     if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<coord_t>(arQuan.size(), 1);
+        arQuan = vector<normal_float>(arQuan.size(), 1);
         return arQuan;
     }
     coord_t divide_by = 1. / (aVMax - aVMin);

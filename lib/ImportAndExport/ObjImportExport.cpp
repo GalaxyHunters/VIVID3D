@@ -21,7 +21,7 @@ namespace vivid
     }
 
     bool static CompareColor(color_t aColor1, color_t aColor2) {
-        return (aColor1.R == aColor2.R && aColor1.G == aColor2.G && aColor1.B == aColor2.B);
+        return (aColor1[0] == aColor2[0] && aColor1[1] == aColor2[1] && aColor1[2] == aColor2[2]);
     }
 
     bool static CompareQuan(CFace aFace1, CFace aFace2) {
@@ -35,7 +35,7 @@ namespace vivid
         // TODO talk to tomer about line endings, unix vs windows.
         aMTLFile << "newmtl surf_%07d" << (*apMtlCounter) <<endl;
         aMTLFile << "Ns 96.078\nKa 1.000 1.000 1.000\n";
-        aMTLFile << "Kd " + to_string(aColor.R) + " " + to_string(aColor.G) + " " + to_string(aColor.B) + "\n";
+        aMTLFile << "Kd " + to_string(aColor[0]) + " " + to_string(aColor[1]) + " " + to_string(aColor[2]) + "\n";
         aMTLFile << "Ks 0.000 0.000 0.000\n";
         aMTLFile << "Ni 1.000000\n";
         aMTLFile << "d " + to_string(aAlpha) + "\n";
@@ -85,7 +85,7 @@ namespace vivid
         //write faces to obj file + write colors to mtl file
         color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetQuan());
         string write_type = apMesh->GetObjType();
-        coord_t alpha = apMesh->GetAlpha();
+        coord_t alpha = apMesh->GetOpacity();
         WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
         for (auto it = Faces.begin(); it != Faces.end(); it++)
         {
@@ -193,7 +193,7 @@ namespace vivid
             aOBJFile << "vt 0 " + to_string(i/aTextureSize) + "\n";
         }
         //write faces
-        WriteMtlTexture(aOBJFile, aMTLFile, mtl_counter, aTextureName, apMesh->GetAlpha());
+        WriteMtlTexture(aOBJFile, aMTLFile, mtl_counter, aTextureName, apMesh->GetOpacity());
         vector<CFace> faces = apMesh->GetFaces();
         for (vector<CFace>::iterator it = faces.begin(); it != faces.end(); it++){
             WriteNewFaceTexture(aOBJFile, apMesh, *it, aPointsCounter);

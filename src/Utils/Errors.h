@@ -33,7 +33,7 @@ const std::map<ELogMessage, std::string> ERROR_TYPE_STRING {  {ELogMessage::ARRA
                                                               {ELogMessage::INVALID_ALPHA_VALUE,
                                                                       "ValueError - Alpha must be between 0 and 1"},
                                                               {ELogMessage::INVALID_FRAME_VALUE,
-                                                               "ValueError - frame must bw within Models.size range"}
+                                                               "ValueError - frame must be within Models.size range"}
 };
 
 

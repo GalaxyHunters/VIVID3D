@@ -281,59 +281,10 @@ void CSurface::CleanPoints()
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
-// TODO: Should use different sorting algorithm
-bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) //TODO this 1st func is the same as the one after!
-{
-    if (abs((*arV1).X() - (*arV2).X()) <= POINT_SIMILARITY_THRESHOLD) {
-        if (abs((*arV1).Y() - (*arV2).Y()) <= POINT_SIMILARITY_THRESHOLD) {
-            if (abs((*arV1).Z() - (*arV2).Z()) <= POINT_SIMILARITY_THRESHOLD) {
-                return false;
-            }
-            else
-            { // we compare the points by z to see who needs to go first
-                return (*arV1).Z() > (*arV2).Z();
-            }
-        }
-        else // we compare by y to see who needs to go first
-        {
-            return (*arV1).Y() > (*arV2).Y();
-        }
-    }
-    else // we compare by x to see who goes first
-    {
-        return (*arV1).X() > (*arV2).X();
-    }
-    //return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
-}
-
-//TODO SIMILAR to THE OLDER CODE OF CompPointRD
-bool CompPointData(const CSurfacePoint &arObj1, const CSurfacePoint &arObj2)
-{
-    if (abs(arObj1.mPoint.X() - arObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) {
-        if (abs(arObj1.mPoint.Y() - arObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) {
-            if (abs(arObj1.mPoint.Z() - arObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) {
-                return false;
-            }
-            else
-            { // we compare the points by z to see who needs to go first
-                return arObj1.mPoint.Z() > arObj2.mPoint.Z();
-            }
-        }
-        else // we compare by y to see who needs to go first
-        {
-            return arObj1.mPoint.Y() > arObj2.mPoint.Y();
-        }
-    }
-    else // we compare by x to see who goes first
-    {
-        return arObj1.mPoint.X() > arObj2.mPoint.X();
-    }
-}
-
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
 {
     //sort the array
-    sort(arData.begin(), arData.end(), CompPointData);
+    sort(arData.begin(), arData.end());
 
     vector<CSurfacePoint> cleaned_data;
     size_t j;
@@ -377,7 +328,7 @@ void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 void CSurface::CleanDoublePoints()
 {
     //sort the array
-    sort(mVertices.begin(), mVertices.end(), CompPointRD);
+    sort(mVertices.begin(), mVertices.end());
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fitting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
     size_t j;
@@ -463,7 +414,7 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseD
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
     }
 
-    CleanDoubleInputPoints(arPoints);
+    //CleanDoubleInputPoints(arPoints);
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};

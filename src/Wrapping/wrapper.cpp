@@ -33,44 +33,35 @@ py::array_t<double> make_cpoint(const double aValue) {
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
 
-    // TODO: FIX THIS!!!
-    // add model component base functions
-//    py::class_<CModelComponent> (m, "ModelComponent")
-//        .def(py::init<const CModelComponent&> (),
-//                "Constructor for ModelComponent",
-//                py::arg("model_component"))
-//        //TODO: Add transform mesh functions
-////        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
-////        .def("transform", &CModelComponent::TransformMesh,
-////             "Transform Model Component points by transformation function",
-////             py::arg("function"))
-////        .def("transform", &CModelComponent::TransformMesh,
-////             "Transform Model Component points by transformation matrix",
-////             py::arg("matrix"))
-//        .def("RotateMesh", &CModelComponent::RotateMesh,
-//             "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
-//             py::arg("norm_vec"), py::arg("radians_angle"))
-//        .def("MoveMesh", &CModelComponent::MoveMesh,
-//             "Add direction_vec to Model Component points.",
-//             py::arg("direction_vec"))
-//        .def("ScaleMesh", &CModelComponent::ScaleMesh,
-//             "Scale Model Component points by multiplying by scale_vec.",
-//             py::arg("scale_vec"));
-    py::class_<CModelComponent> model_component (m, "ModelComponent");
-    //py::class_<CAnimation> Animation (m, "Animation");
-
-    // Mostly unneeded classes
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
         .def(py::init<const CPoint &>(),
                 "copy constructor for Point",
                 py::arg("point"))
-            .def(py::init<coord_t, coord_t, coord_t>(),
-                 "Constructor for point",
-                 py::arg("x"), py::arg("y"), py::arg("z"))
-            .def(py::init<std::vector<double>>(),
-                 "Constructor for point",
-                 py::arg("3d_vector"));
+        .def(py::init<coord_t, coord_t, coord_t>(),
+             "Constructor for point",
+             py::arg("x"), py::arg("y"), py::arg("z"))
+        .def(py::init<std::vector<double>>(),
+             "Constructor for point",
+             py::arg("3d_vector"));
+
+    py::class_<CModelComponent> (m, "ModelComponent")
+        .def(py::init<const CModelComponent&> (),
+            "Constructor for ModelComponent",
+            py::arg("model_component"))
+//        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+        .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
+             "Transform Model Component by transformation matrix",
+             py::arg("matrix"))
+        .def("rotate", &CModelComponent::RotateMesh,
+            "Rotate the Model Component points around a normal vector by an angle, counterclockwise.",
+            py::arg("norm_vec"), py::arg("radians_angle"))
+        .def("move", &CModelComponent::MoveMesh,
+            "Move Model Component by direction_vec",
+            py::arg("direction_vec"))
+        .def("scale", &CModelComponent::ScaleMesh,
+            "Scale Model Component by scale_vec.",
+            py::arg("scale_vec"));
 
     py::class_<CSurface>(m, "Surface")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t, coord_t>(),
@@ -87,7 +78,7 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
-    py::class_<CLines>(m, "Lines", model_component)
+    py::class_<CLines, CModelComponent>(m, "Lines")
             .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
                  "Constructor for Lines",
                  py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
@@ -118,7 +109,7 @@ PYBIND11_MODULE(_vivid, m) {
                   "Generate 3D Mesh using Voronoi Algorithm",
                   py::arg("mask"), py::arg("noise_displacement") = 0.001);
 
-    py::class_<CMesh>(m, "Mesh", model_component)
+    py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
                  py::arg("mesh"))

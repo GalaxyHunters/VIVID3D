@@ -13,19 +13,20 @@ namespace vivid
 
     public:
         CModel(){};
-        CModel(const CModelComponent &arMesh) {mMeshes.push_back(arMesh);};
+        CModel(const CModelComponent& arMesh) {mMeshes.push_back(arMesh);};
         //operator =
-        // TODO: Make this work
         CModel(const std::vector<CModelComponent> &arMeshes) : mMeshes(arMeshes){};
         ~CModel();
 
-        // TODO: Make this work
         void AddMeshes(const vector<CModelComponent> &arMeshes);
+
         int GetNumMeshes() const {return this->mMeshes.size();}
+
         void AddMesh(const CModelComponent &arMesh);
         void AddModel(const CModel &arModel);
         //remove Mesh by label maybe?
         //List of meshes by label?
+        inline size_t GetNumMeshes() const { return mMeshes.size(); }
         inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
 
         // Add Importers

@@ -3,12 +3,12 @@
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
 #include "ModelBuilder/SurfByFunc.h"
-/*include "ImportAndExport/FBXImportExport.h"*/
 #include "ModelBuilder/Surface.h"
 #include "Point.h"
 #include "AssimpImportExport.h"
 #include "DataToImage.h"
 #include "Model.h"
+#include "PointCloud.h"
 #include <map>
 #include <assimp/Importer.hpp>
 #include <assimp/DefaultLogger.hpp>
@@ -128,16 +128,14 @@ int CubeSurfTests()
 //    cerr << "Initiating Copy Constructor" << endl;
 //    CSurface surf_copy = CSurface(surf);
     CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
-    mesh.SetClm("Red");
-    //mesh.Reduce(0.3, 0.3);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
-    CMesh mesh2 = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
-    mesh2.SetClm("Green");
-    CMesh mesh3 = CreateBoxMesh(CPoint(-4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
-    mesh3.SetClm("Blue");
-    vector<CModelComponent> meshes = {mesh2, mesh3};
-    model.AddMesh(mesh2);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/CubeShape");
+    mesh.Export(TEST_OUTPUT_PATH + "/CubeNormalized");
+//    mesh.SetClm("Red");
+//    //mesh.Reduce(0.3, 0.3);
+//    CMesh mesh2 = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), 0.5, 0.4, "Box");
+//    mesh2.SetClm("Green");
+//    model.AddMesh(mesh);
+//    model.AddMesh(mesh2);
+//    model.Export(TEST_OUTPUT_PATH + "/CubeShape");
     return EXIT_SUCCESS;
 }
 
@@ -191,12 +189,11 @@ int PyramidSmoothTest()
         }
     }
     cout << quan.size() << endl;
-    Vmax = 0 ; //*max_element(quan.begin(), quan.end());
-    Vmin = 0 ;//*min_element(quan.begin(), quan.end());
-
-    CSurface smooth1 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-    smooth1.CreateSurface();
-    //smooth1.WhatAreTheseThingsElad();
+    Vmax = 0.0; //*max_element(quan.begin(), quan.end());
+    Vmin = 0.0;//*min_element(quan.begin(), quan.end());
+    CPointCloud pyramid_points = CPointCloud(points, quan, Vmin, Vmax, 1.0, "vivid_assimp_test");
+//    CSurface smooth1 = CSurface(points, mask, quan, Vmin, Vmax);
+//    smooth1.CreateSurface();
     //CSurface surf_copy = CSurface(smooth1);
     CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 1);
     mesh1.LaplacianSmooth(10);
@@ -495,6 +492,7 @@ int main()
 //    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube" << endl;
+//    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
@@ -502,9 +500,9 @@ int main()
     cout << "Pyramid" << endl;
     ret_value = PyramidSmoothTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube Animation" << endl;
-    ret_value = CubeAnimationTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    cout << "Cube Animation" << endl;
+//    ret_value = CubeAnimationTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     return EXIT_SUCCESS;

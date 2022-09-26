@@ -204,21 +204,21 @@ void CMesh::CalculatePointsNeighbours() {
 void CMesh::TriangulizeFaces() {
     vector<CFace> triangle_faces;
     for (auto &mFace : mFaces) {
-        size_t prev_0=0, prev_1=1, prev_2=2;
+//        size_t prev_0=0, prev_1=1, prev_2=2;
         for (size_t i = 1; i < mFace.GetPoints().size()-1; i++) {
             // Add faces along alternating diagonals
-            if (i%2 == 1){
-                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
-            } else {
-                prev_1 = mFace.GetPoints().size()-prev_1;
-                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
-                if (prev_0 == 0) { prev_0 = 3;}
-                else { prev_0++;}
-                prev_1+=prev_2;
-                prev_2=prev_1-prev_2;
-                prev_1-=prev_2;
-            }
-//            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetUVcoords()));
+//            if (i%2 == 1){
+//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
+//            } else {
+//                prev_1 = mFace.GetPoints().size()-prev_1;
+//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
+//                if (prev_0 == 0) { prev_0 = 3;}
+//                else { prev_0++;}
+//                prev_1+=prev_2;
+//                prev_2=prev_1-prev_2;
+//                prev_1-=prev_2;
+//            }
+            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetUVcoord()));
         }
     }
     mFaces = triangle_faces;

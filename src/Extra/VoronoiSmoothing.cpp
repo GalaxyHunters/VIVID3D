@@ -9,7 +9,7 @@ CMesh CVoronoiSmoothing::Smooth(CSurface &arSurf, bool aSuperSmooth, int aSmooth
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     SetPinPout( );
     UpdateInput( );
-    mSurf.CreateSurface(false);
+    mSurf.CreateSurface();
     CalculatePointNeighbours();
     //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
     UpdatePoutPin();

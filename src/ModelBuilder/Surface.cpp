@@ -5,10 +5,10 @@ using namespace vivid;
 using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
-constexpr coord_t NOISE_PERCENTAGE = 0.005;
+constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 1000;
+constexpr coord_t NOISE_PERCENTAGE = 0.0001;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement)
 {
     // Check input validity
     if((arInputPoints.size() != arMask.size()) || !arColorField.empty() && (arInputPoints.size() != arColorField.size())){
@@ -26,7 +26,7 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
         points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), UV_coords[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
-    PreProcessPoints(points);
+    PreProcessPoints(points, aNoiseDisplacement);
 }
 
 CSurface::CSurface(const CSurface &surf)
@@ -64,14 +64,12 @@ CSurface::CSurface(const CSurface &surf)
 //   ------------------------------------------------ Public Methods ------------------------------------------------>>>
 //   <<<--------------------------------------------- Public Methods ---------------------------------------------------
 
-void CSurface::CreateSurface(bool aPostProcessing)
+void CSurface::CreateSurface()
 {
     RunVorn();
     CleanEdges();
-    if (aPostProcessing) {
-        CleanFaces();
-        CleanPoints();
-    }
+    CleanFaces();
+    CleanPoints();
 }
 
 CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
@@ -181,6 +179,7 @@ coord_t CSurface::FindContainingRadius()
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
+// Todo: switch to bool statement, use in CleanFaces
 void CSurface::CleanEdges()
 {
     coord_t clean_by = 0.35;
@@ -205,23 +204,65 @@ void CSurface::CleanFaces()
 {
     vector<CSurfaceFace> new_faces;
     size_t mask_len = mCreationMask.size();
-    size_t c_point1;
-    size_t c_point2;
     for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
-            if (mCreationMask[c_point1] != mCreationMask[c_point2]) { //the face is a part of the surf
-                new_faces.push_back(mVecFace);
-                new_faces.back().mUVcoord = mUVcoords[c_point1] * 0.5 + mUVcoords[c_point2] * 0.5;
+        if (mask_len > mVecFace.mPairPoints.first && mask_len > mVecFace.mPairPoints.second) { //the indexs are both in range and not a part of the box
+            if (mCreationMask[mVecFace.mPairPoints.first] != mCreationMask[mVecFace.mPairPoints.second]) { //the face is a part of the surf
+                vector<CSurfaceFace> triangulized_faces = TriangulizeFace(mVecFace);
+                for (auto & mTriangleFace : triangulized_faces) {
+                    new_faces.push_back(mTriangleFace);
+                }
             }
-        } else {
-            new_faces.push_back(mVecFace);
-            new_faces.back().mUVcoord = 0;
         }
+//        else {
+//            new_faces.push_back(mVecFace);
+//            new_faces.back().mUVcoord = 0;
+//        }
 
     }
     mSurfFaces = new_faces;
+}
+
+vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
+{
+    vector<CSurfaceFace> triangulized_faces;
+    for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
+        CSurfaceFace triangle = CSurfaceFace(
+                {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
+                0,
+//                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
+                arFace.mPairPoints);
+        NormalizeFace(triangle);
+        triangulized_faces.push_back(triangle);
+    }
+    return triangulized_faces;
+}
+
+void CSurface::NormalizeFace(CSurfaceFace& arTriangleFace)
+{
+    bool c_point1_mask = mCreationMask[arTriangleFace.mPairPoints.first];
+    bool c_point2_mask = mCreationMask[arTriangleFace.mPairPoints.second];
+    CPoint c_point1 = mInputPoints[arTriangleFace.mPairPoints.first];
+    CPoint c_point2 = mInputPoints[arTriangleFace.mPairPoints.second];
+
+    // assumption 1
+    // true -> false is normal direction
+    CPoint true_normal;
+    if (c_point1_mask) {
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.first];
+        true_normal = (c_point2 - c_point1).Normalize();
+    } else {
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.second];
+        true_normal = (c_point1 - c_point2).Normalize();
+    }
+    // assumption 2
+    // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
+    // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
+    CPoint face_normal = ((*arTriangleFace.mVertices[1] - *arTriangleFace.mVertices[0]).Cross(*arTriangleFace.mVertices[2] - *arTriangleFace.mVertices[0])).Normalize();
+    true_normal.Scale(face_normal);
+    // if the direction is opposite
+    if (true_normal.Dot({1,1,1}) < 0) {
+        arTriangleFace.mVertices = {arTriangleFace.mVertices[0], arTriangleFace.mVertices[2], arTriangleFace.mVertices[1]};
+    }
 }
 
 // Do to the removal of many unneeded faces in CSurface::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
@@ -321,7 +362,7 @@ void CSurface::CleanDoublePoints()
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
 {
-    if (arColorField.size() == 0){ //default python color_field, user didnt input one
+    if (arColorField.size() == 0){ //default python color_field, user didn't input one
         arColorField = vector<coord_t>(mCreationMask.size(), 1);
         return arColorField;
     }
@@ -342,7 +383,7 @@ vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t
     return arColorField;
 }
 
-void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
+void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement)
 {
     CleanDoubleInputPoints(arPoints);
 
@@ -358,21 +399,19 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
     mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
 
     vector<CPoint> noise_vec (mInputPoints.size());
-    arPoints.clear();
-    bool do_noise = false; // for now noise is disabled because it breaks the model
+
     // Consider generator here.
     srand(time(nullptr));
     for (auto & i : noise_vec){
         i = {1,1,1};
-        if(do_noise) {
-            i = {1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + NOISE_PERCENTAGE * ((coord_t) (rand() % 20 - 10) / 10.)};
+        if(aNoiseDisplacement) {
+            i = {1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.)};
         }
     }
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
-        //arPoints.push_back(CSurfacePoint(mInputPoints[i], mUVcoords[i], mCreationMask[i]));
     }
 
     //CleanDoubleInputPoints(arPoints);

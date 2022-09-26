@@ -62,7 +62,7 @@ namespace vivid
         std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
         // Handle Input Sub-Methods
-        void PreProcessPoints(vector<CSurfacePoint> &arPoints);                 // Centering, scaling, adding noise.
+        void PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
         void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
 
         // TODO: Should be in util, even better should be typedef with min 0. and max 1.
@@ -73,6 +73,8 @@ namespace vivid
 
         // Cleaning Sub-Methods
         void CleanFaces();        // clean the unneeded faces(by mCreationMask)
+        vector<CSurfaceFace> TriangulizeFace(const CSurfaceFace &arFace);
+        void NormalizeFace(CSurfaceFace& arTriangleFace); // normalize face to face correct direction
         void CleanPoints();       // removes all the unused points
         void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
         void CleanDoublePoints(); // remove all the double face points from the model
@@ -84,20 +86,19 @@ namespace vivid
          * @param[in] arMask a boolean mask of true and false points
          * @param[in] arColorField a vector containing the color field of each point
          * @param[in] aVMin the minimum value in arColorField, anything below will be set to aVMin
-         * @param[in] aVMin the maximum value in arColorField, anything below will be set to aVMax
+         * @param[in] aVMax the maximum value in arColorField, anything below will be set to aVMax
+         * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
          */
         CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                 std::vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax);
+                 std::vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement = 0.001);
         /**
          * CSurface Copy-Constructor
          */
         CSurface(const CSurface &surf);
-        // operator =
-
         /**
          * Create the surfaces using the input data
          */
-        void CreateSurface(bool aPostProcessing = true);
+        void CreateSurface();
 
         /**
          * Convert the CSurface object to CMesh object
@@ -120,21 +121,6 @@ namespace vivid
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }
         inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
         inline void SetUVcoords(const std::vector<coord_t> &arUVcoords) { mUVcoords = arUVcoords; }
-
-
-        void WhatAreTheseThingsElad() {
-            cout << mVoronoi.mData.GetAllVolumes().size() << endl;
-            cout << mVoronoi.mData.GetAllArea().size() << endl;
-            cout << mVoronoi.mData.GetAllCM().size() << endl;
-            cout << mVoronoi.mData.GetAllCellFaces().size() << endl;
-            cout << mVoronoi.mData.GetPointNo() << endl;
-            // Useless data:
-            cout << mVoronoi.mData.GetSelfIndex().size() << endl;
-            cout << mVoronoi.mData.GetSentProcs().size() << endl;
-            cout << mVoronoi.mData.GetSentPoints().size() << endl;
-        } //?
-
-
     };
 
 } // namespace vivid

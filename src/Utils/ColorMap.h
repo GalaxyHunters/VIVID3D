@@ -49,7 +49,7 @@ namespace vivid {
             if (mClm.empty()) {
                 return 0;
             }
-            return floor(aVal * (double(mClm.size()) - 1)); //returns the index of the color in ClmPlasma
+            return floor(aVal * (normal_float(mClm.size()) - 1)); //returns the index of the color in ClmPlasma
         }
 
         inline color_t GetColor(normal_float aVal) const { return mClm[GetColorIndex(aVal)]; }

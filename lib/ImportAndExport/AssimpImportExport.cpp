@@ -138,16 +138,13 @@ namespace vivid {
         vector<set<float>> vetUVcoord(vVertices.size());
         for (auto it = vTriangles.begin(); it != vTriangles.end(); ++it) {
             aiFace &face = OutMesh->mFaces[it - vTriangles.begin()];
-            face.mNumIndices = 3;
             const std::vector<size_t> indexes = it->GetPoints();
-            face.mIndices = new unsigned int[3];
-            face.mIndices[0] = indexes[0];
-            face.mIndices[1] = indexes[1];
-            face.mIndices[2] = indexes[2];
-            // UV coordinates
-            vetUVcoord[indexes[0]].insert(it->GetQuan());
-            vetUVcoord[indexes[1]].insert(it->GetQuan());
-            vetUVcoord[indexes[2]].insert(it->GetQuan());
+            face.mNumIndices = indexes.size();
+            face.mIndices = new unsigned int[indexes.size()];
+            for (int i = 0; i < indexes.size(); i++) {
+                face.mIndices[i] = indexes[i];
+                vetUVcoord[indexes[i]].insert(it->GetQuan());
+            }
         }
 
         //assign points
@@ -168,8 +165,6 @@ namespace vivid {
         return OutMesh;
     }
 
-    //create new material and define all its properties
-    //TODO this should receive our own material class containing any important data (and methods for user interface)
     aiMaterial * GenerateMaterial(vivid::CModelComponent& mesh, string aTextureName){
         aiMaterial *material = new aiMaterial();
 

@@ -129,7 +129,7 @@ py::class_<CModelComponent> (m, "ModelComponent")
     py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
             .def(py::init<const vector<CPoint>&, const normal_float, vector<normal_float>&, const string& >(),
                  "Constructor for Point Cloud",
-                 py::arg("points"), py::arg("quan"), py::arg("alpha"), py::arg("label"))
+                 py::arg("points"), py::arg("alpha"), py::arg("quan"), py::arg("label"))
             .def(py::init<const CPointCloud&>(),
                  "Copy Constructor for Point Cloud",
                  py::arg("point_cloud"))

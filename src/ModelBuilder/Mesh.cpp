@@ -60,10 +60,10 @@ void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
             mPoints.push_back((mPoints[vertices[2]] + mPoints[vertices[0]])/2);
 
             // 4 New faces
-            new_faces.push_back(CFace({vertices[0], last_size, last_size+2}, mFaces[i].GetQuan()));
-            new_faces.push_back(CFace({vertices[1], last_size, last_size+1}, mFaces[i].GetQuan()));
-            new_faces.push_back(CFace({vertices[2], last_size+1, last_size+2}, mFaces[i].GetQuan()));
-            new_faces.push_back(CFace({last_size, last_size+1, last_size+2}, mFaces[i].GetQuan()));
+            new_faces.push_back(CFace({vertices[0], last_size, last_size+2}, mFaces[i].GetUVcoord()));
+            new_faces.push_back(CFace({vertices[1], last_size, last_size+1}, mFaces[i].GetUVcoord()));
+            new_faces.push_back(CFace({vertices[2], last_size+1, last_size+2}, mFaces[i].GetUVcoord()));
+            new_faces.push_back(CFace({last_size, last_size+1, last_size+2}, mFaces[i].GetUVcoord()));
         }
     }
     mFaces = new_faces;
@@ -201,70 +201,23 @@ void CMesh::CalculatePointsNeighbours() {
 void CMesh::TriangulizeFaces() {
     vector<CFace> triangle_faces;
     for (auto &mFace : mFaces) {
-        size_t prev_0=0, prev_1=1, prev_2=2;
+//        size_t prev_0=0, prev_1=1, prev_2=2;
         for (size_t i = 1; i < mFace.GetPoints().size()-1; i++) {
             // Add faces along alternating diagonals
-            if (i%2 == 1){
-                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
-            } else {
-                prev_1 = mFace.GetPoints().size()-prev_1;
-                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetQuan()));
-                if (prev_0 == 0) { prev_0 = 3;}
-                else { prev_0++;}
-                prev_1+=prev_2;
-                prev_2=prev_1-prev_2;
-                prev_1-=prev_2;
-            }
-//            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetQuan()));
+//            if (i%2 == 1){
+//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
+//            } else {
+//                prev_1 = mFace.GetPoints().size()-prev_1;
+//                triangle_faces.push_back(CFace({mFace[prev_0], mFace[prev_1], mFace[prev_2]}, mFace.GetUVcoord()));
+//                if (prev_0 == 0) { prev_0 = 3;}
+//                else { prev_0++;}
+//                prev_1+=prev_2;
+//                prev_2=prev_1-prev_2;
+//                prev_1-=prev_2;
+//            }
+            triangle_faces.push_back(CFace({mFace[0], mFace[i], mFace[i + 1]}, mFace.GetUVcoord()));
         }
     }
     mFaces = triangle_faces;
     mFacesAreTriangles = true;
-}
-
-/*--------------------------------------------- Transformation Methods -----------------------------------------------*/
-
-void CMesh::TransformMesh(FTrans_t const &arTrans){
-    for (auto & mPoint : mPoints)
-    {
-        mPoint = arTrans(mPoint);
-    }
-}
-
-void CMesh::TransformMesh(const array<CPoint, 3>& aTrans)
-{
-    for (auto & mPoint : mPoints)
-    {
-        mPoint = {mPoint.Dot(aTrans[0]), mPoint.Dot(aTrans[1]), mPoint.Dot(aTrans[2])};
-    }
-}
-
-void CMesh::RotateMesh(const CPoint& arNormVec, double aRadAngel)
-{
-    auto cos_a = cos(aRadAngel);
-    auto sin_a = sin(aRadAngel);
-    auto one_min_cos_a = 1-cos_a;
-    auto nx = arNormVec.X();
-    auto ny = arNormVec.Y();
-    auto nz = arNormVec.Z();
-
-    array<CPoint, 3> rotation_mat =  {
-            CPoint(cos_a + nx*nx*one_min_cos_a,    nx*ny*one_min_cos_a - nz*sin_a, nx*nz*one_min_cos_a + ny*sin_a),
-            CPoint(ny*nx*one_min_cos_a + nz*sin_a, cos_a + ny*ny*one_min_cos_a,    ny*nz*one_min_cos_a - nx*sin_a),
-            CPoint(nz*nx*one_min_cos_a - ny*sin_a, nz*ny*one_min_cos_a + nx*sin_a, cos_a + nz*nz*one_min_cos_a),
-    };
-    TransformMesh(rotation_mat);
-}
-
-void CMesh::MoveMesh(const CPoint& arDirectionVec){
-    for (auto & mPoint : mPoints)
-    {
-        mPoint += arDirectionVec;
-    }
-}
-
-void CMesh::ScaleMesh(const CPoint& arScaleVec) {
-    for (auto &mPoint: mPoints) {
-        mPoint.Scale(arScaleVec);
-    }
 }

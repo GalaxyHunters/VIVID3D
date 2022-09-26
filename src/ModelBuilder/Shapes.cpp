@@ -94,7 +94,7 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
 
     CMesh mesh(points, faces, arLabel, aAlpha);
     mesh.MoveMesh(arCenter);
-    mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
+    mesh.ScaleMesh({aRadius, aRadius, aRadius});
 
     return mesh;
 }

@@ -10,7 +10,7 @@ namespace vivid {
                                                    {LOG_WARNING, "WARNING: "},
                                                    {LOG_VIVID,   "VIVID:   "},
                                                    {LOG_INFO,    "INFO:    "},
-                                                   {LOG_DEBUG,   "INFO:    "},
+                                                   {LOG_DEBUG,   "DEBUG:   "},
     };
 
     enum ELogMessage {
@@ -28,7 +28,8 @@ namespace vivid {
                                                                        "ValueError - Smooth Factor must be between 1 and 8"},
                                                                {INVALID_ALPHA_VALUE,
                                                                        "ValueError - Alpha must be between 0 and 1"},
+                                                              {ELogMessage::INVALID_FRAME_VALUE,
+                                                                       "ValueError - frame must be within Models.size range"},
     };
-}
-
+}      //namespace vivid
 #endif //VIVID_ERRORS_H

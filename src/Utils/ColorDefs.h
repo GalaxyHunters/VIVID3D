@@ -8,16 +8,15 @@
 using namespace std;
 //namespace vivid {
 
-typedef double quan_t;
 
 constexpr int RGB_MAX = 255;
 
 struct color_t {
-    quan_t R;
-    quan_t G;
-    quan_t B;
+    coord_t R;
+    coord_t G;
+    coord_t B;
 
-    inline color_t(quan_t R, quan_t G, quan_t B) : R(R), G(G), B(B) {}
+    inline color_t(coord_t R, coord_t G, coord_t B) : R(R), G(G), B(B) {}
 };
 
 typedef std::function<std::vector<color_t>()> FColor_t;

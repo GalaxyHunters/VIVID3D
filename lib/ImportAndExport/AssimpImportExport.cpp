@@ -84,7 +84,7 @@ namespace vivid {
                 texture_path = AddTexture(meshes[i].GetClm());
                 //setting up the mesh structure
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
-                scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path);
+                scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path, i);
                 scene->mMeshes[i]->mMaterialIndex = i;
             }
             return scene;
@@ -136,7 +136,7 @@ namespace vivid {
                     texture_path = AddTexture(meshes[mesh_index].GetClm());
                     //setting up the mesh structure
                     scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
-                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path);
+                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path, mesh_counter);
                     scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
                     mesh_counter++;
                 }
@@ -413,10 +413,10 @@ namespace vivid {
 
         //create new material and define all its properties
         //TODO this should receive our own material class containing any important data (and methods for user interface)
-        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName) {
+        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName, size_t mat_index) {
             aiMaterial *material = new aiMaterial();
 
-            const aiString *name = new aiString(mesh.GetLabel() + "_mat");
+            const aiString *name = new aiString(mesh.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
             const int *shading_model = new int(2);

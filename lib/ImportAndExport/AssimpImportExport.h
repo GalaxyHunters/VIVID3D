@@ -30,7 +30,7 @@ namespace vivid {
 
         aiScene *GenerateScene(const vivid::CModel &model);
 
-        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName);
+        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName, size_t mat_index);
 
         aiMesh *GenerateMesh(vivid::CModelComponent *apMesh);
 

@@ -40,14 +40,14 @@ public:
 
     inline string GetName() const { return ClmName; }
 
-    int GetColorIndex(quan_t aVal) const {
+    int GetColorIndex(coord_t aVal) const {
         if (Clm.empty()){
             return 0;
         }
         return floor (aVal * (double(Clm.size())-1)); //returns the index of the color in ClmPlasma
     }
 
-    inline color_t GetColor(quan_t aVal) const { return Clm[GetColorIndex(aVal)]; }
+    inline color_t GetColor(coord_t aVal) const { return Clm[GetColorIndex(aVal)]; }
 
     vector<unsigned char> GetColorTexture() const //float aColorMap
     {

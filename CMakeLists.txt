@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.1.5")
+        VERSION "0.1.6")
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message("${PROJECT_SOURCE_DIR}")
@@ -61,7 +61,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Animation.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
+        #"${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/Extra/Analysis.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"

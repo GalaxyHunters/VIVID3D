@@ -14,11 +14,12 @@ namespace vivid
     struct CSurfacePoint
     { // used to sort and clean the mVoronoi input points
         CPoint mPoint = {};
-        quan_t mQuan = 0;
+        coord_t UVcoord = 0;
         bool mMaskIsTrue = false;
 
         CSurfacePoint() {};
-        CSurfacePoint(const CPoint& arPoint, quan_t aQuan, bool aIsIn): mPoint(arPoint), mQuan(aQuan), mMaskIsTrue(aIsIn) {}
+        CSurfacePoint(const CPoint& arPoint, coord_t aUVcoord, bool aIsIn): mPoint(arPoint), UVcoord(aUVcoord), mMaskIsTrue(aIsIn) {}
+        inline bool operator < (const CSurfacePoint &arObj) {return mPoint < arObj.mPoint;}
     };
 
 // For the cleaning stage
@@ -27,10 +28,10 @@ namespace vivid
     public:
         std::vector<std::shared_ptr<CPoint> > mVertices = {};
         std::pair<size_t, size_t> mPairPoints = {};
-        quan_t mColor = 0;
+        coord_t mUVcoord = 0;
 
-        CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, quan_t aColor, const std::pair<size_t, size_t> &arPairPoints) :
-                mVertices(arPoints), mColor(aColor), mPairPoints(arPairPoints){};
+        CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColorField, const std::pair<size_t, size_t> &arPairPoints) :
+                mVertices(arPoints), mUVcoord(aColorField), mPairPoints(arPairPoints){};
         CSurfaceFace() {};
         ~CSurfaceFace() {};
     };
@@ -44,7 +45,7 @@ namespace vivid
         // Input Data:
         std::vector<CPoint> mInputPoints = {};
         std::vector<bool> mCreationMask = {};
-        std::vector<quan_t> mQuan = {};
+        std::vector<coord_t> mUVcoords = {};
 
         // PreProcessing Data
         std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
@@ -65,7 +66,7 @@ namespace vivid
         void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
 
         // TODO: Should be in util, even better should be typedef with min 0. and max 1.
-        std::vector<coord_t>& NormQuan(std::vector<quan_t>& arQuan, quan_t aVMin, quan_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
+        std::vector<coord_t>& NormColorField(std::vector<coord_t>& arColorField, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
         //vorn function:
         void RunVorn();
@@ -81,12 +82,12 @@ namespace vivid
          * CSurface Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
          * @param[in] arMask a boolean mask of true and false points
-         * @param[in] arQuan a vector containing the quantity of each point
-         * @param[in] aVMin the minimum value in arQuan, anything below will be set to aVMin
-         * @param[in] aVMin the maximum value in arQuan, anything below will be set to aVMax
+         * @param[in] arColorField a vector containing the color field of each point
+         * @param[in] aVMin the minimum value in arColorField, anything below will be set to aVMin
+         * @param[in] aVMin the maximum value in arColorField, anything below will be set to aVMax
          */
         CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                 std::vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax);
+                 std::vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax);
         /**
          * CSurface Copy-Constructor
          */
@@ -112,13 +113,13 @@ namespace vivid
         // Used primarily in deprecated smoothing
         inline const std::vector<CPoint>& GetInputPoints() const { return mInputPoints; }
         inline const std::vector<bool>& GetMask() { return mCreationMask; }
-        inline const std::vector<quan_t>& GetQuan() { return mQuan; }
+        inline const std::vector<coord_t>& GetUVcoords() { return mUVcoords; }
         inline const std::vector<CSurfaceFace>& GetFaces() const { return mSurfFaces; }
         inline const CVoronoi& GetVoronoiData() const { return mVoronoi; }
 
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }
         inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
-        inline void SetQuan(const std::vector<quan_t> &arQuan) { mQuan = arQuan; }
+        inline void SetUVcoords(const std::vector<coord_t> &arUVcoords) { mUVcoords = arUVcoords; }
 
 
         void WhatAreTheseThingsElad() {

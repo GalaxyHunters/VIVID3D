@@ -201,13 +201,9 @@ int PyramidSmoothTest()
     CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 1);
     mesh1.LaplacianSmooth(10);
 //    //mesh1.Reduce(0.3, 0.5);
-    cout << TEST_OUTPUT_PATH + "PyramidAssimpAnim" << endl;
-    CAnimation anim1 = CAnimation(CModel(mesh1));
-    anim1.SetRotateAnim(0, CPoint(6.28, 0, 0));
 //    anim1.SetScaleAnim(0,CPoint(3,3,3));
 //    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
-    vivid::CAssimpExport::AnimationExporter(anim1, "gltf2", TEST_OUTPUT_PATH + "PyramidAssimpAnim");
-//    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpNewMat", "obj");
+    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpNewMat", "obj");
 //    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidVivid");
 //    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
@@ -472,16 +468,17 @@ int CubeAnimationTest()
     //CStopMotionAnimation anim = CStopMotionAnimation(models, 3);
     CAnimation anim = CAnimation(models);
     anim.SetDuration(150);
-//    anim.SetRotateAnim(0, CPoint(2.3,0,1));
-//    anim.SetRotateAnim(3, CPoint(0,2.3,1));
-//    anim.SetRotateAnim(2, CPoint(2.3,0,1));
-//    anim.SetRotateAnim(5, CPoint(2.3,2.3,0));
-//    anim.SetMoveAnim(2,CPoint(3,3,3));
-//    anim.SetMoveAnim(7,CPoint(3,3,3));
+    anim.SetRotateAnim(0, CPoint(2.3,0,1));
+    anim.SetRotateAnim(3, CPoint(0,2.3,1));
+    anim.SetRotateAnim(2, CPoint(2.3,0,1));
+    anim.SetRotateAnim(5, CPoint(2.3,2.3,0));
+    anim.SetMoveAnim(2,CPoint(3,3,3));
+    anim.SetMoveAnim(5,CPoint(3,3,3));
     anim.SetScaleAnim(6, CPoint(2,2,2));
     anim.SetScaleAnim(1, CPoint(5,0,0));
     CStopMotionAnimation SManim = CStopMotionAnimation(anim, 2);
-    CAssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
+    SManim.Export( TEST_OUTPUT_PATH + "/CubeAnimationTest", "gltf2");
+    //AssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
     return EXIT_SUCCESS;
 }
 int main()
@@ -502,9 +499,9 @@ int main()
 //    cout << "Colors" <<endl;
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    cout << "Pyramid" << endl;
-//    ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    cout << "Pyramid" << endl;
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
     cout << "Cube Animation" << endl;
     ret_value = CubeAnimationTest();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;

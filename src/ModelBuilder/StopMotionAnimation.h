@@ -27,7 +27,7 @@ public:
     inline CStopMotionAnimation& operator= (const CStopMotionAnimation& arSMA) { mSecondsPerFrame = arSMA.mSecondsPerFrame; CAnimation::operator=(arSMA); return *this; }
 
     void SetSecondsPerFrame(double aFrameGap){
-        this->mSecondsPerFrame = aFrameGap;
+        mSecondsPerFrame = aFrameGap;
     }
 
     double GetSecondsPerFrame() const {

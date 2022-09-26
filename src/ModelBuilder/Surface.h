@@ -19,6 +19,7 @@ namespace vivid
 
         CSurfacePoint() {};
         CSurfacePoint(const CPoint& arPoint, coord_t aUVcoord, bool aIsIn): mPoint(arPoint), UVcoord(aUVcoord), mMaskIsTrue(aIsIn) {}
+        inline bool operator < (const CSurfacePoint &arObj) {return mPoint < arObj.mPoint;}
     };
 
 // For the cleaning stage

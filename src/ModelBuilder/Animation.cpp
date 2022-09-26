@@ -3,7 +3,7 @@
 namespace vivid {
 
     void CAnimation::Export(const std::string &arOutputFilePath, std::string aFileType) {
-        CAssimpExport::AnimationExporter(*this, aFileType, arOutputFilePath);
+        AssimpExport::AnimationExporter(*this, aFileType, arOutputFilePath);
     }
 
     void CAnimation::AddModels(const std::vector<CModel> &arModels) {

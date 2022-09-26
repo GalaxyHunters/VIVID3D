@@ -5,8 +5,8 @@ using namespace vivid;
 using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
-constexpr coord_t NOISE_PERCENTAGE = 0.005;
+constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 1000;
+constexpr coord_t NOISE_PERCENTAGE = 0.0001;
 
 CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement)
 {
@@ -212,10 +212,11 @@ void CSurface::CleanFaces()
                     new_faces.push_back(mTriangleFace);
                 }
             }
-        } else {
-            new_faces.push_back(mVecFace);
-            new_faces.back().mUVcoord = 0;
         }
+//        else {
+//            new_faces.push_back(mVecFace);
+//            new_faces.back().mUVcoord = 0;
+//        }
 
     }
     mSurfFaces = new_faces;
@@ -227,7 +228,8 @@ vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
     for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
         CSurfaceFace triangle = CSurfaceFace(
                 {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
-                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
+                0,
+//                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
                 arFace.mPairPoints);
         NormalizeFace(triangle);
         triangulized_faces.push_back(triangle);
@@ -246,8 +248,10 @@ void CSurface::NormalizeFace(CSurfaceFace& arTriangleFace)
     // true -> false is normal direction
     CPoint true_normal;
     if (c_point1_mask) {
-       true_normal = (c_point2 - c_point1).Normalize();
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.first];
+        true_normal = (c_point2 - c_point1).Normalize();
     } else {
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.second];
         true_normal = (c_point1 - c_point2).Normalize();
     }
     // assumption 2
@@ -444,7 +448,6 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseD
     mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
 
     vector<CPoint> noise_vec (mInputPoints.size());
-    arPoints.clear();
 
     // Consider generator here.
     srand(time(nullptr));
@@ -458,10 +461,9 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseD
     }
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
-        arPoints.push_back(CSurfacePoint(mInputPoints[i], mUVcoords[i], mCreationMask[i]));
     }
 
-//    CleanDoubleInputPoints(arPoints);
+    CleanDoubleInputPoints(arPoints);
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};

@@ -111,13 +111,13 @@ namespace vivid
         // Used primarily in deprecated smoothing
         inline const std::vector<CPoint>& GetInputPoints() const { return mInputPoints; }
         inline const std::vector<bool>& GetMask() { return mCreationMask; }
-        inline const std::vector<coord_t>& GetUVcoords() { return mUVcoords; }
+        inline const std::vector<normal_float>& GetUVcoords() { return mUVcoords; }
         inline const std::vector<CSurfaceFace>& GetFaces() const { return mSurfFaces; }
         inline const CVoronoi& GetVoronoiData() const { return mVoronoi; }
 
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }
         inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
-        inline void SetUVcoords(const std::vector<coord_t> &arUVcoords) { mUVcoords = arUVcoords; }
+        inline void SetUVcoords(const std::vector<normal_float> &arUVcoords) { mUVcoords = arUVcoords; }
     };
 
 } // namespace vivid

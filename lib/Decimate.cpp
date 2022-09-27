@@ -16,7 +16,7 @@ namespace vivid
         vector< Vec3<size_t> > triangles;
         Vec3<size_t> temp_triangle;
         for (auto & aFace : aFaces) {
-            temp_triangle = Vec3<size_t>(aFace[0], aFace[1], aFace[2], aFace.GetQuan());
+            temp_triangle = Vec3<size_t>(aFace[0], aFace[1], aFace[2], aFace.GetUVcoord());
             triangles.push_back(temp_triangle); //, fIt->GetQuan()
         }
         for (auto & aPoint : aPoints) {

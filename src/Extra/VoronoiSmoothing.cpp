@@ -9,7 +9,7 @@ CMesh CVoronoiSmoothing::Smooth(CSurface &arSurf, bool aSuperSmooth, int aSmooth
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     SetPinPout( );
     UpdateInput( );
-    mSurf.CreateSurface(false);
+    mSurf.CreateSurface();
     CalculatePointNeighbours();
     //begin smooth  part 2, adding new points between the cpoints by aSmoothFactor
     UpdatePoutPin();
@@ -72,14 +72,14 @@ void CVoronoiSmoothing::UpdateInput()
     vector<quan_t> new_quan;
     for (auto & it : mOutPoints) {
         new_points.push_back(mSurf.GetInputPoints()[it]);
-        new_quan.push_back(mSurf.GetQuan()[it]);
+        new_quan.push_back(mSurf.GetUVcoords()[it]);
     }
     for (auto & it : mInPoints) {
         new_points.push_back(mSurf.GetInputPoints()[it]);
-        new_quan.push_back(mSurf.GetQuan()[it]);
+        new_quan.push_back(mSurf.GetUVcoords()[it]);
     }
     mSurf.SetInputPoints(new_points);
-    mSurf.SetQuan(new_quan);
+    mSurf.SetUVcoords(new_quan);
 }
 
 /*----------------------------------------------------- Part 2 -------------------------------------------------------*/
@@ -159,7 +159,7 @@ void CVoronoiSmoothing::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arN
     arPVec.push_back(arNewIndex);
     CPoint new_point = (mSurf.GetInputPoints()[aCPoint1] * 2 + mSurf.GetInputPoints()[aCPoint2] + mSurf.GetInputPoints()[aCPoint3]) / 4.;
     arNewPoints.push_back(new_point);
-    arNewQuan.push_back((mSurf.GetQuan()[aCPoint1] * 2 + mSurf.GetQuan()[aCPoint2] + mSurf.GetQuan()[aCPoint3]) / 4); // Results in color washing, need to consider
+    arNewQuan.push_back((mSurf.GetUVcoords()[aCPoint1] * 2 + mSurf.GetUVcoords()[aCPoint2] + mSurf.GetUVcoords()[aCPoint3]) / 4); // Results in color washing, need to consider
     arNewIndex++;
 }
 
@@ -200,7 +200,7 @@ void CVoronoiSmoothing::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNe
         y = (mSurf.GetInputPoints()[aCPoint1].Y() * (aSmoothFactor + 1 - i) + mSurf.GetInputPoints()[aCPoint2].Y() * i) / (aSmoothFactor+1);
         z = (mSurf.GetInputPoints()[aCPoint1].Z() * (aSmoothFactor + 1 - i) + mSurf.GetInputPoints()[aCPoint2].Z() * i) / (aSmoothFactor+1);
         (*apNewPoints).push_back(CPoint(x, y, z));
-        (*apNewQuan).push_back((mSurf.GetQuan()[aCPoint1] * (aSmoothFactor + 1 - i) + mSurf.GetQuan()[aCPoint2] * i) / (aSmoothFactor+1));
+        (*apNewQuan).push_back((mSurf.GetUVcoords()[aCPoint1] * (aSmoothFactor + 1 - i) + mSurf.GetUVcoords()[aCPoint2] * i) / (aSmoothFactor+1));
         (*apNewIndex)++;
     }
 }
@@ -222,7 +222,7 @@ void CVoronoiSmoothing::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vecto
     arNewOut.clear();
     for (size_t i = 0; i < data.size(); i++) {
         arNewPoints.push_back(data[i].mPoint);
-        arNewQuan.push_back(data[i].mQuan);
+        arNewQuan.push_back(data[i].UVcoord);
         if (data[i].mMaskIsTrue) {
             arNewIn.push_back(i);
         }
@@ -232,7 +232,7 @@ void CVoronoiSmoothing::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vecto
         }
     }
     mSurf.SetInputPoints(arNewPoints);
-    mSurf.SetQuan(arNewQuan);
+    mSurf.SetUVcoords(arNewQuan);
 }
 
 

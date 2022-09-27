@@ -9,7 +9,7 @@ namespace vivid
 /* 3D Lines class */
     class CLines : public CModelComponent{
     private:
-        std::vector<std::vector<size_t>> FormatPairPoints(const std::vector<size_t>& arLine);
+        static std::vector<std::vector<size_t>> FormatPairPoints(const std::vector<size_t>& arLine);
     public:
         CLines() : CModelComponent(LINES) {}
         CLines(const std::vector<CPoint> &arLine, normal_float aOpacity, const std::string &arLabel);

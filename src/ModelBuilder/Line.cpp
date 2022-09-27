@@ -12,7 +12,7 @@ CLines::CLines(const std::vector<CPoint> &arLine, normal_float aOpacity, const s
 CLines::CLines(const std::vector<std::vector<CPoint>> &arLines, normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, LINES)
 {
     for (const auto & line : arLines) {
-        AddLine(line)
+        AddLine(line);
     }
     SetColor(DEFAULT_COLOR);
 }

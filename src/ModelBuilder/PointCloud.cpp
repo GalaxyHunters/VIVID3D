@@ -4,7 +4,7 @@
 using namespace vivid;
 using namespace std;
 
-CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, const std::string* arColor, const normal_float aOpacity, const std::string& arLabel)
+CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, const std::string& arColor, const normal_float aOpacity, const std::string& arLabel)
     : CModelComponent(aOpacity, arLabel, POINTS)
 {
     mPoints = arPoints;
@@ -26,22 +26,22 @@ CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_floa
 
 void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax)
 {
-    arQuan = NormalizeField(arQuan, arPoints.size(), aFieldMin, aFieldMax);
+    arColorField = NormalizeField(arColorField, arPoints.size(), aFieldMin, aFieldMax);
 
     size_t size = mPoints.size();
 
     for (size_t i = 0; i < arPoints.size(); i++){
-        mFaces.push_back(CFace({size+i}, arQuan[i]));
+        mFaces.push_back(CFace({size+i}, arColorField[i]));
     }
     mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end());
 }
 
-CMesh CPointCloud::CreateVoronoiSurface(vector<bool> aMask) {
-    vector<quan_t> quan;
+CMesh CPointCloud::CreateVoronoiSurface(const std::vector<bool>& arMask, coord_t aNoiseDisplacement) {
+    vector<normal_float> UV_coords;
     for (auto & face : mFaces) {
-        quan.push_back(face.GetQuan());
+        UV_coords.push_back(face.GetUVcoord());
     }
-    CSurface surface = CSurface(mPoints, aMask, quan, 0., 1.);
+    CSurface surface = CSurface(mPoints, arMask, UV_coords, 0., 1., aNoiseDisplacement);
     surface.CreateSurface();
-    return surface.ToMesh(mLabel, mMaterial.GetOpacity());
+    return surface.ToMesh(mLabel, GetOpacity());
 }

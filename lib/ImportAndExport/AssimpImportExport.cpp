@@ -402,8 +402,8 @@ namespace vivid {
                 face.mIndices = new unsigned int[indexes.size()];
                 for (int i = 0; i < indexes.size(); i++) {
                     face.mIndices[i] = indexes[i];
-                    vetUVcoord[indexes[i]].insert(it->GetQuan());
-                    }
+                    vetUVcoord[indexes[i]].insert(it->GetUVcoord());
+                }
             }
 
             //assign points

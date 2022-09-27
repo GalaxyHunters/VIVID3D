@@ -194,7 +194,7 @@ int PyramidSmoothTest()
 //    CSurface smooth1 = CSurface(points, mask, quan, Vmin, Vmax);
 //    smooth1.CreateSurface();
     //CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = smooth1.ToMesh("vivid_assimp_test", 1);
+    CMesh mesh1 = pyramid_points.CreateVoronoiSurface(mask, 0.0001);
     mesh1.LaplacianSmooth(10);
 //    //mesh1.Reduce(0.3, 0.5);
 //    anim1.SetScaleAnim(0,CPoint(3,3,3));
@@ -455,8 +455,7 @@ int CubeAnimationTest()
     vector<string> colors = {"Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"};
     vector<CPoint> loc = {{0,0,0}, {1,0,0}, {2,0,0},{0,0,1},{1,0,1},{2,0,1},{0,0,2},{1,0,2}};
     for (int i = 0; i < colors.size(); i++) {
-        CMesh box = CreateCubeMesh(loc[i]*3,0.5,1,1,colors[i]);
-        box.SetClm(colors[i]);
+        CMesh box = CreateCubeMesh(loc[i]*3,0.5,colors[i],1,colors[i]);
         models.push_back((CModel(box)));
     }
     //CStopMotionAnimation anim = CStopMotionAnimation(models, 3);

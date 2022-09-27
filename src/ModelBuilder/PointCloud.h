@@ -14,7 +14,7 @@ namespace vivid
     public:
         //Constructor and Copy Constructor
         CPointCloud(){}
-        CPointCloud(const std::vector<CPoint> &arPoints, const normal_float aOpacity, vector<normal_float> &arQuan, const std::string& arLabel) : CModelComponent(aOpacity, arLabel, "p"){
+        CPointCloud(const std::vector<CPoint> &arPoints, const normal_float aOpacity, vector<normal_float> &arQuan, const std::string& arLabel) : CModelComponent(aOpacity, arLabel, POINTS) {
             mPoints = arPoints;
             normal_float v_max = *std::max_element(arQuan.begin(), arQuan.end());
             normal_float v_min = *std::min_element(arQuan.begin(), arQuan.end());

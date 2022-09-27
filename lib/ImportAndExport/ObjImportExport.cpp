@@ -16,6 +16,8 @@ using namespace std;
 namespace vivid
 {  // TODO temp fix most of the functions here should be rewritten or become out of scope
 
+    map<FACE_TYPE, char> ELEMENT_TYPE {{POLYGONS, 'f'}, {TRIANGLES, 'f'}, {LINES, 'l'}, {POINTS, 'p'}};
+
     color_t static Quan2Color(CColorMap aClm, coord_t aQuan) { // calls function from ColorMap.h
         return aClm.GetColor(aQuan);
     }
@@ -48,9 +50,9 @@ namespace vivid
 
     }
 
-    void WriteNewFace(ofstream& aOBJFile, CFace aFace, size_t aPointsCounter, string aWriteType)
+    void WriteNewFace(ofstream& aOBJFile, CFace aFace, size_t aPointsCounter, char aWriteType)
     {
-        aOBJFile << aWriteType+" ";
+        aOBJFile << aWriteType << ' ';
         vector<size_t> face_points = aFace.GetPoints();
         for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
         {
@@ -84,7 +86,7 @@ namespace vivid
         sort(Faces.begin(), Faces.end(), CompFace); // NlogN
         //write faces to obj file + write colors to mtl file
         color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetQuan());
-        string write_type = apMesh->GetObjType();
+        char write_type = ELEMENT_TYPE[apMesh->GetObjType()];
         coord_t alpha = apMesh->GetOpacity();
         WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
         for (auto it = Faces.begin(); it != Faces.end(); it++)
@@ -149,7 +151,7 @@ namespace vivid
 
 
     void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CFace aFace, size_t aPointsCounter) {
-        arOBJFile << apMesh->GetObjType()+" ";
+        arOBJFile << ELEMENT_TYPE[apMesh->GetObjType()] << ' ';
         vector<size_t> face_points = aFace.GetPoints();
         size_t VT = apMesh->GetClm().GetColorIndex(aFace.GetQuan()) + 1;
         for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)

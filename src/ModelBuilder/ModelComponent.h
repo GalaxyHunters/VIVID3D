@@ -14,6 +14,10 @@
 
 namespace vivid
 {
+    enum FACE_TYPE {
+        POINTS = 1, LINES = 2, TRIANGLES = 3, POLYGONS = 4,
+    };
+
     /* FTrans_t is a function that changes CPoint to another CPoint */
     typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
@@ -23,14 +27,14 @@ namespace vivid
     protected:
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
-        std::string mObjType = "f";
+        FACE_TYPE mObjType = POLYGONS;
         std::string mLabel = "";
         CColorMap mClm;
         CMaterial mMaterial;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
-        CModelComponent(const normal_float aAlpha, const std::string &arLabel, const std::string &arObjType)
-            : mLabel(arLabel), mObjType(arObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
+        CModelComponent(const normal_float aAlpha, const std::string &arLabel, const FACE_TYPE aObjType)
+            : mLabel(arLabel), mObjType(aObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
     public:
         CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
@@ -46,7 +50,7 @@ namespace vivid
         inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
         inline CColorMap GetClm() const { return mClm; }
         inline CMaterial GetMaterial() const { return mMaterial; }
-        inline std::string GetObjType() const { return mObjType; }
+        inline FACE_TYPE GetObjType() const { return mObjType; }
 
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }

@@ -113,7 +113,19 @@ namespace vivid {
         //setting up the apMesh structure
         aiMesh *OutMesh = new aiMesh();
         OutMesh->mName = apMesh->GetLabel();
-        OutMesh->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
+        switch (apMesh->GetObjType()){
+            case TRIANGLES:
+                OutMesh->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
+                break;
+            case LINES:
+                OutMesh->mPrimitiveTypes = aiPrimitiveType_LINE;
+                break;
+            case POINTS:
+                OutMesh->mPrimitiveTypes = aiPrimitiveType_POINT;
+                break;
+            default:
+                OutMesh->mPrimitiveTypes = aiPrimitiveType_POLYGON;
+        }
 
         //setting up vertices and uv texture coordinates
         vector<vivid::CPoint> vVertices = apMesh->GetPoints();

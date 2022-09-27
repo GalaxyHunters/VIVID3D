@@ -75,12 +75,6 @@ void CSurface::CreateSurface(bool aPostProcessing)
 }
 
 CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
-    //check input validity
-    if(aOpacity > 1 || aOpacity <= 0){
-        CLogFile::GetInstance().Write(ELogCode::LOG_WARNING, ELogMessage::INVALID_ALPHA_VALUE);
-        aOpacity = max((float)0.1 , std::min(aOpacity , (float)1)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
-    }
-
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;

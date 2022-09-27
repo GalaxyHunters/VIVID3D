@@ -64,9 +64,6 @@ namespace vivid
         void PreProcessPoints(vector<CSurfacePoint> &arPoints);                 // Centering, scaling, adding noise.
         void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
 
-        // TODO: Should be in util, even better should be typedef with min 0. and max 1.
-        std::vector<normal_float>& NormQuan(std::vector<normal_float>& arQuan, normal_float aVMin, normal_float aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
-
         //vorn function:
         void RunVorn();
 

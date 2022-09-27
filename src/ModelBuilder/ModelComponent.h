@@ -27,21 +27,22 @@ namespace vivid
     protected:
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
-        FACE_TYPE mObjType = POLYGONS;
+        FACE_TYPE mElementType = POLYGONS;
         std::string mLabel = "";
         CColorMap mClm;
         CMaterial mMaterial;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
+        CModelComponent(const FACE_TYPE aElementType) : mElementType(aElementType) {}
         CModelComponent(const normal_float aAlpha, const std::string &arLabel, const FACE_TYPE aObjType)
-            : mLabel(arLabel), mObjType(aObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
+            : mLabel(arLabel), mElementType(aObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
     public:
-        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
+        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mElementType(arModel.mElementType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
 
         // Operator=
         inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
-            mLabel=arModel.mLabel; mObjType=arModel.mObjType; mClm=arModel.mClm; mMaterial=arModel.mMaterial; return *this; }
+            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mClm=arModel.mClm; mMaterial=arModel.mMaterial; return *this; }
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
@@ -50,7 +51,7 @@ namespace vivid
         inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
         inline CColorMap GetClm() const { return mClm; }
         inline CMaterial GetMaterial() const { return mMaterial; }
-        inline FACE_TYPE GetObjType() const { return mObjType; }
+        inline FACE_TYPE GetObjType() const { return mElementType; }
 
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }

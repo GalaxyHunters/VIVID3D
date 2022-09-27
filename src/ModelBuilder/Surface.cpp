@@ -21,7 +21,7 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
-    vector<quan_t> norm_quan = NormQuan(arQuan, aVMin, aVMax);
+    vector<normal_float> norm_quan = NormalizeField(arQuan, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
         points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), norm_quan[i], arMask[i]));
     }
@@ -349,28 +349,6 @@ void CSurface::CleanDoublePoints()
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-vector<normal_float>& CSurface::NormQuan(vector<normal_float> &arQuan, normal_float aVMin, normal_float aVMax)
-{
-    if (arQuan.size() == 0){ //incase the user doesn't input any color
-        arQuan = vector<quan_t>(mCreationMask.size(), 1);
-        return arQuan;
-    }
-    if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
-        aVMax = *max_element(arQuan.begin(), arQuan.end());
-        aVMin = *min_element(arQuan.begin(), arQuan.end());
-    }
-    if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (aQuan is a vector where all the values are the same)
-        arQuan = vector<normal_float>(arQuan.size(), 1);
-        return arQuan;
-    }
-    coord_t divide_by = 1. / (aVMax - aVMin);
-    for (auto it = arQuan.begin(); it != arQuan.end(); it++) {
-        *it = (*it - aVMin) * divide_by;
-        if (*it > 1) *it = 1;
-        if (*it < 0) *it = 0;
-    }
-    return arQuan;
-}
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
 {

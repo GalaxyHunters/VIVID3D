@@ -6,6 +6,7 @@
 
 namespace vivid
 {
+CMesh CreatePlaneMesh(const CPoint &arCenter, coord_t aSize, const string& arColor, normal_float aOpacity, const std::string &arLabel);
 
 CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, const string& arColor, normal_float aOpacity, const std::string &arLabel);
 

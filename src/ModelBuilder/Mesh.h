@@ -23,6 +23,7 @@ namespace vivid
     private:
         std::map<size_t, std::unordered_set<size_t>> mPointNeighbours = {};
         void TriangulizeFaces();
+        void CalculatePointsNeighbours();
         bool mFacesAreTriangles = false;
 
     public:
@@ -35,7 +36,6 @@ namespace vivid
         }
         CMesh(const CMesh &arMesh) : CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
 
-        void CalculatePointsNeighbours();
         /**
          * Decimate faces on CMesh to reduce file size
          * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain

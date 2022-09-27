@@ -1,6 +1,7 @@
 #ifndef VIVID_NORMALFLOAT_H
 #define VIVID_NORMALFLOAT_H
 
+#include <vector>
 #include "LogFile.h"
 
 typedef float normal_float;
@@ -18,6 +19,7 @@ namespace vivid {
         }
         return Normalize(aValue);
     };
+    static std::vector<normal_float> NormalizeField(std::vector<normal_float>& arField, size_t aArraySize, float aMin = 0, float aMax = 0);
 }
 
 #endif //VIVID_NORMALFLOAT_H

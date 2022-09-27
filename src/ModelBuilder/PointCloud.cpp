@@ -4,17 +4,34 @@
 using namespace vivid;
 using namespace std;
 
-void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan)
+CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, const std::string* arColor, const normal_float aOpacity, const std::string& arLabel)
+    : CModelComponent(aOpacity, arLabel, POINTS)
 {
-    quan_t v_max = *std::max_element(arQuan.begin(), arQuan.end());
-    quan_t v_min = *std::min_element(arQuan.begin(), arQuan.end());
+    mPoints = arPoints;
+    SetColor(arColor);
+    for (size_t i = 0; i < arPoints.size(); i++){
+        mFaces.push_back(CFace({i}, 0));
+    }
+}
+
+CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan, normal_float aFieldMin, normal_float aFieldMax, const normal_float aOpacity, const std::string& arLabel)
+    : CModelComponent(aOpacity, arLabel, POINTS)
+{
+    mPoints = arPoints;
+    arQuan = NormalizeField(arQuan, arPoints.size(), aFieldMin, aFieldMax);
+    for (size_t i = 0; i < arPoints.size(); i++){
+        mFaces.push_back(CFace({i}, arQuan[i]));
+    }
+}
+
+void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan, normal_float aFieldMin, normal_float aFieldMax)
+{
+    arQuan = NormalizeField(arQuan, arPoints.size(), aFieldMin, aFieldMax);
 
     size_t size = mPoints.size();
 
-    coord_t divide_by = 1. / (v_max - v_min);
     for (size_t i = 0; i < arPoints.size(); i++){
-        quan_t quan = (arQuan[i] - v_min) * divide_by;
-        mFaces.push_back(CFace({size+i}, quan));
+        mFaces.push_back(CFace({size+i}, arQuan[i]));
     }
     mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end());
 }

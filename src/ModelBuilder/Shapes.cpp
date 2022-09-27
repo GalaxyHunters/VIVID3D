@@ -11,6 +11,23 @@ constexpr double ARROW_LENGTH = 0.8;
 namespace vivid
 {
 
+CMesh CreatePlaneMesh(const CPoint &arCenter, coord_t aSize, const string& arColor, normal_float aOpacity, const std::string &arLabel) {
+    vector<CPoint> points= { CPoint(-1, -1, 0),
+                             CPoint(-1, 1, 0),
+                             CPoint(1, -1, 0),
+                             CPoint(1, 1, 0)     };
+
+    vector<CFace> faces = {CFace({0, 1, 2, 3}, 0)};
+
+
+    CMesh mesh(points, faces, arLabel, aOpacity);
+    mesh.MoveMesh(arCenter);
+    mesh.ScaleMesh({aSize, aSize, 0});
+    mesh.SetColor(arColor);
+
+    return mesh;
+}
+
 CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, const string& arColor, normal_float aOpacity, const string &arLabel)
 {
     CMesh mesh = CreateBoxMesh(arCenter, {aSize, aSize, aSize}, arColor, aOpacity, arLabel);
@@ -50,8 +67,8 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
     vector<CFace> faces;
 
     /* Adds points around sphere*/
-    points.push_back(CPoint(0, 0,  1)); //Creating the top polar
-    points.push_back(CPoint(0, 0, -1)); //Creating the bottom polar
+    points.emplace_back(0, 0,  1); //Creating the top polar
+    points.emplace_back(0, 0, -1); //Creating the bottom polar
 
     double phi_step = M_PI / (aNumOfParallels + 1);
     double theta_step = (2 * M_PI) / aNumOfMeridians;

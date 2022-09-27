@@ -250,7 +250,6 @@ int RunMedicaneTest()
     CMesh mesh = surf.ToMesh("SurfMedicane", 1);
     //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
-    mesh.CalculatePointsNeighbours();
     mesh.LaplacianSmooth(10, 0.7, 0);
 //    mesh.LaplacianSmooth(50, 0.4, 0.7);
 //    mesh.RemovePointyFaces();
@@ -302,7 +301,6 @@ int RunSupernovaTests()
         CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
         //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
-        mesh.CalculatePointsNeighbours();
         mesh.LaplacianSmooth(6, 0.7, 0);
         mesh.LaplacianSmooth(50, 0.4, 0.7);
         //mesh.RemovePointyFaces();

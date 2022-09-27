@@ -61,7 +61,6 @@ namespace vivid
         inline void SetColorMap(const std::vector<color_t> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
         inline void SetColorMap(const std::vector<CColor> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
         inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
-        //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
 
         /**
          * transform CMesh points by transformation function
@@ -89,6 +88,15 @@ namespace vivid
          * @param[in] arScaleVec the x,y.z direction to move by it.
          */
         void ScaleMesh(const CPoint &arScaleVec);
+
+        void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
+
+        /**
+        * Assimp export. writes arModel in aFileType format at aOutputPath
+        * @param[in] aOutputPath Path and name for output file
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        */
+        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "obj");
     };
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

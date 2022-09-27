@@ -53,15 +53,6 @@ namespace vivid
          * @param[in] aBetaFactor weighted value for volume retention, recommended range 0.5<b<1.0
          */
         void LaplacianSmooth(size_t aNumIterations, double aAlphaFactor = 0.5, double aBetaFactor = 0.5);
-
-        void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
-
-        /**
-        * Assimp export. writes arModel in aFileType format at aOutputPath
-        * @param[in] aOutputPath Path and name for output file
-        * @param[in] aFileType 3D filetype format to write to (out of supported options)
-        */
-        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
     };
 
 } // namespace vivid

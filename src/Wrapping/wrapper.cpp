@@ -92,18 +92,20 @@ py::class_<CModelComponent> (m, "ModelComponent")
             py::arg("direction_vec"))
         .def("scale", &CModelComponent::ScaleMesh,
             "Scale Model Component by scale_vec.",
-            py::arg("scale_vec"));
+            py::arg("scale_vec"))
+        .def("export", &CModelComponent::Export,
+            "writes CMesh to a given file format",
+            py::arg("output_file"), py::arg("file_format") = "obj");
 
     py::class_<CSurface>(m, "Surface")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
+                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
             .def("create_surface", &CSurface::CreateSurface,
-                 "Calculate the surface from input data)",
-                 py::arg("Processing") = true)
+                 "Calculate the surface from input data)")
             .def("to_mesh", &CSurface::ToMesh,
                  "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
@@ -112,33 +114,36 @@ py::class_<CModelComponent> (m, "ModelComponent")
     py::class_<CLines, CModelComponent>(m, "Lines")
             .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
-                 py::arg("points"), py::arg("opacity")=1., py::arg("label")="")
+                 py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
 //            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
 //                 "Constructor for Lines",
-//                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
+//                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
             .def(py::init<const CLines&>(),
                  "Copy Constructor for Lines",
                  py::arg("Lines"))
             .def("add_line", &CLines::AddLine,
                  "Add another line",
-                 py::arg("points"))
+                 py::arg("line"));
 //            .def("add_lines", &CLines::AddLine,
 //                 "Add array of lines",
 //                 py::arg("points_matrix"));
 
     py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
-            .def(py::init<const std::vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, const normal_float, const std::string&>(),
+            .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),
                  "Constructor for Point Cloud",
-                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("alpha") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
+                 py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
+            .def(py::init<const std::vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, normal_float, const std::string&>(),
+                 "Constructor for Point Cloud",
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
             .def(py::init<const CPointCloud&>(),
                  "Copy Constructor for Point Cloud",
                  py::arg("point_cloud"))
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
-                 py::arg("points"), py::arg("color_field"), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
-             .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
-                  "Generate 3D Mesh using Voronoi Algorithm",
-                  py::arg("mask"), py::arg("noise_displacement") = 0.001);
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
+            .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
+                 "Generate 3D Mesh using Voronoi Algorithm",
+                 py::arg("mask"), py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
@@ -147,15 +152,12 @@ py::class_<CModelComponent> (m, "ModelComponent")
             .def("reduce", &CMesh::Reduce,
                  "input values should be between 0 and 1. A Reduce algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("decimation_percent") = 0.5, py::arg("error") = 0.1)
-            .def("export_to_obj", &CMesh::ExportToObj,
-                 "writes the surface to an OBJ file, by materials or textures",
-                 py::arg("output_file"), py::arg("with_texture") = 1)
-            .def("laplacian_smooth", &CMesh::LaplacianSmooth,
+//            .def("export_to_obj", &CMesh::ExportToObj,
+//                 "writes the surface to an OBJ file, by materials or textures",
+//                 py::arg("output_file"), py::arg("with_texture") = 1)
+            .def("smooth", &CMesh::LaplacianSmooth,
                  "Smooths the surface by HC Laplacian Algorithm.",
-                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
-            .def("export", &CMesh::Export,
-                 "writes CMesh to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "obj");
+                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
 
     py::class_<CModel>(m, "Model")
             .def(py::init<> (), "default constructor for Model")

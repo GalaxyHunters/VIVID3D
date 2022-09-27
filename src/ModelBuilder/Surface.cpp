@@ -5,16 +5,16 @@ using namespace vivid;
 using namespace std;
 
 constexpr coord_t BOX_EXPAND_FACTOR = 1;
-constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 100;
-constexpr coord_t NOISE_PERCENTAGE = 0.005;
+constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 1000;
+constexpr coord_t NOISE_PERCENTAGE = 0.0001;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<quan_t> &arQuan, quan_t aVMin, quan_t aVMax)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement)
 {
     // Check input validity
-    if((arInputPoints.size() != arMask.size()) || (arInputPoints.size() != arQuan.size())){
+    if((arInputPoints.size() != arMask.size()) || !arColorField.empty() && (arInputPoints.size() != arColorField.size())){
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_NOT_EQUAL);
     }
-    if(arInputPoints.empty() || arInputPoints.empty() || arQuan.empty()) {
+    if(arInputPoints.empty() || arInputPoints.empty()) {
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::ARRAYS_EMPTY);
     }
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
@@ -23,17 +23,17 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
     vector<CSurfacePoint> points;
     vector<normal_float> norm_quan = NormalizeField(arQuan, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), norm_quan[i], arMask[i]));
+        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), UV_coords[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
-    PreProcessPoints(points);
+    PreProcessPoints(points, aNoiseDisplacement);
 }
 
 CSurface::CSurface(const CSurface &surf)
 {
     mInputPoints = surf.mInputPoints;
     mCreationMask = surf.mCreationMask;
-    mQuan = surf.mQuan;
+    mUVcoords = surf.mUVcoords;
     mCenVector = surf.mCenVector;
     mBoxPair = surf.mBoxPair;
     mScale = surf.mScale;
@@ -51,7 +51,7 @@ CSurface::CSurface(const CSurface &surf)
     CSurfaceFace temp;
     for (const auto & mVecFace : surf.mSurfFaces) {
         temp = CSurfaceFace();
-        temp.mColor = mVecFace.mColor;
+        temp.mUVcoord = mVecFace.mUVcoord;
         temp.mPairPoints = mVecFace.mPairPoints;
         temp.mVertices.clear();
         for (const auto & mPoint : mVecFace.mVertices){
@@ -64,14 +64,12 @@ CSurface::CSurface(const CSurface &surf)
 //   ------------------------------------------------ Public Methods ------------------------------------------------>>>
 //   <<<--------------------------------------------- Public Methods ---------------------------------------------------
 
-void CSurface::CreateSurface(bool aPostProcessing)
+void CSurface::CreateSurface()
 {
     RunVorn();
     CleanEdges();
-    if (aPostProcessing) {
-        CleanFaces();
-        CleanPoints();
-    }
+    CleanFaces();
+    CleanPoints();
 }
 
 CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
@@ -95,7 +93,7 @@ CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
                 set_points.insert(indexes[mPoint]);
             }
         }
-        faces.push_back(CFace(face_points, mVecFace.mColor));
+        faces.push_back(CFace(face_points, mVecFace.mUVcoord));
         face_points = vector<size_t>();
         set_points.clear();
     }
@@ -127,7 +125,7 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    quan_t quan;
+    coord_t color_field;
     vector<shared_ptr<CPoint>> face_points;
 
     for (auto & vorn_face : vorn_faces) {
@@ -135,13 +133,13 @@ void CSurface::RunVorn()
         vorn_face.pop_back();
         c_point2 = vorn_face.back();
         vorn_face.pop_back();
-        quan = 0; //quan will be defined later in the program(clean faces) so for now this will be a placeholder
+        color_field = 0; //color_field will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
         for (size_t & point : vorn_face) {
             face_points.push_back(mVertices[point]);
         }
-        new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
+        new_faces.push_back(CSurfaceFace(face_points, color_field, pair<size_t, size_t>(c_point1, c_point2)));
     }
 
     mSurfFaces = new_faces;
@@ -175,6 +173,7 @@ coord_t CSurface::FindContainingRadius()
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
+// Todo: switch to bool statement, use in CleanFaces
 void CSurface::CleanEdges()
 {
     coord_t clean_by = 0.35;
@@ -199,23 +198,65 @@ void CSurface::CleanFaces()
 {
     vector<CSurfaceFace> new_faces;
     size_t mask_len = mCreationMask.size();
-    size_t c_point1;
-    size_t c_point2;
     for (auto & mVecFace : mSurfFaces) {
-        c_point1 = get<0>(mVecFace.mPairPoints);
-        c_point2 = get<1>(mVecFace.mPairPoints);
-        if (mask_len > c_point1 && mask_len > c_point2) { //the indexs are both in range and not a part of the box
-            if (mCreationMask[c_point1] != mCreationMask[c_point2]) { //the face is a part of the surf
-                new_faces.push_back(mVecFace);
-                new_faces.back().mColor = mQuan[c_point1]*0.5 + mQuan[c_point2]*0.5;
+        if (mask_len > mVecFace.mPairPoints.first && mask_len > mVecFace.mPairPoints.second) { //the indexs are both in range and not a part of the box
+            if (mCreationMask[mVecFace.mPairPoints.first] != mCreationMask[mVecFace.mPairPoints.second]) { //the face is a part of the surf
+                vector<CSurfaceFace> triangulized_faces = TriangulizeFace(mVecFace);
+                for (auto & mTriangleFace : triangulized_faces) {
+                    new_faces.push_back(mTriangleFace);
+                }
             }
-        } else {
-            new_faces.push_back(mVecFace);
-            new_faces.back().mColor = 0;
         }
+//        else {
+//            new_faces.push_back(mVecFace);
+//            new_faces.back().mUVcoord = 0;
+//        }
 
     }
     mSurfFaces = new_faces;
+}
+
+vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
+{
+    vector<CSurfaceFace> triangulized_faces;
+    for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
+        CSurfaceFace triangle = CSurfaceFace(
+                {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
+                0,
+//                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
+                arFace.mPairPoints);
+        NormalizeFace(triangle);
+        triangulized_faces.push_back(triangle);
+    }
+    return triangulized_faces;
+}
+
+void CSurface::NormalizeFace(CSurfaceFace& arTriangleFace)
+{
+    bool c_point1_mask = mCreationMask[arTriangleFace.mPairPoints.first];
+    bool c_point2_mask = mCreationMask[arTriangleFace.mPairPoints.second];
+    CPoint c_point1 = mInputPoints[arTriangleFace.mPairPoints.first];
+    CPoint c_point2 = mInputPoints[arTriangleFace.mPairPoints.second];
+
+    // assumption 1
+    // true -> false is normal direction
+    CPoint true_normal;
+    if (c_point1_mask) {
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.first];
+        true_normal = (c_point2 - c_point1).Normalize();
+    } else {
+        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.second];
+        true_normal = (c_point1 - c_point2).Normalize();
+    }
+    // assumption 2
+    // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
+    // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
+    CPoint face_normal = ((*arTriangleFace.mVertices[1] - *arTriangleFace.mVertices[0]).Cross(*arTriangleFace.mVertices[2] - *arTriangleFace.mVertices[0])).Normalize();
+    true_normal.Scale(face_normal);
+    // if the direction is opposite
+    if (true_normal.Dot({1,1,1}) < 0) {
+        arTriangleFace.mVertices = {arTriangleFace.mVertices[0], arTriangleFace.mVertices[2], arTriangleFace.mVertices[1]};
+    }
 }
 
 // Do to the removal of many unneeded faces in CSurface::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
@@ -234,40 +275,10 @@ void CSurface::CleanPoints()
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
-// TODO: Should use different sorting algorithm
-bool CompPointRD(const shared_ptr<CPoint>& arV1, const shared_ptr<CPoint>& arV2) //TODO this 1st func is the same as the one after!
-{
-    return ((*arV1).Dist(*arV2) <= POINT_SIMILARITY_THRESHOLD); //// TODO lambda? or something with CPoint? POINT_SIMILARITY_THRESHOLD is a CPOINT issue
-}
-
-//TODO SIMILAR to THE OLDER CODE OF CompPointRD
-bool CompPointData(const CSurfacePoint &arObj1, const CSurfacePoint &arObj2)
-{
-    if (abs(arObj1.mPoint.X() - arObj2.mPoint.X()) <= POINT_SIMILARITY_THRESHOLD) {
-        if (abs(arObj1.mPoint.Y() - arObj2.mPoint.Y()) <= POINT_SIMILARITY_THRESHOLD) {
-            if (abs(arObj1.mPoint.Z() - arObj2.mPoint.Z()) <= POINT_SIMILARITY_THRESHOLD) {
-                return false;
-            }
-            else
-            { // we compare the points by z to see who needs to go first
-                return arObj1.mPoint.Z() > arObj2.mPoint.Z();
-            }
-        }
-        else // we compare by y to see who needs to go first
-        {
-            return arObj1.mPoint.Y() > arObj2.mPoint.Y();
-        }
-    }
-    else // we compare by x to see who goes first
-    {
-        return arObj1.mPoint.X() > arObj2.mPoint.X();
-    }
-}
-
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
 {
     //sort the array
-    sort(arData.begin(), arData.end(), CompPointData);
+    sort(arData.begin(), arData.end());
 
     vector<CSurfacePoint> cleaned_data;
     size_t j;
@@ -298,12 +309,12 @@ void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 {
     vector<CSurfacePoint> new_points = RemoveDoublesVornInput(arPoints);
     mInputPoints.clear();
-    mQuan.clear();
+    mUVcoords.clear();
     mCreationMask.clear();
     for (auto & point : new_points)
     {
         mInputPoints.push_back(point.mPoint);
-        mQuan.push_back(point.mQuan);
+        mUVcoords.push_back(point.UVcoord);
         mCreationMask.push_back(point.mMaskIsTrue);
     }
 }
@@ -311,8 +322,8 @@ void CSurface::CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints)
 void CSurface::CleanDoublePoints()
 {
     //sort the array
-    sort(mVertices.begin(), mVertices.end(), CompPointRD);
-    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fiting to each point
+    sort(mVertices.begin(), mVertices.end());
+    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fitting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
     size_t j;
     for (size_t i = 0; i < mVertices.size(); i++) {
@@ -344,8 +355,10 @@ void CSurface::CleanDoublePoints()
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 
-void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
+void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement)
 {
+    CleanDoubleInputPoints(arPoints);
+
     CLogFile::GetInstance().WriteCustom(ELogCode::LOG_VIVID, "Preprocessing Data");
 
     CPoint box_dim, box_min, box_max;
@@ -356,21 +369,24 @@ void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints)
         mInputPoints[i] -= mCenVector;
     }
     mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
+
     vector<CPoint> noise_vec (mInputPoints.size());
 
     // Consider generator here.
     srand(time(nullptr));
     for (auto & i : noise_vec){
-        i = {1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.),
-             1 + NOISE_PERCENTAGE*((coord_t)(rand() % 20 - 10) / 10.)   };
+        i = {1,1,1};
+        if(aNoiseDisplacement) {
+            i = {1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
+                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.)};
+        }
     }
     for (int i = 0; i < mInputPoints.size(); i++){
         mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
-        arPoints[i].mPoint = mInputPoints[i];
     }
 
-    CleanDoubleInputPoints(arPoints);
+    //CleanDoubleInputPoints(arPoints);
 
     box_dim = box_dim / mScale; box_min = (box_min - mCenVector) / mScale; box_max = (box_max - mCenVector) / mScale;
     mBoxPair = {box_min-box_dim*BOX_EXPAND_FACTOR, box_max+box_dim*BOX_EXPAND_FACTOR};

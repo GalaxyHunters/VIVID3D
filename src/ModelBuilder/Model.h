@@ -2,8 +2,6 @@
 #define VIVID_MODEL_H
 
 #include "Mesh.h"
-#include "Surface.h"
-
 
 namespace vivid
 {
@@ -14,7 +12,6 @@ namespace vivid
         std::vector<CModelComponent> mMeshes = {};
 
     public:
-        // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
         CModel(){};
         CModel(const CModelComponent& arMesh) {mMeshes.push_back(arMesh);};
         //operator =
@@ -22,6 +19,9 @@ namespace vivid
         ~CModel();
 
         void AddMeshes(const vector<CModelComponent> &arMeshes);
+
+        int GetNumMeshes() const {return this->mMeshes.size();}
+
         void AddMesh(const CModelComponent &arMesh);
         void AddModel(const CModel &arModel);
         //remove Mesh by label maybe?

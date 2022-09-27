@@ -17,7 +17,7 @@ const std::map<ELogCode, std::string> CODE_MAP { {ELogCode::LOG_ERROR,"ERROR: "}
 enum ELogMessage
 {
     ARRAYS_NOT_EQUAL=0, ARRAYS_EMPTY=1, MISSING_BOOLEAN_VALUES=2,
-    INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4, INVALID_NORMAL_VALUE=5,
+    INVALID_SMOOTH_FACTOR=3, INVALID_ALPHA_VALUE=4, INVALID_NORMAL_VALUE=5, , INVALID_FRAME_VALUE=6
 };
 
 //typedef std::function<void (const ELogCode aCode, const ELogMessage aMsg)> (reportCB_t);
@@ -34,6 +34,8 @@ const std::map<ELogMessage, std::string> ERROR_TYPE_STRING {  {ELogMessage::ARRA
                                                                       "ValueError - Alpha must be between 0 and 1"},
                                                               {ELogMessage::INVALID_NORMAL_VALUE,
                                                                       "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
+                                                              {ELogMessage::INVALID_FRAME_VALUE,
+                                                               "ValueError - frame must be within Models.size range"}
 };
 
 

@@ -27,7 +27,7 @@ namespace vivid
     }
 
     bool static CompareQuan(CFace aFace1, CFace aFace2) {
-        return (aFace1.GetQuan() > aFace2.GetQuan());
+        return (aFace1.GetUVcoord() > aFace2.GetUVcoord());
     }
     static bool(*CompFace)(CFace, CFace) = CompareQuan;
 
@@ -85,20 +85,20 @@ namespace vivid
         //sort vecFaces by color
         sort(Faces.begin(), Faces.end(), CompFace); // NlogN
         //write faces to obj file + write colors to mtl file
-        color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetQuan());
+        color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetUVcoord());
         char write_type = ELEMENT_TYPE[apMesh->GetObjType()];
         coord_t alpha = apMesh->GetOpacity();
         WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
         for (auto it = Faces.begin(); it != Faces.end(); it++)
         {
 
-            if (CompareColor(color, Quan2Color(apMesh->GetClm(), it->GetQuan()))) //if true write the face to the obj file
+            if (CompareColor(color, Quan2Color(apMesh->GetClm(), it->GetUVcoord()))) //if true write the face to the obj file
             {
                 WriteNewFace(aOBJFile, *it, aPointsCounter, write_type);
             }
             else // we reached a new color, and we need to write it in mtl before using it
             {
-                color = Quan2Color(apMesh->GetClm(), it->GetQuan());
+                color = Quan2Color(apMesh->GetClm(), it->GetUVcoord());
                 (*apMtlCounter)++;
                 WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
                 // now we can write the face in the obj file
@@ -153,7 +153,7 @@ namespace vivid
     void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CFace aFace, size_t aPointsCounter) {
         arOBJFile << ELEMENT_TYPE[apMesh->GetObjType()] << ' ';
         vector<size_t> face_points = aFace.GetPoints();
-        size_t VT = apMesh->GetClm().GetColorIndex(aFace.GetQuan()) + 1;
+        size_t VT = apMesh->GetClm().GetColorIndex(aFace.GetUVcoord()) + 1;
         for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
         {
             arOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + "/" + to_string(VT) + " "; //TODO formatting
@@ -256,8 +256,7 @@ namespace vivid
             ExportToObjMaterial(aModel, aOutPutFile);
         }
         else{
-//AssimpExporter(aModel, "gltf2", aOutPutFile);
-            ExportToObjTexture(aModel, aOutPutFile+"_Vivid");
+            ExportToObjTexture(aModel, aOutPutFile);
         }
     }
 

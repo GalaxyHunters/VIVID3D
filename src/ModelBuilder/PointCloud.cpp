@@ -24,7 +24,7 @@ CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_floa
     }
 }
 
-void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan, normal_float aFieldMin, normal_float aFieldMax)
+void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax)
 {
     arQuan = NormalizeField(arQuan, arPoints.size(), aFieldMin, aFieldMax);
 

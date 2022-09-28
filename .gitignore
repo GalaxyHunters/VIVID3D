@@ -12,3 +12,5 @@
 /lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeFiles/
 vivid
 vivid_main
+**/__init__.py
+!/src/vivid3d

@@ -8,17 +8,15 @@
 using namespace std;
 
 namespace vivid {
-    typedef normal_float quan_t;
-
     typedef unsigned char rgb_t;
     typedef std::array<rgb_t, 3> color_t;
 
     constexpr rgb_t RGB_MAX = 255;
 
     struct CColor {
-        quan_t R;
-        quan_t G;
-        quan_t B;
+        normal_float R;
+        normal_float G;
+        normal_float B;
 
         CColor(const array<normal_float, 3>& arRGB) : R(AssertNormalize(arRGB[0])), G(AssertNormalize(arRGB[1])), B(AssertNormalize(arRGB[2])) {}
         CColor(const color_t& arRGB) : R((normal_float)arRGB[0] / RGB_MAX), G((normal_float)arRGB[1] / RGB_MAX), B((normal_float)arRGB[2] / RGB_MAX) {}

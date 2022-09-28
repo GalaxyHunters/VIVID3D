@@ -21,9 +21,9 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
         CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
-    vector<normal_float> norm_quan = NormalizeField(arColorField, arInputPoints.size(), aVMin, aVMax);
+    vector<normal_float> normal_field = NormalizeField(arColorField, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), norm_quan[i], arMask[i]));
+        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
@@ -125,7 +125,7 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    quan_t quan;
+    normal_float UVcoord;
     vector<shared_ptr<CPoint>> face_points;
 
     for (auto & vorn_face : vorn_faces) {
@@ -133,13 +133,13 @@ void CSurface::RunVorn()
         vorn_face.pop_back();
         c_point2 = vorn_face.back();
         vorn_face.pop_back();
-        quan = 0; //quan will be defined later in the program(clean faces) so for now this will be a placeholder
+        UVcoord = 0; //UVcoord will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
         for (size_t & point : vorn_face) {
             face_points.push_back(mVertices[point]);
         }
-        new_faces.push_back(CSurfaceFace(face_points, quan, pair<size_t, size_t>(c_point1, c_point2)));
+        new_faces.push_back(CSurfaceFace(face_points, UVcoord, pair<size_t, size_t>(c_point1, c_point2)));
     }
 
     mSurfFaces = new_faces;

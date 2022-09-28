@@ -17,7 +17,7 @@ namespace vivid
         Vec3<size_t> temp_triangle;
         for (auto & aFace : aFaces) {
             temp_triangle = Vec3<size_t>(aFace[0], aFace[1], aFace[2], aFace.GetUVcoord());
-            triangles.push_back(temp_triangle); //, fIt->GetQuan()
+            triangles.push_back(temp_triangle); //, fIt->GetUVcoords()
         }
         for (auto & aPoint : aPoints) {
             vertices.push_back(Vec3<float>(aPoint.X(), aPoint.Y(), aPoint.Z(), 0));

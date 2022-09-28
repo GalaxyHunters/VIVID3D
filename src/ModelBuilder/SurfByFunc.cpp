@@ -15,7 +15,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, normal_float aOpacity, const s
 //            points.push_back(CPoint(i,i,0.));
 //        }
 //    }
-    vector<coord_t> quan = {};
+    vector<normal_float> quan = {};
     coord_t temp_x, temp_y;
 
     for (int x = -aBoxSize; x <= aBoxSize; x += 1) {
@@ -33,7 +33,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, normal_float aOpacity, const s
             }
             CPoint point = {temp_x,z,temp_y};
             points.push_back(point);
-            quan.push_back(z);
+            quan.push_back((float)z);
         }
     }
 

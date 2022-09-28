@@ -58,11 +58,21 @@ PYBIND11_MODULE(_vivid, m) {
 
     py::class_<CMaterial>(m, "Material")
         .def(py::init<normal_float, normal_float, float, const color_t& >(),
-            py::arg("opacity")=1, py::arg("roughness")=0, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0))
-        .def("set_opacity", &CMaterial::SetOpacity, py::arg("opacity"))
-        .def("set_roughness", &CMaterial::SetRoughness, py::arg("roughness"))
-        .def("set_emission_strength", &CMaterial::SetEmissionStrength, py::arg("emission_strength"))
-        .def("set_emission_color", py::overload_cast<const string&>(&CMaterial::SetEmissionColor), py::arg("emission_color_name"));
+            py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0))
+        .def(py::init<normal_float, normal_float, float, const string& >(),
+            py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")="white")
+        .def("set_opacity", &CMaterial::SetOpacity,
+            "Set Opacity (0.0-1.0)",
+            py::arg("opacity"))
+        .def("set_shininess", &CMaterial::SetRoughness,
+            "Set shininess (0.0-1.0)",
+            py::arg("shininess"))
+        .def("set_emission_strength", &CMaterial::SetEmissionStrength, 
+            "Set Emission Strength (0.0-1.0)",
+            py::arg("emission_strength"))
+        .def("set_emission_color", py::overload_cast<const string&>(&CMaterial::SetEmissionColor),
+            "Set Emission Color",
+            py::arg("emission_color_name"));
 //        .def("set_emission_color", py::overload_cast<const string&>(&CModelComponent::SetEmissionColor), py::arg("emission_color"))
 
 py::class_<CModelComponent> (m, "ModelComponent")
@@ -95,7 +105,7 @@ py::class_<CModelComponent> (m, "ModelComponent")
             py::arg("scale_vec"))
         .def("export", &CModelComponent::Export,
             "writes CMesh to a given file format",
-            py::arg("output_file"), py::arg("file_format") = "obj");
+            py::arg("output_file"), py::arg("file_format") = "gltf2");
 
     py::class_<CSurface>(m, "Surface")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
@@ -177,7 +187,7 @@ py::class_<CModelComponent> (m, "ModelComponent")
                  py::arg("output_file"), py::arg("with_texture") = 1)
             .def("export", &CModel::Export,
                  "writes CModel to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "obj");
+                 py::arg("output_file"), py::arg("file_format") = "gltf2");
 
     py::class_<CAnimation> Animation(m,"Animation");
         Animation.def(py::init<> (), "default constructor for Animation")

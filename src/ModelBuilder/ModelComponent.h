@@ -96,7 +96,7 @@ namespace vivid
         * @param[in] aOutputPath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "obj");
+        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
     };
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

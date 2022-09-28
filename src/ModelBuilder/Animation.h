@@ -127,7 +127,7 @@ namespace vivid
         void AddModels(const CModel &arModels);
 
         //export animation
-        void Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
+        void Export(const std::string &arOutputFilePath, std::string aFileType = "gltf2");
 
     };
 

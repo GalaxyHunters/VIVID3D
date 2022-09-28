@@ -453,7 +453,7 @@ namespace vivid {
             material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
 
             
-            const float *shininess = new float(mesh.GetMaterial().GetRoughness() * MAX_ROUGHNESS);
+            const float *shininess = new float(mesh.GetMaterial().GetShininess() * MAX_ROUGHNESS);
             material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
             const float *opacity = new float(mesh.GetOpacity());

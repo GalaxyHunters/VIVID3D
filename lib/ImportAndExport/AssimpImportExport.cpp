@@ -84,7 +84,7 @@ namespace vivid {
             string texture_path;
             for (int i = 0; i < scene->mNumMeshes; i++) {
                 //handle mesh texture
-                texture_path = AddTexture(meshes[i].GetClm());
+                texture_path = AddTexture(meshes[i].GetColorMap());
                 //setting up the mesh structure
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
                 scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path, i);
@@ -136,7 +136,7 @@ namespace vivid {
                 center_node->mChildren[model_index]->mParent = center_node;
                 for (int mesh_index = 0; mesh_index < meshes.size(); mesh_index++) {
                     //handle mesh texture
-                    texture_path = AddTexture(meshes[mesh_index].GetClm());
+                    texture_path = AddTexture(meshes[mesh_index].GetColorMap());
                     //setting up the mesh structure
                     scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
                     scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path, mesh_counter);
@@ -429,8 +429,8 @@ namespace vivid {
             const aiString *name = new aiString(mesh.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
-            const CColor mat_emissive_color (mesh.GetMaterial().GetEmissionColor());
-            const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color.R, mat_emissive_color.G, mat_emissive_color.B);
+            const array<float, 3> mat_emissive_color = ToNormalRGB(mesh.GetMaterial().GetEmissionColor());
+            const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
             material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
         
             const int *shading_model = new int(2);

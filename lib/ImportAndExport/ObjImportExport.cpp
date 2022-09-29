@@ -85,20 +85,20 @@ namespace vivid
         //sort vecFaces by color
         sort(Faces.begin(), Faces.end(), CompFace); // NlogN
         //write faces to obj file + write colors to mtl file
-        color_t color = Quan2Color(apMesh->GetClm(), (apMesh->GetFaces())[0].GetUVcoord());
+        color_t color = Quan2Color(apMesh->GetColorMap(), (apMesh->GetFaces())[0].GetUVcoord());
         char write_type = ELEMENT_TYPE[apMesh->GetObjType()];
         coord_t alpha = apMesh->GetOpacity();
         WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
         for (auto it = Faces.begin(); it != Faces.end(); it++)
         {
 
-            if (CompareColor(color, Quan2Color(apMesh->GetClm(), it->GetUVcoord()))) //if true write the face to the obj file
+            if (CompareColor(color, Quan2Color(apMesh->GetColorMap(), it->GetUVcoord()))) //if true write the face to the obj file
             {
                 WriteNewFace(aOBJFile, *it, aPointsCounter, write_type);
             }
             else // we reached a new color, and we need to write it in mtl before using it
             {
-                color = Quan2Color(apMesh->GetClm(), it->GetUVcoord());
+                color = Quan2Color(apMesh->GetColorMap(), it->GetUVcoord());
                 (*apMtlCounter)++;
                 WriteNewMtl(aOBJFile, aMTLFile, apMtlCounter, color, alpha);
                 // now we can write the face in the obj file
@@ -153,7 +153,7 @@ namespace vivid
     void WriteNewFaceTexture(ofstream &arOBJFile, const CModelComponent * apMesh, CFace aFace, size_t aPointsCounter) {
         arOBJFile << ELEMENT_TYPE[apMesh->GetObjType()] << ' ';
         vector<size_t> face_points = aFace.GetPoints();
-        size_t VT = apMesh->GetClm().GetColorIndex(aFace.GetUVcoord()) + 1;
+        size_t VT = apMesh->GetColorMap().GetColorIndex(aFace.GetUVcoord()) + 1;
         for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
         {
             arOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + "/" + to_string(VT) + " "; //TODO formatting
@@ -227,8 +227,8 @@ namespace vivid
         vector<CModelComponent> meshes = arModel.GetMeshes();
         vector<vector<unsigned char>> textures;
         for (auto it = meshes.begin(); it != meshes.end(); it++) {
-            textures.push_back(it->GetClm().GetColorTexture());
-            encodePNG( string(aOutput + it->GetClm().GetName() + "_texture.png"), textures.back(), 1, textures.back().size()/4);
+            textures.push_back(it->GetColorMap().GetColorTexture());
+            encodePNG(string(aOutput + it->GetColorMap().GetName() + "_texture.png"), textures.back(), 1, textures.back().size() / 4);
         }
         //write obj file starter
         o << "# This 3D code was produced by Vivid \n\n\n";
@@ -241,7 +241,7 @@ namespace vivid
         for (auto it = meshes.begin(); it != meshes.end(); ++it)
         {
 //	    cout << it->GetLabel() << endl;
-            WriteObjTexture(o, m, &(*it), &mtl_counter, mtl + it->GetClm().GetName() + "_texture.png",
+            WriteObjTexture(o, m, &(*it), &mtl_counter, mtl + it->GetColorMap().GetName() + "_texture.png",
                             textures[mtl_counter].size() / 4, points_counter);
             points_counter += it->GetPoints().size();
             mtl_counter = mtl_counter + 1;

@@ -21,7 +21,7 @@ namespace vivid {
         for (float & it : arField) {
             it = (it - aMin) * divide_by;
             if (it > 1) it = 1;
-            if (it < 0) it = 0;
+            if (it < 0.01) it = 0.01;
         }
         return arField;
     }

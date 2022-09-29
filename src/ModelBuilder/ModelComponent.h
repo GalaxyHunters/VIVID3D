@@ -49,7 +49,7 @@ namespace vivid
         inline std::vector<CFace> GetFaces() const { return mFaces; }
         inline std::string GetLabel() const { return mLabel; }
         inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
-        inline CColorMap GetClm() const { return mClm; }
+        inline CColorMap GetColorMap() const { return mClm; }
         inline CMaterial GetMaterial() const { return mMaterial; }
         inline FACE_TYPE GetObjType() const { return mElementType; }
 
@@ -58,8 +58,7 @@ namespace vivid
         inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
         inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
         inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
-        inline void SetColorMap(const std::vector<color_t> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
-        inline void SetColorMap(const std::vector<CColor> &arClm, const std::string &arCName) { mClm = CColorMap(arClm, arCName); }
+        inline void SetColorMap(const CColorMap& arColorMap) { mClm = arColorMap; }
         inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
 
         /**

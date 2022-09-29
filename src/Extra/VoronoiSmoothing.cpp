@@ -110,7 +110,7 @@ void CVoronoiSmoothing::Stage2ModifyPoints()
     size_t c_point3;
 
     vector<CPoint> new_points;
-    vector<noraml_float> new_quan;
+    vector<normal_float> new_quan;
     size_t p_out_size = mOutPoints.size();
     size_t p_in_size = p_out_size + mInPoints.size();
     mInPoints.clear();
@@ -127,7 +127,7 @@ void CVoronoiSmoothing::Stage2ModifyPoints()
 }
 
 void CVoronoiSmoothing::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<size_t> &mInPoints, vector<size_t> &mOutPoints, size_t mOutPointsSize, size_t mInPointsSize,
-                                       const CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<noraml_float> &arNewQuan, size_t &arIndex)
+                                       const CSurfaceFace &arFace, vector<CPoint> &arNewPoints, vector<normal_float> &arNewQuan, size_t &arIndex)
 {
     size_t c_point3;
     for (auto & f_index : mPointNeighbours[aCPoint1])
@@ -153,7 +153,7 @@ void CVoronoiSmoothing::FindPairPoints(size_t aCPoint1, size_t aCPoint2, vector<
     }
 }
 
-void CVoronoiSmoothing::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<noraml_float> &arNewQuan,
+void CVoronoiSmoothing::AddPointsAlt(vector<size_t> &arPVec, vector<CPoint> &arNewPoints, vector<normal_float> &arNewQuan,
                                      size_t &arNewIndex, size_t aCPoint1, size_t aCPoint2, size_t aCPoint3)
 {
     arPVec.push_back(arNewIndex);
@@ -170,7 +170,7 @@ void CVoronoiSmoothing::Stage2AddPoints(size_t aSmoothFactor)
     size_t p_out_size = mOutPoints.size();
     size_t p_in_size = p_out_size + mInPoints.size();
     vector<CPoint> new_points;
-    vector<noraml_float> new_quan;
+    vector<normal_float> new_quan;
     mInPoints.clear();
     mOutPoints.clear();
     size_t new_index = 0; // the index for the new point to be added
@@ -191,7 +191,7 @@ void CVoronoiSmoothing::Stage2AddPoints(size_t aSmoothFactor)
     CleanDoublePointsVorn(new_points, new_quan, mInPoints, mOutPoints);
 }
 
-void CVoronoiSmoothing::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<noraml_float> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
+void CVoronoiSmoothing::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNewPoints, vector<normal_float> * apNewQuan, size_t * apNewIndex, size_t aCPoint1, size_t aCPoint2, int aSmoothFactor)
 {
     coord_t x, y, z;
     for (int i = 1; i <= aSmoothFactor; i++){
@@ -205,7 +205,7 @@ void CVoronoiSmoothing::AddPoints(vector<size_t> * apPVec, vector<CPoint> * apNe
     }
 }
 
-void CVoronoiSmoothing::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<noraml_float>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
+void CVoronoiSmoothing::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vector<normal_float>& arNewQuan, vector<size_t>& arNewIn, vector<size_t>& arNewOut)
 {
     vector<CSurfacePoint> data;
     data.clear();

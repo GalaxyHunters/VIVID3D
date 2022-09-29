@@ -8,6 +8,8 @@
 #include "Model.h"
 #include "Animation.h"
 #include "StopMotionAnimation.h"
+#include <vector>
+#include <array>
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -56,6 +58,16 @@ PYBIND11_MODULE(_vivid, m) {
              "Constructor for point",
              py::arg("3d_vector"));
 
+    py::class_<CColorMap>(m, "ColorMap")
+        .def(py::init<const string&>(),
+            py::arg("name"))
+        .def(py::init<vector<array<float, 3>>&, string&>(),
+            py::arg("colors"), py::arg("name"))
+        .def(py::init<const CColorMap&>(),
+             py::arg("ColorMap"))
+        .def("name", &CColorMap::GetName)
+        .def("colors", &CColorMap::GetColorMap);
+
     py::class_<CMaterial>(m, "Material")
         .def(py::init<normal_float, normal_float, float, const color_t& >(),
             py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0))
@@ -64,7 +76,7 @@ PYBIND11_MODULE(_vivid, m) {
         .def("set_opacity", &CMaterial::SetOpacity,
             "Set Opacity (0.0-1.0)",
             py::arg("opacity"))
-        .def("set_shininess", &CMaterial::SetRoughness,
+        .def("set_shininess", &CMaterial::SetShininess,
             "Set shininess (0.0-1.0)",
             py::arg("shininess"))
         .def("set_emission_strength", &CMaterial::SetEmissionStrength, 
@@ -75,20 +87,17 @@ PYBIND11_MODULE(_vivid, m) {
             py::arg("emission_color_name"));
 //        .def("set_emission_color", py::overload_cast<const string&>(&CModelComponent::SetEmissionColor), py::arg("emission_color"))
 
-py::class_<CModelComponent> (m, "ModelComponent")
+    py::class_<CModelComponent> (m, "ModelComponent")
         .def(py::init<const CModelComponent&> (),
             "Constructor for ModelComponent",
             py::arg("model_component"))
 //        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+        .def("set_opacity", &CModelComponent::SetOpacity,
+            "Set Opacity", py::arg("opacity"))
         .def("set_color", &CModelComponent::SetColor,
              "Set Color", py::arg("color"))
-        .def("set_opacity", &CModelComponent::SetOpacity,
-             "Set Opacity", py::arg("opacity"))
-//        .def("set_color_map", [](const CModelComponent& c, const py::object& arObj ) {
-//            auto clm = arObj.attr("colors").cast<std::vector<std::vector<float>>();
-//            auto name = arObj.attr("name").cast<std::string>();
-//            c.SetColorMap(clm, name);
-//        })
+        .def("set_color_map", &CModelComponent::SetColorMap,
+             "Set Color Map", py::arg("ColorMap"))
         .def("set_material", &CModelComponent::SetMaterial,
              "Set Material", py::arg("Material"))
         .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
@@ -282,6 +291,9 @@ py::class_<CModelComponent> (m, "ModelComponent")
     m.def("create_grid", &CreateGrid,
           "Creates a grid",
           py::arg("size")=10, py::arg("num_of_ticks")=5, py::arg("tick_size")=1);
+    m.def("ConverToColorMap", [](const CColorMap& arObj ) {
+        cout << arObj.GetName() << endl;
+    });
 
-    //SurfByFunc:
+//SurfByFunc:
 }

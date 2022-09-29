@@ -13,18 +13,13 @@ namespace vivid {
 
     constexpr rgb_t RGB_MAX = 255;
 
-    struct CColor {
-        normal_float R;
-        normal_float G;
-        normal_float B;
+    inline color_t ToColor_T(const array<float, 3>& arNormalRGB) {
+        return {(rgb_t) (Normalize(arNormalRGB[0]) * RGB_MAX), (rgb_t) (Normalize(arNormalRGB[1]) * RGB_MAX), (rgb_t) (Normalize(arNormalRGB[2]) * RGB_MAX) };
+    }
 
-        CColor(const array<normal_float, 3>& arRGB) : R(AssertNormalize(arRGB[0])), G(AssertNormalize(arRGB[1])), B(AssertNormalize(arRGB[2])) {}
-        CColor(const color_t& arRGB) : R((normal_float)arRGB[0] / RGB_MAX), G((normal_float)arRGB[1] / RGB_MAX), B((normal_float)arRGB[2] / RGB_MAX) {}
-
-        inline color_t ToColor_T() const {
-            return {(rgb_t) (R * RGB_MAX), (rgb_t) (G * RGB_MAX), (rgb_t) (B * RGB_MAX) };
-        }
-    };
+    inline array<float, 3> ToNormalRGB(const color_t & arRGB) {
+        return {(float)arRGB[0] / RGB_MAX, (float)arRGB[1] / RGB_MAX, (float)arRGB[2] / RGB_MAX};
+    }
 
     constexpr color_t INDIANRED = {205, 92, 92};
     constexpr color_t LIGHTCORAL = {240, 128, 128};

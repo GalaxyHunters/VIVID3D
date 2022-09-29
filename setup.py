@@ -11,7 +11,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="vivid3d",
-    version="0.1.4",
+    version="0.1.9",
     packages=['vivid3d'],
     package_dir={'': 'src'},
     cmake_install_dir='src/vivid3d',

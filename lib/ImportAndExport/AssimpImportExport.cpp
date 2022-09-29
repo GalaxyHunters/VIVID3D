@@ -407,7 +407,7 @@ namespace vivid {
             }
 
             //assign points
-            double tempAvr;
+            double tempAvr, val;
             for (int j = 0; j < vVertices.size(); j++) {
                 OutMesh->mVertices[j] = aiVector3D(vVertices[j].X(), vVertices[j].Y(), vVertices[j].Z());
                 if (!vetUVcoord[j].empty()) { //uv coords
@@ -415,7 +415,8 @@ namespace vivid {
                     for (auto it = vetUVcoord[j].begin(); it != vetUVcoord[j].end(); ++it) {
                         tempAvr += *it;
                     }
-                    OutMesh->mTextureCoords[0][j] = aiVector3D(0, 1 - tempAvr / vetUVcoord[j].size(), 0);
+                    val = max(0.01, min(1 - tempAvr / vetUVcoord[j].size(), 1.0));
+                    OutMesh->mTextureCoords[0][j] = aiVector3D(0, val, 0);
                 } else { // should never happen
                     OutMesh->mTextureCoords[0][j] = aiVector3D(0, 0, 0);
                 }

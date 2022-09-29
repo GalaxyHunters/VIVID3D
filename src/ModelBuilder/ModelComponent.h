@@ -10,9 +10,14 @@
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"
+#include "src/Textures/Material.h"
 
 namespace vivid
 {
+    enum FACE_TYPE {
+        POINTS = 1, LINES = 2, TRIANGLES = 3, POLYGONS = 4,
+    };
+
     /* FTrans_t is a function that changes CPoint to another CPoint */
     typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
@@ -22,53 +27,42 @@ namespace vivid
     protected:
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
-        std::string mObjType = "f";
-        coord_t mAlpha = 1.;
+        FACE_TYPE mElementType = POLYGONS;
         std::string mLabel = "";
         CColorMap mClm;
-        // Constructor, Copy Constructor, Destructor
-        CModelComponent() {}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm() {}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, std::string &arClm) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm) {}
-        CModelComponent(const coord_t aAlpha, const std::string &arLabel, const std::string &arObjType, const std::vector<color_t> &arClm, const std::string &arCName) : mAlpha(max(0.1, min(aAlpha, 1.))), mLabel(arLabel), mObjType(arObjType), mClm(arClm, arCName) {}
+        CMaterial mMaterial;
+        //Constructor, Copy Constructor, Destructor
+        CModelComponent(){}
+        CModelComponent(const FACE_TYPE aElementType) : mElementType(aElementType) {}
+        CModelComponent(const normal_float aAlpha, const std::string &arLabel, const FACE_TYPE aObjType)
+            : mLabel(arLabel), mElementType(aObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
     public:
-        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mAlpha(arModel.mAlpha), mLabel(arModel.mLabel), mObjType(arModel.mObjType), mClm(arModel.mClm) {}
+        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mElementType(arModel.mElementType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
 
         // Operator=
-        inline CModelComponent &operator=(const CModelComponent &arModel)
-        {
-            mPoints = arModel.mPoints;
-            mFaces = arModel.mFaces;
-            mAlpha = arModel.mAlpha;
-            mLabel = arModel.mLabel;
-            mObjType = arModel.mObjType;
-            mClm = arModel.mClm;
-            return *this;
-        }
+        inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
+            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mClm=arModel.mClm; mMaterial=arModel.mMaterial; return *this; }
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
+        inline size_t GetPointsCount() const { return mPoints.size(); }
         inline std::vector<CFace> GetFaces() const { return mFaces; }
+        inline size_t GetFacesCount() const { return mFaces.size(); }
         inline std::string GetLabel() const { return mLabel; }
-        inline coord_t GetAlpha() const { return mAlpha; }
-        inline CColorMap GetClm() const { return mClm; }
-        inline std::string GetObjType() const { return mObjType; }
+        inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
+        inline CColorMap GetColorMap() const { return mClm; }
+        inline const CMaterial& GetMaterial() const { return mMaterial; }
+        inline FACE_TYPE GetObjType() const { return mElementType; }
 
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
         inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
-        inline void SetAlpha(coord_t aAlpha)
-        {
-            // check input valdilty
-            if (aAlpha > 1 || aAlpha < 0)
-            {
-            }
-            mAlpha = aAlpha;
-        }
-        inline void SetClm(string arClm) { mClm.SetColorMap(arClm); }
-        inline void SetClm(const std::vector<color_t> &arClm, const std::string &arCName) { mClm.SetColorMap(arClm, arCName); }
-        //    virtual void ExportToObj(const std::string &aOutputFilePath, bool WithTexture = 1) = 0;
+        inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
+        inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
+        inline void SetColorMap(const CColorMap& arColorMap) { mClm = arColorMap; }
+        inline void SetColorMap(const PyColorMap& arColorMap) { mClm = arColorMap; }
+        inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
 
         /**
          * transform CMesh points by transformation function
@@ -96,7 +90,15 @@ namespace vivid
          * @param[in] arScaleVec the x,y.z direction to move by it.
          */
         void ScaleMesh(const CPoint &arScaleVec);
-    };
 
+        void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
+
+        /**
+        * Assimp export. writes arModel in aFileType format at aOutputPath
+        * @param[in] aOutputPath Path and name for output file
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        */
+        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+    };
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

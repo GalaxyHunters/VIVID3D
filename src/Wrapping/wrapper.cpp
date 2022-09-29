@@ -8,16 +8,22 @@
 #include "Model.h"
 #include "Animation.h"
 #include "StopMotionAnimation.h"
+#include <vector>
+#include <array>
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
+#define PYBIND11_DETAILED_ERROR_MESSAGES
+
 using namespace vivid;
 using namespace std;
 
 namespace py = pybind11;
+using namespace py::literals;
+constexpr auto DEFAULT_COLOR_SHAPES = "lightgray";
 
 py::array_t<double> make_cpoint(const double aValue) {
     py::array_t<double> array (3);
@@ -29,6 +35,15 @@ py::array_t<double> make_cpoint(const double aValue) {
     return array;
 }
 
+py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
+    py::array_t<unsigned char> array (3);
+    py::buffer_info buffer = array.request();
+    auto ptr = static_cast<unsigned char *>(buffer.ptr);
+    for (int i = 0; i < 3; i++) {
+        ptr[i] = aValue;
+    }
+    return array;
+}
 
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = "VIVID: Creating 3D animations in one line of code";
@@ -45,11 +60,49 @@ PYBIND11_MODULE(_vivid, m) {
              "Constructor for point",
              py::arg("3d_vector"));
 
+    py::class_<CColorMap>(m, "ColorMap")
+        .def(py::init<const string&>(),
+            py::arg("name"))
+        .def(py::init<vector<array<float, 3>>&, string&>(),
+            py::arg("colors"), py::arg("name"))
+        .def(py::init<const CColorMap&>(),
+             py::arg("ColorMap"))
+        .def_property_readonly("name", &CColorMap::GetName)
+        .def_property_readonly("colors", &CColorMap::GetColorMap);
+    py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
+
+    py::class_<CMaterial>(m, "Material")
+        .def(py::init<normal_float, normal_float, float, const color_t&, const string& >(),
+            py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0), py::arg("name")="default")
+        .def(py::init<normal_float, normal_float, float, const string&, const string&  >(),
+            py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")="white", py::arg("name")="default")
+        .def_property("opacity", &CMaterial::GetOpacity, &CMaterial::SetOpacity,
+            "Opacity (0.0-1.0)")
+        .def_property("shininess", &CMaterial::GetShininess, &CMaterial::SetShininess,
+            "Shininess (0.0-1.0)")
+        .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
+            "Emission Strength (0.0-1.0)")
+        .def("set_emission_color", py::overload_cast<const string&>(&CMaterial::SetEmissionColor),
+            "Set Emission Color",
+            py::arg("emission_color_name"));
+
     py::class_<CModelComponent> (m, "ModelComponent")
         .def(py::init<const CModelComponent&> (),
             "Constructor for ModelComponent",
             py::arg("model_component"))
 //        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
+        .def_property("name", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
+        .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount)
+        .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount)
+        .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
+              "Opacity (0.0-1.0)")
+        .def_property("material",  &CModelComponent::GetMaterial, &CModelComponent::SetMaterial)
+        .def("set_color", &CModelComponent::SetColor,
+             "Set Color", py::arg("color"))
+        .def("set_color_map", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
+             "Set Color Map", py::arg("ColorMap"))
+        .def("set_color_map", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap),
+             "Set Color Map", py::arg("ColorMap"))
         .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
              "Transform Model Component by transformation matrix",
              py::arg("matrix"))
@@ -61,53 +114,61 @@ PYBIND11_MODULE(_vivid, m) {
             py::arg("direction_vec"))
         .def("scale", &CModelComponent::ScaleMesh,
             "Scale Model Component by scale_vec.",
-            py::arg("scale_vec"));
+            py::arg("scale_vec"))
+        .def("export", &CModelComponent::Export,
+            "writes CMesh to a given file format",
+            py::arg("output_file"), py::arg("file_format") = "gltf2")
+        .def("__str__", [](const CModelComponent& arMC) {
+            return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
+        });
 
     py::class_<CSurface>(m, "Surface")
-            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<coord_t>&, coord_t, coord_t, coord_t>(),
+            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
+                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
             .def(py::init<const CSurface &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
             .def("create_surface", &CSurface::CreateSurface,
-                 "Calculate the surface from input data)",
-                 py::arg("Processing") = true)
+                 "Calculate the surface from input data)")
             .def("to_mesh", &CSurface::ToMesh,
                  "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
     py::class_<CLines, CModelComponent>(m, "Lines")
-            .def(py::init<const vector<CPoint>&, const coord_t, const string& >(),
+            .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
-                 py::arg("points"), py::arg("alpha")=1., py::arg("label")="")
-//            .def(py::init<const vector<vector<CPoint>>&, const coord_t, const string&>(),
+                 py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
+//            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
 //                 "Constructor for Lines",
-//                 py::arg("points_matrix"), py::arg("alpha")=1., py::arg("label")="")
+//                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
             .def(py::init<const CLines&>(),
                  "Copy Constructor for Lines",
                  py::arg("Lines"))
             .def("add_line", &CLines::AddLine,
                  "Add another line",
-                 py::arg("points"))
+                 py::arg("line"));
 //            .def("add_lines", &CLines::AddLine,
 //                 "Add array of lines",
 //                 py::arg("points_matrix"));
 
-    py::class_<CPointCloud>(m, "PointCloud", model_component)
-            .def(py::init<const std::vector<CPoint>&, vector<coord_t>&, coord_t, coord_t, const coord_t, const std::string>(),
+    py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
+            .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),
                  "Constructor for Point Cloud",
-                 py::arg("points"), py::arg("color_field") = vector<coord_t>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("alpha") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
+                 py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
+            .def(py::init<const std::vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, normal_float, const std::string&>(),
+                 "Constructor for Point Cloud",
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
             .def(py::init<const CPointCloud&>(),
                  "Copy Constructor for Point Cloud",
                  py::arg("point_cloud"))
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
-                 py::arg("points"), py::arg("color_field"), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
-             .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
-                  "Generate 3D Mesh using Voronoi Algorithm",
-                  py::arg("mask"), py::arg("noise_displacement") = 0.001);
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
+            .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
+                 "Generate 3D Mesh using Voronoi Algorithm",
+                 py::arg("mask"), py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
@@ -116,15 +177,12 @@ PYBIND11_MODULE(_vivid, m) {
             .def("reduce", &CMesh::Reduce,
                  "input values should be between 0 and 1. A Reduce algorithm for the surface, reduces file size while trying to maintain the the shape as much as possible. it's recommended to not over do it.",
                  py::arg("decimation_percent") = 0.5, py::arg("error") = 0.1)
-            .def("export_to_obj", &CMesh::ExportToObj,
-                 "writes the surface to an OBJ file, by materials or textures",
-                 py::arg("output_file"), py::arg("with_texture") = 1)
-            .def("laplacian_smooth", &CMesh::LaplacianSmooth,
+//            .def("export_to_obj", &CMesh::ExportToObj,
+//                 "writes the surface to an OBJ file, by materials or textures",
+//                 py::arg("output_file"), py::arg("with_texture") = 1)
+            .def("smooth", &CMesh::LaplacianSmooth,
                  "Smooths the surface by HC Laplacian Algorithm.",
-                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"))
-            .def("export", &CMesh::Export,
-                 "writes CMesh to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "obj");
+                 py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
 
     py::class_<CModel>(m, "Model")
             .def(py::init<> (), "default constructor for Model")
@@ -137,14 +195,16 @@ PYBIND11_MODULE(_vivid, m) {
             .def("add_mesh", &CModel::AddMesh,
                  "add another mesh, lines, or point clouds to Model",
                  py::arg("mesh"))
-            .def("get_meshes", &CModel::GetMeshes,
+            .def_property_readonly("meshes", &CModel::GetMeshes,
                  "Returns the list of meshes held by model")
+            .def_property_readonly("n_meshes", &CModel::GetNumMeshes,
+                "Returns the number of meshes held by model")
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
                  py::arg("output_file"), py::arg("with_texture") = 1)
             .def("export", &CModel::Export,
                  "writes CModel to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "obj");
+                 py::arg("output_file"), py::arg("file_format") = "gltf2");
 
     py::class_<CAnimation> Animation(m,"Animation");
         Animation.def(py::init<> (), "default constructor for Animation")
@@ -157,18 +217,10 @@ PYBIND11_MODULE(_vivid, m) {
             .def(py::init<const CAnimation &> (),
                  "copy constructor for animation",
                  py::arg("animation"))
-            .def("get_duration", &CAnimation::GetDuration,
-                 "getter function for duration(in ticks)")
+            .def_property("duration", &CAnimation::GetDuration, &CAnimation::SetDuration, "duration(in ticks)")
+            .def_property("ticks_per_second", &CAnimation::GetTicksPerSecond, &CAnimation::SetTicksPerSecond, "ticks")
             .def("get_models", &CAnimation::GetModels,
                  "getter function for models in the animation")
-            .def("get_ticks_per_second", &CAnimation::GetTicksPerSecond,
-                 "getter function for ticks_per_second")
-            .def("set_duration", &CAnimation::SetDuration,
-                 "set animation duration (in ticks)",
-                 py::arg("duration"))
-            .def("set_ticks_per_second", &CAnimation::SetTicksPerSecond,
-                 "set ticks per second",
-                 py::arg("ticks_per_second"))
             .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("models"))
             .def("add_models", static_cast<void (CAnimation::*)(const vector<CModel> &)>(&CAnimation::AddModels),"add models to animation", py::arg("models"))
             .def("set_move_animation", &CAnimation::SetMoveAnim,
@@ -191,7 +243,7 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("index"))
             .def("export", &CAnimation::Export,
                  "Exports animation to selected file format",
-            py::arg("output_file"), py::arg("file_format") = "gltf2");
+                 py::arg("output_file"), py::arg("file_format") = "gltf2");
 
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation)
@@ -208,37 +260,34 @@ PYBIND11_MODULE(_vivid, m) {
         .def(py::init<const CStopMotionAnimation &> (),
             "copy constructor for StopMotionAnimation",
             py::arg("animation"))
-        .def("get_seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame,
-             "Getter for Seconds per frame")
-        .def("set_seconds_per_frame", &CStopMotionAnimation::SetSecondsPerFrame,
-             "Setter for Seconds per frame",
-             py::arg("SecondsPerFrame"));
+        .def_property("seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame, &CStopMotionAnimation::SetSecondsPerFrame,
+             "Seconds per frame");
 
     //Shapes:
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,
-          py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_box", &CreateBoxMesh,
           "Creates a box mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = make_cpoint(1),
-          py::arg("color") = 0.5, py::arg("alpha") = 1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_sphere", &CreateSphereMesh,
           "Creates a sphere",
           py::arg("position")=make_cpoint(0),py::arg("radius")=1,py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
-          py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_ellipsoid", &CreateEllipsoidMesh,
           "Creates ellipsoid mesh",
           py::arg("position")=make_cpoint(0),py::arg("radii"),py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
           py::arg("major_axis"), py::arg("middle_axis"), py::arg("minor_axis"),
-          py::arg("color")=0.5, py::arg("alpha")=1., py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha")=1., py::arg("label")="");
     m.def("create_arrow", &CreateArrowMesh,
           "Creates an arrow mesh",
           py::arg("position")=make_cpoint(0), py::arg("direction"),py::arg("width")=0.5, py::arg("pointer_chest_ratio")=0.4,
-          py::arg("color")=0.5, py::arg("alpha") = 1, py::arg("label")="");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1, py::arg("label")="");
     m.def("create_grid", &CreateGrid,
           "Creates a grid",
           py::arg("size")=10, py::arg("num_of_ticks")=5, py::arg("tick_size")=1);
 
-    //SurfByFunc:
+//SurfByFunc:
 }

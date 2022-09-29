@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.1.6")
+        VERSION "0.1.7")
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message("${PROJECT_SOURCE_DIR}")
@@ -55,23 +55,23 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/PointCloud.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Surface.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/VoronoiSurface.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/MarchingCubesSurface.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Animation.cpp"
-        #"${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
+        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/Extra/Analysis.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/ProgressBar.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.h"
+        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/Errors.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
-        )
+        "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp")
 
 
 target_include_directories(vivid PUBLIC

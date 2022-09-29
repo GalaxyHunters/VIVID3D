@@ -8,11 +8,10 @@
 
 typedef double coord_t;
 
-constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0005;
+constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
 
 namespace vivid
 {
-
     class CPoint
     {
     private:
@@ -23,7 +22,6 @@ namespace vivid
         inline CPoint(const CPoint &arV) : mX(arV.mX), mY(arV.mY), mZ(arV.mZ) {}
         inline CPoint(coord_t x, coord_t y, coord_t z): mX(x), mY(y), mZ(z) {}
         inline CPoint(std::vector<coord_t>  aV) : mX(aV[0]), mY(aV[1]), mZ(aV[2]) {}
-        //inline CPoint(std::vector<double> aV) : mX(coord_t(aV[0])), mY(coord_t(aV[1])), mZ(coord_t(aV[2])) {}
 
         inline ~CPoint(){}
 
@@ -41,18 +39,19 @@ namespace vivid
         inline CPoint  operator-  (const CPoint& arV) const{ return {mX - arV.mX, mY - arV.mY, mZ - arV.mZ}; }
         inline CPoint  operator*  (const coord_t aSc) const{ return {aSc * mX, aSc * mY, aSc * mZ}; }
         inline CPoint  operator/  (const coord_t aSc) const{ return {mX / aSc, mY / aSc, mZ / aSc}; }
-        inline bool operator== (const CPoint& arV) {return mX == arV.mX && mY == arV.mY && mZ == arV.mZ;}
-        inline bool operator!= (const CPoint& arV) {return mX != arV.mX || mY != arV.mY || mZ != arV.mZ;}
-        inline bool operator < (const CPoint& arV) {
-            if (abs(mX - arV.mX) <= POINT_SIMILARITY_THRESHOLD) {
-                if (abs(mY - arV.mY) <= POINT_SIMILARITY_THRESHOLD) {
-                    if (abs(mZ - arV.mZ) <= POINT_SIMILARITY_THRESHOLD) {return false;}
+        inline bool operator== (const CPoint& arV) const {return mX == arV.mX && mY == arV.mY && mZ == arV.mZ;}
+        inline bool operator!= (const CPoint& arV) const {return mX != arV.mX || mY != arV.mY || mZ != arV.mZ;}
+        inline bool operator < (const CPoint& arV) const {
+            if (std::abs(mX - arV.mX) <= POINT_SIMILARITY_THRESHOLD) {
+                if (std::abs(mY - arV.mY) <= POINT_SIMILARITY_THRESHOLD) {
+                    if (std::abs(mZ - arV.mZ) <= POINT_SIMILARITY_THRESHOLD) {return false;}
                         // we compare the points by z to see who needs to go first
                     else{return mZ > arV.mZ;}}
                     // we compare by y to see who needs to go first
                 else{return mY > arV.mY;}}
-            // we compare by x to see who goes first
-            else{return mX > arV.mX;}}
+                // we compare by x to see who goes first
+            else{return mX > arV.mX;}
+        }
 
         inline coord_t Dist(const CPoint& arV) const{ return sqrt(pow(mX - arV.X(), 2) + pow(mY - arV.Y(), 2) + pow(mZ - arV.Z(), 2)); }
         inline CPoint& Scale(const CPoint& arV) { mX *= arV.mX; mY *= arV.mY; mZ *= arV.mZ; return *this; }

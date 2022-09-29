@@ -1,6 +1,9 @@
 #include "AssimpImportExport.h"
 
 namespace vivid {
+
+    constexpr float MAX_ROUGHNESS = 1000;
+
     namespace AssimpExport {
         // matches assimp file formats to actual file endings
         std::map<std::string, std::string> fileFormats =
@@ -81,10 +84,10 @@ namespace vivid {
             string texture_path;
             for (int i = 0; i < scene->mNumMeshes; i++) {
                 //handle mesh texture
-                texture_path = AddTexture(meshes[i].GetClm());
+                texture_path = AddTexture(meshes[i].GetColorMap());
                 //setting up the mesh structure
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
-                scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path, i);
+                scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
                 scene->mMeshes[i]->mMaterialIndex = i;
             }
             return scene;
@@ -133,10 +136,10 @@ namespace vivid {
                 center_node->mChildren[model_index]->mParent = center_node;
                 for (int mesh_index = 0; mesh_index < meshes.size(); mesh_index++) {
                     //handle mesh texture
-                    texture_path = AddTexture(meshes[mesh_index].GetClm());
+                    texture_path = AddTexture(meshes[mesh_index].GetColorMap());
                     //setting up the mesh structure
                     scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
-                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path, mesh_counter);
+                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index].GetMaterial(), texture_path, mesh_counter);
                     scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
                     mesh_counter++;
                 }
@@ -326,7 +329,7 @@ namespace vivid {
             }
             return texture_path;
         }
-
+        
         string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath) {
             string textureName = arOutputPath + arMeshTexture.GetName() + "_texture.png";
             vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
@@ -353,11 +356,23 @@ namespace vivid {
             return embedded_texture;
         }
 
-        aiMesh *GenerateMesh(CModelComponent *apMesh) {
+        aiMesh *GenerateMesh(CModelComponent * apMesh) {
             //setting up the apMesh structure
             aiMesh *OutMesh = new aiMesh();
             OutMesh->mName = apMesh->GetLabel();
-            OutMesh->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
+            switch (apMesh->GetObjType()){
+                case TRIANGLES:
+                    OutMesh->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
+                    break;
+                case LINES:
+                    OutMesh->mPrimitiveTypes = aiPrimitiveType_LINE;
+                    break;
+                case POINTS:
+                    OutMesh->mPrimitiveTypes = aiPrimitiveType_POINT;
+                    break;
+                default:
+                    OutMesh->mPrimitiveTypes = aiPrimitiveType_POLYGON;
+            }
 
             //setting up vertices and uv texture coordinates
             vector<vivid::CPoint> vVertices = apMesh->GetPoints();
@@ -373,29 +388,26 @@ namespace vivid {
                 color flow in vivid works by face. in most 3d formats (and assimp) texture cords are by vertices
                 in this segments we get the average color of each vertice.
             */
-            OutMesh->mTextureCoords[0] = new aiVector3D[vVertices.size()];
+            OutMesh->mTextureCoords[0] = new aiVector3D [vVertices.size()];
             OutMesh->mNumUVComponents[0] = 2; //to be checked
-            //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetUVcoords(), 0);
+            //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetQuan(), 0);
 
 
             //assign faces and find avrage UVcoord per point
             vector<set<float>> vetUVcoord(vVertices.size());
             for (auto it = vTriangles.begin(); it != vTriangles.end(); ++it) {
                 aiFace &face = OutMesh->mFaces[it - vTriangles.begin()];
-                face.mNumIndices = 3;
                 const std::vector<size_t> indexes = it->GetPoints();
-                face.mIndices = new unsigned int[3];
-                face.mIndices[0] = indexes[0];
-                face.mIndices[1] = indexes[1];
-                face.mIndices[2] = indexes[2];
-                // UV coordinates
-                vetUVcoord[indexes[0]].insert(it->GetUVcoord());
-                vetUVcoord[indexes[1]].insert(it->GetUVcoord());
-                vetUVcoord[indexes[2]].insert(it->GetUVcoord());
+                face.mNumIndices = indexes.size();
+                face.mIndices = new unsigned int[indexes.size()];
+                for (int i = 0; i < indexes.size(); i++) {
+                    face.mIndices[i] = indexes[i];
+                    vetUVcoord[indexes[i]].insert(it->GetUVcoord());
+                }
             }
 
             //assign points
-            double tempAvr;
+            double tempAvr, val;
             for (int j = 0; j < vVertices.size(); j++) {
                 OutMesh->mVertices[j] = aiVector3D(vVertices[j].X(), vVertices[j].Y(), vVertices[j].Z());
                 if (!vetUVcoord[j].empty()) { //uv coords
@@ -403,7 +415,8 @@ namespace vivid {
                     for (auto it = vetUVcoord[j].begin(); it != vetUVcoord[j].end(); ++it) {
                         tempAvr += *it;
                     }
-                    OutMesh->mTextureCoords[0][j] = aiVector3D(0, 1 - tempAvr / vetUVcoord[j].size(), 0);
+                    val = max(0.01, min(1 - tempAvr / vetUVcoord[j].size(), 1.0));
+                    OutMesh->mTextureCoords[0][j] = aiVector3D(0, val, 0);
                 } else { // should never happen
                     OutMesh->mTextureCoords[0][j] = aiVector3D(0, 0, 0);
                 }
@@ -411,14 +424,16 @@ namespace vivid {
             return OutMesh;
         }
 
-        //create new material and define all its properties
-        //TODO this should receive our own material class containing any important data (and methods for user interface)
-        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName, size_t mat_index) {
+        aiMaterial *GenerateMaterial(const vivid::CMaterial& arMaterial, const string& aTextureName, size_t mat_index) {
             aiMaterial *material = new aiMaterial();
 
-            const aiString *name = new aiString(mesh.GetLabel() + "_mat"+ to_string(mat_index));
+            const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
+            const array<float, 3> mat_emissive_color = ToNormalRGB(arMaterial.GetEmissionColor());
+            const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
+            material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
+        
             const int *shading_model = new int(2);
             material->AddProperty(shading_model, 1, AI_MATKEY_SHADING_MODEL);
 
@@ -434,22 +449,21 @@ namespace vivid {
             const aiColor3D *specular_color = new aiColor3D(0, 0, 0);
             material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
 
-            const aiColor3D *emissive_color = new aiColor3D(0, 0, 0);
-            material->AddProperty(emissive_color, 3, AI_MATKEY_COLOR_EMISSIVE);
 
             const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
             material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
 
-            const float *shininess = new float(95);
+            
+            const float *shininess = new float(arMaterial.GetShininess() * MAX_ROUGHNESS);
             material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
-            const float *opacity = new float(mesh.GetAlpha());
+            const float *opacity = new float(arMaterial.GetOpacity());
             material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
 
             const float *anisotrpy_factor = new float(0);
             material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
-
-            const float *emissive_intensity = new float(0.3);
+            
+            const float *emissive_intensity = new float(arMaterial.GetEmissionStrength());
             material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
             const float *refracti = new float(1);

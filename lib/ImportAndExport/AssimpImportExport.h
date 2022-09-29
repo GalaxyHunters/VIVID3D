@@ -1,4 +1,3 @@
-
 #ifndef VIVID_ASSIMPIMPORTEXPORT_H
 #define VIVID_ASSIMPIMPORTEXPORT_H
 
@@ -30,7 +29,7 @@ namespace vivid {
 
         aiScene *GenerateScene(const vivid::CModel &model);
 
-        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName, size_t mat_index);
+        aiMaterial *GenerateMaterial(const vivid::CMaterial &arMaterial, const string& aTextureName, size_t mat_index);
 
         aiMesh *GenerateMesh(vivid::CModelComponent *apMesh);
 

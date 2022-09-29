@@ -310,16 +310,14 @@ void ObjExporter::WriteGeometryFile(bool noMtl) {
             for(const FaceVertex& fv : f.indices) {
                 mOutput << ' ' << fv.vp;
 
-                if (f.kind != 'p') {
-                    if (fv.vt || f.kind == 'f') {
-                        mOutput << '/';
-                    }
-                    if (fv.vt) {
-                        mOutput << fv.vt;
-                    }
-                    if (f.kind == 'f' && fv.vn) {
-                        mOutput << '/' << fv.vn;
-                    }
+                if (fv.vt || f.kind == 'f') {
+                    mOutput << '/';
+                }
+                if (fv.vt) {
+                    mOutput << fv.vt;
+                }
+                if (f.kind == 'f' && fv.vn) {
+                    mOutput << '/' << fv.vn;
                 }
             }
 

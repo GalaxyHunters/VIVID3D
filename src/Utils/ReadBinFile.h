@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "fstream"
+#include "NormalFloat.h"
 
 
 using namespace std;
@@ -13,13 +14,13 @@ using namespace std;
 struct ModelData { // TODO: code repetition!
 	vector<vector<double >> points;
 	vector<bool> mask;
-	vector<coord_t> quan;
+	vector<normal_float> quan;
 };
 
 struct ModelDataMultipleMasks {
 	vector<vector<double >> points;
 	vector<vector<bool> > mask;
-	vector<coord_t> quan;
+	vector<normal_float> quan;
 };
 
 

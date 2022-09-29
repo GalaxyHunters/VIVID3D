@@ -20,8 +20,6 @@ namespace vivid
 
         void AddMeshes(const vector<CModelComponent> &arMeshes);
 
-        int GetNumMeshes() const {return this->mMeshes.size();}
-
         void AddMesh(const CModelComponent &arMesh);
         void AddModel(const CModel &arModel);
         //remove Mesh by label maybe?
@@ -38,7 +36,7 @@ namespace vivid
         * @param[in] aOutputPath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
+        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "obj");
 //    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
         //TODO export to BLOB

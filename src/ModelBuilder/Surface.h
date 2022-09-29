@@ -45,7 +45,7 @@ namespace vivid
         // Input Data:
         std::vector<CPoint> mInputPoints = {};
         std::vector<bool> mCreationMask = {};
-        std::vector<coord_t> mUVcoords = {};
+        std::vector<normal_float> mUVcoords = {};
 
         // PreProcessing Data
         std::pair<CPoint, CPoint> mBoxPair = {}; // Holds min and max boxPoints for ComputeVoronoi
@@ -64,9 +64,6 @@ namespace vivid
         // Handle Input Sub-Methods
         void PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
         void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
-
-        // TODO: Should be in util, even better should be typedef with min 0. and max 1.
-        std::vector<coord_t>& NormColorField(std::vector<coord_t>& arColorField, coord_t aVMin, coord_t aVMax); // normalize the values to be between 0 and 1, uses Vmin and Vmax
 
         //vorn function:
         void RunVorn();
@@ -90,7 +87,7 @@ namespace vivid
          * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
          */
         CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                 std::vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement = 0.001);
+                 std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
         /**
          * CSurface Copy-Constructor
          */
@@ -106,7 +103,7 @@ namespace vivid
          * @param[in] aAlpha the alpha to assign to the new mesh
          * @returns CMesh converted mesh
          */
-        CMesh ToMesh(const string& arLabel, coord_t aAlpha) const;
+        CMesh ToMesh(const string& arLabel, normal_float aOpacity) const;
 
         std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
 
@@ -114,13 +111,13 @@ namespace vivid
         // Used primarily in deprecated smoothing
         inline const std::vector<CPoint>& GetInputPoints() const { return mInputPoints; }
         inline const std::vector<bool>& GetMask() { return mCreationMask; }
-        inline const std::vector<coord_t>& GetUVcoords() { return mUVcoords; }
+        inline const std::vector<normal_float>& GetUVcoords() { return mUVcoords; }
         inline const std::vector<CSurfaceFace>& GetFaces() const { return mSurfFaces; }
         inline const CVoronoi& GetVoronoiData() const { return mVoronoi; }
 
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }
         inline void SetMask(const std::vector<bool> &arMask) { mCreationMask = arMask; }
-        inline void SetUVcoords(const std::vector<coord_t> &arUVcoords) { mUVcoords = arUVcoords; }
+        inline void SetUVcoords(const std::vector<normal_float> &arUVcoords) { mUVcoords = arUVcoords; }
     };
 
 } // namespace vivid

@@ -15,7 +15,7 @@ namespace vivid {
 
     enum ELogMessage {
         ARRAYS_NOT_EQUAL = 0, ARRAYS_EMPTY = 1, MISSING_BOOLEAN_VALUES = 2,
-        INVALID_SMOOTH_FACTOR = 3, INVALID_ALPHA_VALUE = 4
+        INVALID_SMOOTH_FACTOR = 3, INVALID_ALPHA_VALUE=4, INVALID_NORMAL_VALUE=5, INVALID_FRAME_VALUE=6
     };
 
     const std::map<ELogMessage, std::string> ERROR_TYPE_STRING{{ARRAYS_NOT_EQUAL,
@@ -28,8 +28,10 @@ namespace vivid {
                                                                        "ValueError - Smooth Factor must be between 1 and 8"},
                                                                {INVALID_ALPHA_VALUE,
                                                                        "ValueError - Alpha must be between 0 and 1"},
-                                                              {ELogMessage::INVALID_FRAME_VALUE,
-                                                                       "ValueError - frame must be within Models.size range"},
+                                                               {INVALID_NORMAL_VALUE,
+                                                                       "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
+                                                               {INVALID_FRAME_VALUE,
+                                                                       "ValueError - frame must be within Models.size range",
     };
 }      //namespace vivid
 #endif //VIVID_ERRORS_H

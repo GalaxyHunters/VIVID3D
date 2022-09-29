@@ -5,41 +5,25 @@
 
 namespace vivid
 {
-
+    constexpr auto DEFAULT_COLOR = "white";
 /* 3D Lines class */
     class CLines : public CModelComponent{
     private:
-        string mColor = "white";
+        static std::vector<std::vector<size_t>> FormatPairPoints(const std::vector<size_t>& arLine);
     public:
-        CLines(){}
-        CLines(const std::vector<CPoint> &arPoints, coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", mColor){
-            mPoints = arPoints;
-            std::vector<size_t> points (arPoints.size());
-            for (int i = 0; i < arPoints.size(); i++) { points[i] = i; }
-            mFaces = {CFace(points, 0)};
-        }
+        CLines() : CModelComponent(LINES) {}
+        CLines(const std::vector<CPoint> &arLine, normal_float aOpacity, const std::string &arLabel);
         // probably not usable constructor, possible remake in python wrapper.
-        CLines(const std::vector<std::vector<CPoint>> &arPoints, coord_t aAlpha, const std::string &arLabel) : CModelComponent(aAlpha, arLabel, "l", mColor){
-            size_t size = 0;
-            for (const auto & arPoint : arPoints) {
-                std::vector<size_t> points (arPoint.size());
-                for (size_t j = 0; j < arPoint.size(); j++) {
-                    points[j] = size + j;
-                    mPoints.push_back(arPoint.at(j));
-                }
-                mFaces.push_back(CFace(points, 0));
-                size = size + arPoint.size();
-            }
-        }
+        CLines(const std::vector<std::vector<CPoint>> &arLines, normal_float aOpacity, const std::string &arLabel);
         CLines(const CLines &arLine) : CModelComponent(arLine) {}
         ~CLines(){}
 
         // Operator=
         inline CLines& operator= (const CLines& arLine) { CModelComponent::operator=(arLine); return *this; }
 
-        void AddLine(const std::vector<CPoint> &arPoints);
+        void AddLine(const std::vector<CPoint> &arLine);
         // Probably worthless function below
-        void AddLines(const std::vector<std::vector<CPoint>> &arPointsMatrix);
+        void AddLines(const std::vector<std::vector<CPoint>> &arLines);
     };
 
 }; // namespace vivid

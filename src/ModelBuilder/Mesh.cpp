@@ -169,14 +169,6 @@ void CMesh::LaplacianSmooth(size_t aNumIterations, double aAlphaFactor, double a
     mPoints = curr_points;
 }
 
-void CMesh::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
-    CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
-}
-
-int CMesh::Export(const std::string &arOutputFilePath, std::string aFileType){
-    return CModel(*this).Export(arOutputFilePath, aFileType);
-}
-
 void CMesh::CalculatePointsNeighbours() {
     for (auto & mFace : mFaces) {
 
@@ -201,7 +193,7 @@ void CMesh::CalculatePointsNeighbours() {
 void CMesh::TriangulizeFaces() {
     vector<CFace> triangle_faces;
     for (auto &mFace : mFaces) {
-//        size_t prev_0=0, prev_1=1, prev_2=2;
+        size_t prev_0=0, prev_1=1, prev_2=2;
         for (size_t i = 1; i < mFace.GetPoints().size()-1; i++) {
             // Add faces along alternating diagonals
 //            if (i%2 == 1){

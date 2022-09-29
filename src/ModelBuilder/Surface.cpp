@@ -8,7 +8,7 @@ constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 1000;
 constexpr coord_t NOISE_PERCENTAGE = 0.0001;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, coord_t aNoiseDisplacement)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement)
 {
     // Check input validity
     if(arInputPoints.empty() || arInputPoints.empty()) {
@@ -21,9 +21,9 @@ CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMa
         Log(LOG_ERROR, MISSING_BOOLEAN_VALUES);
     }
     vector<CSurfacePoint> points;
-    vector<coord_t> UV_coords = NormColorField(arColorField, aVMin, aVMax);
+    vector<normal_float> normal_field = NormalizeField(arColorField, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), UV_coords[i], arMask[i]));
+        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], arMask[i]));
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
@@ -73,13 +73,7 @@ void CSurface::CreateSurface()
     CleanPoints();
 }
 
-CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
-    //check input validity
-    if(aAlpha > 1 || aAlpha <= 0){
-        Log(LOG_WARNING, INVALID_ALPHA_VALUE);
-        aAlpha = max(0.1 , min(aAlpha ,1.)); //TODO also 0, 0.1 and 1 should be defined at the begining of the file as they are magic numbers!
-    }
-
+CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
@@ -104,7 +98,7 @@ CMesh CSurface::ToMesh(const string& arLabel, coord_t aAlpha) const {
         face_points = vector<size_t>();
         set_points.clear();
     }
-    return CMesh(points, faces, arLabel, aAlpha);
+    return CMesh(points, faces, arLabel, aOpacity);
 }
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
@@ -132,7 +126,7 @@ void CSurface::RunVorn()
     vector<vector<size_t>> points_map;
     points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
     size_t c_point1, c_point2;
-    coord_t color_field;
+    normal_float UVcoord;
     vector<shared_ptr<CPoint>> face_points;
 
     for (auto & vorn_face : vorn_faces) {
@@ -140,13 +134,13 @@ void CSurface::RunVorn()
         vorn_face.pop_back();
         c_point2 = vorn_face.back();
         vorn_face.pop_back();
-        color_field = 0; //color_field will be defined later in the program(clean faces) so for now this will be a placeholder
+        UVcoord = 0; //UVcoord will be defined later in the program(clean faces) so for now this will be a placeholder
         face_points = vector<shared_ptr<CPoint> >();
 
         for (size_t & point : vorn_face) {
             face_points.push_back(mVertices[point]);
         }
-        new_faces.push_back(CSurfaceFace(face_points, color_field, pair<size_t, size_t>(c_point1, c_point2)));
+        new_faces.push_back(CSurfaceFace(face_points, UVcoord, pair<size_t, size_t>(c_point1, c_point2)));
     }
 
     mSurfFaces = new_faces;
@@ -282,6 +276,7 @@ void CSurface::CleanPoints()
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
+
 vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
 {
     //sort the array
@@ -359,28 +354,6 @@ void CSurface::CleanDoublePoints()
 }
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
-vector<coord_t>& CSurface::NormColorField(vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax)
-{
-    if (arColorField.size() == 0){ //default python color_field, user didn't input one
-        arColorField = vector<coord_t>(mCreationMask.size(), 1);
-        return arColorField;
-    }
-    if(aVMin ==  aVMax) { //in cased the user inputs color but not aVMin and aVMax
-        aVMax = *max_element(arColorField.begin(), arColorField.end());
-        aVMin = *min_element(arColorField.begin(), arColorField.end());
-    }
-    if (aVMin == aVMax) { //in case where Vmin-Vmax == 0 (arColorField is a vector where all the values are the same)
-        arColorField = vector<coord_t>(arColorField.size(), 1);
-        return arColorField;
-    }
-    coord_t divide_by = 1. / (aVMax - aVMin);
-    for (auto it = arColorField.begin(); it != arColorField.end(); it++) {
-        *it = (*it - aVMin) * divide_by;
-        if (*it > 1) *it = 1;
-        if (*it < 0) *it = 0;
-    }
-    return arColorField;
-}
 
 void CSurface::PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement)
 {

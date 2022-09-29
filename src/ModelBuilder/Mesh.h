@@ -23,33 +23,19 @@ namespace vivid
     private:
         std::map<size_t, std::unordered_set<size_t>> mPointNeighbours = {};
         void TriangulizeFaces();
+        void CalculatePointsNeighbours();
         bool mFacesAreTriangles = false;
 
     public:
         CMesh() {};
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha) :
-                CModelComponent(aAlpha, arLabel, "f") {
+        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, normal_float aOpacity) :
+                CModelComponent(aOpacity, arLabel, TRIANGLES) {
             mPoints = arPoints; mFaces = arFaces;
             TriangulizeFaces();
             CalculatePointsNeighbours();
         }
+        CMesh(const CMesh &arMesh) : CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
 
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, const std::vector<color_t> &arClm, const std::string &arCName) :
-                CModelComponent(aAlpha, arLabel, "f", arClm, arCName){
-            mPoints = arPoints; mFaces = arFaces;
-            TriangulizeFaces();
-            CalculatePointsNeighbours();
-        }
-        CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, const std::string &arLabel, coord_t aAlpha, string &arClm) :
-                CModelComponent(aAlpha, arLabel, "f", arClm){
-            mPoints = arPoints; mFaces = arFaces;
-            TriangulizeFaces();
-            CalculatePointsNeighbours();
-        }
-        CMesh(const CMesh &arMesh) :
-                CModelComponent(arMesh), mPointNeighbours(arMesh.mPointNeighbours){};
-
-        void CalculatePointsNeighbours();
         /**
          * Decimate faces on CMesh to reduce file size
          * @param[in] aVerticlePercent is a normalized double signifying how many vertices to retain
@@ -63,19 +49,10 @@ namespace vivid
         /**
          * Smooth faces on CMesh by Laplacian Smooth
          * @param[in] aNumIterations number of iterations to run for, recommended to be even
-         * @param[in] aAlphaFactor weighted value for smoothing, recommended range 0.2<a<0.8
+         * @param[in] aOpacityFactor weighted value for smoothing, recommended range 0.2<a<0.8
          * @param[in] aBetaFactor weighted value for volume retention, recommended range 0.5<b<1.0
          */
         void LaplacianSmooth(size_t aNumIterations, double aAlphaFactor = 0.5, double aBetaFactor = 0.5);
-
-        void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
-
-        /**
-        * Assimp export. writes arModel in aFileType format at aOutputPath
-        * @param[in] aOutputPath Path and name for output file
-        * @param[in] aFileType 3D filetype format to write to (out of supported options)
-        */
-        int Export(const std::string &arOutputFilePath, std::string aFileType = "obj");
     };
 
 } // namespace vivid

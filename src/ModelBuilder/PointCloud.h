@@ -11,11 +11,9 @@ namespace vivid
 
 /* 3D points class*/
     class CPointCloud : public CModelComponent{
-    private:
-
     public:
         //Constructor and Copy Constructor
-        CPointCloud(){}
+        CPointCloud() : CModelComponent(POINTS) {}
         /**
          * CSurface Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
@@ -25,25 +23,17 @@ namespace vivid
          * @param[in] aVMin the maximum value in arColorField, anything below will be set to aVMax
          * @param[in] arLabel the label of the point cloud
          */
-        CPointCloud(const std::vector<CPoint> &arPoints, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax, const coord_t aAlpha = 1, const std::string arLabel = "VIVID_POINT_CLOUD")
-        : CModelComponent(aAlpha, arLabel, "p") {
-            mPoints = arPoints;
-            coord_t v_max = *std::max_element(arColorField.begin(), arColorField.end());
-            coord_t v_min = *std::min_element(arColorField.begin(), arColorField.end());
-            coord_t divide_by = 1. / (v_max - v_min);
-            for (size_t i = 0; i < arPoints.size(); i++) {
-                coord_t color = (arColorField[i] - v_min) * divide_by;
-                mFaces.push_back(CFace({i}, color));
-            }
-        }
-        CPointCloud(const CPointCloud &arPC) : CModelComponent(arPC) {}
-        ~CPointCloud() {}
+        CPointCloud(const std::vector<CPoint> &arPoints, const std::string& arColor, normal_float aOpacity, const std::string& arLabel);
+        CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax, normal_float aOpacity, const std::string& arLabel);
+        CPointCloud(const CPointCloud &arPC) : CModelComponent(arPC){}
+        ~CPointCloud(){}
+        
 
         // Operator=
         inline CPointCloud& operator= (const CPointCloud& arPC) { CModelComponent::operator=(arPC); return *this; }
 
         // Add
-        void AddPoints(const std::vector<CPoint> &arPoints, vector<coord_t> &arColorField, coord_t aVMin, coord_t aVMax);
+        void AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax);
 
         /**
          * CreateSurface using Voronoi algorithm

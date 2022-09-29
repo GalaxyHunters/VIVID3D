@@ -1,4 +1,5 @@
 #include "ModelComponent.h"
+#include "Model.h"
 
 using namespace vivid;
 
@@ -48,4 +49,14 @@ void CModelComponent::ScaleMesh(const CPoint& arScaleVec){
    {
        mPoint.Scale(arScaleVec);
    }
+}
+
+/*--------------------------------------------- Export Methods -----------------------------------------------*/
+
+void CModelComponent::ExportToObj(const std::string &arOutputFilePath, bool aWithTexture){
+    CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
+}
+
+int CModelComponent::Export(const std::string &arOutputFilePath, const std::string& arFileType){
+    return CModel(*this).Export(arOutputFilePath, arFileType);
 }

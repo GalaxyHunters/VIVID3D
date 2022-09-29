@@ -59,6 +59,7 @@ namespace vivid
         inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
         inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
         inline void SetColorMap(const CColorMap& arColorMap) { mClm = arColorMap; }
+        inline void SetColorMap(const PyColorMap& arColorMap) { mClm = arColorMap; }
         inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
 
         /**

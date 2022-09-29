@@ -16,6 +16,8 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
+#define PYBIND11_DETAILED_ERROR_MESSAGES
+
 using namespace vivid;
 using namespace std;
 
@@ -65,8 +67,9 @@ PYBIND11_MODULE(_vivid, m) {
             py::arg("colors"), py::arg("name"))
         .def(py::init<const CColorMap&>(),
              py::arg("ColorMap"))
-        .def("name", &CColorMap::GetName)
-        .def("colors", &CColorMap::GetColorMap);
+        .def_property_readonly("name", &CColorMap::GetName)
+        .def_property_readonly("colors", &CColorMap::GetColorMap);
+    py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
 
     py::class_<CMaterial>(m, "Material")
         .def(py::init<normal_float, normal_float, float, const color_t& >(),
@@ -96,7 +99,9 @@ PYBIND11_MODULE(_vivid, m) {
             "Set Opacity", py::arg("opacity"))
         .def("set_color", &CModelComponent::SetColor,
              "Set Color", py::arg("color"))
-        .def("set_color_map", &CModelComponent::SetColorMap,
+        .def("set_color_map", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
+             "Set Color Map", py::arg("ColorMap"))
+        .def("set_color_map", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap),
              "Set Color Map", py::arg("ColorMap"))
         .def("set_material", &CModelComponent::SetMaterial,
              "Set Material", py::arg("Material"))

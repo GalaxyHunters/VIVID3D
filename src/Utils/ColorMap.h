@@ -69,5 +69,11 @@ namespace vivid {
             return texture;
         }
     };
+
+    class PyColorMap : public CColorMap {
+    public:
+        PyColorMap() : CColorMap() {}
+        PyColorMap(vector<array<float, 3>> &arClm, const string &arCName) : CColorMap(arClm, arCName) {}
+    };
 }
 #endif

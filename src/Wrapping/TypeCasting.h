@@ -133,23 +133,24 @@ namespace pybind11 {
 //            }
         };
         /* ------------------------------------------------- COLORMAP -------------------------------------------------*/
-        template <> struct type_caster<CColorMap>
+        template <> struct type_caster<PyColorMap>
         {
         public:
-            PYBIND11_TYPE_CASTER(CColorMap, _("PyColorMap"));
+            PYBIND11_TYPE_CASTER(PyColorMap, _("PyColorMap"));
 
             // Conversion part 1 (Python -> C++)
             bool load(py::handle arObj, bool convert) {
                 if (!arObj || !convert) {
                     return false;
                 }
-//                auto arObj = src.ptr();
                 std::string name;
                 std::vector<std::array<float, 3>> clm;
-                if (GetTypeString(arObj) == MPL_LINEARCOLORMAP) {
+                std::string obj_type = GetTypeString(arObj);
+
+                if (obj_type == MPL_LINEARCOLORMAP) {
                     clm = arObj.attr("colors").cast<std::vector<std::array<float, 3>>>();
                     name = arObj.attr("name").cast<std::string>();
-                } else if (GetTypeString(arObj) == MPL_SEGMENTEDLINEARCOLORMAP) {
+                } else if (obj_type == MPL_SEGMENTEDLINEARCOLORMAP) {
                     name = arObj.attr("name").cast<std::string>();
                     int size = arObj.attr("N").cast<int>();
                     float r, g, b;
@@ -164,7 +165,7 @@ namespace pybind11 {
                     return false;
                 }
 
-                CColorMap cmap (clm, name);
+                PyColorMap cmap (clm, name);
 
                 // This is whats pushed to the function
                 value = cmap;
@@ -172,18 +173,18 @@ namespace pybind11 {
                 return true;
             }
             //Conversion part 2 (C++ -> Python)
-//            static py::handle cast(const CColorMap& src, py::return_value_policy policy, py::handle parent)
-//            {
-////                std::vector<double> shape (3);
-////
-////                shape[0] = src.X();
-////                shape[1] = src.Y();
-////                shape[2] = src.Z();
-////
-////                py::array ret = py::cast(shape);
+            static py::handle cast(const PyColorMap& src, py::return_value_policy policy, py::handle parent)
+            {
+//                std::vector<double> shape (3);
 //
-//                return src;
-//            }
+//                shape[0] = src.X();
+//                shape[1] = src.Y();
+//                shape[2] = src.Z();
+//
+//                py::array ret = py::cast(shape);
+
+                return py::int_(0);
+            }
         };
 
         /* -------------------------------------------- MATRIX<CPOINT> --------------------------------------------*/

@@ -87,7 +87,7 @@ namespace vivid {
                 texture_path = AddTexture(meshes[i].GetColorMap());
                 //setting up the mesh structure
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
-                scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path, i);
+                scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
                 scene->mMeshes[i]->mMaterialIndex = i;
             }
             return scene;
@@ -139,7 +139,7 @@ namespace vivid {
                     texture_path = AddTexture(meshes[mesh_index].GetColorMap());
                     //setting up the mesh structure
                     scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
-                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index], texture_path, mesh_counter);
+                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index].GetMaterial(), texture_path, mesh_counter);
                     scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
                     mesh_counter++;
                 }
@@ -423,13 +423,13 @@ namespace vivid {
             return OutMesh;
         }
 
-        aiMaterial *GenerateMaterial(vivid::CModelComponent &mesh, string aTextureName, size_t mat_index) {
+        aiMaterial *GenerateMaterial(const vivid::CMaterial& arMaterial, const string& aTextureName, size_t mat_index) {
             aiMaterial *material = new aiMaterial();
 
-            const aiString *name = new aiString(mesh.GetLabel() + "_mat"+ to_string(mat_index));
+            const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
-            const array<float, 3> mat_emissive_color = ToNormalRGB(mesh.GetMaterial().GetEmissionColor());
+            const array<float, 3> mat_emissive_color = ToNormalRGB(arMaterial.GetEmissionColor());
             const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
             material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
         
@@ -453,16 +453,16 @@ namespace vivid {
             material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
 
             
-            const float *shininess = new float(mesh.GetMaterial().GetShininess() * MAX_ROUGHNESS);
+            const float *shininess = new float(arMaterial.GetShininess() * MAX_ROUGHNESS);
             material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
-            const float *opacity = new float(mesh.GetOpacity());
+            const float *opacity = new float(arMaterial.GetOpacity());
             material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
 
             const float *anisotrpy_factor = new float(0);
             material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
             
-            const float *emissive_intensity = new float(mesh.GetMaterial().GetEmissionStrength());
+            const float *emissive_intensity = new float(arMaterial.GetEmissionStrength());
             material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
             const float *refracti = new float(1);

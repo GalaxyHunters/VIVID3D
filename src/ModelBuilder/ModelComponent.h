@@ -46,11 +46,13 @@ namespace vivid
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
+        inline size_t GetPointsCount() const { return mPoints.size(); }
         inline std::vector<CFace> GetFaces() const { return mFaces; }
+        inline size_t GetFacesCount() const { return mFaces.size(); }
         inline std::string GetLabel() const { return mLabel; }
         inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
         inline CColorMap GetColorMap() const { return mClm; }
-        inline CMaterial GetMaterial() const { return mMaterial; }
+        inline const CMaterial& GetMaterial() const { return mMaterial; }
         inline FACE_TYPE GetObjType() const { return mElementType; }
 
         inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }

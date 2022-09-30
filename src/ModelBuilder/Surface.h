@@ -44,6 +44,7 @@ namespace vivid
 
         // Input Data:
         std::vector<CPoint> mInputPoints = {};
+        std::map<size_t, size_t> mInputOutputMap = {};
         std::vector<bool> mCreationMask = {};
         std::vector<normal_float> mUVcoords = {};
 
@@ -63,11 +64,11 @@ namespace vivid
 
         // Handle Input Sub-Methods
         void PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
-        void CleanDoubleInputPoints(vector<CSurfacePoint> &arPoints);           // remove all the double input points
+        void CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> &arPoints &arPoints); // remove all the double input points
 
         //vorn function:
         void RunVorn();
-
+        CMesh ToMesh(const string& arLabel, normal_float aOpacity) const;
         // Cleaning Sub-Methods
         void CleanFaces();        // clean the unneeded faces(by mCreationMask)
         vector<CSurfaceFace> TriangulizeFace(const CSurfaceFace &arFace);
@@ -80,14 +81,12 @@ namespace vivid
         /**
          * CSurface Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
-         * @param[in] arMask a boolean mask of true and false points
          * @param[in] arColorField a vector containing the color field of each point
          * @param[in] aVMin the minimum value in arColorField, anything below will be set to aVMin
          * @param[in] aVMax the maximum value in arColorField, anything below will be set to aVMax
          * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
          */
-        CSurface(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                 std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
+        CSurface(const std::vector<CPoint> &arInputPoints, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
         /**
          * CSurface Copy-Constructor
          */
@@ -96,16 +95,15 @@ namespace vivid
          * Create the surfaces using the input data
          */
         void CreateSurface();
-
+        
         /**
          * Convert the CSurface object to CMesh object
+         * @param[in] arMask a boolean mask of true and false points
          * @param[in] arLabel the label to assign to the new mesh
          * @param[in] aAlpha the alpha to assign to the new mesh
          * @returns CMesh converted mesh
          */
-        CMesh ToMesh(const string& arLabel, normal_float aOpacity) const;
-
-        std::vector<CSurfacePoint> RemoveDoublesVornInput(std::vector<CSurfacePoint>& arData);
+        CMesh CSurface::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity) {
 
         // Getters, Setters
         // Used primarily in deprecated smoothing

@@ -8,22 +8,19 @@ constexpr coord_t BOX_EXPAND_FACTOR = 1;
 constexpr coord_t PARTICLE_SCALE_MAGNITUDE = 1000;
 constexpr coord_t NOISE_PERCENTAGE = 0.0001;
 
-CSurface::CSurface(const vector<CPoint> &arInputPoints, const vector<bool> &arMask, vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement)
+CSurface::CSurface(const vector<CPoint> &arInputPoints, vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement)
 {
     // Check input validity
-    if(arInputPoints.empty() || arInputPoints.empty()) {
+    if (arInputPoints.empty()) {
         Log(LOG_ERROR, ARRAYS_EMPTY);
     }
-    if((arInputPoints.size() != arMask.size()) || !arColorField.empty() && (arInputPoints.size() != arColorField.size())){
+    if (!arColorField.empty() && arInputPoints.size() != arColorField.size()) {
         Log(LOG_ERROR, ARRAYS_NOT_EQUAL);
     }
-    if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
-        Log(LOG_ERROR, MISSING_BOOLEAN_VALUES);
-    }
-    vector<CSurfacePoint> points;
+    vector<pair<CSurfacePoint, size_t>> points;
     vector<normal_float> normal_field = NormalizeField(arColorField, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back(CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], arMask[i]));
+        points.push_back({CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], false), i});
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
@@ -33,6 +30,7 @@ CSurface::CSurface(const CSurface &surf)
 {
     mInputPoints = surf.mInputPoints;
     mCreationMask = surf.mCreationMask;
+    mInputOutputMap = surf.mInputOutputMap;
     mUVcoords = surf.mUVcoords;
     mCenVector = surf.mCenVector;
     mBoxPair = surf.mBoxPair;
@@ -61,19 +59,33 @@ CSurface::CSurface(const CSurface &surf)
     }
 }
 
-//   ------------------------------------------------ Public Methods ------------------------------------------------>>>
-//   <<<--------------------------------------------- Public Methods ---------------------------------------------------
+/* ------------------------------------------------ Public Methods ---------------------------------------------------- */
 
 void CSurface::CreateSurface()
 {
     RunVorn();
-    Log(LOG_VIVID, "Voronoi Post Processing");
     CleanEdges();
-    CleanFaces();
-    CleanPoints();
 }
 
-CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) const {
+CMesh CSurface::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity) {
+    if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
+        Log(LOG_ERROR, MISSING_BOOLEAN_VALUES);
+    }
+    // duplicating data, masking
+    vector<bool> new_mask;
+    for (int i = 0; i < mInputOutputMap.size(); i++) {
+        new_mask.push_back(arMask[mInputOutputMap[i]]);
+    }
+
+    CSurface copy = CSurface(*this);
+    copy.SetMask(new_mask);
+    copy.CleanFaces();
+    copy.CleanPoints();
+
+    return copy.ToMesh(arLabel, aOpacity);
+}
+
+CMesh CSurface::ToMesh(const string& arLabel, normal_float aOpacity) {
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
@@ -174,7 +186,6 @@ coord_t CSurface::FindContainingRadius()
 
 /*----------------------------------------------- Cleaning Sub-Methods -----------------------------------------------*/
 
-// Todo: switch to bool statement, use in CleanFaces
 void CSurface::CleanEdges()
 {
     coord_t clean_by = 0.35;
@@ -223,8 +234,7 @@ vector<CSurfaceFace> CSurface::TriangulizeFace(const CSurfaceFace &arFace)
     for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
         CSurfaceFace triangle = CSurfaceFace(
                 {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
-                0,
-//                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
+                mUVcoords[arFace.mPairPoints.first] * 0.5 + mUVcoords[arFace.mPairPoints.second] * 0.5,
                 arFace.mPairPoints);
         NormalizeFace(triangle);
         triangulized_faces.push_back(triangle);
@@ -243,10 +253,8 @@ void CSurface::NormalizeFace(CSurfaceFace& arTriangleFace)
     // true -> false is normal direction
     CPoint true_normal;
     if (c_point1_mask) {
-        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.first];
         true_normal = (c_point2 - c_point1).Normalize();
     } else {
-        arTriangleFace.mUVcoord = mUVcoords[arTriangleFace.mPairPoints.second];
         true_normal = (c_point1 - c_point2).Normalize();
     }
     // assumption 2
@@ -276,63 +284,33 @@ void CSurface::CleanPoints()
 
 //----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
-
-vector<CSurfacePoint> CSurface::RemoveDoublesVornInput(vector<CSurfacePoint>& arData)
-{
-    //sort the array
-    sort(arData.begin(), arData.end());
-
-    vector<CSurfacePoint> cleaned_data;
-    size_t j;
-    int removed_points =0;
-    for (size_t i = 0; i < arData.size(); i++) {
-        j = i+1;
-        cleaned_data.push_back(arData[i]); // push the point to the cleaned data
-        if (j >= arData.size())
-        {
-            break;
-        }
-        while (arData[i].mPoint.Dist(arData[j].mPoint) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
-            j += 1;
-            if (j >= arData.size())
-            {
-                break;
-            }
-            removed_points ++;
-        }
-        i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
-    }
-
-    return cleaned_data;
-}
-
-bool sortPair(const pair<int, int>& arobj1, const pair<int, int>& arobj2) {
+bool sortPair(const pair<CSurfacePoint, size_t>& arobj1, const pair<CSurfacePoint, size_t>& arobj2) {
     return (arobj1.first < arobj2.first);
 }
 
-void testMethod1() {
-    std::vector<pair<int, int>> b;
-    for (int i = 0; i < 10; ++i) {
-        int val = rand() % 10;
-        b.push_back({val, i});
-    }
-    cout << "b size = " << b.size() << endl;
-    cout << "--start---\n";
-    for (auto i: b) cout << i.first << ",";
-    cout << endl;
-    sort(b.begin(), b.end(), sortPair);
+void CSurface::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> &arPoints)
+{
+    sort(arPoints.begin(), arPoints.end(), sortPair);
 
-    vector<int> c;
+    vector<CSurfacePoint> new_points;
 
-    map<int, int> map;
-    for (int i = 0; i < b.size(); i++) {
-        map.insert({c.size(), b[i].second});
-        c.push_back(b[i].first);
-        if (i != b.size() - 1) {
-            while (b[i].first == b[i + 1].first) {
+    map<size_t, size_t> map;
+    for (int i = 0; i < arPoints.size(); i++) {
+        map.insert({new_points.size(), arPoints[i].second});
+        new_points.push_back(arPoints[i].first);
+        if (i != arPoints.size() - 1) {
+            while (arPoints[i].first.mPoint.dist(arPoints[i + 1].first.mPoint) <= POINT_SIMILARITY_THRESHOLD) {
                 i++;
             }
         }
+    }
+
+    mInputPoints.clear();
+    mUVcoords.clear();
+    for (auto & point : new_points)
+    {
+        mInputPoints.push_back(point.mPoint);
+        mUVcoords.push_back(point.UVcoord);
     }
 }
 

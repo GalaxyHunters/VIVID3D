@@ -10,19 +10,19 @@ namespace vivid
     {
     private:
         std::vector<size_t> mPoints = {};
-        quan_t mQuan = 0;
+        normal_float mUVcoord = 0;
 
     public:
-        inline CFace(const std::vector<size_t> &arPoints, quan_t aColor) : mPoints(arPoints), mQuan(max(0.0 , min(aColor ,1.))){}
+        inline CFace(const std::vector<size_t> &arPoints, normal_float aColor) : mPoints(arPoints), mUVcoord(aColor){}
         //operator=
         inline ~CFace(){}
 
         inline std::vector<size_t> GetPoints()const  { return mPoints; }
         inline size_t operator[](size_t I) {return mPoints[I];}
-        inline quan_t GetQuan() const { return mQuan; }
+        inline normal_float GetUVcoord() const { return mUVcoord; }
 
         // todo: is this needed?
-        inline void SetQuan(const quan_t aColor) { mQuan = aColor; }
+        inline void SetUVcoord(const coord_t aColor) { mUVcoord = aColor; }
         inline void SetPoints(const std::vector<size_t> &arPoints) { mPoints = arPoints; }
     };
 

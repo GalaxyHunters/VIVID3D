@@ -2,35 +2,41 @@
 #define VIVID_STOPMOTIONANIMATION_H
 
 #include "Animation.h"
-#include "Model.h"
 
 namespace vivid
 {
 
 /* 3DAnimation by Model Stop Motion technic, meaning Model for each time-step */
-class CStopMotionAnimation : public CAnimation{
-private:
-    std::vector<CModel> mModels = {};
-public:
-    //Constructor, Copy Constructor, Destructor
-    CStopMotionAnimation(){}
-    CStopMotionAnimation(const std::vector<CModel> &arModels, const std::string &arLabel, const duration_t &arDuration) :
-        mModels(arModels), CAnimation(arLabel, arDuration){}
-    CStopMotionAnimation(const CStopMotionAnimation &arSMA) : mModels(arSMA.mModels), CAnimation(arSMA) {}
-    ~CStopMotionAnimation(){}
+    class CStopMotionAnimation : public CAnimation {
+    private:
+        double mSecondsPerFrame;
+    public:
+        //Constructor, Copy Constructor, Destructor
+        CStopMotionAnimation() {}
 
-    // Operator=
-    inline CStopMotionAnimation& operator= (const CStopMotionAnimation& arSMA) { mModels = arSMA.mModels; CAnimation::operator=(arSMA); return *this; }
+        CStopMotionAnimation(const vector<CModel> &arModels, double mSecondsPerFrame) : CAnimation(
+                arModels), mSecondsPerFrame(mSecondsPerFrame){}
 
-    // Set and Get
-    inline std::vector<CModel> GetModels() const{ return mModels; }
-    inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
+        CStopMotionAnimation(const CAnimation &arAnim, double mSecondsPerFrame) : CAnimation(arAnim), mSecondsPerFrame(mSecondsPerFrame) {}
 
-    // Add
-    inline void AddModels(const std::vector<CModel> &arModels) { mModels.insert(mModels.end(), arModels.begin(), arModels.end()); }
+        CStopMotionAnimation(const CModel &arModel, double mSecondsPerFrame) : CAnimation(arModel), mSecondsPerFrame(mSecondsPerFrame) {}
 
-    //add model, add models... look at vec operations
-};
+        CStopMotionAnimation(const CStopMotionAnimation &arStopMotionAnim) : mSecondsPerFrame(arStopMotionAnim.mSecondsPerFrame),CAnimation(arStopMotionAnim){}
+
+        // Operator=
+        inline CStopMotionAnimation& operator= (const CStopMotionAnimation& arSMA) { mSecondsPerFrame = arSMA.mSecondsPerFrame; CAnimation::operator=(arSMA); return *this; }
+
+        void SetSecondsPerFrame(double aFrameGap){
+            mSecondsPerFrame = aFrameGap;
+        }
+
+        double GetSecondsPerFrame() const {
+            return mSecondsPerFrame;
+        }
+
+
+        //add model, add models... look at vec operations
+    };
 
 
 }; // namespace vivid

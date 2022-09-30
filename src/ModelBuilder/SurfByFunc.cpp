@@ -6,7 +6,7 @@
 namespace vivid
 {
 
-CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::string &arLabel, bool RemoveFlatSurfaces) {
+CMesh SurfByFunc(const F3D_t &func, int aBoxSize, normal_float aOpacity, const std::string &arLabel, bool RemoveFlatSurfaces) {
     // Creating Wireframe
     aBoxSize *= SUBDIVISION_FACTOR;
     vector<CPoint> points = {};
@@ -15,7 +15,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
 //            points.push_back(CPoint(i,i,0.));
 //        }
 //    }
-    vector<coord_t> quan = {};
+    vector<normal_float> quan = {};
     coord_t temp_x, temp_y;
 
     for (int x = -aBoxSize; x <= aBoxSize; x += 1) {
@@ -33,7 +33,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
             }
             CPoint point = {temp_x,z,temp_y};
             points.push_back(point);
-            quan.push_back(z);
+            quan.push_back((float)z);
         }
     }
 
@@ -73,12 +73,12 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, coord_t aAlpha, const std::str
         }
     }
 
-    CMesh mesh = CMesh(points, faces, arLabel, aAlpha);
+    CMesh mesh = CMesh(points, faces, arLabel, aOpacity);
     return mesh;
 }
 
 CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t aThetaMin, coord_t aThetaMax,
-                        coord_t aPhiMin, coord_t aPhiMax, coord_t aAlpha, const std::string &arLabel)
+                        coord_t aPhiMin, coord_t aPhiMax, normal_float aOpacity, const std::string &arLabel)
 {
     vector<CPoint> points;
     vector<CFace> faces;
@@ -116,7 +116,7 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
     {
         faces.push_back(CFace(vector<size_t>{0, 2 + (i + 1) * aNumberOfSteps, 2 + i * aNumberOfSteps}, aColor)); //creates triangles
     }
-    faces.push_back(CFace(vector<size_t>{0, 2, 2 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
+    faces.push_back(CFace(vector<size_t>{0, 2, (size_t)2 + (aNumberOfSteps - 1) * aNumberOfSteps}, aColor));
 
     /* Add rectangular faces around center */
     for (size_t i = 2; i < 1 + aNumberOfSteps; i++)
@@ -135,9 +135,9 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
     {
         faces.push_back(CFace(vector<size_t>{1, 1 + (i + 1) * aNumberOfSteps, 1 + (i + 2) * aNumberOfSteps}, aColor));
     }
-    faces.push_back(CFace(vector<size_t>{1, 1 + (aNumberOfSteps) * aNumberOfSteps, 1 + aNumberOfSteps}, aColor));
+    faces.push_back(CFace(vector<size_t>{1, (size_t)1 + (aNumberOfSteps) * aNumberOfSteps, (size_t)1 + aNumberOfSteps}, aColor));
 
-    CMesh mesh(points, faces, arLabel, aAlpha);
+    CMesh mesh(points, faces, arLabel, aOpacity);
 //    mesh.MoveMesh(arCenter);
 //    mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
 

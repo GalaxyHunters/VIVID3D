@@ -2,7 +2,7 @@
 #define VIVID_NORMALFLOAT_H
 
 #include <vector>
-#include "LogFile.h"
+#include "Logging/LogFile.h"
 
 typedef float normal_float;
 

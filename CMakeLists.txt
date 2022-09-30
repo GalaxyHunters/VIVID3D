@@ -78,6 +78,8 @@ add_library(vivid SHARED
 target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Textures>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils/Logging>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Wrapping>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MeshDecimation>
@@ -100,7 +102,9 @@ target_link_libraries(vivid Boost::boost)
 
 install(DIRECTORY
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder"
+        "${PROJECT_SOURCE_DIR}/src/Textures"
         "${PROJECT_SOURCE_DIR}/src/Utils"
+        "${PROJECT_SOURCE_DIR}/src/Utils/Logging"
         "${PROJECT_SOURCE_DIR}/src/Wrapping"
         "${PROJECT_SOURCE_DIR}/lib"
         "${PROJECT_SOURCE_DIR}/lib/MeshDecimation"

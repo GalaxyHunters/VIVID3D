@@ -187,7 +187,7 @@ int PyramidSmoothTest()
             }
         }
     }
-    cout << quan.size() << endl;
+
     Vmax = 0.0; //*max_element(quan.begin(), quan.end());
     Vmin = 0.0;//*min_element(quan.begin(), quan.end());
     CPointCloud pyramid_points = CPointCloud(points, quan, Vmin, Vmax, 1.0, "vivid_assimp_test");

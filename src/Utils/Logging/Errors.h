@@ -31,7 +31,7 @@ namespace vivid {
                                                                {INVALID_NORMAL_VALUE,
                                                                        "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
                                                                {INVALID_FRAME_VALUE,
-                                                                       "ValueError - frame must be within Models.size range",
+                                                                       "ValueError - frame must be within Models.size range"},
     };
 }      //namespace vivid
 #endif //VIVID_ERRORS_H

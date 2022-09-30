@@ -289,5 +289,18 @@ PYBIND11_MODULE(_vivid, m) {
           "Creates a grid",
           py::arg("size")=10, py::arg("num_of_ticks")=5, py::arg("tick_size")=1);
 
-//SurfByFunc:
+    //SurfByFunc:
+
+    // Utils:
+    py::enum_<ELogCode>(m, "LogCode")
+        .value("LOG_ERROR", LOG_ERROR)
+        .value("LOG_WARNING", LOG_WARNING)
+        .value("LOG_VIVID", LOG_VIVID)
+        .value("LOG_INFO", LOG_INFO)
+        .value("LOG_DEBUG", LOG_DEBUG)
+        .export_values();
+
+    m.def("config_logger", &ConfigLogging,
+          "Configure the VIVID in-built Logging Process",
+          py::arg("write_to_console") = true, py::arg("log_level") = LOG_VIVID, py::arg("write_to_file") = false, py::arg("log_file_name") = "VIVID_LOG.txt");
 }

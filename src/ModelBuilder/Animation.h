@@ -70,7 +70,7 @@ namespace vivid
         */
         inline void SetRotateAnim(size_t aFrame, CPoint const &arSpin){
             if(aFrame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             mRotateAnim[aFrame] = arSpin;
         }
@@ -82,7 +82,7 @@ namespace vivid
         */
         inline void SetMoveAnim(size_t aFrame, CPoint const &arMove){
             if(aFrame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             mMoveAnim[aFrame] = arMove;
         }
@@ -94,28 +94,28 @@ namespace vivid
         */
         inline void SetScaleAnim(size_t aFrame, CPoint const &arScale){
             if(aFrame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             mScaleAnim[aFrame] = arScale;
         }
 
         inline CPoint& GetScaleAnim(size_t frame){
             if(frame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             return mScaleAnim[frame];
         }
 
         inline CPoint& GetRotateAnim(size_t frame){
             if(frame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             return mRotateAnim[frame];
         }
 
         inline CPoint& GetMoveAnim(size_t frame){
             if(frame > mMoveAnim.size()){
-                CLogFile::GetInstance().Write(ELogCode::LOG_ERROR, ELogMessage::INVALID_FRAME_VALUE);
+                Log(LOG_ERROR, INVALID_FRAME_VALUE);
             }
             return mMoveAnim[frame];
         }

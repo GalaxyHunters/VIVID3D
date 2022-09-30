@@ -2,7 +2,7 @@
 #define VIVID_NORMALFLOAT_H
 
 #include <vector>
-#include "LogFile.h"
+#include "Logging/LogFile.h"
 
 typedef float normal_float;
 
@@ -15,7 +15,7 @@ namespace vivid {
     }
     inline normal_float AssertNormalize(const normal_float aValue) {
         if(aValue > MAX_NORMAL_VAL || aValue < MIN_NORMAL_VAL){
-//                Log(LOG_WARNING, INVALID_NORMAL_VALUE);
+            Log(LOG_WARNING, INVALID_NORMAL_VALUE);
         }
         return Normalize(aValue);
     };

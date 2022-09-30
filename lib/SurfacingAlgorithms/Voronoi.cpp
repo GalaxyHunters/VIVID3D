@@ -15,7 +15,6 @@ namespace vivid
 
     void CVoronoi::ComputeVoronoi(const vector<CPoint>& arInputPoints, pair<CPoint,CPoint> Box) {
         vector<Vector3D> vorn_points = ConvertToVorn(arInputPoints);
-        cout << "VornPoints # = " << vorn_points.size() << endl;
         mData.SetBox({Box.first.X(), Box.first.Y(), Box.first.Z() }, {Box.second.X(), Box.second.Y(), Box.second.Z() });
         mData.Build(vorn_points);
     }

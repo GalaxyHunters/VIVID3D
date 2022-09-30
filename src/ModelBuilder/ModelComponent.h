@@ -5,12 +5,12 @@
 #include <functional>
 #include <map>
 
-#include "LogFile.h"
 
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"
-#include "src/Textures/Material.h"
+#include "Material.h"
+#include "LogFile.h"
 
 namespace vivid
 {

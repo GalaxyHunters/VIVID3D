@@ -46,7 +46,7 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
 }
 
 PYBIND11_MODULE(_vivid, m) {
-    m.doc() = "VIVID: Creating 3D animations in one line of code";
+    m.doc() = "VIVID: Creating 3D Models in one line of code";
 
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
@@ -166,9 +166,9 @@ PYBIND11_MODULE(_vivid, m) {
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
                  py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
-            .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
+            .def("generate_mesh", &CPointCloud::CreateVoronoiVolume,
                  "Generate 3D Mesh using Voronoi Algorithm",
-                 py::arg("mask"), py::arg("noise_displacement") = 0.001);
+                 py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
@@ -264,6 +264,7 @@ PYBIND11_MODULE(_vivid, m) {
              "Seconds per frame");
 
     //Shapes:
+    m.def("create_plane")
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,

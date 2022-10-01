@@ -4,7 +4,7 @@
 #include "ModelComponent.h"
 #include <vector>
 #include <algorithm>
-#include "Mesh.h"
+#include "VoronoiVolume.h"
 
 namespace vivid
 {
@@ -15,7 +15,7 @@ namespace vivid
         //Constructor and Copy Constructor
         CPointCloud() : CModelComponent(POINTS) {}
         /**
-         * CSurface Constructor
+         * CVoronoiVolume Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
          * @param[in] aAlpha the transparency value
          * @param[in] arColorField a vector containing the color field of each point
@@ -39,12 +39,12 @@ namespace vivid
          * CreateSurface using Voronoi algorithm
          * @param[in] arMask a boolean mask of true and false points, used for generating the boundary surface
          * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
-         * @returns CMesh Voronoi Surface
+         * @returns CVoronoiVolume Voronoi Volume
          */
-        CMesh CreateVoronoiSurface(const std::vector<bool>& arMask, coord_t aNoiseDisplacement = 0);
+        CVoronoiVolume CreateVoronoiVolume(coord_t aNoiseDisplacement = 0);
 
         // CreateSurface using Voronoi algorithm and analysis for masking.
-        //CMesh CreateVoronoiSurface();
+        //CMesh CreateVoronoiVolume();
     };
 
 }; // namespace vivid

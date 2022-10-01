@@ -1,5 +1,5 @@
-#ifndef VIVID_SURFACE_H
-#define VIVID_SURFACE_H
+#ifndef VIVID_VORONOIVOLUME_H
+#define VIVID_VORONOIVOLUME_H
 
 #include "Voronoi.h"
 #include "Mesh.h"
@@ -14,12 +14,12 @@ namespace vivid
     struct CSurfacePoint
     { // used to sort and clean the mVoronoi input points
         CPoint mPoint = {};
-        coord_t UVcoord = 0;
+        normal_float UVcoord = 0;
         bool mMaskIsTrue = false;
 
         CSurfacePoint() {};
-        CSurfacePoint(const CPoint& arPoint, coord_t aUVcoord, bool aIsIn): mPoint(arPoint), UVcoord(aUVcoord), mMaskIsTrue(aIsIn) {}
-        inline bool operator < (const CSurfacePoint &arObj) {return mPoint < arObj.mPoint;}
+        CSurfacePoint(const CPoint& arPoint, normal_float aUVcoord, bool aIsIn): mPoint(arPoint), UVcoord(aUVcoord), mMaskIsTrue(aIsIn) {}
+        inline bool operator < (const CSurfacePoint &arObj) const {return mPoint < arObj.mPoint;}
     };
 
 // For the cleaning stage
@@ -36,8 +36,7 @@ namespace vivid
         ~CSurfaceFace() {};
     };
 
-//public CMesh
-    class CSurface
+    class CVoronoiVolume
     {
     private:
         CVoronoi mVoronoi;                       // CVoronoi class for running Voronoi Surfacing algorithm
@@ -63,12 +62,12 @@ namespace vivid
         std::vector<CPoint> FindContainingBox(); // Find Box dimensions for RunVorn.
 
         // Handle Input Sub-Methods
-        void PreProcessPoints(vector<CSurfacePoint> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
-        void CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> &arPoints &arPoints); // remove all the double input points
+        void PreProcessPoints(std::vector<pair<CSurfacePoint, size_t>> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
+        void CleanDoubleInputPoints(std::vector<pair<CSurfacePoint, size_t>> &arPoints); // remove all the double input points
 
         //vorn function:
         void RunVorn();
-        CMesh ToMesh(const string& arLabel, normal_float aOpacity) const;
+
         // Cleaning Sub-Methods
         void CleanFaces();        // clean the unneeded faces(by mCreationMask)
         vector<CSurfaceFace> TriangulizeFace(const CSurfaceFace &arFace);
@@ -76,34 +75,34 @@ namespace vivid
         void CleanPoints();       // removes all the unused points
         void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
         void CleanDoublePoints(); // remove all the double face points from the model
-
     public:
         /**
-         * CSurface Constructor
+         * CVoronoiVolume Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
          * @param[in] arColorField a vector containing the color field of each point
          * @param[in] aVMin the minimum value in arColorField, anything below will be set to aVMin
          * @param[in] aVMax the maximum value in arColorField, anything below will be set to aVMax
          * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
          */
-        CSurface(const std::vector<CPoint> &arInputPoints, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
+        CVoronoiVolume(const std::vector<CPoint> &arInputPoints, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
         /**
-         * CSurface Copy-Constructor
+         * CVoronoiVolume Copy-Constructor
          */
-        CSurface(const CSurface &surf);
+        CVoronoiVolume(const CVoronoiVolume &surf);
         /**
          * Create the surfaces using the input data
          */
         void CreateSurface();
         
         /**
-         * Convert the CSurface object to CMesh object
+         * Convert the CVoronoiVolume object to CMesh object
          * @param[in] arMask a boolean mask of true and false points
          * @param[in] arLabel the label to assign to the new mesh
          * @param[in] aAlpha the alpha to assign to the new mesh
          * @returns CMesh converted mesh
          */
-        CMesh CSurface::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity) {
+        CMesh MaskMesh(const std::vector<bool> &arMask, const string& arLabel, normal_float aOpacity);
+        CMesh ToMesh(const std::string& arLabel, normal_float aOpacity);
 
         // Getters, Setters
         // Used primarily in deprecated smoothing
@@ -119,4 +118,4 @@ namespace vivid
     };
 
 } // namespace vivid
-#endif //VIVID_SURFACE_H
+#endif //VIVID_VORONOIVOLUME_H

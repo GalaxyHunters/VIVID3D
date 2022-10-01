@@ -64,6 +64,7 @@ namespace vivid {
         aiScene *GenerateScene(const vivid::CModel &model) {
             //setup scene
             aiScene *scene = new aiScene();
+            scene->mFlags = AI_SCENE_FLAGS_NON_VERBOSE_FORMAT + AI_SCENE_FLAGS_ALLOW_SHARED;
             scene->mRootNode = new aiNode();
             scene->mRootNode->mName = aiString("root_node");
 

@@ -1,5 +1,5 @@
 #include "TypeCasting.h"
-#include "Surface.h"
+#include "VoronoiVolume.h"
 #include "ModelComponent.h"
 #include "Mesh.h"
 #include "Line.h"
@@ -122,16 +122,16 @@ PYBIND11_MODULE(_vivid, m) {
             return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
         });
 
-    py::class_<CSurface>(m, "Surface")
+    py::class_<CVoronoiVolume>(m, "VoronoiVolume")
             .def(py::init<const vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
                  py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
-            .def(py::init<const CSurface &> (),
+            .def(py::init<const CVoronoiVolume &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
-            .def("create_surface", &CSurface::CreateSurface,
+            .def("create_surface", &CVoronoiVolume::CreateSurface,
                  "Calculate the surface from input data)")
-            .def("to_mesh", &CSurface::MaskMesh,
+            .def("to_mesh", &CVoronoiVolume::MaskMesh,
                  "Returns an Iso-Surface mesh made by the input mask.",
                  py::arg("mask"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 

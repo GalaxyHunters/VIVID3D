@@ -24,7 +24,7 @@ pip install --upgrade setuptools
 
 install the package
 ```
-pip install -i https://test.pypi.org/simple/ vivid-py==0.0.7
+pip install vivid3d
 ```
 
 

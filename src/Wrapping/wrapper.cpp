@@ -45,9 +45,31 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
     return array;
 }
 
-PYBIND11_MODULE(_vivid, m) {
-    m.doc() = "VIVID: Creating 3D Models in one line of code";
+int add(int i, int j) {
+    return i + j;
+}
 
+PYBIND11_MODULE(_vivid, m) {
+    m.doc() = R"pbdoc(
+	VIVID: Creating 3D animations in one line of code
+	-------------------------------------------------
+
+    .. currentmodule:: _vivid
+
+    .. autosummary::
+       :toctree: _generate
+
+        add
+        Point
+        Mesh
+	)pbdoc";
+
+
+    m.def("add", &add, R"pbdoc(
+        Add two numbers
+        Some other explanation about the add function.
+    )pbdoc");
+    
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
         .def(py::init<const CPoint &>(),

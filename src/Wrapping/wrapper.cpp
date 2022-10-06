@@ -1,5 +1,5 @@
 #include "TypeCasting.h"
-#include "Surface.h"
+#include "VoronoiVolume.h"
 #include "ModelComponent.h"
 #include "Mesh.h"
 #include "Line.h"
@@ -46,7 +46,7 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
 }
 
 PYBIND11_MODULE(_vivid, m) {
-    m.doc() = "VIVID: Creating 3D animations in one line of code";
+    m.doc() = "VIVID: Creating 3D Models in one line of code";
 
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
@@ -122,18 +122,18 @@ PYBIND11_MODULE(_vivid, m) {
             return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
         });
 
-    py::class_<CSurface>(m, "Surface")
-            .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
+    py::class_<CVoronoiVolume>(m, "VoronoiVolume")
+            .def(py::init<const vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
-            .def(py::init<const CSurface &> (),
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
+            .def(py::init<const CVoronoiVolume &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
-            .def("create_surface", &CSurface::CreateSurface,
+            .def("create_surface", &CVoronoiVolume::CreateSurface,
                  "Calculate the surface from input data)")
-            .def("to_mesh", &CSurface::ToMesh,
-                 "returns a mesh obj, a mesh obj can use decimation but will not be able to run smooth",
-                 py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
+            .def("to_mesh", &CVoronoiVolume::MaskMesh,
+                 "Returns an Iso-Surface mesh made by the input mask.",
+                 py::arg("mask"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
     py::class_<CLines, CModelComponent>(m, "Lines")
@@ -166,9 +166,9 @@ PYBIND11_MODULE(_vivid, m) {
             .def("add_points", &CPointCloud::AddPoints,
                  "Add Points to the Point Cloud",
                  py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
-            .def("generate_surface", &CPointCloud::CreateVoronoiSurface,
+            .def("generate_mesh", &CPointCloud::CreateVoronoiVolume,
                  "Generate 3D Mesh using Voronoi Algorithm",
-                 py::arg("mask"), py::arg("noise_displacement") = 0.001);
+                 py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh, CModelComponent>(m, "Mesh")
             .def(py::init<const CMesh &> (),
@@ -264,6 +264,7 @@ PYBIND11_MODULE(_vivid, m) {
              "Seconds per frame");
 
     //Shapes:
+    m.def("create_plane")
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,

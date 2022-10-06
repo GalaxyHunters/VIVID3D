@@ -1,6 +1,6 @@
 #ifndef VIVID_VORONOISMOOTHING_H
 #define VIVID_VORONOISMOOTHING_H
-#include "Surface.h"
+#include "VoronoiVolume.h"
 
 namespace vivid
 {
@@ -14,10 +14,10 @@ namespace vivid
          * @param[in] aSuperSmooth boolean value for activating SuperSmooth Algorithm
          * @param[in] aSmoothFactor An integer value between 1 and 8
          */
-        CMesh Smooth(CSurface &arSurf, bool aSuperSmooth = false, int aSmoothFactor = 2);
+        CMesh Smooth(CVoronoiVolume &arSurf, bool aSuperSmooth = false, int aSmoothFactor = 2);
 
     private:
-        CSurface mSurf;
+        CVoronoiVolume mSurf;
 
         // Calculation data needed for VoronoiSmoothing
         std::map<size_t, std::unordered_set<size_t>> mPointNeighbours = {};

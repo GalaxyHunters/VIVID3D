@@ -54,7 +54,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Line.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/PointCloud.cpp"
 
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Surface.cpp"
+        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/VoronoiVolume.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/MarchingCubesSurface.cpp"
 
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
@@ -70,7 +70,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Logging/LogFile.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
-        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
+#        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp")
 

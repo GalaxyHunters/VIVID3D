@@ -3,7 +3,7 @@
 #include "ModelBuilder/Model.h"
 #include "ModelBuilder/Shapes.h"
 #include "ModelBuilder/SurfByFunc.h"
-#include "ModelBuilder/Surface.h"
+#include "ModelBuilder/VoronoiVolume.h"
 #include "Point.h"
 #include "AssimpImportExport.h"
 #include "DataToImage.h"
@@ -38,10 +38,12 @@ int ShapesTest()
     CMesh arrow_x = CreateArrowMesh( CPoint(0,0,0), CPoint(0,5,0), 0.15, 0.1, "green", 0.6, "arrowX");
     CMesh box = CreateBoxMesh(CPoint(4,0,0), CPoint(5,3,4), "red", 0.4, "Box");
     CMesh cube = CreateCubeMesh(CPoint(-4,0,0), 3, "yellow", 0.4, "Cube");
+    CMesh cube1 = CreateCubeMesh(CPoint(-4,0,0), 3, "yellow", 0.4, "Cube1");
+    model.AddMeshes({cube, cube1});
     pair<CLines, CLines> grid = CreateGrid(100, 10);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
-    model.AddMeshes(list);
-    model.ExportToObj(TEST_OUTPUT_PATH + "/Shapes"); // /test_models/
+//    model.AddMeshes(list);
+    model.Export(TEST_OUTPUT_PATH + "Shapes"); // /test_models/
 
     return EXIT_SUCCESS;
 }
@@ -123,11 +125,11 @@ int CubeSurfTests()
         }
     }
     CModel model;
-    CSurface surf = CSurface(points, mask, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
-    surf.CreateSurface();
+    CVoronoiVolume volume = CVoronoiVolume(points, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
+    volume.CreateSurface();
 //    cerr << "Initiating Copy Constructor");
-//    CSurface surf_copy = CSurface(surf);
-    CMesh mesh = surf.ToMesh("vivid_3d_obj", 1.0);
+//    CVoronoiVolume surf_copy = CVoronoiVolume(surf);
+    CMesh mesh = volume.MaskMesh(mask,"vivid_3d_obj", 1.0);
     mesh.SetColor("Red");
     //mesh.Reduce(0.3, 0.3);
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/Cube");
@@ -188,20 +190,27 @@ int PyramidSmoothTest()
         }
     }
 
-    Vmax = 0.0; //*max_element(quan.begin(), quan.end());
-    Vmin = 0.0;//*min_element(quan.begin(), quan.end());
-    CPointCloud pyramid_points = CPointCloud(points, quan, Vmin, Vmax, 1.0, "vivid_assimp_test");
-//    CSurface smooth1 = CSurface(points, mask, quan, Vmin, Vmax);
+    CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
+//    CVoronoiVolume smooth1 = CVoronoiVolume(points, mask, quan, Vmin, Vmax);
 //    smooth1.CreateSurface();
-    //CSurface surf_copy = CSurface(smooth1);
-    CMesh mesh1 = pyramid_points.CreateVoronoiSurface(mask, 0.0001);
-    mesh1.LaplacianSmooth(10);
-//    //mesh1.Reduce(0.3, 0.5);
+    //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
+    CVoronoiVolume volume = pyramid_points.CreateVoronoiVolume();
+    CMesh mesh = volume.MaskMesh(mask, "2", 1);
+    cout << "second mesh" << endl;
+    CMesh fullMesh = volume.ToMesh("3", 0.1);
+    cout << "model" << endl;
+//    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+    CModel model;
+    model.AddMesh(mesh);
+//    model.AddMesh(mesh);
+    model.AddMesh(fullMesh);
+    //mesh1.Reduce(0.3, 0.5);
 //    anim1.SetScaleAnim(0,CPoint(3,3,3));
 //    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
-    mesh1.Export(TEST_OUTPUT_PATH + "PyramidAssimpNewMat", "obj");
+    cout << "export" << endl;
+    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
 //    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidVivid");
-//    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
 //    mesh3.LaplacianSmooth(10, 0.7, 0);
@@ -210,19 +219,19 @@ int PyramidSmoothTest()
 //    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
 //    CModel model = CModel({mesh3, mesh1});
 //    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
-//    CSurface smooth3 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth3.CreateSurface();
 //    smooth3.Smooth(3);
 //    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
 //    mesh3.Reduce(0.4, 0.3);
 //    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
-//    CSurface smooth6 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    CVoronoiVolume smooth6 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth6.CreateSurface();
 //    smooth6.Smooth(6);
 //    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
 //    mesh6.Reduce(0.25, 0.3);
 //    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
-//    CSurface smooth8 = CSurface(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
+//    CVoronoiVolume smooth8 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
 //    smooth8.CreateSurface();
 //    smooth8.Smooth(8);
 //    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
@@ -244,11 +253,11 @@ int RunMedicaneTest()
         nova.quan[j] = 0.5;
         points[j] = nova.points[j];
     }
-    CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
+    CVoronoiVolume surf = CVoronoiVolume(points, nova.quan, -15.1, 1.51);
     surf.CreateSurface();
     //surf.Smooth(false, 1);
     Log(LOG_INFO, "Convert to Mesh");
-    CMesh mesh = surf.ToMesh("SurfMedicane", 1);
+    CMesh mesh = surf.MaskMesh(nova.mask,"SurfMedicane", 1);
     //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
     mesh.LaplacianSmooth(10, 0.7, 0);
@@ -260,95 +269,6 @@ int RunMedicaneTest()
     mesh.ExportToObj(TEST_OUTPUT_PATH + "/MedicaneModel");
     return EXIT_SUCCESS;
 
-}
-
-/* Test the Elad RunVorn bug and the pointy faces bugs */
-int RunSupernovaTests()
-{
-    Log(LOG_INFO, "Black Hole Test:");
-//    vector<ModelData> data (7);
-//    Log(LOG_INFO, "Loading Data");
-////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
-//    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
-//    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
-//    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
-//    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
-//    data[3] = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
-//    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
-    vector<string> sufix = {"0", "1_5", "2_5", "6", "7_5", "10", "15"};
-    vector<coord_t> why = {0, 1.5, -2.5, -6, -7. - 10., -15.};
-    ModelData nova;
-    CModel nova_model;
-    Log(LOG_INFO, "Running VIVID");
-
-    nova = ReadBin(DATA_MODEL_PATH + "medicane.bin");
-    vector<CPoint> points (nova.points.size());
-    for (int j = 0; j < nova.quan.size(); j++) {
-        nova.quan[j] = 0.5;
-        points[j] = nova.points[j];
-    }
-
-    for (int i = 0; i < 7; i++) {
-        vector<CPoint> points (nova.points.size());
-        nova = ReadBin(DATA_MODEL_PATH + "Supernova-"+sufix[i]+".bin");
-        for (int j = 0; j < nova.quan.size(); j++) {
-            nova.quan[j] = why[i];
-            points[i] = nova.points[i];
-        }
-        CSurface surf = CSurface(points, nova.mask, nova.quan, -15.1, 1.51);
-        surf.CreateSurface();
-        //surf.Smooth(false, 1);
-        Log(LOG_INFO, "Convert to Mesh");
-        CMesh mesh = surf.ToMesh("Surf" + to_string(i), .7);
-        //mesh.SubdivideLargeFaces(4);
-//        mesh.RemovePointyFaces(20);
-        mesh.LaplacianSmooth(6, 0.7, 0);
-        mesh.LaplacianSmooth(50, 0.4, 0.7);
-        //mesh.RemovePointyFaces();
-        mesh.Reduce(0.1, 0.8);
-        //mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_" + to_string(i));
-        nova_model.AddMesh(mesh);
-    }
-    nova_model.ExportToObj(TEST_OUTPUT_PATH + "/SupernovaModel");
-    return EXIT_SUCCESS;
-}
-
-int RemovePointyFacesTest() {
-    Log(LOG_INFO, "Remove Pointy Faces Test:");
-    Log(LOG_INFO, "Loading Data");
-////    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-0.bin");
-//    data[0] = ReadBin(DATA_MODEL_PATH + "Supernova-1_5.bin");
-//    data[1] = ReadBin(DATA_MODEL_PATH + "Supernova-2_5.bin");
-//    data[2] = ReadBin(DATA_MODEL_PATH + "Supernova-6.bin");
-//    data[4] = ReadBin(DATA_MODEL_PATH + "Supernova-7_5.bin");
-    ModelData nova = ReadBin(DATA_MODEL_PATH + "Supernova-10.bin");
-//    data[6] = ReadBin(DATA_MODEL_PATH + "Supernova-15.bin");
-    vector<CPoint> points (nova.points.size());
-    for (int j = 0; j < nova.quan.size(); j++) {
-        nova.quan[j] = 0;
-        points[j] = nova.points[j];
-    }
-    CSurface surf = CSurface(points, nova.mask, nova.quan, 0, 0);
-    surf.CreateSurface();
-    //surf.Smooth(false, 1);
-    Log(LOG_INFO, "Convert to Mesh");
-    CMesh mesh = surf.ToMesh("pointytest", .7);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_no_processing");
-    mesh.SubdivideLargeFaces();
-    mesh.SubdivideLargeFaces();
-    mesh.SubdivideLargeFaces();
-    Log(LOG_INFO, to_string(mesh.GetFaces().size()));
-    mesh.RemovePointyFaces();
-    mesh.LaplacianSmooth(20, 0.7, 0);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_smooth_1");
-    mesh.LaplacianSmooth(150, 0.25, 0.55);
-    //mesh.RemoveLargeFaces(4);
-
-    mesh.RemovePointyFaces(20);
-    mesh.RemovePointyFaces(20);
-    mesh.Reduce(0.25, .7);
-    mesh.ExportToObj(TEST_OUTPUT_PATH + "/Supernova_smooth_reduce");
-    return EXIT_SUCCESS;
 }
 
 void assimpTest(string file){
@@ -476,6 +396,7 @@ int CubeAnimationTest()
 }
 int main()
 {
+    ConfigLogging(true, LOG_DEBUG, false, "");
 //    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
 //    Log(LOG_INFO, "MedicaneTestTest");
@@ -484,18 +405,18 @@ int main()
 //    Log(LOG_INFO, "ParametricSurfByFuncTest");
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    Log(LOG_INFO, "Testing All Shapes");
-//    ret_value = ShapesTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    Log(LOG_INFO, "Testing All Shapes");
+    ret_value = ShapesTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Cube");
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    Log(LOG_INFO, "Pyramid");
-    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "Pyramid");
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

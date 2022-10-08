@@ -17,7 +17,7 @@ include(GNUInstallDirs)
 
 
 
-find_package( Boost 1.58.0 REQUIRED)
+#find_package( Boost 1.58.0 REQUIRED)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
 
@@ -96,8 +96,8 @@ message("VIVID SHARED BUILD")
 
 target_link_libraries(vivid voronoi)
 target_link_libraries(vivid assimp::assimp)
-target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
-target_link_libraries(vivid Boost::boost)
+#target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
+#target_link_libraries(vivid Boost::boost)
 
 
 install(DIRECTORY

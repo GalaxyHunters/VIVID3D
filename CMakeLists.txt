@@ -84,6 +84,7 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MeshDecimation>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MyBoost>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
@@ -111,6 +112,7 @@ install(DIRECTORY
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms"
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon"
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc"
+        "${PROJECT_SOURCE_DIR}/lib/MyBoost"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport"
 #        "${PROJECT_SOURCE_DIR}/pybind11/include/pybind11"

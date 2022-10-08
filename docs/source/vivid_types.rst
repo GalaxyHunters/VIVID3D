@@ -1,1 +1,1 @@
-.. automodule:: vivid3d
+.. automodule:: vivid3d._vivid

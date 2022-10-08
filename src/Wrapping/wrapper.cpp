@@ -51,23 +51,36 @@ int add(int i, int j) {
 
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = R"pbdoc(
-	VIVID: Creating 3D animations in one line of code
-	-------------------------------------------------
+        VIVID: Creating 3D models in one line of code
+        ---------------------------------------------
 
-    .. currentmodule:: _vivid
+        .. currentmodule:: vivid3d
 
-    .. autosummary::
-       :toctree: _generate
+        .. autosummary::
+           :toctree: _generate
 
-        add
-        Point
-        Mesh
+           Point
+           ColorMap
+           Material
+           Surface
+           Lines
+           PointCloud
+           Mesh
+           Model
+           Animation
+           StopMotionAnimation
 	)pbdoc";
 
 
     m.def("add", &add, R"pbdoc(
         Add two numbers
+
         Some other explanation about the add function.
+    )pbdoc");
+
+    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
+        Subtract two numbers
+        Some other explanation about the subtract function.
     )pbdoc");
     
     py::class_<CPoint>(m, "Point")
@@ -93,7 +106,9 @@ PYBIND11_MODULE(_vivid, m) {
         .def_property_readonly("colors", &CColorMap::GetColorMap);
     py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
 
-    py::class_<CMaterial>(m, "Material")
+    py::class_<CMaterial>(m, "Material", R"pbdoc(
+        Material obj
+    )pbdoc")
         .def(py::init<normal_float, normal_float, float, const color_t&, const string& >(),
             py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0), py::arg("name")="default")
         .def(py::init<normal_float, normal_float, float, const string&, const string&  >(),
@@ -144,7 +159,9 @@ PYBIND11_MODULE(_vivid, m) {
             return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
         });
 
-    py::class_<CSurface>(m, "Surface")
+    py::class_<CSurface>(m, "Surface", R"pbdoc(
+        Basic Surface obj, first stage for model
+    )pbdoc")
             .def(py::init<const vector<CPoint>&, const vector<bool>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
                  py::arg("points"), py::arg("mask"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
@@ -158,7 +175,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
-    py::class_<CLines, CModelComponent>(m, "Lines")
+    py::class_<CLines, CModelComponent>(m, "Lines", R"pbdoc(
+        Lines objects
+    )pbdoc")
             .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
                  py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
@@ -175,7 +194,9 @@ PYBIND11_MODULE(_vivid, m) {
 //                 "Add array of lines",
 //                 py::arg("points_matrix"));
 
-    py::class_<CPointCloud, CModelComponent>(m, "PointCloud")
+    py::class_<CPointCloud, CModelComponent>(m, "PointCloud", R"pbdoc(
+        Point cloud
+    )pbdoc")
             .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
@@ -192,7 +213,9 @@ PYBIND11_MODULE(_vivid, m) {
                  "Generate 3D Mesh using Voronoi Algorithm",
                  py::arg("mask"), py::arg("noise_displacement") = 0.001);
 
-    py::class_<CMesh, CModelComponent>(m, "Mesh")
+    py::class_<CMesh, CModelComponent>(m, "Mesh", R"pbdoc(
+        Basic Mesh class
+    )pbdoc")
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
                  py::arg("mesh"))
@@ -206,7 +229,9 @@ PYBIND11_MODULE(_vivid, m) {
                  "Smooths the surface by HC Laplacian Algorithm.",
                  py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
 
-    py::class_<CModel>(m, "Model")
+    py::class_<CModel>(m, "Model", R"pbdoc(
+        Model class for working with multiple Meshes
+    )pbdoc")
             .def(py::init<> (), "default constructor for Model")
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
@@ -228,7 +253,9 @@ PYBIND11_MODULE(_vivid, m) {
                  "writes CModel to a given file format",
                  py::arg("output_file"), py::arg("file_format") = "gltf2");
 
-    py::class_<CAnimation> Animation(m,"Animation");
+    py::class_<CAnimation> Animation(m,"Animation", R"pbdoc(
+        Class for animations
+    )pbdoc");
         Animation.def(py::init<> (), "default constructor for Animation")
             .def(py::init<const CModel &> (),
                  "constructor for Animation from a single Model",
@@ -268,7 +295,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("output_file"), py::arg("file_format") = "gltf2");
 
 
-    py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation)
+    py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"pbdoc(
+        Class for stop motion animations
+    )pbdoc")
         .def(py::init<> (), "default constructor for StopMotionAnimation")
         .def(py::init<const CModel &, double> (),
             "constructor for StopMotionAnimation from a single Model",

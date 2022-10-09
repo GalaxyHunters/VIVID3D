@@ -1,3 +1,9 @@
+<style type="text/css" rel="stylesheet">
+.icon { 
+  border-radius: 50%;
+}
+</style>
+
 ![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
 
 # VIVID3D
@@ -26,6 +32,7 @@ VIVID3D was tested in our cosmology research group by producing models from simu
 ## Highlights
 View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3D is capable of
 ## Documentation
+
 [Read The Docs](https://vivid.readthedocs.io/en/latest/)
 ---
 # Installation
@@ -46,17 +53,17 @@ pip install vivid3d
 
 # Authors
 Project Leads
-- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" style="border-radius:50%;" width="20"/></a>
-- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" style="border-radius:50%;" width="20"/></a>
-- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" style="border-radius:50%;" width="20"/></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="https://avatars.githubusercontent.com/Beilinson" style="border-radius:50%;" width="20"/></a>
+- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" class="logo" width="20"/></a>
+- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" class="logo" width="20"/></a>
+- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" class="logo" width="20"/></a>
+- Adam Beili <a href="https://github.com/Beilinson"><img src="https://avatars.githubusercontent.com/Beilinson" class="logo" width="20"/></a>
+
 Special Thanks
-- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" style="border-radius:50%;" width="20"/></a>
-- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://avatars.githubusercontent.com/OzW1234" style="border-radius:50%;" width="20"/></a>
-- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://avatars.githubusercontent.com/lazy-fox304" style="border-radius:50%;" width="20"/></a>
+- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" class="logo" width="20"/></a>
+- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://avatars.githubusercontent.com/OzW1234" class="logo" width="20"/></a>
+- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://avatars.githubusercontent.com/lazy-fox304" class="logo" width="20"/></a>
 
 [Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 
 # License
-
 VIVID3D is provided under a BSD-3 license that can be found in the [LICENSE](https://github.com/GalaxyHunters/Vivid/blob/master/LICENSE) file. By using, distributing, or contributing to this project, you agree to the terms and conditions of this license.

@@ -47,15 +47,15 @@ pip install vivid3d
 
 # Authors
 Project Leads
-- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" width="20"/></a>
-- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" width="20"/></a>
-- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" width="20"/></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&h=20&w=20&a=crop-22-0&mask=circle&mtrim" width="20"/></a>
+- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/tussbaum&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
+- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/rslanis&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
+- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/ZoharMilman&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
+- Adam Beili <a href="https://github.com/Beilinson"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&a=crop-22-0&mask=circle&mtrim" width="15"/></a>
 
 Special Thanks
-- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" class="logo" width="20"/></a>
-- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://avatars.githubusercontent.com/OzW1234" class="logo" width="20"/></a>
-- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://avatars.githubusercontent.com/lazy-fox304" class="logo" width="20"/></a>
+- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/raphae2118&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
+- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/OzW1234&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
+- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/lazy-fox304&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
 
 [Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 

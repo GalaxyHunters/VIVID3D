@@ -45,19 +45,20 @@ pip install vivid3d
 # Tutorials
 [Read The Docs](https://vivid.readthedocs.io/en/latest/)
 
-# Authors
-Project Leads
-- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/tussbaum&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
+# About
+## Authors
+### Project Leads
+<a href="https://github.com/tussbaum"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/tussbaum&a=crop-22-0&mask=circle&mtrim" width="15"/>Tomer Nussbaum</a>
 - Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/rslanis&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
 - Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/ZoharMilman&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
 - Adam Beili <a href="https://github.com/Beilinson"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&a=crop-22-0&mask=circle&mtrim" width="15"/></a>
 
-Special Thanks
+### Special Thanks
 - Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/raphae2118&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
 - Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/OzW1234&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
 - Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/lazy-fox304&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
 
 [Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 
-# License
+## License
 VIVID3D is provided under a BSD-3 license that can be found in the [LICENSE](https://github.com/GalaxyHunters/Vivid/blob/master/LICENSE) file. By using, distributing, or contributing to this project, you agree to the terms and conditions of this license.

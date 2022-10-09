@@ -47,16 +47,16 @@ pip install vivid3d
 
 # About
 ## Authors
-### Project Leads
-<a href="https://github.com/tussbaum"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/tussbaum&a=crop-22-0&mask=circle&mtrim" width="15"/>Tomer Nussbaum</a>
-- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/rslanis&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
-- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/ZoharMilman&a=crop-22-0&mask=circle&mtrim"  width="15"/></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&a=crop-22-0&mask=circle&mtrim" width="15"/></a>
+**Project Leads**
+- [Tomer Nussbaum](https://github.com/tussbaum)
+- [Naftali Deutsch](https://github.com/rslanis)
+- [Zohar Milman](https://github.com/ZoharMilman)
+- [Adam Beili](https://github.com/Beilinson)
 
-### Special Thanks
-- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/raphae2118&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
-- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/OzW1234&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
-- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/lazy-fox304&a=crop-22-0&mask=circle&mtrim"  class="logo" width="15"/></a>
+**Special Thanks**
+- [Raphael Buzaglo](https://github.com/raphae2118)
+- [Oz Weizzman](https://github.com/OzW1234)
+- [Alice Temkin](https://github.com/lazy-fox304)
 
 [Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 

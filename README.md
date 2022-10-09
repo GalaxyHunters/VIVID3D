@@ -50,7 +50,7 @@ Project Leads
 - Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" width="20"/></a>
 - Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" width="20"/></a>
 - Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" width="20"/></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="[https://avatars.githubusercontent.com/Beilinson](https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&h=20&w=20&a=crop-22-0&mask=circle&mtrim%22%3E)" width="20"/></a>
+- Adam Beili <a href="https://github.com/Beilinson"><img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&h=20&w=20&a=crop-22-0&mask=circle&mtrim" width="20"/></a>
 
 Special Thanks
 - Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" class="logo" width="20"/></a>

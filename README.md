@@ -1,9 +1,3 @@
-<style type="text/css" rel="stylesheet">
-.icon { 
-  border-radius: 50%;
-}
-</style>
-
 ![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
 
 # VIVID3D
@@ -53,10 +47,10 @@ pip install vivid3d
 
 # Authors
 Project Leads
-- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" class="logo" width="20"/></a>
-- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" class="logo" width="20"/></a>
-- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" class="logo" width="20"/></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="https://avatars.githubusercontent.com/Beilinson" class="logo" width="20"/></a>
+- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" width="20"/></a>
+- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" width="20"/></a>
+- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" width="20"/></a>
+- Adam Beili <a href="https://github.com/Beilinson"><img src="[https://avatars.githubusercontent.com/Beilinson](https://images.weserv.nl/?url=avatars.githubusercontent.com/Beilinson&h=20&w=20&a=crop-22-0&mask=circle&mtrim%22%3E)" width="20"/></a>
 
 Special Thanks
 - Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" class="logo" width="20"/></a>

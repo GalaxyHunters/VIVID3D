@@ -1,11 +1,11 @@
 ![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
 
 # VIVID3D
-![Read the Docs](https://img.shields.io/readthedocs/vivid)
-![PyPI](https://img.shields.io/pypi/v/vivid3d?label=pypi)
-![GitHub](https://img.shields.io/github/license/GalaxyHunters/vivid)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vivid3d)
-![GitHub contributors](https://img.shields.io/github/contributors/GalaxyHunters/vivid)
+[![Read the Docs](https://img.shields.io/readthedocs/vivid)](https://vivid.readthedocs.io/en/latest/)
+[![PyPI](https://img.shields.io/pypi/v/vivid3d?label=pypi)](https://pypi.org/project/vivid3d/)
+[![GitHub](https://img.shields.io/github/license/GalaxyHunters/vivid)](https://github.com/GalaxyHunters/Vivid/blob/master/LICENSE)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vivid3d)](https://pypi.org/project/vivid3d/)
+[![GitHub contributors](https://img.shields.io/github/contributors/GalaxyHunters/vivid)](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 
 We present VIVID3D, an innovative method for research using 3D technology.
 

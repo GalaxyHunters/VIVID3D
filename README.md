@@ -7,8 +7,8 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vivid3d)
 ![GitHub contributors](https://img.shields.io/github/contributors/GalaxyHunters/vivid)
 
-<p>We present VIVID3D, an innovative method for research using 3D technology.</P>
----
+We present VIVID3D, an innovative method for research using 3D technology.
+
 # Overview
 VIVID3D is an all new python package for simple scientific visualization and creation of 3D models. 
 Visualize particle simulations like never before, with Voronoi Tesselation for realistic volume representation in 3D
@@ -26,10 +26,10 @@ VIVID3D was tested in our cosmology research group by producing models from simu
 ## Highlights
 View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3D is capable of
 ## Documentation
+**[Read The Docs](https://vivid.readthedocs.io/en/latest/)**
 
-[Read The Docs](https://vivid.readthedocs.io/en/latest/)
----
-# Installation
+# Installation and Usage
+## Installation
 VIVID3D can be installed from PyPI using pip on Python >= 3.5:
 Downloed the prerequirements
 ```
@@ -42,8 +42,8 @@ install the package
 pip install vivid3d
 ```
 
-# Tutorials
-[Read The Docs](https://vivid.readthedocs.io/en/latest/)
+## Usage
+**[Tutorials](https://vivid.readthedocs.io/en/latest/)**
 
 # About
 ## Authors

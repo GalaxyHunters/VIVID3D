@@ -7,7 +7,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vivid3d)
 ![GitHub contributors](https://img.shields.io/github/contributors/GalaxyHunters/vivid)
 
-We present VIVID3D, an innovative method for research using 3D technology.
+<p>We present VIVID3D, an innovative method for research using 3D technology.</P>
 ---
 # Overview
 VIVID3D is an all new python package for simple scientific visualization and creation of 3D models. 
@@ -46,14 +46,14 @@ pip install vivid3d
 
 # Authors
 Project Leads
-- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" style="border-radius:50%;"></a>
-- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" style="border-radius:50%;"></a>
-- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" style="border-radius:50%;"></a>
-- Adam Beili <a href="https://github.com/Beilinson"><img src="https://avatars.githubusercontent.com/Beilinson" style="border-radius:50%;"></a>
+- Tomer Nussbaum <a href="https://github.com/tussbaum"><img src="https://avatars.githubusercontent.com/tussbaum" style="border-radius:50%;" width="20"/></a>
+- Naftali Deutsch <a href="https://github.com/rslanis"><img src="https://avatars.githubusercontent.com/rslanis" style="border-radius:50%;" width="20"/></a>
+- Zohar Milman <a href="https://github.com/ZoharMilman"><img src="https://avatars.githubusercontent.com/ZoharMilman" style="border-radius:50%;" width="20"/></a>
+- Adam Beili <a href="https://github.com/Beilinson"><img src="https://avatars.githubusercontent.com/Beilinson" style="border-radius:50%;" width="20"/></a>
 Special Thanks
-- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" style="border-radius:50%;"></a>
-- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://avatars.githubusercontent.com/OzW1234" style="border-radius:50%;"></a>
-- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://avatars.githubusercontent.com/lazy-fox304" style="border-radius:50%;"></a>
+- Raphael Buzaglo <a href="https://github.com/raphae2118"><img src="https://avatars.githubusercontent.com/raphae2118" style="border-radius:50%;" width="20"/></a>
+- Oz Weizzman <a href="https://github.com/OzW1234"><img src="https://avatars.githubusercontent.com/OzW1234" style="border-radius:50%;" width="20"/></a>
+- Alice Temkin <a href="https://github.com/lazy-fox304"><img src="https://avatars.githubusercontent.com/lazy-fox304" style="border-radius:50%;" width="20"/></a>
 
 [Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 

@@ -35,15 +35,11 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
-    "sphinx_mdinclude",
-    "autodocsumm"
+    "sphinx_mdinclude"
 ]
 
 autosummary_generate = True
 
-autodoc_default_options = {
-    'autosummary': True,
-}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

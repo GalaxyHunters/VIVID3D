@@ -255,7 +255,7 @@ PYBIND11_MODULE(_vivid, m) {
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
                  py::arg("meshes"))
-            .def("add_meshes", &CModel::AddMesh,
+            .def("add_meshes", &CModel::AddMeshes,
                  "add more meshes, lines, or point clouds to Model",
                  py::arg("meshes"))
             .def("add_mesh", &CModel::AddMesh,

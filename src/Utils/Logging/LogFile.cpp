@@ -1,5 +1,10 @@
 #include "LogFile.h"
 
+#ifdef PYTHON
+#include <pybind11/pybind11.h>
+namespace py = pybind11;
+#endif
+
 using namespace std;
 
 namespace vivid {
@@ -22,11 +27,15 @@ namespace vivid {
 
                 auto log_string = time_string + " - " + code + arMsg;
                 if (mWriteToConsole) {
+#ifdef PYTHON
+                    py::print(log_string);
+#else
                     if (aCode == ELogCode::LOG_ERROR) {
                         cerr << log_string << endl;
                     } else {
                         cout << log_string << endl;
                     }
+#endif
                 }
                 if (mWriteToLog) {
                     mLogFile.open(mFilePath, ios::app);

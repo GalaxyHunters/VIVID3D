@@ -264,7 +264,9 @@ PYBIND11_MODULE(_vivid, m) {
              "Seconds per frame");
 
     //Shapes:
-    m.def("create_plane")
+    m.def("create_plane", &CreatePlaneMesh,
+        py::arg("position") = make_cpoint(0), py::arg("size") = 1,
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,
@@ -304,4 +306,8 @@ PYBIND11_MODULE(_vivid, m) {
     m.def("config_logger", &ConfigLogging,
           "Configure the VIVID in-built Logging Process",
           py::arg("write_to_console") = true, py::arg("log_level") = LOG_VIVID, py::arg("write_to_file") = false, py::arg("log_file_name") = "VIVID_LOG.txt");
+
+    m.def("test",  []() {
+        py::print("Test Works!");
+    });
 }

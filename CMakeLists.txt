@@ -31,6 +31,19 @@ set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
 
 add_subdirectory(${ASSIMP_DIR})
 include_directories(${ASSIMP_DIR}/include)
+
+if(DEFINED SKBUILD)
+
+    # prevent an unused variable warning
+    set(ignoreMe "${SKBUILD}")
+
+    add_subdirectory(pybind11)
+    include_directories(pybind11/include)
+    set(PYBIND11_FINDPYTHON ON)
+    set(PYBIND11_PYTHON_VERSION 3.9)
+    add_definitions(-DPYTHON)
+endif()
+
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/lib/assimp/cmake-modules)
 #find_package(assimp COMPONENTS assimp REQUIRED)
 
@@ -88,7 +101,7 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport>
-#        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
@@ -148,18 +161,22 @@ install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
 
 
 if(DEFINED SKBUILD)
-
-    # prevent an unused variable warning
-    set(ignoreMe "${SKBUILD}")
-
-    add_subdirectory(pybind11)
-    set(PYBIND11_FINDPYTHON ON)
-    set(PYBIND11_PYTHON_VERSION 3.9)
-
+    set(Python3_USE_STATIC_LIBS FALSE)
+    find_package(Python3 COMPONENTS Interpreter Development)
+    message("PYTHON STUFF REEEE")
+    message(${Python3_LIBRARIES})
+    message(${Python3_INCLUDE_DIRS})
+    message(${Python3_LIBRARY_DIRS})
+    message(${Python3_EXECUTABLE})
+    message(${Python3_VERSION})
+    message("PYTHON STUFF REEEE")
+    include_directories(${Python3_INCLUDE_DIRS})
+    target_link_libraries(vivid ${Python3_LIBRARIES} -fPIC)
 
     pybind11_add_module(_vivid
             ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp
-            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h)
+            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h
+            )
 
 #    target_include_directories(vivid_py PUBLIC
 #            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>

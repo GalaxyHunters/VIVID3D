@@ -51,8 +51,9 @@ int add(int i, int j) {
 
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = R"pbdoc(
-        VIVID: Creating 3D models in one line of code
-        ---------------------------------------------
+        =======================
+        vivid3d - Documentation
+        =======================
 
         .. currentmodule:: vivid3d
 
@@ -61,7 +62,9 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. autosummary::
            :toctree: _generate
+           :caption: Simple functions
 
+           add
            create_cube
            create_box
            create_sphere
@@ -74,12 +77,14 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. autosummary::
            :toctree: _generate
+           :caption: Classes
 
            Point
            ColorMap
            Material
            Lines
            PointCloud
+           VoronoiVolume
            Mesh
            Model
            Animation

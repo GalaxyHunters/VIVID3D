@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vivid3d.Animation &mdash; vivid 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="vivid3d.StopMotionAnimation" href="vivid3d.StopMotionAnimation.html" />
+    <link rel="prev" title="vivid3d.Model" href="vivid3d.Model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> vivid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basic Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Code Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes and function documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../vivid_types.html">VIVID: Creating 3D models in one line of code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../vivid_types.html#simple-functions">Simple functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../vivid_types.html#classes">classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.Point.html">vivid3d.Point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.ColorMap.html">vivid3d.ColorMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.Material.html">vivid3d.Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.Lines.html">vivid3d.Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.PointCloud.html">vivid3d.PointCloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.Mesh.html">vivid3d.Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.Model.html">vivid3d.Model</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">vivid3d.Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivid3d.StopMotionAnimation.html">vivid3d.StopMotionAnimation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">vivid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../vivid_types.html">VIVID: Creating 3D models in one line of code</a> &raquo;</li>
+      <li>vivid3d.Animation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_generate/vivid3d.Animation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vivid3d-animation">
+<h1>vivid3d.Animation<a class="headerlink" href="#vivid3d-animation" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="vivid3d.Animation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivid3d.</span></span><span class="sig-name descname"><span class="pre">Animation</span></span><a class="headerlink" href="#vivid3d.Animation" title="Permalink to this definition"></a></dt>
+<dd><p>Class for animations</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vivid3d.Animation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vivid3d.Animation.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: vivid3d._vivid.Animation) -&gt; None</p></li>
+</ol>
+<p>default constructor for Animation</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: vivid3d._vivid.Animation, model: vivid3d._vivid.Model) -&gt; None</p></li>
+</ol>
+<p>constructor for Animation from a single Model</p>
+<ol class="arabic simple" start="3">
+<li><p>__init__(self: vivid3d._vivid.Animation, models: List[vivid3d._vivid.Model]) -&gt; None</p></li>
+</ol>
+<p>constructor for Animation from an np array of Models</p>
+<ol class="arabic simple" start="4">
+<li><p>__init__(self: vivid3d._vivid.Animation, animation: vivid3d._vivid.Animation) -&gt; None</p></li>
+</ol>
+<p>copy constructor for animation</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#vivid3d.Animation.__init__" title="vivid3d.Animation.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Overloaded function.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_models</span></code>(*args, **kwargs)</p></td>
+<td><p>Overloaded function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">export</span></code>(self, output_file[, file_format])</p></td>
+<td><p>Exports animation to selected file format</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_models</span></code>(self)</p></td>
+<td><p>getter function for models in the animation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_move_animation</span></code>(self, index)</p></td>
+<td><p>get movement animation for given model index</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rotate_animation</span></code>(self, index)</p></td>
+<td><p>get rotate animation for given model index</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scale_animation</span></code>(self, index)</p></td>
+<td><p>get scale animation for given model index</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_move_animation</span></code>(self, index, move_vector)</p></td>
+<td><p>set movement animation for index model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rotate_animation</span></code>(self, index, anguler_rotate)</p></td>
+<td><p>set rotate animation for index model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_scale_animation</span></code>(self, index, scale_vector)</p></td>
+<td><p>set scale animation for index model</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ticks_per_second</span></code></p></td>
+<td><p>ticks</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vivid3d.Model.html" class="btn btn-neutral float-left" title="vivid3d.Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vivid3d.StopMotionAnimation.html" class="btn btn-neutral float-right" title="vivid3d.StopMotionAnimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, GalaxyHuntersIL.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -264,7 +264,7 @@ PYBIND11_MODULE(_vivid, m) {
              "Seconds per frame");
 
     //Shapes:
-    m.def("create_plane")
+    //m.def("create_plane")
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,

@@ -56,6 +56,21 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. currentmodule:: vivid3d
 
+        Simple functions
+        ================
+
+        .. autosummary::
+           :toctree: _generate
+
+           create_cube
+           create_box
+           create_sphere
+           create_ellipsoid
+           create_arrow
+           create_grid
+
+        classes
+        =======
 
         .. autosummary::
            :toctree: _generate
@@ -63,7 +78,6 @@ PYBIND11_MODULE(_vivid, m) {
            Point
            ColorMap
            Material
-           Surface
            Lines
            PointCloud
            Mesh

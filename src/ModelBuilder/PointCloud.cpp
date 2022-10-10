@@ -1,5 +1,5 @@
 #include "PointCloud.h"
-#include "Surface.h"
+#include "VoronoiVolume.h"
 
 using namespace vivid;
 using namespace std;
@@ -36,12 +36,12 @@ void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_f
     mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end());
 }
 
-CMesh CPointCloud::CreateVoronoiSurface(const std::vector<bool>& arMask, coord_t aNoiseDisplacement) {
+CVoronoiVolume CPointCloud::CreateVoronoiVolume(coord_t aNoiseDisplacement) {
     vector<normal_float> UV_coords;
     for (auto & face : mFaces) {
         UV_coords.push_back(face.GetUVcoord());
     }
-    CSurface surface = CSurface(mPoints, arMask, UV_coords, 0., 1., aNoiseDisplacement);
-    surface.CreateSurface();
-    return surface.ToMesh(mLabel, GetOpacity());
+    CVoronoiVolume volume = CVoronoiVolume(mPoints, UV_coords, 0., 1., aNoiseDisplacement);
+    volume.CreateSurface();
+    return volume;
 }

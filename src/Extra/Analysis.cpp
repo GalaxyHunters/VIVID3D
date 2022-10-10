@@ -2,11 +2,11 @@
 
 using namespace vivid;
 
-vector<double> GetParticlesVolume(const CSurface &arSurf) {
+vector<double> GetParticlesVolume(const CVoronoiVolume &arSurf) {
     return arSurf.GetVoronoiData().mData.GetAllVolumes();
 } //CalcCellCMVolume
 
-vector<double> GetParticlesDensity(const CSurface &arSurf, const std::vector<double> &arMassField) {
+vector<double> GetParticlesDensity(const CVoronoiVolume &arSurf, const std::vector<double> &arMassField) {
     vector<double> volumes = GetParticlesVolume(arSurf);
 
     vector<double> densities (arMassField.size());
@@ -16,7 +16,7 @@ vector<double> GetParticlesDensity(const CSurface &arSurf, const std::vector<dou
     return densities;
 }
 
-vector<double> GetSurfaceAreas(const CSurface &arSurf)
+vector<double> GetSurfaceAreas(const CVoronoiVolume &arSurf)
 {
     // Face Area Calculation by Triangles as in Mesh
     vector<coord_t> face_areas;
@@ -44,7 +44,7 @@ vector<double> GetSurfaceAreas(const CSurface &arSurf)
 }
 
 
-vector<double> CalculateFlux(const CSurface &arSurf, const CPoint &arField) {
+vector<double> CalculateFlux(const CVoronoiVolume &arSurf, const CPoint &arField) {
     vector<CSurfaceFace> faces = arSurf.GetFaces();
     vector<double> flux (faces.size());
     vector<double> areas = GetSurfaceAreas(arSurf);

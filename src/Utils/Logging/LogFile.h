@@ -18,13 +18,13 @@ namespace vivid {
      * @param[in] aCode LOG_ERROR | LOG_WARNING | LOG_VIVID | LOG_INFO | LOG_DEBUG
      * @param[in] aMsg predefined message code
      */
-    void Log(const ELogCode aCode, const ELogMessage aMsg);
+    void Log(ELogCode aCode, ELogMessage aMsg);
     /**
      * Log a custom message to the VIVID Logger
      * @param[in] aCode LOG_ERROR | LOG_WARNING | LOG_VIVID | LOG_INFO | LOG_DEBUG
      * @param[in] arMsg custom message string
      */
-    void Log(const ELogCode aCode, const string& arMsg);
+    void Log(ELogCode aCode, const string& arMsg);
 
     /**
      * Configure VIVID in-built Logging Process
@@ -33,6 +33,6 @@ namespace vivid {
      * @param[in] aWriteToFile select whether to write to file
      * @param[in] arLogFileName custom file to write to. Default file is "./VIVID_LOG.txt"
      */
-    void ConfigLogging(bool aWriteToConsole, const ELogCode aLogLevel, bool aWriteToFile, const string& arLogFileName);
+    void ConfigLogging(bool aWriteToConsole, ELogCode aLogLevel, bool aWriteToFile, const string& arLogFileName);
 }
 #endif //VIVID_LOGFILE_H

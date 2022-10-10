@@ -41,7 +41,7 @@ namespace vivid {
     }
 
     void Log(const ELogCode aCode, const ELogMessage aMsg) {
-        string msg = (*ERROR_TYPE_STRING.find(aMsg)).second;
+        const string& msg = ERROR_TYPE_STRING.at(aMsg);
         return WriteLog(aCode, msg);
     }
     void Log(const ELogCode aCode, const string& arMsg) {

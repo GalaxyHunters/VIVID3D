@@ -3,9 +3,9 @@
 using namespace std;
 using namespace vivid;
 
-CMesh CVoronoiSmoothing::Smooth(CSurface &arSurf, bool aSuperSmooth, int aSmoothFactor)
+CMesh CVoronoiSmoothing::Smooth(CVoronoiVolume &arSurf, bool aSuperSmooth, int aSmoothFactor)
 {
-    mSurf = CSurface(arSurf);
+    mSurf = CVoronoiVolume(arSurf);
     //begin smooth part 1, collecting all the cpoints from the faces on the surf
     SetPinPout( );
     UpdateInput( );

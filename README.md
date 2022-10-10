@@ -1,6 +1,5 @@
 ![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
 
-
 # VIVID3D
 [![Read the Docs](https://img.shields.io/readthedocs/vivid)](https://vivid.readthedocs.io/en/latest/)
 [![PyPI](https://img.shields.io/pypi/v/vivid3d?label=pypi)](https://pypi.org/project/vivid3d/)
@@ -32,16 +31,19 @@ View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3
 # Installation and Usage
 ## Installation
 VIVID3D can be installed from PyPI using pip on Python >= 3.5:
+Downloed the prerequirements
+```
+pip install --upgrade pip
+pip install --upgrade setuptools
+```
 
+install the package
 ```
 pip install vivid3d
 ```
 
-This might take a few minutes, and is only tested on linux as of now.
-
 ## Usage
 **[Tutorials](https://vivid.readthedocs.io/en/latest/)**
-
 
 # About
 ## Authors

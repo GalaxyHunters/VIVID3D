@@ -1,5 +1,0 @@
-setuptools>=61.0
-scikit-build
-cmake
-ninja
-sphinx_mdinclude

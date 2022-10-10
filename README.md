@@ -4,7 +4,7 @@
 We present VIVID, an innovative method for research using 3D technology.
 
 ## Explanation
-Vivid uses an implementation of Voronoi algorithm for a 3d space made by Dr. Elad Stiennberg. The package takes simulated data as input and produces an interactive 3D model that is compatible with the 3D industry.  
+Vivid uses an implementation of Voronoi algorithm for a 3d space made by Dr. Elad Stiennberg. The package takes simulated data as input and produces an interactive 3D model that is compatible with the 3D industry.
 
 VIVID was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
 
@@ -16,16 +16,15 @@ also see https://naftalide.wixsite.com/vivid to view examples of output models.
 
 ## Getting started
 
-Downloed the prerequirments
-```
-pip install --upgrade pip
-pip install --upgrade setuptools
-```
 
-install the package
+Installing the package is as simple as pip install:
+
 ```
 pip install vivid3d
 ```
+
+This might take a few minutes, and is only tested on linux as of now.
+
 
 
 ## Creating your first model

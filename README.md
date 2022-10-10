@@ -1,22 +1,37 @@
 ![image](https://github.com/GalaxyHunters/Vivid/blob/01788a5e3656dbaa048a48215a290dfb7f3dc831/vivid-cover.png?raw=true)
 
-## Vivid
-We present VIVID, an innovative method for research using 3D technology.
+# VIVID3D
+[![Read the Docs](https://img.shields.io/readthedocs/vivid)](https://vivid.readthedocs.io/en/latest/)
+[![PyPI](https://img.shields.io/pypi/v/vivid3d?label=pypi)](https://pypi.org/project/vivid3d/)
+[![GitHub](https://img.shields.io/github/license/GalaxyHunters/vivid)](https://github.com/GalaxyHunters/Vivid/blob/master/LICENSE)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vivid3d)](https://pypi.org/project/vivid3d/)
+[![GitHub contributors](https://img.shields.io/github/contributors/GalaxyHunters/vivid)](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 
-## Explanation
-Vivid uses an implementation of Voronoi algorithm for a 3d space made by Dr. Elad Stiennberg. The package takes simulated data as input and produces an interactive 3D model that is compatible with the 3D industry.  
+We present VIVID3D, an innovative method for research using 3D technology.
 
-VIVID was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
+# Overview
+VIVID3D is an all new python package for simple scientific visualization and creation of 3D models. 
+Visualize particle simulations like never before, with Voronoi Tesselation for realistic volume representation in 3D
 
-The code is written in C++ and wrapped in python.
+VIVID3D was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
 
-Vivid is currently in the last stages of development, including an installer and the finished wrapper. Soon you will be able to simply install Vivid using anaconda and produce a model using a single function or a few lines of code for more control.
+## Features
+- **Fast execution** - C++ wrapped with [pybind11](https://github.com/pybind/pybind11)
+- **Smart Isosurfaces** - Using a [3D Voronoi Algorithm](https://doi.org/10.1088/0067-0049/216/2/35) implementation by Dr. Elad Steinnberg
+- **Support for industry standard file formats** - Using the [Open Asset Import Library](https://github.com/assimp/assimp)
+- **Point Clouds**
+- **Vector Fields**
+- **Scientific Analysis of Meshes**
 
-also see https://naftalide.wixsite.com/vivid to view examples of output models.
+## Highlights
+View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3D is capable of
+## Documentation
+**[Read The Docs](https://vivid.readthedocs.io/en/latest/)**
 
-## Getting started
-
-Downloed the prerequirments
+# Installation and Usage
+## Installation
+VIVID3D can be installed from PyPI using pip on Python >= 3.5:
+Downloed the prerequirements
 ```
 pip install --upgrade pip
 pip install --upgrade setuptools
@@ -27,37 +42,23 @@ install the package
 pip install vivid3d
 ```
 
+## Usage
+**[Tutorials](https://vivid.readthedocs.io/en/latest/)**
 
-## Creating your first model
+# About
+## Authors
+**Project Leads**
+- [Tomer Nussbaum](https://github.com/tussbaum)
+- [Naftali Deutsch](https://github.com/rslanis)
+- [Zohar Milman](https://github.com/ZoharMilman)
+- [Adam Beili](https://github.com/Beilinson)
 
-Code Example
+**Special Thanks**
+- [Raphael Buzaglo](https://github.com/raphae2118)
+- [Oz Weizzman](https://github.com/OzW1234)
+- [Alice Temkin](https://github.com/lazy-fox304)
 
-```Python
+[Contributors](https://github.com/GalaxyHunters/vivid/graphs/contributors/)
 
-import vivid_py as vivid
-import numpy as np
-
-surf = vivid.Surface(points, mask, quan)
-surf.create_surface()
-mesh = surf.to_mesh("This is mt first model", .9)
-mesh.laplacian_smooth(10, 0.7, 0)
-mesh.export_to_obj(path + "/FirstModel");
-
-```
-The mandatory inputs to produce a model are as follows:
-
-- ndArray 3*n float : ModelPoints - holds X Y Z values for data.
-
-- ndArray n boolean : Mask - mask values for ModelPoints. Output model surface is defined as the middle between True and False points.
-
-- string : OutputFile - name and directory for the output file.
-
-optinal arguments:
-
-- Label - float, label for the created surface. defult argument = "Vivid_3D_model"
-
-- Quan - n float ndArray, Defines color per point. default argument = ndArray.ones().
-
-- Vmin - float, minimum value for color map. default argument Quan.min_argument().
-
-- Vmax - float, maximum value for color map. default argument Quan.max_argument().
+## License
+VIVID3D is provided under a BSD-3 license that can be found in the [LICENSE](https://github.com/GalaxyHunters/Vivid/blob/master/LICENSE) file. By using, distributing, or contributing to this project, you agree to the terms and conditions of this license.

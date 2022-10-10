@@ -306,8 +306,4 @@ PYBIND11_MODULE(_vivid, m) {
     m.def("config_logger", &ConfigLogging,
           "Configure the VIVID in-built Logging Process",
           py::arg("write_to_console") = true, py::arg("log_level") = LOG_VIVID, py::arg("write_to_file") = false, py::arg("log_file_name") = "VIVID_LOG.txt");
-
-    m.def("test",  []() {
-        py::print("Test Works!");
-    });
 }

@@ -11,7 +11,7 @@ namespace vivid {
     namespace {
         ofstream mLogFile;
         string mFilePath = "VIVID_LOG.txt";
-        ELogCode mLogLevel = LOG_INFO;
+        ELogCode mLogLevel = LOG_VIVID;
         bool mWriteToLog = false;
         bool mWriteToConsole = true;
 

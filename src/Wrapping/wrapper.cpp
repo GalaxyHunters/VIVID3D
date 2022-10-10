@@ -56,6 +56,7 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. currentmodule:: vivid3d
 
+
         .. autosummary::
            :toctree: _generate
 

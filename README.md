@@ -31,19 +31,15 @@ View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3
 # Installation and Usage
 ## Installation
 VIVID3D can be installed from PyPI using pip on Python >= 3.5:
-Downloed the prerequirements
-```
-pip install --upgrade pip
-pip install --upgrade setuptools
-```
 
-install the package
 ```
 pip install vivid3d
 ```
+This might take a few minutes, and is only tested on linux as of now.
 
 ## Usage
 **[Tutorials](https://vivid.readthedocs.io/en/latest/)**
+
 
 # About
 ## Authors

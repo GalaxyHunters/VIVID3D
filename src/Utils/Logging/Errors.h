@@ -14,8 +14,8 @@ namespace vivid {
     };
 
     enum ELogMessage {
-        ARRAYS_NOT_EQUAL = 0, ARRAYS_EMPTY = 1, MISSING_BOOLEAN_VALUES = 2,
-        INVALID_SMOOTH_FACTOR = 3, INVALID_ALPHA_VALUE=4, INVALID_NORMAL_VALUE=5, INVALID_FRAME_VALUE=6
+        ARRAYS_NOT_EQUAL = 0, ARRAYS_EMPTY = 1, MISSING_BOOLEAN_VALUES = 2, SURFACE_THRESHOLD_OUT_OF_RANGE = 3,
+        INVALID_SMOOTH_FACTOR = 4, INVALID_ALPHA_VALUE=5, INVALID_NORMAL_VALUE=6, INVALID_FRAME_VALUE=7
     };
 
     const std::map<ELogMessage, std::string> ERROR_TYPE_STRING{{ARRAYS_NOT_EQUAL,
@@ -24,6 +24,8 @@ namespace vivid {
                                                                        "ValueError - Input vectors are empty"},
                                                                {MISSING_BOOLEAN_VALUES,
                                                                        "ValueError - Mask must contain both true and false values"},
+                                                               {SURFACE_THRESHOLD_OUT_OF_RANGE,
+                                                                       "ValueError - SurfaceThreshold must be within SurfaceField Range"},
                                                                {INVALID_SMOOTH_FACTOR,
                                                                        "ValueError - Smooth Factor must be between 1 and 8"},
                                                                {INVALID_ALPHA_VALUE,

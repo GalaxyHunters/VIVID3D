@@ -57,12 +57,12 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. currentmodule:: vivid3d
 
-        Simple functions
+        Shape functions
         ================
 
         .. autosummary::
            :toctree: _generate
-           :caption: Simple functions
+           :caption: Shape functions
 
            add
            create_cube

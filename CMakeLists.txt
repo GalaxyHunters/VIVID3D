@@ -49,6 +49,7 @@ add_library(vivid SHARED
         #lib/ImportAndExport/FbxCode.cpp
         #lib/ImportAndExport/FBXImportExport.cpp
         #vivid
+        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Vivify.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Model.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/ModelComponent.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Mesh.cpp"
@@ -73,7 +74,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
 #        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp")
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h)
 
 
 target_include_directories(vivid PUBLIC

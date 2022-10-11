@@ -18,9 +18,9 @@ namespace vivid {
      * @param[in] aOpacity the alpha to assign to the new mesh
      * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
      */
-    int vivify_mesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
-                    std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                    normal_float aOpacity, coord_t aNoiseDisplacement = 0.001);
+    int vivifyMesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
+                   std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
+                   normal_float aOpacity, coord_t aNoiseDisplacement = 0.001);
 
     /**
      * vivify one function to make a model - threshold version
@@ -35,9 +35,9 @@ namespace vivid {
      * @param[in] aOpacity the alpha to assign to the new mesh
      * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
      */
-    int vivify_mesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
-                    normal_float aSurfaceThreshold, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                    normal_float aOpacity, coord_t aNoiseDisplacement = 0.001);
+    int vivifyMesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
+                   normal_float aSurfaceThreshold, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
+                   normal_float aOpacity, coord_t aNoiseDisplacement = 0.001);
 
     /**
      * vivify one function to make a model, with multiple masks - Mask version
@@ -51,9 +51,9 @@ namespace vivid {
      * @param[in] aOpacity the alpha to assign to the new mesh
      * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
      */
-    int vivify_model(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<std::vector<bool>> &arMasks,
-                     std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                     vector<normal_float> &arOpacity, coord_t aNoiseDisplacement = 0.001);
+    int vivifyModel(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<std::vector<bool>> &arMasks,
+                    std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
+                    vector<normal_float> &arOpacity, coord_t aNoiseDisplacement = 0.001);
 
     /**
      * vivify one function to make a model, with multiple masks - threshold version
@@ -68,9 +68,9 @@ namespace vivid {
      * @param[in] aAlpha the alpha to assign to the new mesh
      * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
      */
-    int vivify_model(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
+    int vivifyModel(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
                     vector<normal_float> &arSurfaceThresholds, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                     vector<normal_float> &arOpacity, coord_t aNoiseDisplacement = 0.001);
+                    vector<normal_float> &arOpacity, coord_t aNoiseDisplacement = 0.001);
 }
 
 #endif //VIVID_VIVIFY_H

@@ -10,6 +10,7 @@
 #include "StopMotionAnimation.h"
 #include <vector>
 #include <array>
+#include "Vivify.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -57,6 +58,15 @@ PYBIND11_MODULE(_vivid, m) {
 
         .. currentmodule:: vivid3d
 
+        Vivify functions
+        ================
+
+        .. autosummary::
+           :toctree: _generate
+           :caption: Vivify functions
+
+           vivify_mesh
+
         Shape functions
         ================
 
@@ -91,6 +101,19 @@ PYBIND11_MODULE(_vivid, m) {
            StopMotionAnimation
 	)pbdoc";
 
+    m.def("vivify_mesh", py::overload_cast<const std::string, const std::vector<CPoint>, const std::vector<bool>,
+        std::vector<normal_float>, normal_float, normal_float, const string&,
+        normal_float, coord_t>(&vivifyMesh), R"pbdoc(
+        Add two numbers
+
+        Some other explanation about the add function.
+    )pbdoc");
+
+    m.def("vivify_mesh", py::overload_cast<>(&vivifyMesh), R"pbdoc(
+        Add two numbers
+
+        Some other explanation about the add function.
+    )pbdoc");
 
     m.def("add", &add, R"pbdoc(
         Add two numbers

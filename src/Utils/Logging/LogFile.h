@@ -29,7 +29,7 @@ namespace vivid {
     /**
      * Configure VIVID in-built Logging Process
      * @param[in] aWriteToConsole select whether to print to console
-     * @param[in] aLogLevel weighted value for smoothing, recommended range 0.2<a<0.8
+     * @param[in] aLogLevel Values below this will not be logged. Default is LOG_VIVID
      * @param[in] aWriteToFile select whether to write to file
      * @param[in] arLogFileName custom file to write to. Default file is "./VIVID_LOG.txt"
      */

@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.2.1")
+        VERSION "0.2.2")
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message("${PROJECT_SOURCE_DIR}")
@@ -31,6 +31,7 @@ set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
 
 add_subdirectory(${ASSIMP_DIR})
 include_directories(${ASSIMP_DIR}/include)
+
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/lib/assimp/cmake-modules)
 #find_package(assimp COMPONENTS assimp REQUIRED)
 
@@ -88,7 +89,7 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport>
-#        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
@@ -148,18 +149,23 @@ install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
 
 
 if(DEFINED SKBUILD)
-
-    # prevent an unused variable warning
     set(ignoreMe "${SKBUILD}")
 
     add_subdirectory(pybind11)
+    include_directories(pybind11/include)
     set(PYBIND11_FINDPYTHON ON)
-    set(PYBIND11_PYTHON_VERSION 3.9)
+#    set(PYBIND11_PYTHON_VERSION 3.7)
+    add_definitions(-DPYTHON)
 
+    set(Python3_FIND_STRATEGY VERSION)
+    find_package(Python3 COMPONENTS Interpreter Development)
+    include_directories(${Python3_INCLUDE_DIRS})
+    target_link_libraries(vivid ${Python3_LIBRARIES})
 
     pybind11_add_module(_vivid
             ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp
-            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h)
+            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h
+            )
 
 #    target_include_directories(vivid_py PUBLIC
 #            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>

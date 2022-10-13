@@ -65,7 +65,7 @@ PYBIND11_MODULE(_vivid, m) {
            :toctree: _generate
            :caption: Vivify functions
 
-           vivify_mesh
+           make_model
 
         Shape functions
         ================
@@ -101,19 +101,6 @@ PYBIND11_MODULE(_vivid, m) {
            StopMotionAnimation
 	)pbdoc";
 
-    m.def("vivify_mesh", py::overload_cast<const std::string, const std::vector<CPoint>, const std::vector<bool>,
-        std::vector<normal_float>, normal_float, normal_float, const string&,
-        normal_float, coord_t>(&vivifyMesh), R"pbdoc(
-        Add two numbers
-
-        Some other explanation about the add function.
-    )pbdoc");
-
-    m.def("vivify_mesh", py::overload_cast<>(&vivifyMesh), R"pbdoc(
-        Add two numbers
-
-        Some other explanation about the add function.
-    )pbdoc");
 
     m.def("add", &add, R"pbdoc(
         Add two numbers
@@ -135,8 +122,8 @@ PYBIND11_MODULE(_vivid, m) {
              "Constructor for point",
              py::arg("x"), py::arg("y"), py::arg("z"))
         .def(py::init<std::vector<double>>(),
-             "Constructor for point",
-             py::arg("3d_vector"));
+                 "Constructor for point",
+                 py::arg("3d_vector"));
 
     py::class_<CColorMap>(m, "ColorMap")
         .def(py::init<const string&>(),
@@ -292,7 +279,8 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("output_file"), py::arg("with_texture") = 1)
             .def("export", &CModel::Export,
                  "writes CModel to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "gltf2");
+                 py::arg("output_file"), py::arg("file_format") = "gltf2")
+            .def("__repr__", [](const CModel &a){return "<vivid3d.Model>";});
 
     py::class_<CAnimation> Animation(m,"Animation", R"pbdoc(
         Class for animations
@@ -354,6 +342,81 @@ PYBIND11_MODULE(_vivid, m) {
             py::arg("animation"))
         .def_property("seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame, &CStopMotionAnimation::SetSecondsPerFrame,
              "Seconds per frame");
+
+
+    //one liners
+    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
+        std::vector<normal_float> &, normal_float , normal_float , const string& ,
+        normal_float , coord_t>(&vivifyMesh), R"pbdoc(
+            one function to rule them all
+
+            makes a model from one line, if an output path is given the functions writes the model to file.
+        )pbdoc",
+        py::arg("input_points"),
+        py::arg("mask"),
+        py::arg("output_path") = "",
+        py::arg("ColorField") = vector<normal_float>(0),
+        py::arg("color_field_min") = 0,
+        py::arg("color_field_max") = 0,
+        py::arg("label")= "VIVID_MODEL",
+        py::arg("opacity") = 1,
+        py::arg("noise_displacement") = 0.001);
+
+
+    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
+        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
+        normal_float , coord_t>(&vivifyMesh), R"pbdoc(
+            one function to rule them all
+
+            makes a model from one line, if an output path is given the functions writes the model to file.
+        )pbdoc",
+        py::arg("input_points"),
+        py::arg("surface_field"),
+        py::arg("surface_threshold"),
+        py::arg("output_path") = "",
+        py::arg("ColorField") = vector<normal_float>(0),
+        py::arg("color_field_min") = 0,
+        py::arg("color_field_max") = 0,
+        py::arg("label")= "VIVID_MODEL",
+        py::arg("opacity") = 1,
+        py::arg("noise_displacement") = 0.001);
+
+    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
+        std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
+        vector<normal_float> &, coord_t>(&vivifyModel), R"pbdoc(
+            one function to rule them all
+
+            makes a model from one line, if an output path is given the functions writes the model to file.
+        )pbdoc",
+        py::arg("input_points"),
+        py::arg("masks"),
+        py::arg("output_path") = "",
+        py::arg("ColorField") = vector<normal_float>(0),
+        py::arg("color_field_min") = 0,
+        py::arg("color_field_max") = 0,
+        py::arg("label")= "VIVID_MODEL",
+        py::arg("opacity") = vector<normal_float>(0),
+        py::arg("noise_displacement") = 0.001);
+
+
+    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
+        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
+        std::vector<normal_float> &, coord_t >(&vivifyModel), R"pbdoc(
+            one function to rule them all
+
+            makes a model from one line, if an output path is given the functions writes the model to file.
+        )pbdoc",
+        py::arg("input_points"),
+        py::arg("surface_field"),
+        py::arg("surface_thresholds"),
+        py::arg("output_path") = "",
+        py::arg("ColorField") = vector<normal_float>(0),
+        py::arg("color_field_min") = 0,
+        py::arg("color_field_max") = 0,
+        py::arg("label")= "VIVID_MODEL",
+        py::arg("opacity") = vector<normal_float>(0),
+        py::arg("noise_displacement") = 0.001);
+
 
     //Shapes:
     //m.def("create_plane")

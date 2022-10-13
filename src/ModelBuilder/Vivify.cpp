@@ -1,33 +1,36 @@
 #include "Vivify.h"
 
 namespace vivid{
-    int vivifyMesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask,
+    CModel vivifyMesh(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask, const std::string &arOutputFilePath,
                    std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
                    normal_float aOpacity, coord_t aNoiseDisplacement) {
         CVoronoiVolume surface = CVoronoiVolume(arInputPoints, arColorField, aVMin, aVMax, aNoiseDisplacement);
         surface.CreateSurface();
         CMesh mesh = surface.MaskMesh(arMask, arLabel, aOpacity);
-        return mesh.Export(arOutputFilePath);
+        if(arOutputFilePath != ""){
+            mesh.Export(arOutputFilePath);
+        }
+        return CModel(mesh);
     }
 
-    int vivifyMesh(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
-                   normal_float aSurfaceThreshold, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                   normal_float aOpacity, coord_t aNoiseDisplacement){
+    CModel vivifyMesh(const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField, normal_float aSurfaceThreshold,
+                      const std::string &arOutputFilePath, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax,
+                      const string& arLabel, normal_float aOpacity, coord_t aNoiseDisplacement){
         //checks
         auto minmax = std::minmax_element(arSurfaceField.begin(), arSurfaceField.end());
         if (aSurfaceThreshold <= *minmax.first || aSurfaceThreshold >= *minmax.second){
             Log(LOG_ERROR, SURFACE_THRESHOLD_OUT_OF_RANGE);
         }
         std::vector<bool> mask = vector<bool>(arSurfaceField.size());
-        for(auto it = arSurfaceField.begin(); it != arSurfaceField.end(); it++){
-            mask.emplace_back(*it>aSurfaceThreshold);
+        for(const auto it: arSurfaceField){
+            mask.emplace_back(it>aSurfaceThreshold);
         }
-        return vivifyMesh(arOutputFilePath, arInputPoints, mask, arColorField, aVMin, aVMax, arLabel, aOpacity,
+        return vivifyMesh(arInputPoints, mask, arOutputFilePath, arColorField, aVMin, aVMax, arLabel, aOpacity,
                           aNoiseDisplacement);
     }
 
 
-    int vivifyModel(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<std::vector<bool>> &arMasks,
+    CModel vivifyModel(const std::vector<CPoint> &arInputPoints, const std::vector<std::vector<bool>> &arMasks, const std::string &arOutputFilePath,
                     std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
                     vector<normal_float> &arOpacity, coord_t aNoiseDisplacement){
         //check for empty aOpacity
@@ -47,16 +50,19 @@ namespace vivid{
         for(size_t i = 0; i != arMasks.size(); i++){
             output_model.AddMesh(surface.MaskMesh(arMasks[i], arLabel, arOpacity[i]));
         }
-        return output_model.Export(arOutputFilePath);
+        if(arOutputFilePath != ""){
+            output_model.Export(arOutputFilePath);
+        }
+        return output_model;
     }
 
-    int vivifyModel(const std::string &arOutputFilePath, const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField,
-                    vector<normal_float> &arSurfaceThresholds, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                    vector<normal_float> &arOpacity, coord_t aNoiseDisplacement){
+    CModel vivifyModel(const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField, vector<normal_float> &arSurfaceThresholds,
+                       const std::string &arOutputFilePath, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
+                       vector<normal_float> &arOpacity, coord_t aNoiseDisplacement){
         //checks
         auto minmax = std::minmax_element(arSurfaceField.begin(), arSurfaceField.end());
-        for(auto Threshold = arSurfaceThresholds.begin(); Threshold != arSurfaceThresholds.end(); Threshold++){
-            if (*Threshold <= *minmax.first || *Threshold >= *minmax.second){
+        for(const auto Threshold : arSurfaceThresholds){
+            if (Threshold <= *minmax.first || Threshold >= *minmax.second){
                 Log(LOG_ERROR, SURFACE_THRESHOLD_OUT_OF_RANGE);
             }
         }
@@ -64,12 +70,12 @@ namespace vivid{
         std::vector<std::vector<bool>> masks = vector<vector<bool>>(arSurfaceThresholds.size());
         for(size_t i = 0; i != arSurfaceThresholds.size(); i++){
             masks[i] = vector<bool>(arSurfaceField.size());
-            for(auto it = arSurfaceField.begin(); it != arSurfaceField.end(); it++){
-                masks[i].emplace_back(*it>arSurfaceThresholds[i]);
+            for(const auto it: arSurfaceField){
+                masks[i].emplace_back(it>arSurfaceThresholds[i]);
             }
         }
 
-        return vivifyModel(arOutputFilePath, arInputPoints, masks, arColorField, aVMin, aVMax, arLabel, arOpacity,
+        return vivifyModel(arInputPoints, masks, arOutputFilePath, arColorField, aVMin, aVMax, arLabel, arOpacity,
                            aNoiseDisplacement);
     }
 }

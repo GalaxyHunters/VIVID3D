@@ -16,6 +16,7 @@
 #include <assimp/types.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Vivify.h"
 
 constexpr int BOX_SIZE = 30;
 constexpr int HEIGHT   = 15;
@@ -279,91 +280,6 @@ void assimpTest(string file){
                                         aiProcess_CalcTangentSpace |
                                         aiProcess_JoinIdenticalVertices |
                                         aiProcess_SortByPType);
-
-    aiNodeAnim** channels = scene->mAnimations[0]->mChannels;
-
-    for(int i = 0; i != scene->mAnimations[0]->mNumChannels; i++){
-        cout << "animation channel " << i << endl;
-        cout << "Position Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumPositionKeys; P_key++){
-            cout << "Time - " << channels[i]->mPositionKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mPositionKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mPositionKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mPositionKeys[P_key].mValue.z << endl;
-        }
-        cout << "Rotation Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumRotationKeys; P_key++){
-            cout << "Time - " << channels[i]->mRotationKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mRotationKeys[P_key].mValue.w << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.z << endl;
-        }
-        cout << "Scaling Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumScalingKeys; P_key++){
-            cout << "Time - " << channels[i]->mScalingKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mScalingKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mScalingKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mScalingKeys[P_key].mValue.z << endl;
-        }
-    }
-
-    aiMaterial* mat = scene->mMaterials[1];
-    aiMaterialProperty prop;
-
-//    //big printing of stuff
-//    aiString matString;
-//    aiColor3D color(0,0,0);
-//    int num1;
-//    float float1;
-//    mat->Get(AI_MATKEY_NAME, matString);
-//    cout << "AI_MATKEY_NAME     "<< matString.C_Str() << endl;
-//
-//    mat->Get(AI_MATKEY_SHADING_MODEL, num1);
-//    cout << "AI_MATKEY_SHADING_MODEL     "<< num1 << endl;
-//
-//    mat->Get("$mat.illum", 3, 0, num1);
-//    cout << "mat.illum     "<< num1 << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
-//    cout << "AI_MATKEY_COLOR_AMBIENT     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-//    cout << "AI_MATKEY_COLOR_DIFFUSE     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
-//    cout << "AI_MATKEY_COLOR_SPECULAR     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_EMISSIVE, color);
-//    cout << "AI_MATKEY_COLOR_EMISSIVE     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//
-//    mat->Get(AI_MATKEY_COLOR_TRANSPARENT, color);
-//    cout << "AI_MATKEY_COLOR_TRANSPARENT     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_SHININESS, float1);
-//    cout << "AI_MATKEY_SHININESS     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_OPACITY, float1);
-//    cout << "AI_MATKEY_OPACITY     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_ANISOTROPY_FACTOR, float1);
-//    cout << "AI_MATKEY_ANISOTROPY_FACTOR     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_REFRACTI, float1);
-//    cout << "AI_MATKEY_REFRACTI     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_UVWSRC(aiTextureType_DIFFUSE, 0), num1);
-//    cout << "AI_MATKEY_UVWSRC     "<< num1 << endl;
-//
-//    mat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), matString);
-//    cout << "AI_MATKEY_TEXTURE     "<< matString.C_Str() << endl;
-
     if (exp.Export(scene, "gltf2", TEST_OUTPUT_PATH + "TestAssimpAnim.gltf") != AI_SUCCESS) {
         cerr << exp.GetErrorString() << endl;
     }
@@ -394,6 +310,27 @@ int CubeAnimationTest()
     //AssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
     return EXIT_SUCCESS;
 }
+int make_model_test(){
+    vector<CPoint> points;
+    vector<float> distance;
+    vector<bool> mask;
+    vector<normal_float> quan;
+    vector<double> temp;
+    for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
+        for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
+            for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
+                temp = vector<double>(3);
+                temp[0] = i ; temp[1] = j; temp[2] = z;
+                points.push_back(temp);
+                distance.push_back(sqrt(pow(i - 0, 2) + pow(j - 0, 2) + pow(z - 0, 2)));
+                quan.push_back(j);
+            }
+        }
+    }
+    vivifyMesh(points, distance, 17, TEST_OUTPUT_PATH+ "/test_vivify",
+               quan, -BOX_SIZE, BOX_SIZE, "testVivify", 1, 0.005);
+    return EXIT_SUCCESS;
+}
 int main()
 {
     ConfigLogging(true, LOG_DEBUG, false, "");
@@ -405,8 +342,11 @@ int main()
 //    Log(LOG_INFO, "ParametricSurfByFuncTest");
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    Log(LOG_INFO, "Testing All Shapes");
-    ret_value = ShapesTest();
+//    Log(LOG_INFO, "Testing All Shapes");
+//    ret_value = ShapesTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    Log(LOG_INFO, "Testing vivify");
+    ret_value = make_model_test();
     if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Cube");
 //    ret_value = CubeSurfTests();

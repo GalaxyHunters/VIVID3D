@@ -21,7 +21,8 @@ namespace vivid{
         if (aSurfaceThreshold <= *minmax.first || aSurfaceThreshold >= *minmax.second){
             Log(LOG_ERROR, SURFACE_THRESHOLD_OUT_OF_RANGE);
         }
-        std::vector<bool> mask = vector<bool>(arSurfaceField.size());
+        std::vector<bool> mask;
+        mask.reserve(arSurfaceField.size());
         for(const auto it: arSurfaceField){
             mask.emplace_back(it>aSurfaceThreshold);
         }
@@ -69,7 +70,7 @@ namespace vivid{
 
         std::vector<std::vector<bool>> masks = vector<vector<bool>>(arSurfaceThresholds.size());
         for(size_t i = 0; i != arSurfaceThresholds.size(); i++){
-            masks[i] = vector<bool>(arSurfaceField.size());
+            masks[i].reserve(arSurfaceField.size());
             for(const auto it: arSurfaceField){
                 masks[i].emplace_back(it>arSurfaceThresholds[i]);
             }

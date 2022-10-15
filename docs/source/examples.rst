@@ -21,8 +21,6 @@ Simple example
 .. include:: pyramid_example.rst
 
 
-place holder1 - pyramid
-
 .. _Advanced_example:
 
 Advanced example
@@ -38,3 +36,6 @@ Shapes example
 
 Animation example
 =================
+
+.. include:: animation_example.rst
+

@@ -265,6 +265,9 @@ PYBIND11_MODULE(_vivid, m) {
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
                  py::arg("meshes"))
+            .def(py::init<CModelComponent& >(),
+                 "constructor for CModel, from mesh, line, and point cloud"
+                 py::arg("mesh"))
             .def("add_meshes", &CModel::AddMeshes,
                  "add more meshes, lines, or point clouds to Model",
                  py::arg("meshes"))
@@ -331,13 +334,13 @@ PYBIND11_MODULE(_vivid, m) {
         .def(py::init<> (), "default constructor for StopMotionAnimation")
         .def(py::init<const CModel &, double> (),
             "constructor for StopMotionAnimation from a single Model",
-            py::arg("model"), py::arg("mSecondsPerFrame")) //py::arg("model"), py::arg("mSecondsPerFrame")
+            py::arg("model"), py::arg("seconds_per_frame") = 2) //py::arg("model"), py::arg("mSecondsPerFrame")
         .def(py::init<const vector<CModel> &, double> (),
             "constructor for StopMotionAnimation from an np array of Models",
-            py::arg("models"), py::arg("mSecondsPerFrame")) //py::arg("models"), py::arg("mSecondsPerFrame")
+            py::arg("models"), py::arg("seconds_per_frame") = 2) //py::arg("models"), py::arg("mSecondsPerFrame")
         .def(py::init<const CAnimation &, double> (),
             "constructor for StopMotionAnimation from animation",
-            py::arg("animation"), py::arg("mSecondsPerFrame")) // py::arg("animation"), py::arg("mSecondsPerFrame")
+            py::arg("animation"), py::arg("seconds_per_frame") = 2) // py::arg("animation"), py::arg("mSecondsPerFrame")
         .def(py::init<const CStopMotionAnimation &> (),
             "copy constructor for StopMotionAnimation",
             py::arg("animation"))

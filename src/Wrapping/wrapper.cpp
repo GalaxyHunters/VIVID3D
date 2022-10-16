@@ -351,7 +351,7 @@ PYBIND11_MODULE(_vivid, m) {
     //one liners
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
         std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float , coord_t>(&vivifyMesh), R"pbdoc(
+        normal_float, const std::string&, coord_t>(&vivifyMesh), R"pbdoc(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
@@ -364,12 +364,13 @@ PYBIND11_MODULE(_vivid, m) {
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = 1,
+        py::arg("file_type") = "gltf2",
         py::arg("noise_displacement") = 0.001);
 
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
         const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float , coord_t>(&vivifyMesh), R"pbdoc(
+        normal_float , const std::string&, coord_t>(&vivifyMesh), R"pbdoc(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
@@ -383,11 +384,12 @@ PYBIND11_MODULE(_vivid, m) {
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = 1,
+        py::arg("file_type") = "gltf2",
         py::arg("noise_displacement") = 0.001);
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
         std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
-        vector<normal_float> &, coord_t>(&vivifyModel), R"pbdoc(
+        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"pbdoc(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
@@ -400,12 +402,13 @@ PYBIND11_MODULE(_vivid, m) {
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = vector<normal_float>(0),
+        py::arg("file_type") = "gltf2",
         py::arg("noise_displacement") = 0.001);
 
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
         const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
-        std::vector<normal_float> &, coord_t >(&vivifyModel), R"pbdoc(
+        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"pbdoc(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
@@ -419,6 +422,7 @@ PYBIND11_MODULE(_vivid, m) {
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = vector<normal_float>(0),
+        py::arg("file_type") = "gltf2",
         py::arg("noise_displacement") = 0.001);
 
 

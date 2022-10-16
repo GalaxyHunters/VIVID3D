@@ -328,7 +328,7 @@ int make_model_test(){
         }
     }
     vivifyMesh(points, distance, 17, TEST_OUTPUT_PATH+ "/test_vivify",
-               quan, -BOX_SIZE, BOX_SIZE, "testVivify", 1, 0.005);
+               quan, -BOX_SIZE, BOX_SIZE, "testVivify", 1, "glb2",0.005);
     return EXIT_SUCCESS;
 }
 int main()

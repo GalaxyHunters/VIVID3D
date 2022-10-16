@@ -16,7 +16,7 @@ From this data, we will make a ball
     zero = np.array([0,0,0])
 
     points = []
-    quan = []
+    color = []
     distance = []
 
     for i in range(-BOX_SIZE, BOX_SIZE, 2):
@@ -25,7 +25,7 @@ From this data, we will make a ball
                 point = np.array([i, j, z])
                 points.append(point)
                 distance.append(np.linalg.norm(point-zero))
-                quan.append(j)
+                color.append(j)
 
 Now, with this data we can call vivid and make a model.
 
@@ -45,7 +45,9 @@ The one liner
         color_field_min = -BOX_SIZE, #optinal - Min value for the color field, default is min(color_field)
         color_field_max = BOX_SIZE, #optinal - Max value for the color field, default is max(color_field)
         label =  "My_First_Model", #optinal - label for the model, some formats support it
-        opacity = 0.8 ) #optinal - opacity factor for the model 0 is See throgh
+        opacity = 0.8, #optinal - opacity factor for the model 0 is See throgh
+        file_type = "gltf2" #optinal - file format for the export, basic is "gltf2"
+        noise_displacement = 0.0001) #Optional, add noise to the model, improves Voronoi performance, recommend leaving as default
 
 Here we used the distance from 0,0,0 as a field value and with a threshold of 20, we made a surface. 
 

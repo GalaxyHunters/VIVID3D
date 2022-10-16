@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.2.4")
+        VERSION "0.2.5")
 
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})

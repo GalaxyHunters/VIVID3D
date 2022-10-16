@@ -17,12 +17,12 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = 'vivid'
+project = 'vivid3d'
 copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '0.2.5'
 
 
 # -- General configuration ---------------------------------------------------

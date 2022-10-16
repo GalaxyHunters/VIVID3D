@@ -20,7 +20,7 @@ namespace vivid {
      */
     CModel vivifyMesh(const std::vector<CPoint> &arInputPoints, const std::vector<bool> &arMask, const std::string &arOutputFilePath,
                    std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                   normal_float aOpacity, coord_t aNoiseDisplacement);
+                   normal_float aOpacity, const std::string& arFileType ,coord_t aNoiseDisplacement);
 
     /**
      * vivify one function to make a model - threshold version
@@ -37,7 +37,7 @@ namespace vivid {
      */
     CModel vivifyMesh(const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField, normal_float aSurfaceThreshold,
                       const std::string &arOutputFilePath, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax,
-                      const string& arLabel, normal_float aOpacity, coord_t aNoiseDisplacement);
+                      const string& arLabel, normal_float aOpacity, const std::string& arFileType, coord_t aNoiseDisplacement);
 
     /**
      * vivify one function to make a model, with multiple masks - Mask version
@@ -53,7 +53,7 @@ namespace vivid {
      */
     CModel vivifyModel(const std::vector<CPoint> &arInputPoints, const std::vector<std::vector<bool>> &arMasks, const std::string &arOutputFilePath,
                        std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
-                       vector<normal_float> &arOpacity, coord_t aNoiseDisplacement);
+                       vector<normal_float> &arOpacity, const std::string& arFileType, coord_t aNoiseDisplacement);
 
     /**
      * vivify one function to make a model, with multiple masks - threshold version
@@ -70,7 +70,7 @@ namespace vivid {
      */
     CModel vivifyModel(const std::vector<CPoint> &arInputPoints, const std::vector<normal_float> &arSurfaceField, vector<normal_float> &arSurfaceThresholds,
                        const std::string &arOutputFilePath, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax,
-                       const string& arLabel, vector<normal_float> &arOpacity, coord_t aNoiseDisplacement);
+                       const string& arLabel, vector<normal_float> &arOpacity, const std::string& arFileType, coord_t aNoiseDisplacement);
 }
 
 #endif //VIVID_VIVIFY_H

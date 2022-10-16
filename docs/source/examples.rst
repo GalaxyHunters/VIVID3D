@@ -13,26 +13,35 @@ The first one is recommended for beginners and once you get the gist,
 the advanced approach can get much better results.
 
 
-.. _simple_example:
+
+#. `Simple example`_
+#. `Advanced example`_
+#. `Shapes example`_
+#. `Animation example`_
+
+
+----
 
 Simple example
 ==============
 
 .. include:: pyramid_example.rst
 
-
-.. _Advanced_example:
+----
 
 Advanced example
 ================
 
 place holder - yt enzo galaxy
 
+----
 
 Shapes example
 ==============
 
 .. include:: shape_example.rst
+
+----
 
 Animation example
 =================

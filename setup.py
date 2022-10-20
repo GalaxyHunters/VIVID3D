@@ -21,7 +21,7 @@ setup(
     project_urls={
         "Documentation": "https://vivid.readthedocs.io/en/latest/",
         "Bug Tracker": "https://github.com/GalaxyHunters/Vivid/issues",
-        "Source Code": "https://github.com/pyvista/pyvista",
+        "Source Code": "https://github.com/GalaxyHunters/Vivid",
     },
     description='A 3D visualisation tool for simulations',
     long_description=long_description,

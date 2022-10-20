@@ -51,8 +51,7 @@ int add(int i, int j) {
 }
 
 PYBIND11_MODULE(_vivid, m) {
-    m.doc() = R"pbdoc(
-        =======================
+    m.doc() = R"mydelimiter(
         vivid3d - Documentation
         =======================
 
@@ -99,19 +98,19 @@ PYBIND11_MODULE(_vivid, m) {
            Model
            Animation
            StopMotionAnimation
-	)pbdoc";
+	)mydelimiter";
 
 
-    m.def("add", &add, R"pbdoc(
+    m.def("add", &add, R"mydelimiter(
         Add two numbers
 
         Some other explanation about the add function.
-    )pbdoc");
+    )mydelimiter");
 
-    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
+    m.def("subtract", [](int i, int j) { return i - j; }, R"mydelimiter(
         Subtract two numbers
         Some other explanation about the subtract function.
-    )pbdoc");
+    )mydelimiter");
     
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"
@@ -136,9 +135,9 @@ PYBIND11_MODULE(_vivid, m) {
         .def_property_readonly("colors", &CColorMap::GetColorMap);
     py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
 
-    py::class_<CMaterial>(m, "Material", R"pbdoc(
+    py::class_<CMaterial>(m, "Material", R"mydelimiter(
         Material obj
-    )pbdoc")
+    )mydelimiter")
         .def(py::init<normal_float, normal_float, float, const color_t&, const string& >(),
             py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, py::arg("emission_color")=make_color_t(0), py::arg("name")="default")
         .def(py::init<normal_float, normal_float, float, const string&, const string&  >(),
@@ -204,9 +203,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("mask"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
 
     // Main Classes
-    py::class_<CLines, CModelComponent>(m, "Lines", R"pbdoc(
+    py::class_<CLines, CModelComponent>(m, "Lines", R"mydelimiter(
         Lines objects
-    )pbdoc")
+    )mydelimiter")
             .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
                  py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
@@ -223,9 +222,9 @@ PYBIND11_MODULE(_vivid, m) {
 //                 "Add array of lines",
 //                 py::arg("points_matrix"));
 
-    py::class_<CPointCloud, CModelComponent>(m, "PointCloud", R"pbdoc(
+    py::class_<CPointCloud, CModelComponent>(m, "PointCloud", R"mydelimiter(
         Point cloud
-    )pbdoc")
+    )mydelimiter")
             .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
@@ -242,9 +241,9 @@ PYBIND11_MODULE(_vivid, m) {
                  "Generate 3D Mesh using Voronoi Algorithm",
                  py::arg("noise_displacement") = 0.001);
 
-    py::class_<CMesh, CModelComponent>(m, "Mesh", R"pbdoc(
+    py::class_<CMesh, CModelComponent>(m, "Mesh", R"mydelimiter(
         Basic Mesh class
-    )pbdoc")
+    )mydelimiter")
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
                  py::arg("mesh"))
@@ -258,9 +257,9 @@ PYBIND11_MODULE(_vivid, m) {
                  "Smooths the surface by HC Laplacian Algorithm.",
                  py::arg("num_of_iterations"), py::arg("alpha_weight"), py::arg("beta_weight"));
 
-    py::class_<CModel>(m, "Model", R"pbdoc(
+    py::class_<CModel>(m, "Model", R"mydelimiter(
         Model class for working with multiple Meshes
-    )pbdoc")
+    )mydelimiter")
             .def(py::init<> (), "default constructor for Model")
             .def(py::init<vector<CModelComponent>& >(),
                  "constructor for CModel, from meshes, lines, and point clouds",
@@ -286,9 +285,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("output_file"), py::arg("file_format") = "gltf2")
             .def("__repr__", [](const CModel &a){return "<vivid3d.Model>";});
 
-    py::class_<CAnimation> Animation(m,"Animation", R"pbdoc(
+    py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
         Class for animations
-    )pbdoc");
+    )mydelimiter");
         Animation.def(py::init<> (), "default constructor for Animation")
             .def(py::init<const CModel &> (),
                  "constructor for Animation from a single Model",
@@ -328,9 +327,9 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("output_file"), py::arg("file_format") = "gltf2");
 
 
-    py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"pbdoc(
+    py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
         Class for stop motion animations
-    )pbdoc")
+    )mydelimiter")
         .def(py::init<> (), "default constructor for StopMotionAnimation")
         .def(py::init<const CModel &, double> (),
             "constructor for StopMotionAnimation from a single Model",
@@ -351,11 +350,49 @@ PYBIND11_MODULE(_vivid, m) {
     //one liners
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
         std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float, const std::string&, coord_t>(&vivifyMesh), R"pbdoc(
+        normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
-        )pbdoc",
+
+            Parameters
+            ----------
+            input_points : array[array[float]]
+                The input point data in x,y,z form.
+            mask : array[bool]
+                Boolean mask of true and false points
+            output_path : string, default: ""
+                Path and name for output file
+                If left as None no Module will be written to file.
+            color_field : array[float], default: []
+                Vector containing the color field of each point
+                If left empty color will be basic white
+            color_field_min : float, optional
+                Set minimum value for color_field, anything below will be set to color_field_min
+                If left empty will be set to min(color_field)
+            color_field_max : float, optional
+                Set max value for color_field, anything below will be set to color_field_max
+                If left empty will be set to max(color_field)
+            label : string, default: "VIVID_MODEL"
+                Label to assign to the model, some file format support it
+            opacity : float, default: 1
+                Alpha value for the model, 0-1
+            file_type : string, default: "gltf2"
+                File format for export, out of Assimp supported formats
+            noise_displacement : float, default: 0.001
+                The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+
+            Returns
+            -------
+            vivid3d.Model
+                Output model.
+
+            See Also
+            --------
+            vivid3d.Model
+                Main class holding 3d models data in the vivid3d package, also see examples.
+
+        )mydelimiter",
         py::arg("input_points"),
         py::arg("mask"),
         py::arg("output_path") = "",
@@ -370,11 +407,11 @@ PYBIND11_MODULE(_vivid, m) {
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
         const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float , const std::string&, coord_t>(&vivifyMesh), R"pbdoc(
+        normal_float , const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
-        )pbdoc",
+        )mydelimiter",
         py::arg("input_points"),
         py::arg("surface_field"),
         py::arg("surface_threshold"),
@@ -389,11 +426,11 @@ PYBIND11_MODULE(_vivid, m) {
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
         std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
-        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"pbdoc(
+        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
-        )pbdoc",
+        )mydelimiter",
         py::arg("input_points"),
         py::arg("masks"),
         py::arg("output_path") = "",
@@ -408,11 +445,11 @@ PYBIND11_MODULE(_vivid, m) {
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
         const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
-        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"pbdoc(
+        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
             one function to rule them all
 
             makes a model from one line, if an output path is given the functions writes the model to file.
-        )pbdoc",
+        )mydelimiter",
         py::arg("input_points"),
         py::arg("surface_field"),
         py::arg("surface_thresholds"),

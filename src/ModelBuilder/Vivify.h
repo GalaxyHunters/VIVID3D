@@ -8,9 +8,9 @@ namespace vivid {
 
     /**
      * vivify one function to make a model - Mask version
-     * @param[in] aOutputPath Path and name for output file
      * @param[in] arInputPoints the input point data in x,y,z form.
      * @param[in] arMask a boolean mask of true and false points
+     * @param[in] aOutputPath Path and name for output file
      * @param[in] arColorField a vector containing the color field of each point
      * @param[in] aVMin the minimum value in arColorField, anything below will be set to aVMin
      * @param[in] aVMax the maximum value in arColorField, anything below will be set to aVMax

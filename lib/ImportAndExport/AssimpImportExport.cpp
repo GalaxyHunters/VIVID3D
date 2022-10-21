@@ -31,7 +31,8 @@ namespace vivid {
             aiScene *scene = GenerateScene(arModel);
 
             aOutputPath += fileFormats[arFileType];
-            RET_VALUE = exp.Export(scene, arFileType, aOutputPath);
+            RET_VALUE = exp.Export(scene, arFileType, aOutputPath,
+                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
             if (RET_VALUE != AI_SUCCESS) {
                 cerr << exp.GetErrorString() << endl;
             }
@@ -390,11 +391,11 @@ namespace vivid {
                 in this segments we get the average color of each vertice.
             */
             OutMesh->mTextureCoords[0] = new aiVector3D [vVertices.size()];
-            OutMesh->mNumUVComponents[0] = 2; //to be checked
+            OutMesh->mNumUVComponents[0] = 2;
             //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetQuan(), 0);
 
 
-            //assign faces and find avrage UVcoord per point
+            //assign faces and find average UVcoord per point
             vector<set<float>> vetUVcoord(vVertices.size());
             for (auto it = vTriangles.begin(); it != vTriangles.end(); ++it) {
                 aiFace &face = OutMesh->mFaces[it - vTriangles.begin()];

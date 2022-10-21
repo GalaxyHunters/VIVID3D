@@ -191,53 +191,20 @@ int PyramidSmoothTest()
         }
     }
 
-    CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
-//    CVoronoiVolume smooth1 = CVoronoiVolume(points, mask, quan, Vmin, Vmax);
-//    smooth1.CreateSurface();
+    //CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
+    CVoronoiVolume volume = CVoronoiVolume(points, quan, Vmin, Vmax, 0);
+    volume.CreateSurface();
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
-    CVoronoiVolume volume = pyramid_points.CreateVoronoiVolume();
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
+    mesh.LaplacianSmooth(10);
     cout << "second mesh" << endl;
-    CMesh fullMesh = volume.ToMesh("3", 0.1);
+    //CMesh fullMesh = volume.ToMesh("3", 0.1);
     cout << "model" << endl;
 //    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
     model.AddMesh(mesh);
-//    model.AddMesh(mesh);
-    model.AddMesh(fullMesh);
-    //mesh1.Reduce(0.3, 0.5);
-//    anim1.SetScaleAnim(0,CPoint(3,3,3));
-//    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
     cout << "export" << endl;
     model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
-//    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidVivid");
-//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth3.CreateSurface();
-//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-//    mesh3.LaplacianSmooth(10, 0.7, 0);
-//    mesh3.LaplacianSmooth(150, 0.25, 0.7);
-//    mesh3.Reduce(0.25, 0.7);
-//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
-//    CModel model = CModel({mesh3, mesh1});
-//    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
-//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth3.CreateSurface();
-//    smooth3.Smooth(3);
-//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-//    mesh3.Reduce(0.4, 0.3);
-//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
-//    CVoronoiVolume smooth6 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth6.CreateSurface();
-//    smooth6.Smooth(6);
-//    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
-//    mesh6.Reduce(0.25, 0.3);
-//    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
-//    CVoronoiVolume smooth8 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth8.CreateSurface();
-//    smooth8.Smooth(8);
-//    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
-//    mesh8.Reduce(0.2, 0.3);
-//    mesh8.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth8");
     return EXIT_SUCCESS;
 
 }
@@ -331,11 +298,22 @@ int make_model_test(){
                quan, -BOX_SIZE, BOX_SIZE, "testVivify", 1, "glb2",0.005);
     return EXIT_SUCCESS;
 }
+
+int grid_test(){
+    pair<CLines, CLines> grid = CreateGrid(10, 5, 2);
+    CModel model = CModel();
+    model.AddMesh(grid.first);
+    //model.AddMesh(grid.second);
+    if (model.Export(TEST_OUTPUT_PATH+"grid.obj", "obj") == 0) return EXIT_SUCCESS;
+    return -1;
+}
 int main()
 {
     ConfigLogging(true, LOG_DEBUG, false, "");
 //    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
+//    ret_value = grid_test();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "MedicaneTestTest");
 //    ret_value =RunMedicaneTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
@@ -344,19 +322,19 @@ int main()
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Testing All Shapes");
 //    ret_value = ShapesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    Log(LOG_INFO, "Testing vivify");
-    ret_value = make_model_test();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "Testing vivify");
+//    ret_value = make_model_test();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Cube");
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    Log(LOG_INFO, "Pyramid");
-//    ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    Log(LOG_INFO, "Pyramid");
+    ret_value = PyramidSmoothTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

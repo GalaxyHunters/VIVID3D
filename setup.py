@@ -11,7 +11,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="vivid3d",
-    version="0.2.1",
+    version="0.2.2",
     packages=['vivid3d'],
     package_dir={'': 'src'},
     cmake_install_dir='src/vivid3d',
@@ -28,7 +28,7 @@ setup(
     long_description_content_type='text/markdown',
     zip_safe=False,
     extras_require={"test": ["pytest>=6.0"]},
-    python_requires=">=3.6",
+    python_requires=">=3.7"
     keywords=["3d", "mesh", "visualization", "simulation", "particles"],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -36,7 +36,6 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Programming Language :: C++",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",

@@ -326,6 +326,7 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
     }
 }
 
+
 bool sortPoints(const shared_ptr<CPoint>& arobj1, const shared_ptr<CPoint>& arobj2) {
     return (*arobj1.get() < *arobj2.get());
 }

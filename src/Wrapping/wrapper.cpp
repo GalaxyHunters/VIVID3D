@@ -188,7 +188,6 @@ PYBIND11_MODULE(_vivid, m) {
             return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
         });
 
-
     py::class_<CVoronoiVolume>(m, "VoronoiVolume")
             .def(py::init<const vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
@@ -464,7 +463,9 @@ PYBIND11_MODULE(_vivid, m) {
 
 
     //Shapes:
-    //m.def("create_plane")
+    m.def("create_plane", &CreatePlaneMesh,
+        py::arg("position") = make_cpoint(0), py::arg("size") = 1,
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("alpha") = 1., py::arg("label")="");
     m.def("create_cube", &CreateCubeMesh,
           "Creates a cube mesh",
           py::arg("position") = make_cpoint(0), py::arg("size") = 1,

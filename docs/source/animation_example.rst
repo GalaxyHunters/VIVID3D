@@ -1,3 +1,6 @@
+Animation example
+=================
+
 The vivid3d package is capable of two types of animation support,
 
 1. Animation - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.

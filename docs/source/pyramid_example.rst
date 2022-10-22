@@ -1,3 +1,6 @@
+Simple ball example
+===================
+
 
 First, we need model data to test.
 In this example, we generate a 3D grid with a Distance attribute for each point.

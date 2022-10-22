@@ -46,34 +46,71 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
     return array;
 }
 
-int add(int i, int j) {
-    return i + j;
-}
 
 PYBIND11_MODULE(_vivid, m) {
     m.doc() = R"mydelimiter(
-        vivid3d - Documentation
-        =======================
+        =============
+        API Reference
+        =============
 
         .. currentmodule:: vivid3d
 
-        Vivify functions
-        ================
 
+        Core Api
+        ========
+
+        make_model - one liner model function
+        -------------------------------------
         .. autosummary::
            :toctree: _generate
            :caption: Vivify functions
 
            make_model
 
-        Shape functions
-        ================
 
+        Main Objects
+        ------------
         .. autosummary::
            :toctree: _generate
-           :caption: Shape functions
+           :caption: Main Objects
 
-           add
+           Point
+           Lines
+           PointCloud
+           VoronoiVolume
+           Mesh
+           Model
+
+
+        Animation Objects
+        -----------------
+        .. autosummary::
+           :toctree: _generate
+           :caption: Animation Objects
+
+           Animation
+           StopMotionAnimation
+
+
+        Material and Textures
+        ---------------------
+        .. autosummary::
+           :toctree: _generate
+           :caption: Material and Textures
+
+           ColorMap
+           Material
+
+
+        Utilities
+        =========
+
+        Shapes
+        ------
+        .. autosummary::
+           :toctree: _generate
+           :caption: Shapes
+
            create_cube
            create_box
            create_sphere
@@ -81,36 +118,17 @@ PYBIND11_MODULE(_vivid, m) {
            create_arrow
            create_grid
 
-        classes
-        =======
-
+        Logger
+        ------
         .. autosummary::
            :toctree: _generate
-           :caption: Classes
+           :caption: Logger
 
-           Point
-           ColorMap
-           Material
-           Lines
-           PointCloud
-           VoronoiVolume
-           Mesh
-           Model
-           Animation
-           StopMotionAnimation
+           config_logger
+
+
 	)mydelimiter";
 
-
-    m.def("add", &add, R"mydelimiter(
-        Add two numbers
-
-        Some other explanation about the add function.
-    )mydelimiter");
-
-    m.def("subtract", [](int i, int j) { return i - j; }, R"mydelimiter(
-        Subtract two numbers
-        Some other explanation about the subtract function.
-    )mydelimiter");
     
     py::class_<CPoint>(m, "Point")
 //        .doc() = "VIVID Point Class"

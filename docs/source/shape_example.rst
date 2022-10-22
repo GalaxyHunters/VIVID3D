@@ -1,3 +1,6 @@
+Shapes example
+==============
+
 The package has multiple shape functions that you can use to improve your models,
 they are detailed in the Functios Documentation.
 

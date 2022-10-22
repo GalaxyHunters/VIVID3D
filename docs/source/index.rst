@@ -9,14 +9,14 @@ vivid3d - 3D Visualization and animation tool
 Content
 -------
 .. toctree::
-   :caption: Basic Examples
+   :caption: User Guide
    :maxdepth: 2
 
    examples
 
 .. toctree::
-   :caption: Classes and function documentation
-   :maxdepth: 2
+   :caption: API Reference
+   :maxdepth: 3
 
    vivid_types 
 

@@ -1,7 +1,7 @@
 .. _examples:
 
-Code Examples
-#############
+User Guide
+##########
 
 When working with vivid3d there are two main work flowes:
 
@@ -13,38 +13,14 @@ The first one is recommended for beginners and once you get the gist,
 the advanced approach can get much better results.
 
 
+.. toctree::
+   :caption: Example
+   :maxdepth: 1
 
-#. `Simple example`_
-#. `Advanced example`_
-#. `Shapes example`_
-#. `Animation example`_
+   pyramid_example
+   enzo_galexy
+   shape_example
+   animation_example
 
 
-----
-
-Simple example
-==============
-
-.. include:: pyramid_example.rst
-
-----
-
-Advanced example
-================
-
-place holder - yt enzo galaxy
-
-----
-
-Shapes example
-==============
-
-.. include:: shape_example.rst
-
-----
-
-Animation example
-=================
-
-.. include:: animation_example.rst
 

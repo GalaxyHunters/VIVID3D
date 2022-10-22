@@ -191,7 +191,7 @@ int PyramidSmoothTest()
         }
     }
 
-    //CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
+//CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
     CVoronoiVolume volume = CVoronoiVolume(points, quan, Vmin, Vmax, 0);
     volume.CreateSurface();
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
@@ -199,6 +199,7 @@ int PyramidSmoothTest()
     mesh.LaplacianSmooth(10);
     cout << "second mesh" << endl;
     //CMesh fullMesh = volume.ToMesh("3", 0.1);
+
     cout << "model" << endl;
 //    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
@@ -332,9 +333,9 @@ int main()
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    Log(LOG_INFO, "Pyramid");
-    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "Pyramid");
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

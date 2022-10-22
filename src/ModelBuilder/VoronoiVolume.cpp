@@ -326,10 +326,14 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
     }
 }
 
+
+bool sortPoints(const shared_ptr<CPoint>& arobj1, const shared_ptr<CPoint>& arobj2) {
+    return (*arobj1.get() < *arobj2.get());
+}
 void CVoronoiVolume::CleanDoublePoints()
 {
     //sort the array
-    sort(mVertices.begin(), mVertices.end());
+    sort(mVertices.begin(), mVertices.end(), sortPoints);
     map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fitting to each point
     vector<shared_ptr<CPoint> > cleaned_points;
     size_t j;

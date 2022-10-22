@@ -8,7 +8,7 @@ include(GNUInstallDirs)
 
 #project(VoronoiLib VERSION 1.0.0 DESCRIPTION "Library used for running the voronoi algorithm.")
 #Checks if the library is already present, if so, skips this part entirely.
-include_directories()
+include_directories(${PROJECT_SOURCE_DIR}/lib/MyBoost)
 IF(NOT TARGET voronoi)
     # Create a new LIBRARY target as a shared library, note that this creates an so file in the cmake-debug output dir.
     # Adding the source code.

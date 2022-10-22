@@ -16,6 +16,7 @@
 #include <assimp/types.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Vivify.h"
 
 constexpr int BOX_SIZE = 30;
 constexpr int HEIGHT   = 15;
@@ -190,53 +191,21 @@ int PyramidSmoothTest()
         }
     }
 
-    CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
-//    CVoronoiVolume smooth1 = CVoronoiVolume(points, mask, quan, Vmin, Vmax);
-//    smooth1.CreateSurface();
+//CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
+    CVoronoiVolume volume = CVoronoiVolume(points, quan, Vmin, Vmax, 0);
+    volume.CreateSurface();
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
-    CVoronoiVolume volume = pyramid_points.CreateVoronoiVolume();
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
+    mesh.LaplacianSmooth(10);
     cout << "second mesh" << endl;
-    CMesh fullMesh = volume.ToMesh("3", 0.1);
+    //CMesh fullMesh = volume.ToMesh("3", 0.1);
+
     cout << "model" << endl;
 //    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
     model.AddMesh(mesh);
-//    model.AddMesh(mesh);
-    model.AddMesh(fullMesh);
-    //mesh1.Reduce(0.3, 0.5);
-//    anim1.SetScaleAnim(0,CPoint(3,3,3));
-//    anim1.SetMoveAnim(0, CPoint(50, -50, 20));
     cout << "export" << endl;
     model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
-//    mesh1.ExportToObj(TEST_OUTPUT_PATH + "PyramidVivid");
-//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth3.CreateSurface();
-//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-//    mesh3.LaplacianSmooth(10, 0.7, 0);
-//    mesh3.LaplacianSmooth(150, 0.25, 0.7);
-//    mesh3.Reduce(0.25, 0.7);
-//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidLaplacianSmooth_HC_reduce");
-//    CModel model = CModel({mesh3, mesh1});
-//    model.ExportToObj(TEST_OUTPUT_PATH + "/SmoothReduceComparison");
-//    CVoronoiVolume smooth3 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth3.CreateSurface();
-//    smooth3.Smooth(3);
-//    CMesh mesh3 = smooth3.ToMesh("vivid_3d_obj", 1.0);
-//    mesh3.Reduce(0.4, 0.3);
-//    mesh3.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth3");
-//    CVoronoiVolume smooth6 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth6.CreateSurface();
-//    smooth6.Smooth(6);
-//    CMesh mesh6 = smooth6.ToMesh("vivid_3d_obj", 1.0);
-//    mesh6.Reduce(0.25, 0.3);
-//    mesh6.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth6");
-//    CVoronoiVolume smooth8 = CVoronoiVolume(points, mask, quan, *min_element( quan.begin(), quan.end() ), *max_element( quan.begin(), quan.end()) );
-//    smooth8.CreateSurface();
-//    smooth8.Smooth(8);
-//    CMesh mesh8 = smooth8.ToMesh("vivid_3d_obj", 1.0);
-//    mesh8.Reduce(0.2, 0.3);
-//    mesh8.ExportToObj(TEST_OUTPUT_PATH + "/PyramidSmooth8");
     return EXIT_SUCCESS;
 
 }
@@ -279,91 +248,6 @@ void assimpTest(string file){
                                         aiProcess_CalcTangentSpace |
                                         aiProcess_JoinIdenticalVertices |
                                         aiProcess_SortByPType);
-
-    aiNodeAnim** channels = scene->mAnimations[0]->mChannels;
-
-    for(int i = 0; i != scene->mAnimations[0]->mNumChannels; i++){
-        cout << "animation channel " << i << endl;
-        cout << "Position Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumPositionKeys; P_key++){
-            cout << "Time - " << channels[i]->mPositionKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mPositionKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mPositionKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mPositionKeys[P_key].mValue.z << endl;
-        }
-        cout << "Rotation Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumRotationKeys; P_key++){
-            cout << "Time - " << channels[i]->mRotationKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mRotationKeys[P_key].mValue.w << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mRotationKeys[P_key].mValue.z << endl;
-        }
-        cout << "Scaling Keys: " << endl;
-        for(int P_key = 0; P_key != channels[i]->mNumScalingKeys; P_key++){
-            cout << "Time - " << channels[i]->mScalingKeys[P_key].mTime;
-            cout << " Value - " << channels[i]->mScalingKeys[P_key].mValue.x << " ";
-            cout << channels[i]->mScalingKeys[P_key].mValue.y << " ";
-            cout << channels[i]->mScalingKeys[P_key].mValue.z << endl;
-        }
-    }
-
-    aiMaterial* mat = scene->mMaterials[1];
-    aiMaterialProperty prop;
-
-//    //big printing of stuff
-//    aiString matString;
-//    aiColor3D color(0,0,0);
-//    int num1;
-//    float float1;
-//    mat->Get(AI_MATKEY_NAME, matString);
-//    cout << "AI_MATKEY_NAME     "<< matString.C_Str() << endl;
-//
-//    mat->Get(AI_MATKEY_SHADING_MODEL, num1);
-//    cout << "AI_MATKEY_SHADING_MODEL     "<< num1 << endl;
-//
-//    mat->Get("$mat.illum", 3, 0, num1);
-//    cout << "mat.illum     "<< num1 << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
-//    cout << "AI_MATKEY_COLOR_AMBIENT     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-//    cout << "AI_MATKEY_COLOR_DIFFUSE     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
-//    cout << "AI_MATKEY_COLOR_SPECULAR     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_COLOR_EMISSIVE, color);
-//    cout << "AI_MATKEY_COLOR_EMISSIVE     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//
-//    mat->Get(AI_MATKEY_COLOR_TRANSPARENT, color);
-//    cout << "AI_MATKEY_COLOR_TRANSPARENT     ";
-//    cout << color.r << color.g << color.b << endl;
-//
-//    mat->Get(AI_MATKEY_SHININESS, float1);
-//    cout << "AI_MATKEY_SHININESS     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_OPACITY, float1);
-//    cout << "AI_MATKEY_OPACITY     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_ANISOTROPY_FACTOR, float1);
-//    cout << "AI_MATKEY_ANISOTROPY_FACTOR     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_REFRACTI, float1);
-//    cout << "AI_MATKEY_REFRACTI     "<< float1 << endl;
-//
-//    mat->Get(AI_MATKEY_UVWSRC(aiTextureType_DIFFUSE, 0), num1);
-//    cout << "AI_MATKEY_UVWSRC     "<< num1 << endl;
-//
-//    mat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), matString);
-//    cout << "AI_MATKEY_TEXTURE     "<< matString.C_Str() << endl;
-
     if (exp.Export(scene, "gltf2", TEST_OUTPUT_PATH + "TestAssimpAnim.gltf") != AI_SUCCESS) {
         cerr << exp.GetErrorString() << endl;
     }
@@ -394,20 +278,55 @@ int CubeAnimationTest()
     //AssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
     return EXIT_SUCCESS;
 }
+int make_model_test(){
+    vector<CPoint> points;
+    vector<float> distance;
+    vector<bool> mask;
+    vector<normal_float> quan;
+    vector<double> temp;
+    for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
+        for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
+            for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
+                temp = vector<double>(3);
+                temp[0] = i ; temp[1] = j; temp[2] = z;
+                points.push_back(temp);
+                distance.push_back(sqrt(pow(i - 0, 2) + pow(j - 0, 2) + pow(z - 0, 2)));
+                quan.push_back(j);
+            }
+        }
+    }
+    vivifyMesh(points, distance, 17, TEST_OUTPUT_PATH+ "/test_vivify",
+               quan, -BOX_SIZE, BOX_SIZE, "testVivify", 1, "glb2",0.005);
+    return EXIT_SUCCESS;
+}
+
+int grid_test(){
+    pair<CLines, CLines> grid = CreateGrid(10, 5, 2);
+    CModel model = CModel();
+    model.AddMesh(grid.first);
+    //model.AddMesh(grid.second);
+    if (model.Export(TEST_OUTPUT_PATH+"grid.obj", "obj") == 0) return EXIT_SUCCESS;
+    return -1;
+}
 int main()
 {
     ConfigLogging(true, LOG_DEBUG, false, "");
 //    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
+//    ret_value = grid_test();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "MedicaneTestTest");
 //    ret_value =RunMedicaneTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "ParametricSurfByFuncTest");
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    Log(LOG_INFO, "Testing All Shapes");
-    ret_value = ShapesTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "Testing All Shapes");
+//    ret_value = ShapesTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "Testing vivify");
+//    ret_value = make_model_test();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Cube");
 //    ret_value = CubeSurfTests();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

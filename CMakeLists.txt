@@ -7,7 +7,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.2.2")
+        VERSION "0.2.6")
+
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 message("${PROJECT_SOURCE_DIR}")
@@ -17,7 +18,7 @@ include(GNUInstallDirs)
 
 
 
-find_package( Boost 1.58.0 REQUIRED)
+#find_package( Boost 1.58.0 REQUIRED)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
 
@@ -49,6 +50,7 @@ add_library(vivid SHARED
         #lib/ImportAndExport/FbxCode.cpp
         #lib/ImportAndExport/FBXImportExport.cpp
         #vivid
+        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Vivify.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Model.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/ModelComponent.cpp"
         "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Mesh.cpp"
@@ -73,7 +75,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
 #        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp")
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h)
 
 
 target_include_directories(vivid PUBLIC
@@ -85,6 +87,7 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MeshDecimation>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MyBoost>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
@@ -97,8 +100,8 @@ message("VIVID SHARED BUILD")
 
 target_link_libraries(vivid voronoi)
 target_link_libraries(vivid assimp::assimp)
-target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
-target_link_libraries(vivid Boost::boost)
+#target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
+#target_link_libraries(vivid Boost::boost)
 
 
 install(DIRECTORY
@@ -112,6 +115,7 @@ install(DIRECTORY
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms"
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon"
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc"
+        "${PROJECT_SOURCE_DIR}/lib/MyBoost"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport"
 #        "${PROJECT_SOURCE_DIR}/pybind11/include/pybind11"

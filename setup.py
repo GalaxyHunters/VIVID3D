@@ -11,7 +11,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="vivid3d",
-    version="0.2.2",
+    version="0.2.6",
     packages=['vivid3d'],
     package_dir={'': 'src'},
     cmake_install_dir='src/vivid3d',
@@ -21,7 +21,7 @@ setup(
     project_urls={
         "Documentation": "https://vivid.readthedocs.io/en/latest/",
         "Bug Tracker": "https://github.com/GalaxyHunters/Vivid/issues",
-        "Source Code": "https://github.com/pyvista/pyvista",
+        "Source Code": "https://github.com/GalaxyHunters/Vivid",
     },
     description='A 3D visualisation tool for simulations',
     long_description=long_description,

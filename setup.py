@@ -28,7 +28,7 @@ setup(
     long_description_content_type='text/markdown',
     zip_safe=False,
     extras_require={"test": ["pytest>=6.0"]},
-    python_requires=">=3.7"
+    python_requires=">=3.7",
     keywords=["3d", "mesh", "visualization", "simulation", "particles"],
     classifiers=[
         "Development Status :: 4 - Beta",

@@ -16,19 +16,19 @@ From this data, we will make a ball
 
     #make the data
     BOX_SIZE = 30
-    zero = np.array([0,0,0])
 
-    points = []
-    color = []
-    distance = []
-
-    for i in range(-BOX_SIZE, BOX_SIZE, 2):
-        for j in range(-BOX_SIZE, BOX_SIZE, 2):
-            for z in range(-BOX_SIZE, BOX_SIZE, 2):
-                point = np.array([i, j, z])
-                points.append(point)
-                distance.append(np.linalg.norm(point-zero))
-                color.append(j)
+    #make 3d grid
+    arr = np.arange(-BOX_SIZE, BOX_SIZE, 2)
+    ones = np.ones((len(arr), len(arr), len(arr)))
+    arrX = arr.reshape(-1, 1, 1) * ones
+    arrY = arr.reshape(1, -1, 1) * ones
+    arrZ = arr.reshape(1, 1, -1) * ones
+    #set points
+    points = np.array(list(zip(arrX.reshape(-1), arrY.reshape(-1), arrZ.reshape(-1))))
+    #set color field by Z value
+    color = arrZ.reshape(-1)
+    #Get distance from zero to each point (We will make our surface with this)
+    distance = np.linalg.norm(points - np.zeros((1, 3)), axis=1).reshape(-1)
 
 Now, with this data we can call vivid and make a model.
 

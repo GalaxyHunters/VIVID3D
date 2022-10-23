@@ -161,10 +161,10 @@ if(DEFINED SKBUILD)
 #    set(PYBIND11_PYTHON_VERSION 3.7)
     add_definitions(-DPYTHON)
 
-    set(Python3_FIND_STRATEGY VERSION)
-    find_package(Python3 COMPONENTS Interpreter Development)
-    include_directories(${Python3_INCLUDE_DIRS})
-    target_link_libraries(vivid ${Python3_LIBRARIES})
+#    set(Python3_FIND_STRATEGY VERSION)
+#    find_package(Python3 COMPONENTS Interpreter Development)
+    include_directories(${PYTHON_INCLUDE_DIRS})
+    target_link_libraries(vivid ${PYTHON_LIBRARIES})
 
     pybind11_add_module(_vivid
             ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp

@@ -62,7 +62,7 @@ class VolumetricViewer(object):
     label1 = widgets.Label(value="Thresholds")
     thresholds = widgets.FloatRangeSlider(value=(self.vmin, self.vmax), min=self.vmin,max=self.vmax, step=1 if self.vmax-self.vmin > 10 else (self.vmax-self.vmin)/100.0,name="Mask Range")
     
-    cm_dropdown = widgets.Dropdown(options=cm.cmap_d.keys(), value="viridis", description="Color Map", disable=False)
+    cm_dropdown = widgets.Dropdown(options=cm.cmap_d.keys(), value=self.cmap, description="Color Map", disable=False)
     label2 = widgets.Label(value="Frame Select")
     play = widgets.Play(
       value=self.n_frames // 2,

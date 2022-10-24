@@ -1,27 +1,51 @@
 #include "AssimpImportExport.h"
 
 namespace vivid {
-
-    constexpr float MAX_ROUGHNESS = 1000;
+    namespace {
+        constexpr float MAX_ROUGHNESS = 1000;
+    }
 
     namespace AssimpExport {
         // matches assimp file formats to actual file endings
         std::map<std::string, std::string> fileFormats =
-                {
-                        {"glb2",    ".glb"},
-                        {"gltf2",   ".gltf"},
-                        {"obj",     ".obj"},
-                        {"fbx",     ".fbx"},
-                        {"ply",     ".ply"},
-                        {"gltf",    ".gltf"},
-                        {"3ds",     ".3ds"},
-                        {"stl",     ".stl"},
-                        {"stlb",    ".stl"},
-                        {"collada", ".dae"}
-                };
+            {
+                {"glb",     ".glb"},
+                {"glb2",    ".glb"},
+                {"gltf2",   ".gltf"},
+                {"obj",     ".obj"},
+                {"fbx",     ".fbx"},
+                {"ply",     ".ply"},
+                {"gltf",    ".gltf"},
+                {"3ds",     ".3ds"},
+                {"stl",     ".stl"},
+                {"stlb",    ".stl"},
+                {"collada", ".dae"}
+            };
 
         map<string, string> TextureNameToIndex = {};
         string OutputPath = "";
+
+        const void* AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
+            Assimp::Exporter exp;
+            aiExportDataBlob blob;
+
+            aiScene *scene = GenerateScene(arModel);
+
+            blob = exp.ExportToBlob(scene, arFileType,
+                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
+
+            TextureNameToIndex.clear();
+            delete scene;
+            
+            if (!blob) {
+                Log(LOG_ERROR, exp.GetErrorString();
+            }
+            // memcpy the blob data to avoid it getting deleted by garbage collector
+            void* data = malloc(blob.size);
+            memcpy(data, blob.data, blob.size);
+
+            return data;
+        }
 
         int AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
@@ -33,12 +57,14 @@ namespace vivid {
             aOutputPath += fileFormats[arFileType];
             RET_VALUE = exp.Export(scene, arFileType, aOutputPath,
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
-            if (RET_VALUE != AI_SUCCESS) {
-                cerr << exp.GetErrorString() << endl;
-            }
 
             TextureNameToIndex.clear();
             delete scene;
+
+            if (RET_VALUE != AI_SUCCESS) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+
             return RET_VALUE;
         }
 
@@ -50,15 +76,16 @@ namespace vivid {
 
             aiScene *scene = GenerateAnimationScene(arAnimation);
 
-
             aOutputPath += fileFormats[arFileType];
             RET_VALUE = exp.Export(scene, arFileType, aOutputPath);
-            if (RET_VALUE != AI_SUCCESS) {
-                cerr << exp.GetErrorString() << endl;
-            }
-
+            
             TextureNameToIndex.clear();
             delete scene;
+            
+            if (RET_VALUE != AI_SUCCESS) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+
             return RET_VALUE;
         }
 

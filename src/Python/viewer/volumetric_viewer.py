@@ -1,7 +1,8 @@
 """
-requirements:
-matplotlib, ipywidgets, ffmpeg-python
+IPython 2D 3-Axis Volumetric Viewer
+-------------
 """
+
 from matplotlib import animation, cm
 import matplotlib.pyplot as plt
 import numpy as np

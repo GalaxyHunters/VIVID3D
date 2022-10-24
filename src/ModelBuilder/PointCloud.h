@@ -13,7 +13,7 @@ namespace vivid
     class CPointCloud : public CModelComponent{
     public:
         //Constructor and Copy Constructor
-        CPointCloud() : CModelComponent(POINTS) {}
+        CPointCloud(normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, POINTS) {}
         /**
          * CVoronoiVolume Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.

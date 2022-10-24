@@ -29,4 +29,9 @@ void CModel::ExportToObj(const string &arOutputFilePath, bool WithTexture){
 int CModel::Export(const std::string &arOutputFilePath, const std::string& arFileType){
     return AssimpExport::AssimpExporter(*this, arFileType, arOutputFilePath);
 }
+
+void* ExportToBlob(const std::string& arFileType = "glb") {
+    return AssimpExport::AssimpExporter(*this, arFileType);
+}
+
 CModel::~CModel() = default;

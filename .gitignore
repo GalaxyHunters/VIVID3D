@@ -15,3 +15,4 @@ vivid_main
 **/__init__.py
 !/src/vivid3d
 !/pybind11/pybind11/__init__.py
+.vscode/

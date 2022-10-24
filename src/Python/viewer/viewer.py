@@ -1,8 +1,8 @@
 """
-html model generator
+IPython 3D Model Viewer
 -------------
-Render gltf objects in HTML
-and jupyter notebooks using model-viewer
+Render Vivid3D Objects in IPython
+and jupyter notebooks using show
 """
 import base64
 
@@ -11,10 +11,12 @@ def show(glb):
     Convert a scene to HTML containing embedded geometry
     and a three.js viewer that will display nicely in
     an IPython/Jupyter notebook.
+    
     Parameters
     -------------
     glb : binary
       .glb blob file
+      
     Returns
     -------------
     html : IPython.display.HTML

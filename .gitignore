@@ -3,7 +3,7 @@
 /CMakeFiles/
 /binding_python_version/
 /venv/
-/Vivid_py.egg-info/
+/Vivid3d.egg-info/
 /temp-debug changes/
 /dist/
 /build/
@@ -14,4 +14,5 @@ vivid
 vivid_main
 **/__init__.py
 !/src/vivid3d
+!/src/vivid3d/viewer
 !/pybind11/pybind11/__init__.py

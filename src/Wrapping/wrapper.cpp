@@ -109,8 +109,9 @@ PYBIND11_MODULE(_vivid, m) {
         ------
         .. autosummary::
            :toctree: _generate
-           :caption: Shapes
+           :caption: Geometry
 
+           create_plane 
            create_cube
            create_box
            create_sphere
@@ -131,7 +132,6 @@ PYBIND11_MODULE(_vivid, m) {
 
     
     py::class_<CPoint>(m, "Point")
-//        .doc() = "VIVID Point Class"
         .def(py::init<const CPoint &>(),
                 "copy constructor for Point",
                 py::arg("point"))

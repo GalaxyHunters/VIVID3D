@@ -14,7 +14,7 @@ inline std::string GetTypeString(const py::handle arObj) {
     std::string type = py::str(arObj.get_type()).cast<std::string>();
     return type.substr(8, type.size() - 10);
 }
-
+constexpr auto STR = 'str'
 constexpr auto MPL_LINEARCOLORMAP = "matplotlib.colors.ListedColormap";
 constexpr auto MPL_SEGMENTEDLINEARCOLORMAP = "matplotlib.colors.LinearSegmentedColormap";
 
@@ -24,7 +24,7 @@ namespace pybind11 {
         template <> struct type_caster<CPoint>
         {
         public:
-            PYBIND11_TYPE_CASTER(CPoint, _("Py3DPoint"));
+            PYBIND11_TYPE_CASTER(CPoint, _("Point3D"));
 
             // Conversion part 1 (Python -> C++)
             bool load(py::handle src, bool convert) {
@@ -78,7 +78,7 @@ namespace pybind11 {
         {
         public:
 
-            PYBIND11_TYPE_CASTER(std::vector<CPoint>, _("Py3DPointVector"));
+            PYBIND11_TYPE_CASTER(std::vector<CPoint>, _("Point3DList"));
 
             // Conversion part 1 (Python -> C++)
             bool load(py::handle src, bool convert)
@@ -146,16 +146,22 @@ namespace pybind11 {
                 std::string name;
                 std::vector<std::array<float, 3>> clm;
                 std::string obj_type = GetTypeString(arObj);
+                auto colormap = arObj;
 
+                if (obj_type == STR) {
+                    auto cm = py::module_::import("matplotlib.cm")
+                    auto colormap = cm.attr("get_cmap")(arObj)
+                    obj_type = GetTypeString(colormap)
+                }
                 if (obj_type == MPL_LINEARCOLORMAP) {
-                    clm = arObj.attr("colors").cast<std::vector<std::array<float, 3>>>();
-                    name = arObj.attr("name").cast<std::string>();
+                    clm = colormap.attr("colors").cast<std::vector<std::array<float, 3>>>();
+                    name = colormap.attr("name").cast<std::string>();
                 } else if (obj_type == MPL_SEGMENTEDLINEARCOLORMAP) {
-                    name = arObj.attr("name").cast<std::string>();
-                    int size = arObj.attr("N").cast<int>();
+                    name = colormap.attr("name").cast<std::string>();
+                    int size = colormap.attr("N").cast<int>();
                     float r, g, b;
                     for (int i = 0; i < size; i++) {
-                        auto result = arObj(i);
+                        auto result = colormap(i);
                         r = result[py::int_(0)].cast<float>();
                         g = result[py::int_(1)].cast<float>();
                         b = result[py::int_(2)].cast<float>();
@@ -173,22 +179,24 @@ namespace pybind11 {
                 return true;
             }
             //Conversion part 2 (C++ -> Python)
-            static py::handle cast(const PyColorMap& src, py::return_value_policy policy, py::handle parent)
-            {
-//                std::vector<double> shape (3);
-//
-//                shape[0] = src.X();
-//                shape[1] = src.Y();
-//                shape[2] = src.Z();
-//
-//                py::array ret = py::cast(shape);
+//             static py::handle cast(const PyColorMap& src, py::return_value_policy policy, py::handle parent)
+//             {
+// //                std::vector<double> shape (3);
+// //
+// //                shape[0] = src.X();
+// //                shape[1] = src.Y();
+// //                shape[2] = src.Z();
+// //
+// //                py::array ret = py::cast(shape);
 
-                return py::int_(0);
-            }
+//                 return src;
+//             }
         };
 
         /* -------------------------------------------- MATRIX<CPOINT> --------------------------------------------*/
         // TODO: FIgure out how to do this, if the np 3d matrix has different lengths then its ndim is 1 and impossible to parse using the current strategy
+        // SOLUTION 1: Only accept proper np matrix
+        // SOLUTION 2: Just take the whole buffer (flattened) and read 3 values at a time
         //    template <> struct type_caster<std::vector<std::vector<<CPoint>>>
         //    {
         //    public:

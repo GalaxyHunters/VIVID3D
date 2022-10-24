@@ -109,8 +109,9 @@ PYBIND11_MODULE(_vivid, m) {
         ------
         .. autosummary::
            :toctree: _generate
-           :caption: Shapes
+           :caption: Geometry
 
+           create_plane 
            create_cube
            create_box
            create_sphere
@@ -131,7 +132,6 @@ PYBIND11_MODULE(_vivid, m) {
 
     
     py::class_<CPoint>(m, "Point")
-//        .doc() = "VIVID Point Class"
         .def(py::init<const CPoint &>(),
                 "copy constructor for Point",
                 py::arg("point"))
@@ -150,7 +150,12 @@ PYBIND11_MODULE(_vivid, m) {
         .def(py::init<const CColorMap&>(),
              py::arg("ColorMap"))
         .def_property_readonly("name", &CColorMap::GetName)
-        .def_property_readonly("colors", &CColorMap::GetColorMap);
+        .def_property_readonly("colors", &CColorMap::GetColorMap)
+        .def_readonly_static("colors", &COLORS, "List of supported colors")
+        .def_property_readonly_static("color_maps", [](py::object) {
+            auto plt = py::module_::import("matplotlib.pyplot");
+            return plt.attr("colormaps")();
+        }, "List of supported Matplotlib Color Maps");
     py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
 
     py::class_<CMaterial>(m, "Material", R"mydelimiter(

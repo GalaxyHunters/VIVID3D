@@ -14,7 +14,7 @@ inline std::string GetTypeString(const py::handle arObj) {
     std::string type = py::str(arObj.get_type()).cast<std::string>();
     return type.substr(8, type.size() - 10);
 }
-constexpr auto STR = 'str'
+constexpr auto STR = "str";
 constexpr auto MPL_LINEARCOLORMAP = "matplotlib.colors.ListedColormap";
 constexpr auto MPL_SEGMENTEDLINEARCOLORMAP = "matplotlib.colors.LinearSegmentedColormap";
 
@@ -147,11 +147,12 @@ namespace pybind11 {
                 std::vector<std::array<float, 3>> clm;
                 std::string obj_type = GetTypeString(arObj);
                 auto colormap = arObj;
-
+                std::cout<<obj_type<<std::endl;
                 if (obj_type == STR) {
-                    auto cm = py::module_::import("matplotlib.cm")
-                    auto colormap = cm.attr("get_cmap")(arObj)
-                    obj_type = GetTypeString(colormap)
+                    auto cm = py::module_::import("matplotlib.cm");
+                    colormap = cm.attr("get_cmap")(arObj);
+                    obj_type = GetTypeString(colormap);
+                    std::cout<<obj_type<<std::endl;
                 }
                 if (obj_type == MPL_LINEARCOLORMAP) {
                     clm = colormap.attr("colors").cast<std::vector<std::array<float, 3>>>();

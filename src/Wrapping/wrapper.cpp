@@ -68,11 +68,11 @@ PYBIND11_MODULE(_vivid, m) {
            make_model
 
 
-        Main Objects
+        Model Objects
         ------------
         .. autosummary::
            :toctree: _generate
-           :caption: Main Objects
+           :caption: Model Objects
 
            Point
            Lines
@@ -105,12 +105,13 @@ PYBIND11_MODULE(_vivid, m) {
         Utilities
         =========
 
-        Shapes
+        Geometry
         ------
         .. autosummary::
            :toctree: _generate
-           :caption: Shapes
-
+           :caption: Geometry
+           
+           create_plane 
            create_cube
            create_box
            create_sphere
@@ -125,7 +126,7 @@ PYBIND11_MODULE(_vivid, m) {
            :caption: Logger
 
            config_logger
-
+           LogCode
 
 	)mydelimiter";
 
@@ -199,11 +200,31 @@ PYBIND11_MODULE(_vivid, m) {
         .def("scale", &CModelComponent::ScaleMesh,
             "Scale Model Component by scale_vec.",
             py::arg("scale_vec"))
-        .def("export", &CModelComponent::Export,
-            "writes CMesh to a given file format",
-            py::arg("output_file"), py::arg("file_format") = "gltf2")
+        def("export", [](&CModelComponent self, string output_file, string file_type) {
+                if (output_file) {
+                    return self.Export(output_file, file_type);
+                } else {
+                    return self.ExportToBlob(file_type);
+                }
+            }, R"mydelimiter(
+                Writes Component to output_file with given file format.
+                If no output_file provided, this function will return a blob file in the given file format.
+
+                Parameters
+                -------------
+                output_file : string, default: ""
+                    File Directory to export to
+                file_type : string, default: glb
+                    File format to export to
+                
+                Returns
+                -------------
+                blob : bytes
+                    Object containing exported model - only returned if output_file is not provided
+                )mydelimiter",
+                 py::arg("output_file")="", py::arg("file_type") = "glb")
         .def("__str__", [](const CModelComponent& arMC) {
-            return "vivid3d.__vivid.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
+            return "vivid3d.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
         });
 
     py::class_<CVoronoiVolume>(m, "VoronoiVolume")
@@ -221,8 +242,20 @@ PYBIND11_MODULE(_vivid, m) {
 
     // Main Classes
     py::class_<CLines, CModelComponent>(m, "Lines", R"mydelimiter(
-        Lines objects
+        Lines object that holds 3D Lines
     )mydelimiter")
+            .def(py::init<normal_float, const string&>(), 
+                R"mydelimiter(
+                Lines Empty Constructor
+
+                Parameters
+                -------------
+                opacity : normalized float, default: 1.0
+                    Opacity of Component
+                label : string, default: ""
+                    Label of Component
+                )mydelimiter",
+                 py::arg("opacity")=1., py::arg("label")="")
             .def(py::init<const vector<CPoint>&, const normal_float, const string& >(),
                  "Constructor for Lines",
                  py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
@@ -297,10 +330,30 @@ PYBIND11_MODULE(_vivid, m) {
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
                  py::arg("output_file"), py::arg("with_texture") = 1)
-            .def("export", &CModel::Export,
-                 "writes CModel to a given file format",
-                 py::arg("output_file"), py::arg("file_format") = "gltf2")
-            .def("__repr__", [](const CModel &a){return "<vivid3d.Model>";});
+            .def("export", [](&CModel self, string output_file, string file_type) {
+                if (output_file) {
+                    return self.Export(output_file, file_type);
+                } else {
+                    return self.ExportToBlob(file_type);
+                }
+            }, R"mydelimiter(
+                Writes Component to output_file with given file format.
+                If no output_file provided, this function will return a blob file in the given file format.
+
+                Parameters
+                -------------
+                output_file : string, default: ""
+                    File Directory to export to
+                file_type : string, default: glb
+                    File format to export to
+
+                Returns
+                -------------
+                blob : bytes
+                    Object containing exported model - only returned if output_file is not provided
+                )mydelimiter",
+                 py::arg("output_file")="", py::arg("file_type") = "glb")
+            .def("__repr__", [](const vivid::CModel &self){return "vivid3d.Model\nnMeshes " + to_string(self.GetNumMeshes());});
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
         Class for animations

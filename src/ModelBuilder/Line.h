@@ -11,7 +11,7 @@ namespace vivid
     private:
         static std::vector<std::vector<size_t>> FormatPairPoints(const std::vector<size_t>& arLine);
     public:
-        CLines() : CModelComponent(LINES) {}
+        CLines(normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, LINES) {}
         CLines(const std::vector<CPoint> &arLine, normal_float aOpacity, const std::string &arLabel);
         // probably not usable constructor, possible remake in python wrapper.
         CLines(const std::vector<std::vector<CPoint>> &arLines, normal_float aOpacity, const std::string &arLabel);

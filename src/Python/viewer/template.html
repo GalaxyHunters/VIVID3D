@@ -6,7 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <style>
+      model-viewer {
+        width: auto;
+        height: 500px;
+      }
+    </style>
     
     <!-- The following libraries and polyfills are recommended to maximize browser support -->
     <!-- NOTE: you must adjust the paths as appropriate for your project -->
@@ -28,11 +33,11 @@
   <div class="container">
     <!-- All you need to put beautiful, interactive 3D content on your site: -->
     <model-viewer camera-controls
-                  src="$B64GLTF"
-                  alt="A 3D model of an astronaut"
+                  src="data:text/plain;base64,$B64GLTF"
+                  alt="Vivid3D Model"
                   shadow-intensity="1"
                   camera-controls
-                  auto-rotate ar>
+                  auto-rotate>
     </model-viewer>
     
   </div>

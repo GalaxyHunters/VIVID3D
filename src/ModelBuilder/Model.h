@@ -29,16 +29,25 @@ namespace vivid
 
         // Add Importers
         // void ImportModel(const std::string &arInputFilePath)
+        /**
+        * OBJ export. writes arModel to arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
+        * @param[in] WithTexture Whether to include Texture Data or not
+        */
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
 
         /**
-        * Assimp export. writes arModel in aFileType format at aOutputPath
-        * @param[in] aOutputPath Path and name for output file
+        * Assimp export. writes arModel in aFileType format at arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "obj");
-//    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
-
+        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        /**
+        * Assimp export. returns arModel in aFileType format
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        * @returns void* file blob encoded in provided aFileType
+        */
+        void* ExportToBlob(const std::string& arFileType = "glb");
         //TODO export to BLOB
     };
 

@@ -1,0 +1,49 @@
+name: base
+channels:
+  - defaults
+dependencies:
+  - conda
+  - python=3.9
+  - conda-env
+  - conda-build
+  - conda-verify
+  - _ipyw_jlab_nb_ext_conf
+  - anaconda==2022.05=py39_0
+  - anaconda-navigator
+  - navigator-updater
+  - python-devtools
+  - numpy
+  - matplotlib
+  - pip>=22.1  # pip is needed as dependency
+  - pip:
+    - autodocsumm==0.2.9
+    - build==0.8.0
+    - cmake==3.24.1
+    - cmyt==1.1.2
+    - colorspacious==1.1.2
+    - commonmark==0.9.1
+    - distro==1.7.0
+    - furo==2022.9.29
+    - hello-cmake-package==0.1.0
+    - ipywidgets==8.0.2
+    - jupyterlab-widgets==3.0.3
+    - make==0.1.6.post2
+    - mistune==2.0.4
+    - more-itertools==9.0.0
+    - pep517==0.13.0
+    - pooch==1.6.0
+    - pybind11==2.10.0
+    - readme-renderer==36.0
+    - requests-toolbelt==0.9.1
+    - rfc3986==2.0.0
+    - rich==12.5.1
+    - scikit-build==0.15.0
+    - sphinx-basic-ng==1.0.0b1
+    - sphinx-mdinclude==0.5.3
+    - sphinx-rtd-theme==1.0.0
+    - tomli==2.0.1
+    - tomli-w==1.0.0
+    - unyt==2.9.2
+    - widgetsnbextension==4.0.3
+    - yt==4.1.1
+prefix: /home/naf/anaconda3

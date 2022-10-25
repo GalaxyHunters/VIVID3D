@@ -30,7 +30,7 @@ namespace vivid {
         CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) { //blob
             Assimp::Exporter exp;
 
-            EmbeddedTexture = true; //not sure this works viewer wise, the code should be ok
+            EmbeddedTexture = true; //not sure that this works viewer wise, the code should be ok
 
             aiScene *scene = GenerateScene(arModel);
 
@@ -44,9 +44,8 @@ namespace vivid {
             if (!blob) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
-            Log(LOG_DEBUG, "Oh cool");
-            auto blb = exp.GetOrphanedBlob();
-            return CBlobData(blb);
+            // we copy all the blob data to a vivid const qualified struct so the blob pointer isn't freed by python's greedy GC
+            return CBlobData::FormatExportDataBlob(blob);
         }
 
         CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType) { //blob
@@ -66,12 +65,11 @@ namespace vivid {
             if (!blob) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
-            Log(LOG_DEBUG, "Oh cool");
-            auto blb = exp.GetOrphanedBlob();
-            return CBlobData(blb);
+
+            return CBlobData::FormatExportDataBlob(blob);
         }
 
-        int AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
+        bool AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
             int RET_VALUE;
 
@@ -86,15 +84,14 @@ namespace vivid {
             OutputPath = "";
             delete scene;
 
-            if (RET_VALUE != AI_SUCCESS) {
+            if (RET_VALUE != aiReturn_SUCCESS) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
 
-            return RET_VALUE;
+            return true;
         }
 
-        int AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
-            int RET_VALUE;
+        bool AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
 
             OutputPath = aOutputPath;
@@ -102,17 +99,17 @@ namespace vivid {
             aiScene *scene = GenerateAnimationScene(arAnimation);
 
             aOutputPath += fileFormats[arFileType];
-            RET_VALUE = exp.Export(scene, arFileType, aOutputPath);
+            auto ret = exp.Export(scene, arFileType, aOutputPath);
             
             TextureNameToIndex.clear();
             OutputPath = "";
             delete scene;
             
-            if (RET_VALUE != AI_SUCCESS) {
+            if (ret != aiReturn_SUCCESS) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
 
-            return RET_VALUE;
+            return true;
         }
 
         aiScene *GenerateScene(const vivid::CModel &model) {

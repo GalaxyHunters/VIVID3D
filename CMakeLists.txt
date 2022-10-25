@@ -75,11 +75,12 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
 #        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h lib/ImportAndExport/BlobData.cpp lib/ImportAndExport/BlobData.h)
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h src/ImportExport/BlobData.cpp src/ImportExport/BlobData.h)
 
 
 target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ImportExport>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Textures>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils/Logging>

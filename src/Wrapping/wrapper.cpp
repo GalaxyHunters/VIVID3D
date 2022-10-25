@@ -76,12 +76,13 @@ PYBIND11_MODULE(_vivid, m) {
            :caption: Model Objects
 
            Point
+           BaseMesh
            Lines
            PointCloud
            VoronoiVolume
            Mesh
            Model
-
+           BlobData
 
         Animation Objects
         -----------------
@@ -134,22 +135,17 @@ PYBIND11_MODULE(_vivid, m) {
     py::class_<CBlobData>(m, "BlobData", R"mydelimiter(
         Blob files containing exported file data.
         )mydelimiter")
-        .def_readonly("n_files", &CBlobData::getNumFiles, R"mydelimiter(
-        Number of files held in blob.
-        )mydelimiter")
-        .def_readonly("names", &CBlobData::getNames, R"mydelimiter(
-        List of file names held in blob.
-        )mydelimiter")
-        .def_readonly("files", &CBlobData::getFiles, R"mydelimiter(
+        .def_readonly("n_files", &CBlobData::mNumFiles, "Number of files held in blob.")
+        .def_readonly("names", &CBlobData::mNames, "List of file names held in blob.")
+        .def_property_readonly("files", [](const CBlobData& arSelf) {
+            std::vector<py::bytes> bytes;
+            for (const auto& file : arSelf.mFiles) {
+                bytes.push_back(py::bytes(file));
+            }
+            return bytes;
+        }, R"mydelimiter(
         List of files held in blob. All files are binary encoded arrays.
         )mydelimiter");
-//        .def_readonly("files", [](const CBlobData& arSelf) {
-//            auto files = arSelf.getFiles();
-//
-//            return py::bytes()
-//        }, R"mydelimiter(
-//        List of files held in blob. All files are binary encoded arrays.
-//        )mydelimiter");
 
     py::class_<CPoint>(m, "Point")
         .def(py::init<const CPoint &>(),
@@ -254,7 +250,8 @@ PYBIND11_MODULE(_vivid, m) {
                 if (output_file.empty()) {
                     return arSelf.ExportToBlob(file_type);
                 } else {
-                    return (void*)arSelf.Export(output_file, file_type);
+                    arSelf.Export(output_file, file_type);
+                    return CBlobData();
                 }
             }, R"mydelimiter(
             Writes Component to output_file with given file format.
@@ -411,7 +408,8 @@ PYBIND11_MODULE(_vivid, m) {
             if (output_file.empty()) {
                 return arSelf.ExportToBlob(file_type);
             } else {
-                return (void*)arSelf.Export(output_file, file_type);
+                arSelf.Export(output_file, file_type);
+                return CBlobData();
             }
         }, R"mydelimiter(
             Writes Component to output_file with given file format.

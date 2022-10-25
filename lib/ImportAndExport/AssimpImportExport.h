@@ -9,7 +9,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "DataToImage.h"
-#include "BlobData.h"
+#include "src/ImportExport/BlobData.h"
 #include <map>
 namespace vivid {
     namespace AssimpExport {
@@ -33,8 +33,8 @@ namespace vivid {
          * @param[in] aFileType 3D filetype format to write to (out of supported options)
          * @param[in] aOutputPath Path and name for output file
          */
-        int AssimpExporter(vivid::CModel &arModel, const std::string &arFileType, std::string aOutputPath); //=1
-        int AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath);
+        bool AssimpExporter(vivid::CModel &arModel, const std::string &arFileType, std::string aOutputPath);
+        bool AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath);
 
 
         string AddTexture(CColorMap arMeshCLM);

@@ -5,7 +5,6 @@
 #include <functional>
 #include <map>
 
-
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"

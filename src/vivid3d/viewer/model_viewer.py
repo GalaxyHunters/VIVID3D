@@ -6,7 +6,7 @@ and jupyter notebooks using show
 """
 import base64
 import os
-from vivid3d.__vivid import BlobData
+from vivid3d._vivid import BlobData
 
 def view_glb(glb):
     """
@@ -59,10 +59,10 @@ def show(model):
         if isinstance(glb, bytes):
             bytearray = glb
         elif isinstance(glb, BlobData):
-            bytearray = bytes(glb.files[0])
+            bytearray = glb.files[0]
         else:
             raise Exception("")
         embedded = view_glb(bytearray)
         return embedded
     except Exception:
-        raise Exception("Model could not be parsed to proper format")
+        print("Model could not be parsed to proper format")

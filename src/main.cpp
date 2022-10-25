@@ -194,17 +194,19 @@ int PyramidSmoothTest()
     CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
-    auto blob = mesh.ExportToBlob("obj");
+    auto blob = mesh.ExportToBlob("glb");
 
-    printf("n=%zu files\n", blob.getNumFiles());
-    for (const auto& name : blob.getNames()) {
+    printf("n=%zu files\n", blob.mNumFiles);
+    for (const auto& name : blob.mNames) {
         printf("name: %s\n", name.c_str());
     }
 //    printf("%s", blob.getFiles()[0]);
-    for (auto name : blob.getFiles()) {
-        printf("File:\n%s\n", name);
+    for (const auto& file : blob.mFiles) {
+        printf("Length of file %zu\n", file.size());
+        cout << file << endl;
     }
-    cout << blob.getFiles().size() << endl;
+
+    cout << "\n" << blob.mFiles.size() << endl;
 
 //    mesh.LaplacianSmooth(10);
 //    cout << "second mesh" << endl;

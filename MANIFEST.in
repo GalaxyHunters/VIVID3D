@@ -8,3 +8,4 @@ recursive-exclude lib/assimp/.git *
 recursive-exclude lib/assimp/.github *
 recursive-exclude lib/assimp/test *
 include *.md *.png CMakeLists.txt
+include src/vivid3d/viewer/template.html

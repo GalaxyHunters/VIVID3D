@@ -1,3 +1,5 @@
+from .viewer import *
 from ._vivid import *
-from . import viewer
-from vivid3d._details import __version__
+from ._details import __version__
+
+__all__ = ['_vivid', 'viewer']#, 'show', 'VolumetricViewer']

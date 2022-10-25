@@ -5,6 +5,7 @@ Render Vivid3D Objects in IPython
 and jupyter notebooks using show
 """
 import base64
+import os
 
 
 def view_glb(glb):
@@ -24,12 +25,13 @@ def view_glb(glb):
       Object containing rendered scene
     """
     # keep as soft dependency
-    from IPython import display
 
     # convert scene to a full HTML page
     # fetch HTML template
-    with open('template.html', 'r', encoding="utf8") as f:
+    template_path = os.path.join(os.path.dirname(__file__), 'template.html')
+    with open(template_path, 'r', encoding="utf8") as f:
         template = f.read()
+    from IPython import display
     # get export as bytes
     # with open(path,'rb') as model:
     #     data = model.read()
@@ -46,4 +48,11 @@ def view_glb(glb):
         '<iframe srcdoc="{srcdoc}" '
         'width="100%" height="500px" '
         'style="border:none;"></iframe> '.format(srcdoc=srcdoc))
+    return embedded
+
+
+def show(model):
+    # Works with trimesh and vivid models
+    glb = model.export(file_type="glb")
+    embedded = view_glb(glb)
     return embedded

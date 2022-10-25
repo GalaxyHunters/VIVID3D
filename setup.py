@@ -16,7 +16,7 @@ with open("src/vivid3d/_details.py") as fp:
 setup(
     name="vivid3d",
     version=about['__version__'],
-    packages=['vivid3d','vivid3d.viewer'],
+    packages=['vivid3d', 'vivid3d.viewer'],
     package_dir={'': 'src'},
     cmake_install_dir='src/vivid3d',
     author='GalaxyHuntersIL',

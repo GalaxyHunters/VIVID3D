@@ -22,14 +22,6 @@ class VolumetricViewer(object):
     volume : 3D ndarray with single value per cell
       The volume to visualize. Very large datasets might not work well.
 
-    Methods
-    -------
-    view()
-      Runs on object creation if running in notebook. **IPython Required**
-      Creates GUI for volume visualization, masking, and colormap selection
-    render_animation(fps, min_threshold, max_threshold, cmap)
-      Render the volume with the given mask into an animation
-
     Notes
     -----
     Many IPython environments require the following magic to properly display the Widget

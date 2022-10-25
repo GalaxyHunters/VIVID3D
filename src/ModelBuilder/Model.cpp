@@ -30,7 +30,7 @@ int CModel::Export(const std::string &arOutputFilePath, const std::string& arFil
     return AssimpExport::AssimpExporter(*this, arFileType, arOutputFilePath);
 }
 
-void* CModel::ExportToBlob(const std::string& arFileType) {
+CBlobData CModel::ExportToBlob(const std::string& arFileType) {
     return AssimpExport::AssimpExporter(*this, arFileType);
 }
 

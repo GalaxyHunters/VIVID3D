@@ -130,9 +130,27 @@ PYBIND11_MODULE(_vivid, m) {
 
 	)mydelimiter";
 
-    
+    py::class_<CBlobData>(m, "BlobData", R"mydelimiter(
+        Blob files containing exported file data.
+        )mydelimiter")
+        .def_readonly("n_files", &CBlobData::getNumFiles, R"mydelimiter(
+        Number of files held in blob.
+        )mydelimiter")
+        .def_readonly("names", &CBlobData::getNames, R"mydelimiter(
+        List of file names held in blob.
+        )mydelimiter")
+        .def_readonly("files", &CBlobData::getFiles, R"mydelimiter(
+        List of files held in blob. All files are binary encoded arrays.
+        )mydelimiter");
+//        .def_readonly("files", [](const CBlobData& arSelf) {
+//            auto files = arSelf.getFiles();
+//
+//            return py::bytes()
+//        }, R"mydelimiter(
+//        List of files held in blob. All files are binary encoded arrays.
+//        )mydelimiter");
+
     py::class_<CPoint>(m, "Point")
-//        .doc() = "VIVID Point Class"
         .def(py::init<const CPoint &>(),
                 "copy constructor for Point",
                 py::arg("point"))

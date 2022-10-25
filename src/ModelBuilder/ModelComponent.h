@@ -11,6 +11,7 @@
 #include "ColorMap.h"
 #include "Material.h"
 #include "LogFile.h"
+#include "BlobData.h"
 
 namespace vivid
 {
@@ -109,7 +110,7 @@ namespace vivid
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         * @returns const void* file blob encoded in provided aFileType
         */
-        void* ExportToBlob(const std::string& arFileType = "glb");
+        CBlobData ExportToBlob(const std::string& arFileType = "glb");
     };
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

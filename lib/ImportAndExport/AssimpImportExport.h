@@ -9,6 +9,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "DataToImage.h"
+#include "BlobData.h"
 #include <map>
 namespace vivid {
     namespace AssimpExport {
@@ -18,7 +19,7 @@ namespace vivid {
          * @param[in] aFileType 3D filetype format to write to (out of supported options)
          * @return blob data
          */
-        void* AssimpExporter(vivid::CModel &arModel, const std::string &arFileType);
+        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType);
         /**
          * Assimp export. writes arModel in aFileType format at aOutputPath
          * @param[in] arModel CModel to be exported
@@ -61,10 +62,7 @@ namespace vivid {
 
         void MoveAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0);
 
-
-
-
-        // TODO export to BLOB
+        // TODO export to BLOB Animation
 
     };
 }

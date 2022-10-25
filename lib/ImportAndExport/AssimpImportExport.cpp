@@ -25,7 +25,7 @@ namespace vivid {
         map<string, string> TextureNameToIndex = {};
         string OutputPath = "";
 
-        void* AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
+        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
             Assimp::Exporter exp;
 
             aiScene *scene = GenerateScene(arModel);
@@ -39,11 +39,9 @@ namespace vivid {
             if (!blob) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
-            // memcpy the blob data to avoid it getting deleted by garbage collector
-            void* data = malloc(blob->size);
-            memcpy(data, blob->data, blob->size);
-
-            return data;
+            Log(LOG_DEBUG, "Oh cool");
+            auto blb = exp.GetOrphanedBlob();
+            return CBlobData(blb);
         }
 
         int AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {

@@ -194,16 +194,28 @@ int PyramidSmoothTest()
     CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
-    mesh.LaplacianSmooth(10);
-    cout << "second mesh" << endl;
-    //CMesh fullMesh = volume.ToMesh("3", 0.1);
+    auto blob = mesh.ExportToBlob("obj");
 
-    cout << "model" << endl;
-//    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
-    CModel model;
-    model.AddMesh(mesh);
-    cout << "export" << endl;
-    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+    printf("n=%zu files\n", blob.getNumFiles());
+    for (const auto& name : blob.getNames()) {
+        printf("name: %s\n", name.c_str());
+    }
+//    printf("%s", blob.getFiles()[0]);
+    for (auto name : blob.getFiles()) {
+        printf("File:\n%s\n", name);
+    }
+    cout << blob.getFiles().size() << endl;
+
+//    mesh.LaplacianSmooth(10);
+//    cout << "second mesh" << endl;
+//    //CMesh fullMesh = volume.ToMesh("3", 0.1);
+//
+//    cout << "model" << endl;
+////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+//    CModel model;
+//    model.AddMesh(mesh);
+//    cout << "export" << endl;
+//    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     return EXIT_SUCCESS;
 
 }
@@ -330,8 +342,8 @@ int main()
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    Log(LOG_INFO, "Pyramid");
-//    ret_value = PyramidSmoothTest();
+    Log(LOG_INFO, "Pyramid");
+    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();

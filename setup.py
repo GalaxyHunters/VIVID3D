@@ -18,6 +18,8 @@ setup(
     version=about['__version__'],
     packages=['vivid3d', 'vivid3d.viewer'],
     package_dir={'': 'src'},
+    package_data={'vivid3d.viewer': ["template.html"]},
+    include_package_data=True,
     cmake_install_dir='src/vivid3d',
     author='GalaxyHuntersIL',
     author_email='galaxyhuntersil@gmail.com',

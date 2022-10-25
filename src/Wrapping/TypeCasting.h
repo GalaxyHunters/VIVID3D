@@ -52,7 +52,7 @@ namespace pybind11 {
 
                 point = CPoint(ptr[0], ptr[1], ptr[2]);
 
-                // This is whats pushed to the function
+                // This is what's pushed to the function
                 value = point;
 
                 return true;
@@ -167,7 +167,7 @@ namespace pybind11 {
 
                 PyColorMap cmap (clm, name);
 
-                // This is whats pushed to the function
+                // This is what's pushed to the function
                 value = cmap;
 
                 return true;

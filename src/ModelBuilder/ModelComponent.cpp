@@ -61,6 +61,6 @@ int CModelComponent::Export(const std::string &arOutputFilePath, const std::stri
     return CModel(*this).Export(arOutputFilePath, arFileType);
 }
 
-void* ExportToBlob(const std::string& arFileType = "glb") {
+void* CModelComponent::ExportToBlob(const std::string& arFileType) {
     return CModel(*this).ExportToBlob(arFileType);
 }

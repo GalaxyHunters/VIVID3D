@@ -25,24 +25,23 @@ namespace vivid {
         map<string, string> TextureNameToIndex = {};
         string OutputPath = "";
 
-        const void* AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
+        void* AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
             Assimp::Exporter exp;
-            aiExportDataBlob blob;
 
             aiScene *scene = GenerateScene(arModel);
 
-            blob = exp.ExportToBlob(scene, arFileType,
+            auto blob = exp.ExportToBlob(scene, arFileType,
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
             TextureNameToIndex.clear();
             delete scene;
             
             if (!blob) {
-                Log(LOG_ERROR, exp.GetErrorString();
+                Log(LOG_ERROR, exp.GetErrorString());
             }
             // memcpy the blob data to avoid it getting deleted by garbage collector
-            void* data = malloc(blob.size);
-            memcpy(data, blob.data, blob.size);
+            void* data = malloc(blob->size);
+            memcpy(data, blob->data, blob->size);
 
             return data;
         }

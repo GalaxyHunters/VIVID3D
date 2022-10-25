@@ -53,7 +53,7 @@ namespace vivid
         inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
 
         inline int GetTicksPerSecond() const {return mTicksPerSecond;}
-        inline void SetTicksPerSecond(int mTicksPerSecond){CAnimation::mTicksPerSecond = mTicksPerSecond;}
+        inline void SetTicksPerSecond(int aTicksPerSecond){CAnimation::mTicksPerSecond = aTicksPerSecond;}
 
 
         inline size_t GetNumMeshes() const{

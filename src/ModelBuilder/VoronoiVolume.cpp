@@ -24,6 +24,7 @@ CVoronoiVolume::CVoronoiVolume(const vector<CPoint> &arInputPoints, vector<norma
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
+    CreateSurface();
 }
 
 CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf)
@@ -61,12 +62,6 @@ CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf)
 
 /* ------------------------------------------------ Public Methods ---------------------------------------------------- */
 
-void CVoronoiVolume::CreateSurface()
-{
-    RunVorn();
-    CleanEdges();
-}
-
 CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity)
 {
     Log(LOG_DEBUG, "Mask Input Size: " + to_string(arMask.size()));
@@ -98,7 +93,6 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
-    Log(LOG_DEBUG, "Vertices");
     for (const auto & mVecPoint : mVertices) {
         //points.push_back(**it);
         points.push_back((*mVecPoint * mScale) + mCenVector);
@@ -108,7 +102,6 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
     vector<CFace> faces;
     vector<size_t> face_points;
     set<size_t> set_points;
-    Log(LOG_DEBUG, "Faces");
     for (const auto & mVecFace : mSurfFaces) {
         for (const auto & mPoint : mVecFace.mVertices) {
             if (set_points.count(indexes[mPoint]) == 0) {
@@ -120,13 +113,17 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
         face_points = vector<size_t>();
         set_points.clear();
     }
-    cout << points.size() << endl;
-    cout << faces.size() << endl;
 
-    return CMesh(points, faces, arLabel, aOpacity);
+    return CMesh(points, faces, aOpacity, arLabel);
 }
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
+
+void CVoronoiVolume::CreateSurface()
+{
+    RunVorn();
+    CleanEdges();
+}
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 

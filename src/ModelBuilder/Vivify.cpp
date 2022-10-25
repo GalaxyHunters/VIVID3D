@@ -5,9 +5,8 @@ namespace vivid{
                    std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
                    normal_float aOpacity, const std::string& arFileType, coord_t aNoiseDisplacement) {
         CVoronoiVolume surface = CVoronoiVolume(arInputPoints, arColorField, aVMin, aVMax, aNoiseDisplacement);
-        surface.CreateSurface();
         CMesh mesh = surface.MaskMesh(arMask, arLabel, aOpacity);
-        if(arOutputFilePath != ""){
+        if(!arOutputFilePath.empty()){
             mesh.Export(arOutputFilePath, arFileType);
         }
         return CModel(mesh);
@@ -35,7 +34,7 @@ namespace vivid{
                     std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, const string& arLabel,
                     vector<normal_float> &arOpacity, const std::string& arFileType, coord_t aNoiseDisplacement){
         //check for empty aOpacity
-        if(arOpacity.size() == 0){
+        if(arOpacity.empty()){
             arOpacity.resize(arMasks.size());
             for(size_t i = 0; i != arMasks.size(); i++){
                 arOpacity.emplace_back((1/(arOpacity.size()+1))*(i+1));
@@ -46,12 +45,11 @@ namespace vivid{
         }
 
         CVoronoiVolume surface = CVoronoiVolume(arInputPoints, arColorField, aVMin, aVMax, aNoiseDisplacement);
-        surface.CreateSurface();
         CModel output_model = CModel();
         for(size_t i = 0; i != arMasks.size(); i++){
             output_model.AddMesh(surface.MaskMesh(arMasks[i], arLabel, arOpacity[i]));
         }
-        if(arOutputFilePath != ""){
+        if(!arOutputFilePath.empty()){
             output_model.Export(arOutputFilePath, arFileType);
         }
         return output_model;

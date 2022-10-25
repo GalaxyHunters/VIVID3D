@@ -65,6 +65,10 @@ namespace vivid
         void PreProcessPoints(std::vector<pair<CSurfacePoint, size_t>> &arPoints, coord_t aNoiseDisplacement);   // Centering, scaling, adding noise.
         void CleanDoubleInputPoints(std::vector<pair<CSurfacePoint, size_t>> &arPoints); // remove all the double input points
 
+        /**
+         * Create the surfaces using the input data
+         */
+        void CreateSurface();
         //vorn function:
         void RunVorn();
 
@@ -84,16 +88,13 @@ namespace vivid
          * @param[in] aVMax the maximum value in arColorField, anything below will be set to aVMax
          * @param[in] aNoiseDisplacement the Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
          */
-        CVoronoiVolume(const std::vector<CPoint> &arInputPoints, std::vector<normal_float> &arColorField, normal_float aVMin, normal_float aVMax, coord_t aNoiseDisplacement = 0.001);
+        CVoronoiVolume(const std::vector<CPoint> &arInputPoints, std::vector<normal_float> &arColorField,
+                       normal_float aVMin = 0, normal_float aVMax = 0, coord_t aNoiseDisplacement = 0);
         /**
          * CVoronoiVolume Copy-Constructor
          */
         CVoronoiVolume(const CVoronoiVolume &surf);
-        /**
-         * Create the surfaces using the input data
-         */
-        void CreateSurface();
-        
+
         /**
          * Convert the CVoronoiVolume object to CMesh object
          * @param[in] arMask a boolean mask of true and false points

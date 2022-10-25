@@ -127,7 +127,6 @@ int CubeSurfTests()
     }
     CModel model;
     CVoronoiVolume volume = CVoronoiVolume(points, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
-    volume.CreateSurface();
 //    cerr << "Initiating Copy Constructor");
 //    CVoronoiVolume surf_copy = CVoronoiVolume(surf);
     CMesh mesh = volume.MaskMesh(mask,"vivid_3d_obj", 1.0);
@@ -192,8 +191,7 @@ int PyramidSmoothTest()
     }
 
 //CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
-    CVoronoiVolume volume = CVoronoiVolume(points, quan, Vmin, Vmax, 0);
-    volume.CreateSurface();
+    CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
     mesh.LaplacianSmooth(10);
@@ -223,7 +221,6 @@ int RunMedicaneTest()
         points[j] = nova.points[j];
     }
     CVoronoiVolume surf = CVoronoiVolume(points, nova.quan, -15.1, 1.51);
-    surf.CreateSurface();
     //surf.Smooth(false, 1);
     Log(LOG_INFO, "Convert to Mesh");
     CMesh mesh = surf.MaskMesh(nova.mask,"SurfMedicane", 1);

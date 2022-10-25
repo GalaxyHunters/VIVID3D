@@ -41,7 +41,5 @@ CVoronoiVolume CPointCloud::CreateVoronoiVolume(coord_t aNoiseDisplacement) {
     for (auto & face : mFaces) {
         UV_coords.push_back(face.GetUVcoord());
     }
-    CVoronoiVolume volume = CVoronoiVolume(mPoints, UV_coords, 0., 1., aNoiseDisplacement);
-    volume.CreateSurface();
-    return volume;
+    return CVoronoiVolume(mPoints, UV_coords, 0., 1., aNoiseDisplacement);
 }

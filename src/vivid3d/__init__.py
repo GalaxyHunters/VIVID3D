@@ -1,5 +1,3 @@
 from ._vivid import *
 from . import viewer
-
-from importlib.metadata import version
-__version__ = version("vivid3d")
+from vivid3d._details import __version__

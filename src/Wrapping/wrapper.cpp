@@ -143,11 +143,19 @@ PYBIND11_MODULE(_vivid, m) {
                  "Constructor for point",
                  py::arg("3d_vector"));
 
-    py::class_<CColorMap>(m, "ColorMap")
+    py::class_<CColorMap>(m, "ColorMap", R"mydelimiter(
+        ColorMap class for mapping point color field scalars to colors
+
+        Attributes
+        ------
+        name : str, default: "plasma"
+        colors : array-like of shape (n,3), default : plasma colormap
+        )mydelimiter")
+        .def(py::init<>(), "Default Constructor - Plasma Colormap")
         .def(py::init<const string&>(),
-            py::arg("name"))
+            py::arg("name"), "Set color by name")
         .def(py::init<vector<array<float, 3>>&, string&>(),
-            py::arg("colors"), py::arg("name"))
+            py::arg("colors"), py::arg("name"), "Custom colors and name")
         .def(py::init<const CColorMap&>(),
              py::arg("ColorMap"))
         .def_property_readonly("name", &CColorMap::GetName)
@@ -171,23 +179,46 @@ PYBIND11_MODULE(_vivid, m) {
             "Set Emission Color",
             py::arg("emission_color_name"));
 
-    py::class_<CModelComponent> (m, "ModelComponent")
+    py::class_<CModelComponent> (m, "BaseMesh", R"mydelimiter(
+                Inheritable parent class for : Mesh, Points, Lines
+
+                Attributes
+                -------------
+                name : str
+                n_vertices : number
+                    # of vertices
+                n_polygons : number
+                    # of vertices
+                material : vivid3d.Material
+                    The material instance used by 3D renderers
+                colormap : vivid3d.ColorMap
+                    The Colormap instance used to map scalar data to colors
+                opacity : number
+                    The opacity when rendering, unit value (0.0-1.0)
+                )mydelimiter")
         .def(py::init<const CModelComponent&> (),
-            "Constructor for ModelComponent",
+            "Copy Constructor for ModelComponent",
             py::arg("model_component"))
 //        .doc("Parent class from which Mesh, Point Cloud, and Lines inherit.")
         .def_property("name", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
         .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount)
         .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount)
-        .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
-              "Opacity (0.0-1.0)")
         .def_property("material",  &CModelComponent::GetMaterial, &CModelComponent::SetMaterial)
+        .def_property_readonly("colormap", &CModelComponent::GetColorMap)
+        .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
+            "Opacity (0.0-1.0)")
         .def("set_color", &CModelComponent::SetColor,
              "Set Color", py::arg("color"))
-        .def("set_color_map", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
+        .def("set_colormap", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
              "Set Color Map", py::arg("ColorMap"))
-        .def("set_color_map", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap),
-             "Set Color Map", py::arg("ColorMap"))
+        .def("set_colormap", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap), R"mydelimiter(
+                Set the colormap used for mapping scalar values to colors
+
+                Parameters
+                -------------
+                colormap : str or matplotlib.colors.Colormap
+                    Can be set with any matplotlib registered colormap
+            )mydelimiter", py::arg("colormap"))
         .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
              "Transform Model Component by transformation matrix",
              py::arg("matrix"))
@@ -200,11 +231,12 @@ PYBIND11_MODULE(_vivid, m) {
         .def("scale", &CModelComponent::ScaleMesh,
             "Scale Model Component by scale_vec.",
             py::arg("scale_vec"))
-        def("export", [](&CModelComponent self, string output_file, string file_type) {
-                if (output_file) {
-                    return self.Export(output_file, file_type);
+        .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
+                std::cout << output_file.empty() << std::endl;
+                if (output_file.empty()) {
+                    return arSelf.ExportToBlob(file_type);
                 } else {
-                    return self.ExportToBlob(file_type);
+                    return (void*)arSelf.Export(output_file, file_type);
                 }
             }, R"mydelimiter(
                 Writes Component to output_file with given file format.
@@ -212,9 +244,9 @@ PYBIND11_MODULE(_vivid, m) {
 
                 Parameters
                 -------------
-                output_file : string, default: ""
+                output_file : str, default: ""
                     File Directory to export to
-                file_type : string, default: glb
+                file_type : str, default: glb
                     File format to export to
                 
                 Returns
@@ -223,19 +255,33 @@ PYBIND11_MODULE(_vivid, m) {
                     Object containing exported model - only returned if output_file is not provided
                 )mydelimiter",
                  py::arg("output_file")="", py::arg("file_type") = "glb")
-        .def("__str__", [](const CModelComponent& arMC) {
-            return "vivid3d.ModelComponent\nName: " + arMC.GetLabel() + "\nVertices: " + to_string(arMC.GetPointsCount()) + "\nFaces: " + to_string(arMC.GetFacesCount());
+        .def("__str__", [](const CModelComponent& arSelf) {
+            return "vivid3d.ModelComponent\nName: " + arSelf.GetLabel() + "\nVertices: " + to_string(arSelf.GetPointsCount()) + "\nFaces: " + to_string(arSelf.GetFacesCount());
         });
 
-    py::class_<CVoronoiVolume>(m, "VoronoiVolume")
+    py::class_<CVoronoiVolume>(m, "VoronoiVolume", R"mydelimiter(
+                Inheritable parent class for : Mesh, Points, Lines
+
+                Attributes
+                -------------
+                name : str
+                n_vertices : number
+                    # of vertices
+                n_polygons : number
+                    # of vertices
+                material : vivid3d.Material
+                    The material instance used by 3D renderers
+                colormap : vivid3d.ColorMap
+                    The Colormap instance used to map scalar data to colors
+                opacity : number
+                    The opacity when rendering, unit value (0.0-1.0)
+                )mydelimiter")
             .def(py::init<const vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, coord_t>(),
                  "constructor function for surface",
-                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0.001) //color_field basic value = vector<coord_t>(0)
+                 py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("noise_displacement") = 0) //color_field basic value = vector<coord_t>(0)
             .def(py::init<const CVoronoiVolume &> (),
                  "copy constructor for Surface",
                  py::arg("surf"))
-            .def("create_surface", &CVoronoiVolume::CreateSurface,
-                 "Calculate the surface from input data)")
             .def("to_mesh", &CVoronoiVolume::MaskMesh,
                  "Returns an Iso-Surface mesh made by the input mask.",
                  py::arg("mask"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1);
@@ -252,7 +298,7 @@ PYBIND11_MODULE(_vivid, m) {
                 -------------
                 opacity : normalized float, default: 1.0
                     Opacity of Component
-                label : string, default: ""
+                label : str, default: ""
                     Label of Component
                 )mydelimiter",
                  py::arg("opacity")=1., py::arg("label")="")
@@ -275,6 +321,9 @@ PYBIND11_MODULE(_vivid, m) {
     py::class_<CPointCloud, CModelComponent>(m, "PointCloud", R"mydelimiter(
         Point cloud
     )mydelimiter")
+            .def(py::init<normal_float, const std::string&>(),
+                 "Empty constructor for PointCloud",
+                 py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
             .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),
                  "Constructor for Point Cloud",
                  py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
@@ -292,7 +341,7 @@ PYBIND11_MODULE(_vivid, m) {
                  py::arg("noise_displacement") = 0.001);
 
     py::class_<CMesh, CModelComponent>(m, "Mesh", R"mydelimiter(
-        Basic Mesh class
+        Triangular Mesh class that holds polygonal surfaces.
     )mydelimiter")
             .def(py::init<const CMesh &> (),
                  "copy constructor for Mesh",
@@ -330,11 +379,11 @@ PYBIND11_MODULE(_vivid, m) {
             .def("export_to_obj", &CModel::ExportToObj,
                  "writes the surface to an OBJ file, by materials or textures",
                  py::arg("output_file"), py::arg("with_texture") = 1)
-            .def("export", [](&CModel self, string output_file, string file_type) {
-                if (output_file) {
-                    return self.Export(output_file, file_type);
+            .def("export", [](vivid::CModel &arSelf, string output_file, string file_type) {
+                if (output_file.empty()) {
+                    return arSelf.ExportToBlob(file_type);
                 } else {
-                    return self.ExportToBlob(file_type);
+                    return (void*)arSelf.Export(output_file, file_type);
                 }
             }, R"mydelimiter(
                 Writes Component to output_file with given file format.
@@ -342,9 +391,9 @@ PYBIND11_MODULE(_vivid, m) {
 
                 Parameters
                 -------------
-                output_file : string, default: ""
+                output_file : str, default: ""
                     File Directory to export to
-                file_type : string, default: glb
+                file_type : str, default: glb
                     File format to export to
 
                 Returns
@@ -353,7 +402,7 @@ PYBIND11_MODULE(_vivid, m) {
                     Object containing exported model - only returned if output_file is not provided
                 )mydelimiter",
                  py::arg("output_file")="", py::arg("file_type") = "glb")
-            .def("__repr__", [](const vivid::CModel &self){return "vivid3d.Model\nnMeshes " + to_string(self.GetNumMeshes());});
+            .def("__repr__", [](const CModel &arSelf){return "vivid3d.Model\nnMeshes " + to_string(arSelf.GetNumMeshes());});
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
         Class for animations
@@ -431,7 +480,7 @@ PYBIND11_MODULE(_vivid, m) {
                 The input point data in x,y,z form.
             mask : array[bool]
                 Boolean mask of true and false points
-            output_path : string, default: ""
+            output_path : str, default: ""
                 Path and name for output file
                 If left as None no Module will be written to file.
             color_field : array[float], default: []
@@ -443,11 +492,11 @@ PYBIND11_MODULE(_vivid, m) {
             color_field_max : float, optional
                 Set max value for color_field, anything below will be set to color_field_max
                 If left empty will be set to max(color_field)
-            label : string, default: "VIVID_MODEL"
+            label : str, default: "VIVID_MODEL"
                 Label to assign to the model, some file format support it
             opacity : float, default: 1
                 Alpha value for the model, 0-1
-            file_type : string, default: "gltf2"
+            file_type : str, default: "gltf2"
                 File format for export, out of Assimp supported formats
             noise_displacement : float, default: 0.001
                 The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed

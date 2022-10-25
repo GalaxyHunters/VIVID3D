@@ -48,7 +48,6 @@ namespace vivid
         * @returns void* file blob encoded in provided aFileType
         */
         void* ExportToBlob(const std::string& arFileType = "glb");
-        //TODO export to BLOB
     };
 
 }; // namespace vivid

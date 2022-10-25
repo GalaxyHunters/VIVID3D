@@ -13,7 +13,7 @@ namespace vivid
     class CPointCloud : public CModelComponent{
     public:
         //Constructor and Copy Constructor
-        CPointCloud(normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, POINTS) {}
+        CPointCloud(normal_float aOpacity = 1.0, const std::string &arLabel = "") : CModelComponent(aOpacity, arLabel, POINTS) {}
         /**
          * CVoronoiVolume Constructor
          * @param[in] arInputPoints the input point data in x,y,z form.
@@ -23,8 +23,9 @@ namespace vivid
          * @param[in] aVMin the maximum value in arColorField, anything below will be set to aVMax
          * @param[in] arLabel the label of the point cloud
          */
-        CPointCloud(const std::vector<CPoint> &arPoints, const std::string& arColor, normal_float aOpacity, const std::string& arLabel);
-        CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax, normal_float aOpacity, const std::string& arLabel);
+        CPointCloud(const std::vector<CPoint> &arPoints, const std::string& arColor = "white", normal_float aOpacity = 1, const std::string &arLabel = "");
+        CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin = 0,
+                    normal_float aFieldMax = 0, normal_float aOpacity = 1, const std::string& arLabel = "");
         CPointCloud(const CPointCloud &arPC) : CModelComponent(arPC){}
         ~CPointCloud(){}
         

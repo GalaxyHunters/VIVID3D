@@ -129,6 +129,13 @@ namespace vivid
         //export animation
         void Export(const std::string &arOutputFilePath, std::string aFileType = "gltf2");
 
+        /**
+        * Assimp export. returns arModel in aFileType format
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        * @returns const void* file blob encoded in provided aFileType
+        */
+        CBlobData ExportToBlob(const std::string& arFileType = "glb");
+
     };
 
 }; // namespace vivid

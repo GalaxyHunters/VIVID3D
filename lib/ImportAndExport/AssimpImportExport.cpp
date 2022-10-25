@@ -23,19 +23,46 @@ namespace vivid {
             };
 
         map<string, string> TextureNameToIndex = {};
+        vector<aiTexture*> EmbeddedTextures = {};
+        bool EmbeddedTexture = false;
         string OutputPath = "";
 
-        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
+        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) { //blob
             Assimp::Exporter exp;
+
+            EmbeddedTexture = true; //not sure this works viewer wise, the code should be ok
 
             aiScene *scene = GenerateScene(arModel);
 
             auto blob = exp.ExportToBlob(scene, arFileType,
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
+            EmbeddedTexture = false;
             TextureNameToIndex.clear();
             delete scene;
             
+            if (!blob) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+            Log(LOG_DEBUG, "Oh cool");
+            auto blb = exp.GetOrphanedBlob();
+            return CBlobData(blb);
+        }
+
+        CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType) { //blob
+            Assimp::Exporter exp;
+
+            EmbeddedTexture = true; //not sure this works viewer wise, the code should be ok
+
+            aiScene *scene = GenerateAnimationScene(arAnimation);
+
+            auto blob = exp.ExportToBlob(scene, arFileType,
+                                         aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
+
+            EmbeddedTexture = false;
+            TextureNameToIndex.clear();
+            delete scene;
+
             if (!blob) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
@@ -56,6 +83,7 @@ namespace vivid {
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
             TextureNameToIndex.clear();
+            OutputPath = "";
             delete scene;
 
             if (RET_VALUE != AI_SUCCESS) {
@@ -77,6 +105,7 @@ namespace vivid {
             RET_VALUE = exp.Export(scene, arFileType, aOutputPath);
             
             TextureNameToIndex.clear();
+            OutputPath = "";
             delete scene;
             
             if (RET_VALUE != AI_SUCCESS) {
@@ -115,6 +144,12 @@ namespace vivid {
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
                 scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
                 scene->mMeshes[i]->mMaterialIndex = i;
+            }
+            if(EmbeddedTexture){
+                scene->mNumTextures = EmbeddedTextures.size();
+                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
+                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
+                EmbeddedTextures.clear();
             }
             return scene;
         }
@@ -169,6 +204,12 @@ namespace vivid {
                     scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
                     mesh_counter++;
                 }
+            }
+            if(EmbeddedTexture){
+                scene->mNumTextures = EmbeddedTextures.size();
+                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
+                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
+                EmbeddedTextures.clear();
             }
             return scene;
         }
@@ -350,7 +391,11 @@ namespace vivid {
                 texture_path = TextureNameToIndex[arMeshCLM.GetName()];
             } // need to write the texture
             else {
-                texture_path = GenerateTexturePNG(arMeshCLM, OutputPath);
+                if(!EmbeddedTexture) texture_path = GenerateTexturePNG(arMeshCLM, OutputPath);
+                if(EmbeddedTexture){
+                    texture_path = '*' + std::to_string(EmbeddedTextures.size());
+                    EmbeddedTextures.push_back(GenerateTextureEmbedded(arMeshCLM));
+                }
                 TextureNameToIndex[arMeshCLM.GetName()] = texture_path;
             }
             return texture_path;

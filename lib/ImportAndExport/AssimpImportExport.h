@@ -21,6 +21,13 @@ namespace vivid {
          */
         CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType);
         /**
+         * Assimp export. writes arModel in aFileType format and returns as blob
+         * @param[in] arAnimation CModel to be exported
+         * @param[in] aFileType 3D filetype format to write to (out of supported options)
+         * @return blob data
+         */
+        CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType);
+        /**
          * Assimp export. writes arModel in aFileType format at aOutputPath
          * @param[in] arModel CModel to be exported
          * @param[in] aFileType 3D filetype format to write to (out of supported options)

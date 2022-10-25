@@ -14,7 +14,6 @@
    .. autosummary::
    
       ~VoronoiVolume.__init__
-      ~VoronoiVolume.create_surface
       ~VoronoiVolume.to_mesh
    
    

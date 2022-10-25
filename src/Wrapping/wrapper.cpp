@@ -11,6 +11,7 @@
 #include <vector>
 #include <array>
 #include "Vivify.h"
+#include "BlobData.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>

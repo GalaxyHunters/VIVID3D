@@ -21,7 +21,7 @@
       ~PointCloud.rotate
       ~PointCloud.scale
       ~PointCloud.set_color
-      ~PointCloud.set_color_map
+      ~PointCloud.set_colormap
       ~PointCloud.transform
    
    
@@ -32,6 +32,7 @@
 
    .. autosummary::
    
+      ~PointCloud.colormap
       ~PointCloud.material
       ~PointCloud.n_polygons
       ~PointCloud.n_vertices

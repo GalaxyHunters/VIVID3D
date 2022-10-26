@@ -6,13 +6,19 @@ and jupyter notebooks using show
 """
 import base64
 import os
+from ..utils import in_notebook
 from vivid3d._vivid import BlobData
+
+import tempfile
+import webbrowser
+import time
+
 
 def view_glb(glb):
     """
     Convert a scene to HTML containing embedded geometry
     and a three.js viewer that will display nicely in
-    an IPython/Jupyter notebook.
+    an IPython/Jupyter notebook, or in web browser.
     
     Parameters
     -------------
@@ -21,38 +27,53 @@ def view_glb(glb):
       
     Returns
     -------------
-    html : IPython.display.HTML
-      Object containing rendered scene
+    html : string
+      The HTML page
     """
-    # keep as soft dependency
-
     # convert scene to a full HTML page
-    # fetch HTML template
     template_path = os.path.join(os.path.dirname(__file__), 'template.html')
-    with open(template_path, 'r', encoding="utf8") as f:
+    with open(template_path, 'r', encoding="utf-8") as f:
         template = f.read()
-    from IPython import display
-    # get export as bytes
-    # with open(path,'rb') as model:
-    #     data = model.read()
-    # encode as base64 string
     encoded = base64.b64encode(glb).decode('utf-8')
     # replace keyword with our scene data
-    as_html = template.replace('$B64GLTF', encoded)  # $B64GLTF has no meaning just a placeholder in the template file
+    srcdoc = template.replace('$B64GLTF', encoded)
 
-    # escape the quotes in the HTML
-    srcdoc = as_html.replace('"', '&quot;')
+    if in_notebook():  # Display in notebook
+        # escape the quotes in the HTML
+        srcdoc = srcdoc.replace('"', '&quot;')
+        # keep as soft dependency
+        from IPython import display
+        # embed this puppy as the srcdoc attr of an IFframe
+        display.HTML(
+            '<iframe srcdoc="{srcdoc}" '
+            'width="100%" height="500px" '
+            'style="border:none;"></iframe> '.format(srcdoc=srcdoc))
+    else:  # Attempt to display in browser
+        # Make a temporary file that can be opened, will be deleted as soon as web-browser opens it
+        with tempfile.NamedTemporaryFile('w', suffix='.html') as html:
+            url = 'file://' + html.name
+            html.write(srcdoc)
+            webbrowser.open(url)
 
-    # embed this puppy as the srcdoc attr of an IFframe
-    embedded = display.HTML(
-        '<iframe srcdoc="{srcdoc}" '
-        'width="100%" height="500px" '
-        'style="border:none;"></iframe> '.format(srcdoc=srcdoc))
-    return embedded
+    return srcdoc
 
 
 def show(model):
-    # Works with trimesh and vivid models
+    """
+    Convert a scene to HTML containing embedded geometry
+    and a three.js viewer that will display nicely in
+    an IPython/Jupyter notebook, or in web browser.
+
+    Parameters
+    -------------
+    model : vivid3d.Model or vivid3d.BaseMesh
+      .glb encoded blob file
+
+    Returns
+    -------------
+    html : string
+      The HTML page
+    """
     try:
         glb = model.export(file_type="glb")
 
@@ -61,8 +82,8 @@ def show(model):
         elif isinstance(glb, BlobData):
             bytearray = glb.files[0]
         else:
-            raise Exception("")
+            raise Exception("Model could not be parsed to proper format")
         embedded = view_glb(bytearray)
         return embedded
-    except Exception:
-        print("Model could not be parsed to proper format")
+    except BaseException as err:
+        print(err)

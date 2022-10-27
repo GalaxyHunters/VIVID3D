@@ -485,7 +485,7 @@ namespace vivid {
             const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
-            const array<float, 3> mat_emissive_color = ToNormalRGB(arMaterial.GetEmissionColor());
+            const array<float, 3> mat_emissive_color = ToNormalRGB(COLORS.at(arMaterial.GetEmissionColor()));
             const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
             material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
         

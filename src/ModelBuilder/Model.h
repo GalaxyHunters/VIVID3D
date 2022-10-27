@@ -27,7 +27,20 @@ namespace vivid
         //List of meshes by label?
         inline size_t GetNumMeshes() const { return mMeshes.size(); }
         inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
-
+        inline size_t GetNumVertices() const {
+            size_t count = 0;
+            for (const auto& mesh : mMeshes) {
+                count += mesh.GetPointsCount();
+            }
+            return count;
+        }
+        inline size_t GetNumPolygons() const {
+            size_t count = 0;
+            for (const auto& mesh : mMeshes) {
+                count += mesh.GetFacesCount();
+            }
+            return count;
+        }
         // Add Importers
         // void ImportModel(const std::string &arInputFilePath)
         /**

@@ -1,11 +1,21 @@
 recursive-include pybind11 *
 graft pybind11
 graft cmake
-recursive-include lib *
 recursive-include src *
+recursive-include lib *
 recursive-exclude _skbuild *
-recursive-exclude lib/assimp/.git *
+recursive-exclude lib/SurfacingAlgorithms/huji-rich-Elad3DFast *
+include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/*
+include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/*
+include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/*
 recursive-exclude lib/assimp/.github *
 recursive-exclude lib/assimp/test *
+recursive-exclude lib/assimp/samples *
+recursive-exclude lib/assimp/port *
+recursive-exclude lib/assimp/doc *
+recursive-exclude lib/assimp/tools *
+recursive-exclude pybind11/tests *
+recursive-exclude pybind11/.github *
+recursive-exclude pybind11/docs *
 include *.md *.png CMakeLists.txt
 include src/vivid3d/viewer/template.html

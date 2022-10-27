@@ -14,7 +14,7 @@ import webbrowser
 from time import sleep
 
 
-def view_glb(glb):
+def view_glb(glb, height=600):
     """
     Convert a scene to HTML containing embedded geometry
     and a three.js viewer that will display nicely in
@@ -23,11 +23,13 @@ def view_glb(glb):
     Parameters
     -------------
     glb : bytes
-      .glb encoded blob file
-      
+        .glb encoded blob file
+    height : number, default: 600
+        height in pixels to open the viewer
+
     Returns
     -------------
-    html : string
+    html : string or IPython.display.HTML
       The HTML page
     """
     # convert scene to a full HTML page
@@ -44,10 +46,7 @@ def view_glb(glb):
         # keep as soft dependency
         from IPython import display
         # embed this puppy as the srcdoc attr of an IFframe
-        display.HTML(
-            '<iframe srcdoc="{srcdoc}" '
-            'width="100%" height="500px" '
-            'style="border:none;"></iframe> '.format(srcdoc=srcdoc))
+        return display.HTML('<div><iframe srcdoc="{srcdoc}" width="100%" height="{height}px" style="border:none;"></iframe></div>'.format(srcdoc=srcdoc, height=height))
     else:  # Attempt to display in browser
         # Make a temporary file that can be opened, will be deleted as soon as web-browser opens it
         with tempfile.NamedTemporaryFile('w', suffix='.html') as html:
@@ -59,7 +58,7 @@ def view_glb(glb):
     return srcdoc
 
 
-def show(model):
+def show(model, height=600):
     """
     Convert a scene to HTML containing embedded geometry
     and a three.js viewer that will display nicely in
@@ -68,7 +67,9 @@ def show(model):
     Parameters
     -------------
     model : vivid3d.Model or vivid3d.BaseMesh
-      .glb encoded blob file
+        .glb encoded blob file
+    height : int, default: 600
+        height in pixels to open the viewer
 
     Returns
     -------------
@@ -84,7 +85,7 @@ def show(model):
             bytearray = glb.files[0]
         else:
             raise Exception("Model could not be parsed to proper format")
-        embedded = view_glb(bytearray)
+        embedded = view_glb(bytearray, height)
         return embedded
     except BaseException as err:
         print(err)

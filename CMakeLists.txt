@@ -27,6 +27,9 @@ set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL  "")
 set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL  "")
 set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL  "")
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL  "")
+set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "")
+set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "")
+set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
 
 set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
 
@@ -167,7 +170,7 @@ if(DEFINED SKBUILD)
     include_directories(${PYTHON_INCLUDE_DIRS})
     target_link_libraries(vivid ${PYTHON_LIBRARIES})
 
-    pybind11_add_module(_vivid
+    pybind11_add_module(_core
             ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp
             ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h
             )
@@ -178,10 +181,10 @@ if(DEFINED SKBUILD)
 #            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 #            )
 
-    target_link_libraries(_vivid PRIVATE vivid)
+    target_link_libraries(_core PRIVATE vivid)
 
     # Installing the extension module to the root of the package
-    install(TARGETS _vivid DESTINATION .)
+    install(TARGETS _core DESTINATION .)
 
 #    configure_file("${PROJECT_SOURCE_DIR}/src/vivid_py/__main__.py.in"
 #            "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py")
@@ -190,9 +193,9 @@ if(DEFINED SKBUILD)
 
     if(APPLE)
         set_target_properties(
-                _vivid PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+                _core PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
     else()
-        set_target_properties(_vivid PROPERTIES INSTALL_RPATH
+        set_target_properties(_core PROPERTIES INSTALL_RPATH
                 "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
     endif()
 else()

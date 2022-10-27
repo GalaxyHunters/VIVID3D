@@ -48,7 +48,7 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
 }
 
 
-PYBIND11_MODULE(_vivid, m) {
+PYBIND11_MODULE(_core, m) {
     m.doc() = R"mydelimiter(
         =============
         API Reference
@@ -270,17 +270,22 @@ PYBIND11_MODULE(_vivid, m) {
                 Object containing exported model - only returned if output_file is not provided
             )mydelimiter",
              py::arg("output_file")="", py::arg("file_type") = "glb")
-        .def("show", [](CModelComponent& arSelf) {
+        .def("show", [](CModelComponent& arSelf, int aHeight) {
                 auto viewer = py::module_::import("vivid3d.viewer");
-                return viewer.attr("show")(arSelf);
+                return viewer.attr("show")(arSelf, aHeight);
             }, R"mydelimiter(
             Render and view the mesh in a viewer window. **Requires IPython**
+
+            Params
+            -------------
+            height : int, default: 600
+                height in pixels to open the viewer
 
             Returns
             -------------
             html : IPython.display.HTML
                 Object containing rendered Mesh
-            )mydelimiter")
+            )mydelimiter", py::arg("height")=600)
         .def("__str__", [](const CModelComponent& arSelf) {
             return "vivid3d.ModelComponent\nName: " + arSelf.GetLabel() + "\nVertices: " + to_string(arSelf.GetPointsCount()) + "\nFaces: " + to_string(arSelf.GetFacesCount());
         });
@@ -428,17 +433,22 @@ PYBIND11_MODULE(_vivid, m) {
                 Object containing exported model - only returned if output_file is not provided
             )mydelimiter",
              py::arg("output_file")="", py::arg("file_type") = "glb")
-        .def("show", [](CModel &arSelf) {
+        .def("show", [](CModel &arSelf, int aHeight) {
                 auto viewer = py::module_::import("vivid3d.viewer");
-                return viewer.attr("show")(arSelf);
+                return viewer.attr("show")(arSelf, aHeight);
             }, R"mydelimiter(
             Render and view the mesh in a viewer window. **Requires IPython**
+
+            Params
+            -------------
+            height : int, default: 500
+                height in pixels to open the viewer
 
             Returns
             -------------
             html : IPython.display.HTML
                 Object containing rendered Mesh
-            )mydelimiter")
+            )mydelimiter", py::arg("height")=500)
         .def("__repr__", [](const CModel &arSelf){return "vivid3d.Model\nnMeshes " + to_string(arSelf.GetNumMeshes());});
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(

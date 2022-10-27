@@ -7,7 +7,7 @@ and jupyter notebooks using show
 import base64
 import os
 from ..utils import in_notebook
-from vivid3d._vivid import BlobData
+from vivid3d._core import BlobData
 
 import tempfile
 import webbrowser

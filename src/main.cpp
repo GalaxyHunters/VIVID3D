@@ -6,7 +6,7 @@
 #include "ModelBuilder/VoronoiVolume.h"
 #include "Point.h"
 #include "AssimpImportExport.h"
-#include "DataToImage.h"
+#include "ColorMapToPng.h"
 #include "Model.h"
 #include "PointCloud.h"
 #include <map>
@@ -207,7 +207,14 @@ int PyramidSmoothTest()
     }
 
     cout << "\n" << blob.mFiles.size() << endl;
-
+    auto ClmBuffer = mesh.GetColorMap().GetColorTexture();
+    const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // Check that this works properly please;
+    cout << "\n\n";
+    cout << "PNG ENCODING TESTING" << endl;
+    printf("%lu\n", pngBuffer.mSize);
+    for (int i = 0; i < pngBuffer.mSize; i++) {
+        cout << pngBuffer.mBuffer[i];
+    }
 //    mesh.LaplacianSmooth(10);
 //    cout << "second mesh" << endl;
 //    //CMesh fullMesh = volume.ToMesh("3", 0.1);

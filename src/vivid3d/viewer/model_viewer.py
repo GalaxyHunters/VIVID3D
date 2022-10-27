@@ -11,7 +11,7 @@ from vivid3d._vivid import BlobData
 
 import tempfile
 import webbrowser
-import time
+from time import sleep
 
 
 def view_glb(glb):
@@ -54,6 +54,7 @@ def view_glb(glb):
             url = 'file://' + html.name
             html.write(srcdoc)
             webbrowser.open(url)
+            sleep(3)
 
     return srcdoc
 
@@ -75,7 +76,7 @@ def show(model):
       The HTML page
     """
     try:
-        glb = model.export(file_type="glb")
+        glb = model.export(file_type="glb2")
 
         if isinstance(glb, bytes):
             bytearray = glb

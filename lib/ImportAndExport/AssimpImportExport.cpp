@@ -9,17 +9,17 @@ namespace vivid {
         // matches assimp file formats to actual file endings
         std::map<std::string, std::string> fileFormats =
             {
-                {"glb",     ".glb"},
-                {"glb2",    ".glb"},
-                {"gltf2",   ".gltf"},
-                {"obj",     ".obj"},
-                {"fbx",     ".fbx"},
-                {"ply",     ".ply"},
-                {"gltf",    ".gltf"},
-                {"3ds",     ".3ds"},
-                {"stl",     ".stl"},
-                {"stlb",    ".stl"},
-                {"collada", ".dae"}
+                {"glb",     ".glb"},    // Doesn't work well
+                {"glb2",    ".glb"},    // Works
+                {"gltf",    ".gltf"},   // Works
+                {"gltf2",   ".gltf"},   // Works
+                {"obj",     ".obj"},    // Works
+                {"fbx",     ".fbx"},    // Doesn't work well
+                {"ply",     ".ply"},    // Untested
+                {"3ds",     ".3ds"},    // Untested
+                {"stl",     ".stl"},    // Untested
+                {"stlb",    ".stl"},    // Untested
+                {"collada", ".dae"}     // Untested
             };
 
         map<string, string> TextureNameToIndex = {};
@@ -29,14 +29,13 @@ namespace vivid {
 
         CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) { //blob
             Assimp::Exporter exp;
-
-            EmbeddedTexture = true; //not sure that this works viewer wise, the code should be ok
+            EmbeddedTexture = true;
 
             aiScene *scene = GenerateScene(arModel);
-
             auto blob = exp.ExportToBlob(scene, arFileType,
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
+            EmbeddedTextures.clear();
             EmbeddedTexture = false;
             TextureNameToIndex.clear();
             delete scene;
@@ -50,14 +49,13 @@ namespace vivid {
 
         CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType) { //blob
             Assimp::Exporter exp;
-
-            EmbeddedTexture = true; //not sure this works viewer wise, the code should be ok
+            EmbeddedTexture = true;
 
             aiScene *scene = GenerateAnimationScene(arAnimation);
-
             auto blob = exp.ExportToBlob(scene, arFileType,
                                          aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
+            EmbeddedTextures.clear();
             EmbeddedTexture = false;
             TextureNameToIndex.clear();
             delete scene;
@@ -71,20 +69,18 @@ namespace vivid {
 
         bool AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-            int RET_VALUE;
-
             OutputPath = aOutputPath;
             aiScene *scene = GenerateScene(arModel);
 
             aOutputPath += fileFormats[arFileType];
-            RET_VALUE = exp.Export(scene, arFileType, aOutputPath,
+            auto ret = exp.Export(scene, arFileType, aOutputPath,
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
             TextureNameToIndex.clear();
             OutputPath = "";
             delete scene;
 
-            if (RET_VALUE != aiReturn_SUCCESS) {
+            if (ret != aiReturn_SUCCESS) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
 
@@ -93,7 +89,6 @@ namespace vivid {
 
         bool AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-
             OutputPath = aOutputPath;
 
             aiScene *scene = GenerateAnimationScene(arAnimation);
@@ -146,7 +141,6 @@ namespace vivid {
                 scene->mNumTextures = EmbeddedTextures.size();
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
-                EmbeddedTextures.clear();
             }
             return scene;
         }
@@ -206,7 +200,6 @@ namespace vivid {
                 scene->mNumTextures = EmbeddedTextures.size();
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
-                EmbeddedTextures.clear();
             }
             return scene;
         }
@@ -407,20 +400,14 @@ namespace vivid {
                     textureName.find_last_of("/\\") + 1); // remove the path component from the texture name
         }
 
-        aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture) { //for now this will be deprecated
-            aiTexture *embedded_texture = new aiTexture;
+        aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture) {
+            aiTexture *embedded_texture = new aiTexture();
             vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
-            embedded_texture->mHeight = ClmBuffer.size() / 4;
-            embedded_texture->mWidth = 1;
-            strcpy(embedded_texture->achFormatHint, "rgba8888");
-            embedded_texture->pcData = new aiTexel[ClmBuffer.size() / 4];
-            for (int p = 0;
-                 p < ClmBuffer.size() - 3; p += 4) { // ClmBuffer is a vector<unsigned char> with r,g,b,a,r,g,b,a..
-                embedded_texture->pcData[p / 4].r = ClmBuffer[p];
-                embedded_texture->pcData[p / 4].g = ClmBuffer[p + 1];
-                embedded_texture->pcData[p / 4].b = ClmBuffer[p + 2];
-                embedded_texture->pcData[p / 4].a = ClmBuffer[p + 3];
-            }
+            const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // This is a work of art.
+            strcpy(embedded_texture->achFormatHint, "png");
+            embedded_texture->pcData = (aiTexel*)pngBuffer.mBuffer; // This is bullshit.
+            embedded_texture->mWidth = pngBuffer.mSize;
+            embedded_texture->mHeight = 0; // Assimp expects compressed embedded textures to be with this format.
             return embedded_texture;
         }
 

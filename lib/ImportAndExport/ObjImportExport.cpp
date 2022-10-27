@@ -1,6 +1,6 @@
 #include "ObjImportExport.h"
 #include <boost/algorithm/string/predicate.hpp>
-#include "DataToImage.h"
+#include "ColorMapToPng.h"
 #include "AssimpImportExport.h"
 
 #include <string>

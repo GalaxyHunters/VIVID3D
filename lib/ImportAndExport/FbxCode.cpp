@@ -1,5 +1,5 @@
 #include "FbxCode.h"
-#include "DataToImage.h"
+#include "ColorMapToPng.h"
 #include "Decimate.h"
 
 using namespace vivid;

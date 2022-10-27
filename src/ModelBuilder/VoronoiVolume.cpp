@@ -70,12 +70,7 @@ CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel
     }
     // duplicating data, masking
     vector<bool> new_mask;
-    int i = 0;
     for (auto pair : mInputOutputMap) {
-        if (i < 5) {
-            Log(LOG_DEBUG, to_string(pair.first) + " " + to_string(pair.second));
-        }
-        i++;
         new_mask.push_back(arMask[pair.second]);
     }
     Log(LOG_DEBUG, "Mask New Size: " + to_string(new_mask.size()));
@@ -94,7 +89,6 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
     for (const auto & mVecPoint : mVertices) {
-        //points.push_back(**it);
         points.push_back((*mVecPoint * mScale) + mCenVector);
         indexes[mVecPoint] = counter;
         counter++;

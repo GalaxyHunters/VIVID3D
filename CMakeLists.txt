@@ -43,7 +43,7 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/lib/Decimate.cpp"
         "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/Voronoi.cpp"
         "${PROJECT_SOURCE_DIR}/lib/MeshDecimation/mdMeshDecimator.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/DataToImage.cpp"
+        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/ColorMapToPng.cpp"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng/lodepng.cpp"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/ObjImportExport.cpp"
         "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/AssimpImportExport.cpp"

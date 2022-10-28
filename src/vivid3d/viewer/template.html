@@ -9,6 +9,11 @@
         integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=='
         crossorigin='anonymous' referrerpolicy='no-referrer' />
   <style>
+    * {
+      transition: all 0.15s;
+      -webkit-transition: all 0.15s;
+      -ms-transition: all 0.15s;
+    }
     html,
     body,
     .container,
@@ -16,7 +21,6 @@
       margin: 0;
       height: 100%;
       width: 100%;
-      transition: all 0.2s;
       overflow: hidden;
       background-color: #eee;
     }
@@ -70,6 +74,15 @@
       opacity: 0.6;
     }
 
+
+    .control-panel {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
     .dropdown {
       background-color: transparent;
       padding: 15px 20px;
@@ -99,11 +112,9 @@
     button[type=reset] {
       background-color: #444;
       color: white;
-    ;
       font-size: 1.1em;
       border: none;
       border-radius: 3px;
-    ;
       width: 100%;
       height: 30px;
       cursor: pointer;
@@ -131,10 +142,25 @@
       flex-grow: 1;
     }
 
-
     .control-label {
       color: #fff;
       width: 50px;
+    }
+
+    .download {
+      margin: 30px 60px;
+      padding: 10px 0;
+      margin-top:auto;
+      border: none;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2em;
+    }
+
+    .download:hover {
+      background-color: #4682B4;
     }
 
     .disabled {
@@ -169,6 +195,7 @@
 <div class='container'>
   <!-- All you need to put beautiful, interactive 3D content on your site: -->
   <model-viewer id='modelviewer' loading='eager'
+                src='data:text/plain;base64,Z2xURgIAAAAgBgAAFAUAAEpTT057InNjZW5lIjogMCwgInNjZW5lcyI6IFt7Im5vZGVzIjogWzBdfV0sICJhc3NldCI6IHsidmVyc2lvbiI6ICIyLjAiLCAiZ2VuZXJhdG9yIjogImdpdGh1Yi5jb20vbWlrZWRoL3RyaW1lc2gifSwgImFjY2Vzc29ycyI6IFt7ImJ1ZmZlclZpZXciOiAwLCAiY29tcG9uZW50VHlwZSI6IDUxMjUsICJjb3VudCI6IDM2LCAibWF4IjogWzddLCAibWluIjogWzBdLCAidHlwZSI6ICJTQ0FMQVIifSwgeyJidWZmZXJWaWV3IjogMSwgImNvbXBvbmVudFR5cGUiOiA1MTI2LCAiY291bnQiOiA4LCAidHlwZSI6ICJWRUMzIiwgImJ5dGVPZmZzZXQiOiAwLCAibWF4IjogWzAuNSwgMC41LCAwLjVdLCAibWluIjogWy0wLjUsIC0wLjUsIC0wLjVdfV0sICJtZXNoZXMiOiBbeyJuYW1lIjogImdlb21ldHJ5XzAiLCAicHJpbWl0aXZlcyI6IFt7ImF0dHJpYnV0ZXMiOiB7IlBPU0lUSU9OIjogMX0sICJpbmRpY2VzIjogMCwgIm1vZGUiOiA0LCAibWF0ZXJpYWwiOiAwfV19XSwgIm1hdGVyaWFscyI6IFt7InBick1ldGFsbGljUm91Z2huZXNzIjogeyJiYXNlQ29sb3JGYWN0b3IiOiBbMC40MDAwMDAwMDU5NjA0NjQ1LCAwLjQwMDAwMDAwNTk2MDQ2NDUsIDAuNDAwMDAwMDA1OTYwNDY0NSwgMS4wXSwgIm1ldGFsbGljRmFjdG9yIjogMC4wLCAicm91Z2huZXNzRmFjdG9yIjogMC4wfX1dLCAiY2FtZXJhcyI6IFt7Im5hbWUiOiAiY2FtZXJhX0dYUE9MRSIsICJ0eXBlIjogInBlcnNwZWN0aXZlIiwgInBlcnNwZWN0aXZlIjogeyJhc3BlY3RSYXRpbyI6IDEuMzMzMzMzMzMzMzMzMzMzMywgInlmb3YiOiAwLjc4NTM5ODE2MzM5NzQ0ODN9fV0sICJub2RlcyI6IFt7Im5hbWUiOiAid29ybGQiLCAiY2hpbGRyZW4iOiBbMSwgMl19LCB7Im1hdHJpeCI6IFsxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAwLjAsIDEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjBdLCAibmFtZSI6ICJnZW9tZXRyeV8wX0hCTjRaSUJKSEhYQSIsICJtZXNoIjogMH0sIHsibWF0cml4IjogWzEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAxLjcwNzEwNjc4MTE4NjU0NzUsIDEuMF0sICJuYW1lIjogImNhbWVyYV9HWFBPTEUiLCAiY2FtZXJhIjogMH1dLCAiYnVmZmVycyI6IFt7ImJ5dGVMZW5ndGgiOiAyNDB9XSwgImJ1ZmZlclZpZXdzIjogW3siYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAwLCAiYnl0ZUxlbmd0aCI6IDE0NH0sIHsiYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAxNDQsICJieXRlTGVuZ3RoIjogOTZ9XX0gICAg8AAAAEJJTgABAAAAAwAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAwAAAAIAAAACAAAABAAAAAAAAAABAAAABwAAAAMAAAAFAAAAAQAAAAQAAAAFAAAABwAAAAEAAAADAAAABwAAAAIAAAAGAAAABAAAAAIAAAACAAAABwAAAAYAAAAGAAAABQAAAAQAAAAHAAAABQAAAAYAAAAAAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAD8='
                 src='data:text/plain;base64,$B64GLTF'
                 alt='Vivid3D Model' shadow-intensity='1' camera-controls auto-rotate
                 autoplay max-field-of-view='100deg'>
@@ -177,84 +204,87 @@
     <a class='title-bar' href='https://galaxyhuntersil.wixsite.com/website/vivid' target='_blank'>VIV<span
             style='color:#4682B4'>I</span>D3D</a>
     <hr class='solid'>
-    <button id='toggleRot' class='dropdown'>
-      <span>Rotation Controls</span>
-      <i class='fa-solid fa-chevron-down'></i>
-    </button>
-    <div id='controlsRot' class='controls'>
-      <form id='formRot'>
-        <div class='slider-container'>
-          <div class='control-label'>Roll</div>
-          <input type='range' min='0' max='360' value='0' class='slider' id='rollS' />
-          <div class='value-container' id='rollV'>0</div>
-        </div>
-        <div class='slider-container'>
-          <div class='control-label'>Pitch</div>
-          <input type='range' min='0' max='360' value='0' class='slider' id='pitchS' />
-          <div class='value-container' id='pitchV'>0</div>
-        </div>
-        <div class='slider-container'>
-          <div class='control-label'>Yaw</div>
-          <input type='range' min='0' max='360' value='0' class='slider' id='yawS' />
-          <div class='value-container' id='yawV'>0</div>
-        </div>
-        <button type='reset' id='resetRot'>Reset</button>
-      </form>
-    </div>
-    <button id='toggleScale' class='dropdown'>
-      <span>Scale Controls</span>
-      <i class='fa-solid fa-chevron-down'></i>
-    </button>
-    <div id='controlsScale' class='controls'>
-      <form id='formScale'>
-        <div class='slider-container'>
-          <div class='control-label'>X</div>
-          <input type='range' min='1' max='50' value='10' class='slider' id='xS' />
-          <div class='value-container' id='xV'>1</div>
-        </div>
-        <div class='slider-container'>
-          <div class='control-label'>Y</div>
-          <input type='range' min='1' max='50' value='10' class='slider' id='yS' />
-          <div class='value-container' id='yV'>1</div>
-        </div>
-        <div class='slider-container'>
-          <div class='control-label'>Z</div>
-          <input type='range' min='1' max='50' value='10' class='slider' id='zS' />
-          <div class='value-container' id='zV'>1</div>
-        </div>
-        <button type='reset' id='resetScale'>Reset</button>
-      </form>
-    </div>
-    <button id='toggleAnimations' class='dropdown'>
-      <span>Animations</span>
-      <i class='fa-solid fa-chevron-down'></i>
-    </button>
-    <div id='controlsAnimations' class='controls'>
-      <form id='formAnimations'>
-        <select name='animations' id='animations'>
-        </select>
-        <button class='play' id='play'>
-          <div class='slider-container hidden' id='pressPlay'>
-            <span>Play</span>
-            <i class='fa-solid fa-play'></i>
+    <div class="control-panel">
+      <button id='toggleRot' class='dropdown'>
+        <span>Rotation Controls</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsRot' class='controls'>
+        <form id='formRot'>
+          <div class='slider-container'>
+            <div class='control-label'>Roll</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='rollS' />
+            <div class='value-container' id='rollV'>0</div>
           </div>
-          <div class='slider-container' id='pressPause'>
-            <span>Pause</span>
-            <i class='fa-solid fa-pause'></i>
+          <div class='slider-container'>
+            <div class='control-label'>Pitch</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='pitchS' />
+            <div class='value-container' id='pitchV'>0</div>
           </div>
-        </button>
-        <div class='slider-container'>
-          <div class='control-label'>Speed</div>
-          <input type='range' min='0' max='20' value='10' class='slider' id='speedS' />
-          <div class='value-container' id='speedV'>1</div>
-        </div>
-        <div class='slider-container hidden' id='playback'>
-          <div class='control-label'>Playback</div>
-          <input type='range' min='0' max='100' value='0' class='slider' id='pbS' />
-          <div class='value-container' id='pbV'>0</div>
-        </div>
-        <button type='reset' id='resetAnimation'>Reset</button>
-      </form>
+          <div class='slider-container'>
+            <div class='control-label'>Yaw</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='yawS' />
+            <div class='value-container' id='yawV'>0</div>
+          </div>
+          <button type='reset' id='resetRot'>Reset</button>
+        </form>
+      </div>
+      <button id='toggleScale' class='dropdown'>
+        <span>Scale Controls</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsScale' class='controls'>
+        <form id='formScale'>
+          <div class='slider-container'>
+            <div class='control-label'>X</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='xS' />
+            <div class='value-container' id='xV'>1</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Y</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='yS' />
+            <div class='value-container' id='yV'>1</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Z</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='zS' />
+            <div class='value-container' id='zV'>1</div>
+          </div>
+          <button type='reset' id='resetScale'>Reset</button>
+        </form>
+      </div>
+      <button id='toggleAnimations' class='dropdown'>
+        <span>Animations</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsAnimations' class='controls'>
+        <form id='formAnimations'>
+          <select name='animations' id='animations'>
+          </select>
+          <button class='play' id='play'>
+            <div class='slider-container hidden' id='pressPlay'>
+              <span>Play</span>
+              <i class='fa-solid fa-play'></i>
+            </div>
+            <div class='slider-container' id='pressPause'>
+              <span>Pause</span>
+              <i class='fa-solid fa-pause'></i>
+            </div>
+          </button>
+          <div class='slider-container'>
+            <div class='control-label'>Speed</div>
+            <input type='range' min='0' max='20' value='10' class='slider' id='speedS' />
+            <div class='value-container' id='speedV'>1</div>
+          </div>
+          <div class='slider-container hidden' id='playback'>
+            <div class='control-label'>Playback</div>
+            <input type='range' min='0' max='100' value='0' class='slider' id='pbS' />
+            <div class='value-container' id='pbV'>0</div>
+          </div>
+          <button type='reset' id='resetAnimation'>Reset</button>
+        </form>
+      </div>
+      <button class="download" id="download">Export GLB</button>
     </div>
   </div>
 
@@ -421,6 +451,19 @@
     animations.addEventListener('change', setAnimation);
     speedS.addEventListener('input', updateSpeed);
     playbackS.addEventListener('input', updateFrame);
+    /* ------------------ANNOTATIONS------------------ */
+    /* ------------------DOWNLOAD------------------ */
+    const download = document.querySelector("#download");
+    const exportGLB = async () => {
+      const GLB = await modelViewer.exportScene();
+      const file = new File([GLB], "export.glb");
+      const link = document.createElement("a");
+      link.download =file.name;
+      link.href = URL.createObjectURL(file);
+      link.click();
+    }
+
+    download.addEventListener('click', exportGLB);
   </script>
 </body>
 </html>

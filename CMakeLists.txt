@@ -71,9 +71,9 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Utils/Logging/ProgressBar.cpp"
         "${PROJECT_SOURCE_DIR}/src/Utils/Logging/Errors.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/Logging/LogFile.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
-#        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
+        "${PROJECT_SOURCE_DIR}/src/Textures/ColorMap.h"
+        "${PROJECT_SOURCE_DIR}/src/Textures/ColorDefs.cpp"
+        "${PROJECT_SOURCE_DIR}/src/Textures/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
         "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h)
 

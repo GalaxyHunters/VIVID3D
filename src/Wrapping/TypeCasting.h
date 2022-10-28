@@ -182,11 +182,9 @@ namespace pybind11 {
             //Conversion part 2 (C++ -> Python)
             static py::handle cast(const CColorMap& src, py::return_value_policy policy, py::handle parent)
             {
-				auto LCM = py::module_::import("matplotlib.colors").attr("ListedColorMap");
-
-				py::object ret = LCM("colors"_a=src.GetNormalizedColorMap(), "name"_a=src.GetName());
-				std::cout << ret.attr("name").cast<std::string>() << std::endl;
-                return ret;
+				auto LCM = py::module_::import("matplotlib.colors").attr("ListedColormap");
+				auto ret = LCM("colors"_a=src.GetNormalizedColorMap(), "name"_a=src.GetName());
+                return ret.release();
             }
         };
 

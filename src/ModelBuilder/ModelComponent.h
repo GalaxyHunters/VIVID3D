@@ -29,20 +29,20 @@ namespace vivid
         vector<CFace> mFaces = {};
         FACE_TYPE mElementType = POLYGONS;
         std::string mLabel = "";
-        CColorMap mClm;
+        CColorMap mCmap;
         CMaterial mMaterial;
         //Constructor, Copy Constructor, Destructor
         CModelComponent(){}
         CModelComponent(const FACE_TYPE aElementType) : mElementType(aElementType) {}
         CModelComponent(const normal_float aAlpha, const std::string &arLabel, const FACE_TYPE aObjType)
-            : mLabel(arLabel), mElementType(aObjType), mClm(), mMaterial() { SetOpacity(aAlpha); }
+            : mLabel(arLabel), mElementType(aObjType), mCmap(), mMaterial() { SetOpacity(aAlpha); }
     public:
-        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mElementType(arModel.mElementType), mClm(arModel.mClm), mMaterial(arModel.mMaterial) {}
+        CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mElementType(arModel.mElementType), mCmap(arModel.mCmap), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
 
         // Operator=
         inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
-            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mClm=arModel.mClm; mMaterial=arModel.mMaterial; return *this; }
+            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mCmap=arModel.mCmap; mMaterial=arModel.mMaterial; return *this; }
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
@@ -51,7 +51,7 @@ namespace vivid
         inline size_t GetFacesCount() const { return mFaces.size(); }
         inline std::string GetLabel() const { return mLabel; }
         inline normal_float GetOpacity() const { return mMaterial.GetOpacity(); }
-        inline CColorMap GetColorMap() const { return mClm; }
+        inline CColorMap GetColorMap() const { return mCmap; }
         inline const CMaterial& GetMaterial() const { return mMaterial; }
         inline FACE_TYPE GetObjType() const { return mElementType; }
 
@@ -59,9 +59,8 @@ namespace vivid
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
         inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
         inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
-        inline void SetColor(const string& arColor) { mClm = CColorMap(arColor); }
-        inline void SetColorMap(const CColorMap& arColorMap) { mClm = arColorMap; }
-        inline void SetColorMap(const PyColorMap& arColorMap) { mClm = arColorMap; }
+        inline void SetColor(const string& arColor) { mCmap = CColorMap(arColor); }
+        inline void SetColorMap(const CColorMap& arColorMap) { mCmap = arColorMap; }
         inline void SetMaterial(const CMaterial& arMaterial) { mMaterial = arMaterial; }
 
         /**

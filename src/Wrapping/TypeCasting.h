@@ -133,10 +133,10 @@ namespace pybind11 {
 //            }
         };
         /* ------------------------------------------------- COLORMAP -------------------------------------------------*/
-        template <> struct type_caster<PyColorMap>
+        template <> struct type_caster<CColorMap>
         {
         public:
-            PYBIND11_TYPE_CASTER(PyColorMap, _("PyColorMap"));
+            PYBIND11_TYPE_CASTER(CColorMap, const_name("matplotlib.colors.Colormap"));
 
             // Conversion part 1 (Python -> C++)
             bool load(py::handle arObj, bool convert) {
@@ -147,12 +147,12 @@ namespace pybind11 {
                 std::vector<std::array<float, 3>> clm;
                 std::string obj_type = GetTypeString(arObj);
                 auto colormap = arObj;
-                std::cout<<obj_type<<std::endl;
+                // std::cout<<obj_type<<std::endl;
                 if (obj_type == STR) {
                     auto cm = py::module_::import("matplotlib.cm");
                     colormap = cm.attr("get_cmap")(arObj);
                     obj_type = GetTypeString(colormap);
-                    std::cout<<obj_type<<std::endl;
+                    // std::cout<<obj_type<<std::endl;
                 }
                 if (obj_type == MPL_LINEARCOLORMAP) {
                     clm = colormap.attr("colors").cast<std::vector<std::array<float, 3>>>();
@@ -172,7 +172,7 @@ namespace pybind11 {
                     return false;
                 }
 
-                PyColorMap cmap (clm, name);
+                CColorMap cmap (clm, name);
 
                 // This is whats pushed to the function
                 value = cmap;
@@ -180,18 +180,12 @@ namespace pybind11 {
                 return true;
             }
             //Conversion part 2 (C++ -> Python)
-//             static py::handle cast(const PyColorMap& src, py::return_value_policy policy, py::handle parent)
-//             {
-// //                std::vector<double> shape (3);
-// //
-// //                shape[0] = src.X();
-// //                shape[1] = src.Y();
-// //                shape[2] = src.Z();
-// //
-// //                py::array ret = py::cast(shape);
-
-//                 return src;
-//             }
+            static py::handle cast(const CColorMap& src, py::return_value_policy policy, py::handle parent)
+            {
+				auto LCM = py::module_::import("matplotlib.colors").attr("ListedColormap");
+				auto ret = LCM("colors"_a=src.GetNormalizedColorMap(), "name"_a=src.GetName());
+                return ret.release();
+            }
         };
 
         /* -------------------------------------------- MATRIX<CPOINT> --------------------------------------------*/

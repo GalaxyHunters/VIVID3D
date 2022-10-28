@@ -142,21 +142,20 @@ PYBIND11_MODULE(_vivid, m) {
                  "Constructor for point",
                  py::arg("3d_vector"));
 
-    py::class_<CColorMap>(m, "ColorMap")
-        .def(py::init<const string&>(),
-            py::arg("name"))
-        .def(py::init<vector<array<float, 3>>&, string&>(),
-            py::arg("colors"), py::arg("name"))
-        .def(py::init<const CColorMap&>(),
-             py::arg("ColorMap"))
-        .def_property_readonly("name", &CColorMap::GetName)
-        .def_property_readonly("colors", &CColorMap::GetColorMap)
-        .def_readonly_static("colors", &COLORS, "List of supported colors")
-        .def_property_readonly_static("color_maps", [](py::object) {
-            auto plt = py::module_::import("matplotlib.pyplot");
-            return plt.attr("colormaps")();
-        }, "List of supported Matplotlib Color Maps");
-    py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
+    // py::class_<CColorMap>(m, "ColorMap")
+    //     .def(py::init<const string&>(),
+    //         py::arg("name"))
+    //     .def(py::init<vector<array<float, 3>>&, string&>(),
+    //         py::arg("colors"), py::arg("name"))
+    //     .def(py::init<const CColorMap&>(),
+    //          py::arg("ColorMap"))
+    //     .def_property_readonly("name", &CColorMap::GetName)
+    //     .def_property_readonly("colors", &CColorMap::GetColorMap)
+    //     .def_readonly_static("colors", &COLORS, "List of supported colors")
+    //     .def_property_readonly_static("color_maps", [](py::object) {
+    //         auto plt = py::module_::import("matplotlib.pyplot");
+    //         return plt.attr("colormaps")();
+    //     }, "List of supported Matplotlib Color Maps");
 
     py::class_<CMaterial>(m, "Material", R"mydelimiter(
         Material obj
@@ -186,12 +185,10 @@ PYBIND11_MODULE(_vivid, m) {
         .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
               "Opacity (0.0-1.0)")
         .def_property("material",  &CModelComponent::GetMaterial, &CModelComponent::SetMaterial)
+        .def_property("colormap", &CModelComponent::GetColorMap, &CModelComponent::SetColorMap,
+             "The color map")
         .def("set_color", &CModelComponent::SetColor,
-             "Set Color", py::arg("color"))
-        .def("set_color_map", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
-             "Set Color Map", py::arg("ColorMap"))
-        .def("set_color_map", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap),
-             "Set Color Map", py::arg("ColorMap"))
+            "Set Color", py::arg("color"))
         .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
              "Transform Model Component by transformation matrix",
              py::arg("matrix"))

@@ -99,7 +99,6 @@ PYBIND11_MODULE(_core, m) {
            :toctree: _generate
            :caption: Material and Textures
 
-           ColorMap
            Material
 
         Utilities
@@ -110,7 +109,7 @@ PYBIND11_MODULE(_core, m) {
         .. autosummary::
            :toctree: _generate
            :caption: Geometry
-           
+
            create_plane 
            create_cube
            create_box
@@ -162,25 +161,6 @@ files : list[bytes]
         .def(py::init<std::vector<double>>(),
                  "Constructor for point",
                  py::arg("3d_vector"));
-// TODO: Deprecate in favor of pure matplotlib colormaps approach
-    py::class_<CColorMap>(m, "ColorMap", R"mydelimiter(
-ColorMap class for mapping Mesh point color field scalars to colors
-
-Attributes
-------
-name : str, default: "plasma"
-colors : array_like of shape (n,3), default : plasma colormap
-        )mydelimiter")
-        .def(py::init<>(), "Default Constructor - Plasma Colormap")
-        .def(py::init<const string&>(),
-            py::arg("name"), "Set color by name")
-        .def(py::init<vector<array<float, 3>>&, string&>(),
-            py::arg("colors"), py::arg("name"), "Custom colors and name")
-        .def(py::init<const CColorMap&>(),
-             py::arg("ColorMap"))
-        .def_property_readonly("name", &CColorMap::GetName)
-        .def_property_readonly("colors", &CColorMap::GetColorMap);
-    py::class_<PyColorMap, CColorMap>(m, "PyColorMap");
 
     py::class_<CMaterial>(m, "Material", R"mydelimiter(
 Simplified PBR Material for physically based rendering of Meshes
@@ -219,8 +199,9 @@ n_vertices : number
     # of vertices
 material : vivid3d.Material
     The material instance used by 3D renderers
-colormap : vivid3d.ColorMap
-    The Colormap instance used to map scalar data to colors
+colormap : matplotlib.colors..ColorMap
+    The Colormap instance used to map scalar data to colors.
+    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
 opacity : number
     The opacity when rendering, unit value (0.0-1.0)
 
@@ -252,7 +233,7 @@ export(output_file: str, file_type='glb2')
     .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount)
     .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount)
     .def_property("material", &CModelComponent::GetMaterial, &CModelComponent::SetMaterial)
-    .def_property_readonly("colormap", &CModelComponent::GetColorMap)
+    .def_property("colormap", &CModelComponent::GetColorMap, &CModelComponent::SetColorMap,
     .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
         "Opacity (0.0-1.0)")
     .def("set_color", &CModelComponent::SetColor,
@@ -264,16 +245,6 @@ Parameters
 color : str
     See https://htmlcolorcodes.com/color-names/ for list of all available colors.
         )mydelimiter", py::arg("color"))
-    .def("set_colormap", py::overload_cast<const CColorMap&>(&CModelComponent::SetColorMap),
-         "Set Color Map", py::arg("ColorMap"))
-    .def("set_colormap", py::overload_cast<const PyColorMap&>(&CModelComponent::SetColorMap), R"mydelimiter(
-Set the colormap used for mapping scalar values to colors
-
-Parameters
--------------
-colormap : str or matplotlib.colors.Colormap
-    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
-        )mydelimiter", py::arg("colormap"))
     .def("transform", py::overload_cast<const array<CPoint, 3>&>(&CModelComponent::TransformMesh),
          "Transform Mesh by transformation matrix", py::arg("matrix"))
     .def("rotate", &CModelComponent::RotateMesh,

@@ -13,7 +13,7 @@ namespace vivid {
         vector<color_t> mClm{};
         string mName = "";
 
-        inline string ToLower(const string &arStr) {
+        static inline string ToLower(const string &arStr) {
             string new_str;
             for (char i : arStr) {
                 if (i != ' ') {
@@ -22,14 +22,21 @@ namespace vivid {
             }
             return new_str;
         }
-        inline vector<color_t> ToColor_TClm(const vector<array<float, 3>> &arClm) {
+        static inline vector<color_t> ToColor_TClm(const vector<array<float, 3>> &arClm) {
             vector<color_t> color_t_clm;
             for (auto color : arClm) {
                 color_t_clm.push_back(ToColor_T(color));
             }
             return color_t_clm;
         }
-
+		static inline vector<array<float,3>> ToNormalClm(const vector<color_t> &arClm) {
+			vector<array<float,3>> normal_clm;
+			for (auto color : arClm) {
+                normal_clm.push_back(ToNormalRGB(color));
+			}
+            return normal_clm;
+		}
+    // We lose some accuracy here (we keep 3 decimal points worth), consider keeping cmaps as float arrays instead of char arrays
     public:
         CColorMap() : mClm(PLASMA_CLM.begin(), PLASMA_CLM.end()), mName(PLASMA) {}
         CColorMap(const vector<color_t> &arClm, const string &arCName) : mClm(arClm), mName(arCName) {}
@@ -45,6 +52,7 @@ namespace vivid {
 
         inline string GetName() const { return mName; }
         inline vector<color_t> GetColorMap() const { return mClm; }
+		inline vector<array<float,3>> GetNormalizedColorMap() const { return ToNormalClm(mClm); }
 
         inline int GetColorIndex(normal_float aVal) const {
             if (mClm.empty()) {
@@ -68,12 +76,6 @@ namespace vivid {
             texture.resize(texture.size());
             return texture;
         }
-    };
-
-    class PyColorMap : public CColorMap {
-    public:
-        PyColorMap() : CColorMap() {}
-        PyColorMap(vector<array<float, 3>> &arClm, const string &arCName) : CColorMap(arClm, arCName) {}
     };
 }
 #endif

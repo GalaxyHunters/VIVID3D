@@ -14,13 +14,9 @@ the advanced approach can get much better results.
 
 
 .. toctree::
-   :caption: Example
-   :maxdepth: 1
-
-   pyramid_example
-   enzo_galexy
-   shape_example
-   animation_example
+    :caption: Example
+    :maxdepth: 1
+    notebooks
 
 
 

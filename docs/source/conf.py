@@ -22,8 +22,12 @@ copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.7'
+release = '0.3.1'
 
+import os
+
+package_path = os.path.abspath('../..')
+os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
 
 # -- General configuration ---------------------------------------------------
 
@@ -35,7 +39,9 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
-    "sphinx_mdinclude"
+    "sphinx_mdinclude",
+    'nbsphinx'
+    "jupyter_sphinx",
 ]
 
 autosummary_generate = True

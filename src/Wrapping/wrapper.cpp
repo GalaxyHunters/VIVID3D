@@ -209,9 +209,6 @@ Methods
 -------------
 set_color(color: string)
     Set the mesh texture to a single color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.
-set_colormap(colormap: str or vivid3d.ColorMap)
-    Set the mesh texture to a matplotlib supported colormap. 
-    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
 transform(matrix: ndarray(3,3))
     Transform the Mesh by matrix
 rotate(norm_vec: Point3D, radians_angle: float)
@@ -230,10 +227,10 @@ export(output_file: str, file_type='glb2')
         "Copy Constructor for BaseMesh",
         py::arg("model_component"))
     .def_property("label", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
-    .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount)
-    .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount)
-    .def_property("material", &CModelComponent::GetMaterial, &CModelComponent::SetMaterial)
-    .def_property("colormap", &CModelComponent::GetColorMap, &CModelComponent::SetColorMap,
+    .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount, "# of polygons")
+    .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount, "# of vertices")
+    .def_property("material", &CModelComponent::GetMaterial, &CModelComponent::SetMaterial, "The material instance used by 3D renderers")
+    .def_property("colormap", &CModelComponent::GetColorMap, &CModelComponent::SetColorMap, "The Colormap instance used to map scalar data to colors.")
     .def_property("opacity", &CModelComponent::GetOpacity, &CModelComponent::SetOpacity,
         "Opacity (0.0-1.0)")
     .def("set_color", &CModelComponent::SetColor,
@@ -460,6 +457,8 @@ Methods
 -----
 add_points(points: Point3DArray(n,3), color_field: array_like(n), color_field_min=0, color_field_max=0)
     Append the points to the existing point cloud.
+add_noise(max_displacement: float)
+    Moves particles randomly by uniform distribution[-max_displacement, max_displacement] along x,y,z
 to_volume(noise_displacement=0)
     Generate 3D Volume using the Voronoi algorithm.
     See https://en.wikipedia.org/wiki/Voronoi_diagram for explanation.
@@ -502,6 +501,15 @@ label : str, default: 'pointCloud'
     .def("add_points", &CPointCloud::AddPoints,
         "Add Points to the Point Cloud",
         py::arg("points"), py::arg("color_field") = vector<normal_float>(0), py::arg("color_field_min") = 0, py::arg("color_field_max") = 0)
+    .def("add_noise", &CPointCloud::Noisify, R"mydelimiter(
+Moves particles randomly by uniform distribution[-max_displacement, max_displacement] along x,y,z axes.
+Useful for breaking up grid-like appearance of PointClouds generated with grid based data.
+
+Parameters
+-----
+max_displacement : float
+    Maximum amount to move in along axes. It is recommended to keep below the cell size.
+        )mydelimiter", py::arg("max_displacement"))
     .def("to_voronoi", &CPointCloud::CreateVoronoiVolume, R"mydelimiter(
 Generate 3D Volume using the Voronoi algorithm.
 See https://en.wikipedia.org/wiki/Voronoi_diagram for explanation.

@@ -47,7 +47,7 @@ void CModelComponent::MoveMesh(const CPoint& arDirectionVec){
 void CModelComponent::ScaleMesh(const CPoint& arScaleVec){
    for (auto & mPoint : mPoints)
    {
-       mPoint.Scale(arScaleVec);
+       mPoint *= arScaleVec;
    }
 }
 

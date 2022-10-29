@@ -78,7 +78,13 @@ add_library(vivid SHARED
         "${PROJECT_SOURCE_DIR}/src/Textures/ColorDefs.cpp"
         "${PROJECT_SOURCE_DIR}/src/Textures/Plasma.h"
         "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h src/ImportExport/BlobData.cpp src/ImportExport/BlobData.h)
+        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp"
+        src/ModelBuilder/Vivify.cpp
+        src/ModelBuilder/Vivify.h
+        src/ImportExport/BlobData.cpp
+        src/ImportExport/BlobData.h
+        src/Utils/Noisify.cpp
+        src/Utils/Noisify.h)
 
 
 target_include_directories(vivid PUBLIC

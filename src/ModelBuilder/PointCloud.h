@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include "VoronoiVolume.h"
+#include "Noisify.h"
 
 namespace vivid
 {
@@ -35,7 +36,7 @@ namespace vivid
 
         // Add
         void AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax);
-
+        inline void Noisify(coord_t aMaxDisplacement) { mPoints = NoisifyPoints(mPoints, aMaxDisplacement); }
         /**
          * CreateSurface using Voronoi algorithm
          * @param[in] arMask a boolean mask of true and false points, used for generating the boundary surface

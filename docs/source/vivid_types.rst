@@ -1,1 +1,4 @@
-.. automodule:: vivid3d._vivid
+API Reference
+================
+
+.. automodule:: vivid3d._core

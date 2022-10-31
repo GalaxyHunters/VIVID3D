@@ -26,7 +26,7 @@ VIVID3D was tested in our cosmology research group by producing models from simu
 ## Highlights
 View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3D is capable of
 ## Documentation
-**[Read The Docs](https://vivid.readthedocs.io/en/latest/)**
+[Read The Docs](https://vivid.readthedocs.io/en/latest/)
 
 # Installation and Usage
 ## Installation

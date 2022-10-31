@@ -22,7 +22,7 @@ copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.1'
+release = '0.3.2'
 
 import os
 

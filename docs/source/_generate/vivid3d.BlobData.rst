@@ -1,9 +1,9 @@
-﻿vivid3d.ColorMap
+﻿vivid3d.BlobData
 ================
 
 .. currentmodule:: vivid3d
 
-.. autoclass:: ColorMap
+.. autoclass:: BlobData
 
    
    .. automethod:: __init__
@@ -13,7 +13,7 @@
 
    .. autosummary::
    
-      ~ColorMap.__init__
+      ~BlobData.__init__
    
    
 
@@ -23,7 +23,8 @@
 
    .. autosummary::
    
-      ~ColorMap.colors
-      ~ColorMap.name
+      ~BlobData.files
+      ~BlobData.n_files
+      ~BlobData.names
    
    

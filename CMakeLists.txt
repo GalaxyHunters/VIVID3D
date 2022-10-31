@@ -7,10 +7,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.2.7")
+        VERSION "0.3.2")
 
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
+set(PROJECT_LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
+set(VIVID_SRC_DIR  ${PROJECT_SOURCE_DIR}/src)
 message("${PROJECT_SOURCE_DIR}")
 
 
@@ -19,7 +21,7 @@ include(GNUInstallDirs)
 
 
 #find_package( Boost 1.58.0 REQUIRED)
-add_subdirectory(${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast)
+add_subdirectory(${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
 
 set(ASSIMP_INSTALL OFF CACHE INTERNAL  "")
@@ -27,71 +29,75 @@ set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL  "")
 set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL  "")
 set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL  "")
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL  "")
+set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "")
+set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "")
+set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
 
-set(ASSIMP_DIR ${PROJECT_SOURCE_DIR}/lib/assimp)
+set(ASSIMP_DIR ${PROJECT_LIB_DIR}/ImportExport/assimp)
 
 add_subdirectory(${ASSIMP_DIR})
 include_directories(${ASSIMP_DIR}/include)
 
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/lib/assimp/cmake-modules)
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_LIB_DIR}/assimp/cmake-modules)
 #find_package(assimp COMPONENTS assimp REQUIRED)
 
 #define used cpp packages
 
 add_library(vivid SHARED
         #external
-        "${PROJECT_SOURCE_DIR}/lib/Decimate.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/Voronoi.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/MeshDecimation/mdMeshDecimator.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/DataToImage.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng/lodepng.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/ObjImportExport.cpp"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/AssimpImportExport.cpp"
-        #lib/ImportAndExport/FbxCode.cpp
-        #lib/ImportAndExport/FBXImportExport.cpp
+        "${PROJECT_LIB_DIR}/Decimate.cpp"
+        "${PROJECT_LIB_DIR}/SurfacingAlgorithms/Voronoi.cpp"
+        "${PROJECT_LIB_DIR}/MeshDecimation/mdMeshDecimator.cpp"
+        "${VIVID_SRC_DIR}/ImportExport/ColorMapToPng.cpp"
+        "${PROJECT_LIB_DIR}/ImportExport/lodepng/lodepng.cpp"
+        "${VIVID_SRC_DIR}/ImportExport/ObjImportExport.cpp"
+        "${VIVID_SRC_DIR}/ImportExport/AssimpImportExport.cpp"
+        "${VIVID_SRC_DIR}/ImportExport/BlobData.cpp"
         #vivid
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Vivify.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Model.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/ModelComponent.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Mesh.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Line.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/PointCloud.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Vivify.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Model.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/ModelComponent.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Mesh.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Line.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/PointCloud.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/VoronoiVolume.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/MarchingCubesSurface.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Shapes.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Animation.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/StopMotionAnimation.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/SurfByFunc.cpp"
+        "${VIVID_SRC_DIR}/ModelBuilder/Vivify.cpp"
 
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/VoronoiVolume.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/MarchingCubesSurface.cpp"
+        "${VIVID_SRC_DIR}/Textures/ColorMap.h"
+        "${VIVID_SRC_DIR}/Textures/ColorDefs.cpp"
+        "${VIVID_SRC_DIR}/Textures/Plasma.h"
+        "${VIVID_SRC_DIR}/Textures/Material.h"
 
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Shapes.cpp"
+        "${VIVID_SRC_DIR}/Utils/Logging/ProgressBar.cpp"
+        "${VIVID_SRC_DIR}/Utils/Logging/Errors.h"
+        "${VIVID_SRC_DIR}/Utils/Logging/LogFile.cpp"
 
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/Animation.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/StopMotionAnimation.cpp"
+        "${VIVID_SRC_DIR}/Utils/NormalFloat.cpp"
+        "${VIVID_SRC_DIR}/Utils/Noisify.cpp"
 
-        "${PROJECT_SOURCE_DIR}/src/Extra/Analysis.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.cpp"
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder/SurfByFunc.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/ProgressBar.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/Errors.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Logging/LogFile.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Utils/ColorDefs.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Plasma.h"
-#        "${PROJECT_SOURCE_DIR}/src/Extra/VoronoiSmoothing.cpp"
-        "${PROJECT_SOURCE_DIR}/src/Textures/Material.h"
-        "${PROJECT_SOURCE_DIR}/src/Utils/NormalFloat.cpp" src/ModelBuilder/Vivify.cpp src/ModelBuilder/Vivify.h)
+        "${VIVID_SRC_DIR}/Extra/Analysis.cpp")
 
 
 target_include_directories(vivid PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Textures>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Utils/Logging>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/Wrapping>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MeshDecimation>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/MyBoost>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/ImportAndExport>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ImportExport>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ModelBuilder>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Utils>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Textures>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Utils/Logging>
+        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Wrapping>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/MeshDecimation>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/MyBoost>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport/lodepng>
+        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
@@ -103,24 +109,6 @@ target_link_libraries(vivid assimp::assimp)
 #target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 #target_link_libraries(vivid Boost::boost)
 
-
-install(DIRECTORY
-        "${PROJECT_SOURCE_DIR}/src/ModelBuilder"
-        "${PROJECT_SOURCE_DIR}/src/Textures"
-        "${PROJECT_SOURCE_DIR}/src/Utils"
-        "${PROJECT_SOURCE_DIR}/src/Utils/Logging"
-        "${PROJECT_SOURCE_DIR}/src/Wrapping"
-        "${PROJECT_SOURCE_DIR}/lib"
-        "${PROJECT_SOURCE_DIR}/lib/MeshDecimation"
-        "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms"
-        "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon"
-        "${PROJECT_SOURCE_DIR}/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc"
-        "${PROJECT_SOURCE_DIR}/lib/MyBoost"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport/lodepng"
-        "${PROJECT_SOURCE_DIR}/lib/ImportAndExport"
-#        "${PROJECT_SOURCE_DIR}/pybind11/include/pybind11"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        FILES_MATCHING PATTERN "*.h")
 
 install(
         TARGETS vivid
@@ -166,38 +154,38 @@ if(DEFINED SKBUILD)
     include_directories(${PYTHON_INCLUDE_DIRS})
     target_link_libraries(vivid ${PYTHON_LIBRARIES})
 
-    pybind11_add_module(_vivid
-            ${PROJECT_SOURCE_DIR}/src/Wrapping/wrapper.cpp
-            ${PROJECT_SOURCE_DIR}/src/Wrapping/TypeCasting.h
+    pybind11_add_module(_core
+            ${VIVID_SRC_DIR}/Wrapping/wrapper.cpp
+            ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
             )
 
 #    target_include_directories(vivid_py PUBLIC
-#            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/ModelBuilder>
+#            $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ModelBuilder>
 #            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
 #            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 #            )
 
-    target_link_libraries(_vivid PRIVATE vivid)
+    target_link_libraries(_core PRIVATE vivid)
 
     # Installing the extension module to the root of the package
-    install(TARGETS _vivid DESTINATION .)
+    install(TARGETS _core DESTINATION .)
 
-#    configure_file("${PROJECT_SOURCE_DIR}/src/vivid_py/__main__.py.in"
+#    configure_file("${VIVID_SRC_DIR}/vivid_py/__main__.py.in"
 #            "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py")
 #
 #    install(FILES "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py" DESTINATION .)
 
     if(APPLE)
         set_target_properties(
-                _vivid PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+                _core PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
     else()
-        set_target_properties(_vivid PROPERTIES INSTALL_RPATH
+        set_target_properties(_core PROPERTIES INSTALL_RPATH
                 "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
     endif()
 else()
     add_executable(vivid_main
             #main
-            ${PROJECT_SOURCE_DIR}/src/main.cpp)
+            ${VIVID_SRC_DIR}/main.cpp)
     target_link_libraries(vivid_main vivid)
 endif()
 

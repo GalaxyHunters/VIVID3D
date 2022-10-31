@@ -6,7 +6,7 @@
 #include "ModelBuilder/VoronoiVolume.h"
 #include "Point.h"
 #include "AssimpImportExport.h"
-#include "DataToImage.h"
+#include "ColorMapToPng.h"
 #include "Model.h"
 #include "PointCloud.h"
 #include <map>
@@ -127,7 +127,6 @@ int CubeSurfTests()
     }
     CModel model;
     CVoronoiVolume volume = CVoronoiVolume(points, quan, *min_element(quan.begin(), quan.end() ), *max_element(quan.begin(), quan.end()) );
-    volume.CreateSurface();
 //    cerr << "Initiating Copy Constructor");
 //    CVoronoiVolume surf_copy = CVoronoiVolume(surf);
     CMesh mesh = volume.MaskMesh(mask,"vivid_3d_obj", 1.0);
@@ -192,20 +191,40 @@ int PyramidSmoothTest()
     }
 
 //CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
-    CVoronoiVolume volume = CVoronoiVolume(points, quan, Vmin, Vmax, 0);
-    volume.CreateSurface();
+    CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
-    mesh.LaplacianSmooth(10);
-    cout << "second mesh" << endl;
-    //CMesh fullMesh = volume.ToMesh("3", 0.1);
+    auto blob = mesh.ExportToBlob("glb");
 
-    cout << "model" << endl;
-//    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
-    CModel model;
-    model.AddMesh(mesh);
-    cout << "export" << endl;
-    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+    printf("n=%zu files\n", blob.mNumFiles);
+    for (const auto& name : blob.mNames) {
+        printf("name: %s\n", name.c_str());
+    }
+//    printf("%s", blob.getFiles()[0]);
+    for (const auto& file : blob.mFiles) {
+        printf("Length of file %zu\n", file.size());
+        cout << file << endl;
+    }
+
+    cout << "\n" << blob.mFiles.size() << endl;
+    auto ClmBuffer = mesh.GetColorMap().GetColorTexture();
+    const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // Check that this works properly please;
+    cout << "\n\n";
+    cout << "PNG ENCODING TESTING" << endl;
+    printf("%lu\n", pngBuffer.mSize);
+    for (int i = 0; i < pngBuffer.mSize; i++) {
+        cout << pngBuffer.mBuffer[i];
+    }
+//    mesh.LaplacianSmooth(10);
+//    cout << "second mesh" << endl;
+//    //CMesh fullMesh = volume.ToMesh("3", 0.1);
+//
+//    cout << "model" << endl;
+////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+//    CModel model;
+//    model.AddMesh(mesh);
+//    cout << "export" << endl;
+//    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     return EXIT_SUCCESS;
 
 }
@@ -223,7 +242,6 @@ int RunMedicaneTest()
         points[j] = nova.points[j];
     }
     CVoronoiVolume surf = CVoronoiVolume(points, nova.quan, -15.1, 1.51);
-    surf.CreateSurface();
     //surf.Smooth(false, 1);
     Log(LOG_INFO, "Convert to Mesh");
     CMesh mesh = surf.MaskMesh(nova.mask,"SurfMedicane", 1);
@@ -333,8 +351,8 @@ int main()
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    Log(LOG_INFO, "Pyramid");
-//    ret_value = PyramidSmoothTest();
+    Log(LOG_INFO, "Pyramid");
+    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();

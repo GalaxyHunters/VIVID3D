@@ -73,7 +73,7 @@ CMesh SurfByFunc(const F3D_t &func, int aBoxSize, normal_float aOpacity, const s
         }
     }
 
-    CMesh mesh = CMesh(points, faces, arLabel, aOpacity);
+    CMesh mesh = CMesh(points, faces, aOpacity, arLabel);
     return mesh;
 }
 
@@ -137,7 +137,7 @@ CMesh ParametricSurface(const FParametric_t &func, int aNumberOfSteps, coord_t a
     }
     faces.push_back(CFace(vector<size_t>{1, (size_t)1 + (aNumberOfSteps) * aNumberOfSteps, (size_t)1 + aNumberOfSteps}, aColor));
 
-    CMesh mesh(points, faces, arLabel, aOpacity);
+    CMesh mesh(points, faces, aOpacity, arLabel);
 //    mesh.MoveMesh(arCenter);
 //    mesh.ScaleMesh(CPoint(aRadius, aRadius, aRadius));
 

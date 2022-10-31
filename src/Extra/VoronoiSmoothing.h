@@ -5,7 +5,7 @@
 namespace vivid
 {
 
-// Deprecated smoothing algorithm using Voronoi, essentially a overcomplicated subdivide algorithm thats just a it better at dealing with pointy faces than laplacian smooth
+// Deprecated smoothing algorithm using Voronoi, essentially an overcomplicated subdivide algorithm that's just a bit better at dealing with pointy faces than laplacian smooth
 // Supplemented by RemovePointyFaces and LaplacianSmooth
     class CVoronoiSmoothing {
     public:

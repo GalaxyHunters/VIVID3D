@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.2.7")
+        VERSION "0.3.2")
 
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
@@ -109,25 +109,6 @@ target_link_libraries(vivid assimp::assimp)
 #target_include_directories(vivid PUBLIC ${Boost_INCLUDE_DIR})
 #target_link_libraries(vivid Boost::boost)
 
-
-install(DIRECTORY
-        "${VIVID_SRC_DIR}/ImportExport"
-        "${VIVID_SRC_DIR}/ModelBuilder"
-        "${VIVID_SRC_DIR}/Textures"
-        "${VIVID_SRC_DIR}/Utils"
-        "${VIVID_SRC_DIR}/Utils/Logging"
-        "${VIVID_SRC_DIR}/Wrapping"
-        "${PROJECT_LIB_DIR}"
-        "${PROJECT_LIB_DIR}/MeshDecimation"
-        "${PROJECT_LIB_DIR}/SurfacingAlgorithms"
-        "${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon"
-        "${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc"
-        "${PROJECT_LIB_DIR}/MyBoost"
-        "${PROJECT_LIB_DIR}/ImportExport/lodepng"
-        "${PROJECT_LIB_DIR}/ImportExport"
-#        "${PROJECT_SOURCE_DIR}/pybind11/include/pybind11"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        FILES_MATCHING PATTERN "*.h")
 
 install(
         TARGETS vivid

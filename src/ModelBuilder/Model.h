@@ -3,6 +3,7 @@
 
 #include "Mesh.h"
 
+
 namespace vivid
 {
 
@@ -26,20 +27,41 @@ namespace vivid
         //List of meshes by label?
         inline size_t GetNumMeshes() const { return mMeshes.size(); }
         inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
-
+        inline size_t GetNumVertices() const {
+            size_t count = 0;
+            for (const auto& mesh : mMeshes) {
+                count += mesh.GetPointsCount();
+            }
+            return count;
+        }
+        inline size_t GetNumPolygons() const {
+            size_t count = 0;
+            for (const auto& mesh : mMeshes) {
+                count += mesh.GetFacesCount();
+            }
+            return count;
+        }
         // Add Importers
         // void ImportModel(const std::string &arInputFilePath)
+        /**
+        * OBJ export. writes arModel to arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
+        * @param[in] WithTexture Whether to include Texture Data or not
+        */
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
 
         /**
-        * Assimp export. writes arModel in aFileType format at aOutputPath
-        * @param[in] aOutputPath Path and name for output file
+        * Assimp export. writes arModel in aFileType format at arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "obj");
-//    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
-
-        //TODO export to BLOB
+        void Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        /**
+        * Assimp export. returns arModel in aFileType format
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        * @returns void* file blob encoded in provided aFileType
+        */
+        CBlobData ExportToBlob(const std::string& arFileType = "glb");
     };
 
 }; // namespace vivid

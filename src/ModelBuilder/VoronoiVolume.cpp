@@ -1,5 +1,6 @@
 #include "VoronoiVolume.h"
 #include <map>
+#include "Noisify.h"
 
 using namespace vivid;
 using namespace std;
@@ -20,10 +21,11 @@ CVoronoiVolume::CVoronoiVolume(const vector<CPoint> &arInputPoints, vector<norma
     vector<pair<CSurfacePoint, size_t>> points;
     vector<normal_float> normal_field = NormalizeField(arColorField, arInputPoints.size(), aVMin, aVMax);
     for (int i = 0; i < arInputPoints.size(); i++) {
-        points.push_back({CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], false), i});
+        points.emplace_back(CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], false), i);
     }
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
+    CreateSurface();
 }
 
 CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf)
@@ -61,12 +63,6 @@ CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf)
 
 /* ------------------------------------------------ Public Methods ---------------------------------------------------- */
 
-void CVoronoiVolume::CreateSurface()
-{
-    RunVorn();
-    CleanEdges();
-}
-
 CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity)
 {
     Log(LOG_DEBUG, "Mask Input Size: " + to_string(arMask.size()));
@@ -75,12 +71,7 @@ CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel
     }
     // duplicating data, masking
     vector<bool> new_mask;
-    int i = 0;
     for (auto pair : mInputOutputMap) {
-        if (i < 5) {
-            Log(LOG_DEBUG, to_string(pair.first) + " " + to_string(pair.second));
-        }
-        i++;
         new_mask.push_back(arMask[pair.second]);
     }
     Log(LOG_DEBUG, "Mask New Size: " + to_string(new_mask.size()));
@@ -98,9 +89,7 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
     vector<CPoint> points;
     size_t counter = 0;
     map < shared_ptr<CPoint>, size_t> indexes;
-    Log(LOG_DEBUG, "Vertices");
     for (const auto & mVecPoint : mVertices) {
-        //points.push_back(**it);
         points.push_back((*mVecPoint * mScale) + mCenVector);
         indexes[mVecPoint] = counter;
         counter++;
@@ -108,7 +97,6 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
     vector<CFace> faces;
     vector<size_t> face_points;
     set<size_t> set_points;
-    Log(LOG_DEBUG, "Faces");
     for (const auto & mVecFace : mSurfFaces) {
         for (const auto & mPoint : mVecFace.mVertices) {
             if (set_points.count(indexes[mPoint]) == 0) {
@@ -120,13 +108,17 @@ CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
         face_points = vector<size_t>();
         set_points.clear();
     }
-    cout << points.size() << endl;
-    cout << faces.size() << endl;
 
-    return CMesh(points, faces, arLabel, aOpacity);
+    return CMesh(points, faces, aOpacity, arLabel);
 }
 
 /*------------------------------------------------- Private Methods --------------------------------------------------*/
+
+void CVoronoiVolume::CreateSurface()
+{
+    RunVorn();
+    CleanEdges();
+}
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
@@ -271,7 +263,7 @@ void CVoronoiVolume::NormalizeFace(CSurfaceFace& arTriangleFace)
     // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
     // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
     CPoint face_normal = ((*arTriangleFace.mVertices[1] - *arTriangleFace.mVertices[0]).Cross(*arTriangleFace.mVertices[2] - *arTriangleFace.mVertices[0])).Normalize();
-    true_normal.Scale(face_normal);
+    true_normal *= face_normal;
     // if the direction is opposite
     if (true_normal.Dot({1,1,1}) < 0) {
         arTriangleFace.mVertices = {arTriangleFace.mVertices[0], arTriangleFace.mVertices[2], arTriangleFace.mVertices[1]};
@@ -381,19 +373,11 @@ void CVoronoiVolume::PreProcessPoints(vector<pair<CSurfacePoint, size_t>> &arPoi
     mScale = FindContainingRadius() / PARTICLE_SCALE_MAGNITUDE;
 
     vector<CPoint> noise_vec (mInputPoints.size());
-
-    // Consider generator here.
-    srand(time(nullptr));
-    for (auto & i : noise_vec){
-        i = {1,1,1};
-        if(aNoiseDisplacement) {
-            i = {1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.),
-                 1 + aNoiseDisplacement * ((coord_t) (rand() % 20 - 10) / 10.)};
-        }
+    if (aNoiseDisplacement) {
+        mInputPoints = NoisifyPoints(mInputPoints, aNoiseDisplacement);
     }
-    for (int i = 0; i < mInputPoints.size(); i++){
-        mInputPoints[i] = (mInputPoints[i].Scale(noise_vec[i])) / mScale;
+    for (auto& point : mInputPoints){
+        point /= mScale;
     }
 
     //CleanDoubleInputPoints(arPoints);

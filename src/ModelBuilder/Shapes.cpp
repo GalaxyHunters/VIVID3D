@@ -20,7 +20,7 @@ CMesh CreatePlaneMesh(const CPoint &arCenter, coord_t aSize, const string& arCol
     vector<CFace> faces = {CFace({0, 1, 2, 3}, 0)};
 
 
-    CMesh mesh(points, faces, arLabel, aOpacity);
+    CMesh mesh(points, faces, aOpacity, arLabel);
     mesh.MoveMesh(arCenter);
     mesh.ScaleMesh({aSize, aSize, 0});
     mesh.SetColor(arColor);
@@ -53,7 +53,7 @@ CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, const string& 
                            CFace(vector<size_t>{1, 5, 4, 0}, 0)     };
 
 
-    CMesh mesh(points, faces, arLabel, aOpacity);
+    CMesh mesh(points, faces, aOpacity, arLabel);
     mesh.MoveMesh(arCenter);
     mesh.ScaleMesh(arSize);
     mesh.SetColor(arColor);
@@ -109,7 +109,7 @@ CMesh CreateSphereMesh(const CPoint &arCenter, coord_t aRadius, size_t aNumOfMer
     }
     faces.push_back(CFace({1, 1 + (aNumOfMeridians) * aNumOfParallels, 1 + aNumOfParallels}, 0));
 
-    CMesh mesh(points, faces, arLabel, aOpacity);
+    CMesh mesh(points, faces, aOpacity, arLabel);
     mesh.MoveMesh(arCenter);
     mesh.ScaleMesh({aRadius, aRadius, aRadius});
     mesh.SetColor(arColor);
@@ -121,7 +121,7 @@ CMesh CreateEllipsoidMesh(const CPoint &arCenter, const CPoint &arScaleVec, size
 {
     /* Asserting conditions */
     if (!(arMajorAxis.Orthogonal(arMiddleAxis) && arMinorAxis.Orthogonal(arMiddleAxis) && arMajorAxis.Orthogonal(arMinorAxis))) {
-        throw "Axis vectors must be perpendicular";
+        Log(LOG_ERROR, "Axis vectors must be perpendicular");
     }
 
     CMesh Ellipsoid = CreateSphereMesh(arCenter, 1.0, aNumOfMeridians, aNumOfParallels, arColor, aOpacity, arLabel);
@@ -140,10 +140,10 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
 {
     //before we run, lets check Exceptions
     if (ZERO_COMPARISON_THRESHOLD >= arDirVec.Magnitude())  {
-        throw "Direction Vector cannot be (0,0,0)";
+        Log(LOG_ERROR, "Direction Vector cannot be (0,0,0)");
     }
     if (ZERO_COMPARISON_THRESHOLD >= aWidth || ZERO_COMPARISON_THRESHOLD >= aPCRatio) {
-        throw "aWidth and aPCRatio must be different then 0";
+        Log(LOG_ERROR, "aWidth and aPCRatio must be different then 0");
     }
 
     // Create arrow pointing from (0,0,0) to (0,0,1)
@@ -190,7 +190,7 @@ CMesh CreateArrowMesh(const CPoint &arCenter, const CPoint &arDirVec, coord_t aW
                          CFace(vector<size_t>{11, 12, 9}, 0),
                          CFace(vector<size_t>{9, 12, 8}, 0) };
 
-    CMesh mesh(points, faces, arLabel, aOpacity);
+    CMesh mesh(points, faces, aOpacity, arLabel);
 
     // Scale the arrow by aDirVec and later rotating the arrow to aDirVec direction
     auto direction_size = arDirVec.Magnitude();
@@ -248,10 +248,4 @@ pair<CLines, CLines> CreateGrid(coord_t aScale, size_t aNumOfTicks, coord_t aTic
 }
 
 } // namespace vivid
-
-
-////this function applies a matrix so that the input points is rotated in a way that vector1 is equal to vector2.
-//vector<CPoint> RotateMatchVectors(vector<CPoint> Points, vector<double> &Vector1, vector<double> &Vector2){
-//    //start by using the cross product to get a vector thats gonna be our rotation base, ie we are going to rotate around it.
-
 

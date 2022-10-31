@@ -8,21 +8,35 @@
 #include <assimp/types.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include "DataToImage.h"
+#include "ColorMapToPng.h"
+#include "BlobData.h"
 #include <map>
 namespace vivid {
     namespace AssimpExport {
-
+        /**
+         * Assimp export. writes arModel in aFileType format and returns as blob
+         * @param[in] arModel CModel to be exported
+         * @param[in] aFileType 3D filetype format to write to (out of supported options)
+         * @return CBlobData files as blobs
+         */
+        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType);
+        /**
+         * Assimp export. writes arModel in aFileType format and returns as blob
+         * @param[in] arAnimation CModel to be exported
+         * @param[in] aFileType 3D filetype format to write to (out of supported options)
+         * @return CBlobData files as blobs
+         */
+        CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType);
         /**
          * Assimp export. writes arModel in aFileType format at aOutputPath
          * @param[in] arModel CModel to be exported
          * @param[in] aFileType 3D filetype format to write to (out of supported options)
          * @param[in] aOutputPath Path and name for output file
          */
-        int AssimpExporter(vivid::CModel &arModel, const std::string &arFileType, std::string aOutputPath); //=1
-        int AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath);
-
-
+        void AssimpExporter(vivid::CModel &arModel, const std::string &arFileType, std::string aOutputPath);
+        void AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath);
+        // TODO: CModel AssimpImport(const std::string &arInputPath)
+        // TODO: All of these should be cpp only code, none of them need to be in the header
         string AddTexture(CColorMap arMeshCLM);
 
         aiNode *GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd);
@@ -54,12 +68,6 @@ namespace vivid {
         void RotateAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0);
 
         void MoveAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0);
-
-
-
-
-        // TODO export to BLOB
-
     };
 }
 

@@ -53,7 +53,7 @@ namespace vivid
         inline void SetModels(const std::vector<CModel> &arModels) { mModels = arModels; }
 
         inline int GetTicksPerSecond() const {return mTicksPerSecond;}
-        inline void SetTicksPerSecond(int mTicksPerSecond){CAnimation::mTicksPerSecond = mTicksPerSecond;}
+        inline void SetTicksPerSecond(int aTicksPerSecond){CAnimation::mTicksPerSecond = aTicksPerSecond;}
 
 
         inline size_t GetNumMeshes() const{
@@ -128,6 +128,13 @@ namespace vivid
 
         //export animation
         void Export(const std::string &arOutputFilePath, std::string aFileType = "gltf2");
+
+        /**
+        * Assimp export. returns arModel in aFileType format
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        * @returns const void* file blob encoded in provided aFileType
+        */
+        CBlobData ExportToBlob(const std::string& arFileType = "glb");
 
     };
 

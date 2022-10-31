@@ -239,6 +239,9 @@ unsigned encode(std::vector<unsigned char>& out,
 unsigned encode(std::vector<unsigned char>& out,
                 const std::vector<unsigned char>& in, unsigned w, unsigned h,
                 LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
+unsigned encode(unsigned char** apBuffer, size_t* apBufferSize,
+                const std::vector<unsigned char>& in, unsigned w, unsigned h,
+                LodePNGColorType colortype = LCT_RGBA, unsigned bitdepth = 8);
 #ifdef LODEPNG_COMPILE_DISK
 /*
 Converts 32-bit RGBA raw pixel data into a PNG file on disk.

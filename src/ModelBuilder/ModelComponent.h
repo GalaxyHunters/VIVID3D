@@ -5,12 +5,12 @@
 #include <functional>
 #include <map>
 
-
 #include "Point.h"
 #include "Face.h"
 #include "ColorMap.h"
 #include "Material.h"
 #include "LogFile.h"
+#include "BlobData.h"
 
 namespace vivid
 {
@@ -90,14 +90,25 @@ namespace vivid
          */
         void ScaleMesh(const CPoint &arScaleVec);
 
+        /*
+        * OBJ export. writes arModel to arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
+        * @param[in] WithTexture Whether to include Texture Data or not
+        */
         void ExportToObj(const std::string &arOutputFilePath, bool WithTexture = 1);
 
         /**
-        * Assimp export. writes arModel in aFileType format at aOutputPath
-        * @param[in] aOutputPath Path and name for output file
+        * Assimp export. writes arModel in aFileType format at arOutputFilePath
+        * @param[in] arOutputFilePath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        void Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        /**
+        * Assimp export. returns arModel in aFileType format
+        * @param[in] aFileType 3D filetype format to write to (out of supported options)
+        * @returns const void* file blob encoded in provided aFileType
+        */
+        CBlobData ExportToBlob(const std::string& arFileType = "glb");
     };
 };     // namespace vivid
 #endif // VIVID_MODELCOMPONENT_H

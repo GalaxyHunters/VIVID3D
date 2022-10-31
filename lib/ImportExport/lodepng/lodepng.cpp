@@ -6280,6 +6280,19 @@ unsigned encode(std::vector<unsigned char>& out, const unsigned char* in, unsign
   return error;
 }
 
+unsigned encode(unsigned char** apBuffer, size_t* apBufferSize,
+                const std::vector<unsigned char>& in, unsigned w, unsigned h,
+                LodePNGColorType colortype, unsigned bitdepth) {
+//    unsigned char* buffer;
+//    size_t buffersize;
+    unsigned error = lodepng_encode_memory(apBuffer, apBufferSize, in.empty() ? 0 : &in[0], w, h, colortype, bitdepth);
+//    if(buffer) {
+//        out.insert(out.end(), &buffer[0], &buffer[buffersize]);
+//        lodepng_free(buffer);
+//    }
+    return error;
+}
+
 unsigned encode(std::vector<unsigned char>& out,
                 const std::vector<unsigned char>& in, unsigned w, unsigned h,
                 LodePNGColorType colortype, unsigned bitdepth) {

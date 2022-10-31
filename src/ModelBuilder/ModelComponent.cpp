@@ -47,7 +47,7 @@ void CModelComponent::MoveMesh(const CPoint& arDirectionVec){
 void CModelComponent::ScaleMesh(const CPoint& arScaleVec){
    for (auto & mPoint : mPoints)
    {
-       mPoint.Scale(arScaleVec);
+       mPoint *= arScaleVec;
    }
 }
 
@@ -57,6 +57,10 @@ void CModelComponent::ExportToObj(const std::string &arOutputFilePath, bool aWit
     CModel(*this).ExportToObj(arOutputFilePath, aWithTexture);
 }
 
-int CModelComponent::Export(const std::string &arOutputFilePath, const std::string& arFileType){
-    return CModel(*this).Export(arOutputFilePath, arFileType);
+void CModelComponent::Export(const std::string &arOutputFilePath, const std::string& arFileType){
+    CModel(*this).Export(arOutputFilePath, arFileType);
+}
+
+CBlobData CModelComponent::ExportToBlob(const std::string& arFileType) {
+    return CModel(*this).ExportToBlob(arFileType);
 }

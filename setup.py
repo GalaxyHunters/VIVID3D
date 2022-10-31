@@ -9,11 +9,17 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
+about = {}
+with open("src/vivid3d/_details.py") as fp:
+    exec(fp.read(), about)
+
 setup(
     name="vivid3d",
-    version="0.2.7",
-    packages=['vivid3d'],
+    version=about['__version__'],
+    packages=['vivid3d', 'vivid3d.viewer'],
     package_dir={'': 'src'},
+    package_data={'vivid3d.viewer': ["template.html"]},
+    #include_package_data=True,
     cmake_install_dir='src/vivid3d',
     author='GalaxyHuntersIL',
     author_email='galaxyhuntersil@gmail.com',

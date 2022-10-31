@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>VIVID3D Model Viewer</title>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
+        integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=='
+        crossorigin='anonymous' referrerpolicy='no-referrer' />
+  <style>
+    * {
+      transition: all 0.15s;
+      -webkit-transition: all 0.15s;
+      -ms-transition: all 0.15s;
+    }
+    html,
+    body,
+    .container,
+    model-viewer {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background-color: #eee;
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    .slider-container,
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    model-viewer {
+      min-height: 500px;
+    }
+
+    .right-container {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+
+      display: flex;
+      flex-direction: column;
+      background-color: #222;
+      color: #fff;
+      height: 100%;
+      min-width: 360px;
+      max-width: 360px;
+    }
+
+    .title-bar {
+      padding: 20px 0px;
+      background-color: #222;
+      text-align: center;
+      font-family: Helvetica, sans-serif;
+      font-size: 3em;
+      letter-spacing: 10px;
+      font-weight: bolder;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .title-bar:hover {
+      opacity: 0.6;
+    }
+
+
+    .control-panel {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    .dropdown {
+      background-color: transparent;
+      padding: 15px 20px;
+      font-size: 1.25em;
+      font-weight: 400;
+      color: #fff;
+      text-align: left;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .controls {
+      padding: 20px;
+      background-color: #333;
+      display: none;
+    }
+
+    .slider-container {
+      justify-content: space-between;
+      height: 40px;
+      margin: 0 5px;
+    }
+
+    button[type=reset] {
+      background-color: #444;
+      color: white;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 3px;
+      width: 100%;
+      height: 30px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button[type=reset]:hover {
+      background-color: #666;
+    }
+
+    .value-container {
+      border-radius: 3px;
+      background-color: #444;
+      border: none;
+      font-size: 0.9em;
+      text-align: center;
+      line-height: 30px;
+      width: 30px;
+      height: 30px;
+      color: #fff;
+    }
+
+    .slider {
+      margin: 0 20px;
+      flex-grow: 1;
+    }
+
+    .control-label {
+      color: #fff;
+      width: 50px;
+    }
+
+    .download {
+      margin: 30px 60px;
+      padding: 10px 0;
+      margin-top:auto;
+      border: none;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2em;
+    }
+
+    .download:hover {
+      background-color: #4682B4;
+    }
+
+    .disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+  <!-- The following libraries and polyfills are recommended to maximize browser support -->
+  <!-- NOTE: you must adjust the paths as appropriate for your project -->
+
+  <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
+  <!--     <script src='https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js'></script> -->
+
+  <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
+  <!--     <script src='https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js'></script> -->
+
+  <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
+  <script src='https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js'></script>
+
+  <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+  <script src='https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js' defer></script>
+</head>
+<body>
+<div class='container'>
+  <!-- All you need to put beautiful, interactive 3D content on your site: -->
+  <model-viewer id='modelviewer' loading='eager'
+                src='data:text/plain;base64,Z2xURgIAAAAgBgAAFAUAAEpTT057InNjZW5lIjogMCwgInNjZW5lcyI6IFt7Im5vZGVzIjogWzBdfV0sICJhc3NldCI6IHsidmVyc2lvbiI6ICIyLjAiLCAiZ2VuZXJhdG9yIjogImdpdGh1Yi5jb20vbWlrZWRoL3RyaW1lc2gifSwgImFjY2Vzc29ycyI6IFt7ImJ1ZmZlclZpZXciOiAwLCAiY29tcG9uZW50VHlwZSI6IDUxMjUsICJjb3VudCI6IDM2LCAibWF4IjogWzddLCAibWluIjogWzBdLCAidHlwZSI6ICJTQ0FMQVIifSwgeyJidWZmZXJWaWV3IjogMSwgImNvbXBvbmVudFR5cGUiOiA1MTI2LCAiY291bnQiOiA4LCAidHlwZSI6ICJWRUMzIiwgImJ5dGVPZmZzZXQiOiAwLCAibWF4IjogWzAuNSwgMC41LCAwLjVdLCAibWluIjogWy0wLjUsIC0wLjUsIC0wLjVdfV0sICJtZXNoZXMiOiBbeyJuYW1lIjogImdlb21ldHJ5XzAiLCAicHJpbWl0aXZlcyI6IFt7ImF0dHJpYnV0ZXMiOiB7IlBPU0lUSU9OIjogMX0sICJpbmRpY2VzIjogMCwgIm1vZGUiOiA0LCAibWF0ZXJpYWwiOiAwfV19XSwgIm1hdGVyaWFscyI6IFt7InBick1ldGFsbGljUm91Z2huZXNzIjogeyJiYXNlQ29sb3JGYWN0b3IiOiBbMC40MDAwMDAwMDU5NjA0NjQ1LCAwLjQwMDAwMDAwNTk2MDQ2NDUsIDAuNDAwMDAwMDA1OTYwNDY0NSwgMS4wXSwgIm1ldGFsbGljRmFjdG9yIjogMC4wLCAicm91Z2huZXNzRmFjdG9yIjogMC4wfX1dLCAiY2FtZXJhcyI6IFt7Im5hbWUiOiAiY2FtZXJhX0dYUE9MRSIsICJ0eXBlIjogInBlcnNwZWN0aXZlIiwgInBlcnNwZWN0aXZlIjogeyJhc3BlY3RSYXRpbyI6IDEuMzMzMzMzMzMzMzMzMzMzMywgInlmb3YiOiAwLjc4NTM5ODE2MzM5NzQ0ODN9fV0sICJub2RlcyI6IFt7Im5hbWUiOiAid29ybGQiLCAiY2hpbGRyZW4iOiBbMSwgMl19LCB7Im1hdHJpeCI6IFsxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAwLjAsIDEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjBdLCAibmFtZSI6ICJnZW9tZXRyeV8wX0hCTjRaSUJKSEhYQSIsICJtZXNoIjogMH0sIHsibWF0cml4IjogWzEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAxLjcwNzEwNjc4MTE4NjU0NzUsIDEuMF0sICJuYW1lIjogImNhbWVyYV9HWFBPTEUiLCAiY2FtZXJhIjogMH1dLCAiYnVmZmVycyI6IFt7ImJ5dGVMZW5ndGgiOiAyNDB9XSwgImJ1ZmZlclZpZXdzIjogW3siYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAwLCAiYnl0ZUxlbmd0aCI6IDE0NH0sIHsiYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAxNDQsICJieXRlTGVuZ3RoIjogOTZ9XX0gICAg8AAAAEJJTgABAAAAAwAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAwAAAAIAAAACAAAABAAAAAAAAAABAAAABwAAAAMAAAAFAAAAAQAAAAQAAAAFAAAABwAAAAEAAAADAAAABwAAAAIAAAAGAAAABAAAAAIAAAACAAAABwAAAAYAAAAGAAAABQAAAAQAAAAHAAAABQAAAAYAAAAAAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAD8='
+                src='data:text/plain;base64,$B64GLTF'
+                alt='Vivid3D Model' shadow-intensity='1' camera-controls auto-rotate
+                autoplay max-field-of-view='100deg'>
+  </model-viewer>
+  <div class='right-container'>
+    <a class='title-bar' href='https://galaxyhuntersil.wixsite.com/website/vivid' target='_blank'>VIV<span
+            style='color:#4682B4'>I</span>D3D</a>
+    <hr class='solid'>
+    <div class="control-panel">
+      <button id='toggleRot' class='dropdown'>
+        <span>Rotation Controls</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsRot' class='controls'>
+        <form id='formRot'>
+          <div class='slider-container'>
+            <div class='control-label'>Roll</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='rollS' />
+            <div class='value-container' id='rollV'>0</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Pitch</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='pitchS' />
+            <div class='value-container' id='pitchV'>0</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Yaw</div>
+            <input type='range' min='0' max='360' value='0' class='slider' id='yawS' />
+            <div class='value-container' id='yawV'>0</div>
+          </div>
+          <button type='reset' id='resetRot'>Reset</button>
+        </form>
+      </div>
+      <button id='toggleScale' class='dropdown'>
+        <span>Scale Controls</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsScale' class='controls'>
+        <form id='formScale'>
+          <div class='slider-container'>
+            <div class='control-label'>X</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='xS' />
+            <div class='value-container' id='xV'>1</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Y</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='yS' />
+            <div class='value-container' id='yV'>1</div>
+          </div>
+          <div class='slider-container'>
+            <div class='control-label'>Z</div>
+            <input type='range' min='1' max='50' value='10' class='slider' id='zS' />
+            <div class='value-container' id='zV'>1</div>
+          </div>
+          <button type='reset' id='resetScale'>Reset</button>
+        </form>
+      </div>
+      <button id='toggleAnimations' class='dropdown'>
+        <span>Animations</span>
+        <i class='fa-solid fa-chevron-down'></i>
+      </button>
+      <div id='controlsAnimations' class='controls'>
+        <form id='formAnimations'>
+          <select name='animations' id='animations'>
+          </select>
+          <button class='play' id='play'>
+            <div class='slider-container hidden' id='pressPlay'>
+              <span>Play</span>
+              <i class='fa-solid fa-play'></i>
+            </div>
+            <div class='slider-container' id='pressPause'>
+              <span>Pause</span>
+              <i class='fa-solid fa-pause'></i>
+            </div>
+          </button>
+          <div class='slider-container'>
+            <div class='control-label'>Speed</div>
+            <input type='range' min='0' max='20' value='10' class='slider' id='speedS' />
+            <div class='value-container' id='speedV'>1</div>
+          </div>
+          <div class='slider-container hidden' id='playback'>
+            <div class='control-label'>Playback</div>
+            <input type='range' min='0' max='100' value='0' class='slider' id='pbS' />
+            <div class='value-container' id='pbV'>0</div>
+          </div>
+          <button type='reset' id='resetAnimation'>Reset</button>
+        </form>
+      </div>
+      <button class="download" id="download">Export GLB</button>
+    </div>
+  </div>
+
+
+  <!-- 💁 Include both scripts below to support all browsers! -->
+
+  <!-- Loads <model-viewer> for modern browsers: -->
+  <script type='module' src='https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'>
+  </script>
+
+  <!-- Loads <model-viewer> for old browsers like IE11: -->
+  <script nomodule src='https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js'>
+  </script>
+
+  <script>
+    const modelViewer = document.querySelector('model-viewer#modelviewer');
+
+    /* ------------------ROTATION------------------ */
+
+    const toggleRot = document.querySelector('#toggleRot');
+    const controlsRot = document.querySelector('#controlsRot');
+
+    const rollS = document.querySelector('#rollS');
+    const pitchS = document.querySelector('#pitchS');
+    const yawS = document.querySelector('#yawS');
+    const rollV = document.querySelector('#rollV');
+    const pitchV = document.querySelector('#pitchV');
+    const yawV = document.querySelector('#yawV');
+    const formRot = document.querySelector('#formRot');
+    formRot.reset();
+    const openControls = (e, controls) => {
+      controls.classList.toggle('show');
+      const toggleIcon = e.target.querySelectorAll('i')[0];
+      toggleIcon.classList.toggle('fa-chevron-down');
+      toggleIcon.classList.toggle('fa-chevron-up');
+    }
+
+    const updateOrientation = () => {
+      modelViewer.orientation = `${rollS.value}deg ${pitchS.value}deg ${yawS.value}deg`;
+      rollV.innerHTML = rollS.value;
+      pitchV.innerHTML = pitchS.value;
+      yawV.innerHTML = yawS.value;
+      modelViewer.updateFraming();
+    };
+    toggleRot.addEventListener('click', (e) => {
+      openControls(e, controlsRot);
+    });
+    rollS.addEventListener('input', () => {
+      updateOrientation();
+    });
+    pitchS.addEventListener('input', () => {
+      updateOrientation();
+    });
+    yawS.addEventListener('input', () => {
+      updateOrientation();
+    });
+    formRot.addEventListener('reset', () => {
+      setTimeout(updateOrientation);
+    });
+
+    /* ------------------SCALE------------------ */
+
+    const toggleScale = document.querySelector('#toggleScale');
+    const controlsScale = document.querySelector('#controlsScale');
+    const xS = document.querySelector('#xS');
+    const yS = document.querySelector('#yS');
+    const zS = document.querySelector('#zS');
+    const xV = document.querySelector('#xV');
+    const yV = document.querySelector('#yV');
+    const zV = document.querySelector('#zV');
+    const formScale = document.querySelector('#formScale');
+    formScale.reset();
+    const updateScale = () => {
+      modelViewer.scale = `${xS.value / 10} ${yS.value / 10} ${zS.value / 10}`;
+      xV.innerHTML = xS.value / 10;
+      yV.innerHTML = yS.value / 10;
+      zV.innerHTML = zS.value / 10;
+      //modelViewerTransform.updateFraming();
+    };
+    toggleScale.addEventListener('click', (e) => {
+      openControls(e, controlsScale);
+    });
+    xS.addEventListener('input', () => {
+      updateScale();
+    });
+    yS.addEventListener('input', () => {
+      updateScale();
+    });
+    zS.addEventListener('input', () => {
+      updateScale();
+    });
+    formScale.addEventListener('reset', () => {
+      setTimeout(updateScale);
+    });
+
+    /* ------------------ANIMATION------------------ */
+    const toggleAnimation = document.querySelector('#toggleAnimations');
+    const controlsAnimation = document.querySelector('#controlsAnimations');
+    const animations = document.querySelector('#animations');
+    const playback = document.querySelector('#playback');
+    const play = document.querySelector('#play');
+    const speedS = document.querySelector('#speedS');
+    const playbackS = document.querySelector('#pbS');
+    const speedV = document.querySelector('#speedV');
+    const playbackV = document.querySelector('#pbV');
+    const formAnimation = document.querySelector('#formAnimation');
+
+    const initAnimations = () => {
+      console.log('hello!');
+      console.log(modelViewer.availableAnimations.length);
+      if (modelViewer.availableAnimations.length) {
+        toggleAnimation.classList.remove('disabled');
+        toggleAnimation.addEventListener('click', (e) => {
+          openControls(e, controlsAnimation);
+        });
+        modelViewer.availableAnimations.forEach((name) => {
+          const option = document.createElement('option');
+          option.value = name;
+          option.innerHTML = name;
+          animations.appendChild(option);
+        })
+      } else {
+        toggleAnimation.classList.add('disabled');
+        const toggleIcon = toggleAnimation.querySelectorAll('i')[0];
+        toggleIcon.classList.add('hidden');
+      }
+    };
+    modelViewer.addEventListener('load', initAnimations);
+
+
+    const setAnimation = () => {
+      modelViewer.animationName = animations.value;
+      playbackS.setAttribute('max', modelViewer.duration * 100);
+    };
+
+    const updateSpeed = () => {
+      modelViewer.timeScale = speedS.value / 10;
+      speedV.innerHTML = speedS.value / 10;
+    };
+
+    const togglePlay = () => {
+      if (modelViewer.paused) {
+        modelViewer.play();
+        play.querySelector('#pressPlay').toggle('hidden');
+        play.querySelector('#pressPause').toggle('hidden');
+      } else {
+        modelViewer.pause();
+      }
+    };
+
+    const togglePlayback = () => {
+      playback.classList.toggle('hidden');
+      playbackS.value = modelViewer.currentTime * 100
+      playbackV.value = modelViewer.currentTime;
+    };
+
+    const updateFrame = () => {
+      modelViewer.currentTime = playbackS.value / 100
+      playbackV.value = playbackS.value / 100;
+    };
+    play.addEventListener('click', togglePlay);
+    modelViewer.addEventListener('play', togglePlayback);
+    modelViewer.addEventListener('pause', togglePlayback);
+    animations.addEventListener('change', setAnimation);
+    speedS.addEventListener('input', updateSpeed);
+    playbackS.addEventListener('input', updateFrame);
+    /* ------------------ANNOTATIONS------------------ */
+    /* ------------------DOWNLOAD------------------ */
+    const download = document.querySelector("#download");
+    const exportGLB = async () => {
+      const GLB = await modelViewer.exportScene();
+      const file = new File([GLB], "export.glb");
+      const link = document.createElement("a");
+      link.download =file.name;
+      link.href = URL.createObjectURL(file);
+      link.click();
+    }
+
+    download.addEventListener('click', exportGLB);
+  </script>
+</body>
+</html>

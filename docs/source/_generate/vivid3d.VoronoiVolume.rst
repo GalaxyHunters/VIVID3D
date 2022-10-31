@@ -14,7 +14,7 @@
    .. autosummary::
    
       ~VoronoiVolume.__init__
-      ~VoronoiVolume.to_mesh
+      ~VoronoiVolume.iso_surface
    
    
 

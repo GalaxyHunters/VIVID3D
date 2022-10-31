@@ -20,7 +20,7 @@
       ~Mesh.rotate
       ~Mesh.scale
       ~Mesh.set_color
-      ~Mesh.set_colormap
+      ~Mesh.show
       ~Mesh.smooth
       ~Mesh.transform
    
@@ -33,10 +33,10 @@
    .. autosummary::
    
       ~Mesh.colormap
+      ~Mesh.label
       ~Mesh.material
       ~Mesh.n_polygons
       ~Mesh.n_vertices
-      ~Mesh.name
       ~Mesh.opacity
    
    

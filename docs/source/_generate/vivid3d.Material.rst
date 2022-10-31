@@ -14,7 +14,6 @@
    .. autosummary::
    
       ~Material.__init__
-      ~Material.set_emission_color
    
    
 
@@ -24,7 +23,9 @@
 
    .. autosummary::
    
+      ~Material.emission_color
       ~Material.emission_strength
+      ~Material.name
       ~Material.opacity
       ~Material.shininess
    

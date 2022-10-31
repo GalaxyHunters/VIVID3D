@@ -67,7 +67,7 @@ namespace vivid {
             return CBlobData::FormatExportDataBlob(blob);
         }
 
-        bool AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
+        void AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
             OutputPath = aOutputPath;
             aiScene *scene = GenerateScene(arModel);
@@ -83,11 +83,9 @@ namespace vivid {
             if (ret != aiReturn_SUCCESS) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
-
-            return true;
         }
 
-        bool AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
+        void AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
             OutputPath = aOutputPath;
 
@@ -103,8 +101,6 @@ namespace vivid {
             if (ret != aiReturn_SUCCESS) {
                 Log(LOG_ERROR, exp.GetErrorString());
             }
-
-            return true;
         }
 
         aiScene *GenerateScene(const vivid::CModel &model) {

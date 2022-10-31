@@ -55,7 +55,7 @@ namespace vivid
         * @param[in] arOutputFilePath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        int Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        void Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
         /**
         * Assimp export. returns arModel in aFileType format
         * @param[in] aFileType 3D filetype format to write to (out of supported options)

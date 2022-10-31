@@ -18,6 +18,7 @@
       ~Model.add_meshes
       ~Model.export
       ~Model.export_to_obj
+      ~Model.show
    
    
 
@@ -29,5 +30,7 @@
    
       ~Model.meshes
       ~Model.n_meshes
+      ~Model.n_polygons
+      ~Model.n_vertices
    
    

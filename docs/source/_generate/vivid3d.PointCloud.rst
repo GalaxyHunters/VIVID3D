@@ -14,14 +14,15 @@
    .. autosummary::
    
       ~PointCloud.__init__
+      ~PointCloud.add_noise
       ~PointCloud.add_points
       ~PointCloud.export
-      ~PointCloud.generate_mesh
       ~PointCloud.move
       ~PointCloud.rotate
       ~PointCloud.scale
       ~PointCloud.set_color
-      ~PointCloud.set_colormap
+      ~PointCloud.show
+      ~PointCloud.to_voronoi
       ~PointCloud.transform
    
    
@@ -33,10 +34,10 @@
    .. autosummary::
    
       ~PointCloud.colormap
+      ~PointCloud.label
       ~PointCloud.material
       ~PointCloud.n_polygons
       ~PointCloud.n_vertices
-      ~PointCloud.name
       ~PointCloud.opacity
    
    

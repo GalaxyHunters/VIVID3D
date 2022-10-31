@@ -20,7 +20,7 @@
       ~Lines.rotate
       ~Lines.scale
       ~Lines.set_color
-      ~Lines.set_colormap
+      ~Lines.show
       ~Lines.transform
    
    
@@ -32,10 +32,10 @@
    .. autosummary::
    
       ~Lines.colormap
+      ~Lines.label
       ~Lines.material
       ~Lines.n_polygons
       ~Lines.n_vertices
-      ~Lines.name
       ~Lines.opacity
    
    

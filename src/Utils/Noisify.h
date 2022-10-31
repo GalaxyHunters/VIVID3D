@@ -4,7 +4,7 @@
 #include "Point.h"
 
 namespace vivid {
-    std::vector<CPoint> NoisifyPoints(const std::vector<CPoint>& points, coord_t amount);
+    std::vector<CPoint> NoisifyPoints(const std::vector<CPoint>& arPoints, coord_t aDistance);
 }
 
 #endif //VIVID_NOISIFY_H

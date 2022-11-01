@@ -10,13 +10,19 @@ Content
 -------
 .. toctree::
    :caption: User Guide
-   :maxdepth: 2
+   :maxdepth: 1
 
    examples
 
 .. toctree::
    :caption: API Reference
-   :maxdepth: 3
+   :maxdepth: 1
 
-   vivid_types 
+   api_reference
+
+.. toctree::
+    :caption: Gallery
+    :maxdepth: 1
+
+    gallery
 

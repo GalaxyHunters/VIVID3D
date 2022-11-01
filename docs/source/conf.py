@@ -40,7 +40,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
     "sphinx_mdinclude",
-    'nbsphinx'
+    'nbsphinx',
     "jupyter_sphinx",
 ]
 

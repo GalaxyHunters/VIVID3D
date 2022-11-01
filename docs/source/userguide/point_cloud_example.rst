@@ -4,7 +4,7 @@ Point Cloud Example
 In this example, we generate a dataset of 3D Points on a uniformly sampled sphere, and pass it to the PointCloud class.
 
 .. jupyter-execute::
-    :caption: Uniformly-sampled Point Cloud Sphere
+
     import vivid3d
     import numpy as np
 
@@ -16,7 +16,8 @@ In this example, we generate a dataset of 3D Points on a uniformly sampled spher
         x,y,z = u/norm,v/norm,w/norm
         return np.array([x,y,z])
 
-    points = np.apply_along_axis(radius, 0, np.empty(1000))
 
-    pointCloud = vivid3d.PointCloud(points)
+    colors = np.zeros([1000, 1]);
+    points = np.apply_along_axis(radius, 1, colors)
+    pointCloud = vivid3d.PointCloud(points, colors.flatten())
     pointCloud.show()

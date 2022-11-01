@@ -13,11 +13,11 @@ This covers the basic understanding and creation of Meshes and Models, visualiza
 
     userguide/basics
     userguide/materials_colors
-    uesrguide/geometries
+    userguide/geometries
     userguide/animations
     userguide/point_cloud
     userguide/lines
-    uesrguide/voronoi
+    userguide/voronoi
     userguide/transformations
 
 

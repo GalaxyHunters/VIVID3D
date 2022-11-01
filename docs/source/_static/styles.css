@@ -1,0 +1,19 @@
+.jupyter_cell.jupyter_container {
+    background: none !important;
+    border: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+div.jupyter_cell > div.code_cell,
+div.jupyter_cell div.highlight,
+div.code_cell div.highlight {
+    background-color: var(--color-code-background) !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+div.jupyter_cell div.highlight pre {
+    padding: .625rem .875rem;
+}

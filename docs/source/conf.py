@@ -38,12 +38,15 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autosummary",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx_mdinclude",
     'nbsphinx',
     "jupyter_sphinx",
 ]
 
+autosectionlabel_prefix_document = True
+#autosectionlabel_maxdepth = 2
 autosummary_generate = True
 napoleon_numpy_docstring = True
 
@@ -57,7 +60,7 @@ exclude_patterns = []
 
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+#pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
@@ -73,3 +76,6 @@ html_theme = 'furo'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_css_files = [
+    "styles.css",
+]

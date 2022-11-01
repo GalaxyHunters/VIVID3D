@@ -1,10 +1,7 @@
 Simple ball example
 ===================
 
-
-First, we need model data to test.
-In this example, we generate a 3D grid with a Distance attribute for each point.
-From this data, we will make a ball
+In this example, we generate a volumetric 3D grid with a Distance attribute for each point (voxel).
 
 .. jupyter-execute::
 
@@ -20,41 +17,45 @@ From this data, we will make a ball
     arrX = arr.reshape(-1, 1, 1) * ones
     arrY = arr.reshape(1, -1, 1) * ones
     arrZ = arr.reshape(1, 1, -1) * ones
-    #set points
+    # set points
     points = np.array(list(zip(arrX.reshape(-1), arrY.reshape(-1), arrZ.reshape(-1))))
-    #set color field by Z value
+    # set color field by Z value
     color = arrZ.reshape(-1)
-    #Get distance from zero to each point (We will make our surface with this)
+    # Get distance from zero to each point (We will make our surface with this)
     distance = np.linalg.norm(points - np.zeros((1, 3)), axis=1).reshape(-1)
 
-Now, with this data we can call vivid and make a model.
+The Voronoi Algorithm
+---------------------
 
-The one liner
--------------
+The Voronoi algorithm is a cousin of the `Delaunay Triangulation<https://en.wikipedia.org/wiki/Delaunay_triangulation>` method.
 
-.. code-block:: python
-
-    vivid3d.make_model(
-        input_points=points, #the 3D points form which faces are made
-        surface_field = distance, #surface_field, Value for each input_point to later make a surface 
-        surface_threshold = 20, #The threshold value for surface_field, resulting in the surface.
-        output_path = path + "/MyFirstModel", #optinal - output path for model
-        color_field = color, #optinal - Color value for each input point
-        color_field_min = -BOX_SIZE, #optinal - Min value for the color field, default is min(color_field)
-        color_field_max = BOX_SIZE, #optinal - Max value for the color field, default is max(color_field)
-        label =  "My_First_Model", #optinal - label for the model, some formats support it
-        opacity = 0.8, #optinal - opacity factor for the model 0 is See throgh
-        file_type = "glb", #optinal - file format for the export, basic is "gltf2"
-        noise_displacement = 0.0001) #Optional, add noise to the model, improves Voronoi performance, recommend leaving as default
-
-
-Here we used the distance from 0,0,0 as a field value and with a threshold of 20, we made a surface. 
-
-Similarly, you can input a Mask (bool array) and the surface will be created between true (blue in this 2D example) and false (red).
+The
 
 .. image:: ../resources/voronoi_diagram.jpg
    :width: 400
    :alt: voronoi_diagrem
+
+
+The one liner
+-------------
+
+Here we use the distance from 0,0,0 as a field value and with a threshold of 20, we made a surface.
+
+.. jupyter-execute::
+
+    model = vivid3d.make_model(
+        input_points=points, #the 3D points form which faces are made
+        surface_field = distance, #surface_field, Value for each input_point to later make a surface 
+        surface_threshold = 20, #The threshold value for surface_field, resulting in the surface.
+        #output_path = path + "/MyFirstModel", #optinal - output path for model
+        color_field = color, #optinal - Color value for each input point
+        color_field_min = -BOX_SIZE, #optinal - Min value for the color field, default is min(color_field)
+        color_field_max = BOX_SIZE, #optinal - Max value for the color field, default is max(color_field)
+        label = "My_First_Model", #optinal - label for the model, some formats support it
+        opacity = 0.8, #optinal - opacity factor for the model 0 is See throgh
+        file_type = "glb", #optinal - file format for the export, basic is "gltf2"
+        noise_displacement = 0.0001) #Optional, add noise to the model, improves Voronoi performance, recommend leaving as default
+    model.show()
 
 
 More control

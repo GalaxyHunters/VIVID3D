@@ -6,27 +6,20 @@ Fundamentals
 This section explains the basics of VIVID3D for new users looking to create beautiful scientific visualizations, meant to
 serve as a starting point for those unfamiliar with 3D libraries.
 
-This covers the basic understanding of Meshes and Models, visualizations, animations, and more.
+This covers the basic understanding and creation of Meshes and Models, visualizations, animations, and more.
 
 .. toctree::
     :maxdepth: 1
 
-    userguide/data_structures
-    userguide/interacting
+    userguide/basics
     userguide/materials_colors
-    userguide/animation
-
-Basic Models
-============
-
-This sections provides examples for basic usage of the VIVID3D objects, including: creating geometries, creating
-the different Mesh types, transformations, and more.
-
-.. toctree::
-
-    userguide/shape_example
-    userguide/sphere_example
+    uesrguide/geometries
+    userguide/animations
+    userguide/point_cloud
+    userguide/lines
+    uesrguide/voronoi
     userguide/transformations
+
 
 Creating Models
 ===============

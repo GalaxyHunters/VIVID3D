@@ -1,26 +1,28 @@
-Animation example
+Animations
 =================
 
-The vivid3d package is capable of two types of animation support,
+VIVID3D supports two types of animations,
 
-1. Animation - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.
+.. list-table::
 
-2. Stop motion animation - same as above but each time only one model appears and the change rate is determined by seconds_per_frame
+    * - :doc:`../_generate/vivid3d.Animation`
+      - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.
+    * - :doc:`../_generate/vivid3d.StopMotionAnimation`
+      - same as above but each time only one model appears and the change rate is determined by seconds_per_frame
 
 First, we make a few cubes to animate:
 
-.. code-block:: python
-   :caption: Cubes to animate
+.. jupyter-execute::
 
-   import vivid3d
-   import numpy as np
+    import vivid3d
+    import numpy as np
 
-   models = []
-   colors = ["Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"]
-   loc = [[0,0,0], [1,0,0], [2,0,0],[0,0,1],[1,0,1],[2,0,1],[0,0,2],[1,0,2]]
-   for i in range(8):
-       box = vivid3d.create_cube(np.array(loc[i])*3,size=0.5, color = colors[i], alpha=1, label=colors[i])
-       models.append(vivid3d.Model([box]))
+    models = []
+    colors = ["Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"]
+    loc = [[0,0,0], [1,0,0], [2,0,0],[0,0,1],[1,0,1],[2,0,1],[0,0,2],[1,0,2]]
+    for i in range(8):
+        box = vivid3d.create_cube(position=loc[i], size=0.5, color=colors[i], label=colors[i])
+        models.append(vivid3d.Model([box]))
 
 Now lets add some animation to the cubes:
 

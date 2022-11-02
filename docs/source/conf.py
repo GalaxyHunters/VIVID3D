@@ -37,7 +37,6 @@ os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', 
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.autosummary",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx_mdinclude",
@@ -47,8 +46,20 @@ extensions = [
 
 autosectionlabel_prefix_document = True
 #autosectionlabel_maxdepth = 2
-autosummary_generate = True
 napoleon_numpy_docstring = True
+napoleon_use_ivar = True
+napoleon_use_rtype = False
+
+
+def autodoc_skip_properties(app, what, name, obj, skip, options):
+    if isinstance(obj, property):
+        print(f"property:{name}")
+        return True
+    return None
+
+
+def setup(app):
+    app.connect('autodoc-skip-member', autodoc_skip_properties)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

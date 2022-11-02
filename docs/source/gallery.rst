@@ -1,8 +1,5 @@
-Scientific Visualizations
-=====================================
-
 The Positronic Brain
---------------------
+=====================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe
@@ -10,7 +7,7 @@ The Positronic Brain
         src="https://sketchfab.com/models/2c76631d3a61458ba2b8b1340c2b8e9d/embed?ui_hint=0&ui_theme=dark"> </iframe> </div>
 
 Galaxy Halo (Enzo)
--------------------
+=====================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe
@@ -18,7 +15,7 @@ Galaxy Halo (Enzo)
         src="https://sketchfab.com/models/52293231d3704e6e829b63f7b3dca1ac/embed?ui_hint=0&ui_theme=dark"> </iframe> </div>
 
 Spiral Galaxy (Enzo)
----------------------
+=====================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe
@@ -26,7 +23,7 @@ Spiral Galaxy (Enzo)
         src="https://sketchfab.com/models/8449bc7dcf964e0aa6e1ba656ea6bf4c/embed?ui_hint=0&ui_theme=dark"> </iframe> </div>
 
 Brain CT Scan
--------------
+=====================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe
@@ -34,7 +31,7 @@ Brain CT Scan
         src="https://sketchfab.com/models/d9078675a1d04d1697546de4c17a2da2/embed?ui_hint=0&ui_theme=dark"> </iframe> </div>
 
 The Cosmic Web (Enzo)
----------------------
+=====================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe
@@ -42,7 +39,7 @@ The Cosmic Web (Enzo)
         src="https://sketchfab.com/models/aecaa5693b3e4dbea41ccb5da678f4fc/embed?ui_hint=0&ui_theme=dark"> </iframe> </div>
 
 Heptane Gas Combustion
-----------------------
+======================
 .. raw:: html
 
     <div class="sketchfab-embed-wrapper"> <iframe

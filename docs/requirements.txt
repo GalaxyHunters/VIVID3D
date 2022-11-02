@@ -1,3 +1,6 @@
 -r ../requirements.txt
 sphinx_mdinclude
 furo
+nbsphinx
+jupyter_sphinx
+numpydoc

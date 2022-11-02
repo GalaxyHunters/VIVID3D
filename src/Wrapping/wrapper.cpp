@@ -49,84 +49,12 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
 
 
 PYBIND11_MODULE(_core, m) {
-    m.doc() = R"mydelimiter(
-        =============
-        API Reference
-        =============
+    m.doc() = R"mydelimitter(
+Core API
+========
 
-        .. currentmodule:: vivid3d
-
-
-        Core Api
-        ========
-
-        One Line Model
-        -------------------------------------
-        .. autosummary::
-           :toctree: _generate
-           :caption: Vivify functions
-
-            make_model
-
-        Model Objects
-        ------------------------------------
-        .. autosummary::
-            :toctree: _generate
-            :caption: Model Objects
-
-            BaseMesh
-            Lines
-            PointCloud
-            VoronoiVolume
-            Mesh
-            Model
-            BlobData
-
-        Animation Objects
-        ------------------------------------
-        .. autosummary::
-            :toctree: _generate
-            :caption: Animation Objects
-
-            Animation
-            StopMotionAnimation
-
-        Material and Textures
-        ------------------------------------
-        .. autosummary::
-           :toctree: _generate
-           :caption: Material and Textures
-
-           Material
-
-        Utilities
-        =========
-
-        Geometry
-        ------------------------------------
-        .. autosummary::
-           :toctree: _generate
-           :caption: Geometry
-
-           create_plane
-           create_cube
-           create_box
-           create_sphere
-           create_ellipsoid
-           create_arrow
-           create_grid
-
-        Logger
-        ------------------------------------
-        .. autosummary::
-           :toctree: _generate
-           :caption: Logger
-
-           config_logger
-           LogCode
-
-
-	)mydelimiter";
+boobs
+)mydelimitter";
 
     py::class_<CBlobData>(m, "BlobData", R"mydelimiter(
 Blob files containing exported file data.
@@ -378,20 +306,20 @@ Opacity of Component
 label : str, default: ""
 Label of Component
         )mydelimiter", py::arg("opacity")=1., py::arg("label")="")
-    .def(py::init<const vector<CPoint>&, const normal_float, const string& >(), R"mydelimiter(
-Lines Constructor
-
-Parameters
-----------------
-line : Point3DArray
-opacity : normalized float, default: 1.0
-Opacity of Component
-label : str, default: ""
-Label of Component
-        )mydelimiter", py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
-//            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
-//                 "Constructor for Lines",
-//                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
+//    .def(py::init<const vector<CPoint>&, const normal_float, const string& >(), R"mydelimiter(
+//Lines Constructor
+//
+//Parameters
+//----------------
+//line : Point3DArray
+//opacity : normalized float, default: 1.0
+//Opacity of Component
+//label : str, default: ""
+//Label of Component
+//        )mydelimiter", py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
+////            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
+////                 "Constructor for Lines",
+////                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
     .def(py::init<const CLines&>(),
          "Copy Constructor for Lines",
          py::arg("Lines"))
@@ -752,62 +680,62 @@ html : str or IPython.display.HTML
         py::arg("noise_displacement") = 0.001);
 
 
-    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
-        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float , const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
-        one function to rule them all
-
-        makes a model from one line, if an output path is given the functions writes the model to file.
-        )mydelimiter",
-        py::arg("input_points"),
-        py::arg("surface_field"),
-        py::arg("surface_threshold"),
-        py::arg("output_path") = "",
-        py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0,
-        py::arg("color_field_max") = 0,
-        py::arg("label")= "VIVID_MODEL",
-        py::arg("opacity") = 1,
-        py::arg("file_type") = "gltf2",
-        py::arg("noise_displacement") = 0.001);
-
-    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
-        std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
-        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
-        one function to rule them all
-
-        makes a model from one line, if an output path is given the functions writes the model to file.
-        )mydelimiter",
-        py::arg("input_points"),
-        py::arg("masks"),
-        py::arg("output_path") = "",
-        py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0,
-        py::arg("color_field_max") = 0,
-        py::arg("label")= "VIVID_MODEL",
-        py::arg("opacity") = vector<normal_float>(0),
-        py::arg("file_type") = "gltf2",
-        py::arg("noise_displacement") = 0.001);
-
-
-    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
-        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
-        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
-        one function to rule them all
-
-        makes a model from one line, if an output path is given the functions writes the model to file.
-        )mydelimiter",
-        py::arg("input_points"),
-        py::arg("surface_field"),
-        py::arg("surface_thresholds"),
-        py::arg("output_path") = "",
-        py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0,
-        py::arg("color_field_max") = 0,
-        py::arg("label")= "VIVID_MODEL",
-        py::arg("opacity") = vector<normal_float>(0),
-        py::arg("file_type") = "gltf2",
-        py::arg("noise_displacement") = 0.001);
+//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
+//        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
+//        normal_float , const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
+//        one function to rule them all
+//
+//        makes a model from one line, if an output path is given the functions writes the model to file.
+//        )mydelimiter",
+//        py::arg("input_points"),
+//        py::arg("surface_field"),
+//        py::arg("surface_threshold"),
+//        py::arg("output_path") = "",
+//        py::arg("color_field") = vector<normal_float>(0),
+//        py::arg("color_field_min") = 0,
+//        py::arg("color_field_max") = 0,
+//        py::arg("label")= "VIVID_MODEL",
+//        py::arg("opacity") = 1,
+//        py::arg("file_type") = "gltf2",
+//        py::arg("noise_displacement") = 0.001);
+//
+//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
+//        std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
+//        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
+//        one function to rule them all
+//
+//        makes a model from one line, if an output path is given the functions writes the model to file.
+//        )mydelimiter",
+//        py::arg("input_points"),
+//        py::arg("masks"),
+//        py::arg("output_path") = "",
+//        py::arg("color_field") = vector<normal_float>(0),
+//        py::arg("color_field_min") = 0,
+//        py::arg("color_field_max") = 0,
+//        py::arg("label")= "VIVID_MODEL",
+//        py::arg("opacity") = vector<normal_float>(0),
+//        py::arg("file_type") = "gltf2",
+//        py::arg("noise_displacement") = 0.001);
+//
+//
+//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
+//        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
+//        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
+//        one function to rule them all
+//
+//        makes a model from one line, if an output path is given the functions writes the model to file.
+//        )mydelimiter",
+//        py::arg("input_points"),
+//        py::arg("surface_field"),
+//        py::arg("surface_thresholds"),
+//        py::arg("output_path") = "",
+//        py::arg("color_field") = vector<normal_float>(0),
+//        py::arg("color_field_min") = 0,
+//        py::arg("color_field_max") = 0,
+//        py::arg("label")= "VIVID_MODEL",
+//        py::arg("opacity") = vector<normal_float>(0),
+//        py::arg("file_type") = "gltf2",
+//        py::arg("noise_displacement") = 0.001);
 
 
     //Shapes:

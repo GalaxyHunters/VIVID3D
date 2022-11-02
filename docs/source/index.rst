@@ -16,13 +16,13 @@ Content
 
 .. toctree::
    :caption: API Reference
-   :maxdepth: 1
+   :maxdepth: 0
 
    api_reference
 
 .. toctree::
     :caption: Gallery
-    :maxdepth: 1
+    :maxdepth: 3
 
     gallery
 

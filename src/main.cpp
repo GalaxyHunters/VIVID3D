@@ -194,37 +194,40 @@ int PyramidSmoothTest()
     CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
     CMesh mesh = volume.MaskMesh(mask, "2", 1);
-    auto blob = mesh.ExportToBlob("glb");
-
-    printf("n=%zu files\n", blob.mNumFiles);
-    for (const auto& name : blob.mNames) {
-        printf("name: %s\n", name.c_str());
-    }
-//    printf("%s", blob.getFiles()[0]);
-    for (const auto& file : blob.mFiles) {
-        printf("Length of file %zu\n", file.size());
-        cout << file << endl;
-    }
-
-    cout << "\n" << blob.mFiles.size() << endl;
-    auto ClmBuffer = mesh.GetColorMap().GetColorTexture();
-    const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // Check that this works properly please;
-    cout << "\n\n";
-    cout << "PNG ENCODING TESTING" << endl;
-    printf("%lu\n", pngBuffer.mSize);
-    for (int i = 0; i < pngBuffer.mSize; i++) {
-        cout << pngBuffer.mBuffer[i];
-    }
-//    mesh.LaplacianSmooth(10);
+//    auto blob = mesh.ExportToBlob("glb");
+//
+//    printf("n=%zu files\n", blob.mNumFiles);
+//    for (const auto& name : blob.mNames) {
+//        printf("name: %s\n", name.c_str());
+//    }
+////    printf("%s", blob.getFiles()[0]);
+//    for (const auto& file : blob.mFiles) {
+//        printf("Length of file %zu\n", file.size());
+//        cout << file << endl;
+//    }
+//
+//    cout << "\n" << blob.mFiles.size() << endl;
+//    auto ClmBuffer = mesh.GetColorMap().GetColorTexture();
+//    const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // Check that this works properly please;
+//    cout << "\n\n";
+//    cout << "PNG ENCODING TESTING" << endl;
+//    printf("%lu\n", pngBuffer.mSize);
+//    for (int i = 0; i < pngBuffer.mSize; i++) {
+//        cout << pngBuffer.mBuffer[i];
+//    }
+    mesh.LaplacianSmooth(10);
 //    cout << "second mesh" << endl;
 //    //CMesh fullMesh = volume.ToMesh("3", 0.1);
 //
 //    cout << "model" << endl;
 ////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
-//    CModel model;
-//    model.AddMesh(mesh);
-//    cout << "export" << endl;
-//    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+    CModel model;
+    model.AddMesh(mesh);
+    pair<CLines, CLines> grid = CreateGrid(40, 20, 2);
+    model.AddMesh(grid.first);
+    model.AddMesh(grid.second);
+    cout << "export" << endl;
+    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     return EXIT_SUCCESS;
 
 }
@@ -322,17 +325,17 @@ int grid_test(){
     pair<CLines, CLines> grid = CreateGrid(10, 5, 2);
     CModel model = CModel();
     model.AddMesh(grid.first);
-    //model.AddMesh(grid.second);
-    if (model.Export(TEST_OUTPUT_PATH+"grid.obj", "obj") == 0) return EXIT_SUCCESS;
-    return -1;
+    model.AddMesh(grid.second);
+    model.Export(TEST_OUTPUT_PATH+"/grid.obj", "obj");
+    return EXIT_SUCCESS;
 }
 int main()
 {
     ConfigLogging(true, LOG_DEBUG, false, "");
 //    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
-//    ret_value = grid_test();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    ret_value = grid_test();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "MedicaneTestTest");
 //    ret_value =RunMedicaneTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
@@ -351,9 +354,9 @@ int main()
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-    Log(LOG_INFO, "Pyramid");
+//    Log(LOG_INFO, "Pyramid");
     ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

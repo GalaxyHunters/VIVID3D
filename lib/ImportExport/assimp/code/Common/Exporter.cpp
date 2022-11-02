@@ -71,7 +71,7 @@ Here we implement only the C++ interface (Assimp::Exporter).
 #include "PostProcessing/PretransformVertices.h"
 
 #include <memory>
-
+#include <iostream>
 namespace Assimp {
 
 #ifdef _MSC_VER
@@ -465,7 +465,11 @@ aiReturn Exporter::Export( const aiScene* pScene, const char* pFormatId, const c
                     // dispatch other processes
                     for( unsigned int a = 0; a < pimpl->mPostProcessingSteps.size(); a++) {
                         BaseProcess* const p = pimpl->mPostProcessingSteps[a];
-
+                        // TODO debug--------------------------------------
+                        std::cout << "procces " << a << " - " << p << std::endl;
+                        std::cout << p->IsActive(pp) << "  " << !dynamic_cast<FlipUVsProcess*>(p) << "  " << !dynamic_cast<FlipWindingOrderProcess*>(p) << "  " << !dynamic_cast<MakeLeftHandedProcess*>(p) << std::endl;
+                        std::cout << (p->IsActive(pp) && !dynamic_cast<FlipUVsProcess*>(p) && !dynamic_cast<FlipWindingOrderProcess*>(p) && !dynamic_cast<MakeLeftHandedProcess*>(p)) << std::endl;
+                        // TODO debug---------------------------------------
                         if (p->IsActive(pp)
                             && !dynamic_cast<FlipUVsProcess*>(p)
                             && !dynamic_cast<FlipWindingOrderProcess*>(p)

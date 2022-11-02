@@ -1,13 +1,13 @@
 Animations
-=================
+==========
 
 VIVID3D supports two types of animations,
 
 .. list-table::
 
-    * - :doc:`../_generate/vivid3d.Animation`
+    * - :doc:`../generated/vivid3d.Animation`
       - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.
-    * - :doc:`../_generate/vivid3d.StopMotionAnimation`
+    * - :doc:`../generated/vivid3d.StopMotionAnimation`
       - same as above but each time only one model appears and the change rate is determined by seconds_per_frame
 
 First, we make a few cubes to animate:
@@ -23,6 +23,9 @@ First, we make a few cubes to animate:
     for i in range(8):
         box = vivid3d.create_cube(position=loc[i], size=0.5, color=colors[i], label=colors[i])
         models.append(vivid3d.Model([box]))
+
+Animated Models
+---------------
 
 Now lets add some animation to the cubes:
 
@@ -44,6 +47,9 @@ Now lets add some animation to the cubes:
 
    #export
    animation.export(path+"/CubeAnimation", "gltf2")
+
+Stop Motion Animation
+---------------------
 
 And if we want stop-motion animation we just add this:
 

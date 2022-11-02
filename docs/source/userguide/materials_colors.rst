@@ -1,9 +1,10 @@
 Materials
-=================
+=========
 
-VIVID3D currently supports heavily simplified PBR (Physically-Based-Rendering) materials. For ease of use, we chose a select few parameters that we believe are important when rendering scientific models.
+VIVID3D currently supports heavily simplified PBR (Physically-Based-Rendering) materials.
+For ease of use, we chose a select few parameters that we believe are important when rendering scientific models.
 
-The Material API allows you to customize the opacity, reflectivity, and emissive properties of the Base Mesh.
+The :doc:`Material API<../generated/vivid3d.Material>` allows you to customize the opacity, reflectivity, and emissive properties of the Base Mesh.
 
 1. Opacity affects the transparency of a mesh.
 

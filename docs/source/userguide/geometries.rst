@@ -3,7 +3,7 @@ Geometries
 
 VIVID3D supplies multiple basic geometric objects that you can use to improve your models, or test basic VIVID3D features.
 
-They are detailed in the :ref:`API Reference: Geometry <api_reference:geometry>` section.
+They are detailed in the :doc:`API Reference: Geometry <../generated/vivid3d.Geometries>` section.
 
 .. jupyter-execute::
 

@@ -4,7 +4,7 @@ The Basics
 BaseMesh
 --------
 
-In VIVID3D, we represent 3D data with the :doc:`../_generate/vivid3d.BaseMesh` class, that holds the base attributes of any 3D object.
+In VIVID3D, we represent 3D data with the :doc:`../generated/vivid3d.BaseMesh` class, that holds the base attributes of any 3D object.
 
 All BaseMeshes contain:
 
@@ -31,11 +31,11 @@ There are several different BaseMesh classes, used for representing different da
 
     * - Class
       - Explanation
-    * - :doc:`../_generate/vivid3d.PointCloud`
+    * - :ref:`generated/vivid3d.PointCloud`
       - For representing each vertex as a separate unconnected points
-    * - :doc:`../_generate/vivid3d.Lines`
+    * - :ref:`generated/vivid3d.Lines`
       - For representing groups of vertices as connected lines
-    * - :doc:`../_generate/vivid3d.Mesh`
+    * - :ref:`generated/vivid3d.Mesh`
       - For representing groups of vertices as polygonal faces
 
 Later we will go in depth how to create and manipulate each of these objects.
@@ -43,7 +43,7 @@ Later we will go in depth how to create and manipulate each of these objects.
 Model
 -----
 
-The :doc:`../_generate/vivid3d.Model` class is simply a collection of BaseMeshes, primarily used to export and view meshes in a combined scene.
+The :doc:`../generated/vivid3d.Model` class is simply a collection of BaseMeshes, primarily used to export and view meshes in a combined scene.
 
 The creation of a model is as simple as:
 
@@ -125,7 +125,7 @@ Similarly, this saves the *file_type = obj* files as: *export.obj, export.mtl, e
 
     model.export('/models/export', 'obj')
 
-If you do not wish to save directly to a file, you may omit the output_file variable to save the files in a :doc:`../_generate/vivid3d.BlobData` instance.
+If you do not wish to save directly to a file, you may omit the output_file variable to save the files in a :doc:`../generated/vivid3d.BlobData` instance.
 
 This example writes using the default *file_type = glb* to the blob_data instance.
 

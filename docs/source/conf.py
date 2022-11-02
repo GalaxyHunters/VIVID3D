@@ -43,22 +43,33 @@ extensions = [
     'nbsphinx',
     "jupyter_sphinx",
 ]
-
+autodoc_typehints_format = 'fully-qualified'
+autodoc_member_order = 'bysource'
 autosectionlabel_prefix_document = True
-#autosectionlabel_maxdepth = 2
+autosectionlabel_maxdepth = 3
 napoleon_numpy_docstring = True
-napoleon_use_ivar = True
 napoleon_use_rtype = False
 
+import re
 
 def autodoc_skip_properties(app, what, name, obj, skip, options):
     if isinstance(obj, property):
-        print(f"property:{name}")
         return True
     return None
 
+def autodoc_remove_init_methods(app, what, name, obj, options, lines):
+    if what == "class":
+        remove = len(lines)
+        for i, line in enumerate(lines):
+            if line.count(".. method::"):
+                remove = i
+                break
+
+        del lines[remove:]
+    return None
 
 def setup(app):
+    app.connect('autodoc-process-docstring', autodoc_remove_init_methods)
     app.connect('autodoc-skip-member', autodoc_skip_properties)
 
 # Add any paths that contain templates here, relative to this directory.

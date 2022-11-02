@@ -30,7 +30,6 @@ cases with a variety of real datasets.
 .. toctree::
     :maxdepth: 1
 
-    userguide/enzo_gas
-    userguide/enzo_stars
-    notebooks/NRRD_Volumetric_File_Example.ipynb
+    userguide/GalaxyStarsEnzo.ipynb
+    notebooks/BrainCTScan.ipynb
 

@@ -1,7 +1,8 @@
 Voronoi Volume
-===================
+==============
 
 In this example, we generate a volumetric 3D grid with a Distance attribute for each point (voxel).
+We will create a model of extracted iso-surfaces, which represents the volumetric data as a :doc:`../generated/vivid3d.Model`.
 
 .. jupyter-execute::
 

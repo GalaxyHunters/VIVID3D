@@ -1,7 +1,7 @@
 Lines
-===================
+=====
 
-In this example, we generate a dataset of random walks starting from (0,0,0), and display them using :doc:`../_generate/vivid3d.Lines`.
+In this example, we generate a dataset of random walks starting from (0,0,0), and display them using :doc:`../generated/vivid3d.Lines`.
 
 .. jupyter-execute::
 

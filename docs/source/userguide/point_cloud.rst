@@ -1,7 +1,7 @@
 Point Cloud
 ===================
 
-In this example, we generate a dataset of 3D Points on a uniformly sampled sphere, and display it with a :doc:`../_generate/vivid3d.PointCloud` object.
+In this example, we generate a dataset of 3D Points on a uniformly sampled sphere, and display it with a :doc:`../generated/vivid3d.PointCloud` object.
 
 By default, a BaseMesh that does not have the color_field provided will generate a color_field of *np.zeros(n, 1)*, and will
 set the default color to *'white'*.

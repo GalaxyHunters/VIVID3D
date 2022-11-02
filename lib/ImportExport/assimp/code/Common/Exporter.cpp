@@ -370,7 +370,10 @@ aiReturn Exporter::Export( const aiScene* pScene, const char* pFormatId, const c
     // format. They will likely not be aware that there is a flag in the scene to indicate
     // this, however. To avoid surprises and bug reports, we check for duplicates in
     // meshes upfront.
-    const bool is_verbose_format = !(pScene->mFlags & AI_SCENE_FLAGS_NON_VERBOSE_FORMAT) || MakeVerboseFormatProcess::IsVerboseFormat(pScene);
+    //changed from:
+    //const bool is_verbose_format = !(pScene->mFlags & AI_SCENE_FLAGS_NON_VERBOSE_FORMAT) || MakeVerboseFormatProcess::IsVerboseFormat(pScene);
+    //Meaning that when flag is defined it is taken as true, but when flag isn't defined it is checked if scene is really Verbose.
+    const bool is_verbose_format = !((pScene->mFlags & AI_SCENE_FLAGS_NON_VERBOSE_FORMAT) || !MakeVerboseFormatProcess::IsVerboseFormat(pScene));
 
     pimpl->mProgressHandler->UpdateFileWrite(0, 4);
 
@@ -465,11 +468,6 @@ aiReturn Exporter::Export( const aiScene* pScene, const char* pFormatId, const c
                     // dispatch other processes
                     for( unsigned int a = 0; a < pimpl->mPostProcessingSteps.size(); a++) {
                         BaseProcess* const p = pimpl->mPostProcessingSteps[a];
-                        // TODO debug--------------------------------------
-                        std::cout << "procces " << a << " - " << p << std::endl;
-                        std::cout << p->IsActive(pp) << "  " << !dynamic_cast<FlipUVsProcess*>(p) << "  " << !dynamic_cast<FlipWindingOrderProcess*>(p) << "  " << !dynamic_cast<MakeLeftHandedProcess*>(p) << std::endl;
-                        std::cout << (p->IsActive(pp) && !dynamic_cast<FlipUVsProcess*>(p) && !dynamic_cast<FlipWindingOrderProcess*>(p) && !dynamic_cast<MakeLeftHandedProcess*>(p)) << std::endl;
-                        // TODO debug---------------------------------------
                         if (p->IsActive(pp)
                             && !dynamic_cast<FlipUVsProcess*>(p)
                             && !dynamic_cast<FlipWindingOrderProcess*>(p)

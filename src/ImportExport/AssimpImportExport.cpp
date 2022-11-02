@@ -70,12 +70,15 @@ namespace vivid {
 
         void AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-            OutputPath = aOutputPath;
+
             aiScene *scene = GenerateScene(arModel);
 
+            //clean aOutputPath
+            //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
             aOutputPath += fileFormats[arFileType];
-            auto ret = exp.Export(scene, arFileType, aOutputPath,
-                                   aiProcess_FixInfacingNormals); //aiProcess_JoinIdenticalVertices |  | aiProcess_GenSmoothNormals
+            OutputPath = aOutputPath;
+            auto ret = exp.Export(scene, arFileType, OutputPath,
+                                  aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
             TextureNameToIndex.clear();
             OutputPath = "";
@@ -88,12 +91,13 @@ namespace vivid {
 
         void AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-            OutputPath = aOutputPath;
 
             aiScene *scene = GenerateAnimationScene(arAnimation);
 
-            aOutputPath += fileFormats[arFileType];
-            auto ret = exp.Export(scene, arFileType, aOutputPath);
+            //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
+            OutputPath += fileFormats[arFileType];
+            OutputPath = aOutputPath;
+            auto ret = exp.Export(scene, arFileType, OutputPath);
             
             TextureNameToIndex.clear();
             OutputPath = "";
@@ -122,8 +126,6 @@ namespace vivid {
             scene->mRootNode->mChildren[0] = GenerateNode("basic_node", 0, scene->mNumMeshes);
             scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
 
-            cout << scene->mRootNode->mChildren[0]->mMeshes[0] << " " << scene->mRootNode->mChildren[0]->mMeshes[1] << endl;
-
 
             vector<vivid::CModelComponent> meshes = model.GetMeshes();
 
@@ -141,7 +143,6 @@ namespace vivid {
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
             }
-            //if(Assimp::MakeVerboseFormatProcess::IsVerboseFormat(scene)) scene->mFlags |= AI_SCENE_FLAGS_NON_VERBOSE_FORMAT;
             return scene;
         }
 
@@ -202,7 +203,6 @@ namespace vivid {
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
             }
-            //if(Assimp::MakeVerboseFormatProcess::IsVerboseFormat(scene)) scene->mFlags |= AI_SCENE_FLAGS_NON_VERBOSE_FORMAT;
             return scene;
         }
 

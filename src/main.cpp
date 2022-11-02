@@ -223,7 +223,7 @@ int PyramidSmoothTest()
 ////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
     model.AddMesh(mesh);
-    pair<CLines, CLines> grid = CreateGrid(40, 20, 2);
+    pair<CLines, CLines> grid = CreateGrid(20, 20, 20);
     model.AddMesh(grid.first);
     model.AddMesh(grid.second);
     cout << "export" << endl;
@@ -326,7 +326,7 @@ int grid_test(){
     CModel model = CModel();
     model.AddMesh(grid.first);
     model.AddMesh(grid.second);
-    model.Export(TEST_OUTPUT_PATH+"/grid.obj", "obj");
+    model.Export(TEST_OUTPUT_PATH+"/grid", "obj");
     return EXIT_SUCCESS;
 }
 int main()
@@ -355,8 +355,8 @@ int main()
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
 //    Log(LOG_INFO, "Pyramid");
-    ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    ret_value = PyramidSmoothTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

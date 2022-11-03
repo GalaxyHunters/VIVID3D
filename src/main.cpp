@@ -142,16 +142,11 @@ int CubeSurfTests()
 }
 
 /* Test Colormap functionality by many cubemeshes */
-int ColorMapTest()
+int GlbTest()
 {
-    CModel model;
-    vector<string> colors = {"Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"};
-    vector<CPoint> loc = {{0,0,0}, {1,0,0}, {2,0,0},{0,0,1},{1,0,1},{2,0,1},{0,0,2},{1,0,2}};
-    for (int i = 0; i < colors.size(); i++) {
-        CMesh box = CreateCubeMesh(loc[i]*3,0.5,colors[i],1,colors[i]);
-        model.AddMesh(box);
-    }
-    model.ExportToObj(TEST_OUTPUT_PATH + "/ColorsTest");
+    auto cube1 = CreateCubeMesh({0,0,0}, 2, "blue", 0.8, "blue");
+    auto cube2 = CreateCubeMesh({0,0,0}, 1, "red", 0.3, "red");
+    CModel({cube1, cube2}).Export(TEST_OUTPUT_PATH + "/transparency_test", "glb");
     return EXIT_SUCCESS;
 }
 
@@ -193,7 +188,7 @@ int PyramidSmoothTest()
 //CPointCloud pyramid_points = CPointCloud(points, quan, 0, 0, 1.0, "");
     CVoronoiVolume volume = CVoronoiVolume(points, quan);
     //CVoronoiVolume surf_copy = CVoronoiVolume(smooth1);
-    CMesh mesh = volume.MaskMesh(mask, "2", 1);
+    CMesh mesh = volume.MaskMesh(mask, "2", .8);
 //    auto blob = mesh.ExportToBlob("glb");
 //
 //    printf("n=%zu files\n", blob.mNumFiles);
@@ -223,11 +218,13 @@ int PyramidSmoothTest()
 ////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
     model.AddMesh(mesh);
-    pair<CLines, CLines> grid = CreateGrid(20, 20, 20);
-    model.AddMesh(grid.first);
-    model.AddMesh(grid.second);
+//    pair<CLines, CLines> grid = CreateGrid(20, 20, 20);
+//    model.AddMesh(grid.first);
+//    model.AddMesh(grid.second);
+    auto cube = CreateCubeMesh({0,0,0}, 50, "yellow", 0.3, "cube");
+    model.AddMesh(cube);
     cout << "export" << endl;
-    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
+    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "glb");
     return EXIT_SUCCESS;
 
 }
@@ -247,7 +244,7 @@ int RunMedicaneTest()
     CVoronoiVolume surf = CVoronoiVolume(points, nova.quan, -15.1, 1.51);
     //surf.Smooth(false, 1);
     Log(LOG_INFO, "Convert to Mesh");
-    CMesh mesh = surf.MaskMesh(nova.mask,"SurfMedicane", 1);
+    CMesh mesh = surf.MaskMesh(nova.mask,"SurfMedicane", 0.8);
     //mesh.SubdivideLargeFaces(4);
 //        mesh.RemovePointyFaces(20);
     mesh.LaplacianSmooth(10, 0.7, 0);
@@ -334,8 +331,8 @@ int main()
     ConfigLogging(true, LOG_DEBUG, false, "");
 //    assimpTest(TEST_OUTPUT_PATH + "/sat_gal_anim.gltf");
     int ret_value = EXIT_SUCCESS;
-    ret_value = grid_test();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    ret_value = grid_test();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "MedicaneTestTest");
 //    ret_value =RunMedicaneTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
@@ -348,9 +345,9 @@ int main()
 //    Log(LOG_INFO, "Testing vivify");
 //    ret_value = make_model_test();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    Log(LOG_INFO, "Cube");
-//    ret_value = CubeSurfTests();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    Log(LOG_INFO, "GlbTest");
+    ret_value = GlbTest();
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;

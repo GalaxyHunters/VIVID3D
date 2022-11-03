@@ -15,19 +15,8 @@ import sys
 #sys.path.insert(0, os.path.abspath('.'))
 
 import vivid3d
-path = vivid3d.__path__[0]
-print(path)
-print(os.listdir(path))
-try:
-    path1 = vivid3d.viewer.__path__[0]
-    print(path1)
-    print(os.listdir(path1))
-except:
-    print("no viewer")
-try:
-    print(dir(vivid3d.viewer.model_viewer))
-except:
-    print("cant access viewer.model_viewer")
+dir(vivid3d)
+dir(vivid3d.viewer)
 # -- Project information -----------------------------------------------------
 
 project = 'VIVID3D'

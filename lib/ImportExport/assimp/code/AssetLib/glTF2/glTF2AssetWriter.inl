@@ -390,32 +390,28 @@ namespace glTF2 {
         Value exts;
         exts.SetObject();
 
-        if (m.pbrSpecularGlossiness.isPresent) {
-            Value pbrSpecularGlossiness;
-            pbrSpecularGlossiness.SetObject();
-
-            PbrSpecularGlossiness &pbrSG = m.pbrSpecularGlossiness.value;
-
-            //pbrSpecularGlossiness
-            WriteVec(pbrSpecularGlossiness, pbrSG.diffuseFactor, "diffuseFactor", defaultDiffuseFactor, w.mAl);
-            WriteVec(pbrSpecularGlossiness, pbrSG.specularFactor, "specularFactor", defaultSpecularFactor, w.mAl);
-
-            if (pbrSG.glossinessFactor != 1) {
-                WriteFloat(pbrSpecularGlossiness, pbrSG.glossinessFactor, "glossinessFactor", w.mAl);
-            }
-
-            WriteTex(pbrSpecularGlossiness, pbrSG.diffuseTexture, "diffuseTexture", w.mAl);
-            WriteTex(pbrSpecularGlossiness, pbrSG.specularGlossinessTexture, "specularGlossinessTexture", w.mAl);
-
-            if (!pbrSpecularGlossiness.ObjectEmpty()) {
-                exts.AddMember("KHR_materials_pbrSpecularGlossiness", pbrSpecularGlossiness, w.mAl);
-            }
-        }
-
         if (m.unlit) {
           Value unlit;
           unlit.SetObject();
           exts.AddMember("KHR_materials_unlit", unlit, w.mAl);
+        }
+
+        if (m.materialSpecular.isPresent) {
+            Value materialSpecular(rapidjson::Type::kObjectType);
+            materialSpecular.SetObject();
+
+            MaterialSpecular &specular = m.materialSpecular.value;
+
+            // materialSpecular
+            WriteFloat(materialSpecular, specular.specularFactor, "sheenRoughnessFactor", w.mAl);
+            WriteVec(materialSpecular, specular.specularColorFactor, "specularColorFactor", w.mAl);
+
+            WriteTex(materialSpecular, specular.specularTexture, "specularTexture", w.mAl);
+            WriteTex(materialSpecular, specular.specularColorTexture, "specularColorTexture", w.mAl);
+
+            if (!materialSpecular.ObjectEmpty()) {
+                exts.AddMember("KHR_materials_specular", materialSpecular, w.mAl);
+            }
         }
 
         if (m.materialSheen.isPresent) {
@@ -906,9 +902,8 @@ namespace glTF2 {
         Value exts;
         exts.SetArray();
         {
-            // This is used to export pbrSpecularGlossiness materials with GLTF 2.
-            if (this->mAsset.extensionsUsed.KHR_materials_pbrSpecularGlossiness) {
-                exts.PushBack(StringRef("KHR_materials_pbrSpecularGlossiness"), mAl);
+            if (this->mAsset.extensionsUsed.KHR_materials_specular) {
+                exts.PushBack(StringRef("KHR_materials_specular"), mAl);
             }
 
             if (this->mAsset.extensionsUsed.KHR_materials_unlit) {

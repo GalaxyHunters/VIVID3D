@@ -75,7 +75,7 @@ struct NormalTextureInfo;
 struct OcclusionTextureInfo;
 struct Node;
 struct Texture;
-struct PbrSpecularGlossiness;
+struct MaterialSpecular;
 struct MaterialSheen;
 struct MaterialClearcoat;
 struct MaterialTransmission;
@@ -115,7 +115,7 @@ protected:
     void GetMatTex(const aiMaterial &mat, glTF2::OcclusionTextureInfo &prop, aiTextureType tt, unsigned int slot);
     aiReturn GetMatColor(const aiMaterial &mat, glTF2::vec4 &prop, const char *propName, int type, int idx) const;
     aiReturn GetMatColor(const aiMaterial &mat, glTF2::vec3 &prop, const char *propName, int type, int idx) const;
-    bool GetMatSpecGloss(const aiMaterial &mat, glTF2::PbrSpecularGlossiness &pbrSG);
+    bool GetMatSpecular(const aiMaterial &mat, glTF2::MaterialSpecular &specular);
     bool GetMatSheen(const aiMaterial &mat, glTF2::MaterialSheen &sheen);
     bool GetMatClearcoat(const aiMaterial &mat, glTF2::MaterialClearcoat &clearcoat);
     bool GetMatTransmission(const aiMaterial &mat, glTF2::MaterialTransmission &transmission);

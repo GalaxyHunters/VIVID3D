@@ -288,7 +288,7 @@ namespace vivid {
             const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
             material->AddProperty(ambient_color, 3, AI_MATKEY_COLOR_AMBIENT);
 
-            const aiColor3D *specular_color = new aiColor3D(0, 0, 0);
+            const aiColor3D *specular_color = new aiColor3D(1, 1, 1);
             material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
 
 
@@ -311,8 +311,8 @@ namespace vivid {
             const float *refracti = new float(1);
             material->AddProperty(refracti, 1, AI_MATKEY_REFRACTI);
 
-//            const int *twosided = new int(!0);
-//            material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
+            const int *twosided = new int(!0);
+            material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
             //texture property
 
             const int *uvwsrc = new int(0);

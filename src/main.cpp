@@ -218,13 +218,13 @@ int PyramidSmoothTest()
 ////    fullMesh.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "obj");
     CModel model;
     model.AddMesh(mesh);
-//    pair<CLines, CLines> grid = CreateGrid(20, 20, 20);
-//    model.AddMesh(grid.first);
-//    model.AddMesh(grid.second);
+    pair<CLines, CLines> grid = CreateGrid(20, 20, 20);
+    model.AddMesh(grid.first);
+    model.AddMesh(grid.second);
     auto cube = CreateCubeMesh({0,0,0}, 50, "yellow", 0.3, "cube");
     model.AddMesh(cube);
     cout << "export" << endl;
-    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "glb");
+    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "gltf");
     return EXIT_SUCCESS;
 
 }
@@ -345,15 +345,15 @@ int main()
 //    Log(LOG_INFO, "Testing vivify");
 //    ret_value = make_model_test();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    Log(LOG_INFO, "GlbTest");
-    ret_value = GlbTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    Log(LOG_INFO, "GlbTest");
+//    ret_value = GlbTest();
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
     Log(LOG_INFO, "Pyramid");
     ret_value = PyramidSmoothTest();
-//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

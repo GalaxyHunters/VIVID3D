@@ -640,38 +640,23 @@ aiReturn glTF2Exporter::GetMatColor(const aiMaterial &mat, vec3 &prop, const cha
     return result;
 }
 
-bool glTF2Exporter::GetMatSpecGloss(const aiMaterial &mat, glTF2::PbrSpecularGlossiness &pbrSG) {
-    bool result = false;
-    // If has Glossiness, a Specular Color or Specular Texture, use the KHR_materials_pbrSpecularGlossiness extension
-    // NOTE: This extension is being considered for deprecation (Dec 2020), may be replaced by KHR_material_specular
-
-    if (mat.Get(AI_MATKEY_GLOSSINESS_FACTOR, pbrSG.glossinessFactor) == AI_SUCCESS) {
-        result = true;
-    } else {
-        // Don't have explicit glossiness, convert from pbr roughness or legacy shininess
-        float shininess;
-        if (mat.Get(AI_MATKEY_ROUGHNESS_FACTOR, shininess) == AI_SUCCESS) {
-            pbrSG.glossinessFactor = 1.0f - shininess; // Extension defines this way
-        } else if (mat.Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS) {
-            pbrSG.glossinessFactor = shininess / 1000;
-        }
+bool glTF2Exporter::GetMatSpecular(const aiMaterial &mat, glTF2::MaterialSpecular &specular) {
+    if (GetMatColor(mat, specular.specularColorFactor, AI_MATKEY_COLOR_SPECULAR) != AI_SUCCESS) {
+        return false;
+    }
+    if (mat.Get(AI_MATKEY_SPECULAR_FACTOR, specular.specularFactor) != AI_SUCCESS) {
+        return false;
     }
 
-    if (GetMatColor(mat, pbrSG.specularFactor, AI_MATKEY_COLOR_SPECULAR) == AI_SUCCESS) {
-        result = true;
-    }
+    // default factors of zero disables specular, so do not export
+    if (specular.specularFactor == 0.0f || (specular.specularColorFactor[0] == defaultSpecularFactor[0] && specular.specularColorFactor[1] == defaultSpecularFactor[1] && specular.specularColorFactor[2] == defaultSpecularFactor[2]))
+        return false;
+
     // Add any appropriate textures
-    GetMatTex(mat, pbrSG.specularGlossinessTexture, aiTextureType_SPECULAR);
+    GetMatTex(mat, specular.specularTexture, aiTextureType_SPECULAR);
+    GetMatTex(mat, specular.specularColorTexture, aiTextureType_SPECULAR);
 
-    result = result || pbrSG.specularGlossinessTexture.texture;
-
-    if (result) {
-        // Likely to always have diffuse
-        GetMatTex(mat, pbrSG.diffuseTexture, aiTextureType_DIFFUSE);
-        GetMatColor(mat, pbrSG.diffuseFactor, AI_MATKEY_COLOR_DIFFUSE);
-    }
-
-    return result;
+    return true;
 }
 
 bool glTF2Exporter::GetMatSheen(const aiMaterial &mat, glTF2::MaterialSheen &sheen) {
@@ -814,16 +799,6 @@ void glTF2Exporter::ExportMaterials() {
             m->alphaMode = alphaMode.C_Str();
         }
 
-        {
-            // KHR_materials_pbrSpecularGlossiness extension
-            // NOTE: This extension is being considered for deprecation (Dec 2020)
-            PbrSpecularGlossiness pbrSG;
-            if (GetMatSpecGloss(mat, pbrSG)) {
-                mAsset->extensionsUsed.KHR_materials_pbrSpecularGlossiness = true;
-                m->pbrSpecularGlossiness = Nullable<PbrSpecularGlossiness>(pbrSG);
-            }
-        }
-
         // glTFv2 is either PBR or Unlit
         aiShadingMode shadingMode = aiShadingMode_PBR_BRDF;
         mat.Get(AI_MATKEY_SHADING_MODEL, shadingMode);
@@ -831,39 +806,43 @@ void glTF2Exporter::ExportMaterials() {
             mAsset->extensionsUsed.KHR_materials_unlit = true;
             m->unlit = true;
         } else {
-            // These extensions are not compatible with KHR_materials_unlit or KHR_materials_pbrSpecularGlossiness
-            if (!m->pbrSpecularGlossiness.isPresent) {
-                // Sheen
-                MaterialSheen sheen;
-                if (GetMatSheen(mat, sheen)) {
-                    mAsset->extensionsUsed.KHR_materials_sheen = true;
-                    m->materialSheen = Nullable<MaterialSheen>(sheen);
-                }
-
-                MaterialClearcoat clearcoat;
-                if (GetMatClearcoat(mat, clearcoat)) {
-                    mAsset->extensionsUsed.KHR_materials_clearcoat = true;
-                    m->materialClearcoat = Nullable<MaterialClearcoat>(clearcoat);
-                }
-
-                MaterialTransmission transmission;
-                if (GetMatTransmission(mat, transmission)) {
-                    mAsset->extensionsUsed.KHR_materials_transmission = true;
-                    m->materialTransmission = Nullable<MaterialTransmission>(transmission);
-                }
-                
-                MaterialVolume volume;
-                if (GetMatVolume(mat, volume)) {
-                    mAsset->extensionsUsed.KHR_materials_volume = true;
-                    m->materialVolume = Nullable<MaterialVolume>(volume);
-                }
-                                
-                MaterialIOR ior;
-                if (GetMatIOR(mat, ior)) {
-                    mAsset->extensionsUsed.KHR_materials_ior = true;
-                    m->materialIOR = Nullable<MaterialIOR>(ior);
-                }
+            // These extensions are not compatible with KHR_materials_unlit
+            MaterialSpecular specular;
+            if (GetMatSpecular(mat, specular)) {
+                mAsset->extensionsUsed.KHR_materials_specular = true;
+                m->materialSpecular = Nullable<MaterialSpecular>(specular);
             }
+
+            MaterialSheen sheen;
+            if (GetMatSheen(mat, sheen)) {
+                mAsset->extensionsUsed.KHR_materials_sheen = true;
+                m->materialSheen = Nullable<MaterialSheen>(sheen);
+            }
+
+            MaterialClearcoat clearcoat;
+            if (GetMatClearcoat(mat, clearcoat)) {
+                mAsset->extensionsUsed.KHR_materials_clearcoat = true;
+                m->materialClearcoat = Nullable<MaterialClearcoat>(clearcoat);
+            }
+
+            MaterialTransmission transmission;
+            if (GetMatTransmission(mat, transmission)) {
+                mAsset->extensionsUsed.KHR_materials_transmission = true;
+                m->materialTransmission = Nullable<MaterialTransmission>(transmission);
+            }
+
+            MaterialVolume volume;
+            if (GetMatVolume(mat, volume)) {
+                mAsset->extensionsUsed.KHR_materials_volume = true;
+                m->materialVolume = Nullable<MaterialVolume>(volume);
+            }
+
+            MaterialIOR ior;
+            if (GetMatIOR(mat, ior)) {
+                mAsset->extensionsUsed.KHR_materials_ior = true;
+                m->materialIOR = Nullable<MaterialIOR>(ior);
+            }
+
         }
     }
 }

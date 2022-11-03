@@ -354,8 +354,8 @@ int main()
 //    Log(LOG_INFO, "Colors");
 //    ret_value = ColorMapTest();
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
-//    Log(LOG_INFO, "Pyramid");
-//    ret_value = PyramidSmoothTest();
+    Log(LOG_INFO, "Pyramid");
+    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();

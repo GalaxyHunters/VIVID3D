@@ -70,14 +70,13 @@ namespace vivid {
 
         void AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-
+            OutputPath = aOutputPath;
             aiScene *scene = GenerateScene(arModel);
 
             //clean aOutputPath
             //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
             aOutputPath += fileFormats[arFileType];
-            OutputPath = aOutputPath;
-            auto ret = exp.Export(scene, arFileType, OutputPath,
+            auto ret = exp.Export(scene, arFileType, aOutputPath,
                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
             TextureNameToIndex.clear();
@@ -91,13 +90,12 @@ namespace vivid {
 
         void AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
             Assimp::Exporter exp;
-
+            OutputPath = aOutputPath;
             aiScene *scene = GenerateAnimationScene(arAnimation);
 
             //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
-            OutputPath += fileFormats[arFileType];
-            OutputPath = aOutputPath;
-            auto ret = exp.Export(scene, arFileType, OutputPath);
+            aOutputPath += fileFormats[arFileType];
+            auto ret = exp.Export(scene, arFileType, aOutputPath);
             
             TextureNameToIndex.clear();
             OutputPath = "";

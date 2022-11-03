@@ -1,22 +1,22 @@
-=============================================
-vivid3d - 3D Visualization and animation tool
-=============================================
+=========================================================
+VIVID3D - Scientific 3D Visualization and Animations Tool
+=========================================================
 
 .. mdinclude:: ../../README.md
 
 ----
 
 Content
--------
+=======
 .. toctree::
    :caption: User Guide
-   :maxdepth: 1
+   :maxdepth: 2
 
    examples
 
 .. toctree::
    :caption: API Reference
-   :maxdepth: 0
+   :maxdepth: 2
 
    api_reference
 

@@ -104,12 +104,12 @@ html_css_files = [
 # Intersphinx mapping
 # NOTE: if these are changed, then doc/intersphinx/update.sh
 # must be changed accordingly to keep auto-updated mappings working
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', (None, 'intersphinx/python-objects.inv')),
-    'numpy': ('https://numpy.org/doc/stable', (None, 'intersphinx/numpy-objects.inv')),
-    'matplotlib': ('https://matplotlib.org/stable', (None, 'intersphinx/matplotlib-objects.inv')),
-    'pandas': (
-        'https://pandas.pydata.org/pandas-docs/stable',
-        (None, 'intersphinx/pandas-objects.inv'),
-    ),
-}
+# intersphinx_mapping = {
+#     'python': ('https://docs.python.org/3', (None, 'intersphinx/python-objects.inv')),
+#     'numpy': ('https://numpy.org/doc/stable', (None, 'intersphinx/numpy-objects.inv')),
+#     'matplotlib': ('https://matplotlib.org/stable', (None, 'intersphinx/matplotlib-objects.inv')),
+#     'pandas': (
+#         'https://pandas.pydata.org/pandas-docs/stable',
+#         (None, 'intersphinx/pandas-objects.inv'),
+#     ),
+# }

@@ -11,22 +11,24 @@ We present VIVID3D, an innovative method for research using 3D technology.
 
 # Overview
 VIVID3D is an all new python package for simple scientific visualization and creation of 3D models. 
-Visualize particle simulations like never before, with Voronoi Tesselation for realistic volume representation in 3D
+Visualize particle simulations or volumetric scans like never before, with Voronoi Tesselation for realistic volume representation in 3D.
 
 VIVID3D was tested in our cosmology research group by producing models from simulations for researchers, supporting new scientific insights about the evolution of galaxies and structures of the Universe.
 
 ## Features
 - **Fast execution** - C++ wrapped with [pybind11](https://github.com/pybind/pybind11)
-- **Smart Isosurfaces** - Using a [3D Voronoi Algorithm](https://doi.org/10.1088/0067-0049/216/2/35) implementation by Dr. Elad Steinnberg
+- **Smart Isosurfaces** - Using a [3D Voronoi Algorithm](https://doi.org/10.1088/0067-0049/216/2/35) implementation by Dr. Elad Steinnberg for visualization of volumetric data
 - **Support for industry standard file formats** - Using the [Open Asset Import Library](https://github.com/assimp/assimp)
 - **Point Clouds**
 - **Vector Fields**
+- **Interactive 3D Viewer**
 - **Scientific Analysis of Meshes**
 
 ## Highlights
-View the [Model Gallery](https://naftalide.wixsite.com/vivid) to see what VIVID3D is capable of
+View the [Model Gallery](https://vivid.readthedocs.io/en/latest/gallery) to see what VIVID3D is capable of. 
+
 ## Documentation
-[Read The Docs](https://vivid.readthedocs.io/en/latest/)
+Our Documentation is hosted at [Read The Docs](https://vivid.readthedocs.io/en/latest/). This contains usage guides and examples, our API reference, and a gallery of our favourite models.
 
 # Installation and Usage
 ## Installation
@@ -38,8 +40,7 @@ pip install vivid3d
 This might take a few minutes, and is only tested on linux as of now.
 
 ## Usage
-**[Tutorials](https://vivid.readthedocs.io/en/latest/)**
-
+Learn the fundamentals and advanced model creation examples with the [User Guide](https://vivid.readthedocs.io/en/latest/examples).
 
 # About
 ## Authors

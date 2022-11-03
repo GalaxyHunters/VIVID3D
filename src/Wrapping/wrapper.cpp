@@ -600,11 +600,11 @@ blob : vivid3d.BlobData
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
         }, R"mydelimiter(
-Render and view the mesh in a viewer window. **Requires IPython**
+Render and view the model in a viewer window.
 
 Parameters
 ----------
-height : int, default: 500
+height : int, default: 600
     height in pixels to open the viewer
 
 Returns
@@ -612,7 +612,7 @@ Returns
 html : str or IPython.display.HTML
     The HTML with embedded model
 
-        )mydelimiter", py::arg("height")=500)
+        )mydelimiter", py::arg("height")=600)
     .def("__str__", [](const CModel &arSelf){ return "vivid3d.Model\nn_meshes: " + to_string(arSelf.GetNumMeshes()) + "\nn_polygons: " + to_string(arSelf.GetNumPolygons()) + "\nn_vertices: " + to_string(arSelf.GetNumVertices()); });
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(

@@ -7,6 +7,7 @@ By default, a BaseMesh that does not have the color_field provided will generate
 set the default color to *'white'*.
 
 .. jupyter-execute::
+    :raises:
 
     import vivid3d
     import numpy as np
@@ -27,6 +28,7 @@ set the default color to *'white'*.
 Just like all other BaseMeshes, PointClouds can be given a optional color_field array that maps each point to a colormap.
 
 .. jupyter-execute::
+    :raises:
 
     # Creating an array of 1000 scalars with random value from uniform distribution [0, 1]
     colors = np.random.rand(1000)

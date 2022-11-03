@@ -6,6 +6,7 @@ VIVID3D supplies multiple basic geometric objects that you can use to improve yo
 They are detailed in the :doc:`API Reference: Geometry <../generated/vivid3d.Geometries>` section.
 
 .. jupyter-execute::
+    :raises:
 
     import vivid3d
 

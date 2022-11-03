@@ -66,6 +66,7 @@ More control
 For the second method, we will use a mask and utilize some other abilities of the code.
 
 .. jupyter-execute::
+    :raises:
 
    #we will make two masks for two meshes
    mask1 = np.array(distance) > 25 

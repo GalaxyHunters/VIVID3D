@@ -218,7 +218,7 @@ move(direction_vec: Point3D)
     Move the Mesh by direction_vec
 show(height=600)
     Render and view the mesh in a viewer window.
-export(output_file: str, file_type='glb2')
+export(output_file: str, file_type='glb')
     Writes Component to output_file with given file format.
     If no output_file provided, this function will return a blob file in the given file format.
 )mydelimiter")
@@ -275,17 +275,17 @@ scale : Point3D
         -------------
         output_file : str, default: "Vivid3dModel"
             File Directory to export to
-        file_type : str, default: 'glb2'
+        file_type : str, default: 'glb'
             File format to export to
 
             )mydelimiter",
-    py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb2")
+    py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
     .def("export_to_blob", &CModelComponent::ExportToBlob, R"mydelimiter(
             Writes Mesh to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
             Parameters
             ----------
-            file_type : str, default: 'glb2'
+            file_type : str, default: 'glb'
                 File format to export to
 
             Returns
@@ -293,7 +293,7 @@ scale : Point3D
             blob : vivid3d.BlobData
                 Object containing exported model file blobs
                 )mydelimiter",
-    py::arg("file_type") = "glb2")
+    py::arg("file_type") = "glb")
 //    .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
 //            if (output_file.empty()) {
 //                return arSelf.ExportToBlob(file_type);
@@ -308,14 +308,14 @@ scale : Point3D
 //----------------
 //output_file : str, default: ""
 //    File Directory to export to
-//file_type : str, default: 'glb2'
+//file_type : str, default: 'glb'
 //    File format to export to
 //
 //Returns
 //----------------
 //blob : vivid3d.BlobData
 //    Object containing exported model file blobs - only returned if output_file is empty
-//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb")
     .def("show", [](CModelComponent& arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -570,7 +570,7 @@ add_mesh(mesh: vivid3d.BaseMesh)
     Add Mesh, PointCloud, or Lines object to model
 add_meshes(mesh: vivid3d.BaseMesh)
     Add Meshes, PointCloud's, or Lines objects to model
-export(output_file='', file_type='glb2')
+export(output_file='', file_type='glb')
     Default exporter supporting most common 3D file types. For full list of supported file formats see: __reference__
     Returns vivid3d.BlobData if output_file is empty.
 
@@ -626,17 +626,17 @@ File Directory to export to
     -------------
     output_file : str, default: "Vivid3dModel"
         File Directory to export to
-    file_type : str, default: 'glb2'
+    file_type : str, default: 'glb'
         File format to export to
 
         )mydelimiter",
-        py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb2")
+        py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
     .def("export_to_blob", &CModel::ExportToBlob, R"mydelimiter(
         Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
         Parameters
         ----------
-        file_type : str, default: 'glb2'
+        file_type : str, default: 'glb'
             File format to export to
 
         Returns
@@ -644,7 +644,7 @@ File Directory to export to
         blob : vivid3d.BlobData
             Object containing exported model file blobs
             )mydelimiter",
-    py::arg("file_type") = "glb2")
+    py::arg("file_type") = "glb")
 //    .def("export", [](CModel &arSelf, string output_file, string file_type) {
 //        if (output_file.empty()) {
 //            return arSelf.ExportToBlob(file_type);
@@ -659,14 +659,14 @@ File Directory to export to
 //    -------------
 //    output_file : str, default: ""
 //        File Directory to export to
-//    file_type : str, default: 'glb2'
+//    file_type : str, default: 'glb'
 //        File format to export to
 //
 //    Returns
 //    -------------
 //    blob : vivid3d.BlobData
 //        Object containing exported model file blobs - only returned if output_file is empty
-//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb")
     .def("show", [](CModel &arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -724,7 +724,7 @@ html : str or IPython.display.HTML
          py::arg("index"))
     .def("export", &CAnimation::Export,
          "Exports animation to selected file format",
-         py::arg("output_file"), py::arg("file_format") = "gltf2");
+         py::arg("output_file"), py::arg("file_format") = "glb");
 
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
@@ -777,7 +777,7 @@ html : str or IPython.display.HTML
             Label to assign to the model, some file format support it
         opacity : float, default: 1
             Alpha value for the model, 0-1
-        file_type : str, default: "gltf2"
+        file_type : str, default: "glb"
             File format for export, out of Assimp supported formats
         noise_displacement : float, default: 0.001
             The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
@@ -800,7 +800,7 @@ html : str or IPython.display.HTML
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = 1,
-        py::arg("file_type") = "gltf2",
+        py::arg("file_type") = "glb",
         py::arg("noise_displacement") = 0.001);
 
 
@@ -820,7 +820,7 @@ html : str or IPython.display.HTML
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = 1,
-        py::arg("file_type") = "gltf2",
+        py::arg("file_type") = "glb",
         py::arg("noise_displacement") = 0.001);
 
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
@@ -838,7 +838,7 @@ html : str or IPython.display.HTML
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = vector<normal_float>(0),
-        py::arg("file_type") = "gltf2",
+        py::arg("file_type") = "glb",
         py::arg("noise_displacement") = 0.001);
 
 
@@ -858,7 +858,7 @@ html : str or IPython.display.HTML
         py::arg("color_field_max") = 0,
         py::arg("label")= "VIVID_MODEL",
         py::arg("opacity") = vector<normal_float>(0),
-        py::arg("file_type") = "gltf2",
+        py::arg("file_type") = "glb",
         py::arg("noise_displacement") = 0.001);
 
 

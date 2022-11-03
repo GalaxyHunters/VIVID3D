@@ -55,11 +55,11 @@ namespace vivid
         * @param[in] arOutputFilePath Path and name for output file
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
         */
-        void Export(const std::string &arOutputFilePath, const std::string& arFileType = "gltf2");
+        void Export(const std::string &arOutputFilePath, const std::string& arFileType = "glb");
         /**
         * Assimp export. returns arModel in aFileType format
         * @param[in] aFileType 3D filetype format to write to (out of supported options)
-        * @returns void* file blob encoded in provided aFileType
+        * @returns CBlobData files as blobs
         */
         CBlobData ExportToBlob(const std::string& arFileType = "glb");
     };

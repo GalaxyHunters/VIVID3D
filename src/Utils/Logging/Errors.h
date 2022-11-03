@@ -15,7 +15,7 @@ namespace vivid {
 
     enum ELogMessage {
         ARRAYS_NOT_EQUAL = 0, ARRAYS_EMPTY = 1, MISSING_BOOLEAN_VALUES = 2, SURFACE_THRESHOLD_OUT_OF_RANGE = 3,
-        INVALID_SMOOTH_FACTOR = 4, INVALID_ALPHA_VALUE=5, INVALID_NORMAL_VALUE=6, INVALID_FRAME_VALUE=7
+        INVALID_SMOOTH_FACTOR = 4, INVALID_ALPHA_VALUE=5, INVALID_NORMAL_VALUE=6, INVALID_POSITIVE_VALUE=7, INVALID_FRAME_VALUE=8
     };
 
     const std::map<ELogMessage, std::string> ERROR_TYPE_STRING{{ARRAYS_NOT_EQUAL,
@@ -31,7 +31,9 @@ namespace vivid {
                                                                {INVALID_ALPHA_VALUE,
                                                                        "ValueError - Alpha must be between 0 and 1"},
                                                                {INVALID_NORMAL_VALUE,
-                                                                       "ValueError - Normal Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
+                                                                       "ValueError - Value must be between 0.0 and 1.0. Rounding to the nearest possible value"},
+																{INVALID_POSITIVE_VALUE,
+                                                                       "ValueError - Value must be greater than or equal to 0. Setting to 0."},
                                                                {INVALID_FRAME_VALUE,
                                                                        "ValueError - frame must be within Models.size range"},
     };

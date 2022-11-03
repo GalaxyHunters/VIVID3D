@@ -113,7 +113,7 @@ Supported File Types
 
 VIVID3D supports a wide range of industry standard 3D file formats, usable in any 3D software or platform.
 
-The recommended file format is GLB2, intended for minimal file size, integration with nearly every 3D software. Unlike other
+The recommended file format is GLB, intended for minimal file size, integration with nearly every 3D software. Unlike other
 file formats, GLB stores all the model data in a single file, making it a much cleaner file format to use than others.
 
 Here is the list of supported 3D file formats:

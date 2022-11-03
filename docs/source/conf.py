@@ -21,7 +21,7 @@ print(dir(vivid3d.viewer.volumetric_viewer))
 
 # -- Project information -----------------------------------------------------
 
-project = 'vivid3d'
+project = 'VIVID3D'
 copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 

@@ -168,7 +168,7 @@ Attributes
 ----------------
 opacity : (0.0-1.0), default: 1.0
 shininess : (0.0-1.0), default: 0.1
-emission_strength : (0.0-1.0), default: 0.0
+emission_strength : PositiveFloat, default: 0.0
 emission_color : str, default: "black"
     See https://htmlcolorcodes.com/color-names/ for list of all available colors."
 name : str, default: "defaultMaterial"
@@ -182,7 +182,7 @@ name : str, default: "defaultMaterial"
         .def_property("shininess", &CMaterial::GetShininess, &CMaterial::SetShininess,
             "Shininess (0.0-1.0)")
         .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
-            "Emission Strength (0.0-1.0)")
+            "Emission Strength : PositiveFloat")
         .def_property("emission_color", &CMaterial::GetEmissionColor, &CMaterial::SetEmissionColor,
             "Emission Color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.");
 

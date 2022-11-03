@@ -12,7 +12,7 @@
 #
 import os
 import sys
-# sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
@@ -24,10 +24,8 @@ author = 'GalaxyHuntersIL'
 # The full version, including alpha/beta/rc tags
 release = '0.3.2'
 
-import os
-
-package_path = os.path.abspath('../..')
-os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
+#package_path = os.path.abspath('../..')
+#os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
 
 # -- General configuration ---------------------------------------------------
 
@@ -101,3 +99,17 @@ html_static_path = ['_static']
 html_css_files = [
     "styles.css",
 ]
+
+
+# Intersphinx mapping
+# NOTE: if these are changed, then doc/intersphinx/update.sh
+# must be changed accordingly to keep auto-updated mappings working
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', (None, 'intersphinx/python-objects.inv')),
+    'numpy': ('https://numpy.org/doc/stable', (None, 'intersphinx/numpy-objects.inv')),
+    'matplotlib': ('https://matplotlib.org/stable', (None, 'intersphinx/matplotlib-objects.inv')),
+    'pandas': (
+        'https://pandas.pydata.org/pandas-docs/stable',
+        (None, 'intersphinx/pandas-objects.inv'),
+    ),
+}

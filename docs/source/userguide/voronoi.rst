@@ -68,23 +68,23 @@ For the second method, we will use a mask and utilize some other abilities of th
 .. jupyter-execute::
     :raises:
 
-   #we will make two masks for two meshes
-   mask1 = np.array(distance) > 25 
-   mask2 = np.array(distance) > 15
+    #we will make two masks for two meshes
+    mask1 = np.array(distance) > 25
+    mask2 = np.array(distance) > 15
 
-   #create the faces by running Voronoi, this might be a heavy function
-   voronoi = vivid3d.VoronoiVolume(points, color) #make VoronoiVolume obj
+    #create the faces by running Voronoi, this might be a heavy function
+    voronoi = vivid3d.VoronoiVolume(points, color) #make VoronoiVolume obj
 
-   #make a mesh and take a surface by mask
-   mesh1 = voronoi.iso_surface(mask1, "Mesh", 0.5)
-   mesh2 = voronoi.iso_surface(mask2, "Mesh", 1)
-   mesh1.smooth()
-   mesh1.show()
-   #make a model with our two meshes
-   #model = vivid3d.Model([mesh1,mesh2])
-   #model.show()
-   # export
-   # model.export(path+"/MyModel", "gltf2")
+    #make a mesh and take a surface by mask
+    mesh1 = voronoi.iso_surface(mask1, "Mesh", 0.5)
+    mesh2 = voronoi.iso_surface(mask2, "Mesh", 1)
+    mesh1.smooth()
+    mesh1.show()
+    #make a model with our two meshes
+    #model = vivid3d.Model([mesh1,mesh2])
+    #model.show()
+    # export
+    # model.export(path+"/MyModel", "gltf2")
 
 Now we have a cool model.
 

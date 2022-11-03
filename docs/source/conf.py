@@ -15,13 +15,21 @@ import sys
 #sys.path.insert(0, os.path.abspath('.'))
 
 import vivid3d
-path = os.path.dirname(vivid3d.__file__)
+path = vivid3d.__path__[0]
 print(path)
 print(os.listdir(path))
-viewer_path = os.path.dirname(vivid3d.viewer.__file__)
-print(viewer_path)
-print(os.listdir(viewer_path))
-
+try:
+    path1 = vivid3d.viewer.__path__[0]
+    print(path1)
+    print(os.listdir(path1))
+except:
+    print("no viewer")
+try:
+    path2 = vivid3d.lib.__path__[0]
+    print(path2)
+    print(os.listdir(path2))
+except:
+    print("no lib")
 # -- Project information -----------------------------------------------------
 
 project = 'VIVID3D'

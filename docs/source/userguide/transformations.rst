@@ -1,7 +1,7 @@
 Transformations
 ===============
 
-All VIVID3D :doc:`BaseMeshes<../generated/vivid3d.BaseMesh` contain methods for basic transformations.
+All VIVID3D :doc:`BaseMeshes<../generated/vivid3d.BaseMesh>` contain methods for basic transformations.
 
 Move
 ----

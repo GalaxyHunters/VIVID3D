@@ -7,4 +7,4 @@ StopMotionAnimation
    :inherited-members:
 
 :ref:`User Guide<userguide/animations:Stop Motion Animation>`
-----------------------------------------------------
+-------------------------------------------------------------

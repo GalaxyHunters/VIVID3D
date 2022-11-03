@@ -16,4 +16,4 @@ Geometry
 .. autofunction:: vivid3d.create_grid
 
 :doc:`User Guide<../userguide/geometries>`
----------------------------------------
+------------------------------------------

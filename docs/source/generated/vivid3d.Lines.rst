@@ -7,4 +7,4 @@ Lines
    :inherited-members:
 
 :doc:`User Guide<../userguide/lines>`
-----------------------------------
+-------------------------------------

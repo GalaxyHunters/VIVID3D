@@ -31,11 +31,11 @@ There are several different BaseMesh classes, used for representing different da
 
     * - Class
       - Explanation
-    * - :ref:`generated/vivid3d.PointCloud`
+    * - :doc:`../generated/vivid3d.PointCloud`
       - For representing each vertex as a separate unconnected points
-    * - :ref:`generated/vivid3d.Lines`
+    * - :doc:`../generated/vivid3d.Lines`
       - For representing groups of vertices as connected lines
-    * - :ref:`generated/vivid3d.Mesh`
+    * - :doc:`../generated/vivid3d.Mesh`
       - For representing groups of vertices as polygonal faces
 
 Later we will go in depth how to create and manipulate each of these objects.
@@ -107,6 +107,29 @@ You can save both BaseMeshes and Models using the export() function. It accepts 
       - For representing each vertex as a separate unconnected points
     * - file_type
       - For representing groups of vertices as connected lines
+
+Supported File Types
+--------------------
+
+VIVID3D supports a wide range of industry standard 3D file formats, usable in any 3D software or platform.
+
+The recommended file format is GLB2, intended for minimal file size, integration with nearly every 3D software. Unlike other
+file formats, GLB stores all the model data in a single file, making it a much cleaner file format to use than others.
+
+Here is the list of supported 3D file formats:
+
+* `GLB <https://docs.fileformat.com/3d/glb/>`_
+* `GLTF <https://docs.fileformat.com/3d/gltf/>`_
+* `OBJ <https://docs.fileformat.com/3d/obj/>`_
+* `FBX <https://docs.fileformat.com/3d/fbx/>`_
+
+Additional, untested file formats:
+
+* `PLY <https://docs.fileformat.com/3d/ply/>`_
+* `3DS <https://docs.fileformat.com/3d/3ds/>`_
+* `STL <https://docs.fileformat.com/cad/stl/>`_
+* `STLB <https://docs.fileformat.com/cad/stl/#stl-binary-format>`_
+* `COLLADA <https://docs.fileformat.com/3d/dae/>`_
 
 Examples
 --------

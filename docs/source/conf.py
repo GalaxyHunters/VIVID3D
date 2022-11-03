@@ -15,9 +15,12 @@ import sys
 #sys.path.insert(0, os.path.abspath('.'))
 
 import vivid3d
-print(dir(vivid3d.viewer))
-print(dir(vivid3d.viewer.show))
-print(dir(vivid3d.viewer.volumetric_viewer))
+path = os.path.dirname(vivid3d.__file__)
+print(path)
+print(os.listdir(path))
+viewer_path = os.path.dirname(vivid3d.viewer.__file__)
+print(viewer_path)
+print(os.listdir(viewer_path))
 
 # -- Project information -----------------------------------------------------
 

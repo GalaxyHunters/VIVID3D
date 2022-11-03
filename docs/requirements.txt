@@ -3,3 +3,4 @@ sphinx_mdinclude
 furo
 nbsphinx
 jupyter_sphinx
+Pandoc

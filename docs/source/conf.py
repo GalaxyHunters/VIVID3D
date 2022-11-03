@@ -14,7 +14,8 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 
-
+import vivid3d
+print(dir(vivid3d))
 # -- Project information -----------------------------------------------------
 
 project = 'vivid3d'
@@ -22,7 +23,7 @@ copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.2'
+release = vivid3d.__version__
 
 #package_path = os.path.abspath('../..')
 #os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))

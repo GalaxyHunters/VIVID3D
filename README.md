@@ -32,7 +32,7 @@ Our Documentation is hosted at [Read The Docs](https://vivid.readthedocs.io/en/l
 
 # Installation and Usage
 ## Installation
-VIVID3D can be installed from PyPI using pip on Python >= 3.5:
+VIVID3D can be installed from PyPI using pip on `Python >= 3.7`
 
 ```
 pip install vivid3d

@@ -25,11 +25,9 @@ try:
 except:
     print("no viewer")
 try:
-    path2 = vivid3d.lib.__path__[0]
-    print(path2)
-    print(os.listdir(path2))
+    print(dir(vivid3d.viewer.model_viewer))
 except:
-    print("no lib")
+    print("cant access viewer.model_viewer")
 # -- Project information -----------------------------------------------------
 
 project = 'VIVID3D'

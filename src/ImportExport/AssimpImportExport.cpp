@@ -369,7 +369,7 @@ namespace vivid {
             node->mName = aiString(aNodeName);
             node->mNumMeshes = aMeshIndexEnd - aMeshIndexStart;
             node->mMeshes = new unsigned int[node->mNumMeshes];
-            for (size_t index = aMeshIndexStart; index != aMeshIndexEnd; index++) {
+            for (size_t index = 0; index != node->mNumMeshes; index++) {
                 node->mMeshes[index] = aMeshIndexStart;
                 aMeshIndexStart++;
             }

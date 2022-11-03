@@ -268,28 +268,54 @@ Parameters
 ----------------
 scale : Point3D
         )mydelimiter", py::arg("scale"))
-    .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
-            if (output_file.empty()) {
-                return arSelf.ExportToBlob(file_type);
-            } else {
-                arSelf.Export(output_file, file_type);
-            }
-        }, R"mydelimiter(
-Writes Mesh to output_file with given file format.
-If no output_file provided, this function will return a blob file in the given file format.
+    .def("export", &CModelComponent::Export, R"mydelimiter(
+        Writes Mesh to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-Parameters
-----------------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+        Parameters
+        -------------
+        output_file : str, default: "Vivid3dModel"
+            File Directory to export to
+        file_type : str, default: 'glb2'
+            File format to export to
 
-Returns
-----------------
-blob : vivid3d.BlobData
-    Object containing exported model file blobs - only returned if output_file is empty
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+            )mydelimiter",
+    py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb2")
+    .def("export_to_blob", &CModelComponent::ExportToBlob, R"mydelimiter(
+            Writes Mesh to Blob with given file_type format. For full list of supported file formats, see: __reference__
+
+            Parameters
+            ----------
+            file_type : str, default: 'glb2'
+                File format to export to
+
+            Returns
+            -------
+            blob : vivid3d.BlobData
+                Object containing exported model file blobs
+                )mydelimiter",
+    py::arg("file_type") = "glb2")
+//    .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
+//            if (output_file.empty()) {
+//                return arSelf.ExportToBlob(file_type);
+//            } else {
+//                arSelf.Export(output_file, file_type);
+//            }
+//        }, R"mydelimiter(
+//Writes Mesh to output_file with given file format.
+//If no output_file provided, this function will return a blob file in the given file format.
+//
+//Parameters
+//----------------
+//output_file : str, default: ""
+//    File Directory to export to
+//file_type : str, default: 'glb2'
+//    File format to export to
+//
+//Returns
+//----------------
+//blob : vivid3d.BlobData
+//    Object containing exported model file blobs - only returned if output_file is empty
+//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
     .def("show", [](CModelComponent& arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -593,28 +619,54 @@ Parameters
 output_file : str, default: ""
 File Directory to export to
         )mydelimiter", py::arg("output_file"), py::arg("with_texture") = 1)
-    .def("export", [](CModel &arSelf, string output_file, string file_type) {
-        if (output_file.empty()) {
-            return arSelf.ExportToBlob(file_type);
-        } else {
-            arSelf.Export(output_file, file_type);
-        }
-    }, R"mydelimiter(
-Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
-If no output_file provided, this function will return a blob file in the given file format.
+    .def("export", &CModel::Export, R"mydelimiter(
+    Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-Parameters
--------------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+    Parameters
+    -------------
+    output_file : str, default: "Vivid3dModel"
+        File Directory to export to
+    file_type : str, default: 'glb2'
+        File format to export to
 
-Returns
--------------
-blob : vivid3d.BlobData
-    Object containing exported model file blobs - only returned if output_file is empty
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+        )mydelimiter",
+        py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb2")
+    .def("export_to_blob", &CModel::ExportToBlob, R"mydelimiter(
+        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
+
+        Parameters
+        ----------
+        file_type : str, default: 'glb2'
+            File format to export to
+
+        Returns
+        -------
+        blob : vivid3d.BlobData
+            Object containing exported model file blobs
+            )mydelimiter",
+    py::arg("file_type") = "glb2")
+//    .def("export", [](CModel &arSelf, string output_file, string file_type) {
+//        if (output_file.empty()) {
+//            return arSelf.ExportToBlob(file_type);
+//        } else {
+//            arSelf.Export(output_file, file_type);
+//        }
+//    }, R"mydelimiter(
+//    Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
+//    If no output_file provided, this function will return a blob file in the given file format.
+//
+//    Parameters
+//    -------------
+//    output_file : str, default: ""
+//        File Directory to export to
+//    file_type : str, default: 'glb2'
+//        File format to export to
+//
+//    Returns
+//    -------------
+//    blob : vivid3d.BlobData
+//        Object containing exported model file blobs - only returned if output_file is empty
+//        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
     .def("show", [](CModel &arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);

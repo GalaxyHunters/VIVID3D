@@ -14,6 +14,8 @@ vivid
 vivid_main
 /docs/build/
 **/__init__.py
+!/src/vivid3d/__init__.py
+!/src/vivid3d/viewer/__init__.py
 !/src/vivid3d
 !/src/vivid3d/viewer
 !/pybind11/pybind11/__init__.py

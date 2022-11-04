@@ -1,246 +1,37 @@
 #include "AssimpImportExport.h"
+//#include "PostProcessing/MakeVerboseFormat.h"
 
 namespace vivid {
     namespace {
         constexpr float MAX_ROUGHNESS = 1000;
-    }
-
-    namespace AssimpExport {
         // matches assimp file formats to actual file endings
-        std::map<std::string, std::string> fileFormats =
+        const std::map<std::string, std::string> FILE_FORMATS =
             {
-                {"glb",     ".glb"},    // Doesn't work well
-                {"glb2",    ".glb"},    // Works
-                {"gltf",    ".gltf"},   // Works
-                {"gltf2",   ".gltf"},   // Works
-                {"obj",     ".obj"},    // Works
-                {"fbx",     ".fbx"},    // Doesn't work well
-                {"ply",     ".ply"},    // Untested
-                {"3ds",     ".3ds"},    // Untested
-                {"stl",     ".stl"},    // Untested
-                {"stlb",    ".stl"},    // Untested
-                {"collada", ".dae"}     // Untested
+                    {"glb",     ".glb"},    // Works
+                    {"gltf",    ".gltf"},   // Works
+                    {"obj",     ".obj"},    // Works
+                    {"fbx",     ".fbx"},    // Doesn't work well
+                    {"ply",     ".ply"},    // Untested
+                    {"3ds",     ".3ds"},    // Untested
+                    {"stl",     ".stl"},    // Untested
+                    {"stlb",    ".stl"},    // Untested
+                    {"collada", ".dae"}     // Untested
             };
+
+        std::string RenameGLTF_GLB(const std::string& arFileFormat) {
+            if (arFileFormat == "glb" || arFileFormat == "gltf") {
+                return arFileFormat + "2";
+            }
+            return arFileFormat;
+        }
+
 
         map<string, string> TextureNameToIndex = {};
         vector<aiTexture*> EmbeddedTextures = {};
         bool EmbeddedTexture = false;
         string OutputPath = "";
 
-        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) { //blob
-            Assimp::Exporter exp;
-            EmbeddedTexture = true;
-
-            aiScene *scene = GenerateScene(arModel);
-            auto blob = exp.ExportToBlob(scene, arFileType,
-                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
-
-            EmbeddedTextures.clear();
-            EmbeddedTexture = false;
-            TextureNameToIndex.clear();
-            delete scene;
-            
-            if (!blob) {
-                Log(LOG_ERROR, exp.GetErrorString());
-            }
-            // we copy all the blob data to a vivid const qualified struct so the blob pointer isn't freed by python's greedy GC
-            return CBlobData::FormatExportDataBlob(blob);
-        }
-
-        CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType) { //blob
-            Assimp::Exporter exp;
-            EmbeddedTexture = true;
-
-            aiScene *scene = GenerateAnimationScene(arAnimation);
-            auto blob = exp.ExportToBlob(scene, arFileType,
-                                         aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
-
-            EmbeddedTextures.clear();
-            EmbeddedTexture = false;
-            TextureNameToIndex.clear();
-            delete scene;
-
-            if (!blob) {
-                Log(LOG_ERROR, exp.GetErrorString());
-            }
-
-            return CBlobData::FormatExportDataBlob(blob);
-        }
-
-        void AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
-            Assimp::Exporter exp;
-            OutputPath = aOutputPath;
-            aiScene *scene = GenerateScene(arModel);
-
-            aOutputPath += fileFormats[arFileType];
-            auto ret = exp.Export(scene, arFileType, aOutputPath,
-                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
-
-            TextureNameToIndex.clear();
-            OutputPath = "";
-            delete scene;
-
-            if (ret != aiReturn_SUCCESS) {
-                Log(LOG_ERROR, exp.GetErrorString());
-            }
-        }
-
-        void AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
-            Assimp::Exporter exp;
-            OutputPath = aOutputPath;
-
-            aiScene *scene = GenerateAnimationScene(arAnimation);
-
-            aOutputPath += fileFormats[arFileType];
-            auto ret = exp.Export(scene, arFileType, aOutputPath);
-            
-            TextureNameToIndex.clear();
-            OutputPath = "";
-            delete scene;
-            
-            if (ret != aiReturn_SUCCESS) {
-                Log(LOG_ERROR, exp.GetErrorString());
-            }
-        }
-
-        aiScene *GenerateScene(const vivid::CModel &model) {
-            //setup scene
-            aiScene *scene = new aiScene();
-            scene->mFlags = AI_SCENE_FLAGS_NON_VERBOSE_FORMAT + AI_SCENE_FLAGS_ALLOW_SHARED;
-            scene->mRootNode = new aiNode();
-            scene->mRootNode->mName = aiString("root_node");
-
-            scene->mNumMeshes = model.GetNumMeshes();
-            scene->mMeshes = new aiMesh *[scene->mNumMeshes];
-
-            scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
-            scene->mNumMaterials = scene->mNumMeshes;
-
-            scene->mRootNode->mNumChildren = 1;
-            scene->mRootNode->mChildren = new aiNode *[1];
-            scene->mRootNode->mChildren[0] = GenerateNode("basic_node", 0, scene->mNumMeshes);
-            scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
-
-
-            vector<vivid::CModelComponent> meshes = model.GetMeshes();
-
-            string texture_path;
-            for (int i = 0; i < scene->mNumMeshes; i++) {
-                //handle mesh texture
-                texture_path = AddTexture(meshes[i].GetColorMap());
-                //setting up the mesh structure
-                scene->mMeshes[i] = GenerateMesh(&meshes[i]);
-                scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
-                scene->mMeshes[i]->mMaterialIndex = i;
-            }
-            if(EmbeddedTexture){
-                scene->mNumTextures = EmbeddedTextures.size();
-                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
-                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
-            }
-            return scene;
-        }
-
-        aiScene *GenerateAnimationScene(CAnimation &arAnimation) {
-            //setup scene
-            aiScene *scene = new aiScene();
-            scene->mRootNode = new aiNode();
-            scene->mRootNode->mName = aiString("root_node");
-
-            vector<vivid::CModel> models = arAnimation.GetModels();
-
-            scene->mNumMeshes = arAnimation.GetNumMeshes();
-            scene->mMeshes = new aiMesh *[scene->mNumMeshes];
-
-            scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
-            scene->mNumMaterials = scene->mNumMeshes;
-
-            scene->mRootNode->mNumChildren = 1;
-            scene->mRootNode->mChildren = new aiNode *[1];
-            aiNode *center_node = GenerateNode("center_node", 0, 0);
-            scene->mRootNode->mChildren[0] = center_node;
-            scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
-            center_node->mNumChildren = models.size();
-            center_node->mChildren = new aiNode *[models.size()];
-
-            scene->mNumAnimations = 1;//models.size();
-            scene->mAnimations = new aiAnimation *[1]; //models.size()
-
-
-            CStopMotionAnimation *SMAnimation = dynamic_cast<CStopMotionAnimation *>(&arAnimation);
-            if (!SMAnimation) {
-                scene->mAnimations[0] = GenerateAnimation(arAnimation);
-            } else {
-                scene->mAnimations[0] = GenerateStopMotionAnimation(*SMAnimation);
-            }
-
-            vector<vivid::CModelComponent> meshes;
-            string texture_path;
-            size_t mesh_counter = 0;
-            for (int model_index = 0; model_index != models.size(); model_index++) {
-                meshes = models[model_index].GetMeshes();
-                center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter,
-                                                                   mesh_counter + meshes.size());
-                center_node->mChildren[model_index]->mParent = center_node;
-                for (int mesh_index = 0; mesh_index < meshes.size(); mesh_index++) {
-                    //handle mesh texture
-                    texture_path = AddTexture(meshes[mesh_index].GetColorMap());
-                    //setting up the mesh structure
-                    scene->mMeshes[mesh_counter] = GenerateMesh(&meshes[mesh_index]);
-                    scene->mMaterials[mesh_counter] = GenerateMaterial(meshes[mesh_index].GetMaterial(), texture_path, mesh_counter);
-                    scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
-                    mesh_counter++;
-                }
-            }
-            if(EmbeddedTexture){
-                scene->mNumTextures = EmbeddedTextures.size();
-                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
-                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
-            }
-            return scene;
-        }
-
-        aiAnimation *GenerateAnimation(CAnimation &arAnimation) {
-            aiAnimation *anim = new aiAnimation;
-            anim->mNumChannels = arAnimation.GetModels().size();
-            anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
-            anim->mDuration = arAnimation.GetDuration();
-            anim->mTicksPerSecond = arAnimation.GetTicksPerSecond();
-            anim->mName = aiString("animation");
-            for (int i = 0; i != anim->mNumChannels; i++) {
-                anim->mChannels[i] = GenerateAnimationChannel(arAnimation, i);
-            }
-            return anim;
-        }
-
-        aiAnimation *GenerateStopMotionAnimation(CStopMotionAnimation &arSMAnimation) {
-            aiAnimation *anim = new aiAnimation;
-            anim->mNumChannels = arSMAnimation.GetModels().size();
-            anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
-            int ticks_per_frame = int(arSMAnimation.GetTicksPerSecond() * arSMAnimation.GetSecondsPerFrame());
-            anim->mDuration = anim->mNumChannels * ticks_per_frame;
-            anim->mTicksPerSecond = arSMAnimation.GetTicksPerSecond();
-            anim->mName = aiString("animation");
-            for (int i = 0; i != anim->mNumChannels; i++) {
-                anim->mChannels[i] = new aiNodeAnim;
-                anim->mChannels[i]->mNodeName = aiString("anim_node_" + to_string(i));
-//            anim->mChannels[i]->mPreState = aiAnimBehaviour_CONSTANT;
-//            anim->mChannels[i]->mPostState = aiAnimBehaviour_CONSTANT;
-                //Move
-                CPoint animation_value = arSMAnimation.GetMoveAnim(i);
-                MoveAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
-                //Rotate
-                animation_value = arSMAnimation.GetRotateAnim(i);
-                RotateAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
-                //Scale
-                animation_value = arSMAnimation.GetScaleAnim(i);
-                StopMotionScaleAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value,
-                                         i * ticks_per_frame);
-            }
-            return anim;
-        }
-
-        void StopMotionScaleAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime) {
+        void StopMotionScaleAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0) {
             if (*arAnimValue != CPoint()) {
                 if (aStartTime == 0) { //make the frame pop out and in when needed
                     arAnim->mNumScalingKeys = int(aDuration - aStartTime) + 3;
@@ -290,7 +81,7 @@ namespace vivid {
         }
 
 
-        void ScaleAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime) {
+        void ScaleAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0) {
             if (*arAnimValue != CPoint()) {
                 arAnim->mNumScalingKeys = int(aDuration - aStartTime);
                 arAnim->mScalingKeys = new aiVectorKey[int(aDuration - aStartTime)];
@@ -308,7 +99,7 @@ namespace vivid {
             }
         }
 
-        void MoveAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime) {
+        void MoveAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0) {
             if (*arAnimValue != CPoint()) {
                 arAnim->mNumPositionKeys = int(aDuration - aStartTime);
                 arAnim->mPositionKeys = new aiVectorKey[int(aDuration - aStartTime)];
@@ -325,7 +116,7 @@ namespace vivid {
             }
         }
 
-        void RotateAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime) {
+        void RotateAnimation(aiNodeAnim *arAnim, coord_t aDuration, CPoint *arAnimValue, coord_t aStartTime = 0) {
             if (*arAnimValue != CPoint()) {
                 arAnim->mNumRotationKeys = int(aDuration - aStartTime);
                 arAnim->mRotationKeys = new aiQuatKey[int(aDuration - aStartTime)];
@@ -343,7 +134,7 @@ namespace vivid {
         }
 
         aiNodeAnim *GenerateAnimationChannel(CAnimation &arAnimation, size_t aIndex) {
-            aiNodeAnim *anim_channel = new aiNodeAnim;
+            auto *anim_channel = new aiNodeAnim;
             anim_channel->mNodeName = aiString("anim_node_" + to_string(aIndex));
             //Move
             CPoint &animation_value = arAnimation.GetMoveAnim(aIndex);
@@ -358,16 +149,36 @@ namespace vivid {
             return anim_channel;
         }
 
-        aiNode *GenerateNode(string aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd) {
-            aiNode *node = new aiNode();
+        aiNode *GenerateNode(const string& aNodeName, size_t aMeshIndexStart, size_t aMeshIndexEnd) {
+            auto *node = new aiNode();
             node->mName = aiString(aNodeName);
             node->mNumMeshes = aMeshIndexEnd - aMeshIndexStart;
             node->mMeshes = new unsigned int[node->mNumMeshes];
-            size_t index = 0;
-            for (size_t MeshIndex = aMeshIndexStart; MeshIndex != aMeshIndexEnd; MeshIndex++) {
-                node->mMeshes[index] = MeshIndex;
+            for (size_t index = 0; index != node->mNumMeshes; index++) {
+                node->mMeshes[index] = aMeshIndexStart;
+                aMeshIndexStart++;
             }
             return node;
+        }
+
+        string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath) {
+            string textureName = arOutputPath + arMeshTexture.GetName() + "_texture.png";
+            vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
+            vivid::encodePNG(textureName, ClmBuffer, 1,
+                             ClmBuffer.size() / 4);
+            return textureName.substr(
+                    textureName.find_last_of("/\\") + 1); // remove the path component from the texture name
+        }
+
+        aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture) {
+            auto *embedded_texture = new aiTexture();
+            vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
+            const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // This is a work of art.
+            strcpy(embedded_texture->achFormatHint, "png");
+            embedded_texture->pcData = (aiTexel*)pngBuffer.mBuffer; // This is bullshit.
+            embedded_texture->mWidth = pngBuffer.mSize;
+            embedded_texture->mHeight = 0; // Assimp expects compressed embedded textures to be with this format.
+            return embedded_texture;
         }
 
         string AddTexture(CColorMap arMeshCLM) {
@@ -386,30 +197,10 @@ namespace vivid {
             }
             return texture_path;
         }
-        
-        string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath) {
-            string textureName = arOutputPath + arMeshTexture.GetName() + "_texture.png";
-            vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
-            vivid::encodePNG(textureName, ClmBuffer, 1,
-                             ClmBuffer.size() / 4);
-            return textureName.substr(
-                    textureName.find_last_of("/\\") + 1); // remove the path component from the texture name
-        }
-
-        aiTexture *GenerateTextureEmbedded(CColorMap &arMeshTexture) {
-            aiTexture *embedded_texture = new aiTexture();
-            vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
-            const CMemoryBuffer pngBuffer = encodePNG(ClmBuffer, 1, ClmBuffer.size() / 4); // This is a work of art.
-            strcpy(embedded_texture->achFormatHint, "png");
-            embedded_texture->pcData = (aiTexel*)pngBuffer.mBuffer; // This is bullshit.
-            embedded_texture->mWidth = pngBuffer.mSize;
-            embedded_texture->mHeight = 0; // Assimp expects compressed embedded textures to be with this format.
-            return embedded_texture;
-        }
 
         aiMesh *GenerateMesh(CModelComponent * apMesh) {
             //setting up the apMesh structure
-            aiMesh *OutMesh = new aiMesh();
+            auto *OutMesh = new aiMesh();
             OutMesh->mName = apMesh->GetLabel();
             switch (apMesh->GetObjType()){
                 case TRIANGLES:
@@ -476,7 +267,7 @@ namespace vivid {
         }
 
         aiMaterial *GenerateMaterial(const vivid::CMaterial& arMaterial, const string& aTextureName, size_t mat_index) {
-            aiMaterial *material = new aiMaterial();
+            auto *material = new aiMaterial();
 
             const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
@@ -484,7 +275,7 @@ namespace vivid {
             const array<float, 3> mat_emissive_color = ToNormalRGB(COLORS.at(arMaterial.GetEmissionColor()));
             const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
             material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
-        
+
             const int *shading_model = new int(2);
             material->AddProperty(shading_model, 1, AI_MATKEY_SHADING_MODEL);
 
@@ -497,14 +288,14 @@ namespace vivid {
             const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
             material->AddProperty(ambient_color, 3, AI_MATKEY_COLOR_AMBIENT);
 
-            const aiColor3D *specular_color = new aiColor3D(0, 0, 0);
+            const aiColor3D *specular_color = new aiColor3D(1, 1, 1);
             material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
 
 
             const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
             material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
 
-            
+
             const float *shininess = new float(arMaterial.GetShininess() * MAX_ROUGHNESS);
             material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
 
@@ -513,7 +304,7 @@ namespace vivid {
 
             const float *anisotrpy_factor = new float(0);
             material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
-            
+
             const float *emissive_intensity = new float(arMaterial.GetEmissionStrength());
             material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
@@ -539,6 +330,229 @@ namespace vivid {
             material->AddProperty(texIndex, AI_MATKEY_TEXTURE_EMISSIVE(0));
 
             return material;
+        }
+
+
+
+        aiScene *GenerateScene(const vivid::CModel &model) {
+            //setup scene
+            auto *scene = new aiScene();
+            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;
+            scene->mRootNode = new aiNode();
+            scene->mRootNode->mName = aiString("root_node");
+
+            scene->mNumMeshes = model.GetNumMeshes();
+            scene->mMeshes = new aiMesh *[scene->mNumMeshes];
+
+            scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
+            scene->mNumMaterials = scene->mNumMeshes;
+
+            scene->mRootNode->mNumChildren = 1;
+            scene->mRootNode->mChildren = new aiNode *[1];
+            scene->mRootNode->mChildren[0] = GenerateNode("basic_node", 0, scene->mNumMeshes);
+            scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
+
+
+            vector<vivid::CModelComponent> meshes = model.GetMeshes();
+
+            string texture_path;
+            for (int i = 0; i < scene->mNumMeshes; i++) {
+                //handle mesh texture
+                texture_path = AddTexture(meshes[i].GetColorMap());
+                //setting up the mesh structure
+                scene->mMeshes[i] = GenerateMesh(&meshes[i]);
+                scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
+                scene->mMeshes[i]->mMaterialIndex = i;
+            }
+            if(EmbeddedTexture){
+                scene->mNumTextures = EmbeddedTextures.size();
+                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
+                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
+            }
+            return scene;
+        }
+
+        aiAnimation *GenerateAnimation(CAnimation &arAnimation) {
+            auto *anim = new aiAnimation;
+            anim->mNumChannels = arAnimation.GetModels().size();
+            anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
+            anim->mDuration = arAnimation.GetDuration();
+            anim->mTicksPerSecond = arAnimation.GetTicksPerSecond();
+            anim->mName = aiString("animation");
+            for (int i = 0; i != anim->mNumChannels; i++) {
+                anim->mChannels[i] = GenerateAnimationChannel(arAnimation, i);
+            }
+            return anim;
+        }
+
+        aiAnimation *GenerateStopMotionAnimation(CStopMotionAnimation &arSMAnimation) {
+            auto *anim = new aiAnimation;
+            anim->mNumChannels = arSMAnimation.GetModels().size();
+            anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
+            int ticks_per_frame = int(arSMAnimation.GetTicksPerSecond() * arSMAnimation.GetSecondsPerFrame());
+            anim->mDuration = anim->mNumChannels * ticks_per_frame;
+            anim->mTicksPerSecond = arSMAnimation.GetTicksPerSecond();
+            anim->mName = aiString("animation");
+            for (int i = 0; i != anim->mNumChannels; i++) {
+                anim->mChannels[i] = new aiNodeAnim;
+                anim->mChannels[i]->mNodeName = aiString("anim_node_" + to_string(i));
+//            anim->mChannels[i]->mPreState = aiAnimBehaviour_CONSTANT;
+//            anim->mChannels[i]->mPostState = aiAnimBehaviour_CONSTANT;
+                //Move
+                CPoint animation_value = arSMAnimation.GetMoveAnim(i);
+                MoveAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
+                //Rotate
+                animation_value = arSMAnimation.GetRotateAnim(i);
+                RotateAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
+                //Scale
+                animation_value = arSMAnimation.GetScaleAnim(i);
+                StopMotionScaleAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value,
+                                         i * ticks_per_frame);
+            }
+            return anim;
+        }
+
+
+        aiScene *GenerateAnimationScene(CAnimation &arAnimation) {
+            //setup scene
+            auto *scene = new aiScene();
+            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;
+            scene->mRootNode = new aiNode();
+            scene->mRootNode->mName = aiString("root_node");
+
+            vector<vivid::CModel> models = arAnimation.GetModels();
+
+            scene->mNumMeshes = arAnimation.GetNumMeshes();
+            scene->mMeshes = new aiMesh *[scene->mNumMeshes];
+
+            scene->mMaterials = new aiMaterial *[scene->mNumMeshes];
+            scene->mNumMaterials = scene->mNumMeshes;
+
+            scene->mRootNode->mNumChildren = 1;
+            scene->mRootNode->mChildren = new aiNode *[1];
+            aiNode *center_node = GenerateNode("center_node", 0, 0);
+            scene->mRootNode->mChildren[0] = center_node;
+            scene->mRootNode->mChildren[0]->mParent = scene->mRootNode;
+            center_node->mNumChildren = models.size();
+            center_node->mChildren = new aiNode *[models.size()];
+
+            scene->mNumAnimations = 1;//models.size();
+            scene->mAnimations = new aiAnimation *[1]; //models.size()
+
+
+            auto *SMAnimation = dynamic_cast<CStopMotionAnimation *>(&arAnimation);
+            if (!SMAnimation) {
+                scene->mAnimations[0] = GenerateAnimation(arAnimation);
+            } else {
+                scene->mAnimations[0] = GenerateStopMotionAnimation(*SMAnimation);
+            }
+
+            vector<vivid::CModelComponent> meshes;
+            string texture_path;
+            size_t mesh_counter = 0;
+            for (int model_index = 0; model_index != models.size(); model_index++) {
+                meshes = models[model_index].GetMeshes();
+                center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter,
+                                                                   mesh_counter + meshes.size());
+                center_node->mChildren[model_index]->mParent = center_node;
+                for (auto & mesh : meshes) {
+                    //handle mesh texture
+                    texture_path = AddTexture(mesh.GetColorMap());
+                    //setting up the mesh structure
+                    scene->mMeshes[mesh_counter] = GenerateMesh(&mesh);
+                    scene->mMaterials[mesh_counter] = GenerateMaterial(mesh.GetMaterial(), texture_path, mesh_counter);
+                    scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
+                    mesh_counter++;
+                }
+            }
+            if(EmbeddedTexture){
+                scene->mNumTextures = EmbeddedTextures.size();
+                scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
+                for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
+            }
+            return scene;
+        }
+
+    }
+
+    namespace AssimpExport {
+
+        CBlobData AssimpExporter(vivid::CModel &arModel, const std::string &arFileType) {
+            Assimp::Exporter exp;
+            EmbeddedTexture = true;
+
+            aiScene *scene = GenerateScene(arModel);
+            auto blob = exp.ExportToBlob(scene, RenameGLTF_GLB(arFileType),
+                                   aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
+
+            EmbeddedTextures.clear();
+            EmbeddedTexture = false;
+            TextureNameToIndex.clear();
+            delete scene;
+            
+            if (!blob) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+            // we copy all the blob data to a vivid const qualified struct so the blob pointer isn't freed by python's greedy GC
+            return CBlobData::FormatExportDataBlob(blob);
+        }
+
+        CBlobData AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType) {
+            Assimp::Exporter exp;
+            EmbeddedTexture = true;
+
+            aiScene *scene = GenerateAnimationScene(arAnimation);
+            auto blob = exp.ExportToBlob(scene, RenameGLTF_GLB(arFileType),
+                                         aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
+
+            EmbeddedTextures.clear();
+            EmbeddedTexture = false;
+            TextureNameToIndex.clear();
+            delete scene;
+
+            if (!blob) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+
+            return CBlobData::FormatExportDataBlob(blob);
+        }
+
+        void AssimpExporter(CModel &arModel, const std::string &arFileType, std::string aOutputPath) {
+            Assimp::Exporter exp;
+            OutputPath = aOutputPath;
+            aiScene *scene = GenerateScene(arModel);
+
+            //clean aOutputPath
+            //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
+            aOutputPath += FILE_FORMATS.at(arFileType);
+            auto ret = exp.Export(scene, RenameGLTF_GLB(arFileType), aOutputPath,
+                                  aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
+
+            TextureNameToIndex.clear();
+            OutputPath = "";
+            delete scene;
+
+            if (ret != aiReturn_SUCCESS) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
+        }
+
+        void AnimationExporter(CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath) {
+            Assimp::Exporter exp;
+            OutputPath = aOutputPath;
+            aiScene *scene = GenerateAnimationScene(arAnimation);
+
+            //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
+            aOutputPath += FILE_FORMATS.at(arFileType);
+            auto ret = exp.Export(scene, RenameGLTF_GLB(arFileType), aOutputPath);
+            
+            TextureNameToIndex.clear();
+            OutputPath = "";
+            delete scene;
+            
+            if (ret != aiReturn_SUCCESS) {
+                Log(LOG_ERROR, exp.GetErrorString());
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 #ifndef VIVID_MATERIAL_H
 #define VIVID_MATERIAL_H
 
-#include "NormalFloat.h"
+#include "ConstrainedNumbers.h"
 #include "ColorMap.h"
 
 using namespace std;
@@ -17,7 +17,7 @@ namespace vivid {
     public:
         CMaterial() {}
         CMaterial(normal_float aOpacity, normal_float aRoughness, float aEmissionStrength, const string& arEmissionColor, const string& arLabel)
-                : mOpacity(AssertNormalize(aOpacity)), mRoughness(AssertNormalize(aRoughness)), mEmissionStrength(aEmissionStrength),  mLabel(arLabel) {
+                : mOpacity(AssertNormalize(aOpacity)), mRoughness(AssertNormalize(aRoughness)), mEmissionStrength(AssertPositive(aEmissionStrength)),  mLabel(arLabel) {
             try {
                 COLORS.at(arEmissionColor); // will error out if not exists
                 mEmissionColor = arEmissionColor;
@@ -35,8 +35,7 @@ namespace vivid {
         inline void SetLabel(const string& arLabel) { mLabel = arLabel; }
         inline void SetOpacity(normal_float aOpacity) { mOpacity = AssertNormalize((aOpacity)); }
         inline void SetShininess(normal_float aRoughness) { mRoughness = AssertNormalize((aRoughness)); }
-        inline void SetEmissionStrength(normal_float aEmissionStrength) { mEmissionStrength = aEmissionStrength; }
-//        inline void SetEmissionColor(const color_t& arEmissionColor) { mEmissionColor = arEmissionColor; }
+        inline void SetEmissionStrength(positive_float aEmissionStrength) { mEmissionStrength = AssertPositive(aEmissionStrength); }
         inline void SetEmissionColor(const string& arEmissionColor) {
             try {
                 COLORS.at(arEmissionColor); // will error out if not exists

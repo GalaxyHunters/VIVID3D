@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "fstream"
-#include "NormalFloat.h"
+#include "ConstrainedNumbers.h"
 
 
 using namespace std;

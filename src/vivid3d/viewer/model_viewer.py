@@ -77,7 +77,7 @@ def show(model, height=600):
       The HTML page
     """
     try:
-        glb = model.export(file_type="glb2")
+        glb = model.export_to_blob(file_type="glb")
 
         if isinstance(glb, bytes):
             bytearray = glb

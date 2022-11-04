@@ -390,32 +390,28 @@ namespace glTF2 {
         Value exts;
         exts.SetObject();
 
-        if (m.pbrSpecularGlossiness.isPresent) {
-            Value pbrSpecularGlossiness;
-            pbrSpecularGlossiness.SetObject();
-
-            PbrSpecularGlossiness &pbrSG = m.pbrSpecularGlossiness.value;
-
-            //pbrSpecularGlossiness
-            WriteVec(pbrSpecularGlossiness, pbrSG.diffuseFactor, "diffuseFactor", defaultDiffuseFactor, w.mAl);
-            WriteVec(pbrSpecularGlossiness, pbrSG.specularFactor, "specularFactor", defaultSpecularFactor, w.mAl);
-
-            if (pbrSG.glossinessFactor != 1) {
-                WriteFloat(pbrSpecularGlossiness, pbrSG.glossinessFactor, "glossinessFactor", w.mAl);
-            }
-
-            WriteTex(pbrSpecularGlossiness, pbrSG.diffuseTexture, "diffuseTexture", w.mAl);
-            WriteTex(pbrSpecularGlossiness, pbrSG.specularGlossinessTexture, "specularGlossinessTexture", w.mAl);
-
-            if (!pbrSpecularGlossiness.ObjectEmpty()) {
-                exts.AddMember("KHR_materials_pbrSpecularGlossiness", pbrSpecularGlossiness, w.mAl);
-            }
-        }
-
         if (m.unlit) {
           Value unlit;
           unlit.SetObject();
           exts.AddMember("KHR_materials_unlit", unlit, w.mAl);
+        }
+
+        if (m.materialSpecular.isPresent) {
+            Value materialSpecular(rapidjson::Type::kObjectType);
+            materialSpecular.SetObject();
+
+            MaterialSpecular &specular = m.materialSpecular.value;
+
+            // materialSpecular
+            WriteFloat(materialSpecular, specular.specularFactor, "sheenRoughnessFactor", w.mAl);
+            WriteVec(materialSpecular, specular.specularColorFactor, "specularColorFactor", w.mAl);
+
+            WriteTex(materialSpecular, specular.specularTexture, "specularTexture", w.mAl);
+            WriteTex(materialSpecular, specular.specularColorTexture, "specularColorTexture", w.mAl);
+
+            if (!materialSpecular.ObjectEmpty()) {
+                exts.AddMember("KHR_materials_specular", materialSpecular, w.mAl);
+            }
         }
 
         if (m.materialSheen.isPresent) {
@@ -508,6 +504,20 @@ namespace glTF2 {
 
             if (!materialIOR.ObjectEmpty()) {
                 exts.AddMember("KHR_materials_ior", materialIOR, w.mAl);
+            }
+        }
+
+        if (m.materialEmissiveStrength.isPresent) {
+            Value materialEmissiveStrength(rapidjson::Type::kObjectType);
+
+            MaterialEmissiveStrength &emissiveStrength = m.materialEmissiveStrength.value;
+
+            if (emissiveStrength.emissiveStrength != 0.f) {
+                WriteFloat(materialEmissiveStrength, emissiveStrength.emissiveStrength, "emissiveStrength", w.mAl);
+            }
+
+            if (!materialEmissiveStrength.ObjectEmpty()) {
+                exts.AddMember("KHR_materials_emissive_strength", materialEmissiveStrength, w.mAl);
             }
         }
 
@@ -906,9 +916,8 @@ namespace glTF2 {
         Value exts;
         exts.SetArray();
         {
-            // This is used to export pbrSpecularGlossiness materials with GLTF 2.
-            if (this->mAsset.extensionsUsed.KHR_materials_pbrSpecularGlossiness) {
-                exts.PushBack(StringRef("KHR_materials_pbrSpecularGlossiness"), mAl);
+            if (this->mAsset.extensionsUsed.KHR_materials_specular) {
+                exts.PushBack(StringRef("KHR_materials_specular"), mAl);
             }
 
             if (this->mAsset.extensionsUsed.KHR_materials_unlit) {
@@ -933,6 +942,10 @@ namespace glTF2 {
 
             if (this->mAsset.extensionsUsed.KHR_materials_ior) {
                 exts.PushBack(StringRef("KHR_materials_ior"), mAl);
+            }
+
+            if (this->mAsset.extensionsUsed.KHR_materials_emissive_strength) {
+                exts.PushBack(StringRef("KHR_materials_emissive_strength"), mAl);
             }
 
             if (this->mAsset.extensionsUsed.FB_ngon_encoding) {

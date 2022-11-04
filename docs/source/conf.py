@@ -49,7 +49,6 @@ autosectionlabel_prefix_document = True
 autosectionlabel_maxdepth = 3
 napoleon_numpy_docstring = True
 napoleon_use_rtype = False
-jupyter_execute_kwargs = dict(timeout=-1, allow_errors=True)
 
 import re
 

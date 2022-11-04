@@ -802,7 +802,7 @@ html : str or IPython.display.HTML
                 models to initialize the animation with
             seconds_per_frame : float, default: 2
                 seconds for frame
-        )mydelimiter"
+        )mydelimiter",
             py::arg("models"), py::arg("seconds_per_frame") = 2) //py::arg("models"), py::arg("mSecondsPerFrame")
         .def(py::init<const CAnimation &, double> (),
         R"mydelimiter(

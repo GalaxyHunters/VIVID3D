@@ -25,7 +25,7 @@ namespace vivid {
 		if (aValue < MIN_NORMAL_VAL) {
             Log(LOG_WARNING, INVALID_POSITIVE_VALUE);
         }
-        return max(MIN_NORMAL_VAL, aValue)
+        return max(MIN_NORMAL_VAL, aValue);
 	}
 }
 

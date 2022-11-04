@@ -1311,8 +1311,7 @@ inline void Material::Read(Value &material, Asset &r) {
                 this->materialIOR = Nullable<MaterialIOR>(ior);
             }
         }
-		
-		if (r.extensionsUsed.KHR_materials_emissive_strength) {
+        if (r.extensionsUsed.KHR_materials_emissive_strength) {
             if (Value *curMaterialEmissiveStrength = FindObject(*extensions, "KHR_materials_emissive_strength")) {
                 MaterialEmissiveStrength emissiveStrength;
 

@@ -619,13 +619,33 @@ html : str or IPython.display.HTML
         )mydelimiter", py::arg("height")=600)
     .def("__str__", [](const CModel &arSelf){ return "vivid3d.Model\nn_meshes: " + to_string(arSelf.GetNumMeshes()) + "\nn_polygons: " + to_string(arSelf.GetNumPolygons()) + "\nn_vertices: " + to_string(arSelf.GetNumVertices()); });
 
+    py::class_<CFrame>(m, "Frame", R"mydelimiter(
+        Basic Frame struct, capable of move, rotate and scale.
+
+        Attributes
+        ----------
+        model : vivid3d.Model
+            frame model
+        move_animation : Point
+            movement animation for this frame
+        rotate_animation : Point
+            rotate animation for this frame
+        scale_animation : Point
+            scale animation for this frame
+
+        )mydelimiter")
+        .def_readwrite("move_animation", &CFrame::mMoveAnimation)
+        .def_readwrite("rotate_animation", &CFrame::mRotateAnimation)
+        .def_readwrite("scale_animation", &CFrame::mScaleAnimation)
+        .def_readwrite("model", &CFrame::mModel);
+
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
         Basic Animation class, capable of move, rotate and scale.
         
         Attributes
         ----------
-        models : list[vivid3d.Models]
-            List of models held, each model holds his own animation.
+        frames : list[vivid3d.Frame]
+            List of frames held, each model holds his own animation.
         duration : float
             Animation duration in ticks
         ticks_per_second  : float
@@ -633,7 +653,7 @@ html : str or IPython.display.HTML
         
         Methods
         -------
-        add_models(model: vivid3d.model)
+        add_model(model: vivid3d.model)
             add a model to the animation
         add_models(models: list[vivid3d.model])
             add a list of models to the animation
@@ -641,43 +661,53 @@ html : str or IPython.display.HTML
             export the animation to file, file formats: glb, gltf, fbx
         export_to_blob(file_format = 'glb')
             Writes Model to Blob with given file_type format.
-        //TODO add animations once this is rewritten
 
         )mydelimiter");
     Animation.def(py::init<> (), "default constructor for Animation")
-    .def(py::init<const CModel &> (),
-         "constructor for Animation from a single Model",
-         py::arg("model"))
-    .def(py::init<const vector<CModel> &> (),
-         "constructor for Animation from an np array of Models",
-         py::arg("models"))
+    .def(py::init<const CModel &> (),R"mydelimiter(
+            constructor for Animation from a single Model.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to initialize the animation with
+        )mydelimiter", py::arg("model"))
+    .def(py::init<const vector<CModel> &> (),R"mydelimiter(
+            constructor for Animation from a list of Models.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to initialize the animation with
+        )mydelimiter", py::arg("models"))
     .def(py::init<const CAnimation &> (),
-         "copy constructor for animation",
-         py::arg("animation"))
+        R"mydelimiter(
+            copy constructor for animation
+
+            Parameters
+            ----------
+            animation : vivid3d.Animation,
+                animation to initialize the Animation
+        )mydelimiter", py::arg("animation"))
     .def_property("duration", &CAnimation::GetDuration, &CAnimation::SetDuration, "duration(in ticks)")
     .def_property("ticks_per_second", &CAnimation::GetTicksPerSecond, &CAnimation::SetTicksPerSecond, "ticks")
-    .def("get_models", &CAnimation::GetModels,
-         "getter function for models in the animation")
-    .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("model"))
-    .def("add_models", static_cast<void (CAnimation::*)(const vector<CModel> &)>(&CAnimation::AddModels),"add models to animation", py::arg("models"))
-    .def("set_move_animation", &CAnimation::SetMoveAnim,
-         "set movement animation for index model",
-         py::arg("index"), py::arg("move_vector"))
-    .def("set_rotate_animation", &CAnimation::SetRotateAnim,
-         "set rotate animation for index model",
-         py::arg("index"), py::arg("anguler_rotate"))
-    .def("set_scale_animation", &CAnimation::SetScaleAnim,
-         "set scale animation for index model",
-         py::arg("index"), py::arg("scale_vector"))
-    .def("get_move_animation", &CAnimation::GetMoveAnim,
-         "get movement animation for given model index",
-         py::arg("index"))
-    .def("get_rotate_animation", &CAnimation::GetRotateAnim,
-         "get rotate animation for given model index",
-         py::arg("index"))
-    .def("get_scale_animation", &CAnimation::GetScaleAnim,
-         "get scale animation for given model index",
-         py::arg("index"))
+    .def_property("frames", &CAnimation::GetFrames, &CAnimation::SetFrames,"animation frames")
+    .def("add_model", &CAnimation::AddModel,R"mydelimiter(
+            Add a model to the animation.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to add
+        )mydelimiter", py::arg("model"))
+    .def("add_models", &CAnimation::AddModels,R"mydelimiter(
+            Add a list of models to the animation.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to add
+        )mydelimiter", py::arg("models"))
     .def("show", [](CModel &arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -726,39 +756,75 @@ html : str or IPython.display.HTML
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
         Stop motion animation class, inherits from vivid3d.animation but present the models frame after frame
-        
-        Attributes
+
+    Attributes
         ----------
-        models : list[vivid3d.Models]
-            List of models held, each model holds his own animation.
-        ticks_per_second  : float
-            ticks per second
+        frames : list[vivid3d.Frame]
+            List of frames held, each model holds his own animation.
         seconds_per_frame : float
             How long should each frame last
-        
+        ticks_per_second  : float
+            ticks per second
+
         Methods
         -------
-        add_models(model: vivid3d.model)
+        add_model(model: vivid3d.model)
             add a model to the animation
         add_models(models: list[vivid3d.model])
             add a list of models to the animation
         export(output_file: str, file_format = 'glb')
             export the animation to file, file formats: glb, gltf, fbx
-        //TODO add animations once this is rewritten
+        export_to_blob(file_format = 'glb')
+            Writes Model to Blob with given file_type format.
+
 
     )mydelimiter")
         .def(py::init<> (), "default constructor for StopMotionAnimation")
         .def(py::init<const CModel &, double> (),
-            "constructor for StopMotionAnimation from a single Model",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from a single Model.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to initialize the animation with
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter",
             py::arg("model"), py::arg("seconds_per_frame") = 2) //py::arg("model"), py::arg("mSecondsPerFrame")
         .def(py::init<const vector<CModel> &, double> (),
-            "constructor for StopMotionAnimation from an np array of Models",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from a list of Models.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to initialize the animation with
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter"
             py::arg("models"), py::arg("seconds_per_frame") = 2) //py::arg("models"), py::arg("mSecondsPerFrame")
         .def(py::init<const CAnimation &, double> (),
-            "constructor for StopMotionAnimation from animation",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from animation
+
+            Parameters
+            ----------
+            animation : vivid3d.Animation,
+                animation to initialize the StopMotionAnimation
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter",
             py::arg("animation"), py::arg("seconds_per_frame") = 2) // py::arg("animation"), py::arg("mSecondsPerFrame")
         .def(py::init<const CStopMotionAnimation &> (),
-            "copy constructor for StopMotionAnimation",
+        R"mydelimiter(
+            copy constructor for StopMotionAnimation
+
+            Parameters
+            ----------
+            StopMotionAnimation : vivid3d.StopMotionAnimation,
+                StopMotionAnimation to initialize the StopMotionAnimation
+        )mydelimiter",
             py::arg("animation"))
         .def_property("seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame, &CStopMotionAnimation::SetSecondsPerFrame,
              "Seconds per frame");

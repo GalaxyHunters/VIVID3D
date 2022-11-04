@@ -137,13 +137,13 @@ namespace vivid {
             auto *anim_channel = new aiNodeAnim;
             anim_channel->mNodeName = aiString("anim_node_" + to_string(aIndex));
             //Move
-            CPoint &animation_value = arAnimation.GetMoveAnim(aIndex);
+            CPoint &animation_value = arAnimation.GetFrames()[aIndex].mMoveAnimation;
             MoveAnimation(anim_channel, arAnimation.GetDuration(), &animation_value);
             //Rotate
-            animation_value = arAnimation.GetRotateAnim(aIndex);
+            animation_value = arAnimation.GetFrames()[aIndex].mRotateAnimation;
             RotateAnimation(anim_channel, arAnimation.GetDuration(), &animation_value);
             //Scale
-            animation_value = arAnimation.GetScaleAnim(aIndex);
+            animation_value = arAnimation.GetFrames()[aIndex].mScaleAnimation;
             ScaleAnimation(anim_channel, arAnimation.GetDuration(), &animation_value);
 
             return anim_channel;
@@ -374,7 +374,7 @@ namespace vivid {
 
         aiAnimation *GenerateAnimation(CAnimation &arAnimation) {
             auto *anim = new aiAnimation;
-            anim->mNumChannels = arAnimation.GetModels().size();
+            anim->mNumChannels = arAnimation.GetNumModels();
             anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
             anim->mDuration = arAnimation.GetDuration();
             anim->mTicksPerSecond = arAnimation.GetTicksPerSecond();
@@ -387,7 +387,7 @@ namespace vivid {
 
         aiAnimation *GenerateStopMotionAnimation(CStopMotionAnimation &arSMAnimation) {
             auto *anim = new aiAnimation;
-            anim->mNumChannels = arSMAnimation.GetModels().size();
+            anim->mNumChannels = arSMAnimation.GetNumModels();
             anim->mChannels = new aiNodeAnim *[anim->mNumChannels];
             int ticks_per_frame = int(arSMAnimation.GetTicksPerSecond() * arSMAnimation.GetSecondsPerFrame());
             anim->mDuration = anim->mNumChannels * ticks_per_frame;
@@ -399,13 +399,13 @@ namespace vivid {
 //            anim->mChannels[i]->mPreState = aiAnimBehaviour_CONSTANT;
 //            anim->mChannels[i]->mPostState = aiAnimBehaviour_CONSTANT;
                 //Move
-                CPoint animation_value = arSMAnimation.GetMoveAnim(i);
+                CPoint animation_value = arSMAnimation.GetFrames()[i].mMoveAnimation;
                 MoveAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
                 //Rotate
-                animation_value = arSMAnimation.GetRotateAnim(i);
+                animation_value = arSMAnimation.GetFrames()[i].mRotateAnimation;
                 RotateAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value, i * ticks_per_frame);
                 //Scale
-                animation_value = arSMAnimation.GetScaleAnim(i);
+                animation_value = arSMAnimation.GetFrames()[i].mScaleAnimation;
                 StopMotionScaleAnimation(anim->mChannels[i], (i + 1) * ticks_per_frame, &animation_value,
                                          i * ticks_per_frame);
             }
@@ -420,7 +420,7 @@ namespace vivid {
             scene->mRootNode = new aiNode();
             scene->mRootNode->mName = aiString("root_node");
 
-            vector<vivid::CModel> models = arAnimation.GetModels();
+            vector<vivid::CFrame> models = arAnimation.GetFrames();
 
             scene->mNumMeshes = arAnimation.GetNumMeshes();
             scene->mMeshes = new aiMesh *[scene->mNumMeshes];
@@ -451,7 +451,7 @@ namespace vivid {
             string texture_path;
             size_t mesh_counter = 0;
             for (int model_index = 0; model_index != models.size(); model_index++) {
-                meshes = models[model_index].GetMeshes();
+                meshes = models[model_index].mModel.GetMeshes();
                 center_node->mChildren[model_index] = GenerateNode("anim_node_" + to_string(model_index), mesh_counter,
                                                                    mesh_counter + meshes.size());
                 center_node->mChildren[model_index]->mParent = center_node;

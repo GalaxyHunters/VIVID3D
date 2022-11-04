@@ -631,6 +631,17 @@ html : str or IPython.display.HTML
         ticks_per_second  : float
             ticks per second
         
+        Methods
+        -------
+        add_models(model: vivid3d.model)
+            add a model to the animation
+        add_models(models: list[vivid3d.model])
+            add a list of models to the animation
+        export(output_file: str, file_format = 'glb')
+            export the animation to file, file formats: glb, gltf, fbx
+        export_to_blob(file_format = 'glb')
+            Writes Model to Blob with given file_type format.
+        //TODO add animations once this is rewritten
 
         )mydelimiter");
     Animation.def(py::init<> (), "default constructor for Animation")
@@ -647,7 +658,7 @@ html : str or IPython.display.HTML
     .def_property("ticks_per_second", &CAnimation::GetTicksPerSecond, &CAnimation::SetTicksPerSecond, "ticks")
     .def("get_models", &CAnimation::GetModels,
          "getter function for models in the animation")
-    .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("models"))
+    .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("model"))
     .def("add_models", static_cast<void (CAnimation::*)(const vector<CModel> &)>(&CAnimation::AddModels),"add models to animation", py::arg("models"))
     .def("set_move_animation", &CAnimation::SetMoveAnim,
          "set movement animation for index model",
@@ -667,13 +678,73 @@ html : str or IPython.display.HTML
     .def("get_scale_animation", &CAnimation::GetScaleAnim,
          "get scale animation for given model index",
          py::arg("index"))
+    .def("show", [](CModel &arSelf, int aHeight) {
+            auto viewer = py::module_::import("vivid3d.viewer");
+            return viewer.attr("show")(arSelf, aHeight);
+        }, R"mydelimiter(
+            Render and view the model in a viewer window.
+
+            Parameters
+            ----------
+            height : int, default: 600
+                height in pixels to open the viewer
+
+            Returns
+            -------
+            html : str or IPython.display.HTML
+                The HTML with embedded model
+
+        )mydelimiter", py::arg("height")=600)
+    .def("export_to_blob", &CAnimation::ExportToBlob, R"mydelimiter(
+        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
+
+        Parameters
+        ----------
+        file_type : str, default: 'glb'
+            File format to export to
+
+        Returns
+        -------
+        blob : vivid3d.BlobData
+            Object containing exported model file blobs
+            )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("export", &CAnimation::Export,
-         "Exports animation to selected file format",
+         R"mydelimiter(
+    Writes animation to output_file with given file_type format. For full list of supported file formats, see: __reference__
+
+    Parameters
+    -------------
+    output_file : str, default: "Vivid3dModel"
+        File Directory to export to
+    file_type : str, default: 'glb'
+        File format to export to
+
+        )mydelimiter",
          py::arg("output_file"), py::arg("file_format") = "glb");
 
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
-Class for stop motion animations
+        Stop motion animation class, inherits from vivid3d.animation but present the models frame after frame
+        
+        Attributes
+        ----------
+        models : list[vivid3d.Models]
+            List of models held, each model holds his own animation.
+        ticks_per_second  : float
+            ticks per second
+        seconds_per_frame : float
+            How long should each frame last
+        
+        Methods
+        -------
+        add_models(model: vivid3d.model)
+            add a model to the animation
+        add_models(models: list[vivid3d.model])
+            add a list of models to the animation
+        export(output_file: str, file_format = 'glb')
+            export the animation to file, file formats: glb, gltf, fbx
+        //TODO add animations once this is rewritten
 
     )mydelimiter")
         .def(py::init<> (), "default constructor for StopMotionAnimation")

@@ -24,7 +24,7 @@ __Importers__:
 - [glTF 2.0](https://en.wikipedia.org/wiki/GlTF#glTF_2.0):
   At the moment for glTF2.0 the following extensions are supported:
   + KHR_lights_punctual ( 5.0 )
-  + KHR_materials_pbrSpecularGlossiness ( 5.0 )
+  + KHR_materials_specular ( 5.0 )
   + KHR_materials_unlit ( 5.0 )
   + KHR_texture_transform ( 5.1 under test )
 - HMB

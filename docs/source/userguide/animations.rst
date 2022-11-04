@@ -1,33 +1,36 @@
-Animation example
-=================
+Animations
+==========
 
-The vivid3d package is capable of two types of animation support,
+VIVID3D supports two types of animations,
 
-1. Animation - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.
+.. list-table::
 
-2. Stop motion animation - same as above but each time only one model appears and the change rate is determined by seconds_per_frame
+    * - :doc:`../generated/vivid3d.Animation`
+      - list of models each with animation fields of Scale, Rotation, and Movement, all of which are happening simultaneously.
+    * - :doc:`../generated/vivid3d.StopMotionAnimation`
+      - same as above but each time only one model appears and the change rate is determined by seconds_per_frame
 
 First, we make a few cubes to animate:
 
-.. code-block:: python
-   :caption: Cubes to animate
-   :linenos:
+.. jupyter-execute::
 
-   import vivid3d
-   import numpy as np
+    import vivid3d
+    import numpy as np
 
-   models = []
-   colors = ["Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"]
-   loc = [[0,0,0], [1,0,0], [2,0,0],[0,0,1],[1,0,1],[2,0,1],[0,0,2],[1,0,2]]
-   for i in range(8):
-       box = vivid3d.create_cube(np.array(loc[i])*3,size=0.5, color = colors[i], alpha=1, label=colors[i])
-       models.append(vivid3d.Model([box]))
+    models = []
+    colors = ["Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"]
+    loc = [[0,0,0], [1,0,0], [2,0,0],[0,0,1],[1,0,1],[2,0,1],[0,0,2],[1,0,2]]
+    for i in range(8):
+        box = vivid3d.create_cube(position=loc[i], size=0.5, color=colors[i], name=colors[i])
+        models.append(vivid3d.Model([box]))
+
+Animated Models
+---------------
 
 Now lets add some animation to the cubes:
 
 .. code-block:: python
    :caption: Regular animation
-   :linenos:
 
    animation = vivid3d.Animation(models)
    animation.duration = 150 #duration in ticks per second
@@ -45,11 +48,13 @@ Now lets add some animation to the cubes:
    #export
    animation.export(path+"/CubeAnimation", "gltf2")
 
+Stop Motion Animation
+---------------------
+
 And if we want stop-motion animation we just add this:
 
 .. code-block:: python
    :caption: Stop motion animation
-   :linenos:
 
    SMA = vivid3d.StopMotionAnimation(animation, seconds_per_frame= 2)
    SMA.export(path+"/CubeSMAnimation", "gltf2")

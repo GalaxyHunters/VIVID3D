@@ -1,26 +1,35 @@
 .. _examples:
 
-User Guide
-##########
+Fundamentals
+============
 
-When working with vivid3d there are two main work flowes:
+This section explains the basics of VIVID3D for new users looking to create beautiful scientific visualizations, meant to
+serve as a starting point for those unfamiliar with 3D libraries.
 
-1. The simple approach, make_model() is a one-line model function, easy to use but with less user control.
-2. The advanced approach, the model is built step-by-step with more control at every stage.
-
-All examples will showcase both ways.
-The first one is recommended for beginners and once you get the gist,
-the advanced approach can get much better results.
-
+This covers the basic understanding and creation of Meshes and Models, visualizations, animations, and more.
 
 .. toctree::
-   :caption: Example
-   :maxdepth: 1
+    :maxdepth: 1
 
-   pyramid_example
-   enzo_galexy
-   shape_example
-   animation_example
+    userguide/basics
+    userguide/materials_colors
+    userguide/geometries
+    userguide/animations
+    userguide/point_cloud
+    userguide/lines
+    userguide/voronoi
+    userguide/transformations
 
 
+Creating Models
+===============
+
+This section shows more advanced model creation techniques, leveraging different aspects of the fundamentals for use
+cases with a variety of real datasets.
+
+.. toctree::
+    :maxdepth: 1
+
+    notebooks/GalaxyStarsEnzo.ipynb
+    notebooks/BrainCTScan.ipynb
 

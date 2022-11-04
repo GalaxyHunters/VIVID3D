@@ -46,4 +46,6 @@ dependencies:
     - unyt==2.9.2
     - widgetsnbextension==4.0.3
     - yt==4.1.1
+    - nbsphinx
+    - jupyter_sphinx
 prefix: /home/naf/anaconda3

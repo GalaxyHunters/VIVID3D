@@ -311,7 +311,7 @@ namespace vivid {
             const float *refracti = new float(1);
             material->AddProperty(refracti, 1, AI_MATKEY_REFRACTI);
 
-            const int *twosided = new int(!0);
+            const int *twosided = new int(0);
             material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
             //texture property
 

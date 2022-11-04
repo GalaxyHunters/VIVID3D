@@ -21,16 +21,17 @@ def view_glb(glb, height=600):
     an IPython/Jupyter notebook, or in web browser.
     
     Parameters
-    -------------
+    ----------
     glb : bytes
         .glb encoded blob file
     height : number, default: 600
         height in pixels to open the viewer
 
     Returns
-    -------------
+    -------
     html : string or IPython.display.HTML
       The HTML page
+
     """
     # convert scene to a full HTML page
     template_path = os.path.join(os.path.dirname(__file__), 'template.html')
@@ -65,16 +66,17 @@ def show(model, height=600):
     an IPython/Jupyter notebook, or in web browser.
 
     Parameters
-    -------------
+    ----------
     model : vivid3d.Model or vivid3d.BaseMesh
         .glb encoded blob file
     height : int, default: 600
         height in pixels to open the viewer
 
     Returns
-    -------------
+    -------
     html : string
       The HTML page
+
     """
     try:
         glb = model.export_to_blob(file_type="glb")

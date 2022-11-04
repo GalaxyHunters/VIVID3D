@@ -620,7 +620,17 @@ html : str or IPython.display.HTML
     .def("__str__", [](const CModel &arSelf){ return "vivid3d.Model\nn_meshes: " + to_string(arSelf.GetNumMeshes()) + "\nn_polygons: " + to_string(arSelf.GetNumPolygons()) + "\nn_vertices: " + to_string(arSelf.GetNumVertices()); });
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
-Class for animations
+        Basic Animation class, capable of move, rotate and scale.
+        
+        Attributes
+        ----------
+        models : list[vivid3d.Models]
+            List of models held, each model holds his own animation.
+        duration : float
+            Animation duration in ticks
+        ticks_per_second  : float
+            ticks per second
+        
 
         )mydelimiter");
     Animation.def(py::init<> (), "default constructor for Animation")
@@ -684,68 +694,66 @@ Class for stop motion animations
 
 
     //one liners
-    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
-        std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
+//     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
+//         std::vector<normal_float> &, normal_float , normal_float , const string& ,
+//         normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
+//     makes a model from one line, if an output path is given the functions writes the model to file.
 
-one function to rule them all
-makes a model from one line, if an output path is given the functions writes the model to file.
+//     Parameters
+//     ----------
+//     input_points : array[array[float]]
+//         The input point data in x,y,z form.
+//     mask : array[bool]
+//         Boolean mask of true and false points
+//     output_path : str, default: ""
+//         Path and name for output file
+//         If left as None no Module will be written to file.
+//     color_field : array[float], default: []
+//         Vector containing the color field of each point
+//         If left empty color will be basic white
+//     color_field_min : float, optional
+//         Set minimum value for color_field, anything below will be set to color_field_min
+//         If left empty will be set to min(color_field)
+//     color_field_max : float, optional
+//         Set max value for color_field, anything below will be set to color_field_max
+//         If left empty will be set to max(color_field)
+//     name : str, default: "VIVID_MODEL"
+//         Optional name of the object, not required to be unique.
+//     opacity : float, default: 1
+//         Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+//     file_type : str, default: "gltf2"
+//         File format for export, out of Assimp supported formats
+//     noise_displacement : float, default: 0.001
+//         The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
 
-Parameters
-----------
-input_points : array[array[float]]
-    The input point data in x,y,z form.
-mask : array[bool]
-    Boolean mask of true and false points
-output_path : str, default: ""
-    Path and name for output file
-    If left as None no Module will be written to file.
-color_field : array[float], default: []
-    Vector containing the color field of each point
-    If left empty color will be basic white
-color_field_min : float, optional
-    Set minimum value for color_field, anything below will be set to color_field_min
-    If left empty will be set to min(color_field)
-color_field_max : float, optional
-    Set max value for color_field, anything below will be set to color_field_max
-    If left empty will be set to max(color_field)
-name : str, default: "VIVID_MODEL"
-    Optional name of the object, not required to be unique.
-opacity : float, default: 1
-    Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-file_type : str, default: "gltf2"
-    File format for export, out of Assimp supported formats
-noise_displacement : float, default: 0.001
-    The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+//     Returns
+//     -------
+//     vivid3d.Model
+//         Output model.
 
-Returns
--------
-vivid3d.Model
-    Output model.
+//     See Also
+//     ----------------
+//     vivid3d.Model
+//         Main class holding 3d models data in the vivid3d package, also see examples.
 
-See Also
-----------------
-vivid3d.Model
-    Main class holding 3d models data in the vivid3d package, also see examples.
-
-        )mydelimiter",
-        py::arg("input_points"),
-        py::arg("mask"),
-        py::arg("output_path") = "",
-        py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0,
-        py::arg("color_field_max") = 0,
-        py::arg("name")= "VIVID_MODEL",
-        py::arg("opacity") = 1,
-        py::arg("file_type") = "gltf2",
-        py::arg("noise_displacement") = 0.001);
+//         )mydelimiter",
+//         py::arg("input_points"),
+//         py::arg("mask"),
+//         py::arg("output_path") = "",
+//         py::arg("color_field") = vector<normal_float>(0),
+//         py::arg("color_field_min") = 0,
+//         py::arg("color_field_max") = 0,
+//         py::arg("name")= "VIVID_MODEL",
+//         py::arg("opacity") = 1,
+//         py::arg("file_type") = "gltf2",
+//         py::arg("noise_displacement") = 0.001);
 
 
 //    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
 //        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
 //        normal_float , const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
 //        one function to rule them all
-//
+
 //        makes a model from one line, if an output path is given the functions writes the model to file.
 //        )mydelimiter",
 //        py::arg("input_points"),
@@ -759,44 +767,108 @@ vivid3d.Model
 //        py::arg("opacity") = 1,
 //        py::arg("file_type") = "gltf2",
 //        py::arg("noise_displacement") = 0.001);
-//
-//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
-//        std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
-//        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
-//        one function to rule them all
-//
-//        makes a model from one line, if an output path is given the functions writes the model to file.
-//        )mydelimiter",
-//        py::arg("input_points"),
-//        py::arg("masks"),
-//        py::arg("output_path") = "",
-//        py::arg("color_field") = vector<normal_float>(0),
-//        py::arg("color_field_min") = 0,
-//        py::arg("color_field_max") = 0,
-//        py::arg("name")= "VIVID_MODEL",
-//        py::arg("opacity") = vector<normal_float>(0),
-//        py::arg("file_type") = "gltf2",
-//        py::arg("noise_displacement") = 0.001);
-//
-//
-//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
-//        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
-//        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
-//        one function to rule them all
-//
-//        makes a model from one line, if an output path is given the functions writes the model to file.
-//        )mydelimiter",
-//        py::arg("input_points"),
-//        py::arg("surface_field"),
-//        py::arg("surface_thresholds"),
-//        py::arg("output_path") = "",
-//        py::arg("color_field") = vector<normal_float>(0),
-//        py::arg("color_field_min") = 0,
-//        py::arg("color_field_max") = 0,
-//        py::arg("name")= "VIVID_MODEL",
-//        py::arg("opacity") = vector<normal_float>(0),
-//        py::arg("file_type") = "gltf2",
-//        py::arg("noise_displacement") = 0.001);
+
+   m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
+       std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
+       vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
+       makes a model from one line, if an output path is given the functions writes the model to file.
+
+    Parameters
+    ----------
+    input_points : array[array[float]]
+        The input point data in x,y,z form.
+    mask : array[array[bool]]
+        array of masks, Each inner array is a Boolean mask of true and false points, has to be the same size as input_points.
+    output_path : str, default: ""
+        Path and name for output file
+        If left as None no Module will be written to file.
+    color_field : array[float], default: []
+        Vector containing the color field of each point
+        If left empty color will be basic white
+    color_field_min : float, optional
+        Set minimum value for color_field, anything below will be set to color_field_min
+        If left empty will be set to min(color_field)
+    color_field_max : float, optional
+        Set max value for color_field, anything below will be set to color_field_max
+        If left empty will be set to max(color_field)
+    name : str, default: "VIVID_MODEL"
+        Optional name of the object, not required to be unique.
+    opacity : array[float], default: []
+        Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+    file_type : str, default: "gltf2"
+        File format for export, out of Assimp supported formats
+    noise_displacement : float, default: 0.001
+        The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+
+    Returns
+    -------
+    vivid3d.Model
+        Output model.
+        
+       )mydelimiter",
+       py::arg("input_points"),
+       py::arg("masks"),
+       py::arg("output_path") = "",
+       py::arg("color_field") = vector<normal_float>(0),
+       py::arg("color_field_min") = 0,
+       py::arg("color_field_max") = 0,
+       py::arg("name")= "VIVID_MODEL",
+       py::arg("opacity") = vector<normal_float>(0),
+       py::arg("file_type") = "gltf2",
+       py::arg("noise_displacement") = 0.001);
+
+
+   m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
+       const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
+       std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
+       makes a model from one line, if an output path is given the functions writes the model to file.
+
+    Parameters
+    ----------
+    input_points : array[array[float]]
+        The input point data in x,y,z form.
+    surface_field : array[float]
+        surface field value for each point, has to be same size as input_points.
+    surface_thresholds : array[float]
+        thresholds to create surfaces.
+    output_path : str, default: ""
+        Path and name for output file
+        If left as None no Module will be written to file.
+    color_field : array[float], default: []
+        Vector containing the color field of each point
+        If left empty color will be basic white
+    color_field_min : float, optional
+        Set minimum value for color_field, anything below will be set to color_field_min
+        If left empty will be set to min(color_field)
+    color_field_max : float, optional
+        Set max value for color_field, anything below will be set to color_field_max
+        If left empty will be set to max(color_field)
+    name : str, default: "VIVID_MODEL"
+        Optional name of the object, not required to be unique.
+    opacity : array[float], default: []
+        Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+    file_type : str, default: "gltf2"
+        File format for export, out of Assimp supported formats
+    noise_displacement : float, default: 0.001
+        The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+
+    Returns
+    -------
+    vivid3d.Model
+        Output model.
+        
+       )mydelimiter",
+       py::arg("input_points"),
+       py::arg("surface_field"),
+       py::arg("surface_thresholds"),
+       py::arg("output_path") = "",
+       py::arg("color_field") = vector<normal_float>(0),
+       py::arg("color_field_min") = 0,
+       py::arg("color_field_max") = 0,
+       py::arg("name")= "VIVID_MODEL",
+       py::arg("opacity") = vector<normal_float>(0),
+       py::arg("file_type") = "gltf2",
+       py::arg("noise_displacement") = 0.001);
 
 
     //Shapes:

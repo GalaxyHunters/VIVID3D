@@ -3,7 +3,7 @@
 
 #include <functional>
 #include <map>
-#include "NormalFloat.h"
+#include "ConstrainedNumbers.h"
 
 using namespace std;
 

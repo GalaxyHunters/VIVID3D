@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "NormalFloat.h"
+#include "ConstrainedNumbers.h"
 
 using namespace std;
 

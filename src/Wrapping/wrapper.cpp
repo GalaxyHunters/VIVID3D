@@ -102,6 +102,7 @@ shininess : (0.0-1.0), default: 0.1
     Shininess affects the reflectivity of a mesh.
 emission_strength : (0.0-1.0), default: 0.0
     Float in the range of 0.0 - 1.0 indicating the self-illumination strength of the material.
+
 emission_color : str, default: "black"
     The color of self-illumination. See https://htmlcolorcodes.com/color-names/ for list of all available colors."
 name : str, default: "defaultMaterial"
@@ -117,7 +118,7 @@ name : str, default: "defaultMaterial"
         .def_property("shininess", &CMaterial::GetShininess, &CMaterial::SetShininess,
             "Shininess (0.0-1.0)")
         .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
-            "Emission Strength (0.0-1.0)")
+            "Emission Strength : PositiveFloat")
         .def_property("emission_color", &CMaterial::GetEmissionColor, &CMaterial::SetEmissionColor,
             "Emission Color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.");
 
@@ -213,30 +214,32 @@ scale : Point3D
     The vector to scale by
 
         )mydelimiter", py::arg("scale"))
-    .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
-            if (output_file.empty()) {
-                return arSelf.ExportToBlob(file_type);
-            } else {
-                arSelf.Export(output_file, file_type);
-            }
-        }, R"mydelimiter(
-Writes Mesh to output_file with given file format.
+    .def("export", &CModelComponent::Export, R"mydelimiter(
+        Writes Mesh to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-If no output_file provided, this function will return a blob file in the given file format.
+        Parameters
+        -------------
+        output_file : str, default: "Vivid3dModel"
+            File Directory to export to
+        file_type : str, default: 'glb'
+            File format to export to
 
-Parameters
-----------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+            )mydelimiter",
+    py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
+    .def("export_to_blob", &CModelComponent::ExportToBlob, R"mydelimiter(
+            Writes Mesh to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
-Returns
--------
-blob : vivid3d.BlobData or None
-    Object containing exported model file blobs - if output_file is empty - else None
+            Parameters
+            ----------
+            file_type : str, default: 'glb'
+                File format to export to
 
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+            Returns
+            -------
+            blob : vivid3d.BlobData
+                Object containing exported model file blobs
+                )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("show", [](CModelComponent& arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -517,7 +520,7 @@ add_mesh(mesh: vivid3d.BaseMesh)
     Add Mesh, PointCloud, or Lines object to model
 add_meshes(mesh: vivid3d.BaseMesh)
     Add Meshes, PointCloud's, or Lines objects to model
-export(output_file='', file_type='glb2')
+export(output_file='', file_type='glb')
     Default exporter supporting most common 3D file types. For full list of supported file formats see: __reference__
     Returns vivid3d.BlobData if output_file is empty.
 export_to_obj(output_file: str, with_texture=True)
@@ -571,31 +574,32 @@ File Directory to export to
 
 
         )mydelimiter", py::arg("output_file"), py::arg("with_texture") = 1)
-    .def("export", [](CModel &arSelf, string output_file, string file_type) {
-        if (output_file.empty()) {
-            return arSelf.ExportToBlob(file_type);
-        } else {
-            arSelf.Export(output_file, file_type);
-        }
-    }, R"mydelimiter(
-Writes Model to output_file with given file_type format.
+    .def("export", &CModel::Export, R"mydelimiter(
+    Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-For full list of supported file formats, see: __reference__
-If no output_file provided, this function will return a blob file in the given file format.
+    Parameters
+    -------------
+    output_file : str, default: "Vivid3dModel"
+        File Directory to export to
+    file_type : str, default: 'glb'
+        File format to export to
 
-Parameters
-----------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+        )mydelimiter",
+        py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
+    .def("export_to_blob", &CModel::ExportToBlob, R"mydelimiter(
+        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
-Returns
--------
-blob : vivid3d.BlobData
-    Object containing exported model file blobs - only returned if output_file is empty
+        Parameters
+        ----------
+        file_type : str, default: 'glb'
+            File format to export to
 
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+        Returns
+        -------
+        blob : vivid3d.BlobData
+            Object containing exported model file blobs
+            )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("show", [](CModel &arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -655,7 +659,7 @@ Class for animations
          py::arg("index"))
     .def("export", &CAnimation::Export,
          "Exports animation to selected file format",
-         py::arg("output_file"), py::arg("file_format") = "gltf2");
+         py::arg("output_file"), py::arg("file_format") = "glb");
 
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
@@ -683,8 +687,8 @@ Class for stop motion animations
     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
         std::vector<normal_float> &, normal_float , normal_float , const string& ,
         normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
-one function to rule them all
 
+one function to rule them all
 makes a model from one line, if an output path is given the functions writes the model to file.
 
 Parameters

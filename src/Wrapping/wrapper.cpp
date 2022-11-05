@@ -91,6 +91,7 @@ files : list[bytes]
                  "Constructor for point",
                  py::arg("3d_vector"));
 
+    m.def("point", [](CPoint point){return point;}, "return cpoint");
     py::class_<CMaterial>(m, "Material", R"mydelimiter(
 Simplified PBR Material for physically based rendering of Meshes
 
@@ -102,6 +103,7 @@ shininess : (0.0-1.0), default: 0.1
     Shininess affects the reflectivity of a mesh.
 emission_strength : (0.0-1.0), default: 0.0
     Float in the range of 0.0 - 1.0 indicating the self-illumination strength of the material.
+
 emission_color : str, default: "black"
     The color of self-illumination. See https://htmlcolorcodes.com/color-names/ for list of all available colors."
 name : str, default: "defaultMaterial"
@@ -117,7 +119,7 @@ name : str, default: "defaultMaterial"
         .def_property("shininess", &CMaterial::GetShininess, &CMaterial::SetShininess,
             "Shininess (0.0-1.0)")
         .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
-            "Emission Strength (0.0-1.0)")
+            "Emission Strength : PositiveFloat")
         .def_property("emission_color", &CMaterial::GetEmissionColor, &CMaterial::SetEmissionColor,
             "Emission Color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.");
 
@@ -213,30 +215,32 @@ scale : Point3D
     The vector to scale by
 
         )mydelimiter", py::arg("scale"))
-    .def("export", [](CModelComponent arSelf, string output_file, string file_type) {
-            if (output_file.empty()) {
-                return arSelf.ExportToBlob(file_type);
-            } else {
-                arSelf.Export(output_file, file_type);
-            }
-        }, R"mydelimiter(
-Writes Mesh to output_file with given file format.
+    .def("export", &CModelComponent::Export, R"mydelimiter(
+        Writes Mesh to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-If no output_file provided, this function will return a blob file in the given file format.
+        Parameters
+        -------------
+        output_file : str, default: "Vivid3dModel"
+            File Directory to export to
+        file_type : str, default: 'glb'
+            File format to export to
 
-Parameters
-----------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+            )mydelimiter",
+    py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
+    .def("export_to_blob", &CModelComponent::ExportToBlob, R"mydelimiter(
+            Writes Mesh to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
-Returns
--------
-blob : vivid3d.BlobData or None
-    Object containing exported model file blobs - if output_file is empty - else None
+            Parameters
+            ----------
+            file_type : str, default: 'glb'
+                File format to export to
 
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+            Returns
+            -------
+            blob : vivid3d.BlobData
+                Object containing exported model file blobs
+                )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("show", [](CModelComponent& arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -517,7 +521,7 @@ add_mesh(mesh: vivid3d.BaseMesh)
     Add Mesh, PointCloud, or Lines object to model
 add_meshes(mesh: vivid3d.BaseMesh)
     Add Meshes, PointCloud's, or Lines objects to model
-export(output_file='', file_type='glb2')
+export(output_file='', file_type='glb')
     Default exporter supporting most common 3D file types. For full list of supported file formats see: __reference__
     Returns vivid3d.BlobData if output_file is empty.
 export_to_obj(output_file: str, with_texture=True)
@@ -571,31 +575,32 @@ File Directory to export to
 
 
         )mydelimiter", py::arg("output_file"), py::arg("with_texture") = 1)
-    .def("export", [](CModel &arSelf, string output_file, string file_type) {
-        if (output_file.empty()) {
-            return arSelf.ExportToBlob(file_type);
-        } else {
-            arSelf.Export(output_file, file_type);
-        }
-    }, R"mydelimiter(
-Writes Model to output_file with given file_type format.
+    .def("export", &CModel::Export, R"mydelimiter(
+    Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
 
-For full list of supported file formats, see: __reference__
-If no output_file provided, this function will return a blob file in the given file format.
+    Parameters
+    -------------
+    output_file : str, default: "Vivid3dModel"
+        File Directory to export to
+    file_type : str, default: 'glb'
+        File format to export to
 
-Parameters
-----------
-output_file : str, default: ""
-    File Directory to export to
-file_type : str, default: 'glb2'
-    File format to export to
+        )mydelimiter",
+        py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
+    .def("export_to_blob", &CModel::ExportToBlob, R"mydelimiter(
+        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
 
-Returns
--------
-blob : vivid3d.BlobData
-    Object containing exported model file blobs - only returned if output_file is empty
+        Parameters
+        ----------
+        file_type : str, default: 'glb'
+            File format to export to
 
-        )mydelimiter", py::arg("output_file")="", py::arg("file_type") = "glb2")
+        Returns
+        -------
+        blob : vivid3d.BlobData
+            Object containing exported model file blobs
+            )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("show", [](CModel &arSelf, int aHeight) {
             auto viewer = py::module_::import("vivid3d.viewer");
             return viewer.attr("show")(arSelf, aHeight);
@@ -615,133 +620,278 @@ html : str or IPython.display.HTML
         )mydelimiter", py::arg("height")=600)
     .def("__str__", [](const CModel &arSelf){ return "vivid3d.Model\nn_meshes: " + to_string(arSelf.GetNumMeshes()) + "\nn_polygons: " + to_string(arSelf.GetNumPolygons()) + "\nn_vertices: " + to_string(arSelf.GetNumVertices()); });
 
+    py::class_<CFrame>(m, "Frame", R"mydelimiter(
+        Basic Frame struct, capable of move, rotate and scale.
+
+        Attributes
+        ----------
+        model : vivid3d.Model
+            frame model
+        move_animation : Point
+            movement animation for this frame
+        rotate_animation : Point
+            rotate animation for this frame
+        scale_animation : Point
+            scale animation for this frame
+
+        )mydelimiter")
+        .def_property("move_animation", &CFrame::getMMoveAnimation, &CFrame::setMMoveAnimation)
+        .def_property("rotate_animation", &CFrame::getMRotateAnimation, &CFrame::setMRotateAnimation)
+        .def_property("scale_animation", &CFrame::getMScaleAnimation, &CFrame::setMScaleAnimation)
+        .def_readwrite("model", &CFrame::mModel);
+
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
-Class for animations
+        Basic Animation class, capable of move, rotate and scale.
+        
+        Attributes
+        ----------
+        frames : list[vivid3d.Frame]
+            List of frames held, each model holds his own animation.
+        duration : float
+            Animation duration in ticks
+        ticks_per_second  : float
+            ticks per second
+        
+        Methods
+        -------
+        add_model(model: vivid3d.model)
+            add a model to the animation
+        add_models(models: list[vivid3d.model])
+            add a list of models to the animation
+        export(output_file: str, file_format = 'glb')
+            export the animation to file, file formats: glb, gltf, fbx
+        export_to_blob(file_format = 'glb')
+            Writes Model to Blob with given file_type format.
 
         )mydelimiter");
     Animation.def(py::init<> (), "default constructor for Animation")
-    .def(py::init<const CModel &> (),
-         "constructor for Animation from a single Model",
-         py::arg("model"))
-    .def(py::init<const vector<CModel> &> (),
-         "constructor for Animation from an np array of Models",
-         py::arg("models"))
+    .def(py::init<const CModel &> (),R"mydelimiter(
+            constructor for Animation from a single Model.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to initialize the animation with
+        )mydelimiter", py::arg("model"))
+    .def(py::init<const vector<CModel> &> (),R"mydelimiter(
+            constructor for Animation from a list of Models.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to initialize the animation with
+        )mydelimiter", py::arg("models"))
     .def(py::init<const CAnimation &> (),
-         "copy constructor for animation",
-         py::arg("animation"))
+        R"mydelimiter(
+            copy constructor for animation
+
+            Parameters
+            ----------
+            animation : vivid3d.Animation,
+                animation to initialize the Animation
+        )mydelimiter", py::arg("animation"))
     .def_property("duration", &CAnimation::GetDuration, &CAnimation::SetDuration, "duration(in ticks)")
     .def_property("ticks_per_second", &CAnimation::GetTicksPerSecond, &CAnimation::SetTicksPerSecond, "ticks")
-    .def("get_models", &CAnimation::GetModels,
-         "getter function for models in the animation")
-    .def("add_models", static_cast<void (CAnimation::*)(const CModel &)>(&CAnimation::AddModels),"add a model to animation", py::arg("models"))
-    .def("add_models", static_cast<void (CAnimation::*)(const vector<CModel> &)>(&CAnimation::AddModels),"add models to animation", py::arg("models"))
-    .def("set_move_animation", &CAnimation::SetMoveAnim,
-         "set movement animation for index model",
-         py::arg("index"), py::arg("move_vector"))
-    .def("set_rotate_animation", &CAnimation::SetRotateAnim,
-         "set rotate animation for index model",
-         py::arg("index"), py::arg("anguler_rotate"))
-    .def("set_scale_animation", &CAnimation::SetScaleAnim,
-         "set scale animation for index model",
-         py::arg("index"), py::arg("scale_vector"))
-    .def("get_move_animation", &CAnimation::GetMoveAnim,
-         "get movement animation for given model index",
-         py::arg("index"))
-    .def("get_rotate_animation", &CAnimation::GetRotateAnim,
-         "get rotate animation for given model index",
-         py::arg("index"))
-    .def("get_scale_animation", &CAnimation::GetScaleAnim,
-         "get scale animation for given model index",
-         py::arg("index"))
+    .def_property("frames", &CAnimation::GetFrames, &CAnimation::SetFrames,"animation frames")
+    .def("add_model", &CAnimation::AddModel,R"mydelimiter(
+            Add a model to the animation.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to add
+        )mydelimiter", py::arg("model"))
+    .def("add_models", &CAnimation::AddModels,R"mydelimiter(
+            Add a list of models to the animation.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to add
+        )mydelimiter", py::arg("models"))
+    .def("show", [](CModel &arSelf, int aHeight) {
+            auto viewer = py::module_::import("vivid3d.viewer");
+            return viewer.attr("show")(arSelf, aHeight);
+        }, R"mydelimiter(
+            Render and view the model in a viewer window.
+
+            Parameters
+            ----------
+            height : int, default: 600
+                height in pixels to open the viewer
+
+            Returns
+            -------
+            html : str or IPython.display.HTML
+                The HTML with embedded model
+
+        )mydelimiter", py::arg("height")=600)
+    .def("export_to_blob", &CAnimation::ExportToBlob, R"mydelimiter(
+        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
+
+        Parameters
+        ----------
+        file_type : str, default: 'glb'
+            File format to export to
+
+        Returns
+        -------
+        blob : vivid3d.BlobData
+            Object containing exported model file blobs
+            )mydelimiter",
+    py::arg("file_type") = "glb")
     .def("export", &CAnimation::Export,
-         "Exports animation to selected file format",
-         py::arg("output_file"), py::arg("file_format") = "gltf2");
+         R"mydelimiter(
+    Writes animation to output_file with given file_type format. For full list of supported file formats, see: __reference__
+
+    Parameters
+    -------------
+    output_file : str, default: "Vivid3dModel"
+        File Directory to export to
+    file_type : str, default: 'glb'
+        File format to export to
+
+        )mydelimiter",
+         py::arg("output_file"), py::arg("file_format") = "glb");
 
 
     py::class_<CStopMotionAnimation>(m,"StopMotionAnimation", Animation, R"mydelimiter(
-Class for stop motion animations
+        Stop motion animation class, inherits from vivid3d.animation but present the models frame after frame
+
+    Attributes
+        ----------
+        frames : list[vivid3d.Frame]
+            List of frames held, each model holds his own animation.
+        seconds_per_frame : float
+            How long should each frame last
+        ticks_per_second  : float
+            ticks per second
+
+        Methods
+        -------
+        add_model(model: vivid3d.model)
+            add a model to the animation
+        add_models(models: list[vivid3d.model])
+            add a list of models to the animation
+        export(output_file: str, file_format = 'glb')
+            export the animation to file, file formats: glb, gltf, fbx
+        export_to_blob(file_format = 'glb')
+            Writes Model to Blob with given file_type format.
+
 
     )mydelimiter")
         .def(py::init<> (), "default constructor for StopMotionAnimation")
         .def(py::init<const CModel &, double> (),
-            "constructor for StopMotionAnimation from a single Model",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from a single Model.
+
+            Parameters
+            ----------
+            model : vivid3d.Model,
+                model to initialize the animation with
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter",
             py::arg("model"), py::arg("seconds_per_frame") = 2) //py::arg("model"), py::arg("mSecondsPerFrame")
         .def(py::init<const vector<CModel> &, double> (),
-            "constructor for StopMotionAnimation from an np array of Models",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from a list of Models.
+
+            Parameters
+            ----------
+            models : list[vivid3d.Model],
+                models to initialize the animation with
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter",
             py::arg("models"), py::arg("seconds_per_frame") = 2) //py::arg("models"), py::arg("mSecondsPerFrame")
         .def(py::init<const CAnimation &, double> (),
-            "constructor for StopMotionAnimation from animation",
+        R"mydelimiter(
+            constructor for StopMotionAnimation from animation
+
+            Parameters
+            ----------
+            animation : vivid3d.Animation,
+                animation to initialize the StopMotionAnimation
+            seconds_per_frame : float, default: 2
+                seconds for frame
+        )mydelimiter",
             py::arg("animation"), py::arg("seconds_per_frame") = 2) // py::arg("animation"), py::arg("mSecondsPerFrame")
         .def(py::init<const CStopMotionAnimation &> (),
-            "copy constructor for StopMotionAnimation",
+        R"mydelimiter(
+            copy constructor for StopMotionAnimation
+
+            Parameters
+            ----------
+            StopMotionAnimation : vivid3d.StopMotionAnimation,
+                StopMotionAnimation to initialize the StopMotionAnimation
+        )mydelimiter",
             py::arg("animation"))
         .def_property("seconds_per_frame", &CStopMotionAnimation::GetSecondsPerFrame, &CStopMotionAnimation::SetSecondsPerFrame,
              "Seconds per frame");
 
 
     //one liners
-    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
-        std::vector<normal_float> &, normal_float , normal_float , const string& ,
-        normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
-one function to rule them all
+//     m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<bool> &, const std::string &,
+//         std::vector<normal_float> &, normal_float , normal_float , const string& ,
+//         normal_float, const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
+//     makes a model from one line, if an output path is given the functions writes the model to file.
 
-makes a model from one line, if an output path is given the functions writes the model to file.
+//     Parameters
+//     ----------
+//     input_points : array[array[float]]
+//         The input point data in x,y,z form.
+//     mask : array[bool]
+//         Boolean mask of true and false points
+//     output_path : str, default: ""
+//         Path and name for output file
+//         If left as None no Module will be written to file.
+//     color_field : array[float], default: []
+//         Vector containing the color field of each point
+//         If left empty color will be basic white
+//     color_field_min : float, optional
+//         Set minimum value for color_field, anything below will be set to color_field_min
+//         If left empty will be set to min(color_field)
+//     color_field_max : float, optional
+//         Set max value for color_field, anything below will be set to color_field_max
+//         If left empty will be set to max(color_field)
+//     name : str, default: "VIVID_MODEL"
+//         Optional name of the object, not required to be unique.
+//     opacity : float, default: 1
+//         Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+//     file_type : str, default: "gltf2"
+//         File format for export, out of Assimp supported formats
+//     noise_displacement : float, default: 0.001
+//         The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
 
-Parameters
-----------
-input_points : array[array[float]]
-    The input point data in x,y,z form.
-mask : array[bool]
-    Boolean mask of true and false points
-output_path : str, default: ""
-    Path and name for output file
-    If left as None no Module will be written to file.
-color_field : array[float], default: []
-    Vector containing the color field of each point
-    If left empty color will be basic white
-color_field_min : float, optional
-    Set minimum value for color_field, anything below will be set to color_field_min
-    If left empty will be set to min(color_field)
-color_field_max : float, optional
-    Set max value for color_field, anything below will be set to color_field_max
-    If left empty will be set to max(color_field)
-name : str, default: "VIVID_MODEL"
-    Optional name of the object, not required to be unique.
-opacity : float, default: 1
-    Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-file_type : str, default: "gltf2"
-    File format for export, out of Assimp supported formats
-noise_displacement : float, default: 0.001
-    The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+//     Returns
+//     -------
+//     vivid3d.Model
+//         Output model.
 
-Returns
--------
-vivid3d.Model
-    Output model.
+//     See Also
+//     ----------------
+//     vivid3d.Model
+//         Main class holding 3d models data in the vivid3d package, also see examples.
 
-See Also
-----------------
-vivid3d.Model
-    Main class holding 3d models data in the vivid3d package, also see examples.
-
-        )mydelimiter",
-        py::arg("input_points"),
-        py::arg("mask"),
-        py::arg("output_path") = "",
-        py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0,
-        py::arg("color_field_max") = 0,
-        py::arg("name")= "VIVID_MODEL",
-        py::arg("opacity") = 1,
-        py::arg("file_type") = "gltf2",
-        py::arg("noise_displacement") = 0.001);
+//         )mydelimiter",
+//         py::arg("input_points"),
+//         py::arg("mask"),
+//         py::arg("output_path") = "",
+//         py::arg("color_field") = vector<normal_float>(0),
+//         py::arg("color_field_min") = 0,
+//         py::arg("color_field_max") = 0,
+//         py::arg("name")= "VIVID_MODEL",
+//         py::arg("opacity") = 1,
+//         py::arg("file_type") = "gltf2",
+//         py::arg("noise_displacement") = 0.001);
 
 
 //    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, normal_float,
 //        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const string& ,
 //        normal_float , const std::string&, coord_t>(&vivifyMesh), R"mydelimiter(
 //        one function to rule them all
-//
+
 //        makes a model from one line, if an output path is given the functions writes the model to file.
 //        )mydelimiter",
 //        py::arg("input_points"),
@@ -755,44 +905,108 @@ vivid3d.Model
 //        py::arg("opacity") = 1,
 //        py::arg("file_type") = "gltf2",
 //        py::arg("noise_displacement") = 0.001);
-//
-//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
-//        std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
-//        vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
-//        one function to rule them all
-//
-//        makes a model from one line, if an output path is given the functions writes the model to file.
-//        )mydelimiter",
-//        py::arg("input_points"),
-//        py::arg("masks"),
-//        py::arg("output_path") = "",
-//        py::arg("color_field") = vector<normal_float>(0),
-//        py::arg("color_field_min") = 0,
-//        py::arg("color_field_max") = 0,
-//        py::arg("name")= "VIVID_MODEL",
-//        py::arg("opacity") = vector<normal_float>(0),
-//        py::arg("file_type") = "gltf2",
-//        py::arg("noise_displacement") = 0.001);
-//
-//
-//    m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
-//        const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
-//        std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
-//        one function to rule them all
-//
-//        makes a model from one line, if an output path is given the functions writes the model to file.
-//        )mydelimiter",
-//        py::arg("input_points"),
-//        py::arg("surface_field"),
-//        py::arg("surface_thresholds"),
-//        py::arg("output_path") = "",
-//        py::arg("color_field") = vector<normal_float>(0),
-//        py::arg("color_field_min") = 0,
-//        py::arg("color_field_max") = 0,
-//        py::arg("name")= "VIVID_MODEL",
-//        py::arg("opacity") = vector<normal_float>(0),
-//        py::arg("file_type") = "gltf2",
-//        py::arg("noise_displacement") = 0.001);
+
+   m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<std::vector<bool>> &, const std::string &,
+       std::vector<normal_float> &, normal_float , normal_float , const std::string& ,
+       vector<normal_float> &, const std::string&, coord_t>(&vivifyModel), R"mydelimiter(
+       makes a model from one line, if an output path is given the functions writes the model to file.
+
+    Parameters
+    ----------
+    input_points : array[array[float]]
+        The input point data in x,y,z form.
+    mask : array[array[bool]]
+        array of masks, Each inner array is a Boolean mask of true and false points, has to be the same size as input_points.
+    output_path : str, default: ""
+        Path and name for output file
+        If left as None no Module will be written to file.
+    color_field : array[float], default: []
+        Vector containing the color field of each point
+        If left empty color will be basic white
+    color_field_min : float, optional
+        Set minimum value for color_field, anything below will be set to color_field_min
+        If left empty will be set to min(color_field)
+    color_field_max : float, optional
+        Set max value for color_field, anything below will be set to color_field_max
+        If left empty will be set to max(color_field)
+    name : str, default: "VIVID_MODEL"
+        Optional name of the object, not required to be unique.
+    opacity : array[float], default: []
+        Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+    file_type : str, default: "gltf2"
+        File format for export, out of Assimp supported formats
+    noise_displacement : float, default: 0.001
+        The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+
+    Returns
+    -------
+    vivid3d.Model
+        Output model.
+        
+       )mydelimiter",
+       py::arg("input_points"),
+       py::arg("masks"),
+       py::arg("output_path") = "",
+       py::arg("color_field") = vector<normal_float>(0),
+       py::arg("color_field_min") = 0,
+       py::arg("color_field_max") = 0,
+       py::arg("name")= "VIVID_MODEL",
+       py::arg("opacity") = vector<normal_float>(0),
+       py::arg("file_type") = "gltf2",
+       py::arg("noise_displacement") = 0.001);
+
+
+   m.def("make_model", py::overload_cast<const std::vector<CPoint> &, const std::vector<normal_float> &, std::vector<normal_float> &,
+       const std::string &, std::vector<normal_float> &, normal_float , normal_float , const std::string&,
+       std::vector<normal_float> &, const std::string&, coord_t >(&vivifyModel), R"mydelimiter(
+       makes a model from one line, if an output path is given the functions writes the model to file.
+
+    Parameters
+    ----------
+    input_points : array[array[float]]
+        The input point data in x,y,z form.
+    surface_field : array[float]
+        surface field value for each point, has to be same size as input_points.
+    surface_thresholds : array[float]
+        thresholds to create surfaces.
+    output_path : str, default: ""
+        Path and name for output file
+        If left as None no Module will be written to file.
+    color_field : array[float], default: []
+        Vector containing the color field of each point
+        If left empty color will be basic white
+    color_field_min : float, optional
+        Set minimum value for color_field, anything below will be set to color_field_min
+        If left empty will be set to min(color_field)
+    color_field_max : float, optional
+        Set max value for color_field, anything below will be set to color_field_max
+        If left empty will be set to max(color_field)
+    name : str, default: "VIVID_MODEL"
+        Optional name of the object, not required to be unique.
+    opacity : array[float], default: []
+        Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+    file_type : str, default: "gltf2"
+        File format for export, out of Assimp supported formats
+    noise_displacement : float, default: 0.001
+        The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
+
+    Returns
+    -------
+    vivid3d.Model
+        Output model.
+        
+       )mydelimiter",
+       py::arg("input_points"),
+       py::arg("surface_field"),
+       py::arg("surface_thresholds"),
+       py::arg("output_path") = "",
+       py::arg("color_field") = vector<normal_float>(0),
+       py::arg("color_field_min") = 0,
+       py::arg("color_field_max") = 0,
+       py::arg("name")= "VIVID_MODEL",
+       py::arg("opacity") = vector<normal_float>(0),
+       py::arg("file_type") = "gltf2",
+       py::arg("noise_displacement") = 0.001);
 
 
     //Shapes:

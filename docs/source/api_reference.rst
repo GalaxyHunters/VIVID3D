@@ -28,6 +28,7 @@ Animations
 .. toctree::
     :maxdepth: 1
 
+    generated/vivid3d.Frame
     generated/vivid3d.Animation
     generated/vivid3d.StopMotionAnimation
 

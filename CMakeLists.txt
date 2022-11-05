@@ -77,7 +77,7 @@ add_library(vivid SHARED
         "${VIVID_SRC_DIR}/Utils/Logging/Errors.h"
         "${VIVID_SRC_DIR}/Utils/Logging/LogFile.cpp"
 
-        "${VIVID_SRC_DIR}/Utils/NormalFloat.cpp"
+        "${VIVID_SRC_DIR}/Utils/ConstrainedNumbers.cpp"
         "${VIVID_SRC_DIR}/Utils/Noisify.cpp"
 
         "${VIVID_SRC_DIR}/Extra/Analysis.cpp")

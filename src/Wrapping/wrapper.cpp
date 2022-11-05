@@ -91,6 +91,7 @@ files : list[bytes]
                  "Constructor for point",
                  py::arg("3d_vector"));
 
+    m.def("point", [](CPoint point){return point;}, "return cpoint");
     py::class_<CMaterial>(m, "Material", R"mydelimiter(
 Simplified PBR Material for physically based rendering of Meshes
 
@@ -634,9 +635,9 @@ html : str or IPython.display.HTML
             scale animation for this frame
 
         )mydelimiter")
-        .def_readwrite("move_animation", &CFrame::mMoveAnimation)
-        .def_readwrite("rotate_animation", &CFrame::mRotateAnimation)
-        .def_readwrite("scale_animation", &CFrame::mScaleAnimation)
+        .def_property("move_animation", &CFrame::getMMoveAnimation, &CFrame::setMMoveAnimation)
+        .def_property("rotate_animation", &CFrame::getMRotateAnimation, &CFrame::setMRotateAnimation)
+        .def_property("scale_animation", &CFrame::getMScaleAnimation, &CFrame::setMScaleAnimation)
         .def_readwrite("model", &CFrame::mModel);
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(

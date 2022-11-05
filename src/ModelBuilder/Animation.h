@@ -6,15 +6,43 @@
 
 namespace vivid
 {
-    struct CFrame
+    class CFrame
     {
+    public:
         CModel mModel;
         CPoint mScaleAnimation;
         CPoint mMoveAnimation;
         CPoint mRotateAnimation;
 
-        CFrame(const CModel &arModel, const CPoint &arScaleAnimation = {0, 0, 0},const CPoint &arMoveAnimation = {0, 0, 0},
-               const CPoint &arRotateAnimation = {0, 0, 0}): mModel(arModel), mScaleAnimation(arScaleAnimation), mMoveAnimation(arMoveAnimation), mRotateAnimation(arRotateAnimation){}
+        CFrame(const CModel &arModel, const CPoint &arScaleAnimation = CPoint(),const CPoint &arMoveAnimation = CPoint(),
+               const CPoint &arRotateAnimation = CPoint()): mModel(arModel), mScaleAnimation(arScaleAnimation), mMoveAnimation(arMoveAnimation), mRotateAnimation(arRotateAnimation){}
+        //getter setter for pybind use (type cast for cpoint is weird)
+        const CPoint &getMScaleAnimation() const {
+            return mScaleAnimation;
+        }
+
+        void setMScaleAnimation(const CPoint &mScaleAnimation) {
+            CFrame::mScaleAnimation = mScaleAnimation;
+        }
+
+        const CPoint &getMMoveAnimation() const {
+            cout << mMoveAnimation << endl;
+            return mMoveAnimation;
+        }
+
+        void setMMoveAnimation(const CPoint &mMoveAnimation) {
+            cout << mMoveAnimation << endl;
+            CFrame::mMoveAnimation = mMoveAnimation;
+            cout << CFrame::mMoveAnimation << endl;
+        }
+
+        const CPoint &getMRotateAnimation() const {
+            return mRotateAnimation;
+        }
+
+        void setMRotateAnimation(const CPoint &mRotateAnimation) {
+            CFrame::mRotateAnimation = mRotateAnimation;
+        }
     };
     class CAnimation {
     private:

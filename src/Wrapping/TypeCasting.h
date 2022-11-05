@@ -51,7 +51,6 @@ namespace pybind11 {
                 auto *ptr = (coord_t *) buffer.ptr;
 
                 point = CPoint(ptr[0], ptr[1], ptr[2]);
-
                 // This is what's pushed to the function
                 value = point;
 
@@ -69,7 +68,9 @@ namespace pybind11 {
 
                 py::array ret = py::cast(shape);
 
-                return ret;
+                ret.inc_ref();
+
+                return ret.release();
             }
         };
 
@@ -117,20 +118,21 @@ namespace pybind11 {
                 return true;
             }
 
-//            //Conversion part 2 (C++ -> Python)
-//            static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
-//            {
-//                std::vector<std::vector<double>> shape (src.size());
-//
-//                for ( int i = 0 ; i < src.size() ; i++ ) {
-//                    shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
-//                }
-//
-//                py::array ret = py::cast(shape);
-//
-//                return ret;
-//
-//            }
+            //Conversion part 2 (C++ -> Python)
+            static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
+            {
+                std::vector<std::vector<double>> shape (src.size());
+
+                for ( int i = 0 ; i < src.size() ; i++ ) {
+                    shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
+                }
+
+                py::array ret = py::cast(shape);
+
+                ret.inc_ref();
+                return ret.release();
+
+            }
         };
         /* ------------------------------------------------- COLORMAP -------------------------------------------------*/
         template <> struct type_caster<CColorMap>

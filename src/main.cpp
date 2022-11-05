@@ -291,7 +291,7 @@ int CubeAnimationTest()
     anim[5].mMoveAnimation = CPoint(3,3,3);
     anim[6].mScaleAnimation = CPoint(2,2,2);
     anim[1].mScaleAnimation = CPoint(5,0,0);
-    cout << anim[1].mScaleAnimation << endl;
+    cout << anim[5].mScaleAnimation << endl;
     CStopMotionAnimation SManim = CStopMotionAnimation(anim, 2);
     anim.Export( TEST_OUTPUT_PATH + "/CubeAnimationTest", "gltf");
     //AssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");

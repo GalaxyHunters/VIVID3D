@@ -1,22 +1,21 @@
 Materials
 =========
 
-VIVID3D currently supports heavily simplified PBR (Physically-Based-Rendering) materials.
+VIVID3D fully supports PBR (Physically-Based-Rendering) materials. The PBR model is the 3D standard for beautiful 3D models, and is the main rendering model used in Sketchfab.
+
 For ease of use, we chose a select few parameters that we believe are important when rendering scientific models.
 
-The :doc:`Material API<../generated/vivid3d.Material>` allows you to customize the opacity, reflectivity, and emissive properties of the Base Mesh.
+The :doc:`Material API<../generated/vivid3d.Material>` allows you to customize the opacity, metalness, roughness, and emissive properties of the Base Mesh.
 
-1. Opacity affects the transparency of a mesh.
+We built an interactive demo for material editing, which allows you to play with all 4 Material parameters and see how it affects the displayed mesh.
 
-.. image:: https://docs.unrealengine.com/5.0/Images/designing-visuals-rendering-and-graphics/materials/tutorials/transparency/Trans_Opacity_Settings.webp
+Interactive Demo
+----------------
+.. raw:: html
 
-2. Shininess affects the reflectivity of a mesh.
-
-.. image:: https://www.google.com/url?sa=i&url=https%3A%2F%2Flifeisforu.tistory.com%2F387&psig=AOvVaw0_cFpcNnULUENJDRfJDXkg&ust=1667349146269000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCIizid3di_sCFQAAAAAdAAAAABA1
-
-3. The Emissive properties are used to create self-illuminating meshes.
-
-.. image:: https://i.ytimg.com/vi/Q45HW6hsJzQ/maxresdefault.jpg
+    <iframe
+        title="Material Editor" width="100%" height="800px"
+        src='../resources/material_viewer.html'></iframe>
 
 Good examples for each material would be :
 

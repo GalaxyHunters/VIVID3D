@@ -25,7 +25,7 @@ VIVID3D was tested in our cosmology research group by producing models from simu
 - **Scientific Analysis of Meshes**
 
 ## Highlights
-View the [Model Gallery](https://vivid.readthedocs.io/en/latest/gallery) to see what VIVID3D is capable of. 
+View the [Model Gallery](https://vivid.readthedocs.io/en/latest/gallery.html) to see what VIVID3D is capable of. 
 
 ## Documentation
 Our Documentation is hosted at [Read The Docs](https://vivid.readthedocs.io/en/latest/). This contains usage guides and examples, our API reference, and a gallery of our favourite models.
@@ -40,7 +40,7 @@ pip install vivid3d
 This might take a few minutes, and is only tested on linux as of now.
 
 ## Usage
-Learn the fundamentals and advanced model creation examples with the [User Guide](https://vivid.readthedocs.io/en/latest/examples).
+Learn the fundamentals and advanced model creation examples with the [User Guide](https://vivid.readthedocs.io/en/latest/examples.html).
 
 # About
 ## Authors

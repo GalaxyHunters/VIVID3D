@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>VIVID3D Model Viewer</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            transition: all 0.15s;
+            -webkit-transition: all 0.15s;
+            -ms-transition: all 0.15s;
+        }
+
+        html,
+        body,
+        .container,
+        model-viewer {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        hr {
+            width: 100%;
+        }
+
+        .slider-container,
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        model-viewer {
+            min-height: 500px;
+        }
+
+        .right-container {
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+
+            display: flex;
+            flex-direction: column;
+            background-color: #222;
+            color: #fff;
+            height: 100%;
+            min-width: 360px;
+            max-width: 360px;
+        }
+
+        .title-bar {
+            padding: 20px 0px;
+            background-color: #222;
+            text-align: center;
+            font-family: Helvetica, sans-serif;
+            font-size: 3em;
+            letter-spacing: 10px;
+            font-weight: bolder;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .title-bar:hover {
+            opacity: 0.6;
+        }
+
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .dropdown {
+            background-color: transparent;
+            padding: 15px 20px;
+            font-size: 1.25em;
+            font-weight: 400;
+            color: #fff;
+            text-align: left;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .controls {
+            padding: 20px;
+            background-color: #333;
+            display: none;
+        }
+
+        .slider-container {
+            justify-content: space-between;
+            height: 40px;
+            margin: 0 5px;
+        }
+
+        button[type="reset"] {
+            background-color: #444;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 3px;
+            width: 100%;
+            height: 30px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button[type="reset"]:hover {
+            background-color: #666;
+        }
+
+        .value-container {
+            border-radius: 3px;
+            background-color: #444;
+            border: none;
+            font-size: 0.9em;
+            text-align: center;
+            line-height: 30px;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+        }
+
+        .slider {
+            margin: 0 20px;
+            flex-grow: 1;
+        }
+
+        .control-label {
+            color: #fff;
+            width: 50px;
+        }
+
+        .download {
+            margin: 30px 60px;
+            padding: 10px 0;
+            margin-top: auto;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: #fff;
+            cursor: pointer;
+            font-size: 2em;
+        }
+
+        .download:hover {
+            background-color: #4682b4;
+        }
+
+        .disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+    <!-- The following libraries and polyfills are recommended to maximize browser support -->
+    <!-- NOTE: you must adjust the paths as appropriate for your project -->
+
+    <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
+    <!--     <script src='https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js'></script> -->
+
+    <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
+    <!--     <script src='https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js'></script> -->
+
+    <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
+    <script src="https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js"></script>
+
+    <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+</head>
+
+<body>
+    <model-viewer id="modelviewer" loading="eager" alt="Vivid3D Model"
+        src='data:text/plain;base64,Z2xURgIAAAAgBgAAFAUAAEpTT057InNjZW5lIjogMCwgInNjZW5lcyI6IFt7Im5vZGVzIjogWzBdfV0sICJhc3NldCI6IHsidmVyc2lvbiI6ICIyLjAiLCAiZ2VuZXJhdG9yIjogImdpdGh1Yi5jb20vbWlrZWRoL3RyaW1lc2gifSwgImFjY2Vzc29ycyI6IFt7ImJ1ZmZlclZpZXciOiAwLCAiY29tcG9uZW50VHlwZSI6IDUxMjUsICJjb3VudCI6IDM2LCAibWF4IjogWzddLCAibWluIjogWzBdLCAidHlwZSI6ICJTQ0FMQVIifSwgeyJidWZmZXJWaWV3IjogMSwgImNvbXBvbmVudFR5cGUiOiA1MTI2LCAiY291bnQiOiA4LCAidHlwZSI6ICJWRUMzIiwgImJ5dGVPZmZzZXQiOiAwLCAibWF4IjogWzAuNSwgMC41LCAwLjVdLCAibWluIjogWy0wLjUsIC0wLjUsIC0wLjVdfV0sICJtZXNoZXMiOiBbeyJuYW1lIjogImdlb21ldHJ5XzAiLCAicHJpbWl0aXZlcyI6IFt7ImF0dHJpYnV0ZXMiOiB7IlBPU0lUSU9OIjogMX0sICJpbmRpY2VzIjogMCwgIm1vZGUiOiA0LCAibWF0ZXJpYWwiOiAwfV19XSwgIm1hdGVyaWFscyI6IFt7InBick1ldGFsbGljUm91Z2huZXNzIjogeyJiYXNlQ29sb3JGYWN0b3IiOiBbMC40MDAwMDAwMDU5NjA0NjQ1LCAwLjQwMDAwMDAwNTk2MDQ2NDUsIDAuNDAwMDAwMDA1OTYwNDY0NSwgMS4wXSwgIm1ldGFsbGljRmFjdG9yIjogMC4wLCAicm91Z2huZXNzRmFjdG9yIjogMC4wfX1dLCAiY2FtZXJhcyI6IFt7Im5hbWUiOiAiY2FtZXJhX0dYUE9MRSIsICJ0eXBlIjogInBlcnNwZWN0aXZlIiwgInBlcnNwZWN0aXZlIjogeyJhc3BlY3RSYXRpbyI6IDEuMzMzMzMzMzMzMzMzMzMzMywgInlmb3YiOiAwLjc4NTM5ODE2MzM5NzQ0ODN9fV0sICJub2RlcyI6IFt7Im5hbWUiOiAid29ybGQiLCAiY2hpbGRyZW4iOiBbMSwgMl19LCB7Im1hdHJpeCI6IFsxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAwLjAsIDEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjBdLCAibmFtZSI6ICJnZW9tZXRyeV8wX0hCTjRaSUJKSEhYQSIsICJtZXNoIjogMH0sIHsibWF0cml4IjogWzEuMCwgMC4wLCAwLjAsIDAuMCwgMC4wLCAxLjAsIDAuMCwgMC4wLCAwLjAsIDAuMCwgMS4wLCAwLjAsIDAuMCwgMC4wLCAxLjcwNzEwNjc4MTE4NjU0NzUsIDEuMF0sICJuYW1lIjogImNhbWVyYV9HWFBPTEUiLCAiY2FtZXJhIjogMH1dLCAiYnVmZmVycyI6IFt7ImJ5dGVMZW5ndGgiOiAyNDB9XSwgImJ1ZmZlclZpZXdzIjogW3siYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAwLCAiYnl0ZUxlbmd0aCI6IDE0NH0sIHsiYnVmZmVyIjogMCwgImJ5dGVPZmZzZXQiOiAxNDQsICJieXRlTGVuZ3RoIjogOTZ9XX0gICAg8AAAAEJJTgABAAAAAwAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAwAAAAIAAAACAAAABAAAAAAAAAABAAAABwAAAAMAAAAFAAAAAQAAAAQAAAAFAAAABwAAAAEAAAADAAAABwAAAAIAAAAGAAAABAAAAAIAAAACAAAABwAAAAYAAAAGAAAABQAAAAQAAAAHAAAABQAAAAYAAAAAAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAD8='
+        shadow-intensity="1" camera-controls auto-rotate autoplay max-field-of-view="45deg">
+    </model-viewer>
+    <div class="right-container">
+        <a class="title-bar" href="https://galaxyhuntersil.wixsite.com/website/vivid" target="_blank">VIV<span
+                style="color: #4682b4">I</span>D3D</a>
+        <hr class="solid" />
+        <div class="control-panel">
+            <div id="controlsMat" class="controls show">
+                <form id="formMat">
+                    <div class="slider-container">
+                        <div class="control-label">Metalness</div>
+                        <input type="range" min="0" max="100" value="50" class="slider" id="metalnessS" />
+                        <div class="value-container" id="metalnessV">0.5</div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="control-label">Roughness</div>
+                        <input type="range" min="0" max="100" value="50" class="slider" id="roughnessS" />
+                        <div class="value-container" id="roughnessV">0.5</div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="control-label">Opacity</div>
+                        <input type="range" min="0" max="100" value="100" class="slider" id="opacityS" />
+                        <div class="value-container" id="opacityV">1.0</div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="control-label">Emissive Strength</div>
+                        <input type="range" min="0" max="200" value="0" class="slider" id="emissiveS" />
+                        <div class="value-container" id="emissiveV">0.0</div>
+                    </div>
+                    <button type="reset" id="resetRot">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const modelViewer = document.querySelector('model-viewer#modelviewer');
+        
+        /* ------------------MATERIAL------------------ */
+        
+        const material = modelViewer.models.materials[0];
+
+        const metallnessS = document.querySelector('#metalnessS');
+        const metallnessV = document.querySelector('#metalnessV');
+
+        const roughnessS = document.querySelector('#roughnessS');
+        const roughnessV = document.querySelector('#roughnessV');
+
+        const opacityS = document.querySelector('#opacityS');
+        const opacityV = document.querySelector('#opacityV');
+
+        const emissiveS = document.querySelector('#emissiveS');
+        const emissiveV = document.querySelector('#emissiveV');
+
+        const formMat = document.querySelector('#formMat');
+        formMat.reset();
+
+        const updateMetalness = () => {
+            const amount = metallnessS.value / 10;
+            material.pbrMetallicRoughness.setMetallicFactor(amount);
+            metalnessV.textContent = amount;
+        }
+
+        const updateRoughness = () => {
+            const amount = roughnessS.value / 10;
+            material.pbrMetallicRoughness.setRoughnessFactor(amount);
+            roughnessV.textContent = amount;
+        }
+
+        const updateOpacity = () => {
+            const amount = opacityS.value / 10;
+            const baseColorFactor = material.baseColorFactor;
+            material.setBaseColorFactor(baseColorFactor[0], baseColorFactor[1], baseColorFactor[2], amount);
+            if (amount == 1) {
+                material.setAlphaMode('OPAQUE');
+            } else {
+                material.setAlphaMode('BLEND');
+            }
+            opacityV.textContent = amount;
+        }
+
+        const updateEmissive = () => {
+            const amount = emissiveS.value / 10;
+            material.setEmissiveFactor(amount);
+            emissiveV.textContent = amount;
+        }
+        metalnessS.addEventListener('input', updateMetalness);
+        roughnessS.addEventListener('input', updateRoughness);
+        opacityS.addEventListener('input', updateOpacity);
+        emissiveS.addEventListener('input', updateEmissive);
+
+        formMat.addEventListener('reset', () => {
+            setTimeout(() => {
+                updateMetalness(); updateRoughness(); updateOpacity(); updateEmissive();
+            });
+        });
+    </script>
+</body>
+</html>

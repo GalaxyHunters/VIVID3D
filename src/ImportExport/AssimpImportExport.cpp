@@ -266,55 +266,51 @@ namespace vivid {
             return OutMesh;
         }
 
-        aiMaterial *GenerateMaterial(const vivid::CMaterial& arMaterial, const string& aTextureName, size_t mat_index) {
+        aiMaterial *GenerateMaterial(const vivid::CModelComponent& arMesh, const string& aTextureName, size_t mat_index) {
+            auto arMaterial = arMesh.GetMaterial();
+            auto arCmap = arMesh.GetColormap();
             auto *material = new aiMaterial();
-
+            // name
             const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
-            const array<float, 3> mat_emissive_color = ToNormalRGB(COLORS.at(arMaterial.GetEmissionColor()));
-            const aiColor3D *emissive_color = new aiColor3D(mat_emissive_color[0], mat_emissive_color[1], mat_emissive_color[2]);
-            material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
-
-            const int *shading_model = new int(2);
-            material->AddProperty(shading_model, 1, AI_MATKEY_SHADING_MODEL);
-
-            const int *illum = new int(0);
-            material->AddProperty(illum, 1, "$mat.illum", 4, 0);  // going around assimp system
-
-            const aiColor4D *diffuse_color = new aiColor4D(1, 1, 1, 1);
+            // base color
+            if (arModel.GetColormap().size() == 1) {
+                const auto base_color = arModel.GetColormap()[0];
+                const aiColor4D *diffuse_color = new aiColor4D(base_color[0], base_color[1], base_color[2], 1);
+            } else {
+                const aiColor4D *diffuse_color = new aiColor4D(1, 1, 1, 1);
+            }
             material->AddProperty(diffuse_color, 3, AI_MATKEY_COLOR_DIFFUSE);
 
-            const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
-            material->AddProperty(ambient_color, 3, AI_MATKEY_COLOR_AMBIENT);
+            // emissive color
+            const auto emission_factor = arMaterial.GetEmissionStrength();
+            const auto emission_color = min(emission_factor, 1);
+            if (arModel.GetColormap().size() == 1) {
+                const auto base_color = arModel.GetColormap()[0];
+                const aiColor4D *emissive_color = new aiColor3D(base_color[0] * emission_color, base_color[1] * emission_color, base_color[2] * emission_color);
+            } else {
+                const aiColor3D *emissive_color = new aiColor3D(emission_color, emission_color, emission_color);
+            }
+            material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
 
-            const aiColor3D *specular_color = new aiColor3D(1, 1, 1);
-            material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
+            // emissive strength
+            const float *emissive_intensity = new float(max(emission_factor, 1.0));
+            material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
+            // metalness
+            const float *metalness = new float(arMaterial.GetMetalness());
+            material->AddProperty(metalness, 1, AI_MATKEY_METALLIC_FACTOR);
 
-            const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
-            material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
+            // roughness
+            const float *roughness = new float(arMaterial.GetRoughness());
+            material->AddProperty(roughness, 1, AI_MATKEY_ROUGHNESS_FACTOR);
 
-
-            const float *shininess = new float(arMaterial.GetShininess() * MAX_ROUGHNESS);
-            material->AddProperty(shininess, 1, AI_MATKEY_SHININESS);
-
+            // opacity
             const float *opacity = new float(arMaterial.GetOpacity());
             material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
 
-            const float *anisotrpy_factor = new float(0);
-            material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
-
-            const float *emissive_intensity = new float(arMaterial.GetEmissionStrength());
-            material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
-
-            const float *refracti = new float(1);
-            material->AddProperty(refracti, 1, AI_MATKEY_REFRACTI);
-
-            const int *twosided = new int(0);
-            material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
-            //texture property
-
+            // textures
             const int *uvwsrc = new int(0);
             material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_AMBIENT(0));
 
@@ -328,6 +324,33 @@ namespace vivid {
             material->AddProperty(texIndex, AI_MATKEY_TEXTURE_AMBIENT(0));
 
             material->AddProperty(texIndex, AI_MATKEY_TEXTURE_EMISSIVE(0));
+
+            // twosided
+            const int *twosided = new int(0);
+            material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
+
+            // obj specific things
+            const int *shading_model = new int(2);
+            material->AddProperty(shading_model, 1, AI_MATKEY_SHADING_MODEL);
+
+            const int *illum = new int(0);
+            material->AddProperty(illum, 1, "$mat.illum", 4, 0);  // going around assimp system
+
+            // TODO: Are the rest of these needed?
+            const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
+            material->AddProperty(ambient_color, 3, AI_MATKEY_COLOR_AMBIENT);
+
+            const aiColor3D *specular_color = new aiColor3D(1, 1, 1);
+            material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
+
+            const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
+            material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
+
+            const float *anisotrpy_factor = new float(0);
+            material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);
+
+            const float *refracti = new float(1);
+            material->AddProperty(refracti, 1, AI_MATKEY_REFRACTI);
 
             return material;
         }
@@ -361,7 +384,7 @@ namespace vivid {
                 texture_path = AddTexture(meshes[i].GetColorMap());
                 //setting up the mesh structure
                 scene->mMeshes[i] = GenerateMesh(&meshes[i]);
-                scene->mMaterials[i] = GenerateMaterial(meshes[i].GetMaterial(), texture_path, i);
+                scene->mMaterials[i] = GenerateMaterial(meshes[i], texture_path, i);
                 scene->mMeshes[i]->mMaterialIndex = i;
             }
             if(EmbeddedTexture){
@@ -460,7 +483,7 @@ namespace vivid {
                     texture_path = AddTexture(mesh.GetColorMap());
                     //setting up the mesh structure
                     scene->mMeshes[mesh_counter] = GenerateMesh(&mesh);
-                    scene->mMaterials[mesh_counter] = GenerateMaterial(mesh.GetMaterial(), texture_path, mesh_counter);
+                    scene->mMaterials[mesh_counter] = GenerateMaterial(mesh, texture_path, mesh_counter);
                     scene->mMeshes[mesh_counter]->mMaterialIndex = mesh_counter;
                     mesh_counter++;
                 }

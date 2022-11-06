@@ -43,8 +43,9 @@ int ShapesTest()
     model.AddMeshes({cube, cube1});
     pair<CLines, CLines> grid = CreateGrid(100, 10);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
-//    model.AddMeshes(list);
-    model.Export(TEST_OUTPUT_PATH + "Shapes"); // /test_models/
+    model.AddMeshes(list);
+    model.ExportToObj(TEST_OUTPUT_PATH + "ShapesVivid3D");
+    model.Export(TEST_OUTPUT_PATH + "Shapes", "obj"); // /test_models/
 
     return EXIT_SUCCESS;
 }
@@ -340,8 +341,8 @@ int main()
 //    Log(LOG_INFO, "ParametricSurfByFuncTest");
 //    ret_value = ParametricSurfByFuncTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-//    Log(LOG_INFO, "Testing All Shapes");
-//    ret_value = ShapesTest();
+    Log(LOG_INFO, "Testing All Shapes");
+    ret_value = ShapesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    Log(LOG_INFO, "Testing vivify");
 //    ret_value = make_model_test();
@@ -355,8 +356,8 @@ int main()
 //    Log(LOG_INFO, "Pyramid");
 //    ret_value = PyramidSmoothTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
-    cout << "Cube Animation" << endl;
-    ret_value = CubeAnimationTest();
+//    cout << "Cube Animation" << endl;
+//    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    ret_value = RemovePointyFacesTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

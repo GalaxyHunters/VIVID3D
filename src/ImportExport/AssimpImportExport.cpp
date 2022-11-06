@@ -183,6 +183,7 @@ namespace vivid {
 
         string AddTexture(CColorMap arMeshCLM) {
             string texture_path;
+            if(arMeshCLM.GetColorMap().size() == 1) return "";
             if (TextureNameToIndex.find(arMeshCLM.GetName()) !=
                 TextureNameToIndex.end()) { //check if texture has been written already
                 texture_path = TextureNameToIndex[arMeshCLM.GetName()];
@@ -284,6 +285,8 @@ namespace vivid {
             }
             material->AddProperty(diffuse_color, 4, AI_MATKEY_COLOR_DIFFUSE);
 
+            //const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
+            material->AddProperty(diffuse_color, 4, AI_MATKEY_COLOR_AMBIENT);
             // emissive color
             const auto emission_factor = arMaterial.GetEmissionStrength();
             const auto emission_color = min(emission_factor, 1.0f);
@@ -313,20 +316,21 @@ namespace vivid {
             material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
 
             // textures
-            const int *uvwsrc = new int(0);
-            material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_AMBIENT(0));
+            if(!cmap.size() == 1) { //one color
+                const int *uvwsrc = new int(0);
+                material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_AMBIENT(0));
 
-            material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_DIFFUSE(0));
+                material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_DIFFUSE(0));
 
-            material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_EMISSIVE(0));
+                material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_EMISSIVE(0));
 
-            const aiString *texIndex = new aiString(aTextureName.substr(aTextureName.find_last_of("/\\") + 1));
-            material->AddProperty(texIndex, AI_MATKEY_TEXTURE_DIFFUSE(0));
+                const aiString *texIndex = new aiString(aTextureName.substr(aTextureName.find_last_of("/\\") + 1));
+                material->AddProperty(texIndex, AI_MATKEY_TEXTURE_DIFFUSE(0));
 
-            material->AddProperty(texIndex, AI_MATKEY_TEXTURE_AMBIENT(0));
+                material->AddProperty(texIndex, AI_MATKEY_TEXTURE_AMBIENT(0));
 
-            material->AddProperty(texIndex, AI_MATKEY_TEXTURE_EMISSIVE(0));
-
+                material->AddProperty(texIndex, AI_MATKEY_TEXTURE_EMISSIVE(0));
+            }
             // twosided
             const int *twosided = new int(0);
             material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
@@ -339,14 +343,12 @@ namespace vivid {
             material->AddProperty(illum, 1, "$mat.illum", 4, 0);  // going around assimp system
 
             // TODO: Are the rest of these needed?
-            const aiColor3D *ambient_color = new aiColor3D(1, 1, 1);
-            material->AddProperty(ambient_color, 3, AI_MATKEY_COLOR_AMBIENT);
 
-            const aiColor3D *specular_color = new aiColor3D(1, 1, 1);
+            const aiColor3D *specular_color = new aiColor3D(0, 0, 0);
             material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
 
-            const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
-            material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
+//            const aiColor3D *color_transparent = new aiColor3D(1, 1, 1);
+//            material->AddProperty(color_transparent, 3, AI_MATKEY_COLOR_TRANSPARENT);
 
             const float *anisotrpy_factor = new float(0);
             material->AddProperty(anisotrpy_factor, 1, AI_MATKEY_ANISOTROPY_FACTOR);

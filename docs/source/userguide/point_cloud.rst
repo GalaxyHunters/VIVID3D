@@ -14,7 +14,7 @@ set the default color to *'white'*.
 
     # generating data
     points = []
-    for i in range(1000): # sample random point on sphere
+    for i in range(10000): # sample random point on sphere
         u = np.random.normal(0,1)
         v = np.random.normal(0,1)
         w = np.random.normal(0,1)
@@ -30,8 +30,8 @@ Just like all other BaseMeshes, PointClouds can be given a optional color_field 
 .. jupyter-execute::
     :raises:
 
-    # Creating an array of 1000 scalars with random value from uniform distribution [0, 1]
-    colors = np.random.rand(1000)
+    # Creating an array of 10000 scalars with random value from uniform distribution [0, 1]
+    colors = np.random.rand(10000)
 
     point_cloud_colored = vivid3d.PointCloud(points, colors) # PointCloud with color_field
     point_cloud_colored.show()

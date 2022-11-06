@@ -56,8 +56,6 @@ def view_glb(glb, height=600):
             webbrowser.open(url)
             sleep(3)
 
-    return srcdoc
-
 
 def show(model, height=600):
     """

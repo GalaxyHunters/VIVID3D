@@ -6,7 +6,7 @@
 
 namespace vivid
 {
-    class CFrame
+    struct CFrame
     {
     public:
         CModel mModel;
@@ -16,39 +16,14 @@ namespace vivid
 
         CFrame(const CModel &arModel, const CPoint &arScaleAnimation = CPoint(),const CPoint &arMoveAnimation = CPoint(),
                const CPoint &arRotateAnimation = CPoint()): mModel(arModel), mScaleAnimation(arScaleAnimation), mMoveAnimation(arMoveAnimation), mRotateAnimation(arRotateAnimation){}
-        //getter setter for pybind use (type cast for cpoint is weird)
-        const CPoint &getMScaleAnimation() const {
-            return mScaleAnimation;
-        }
 
-        void setMScaleAnimation(const CPoint &mScaleAnimation) {
-            CFrame::mScaleAnimation = mScaleAnimation;
-        }
-
-        const CPoint &getMMoveAnimation() const {
-            cout << mMoveAnimation << endl;
-            return mMoveAnimation;
-        }
-
-        void setMMoveAnimation(const CPoint &mMoveAnimation) {
-            cout << mMoveAnimation << endl;
-            CFrame::mMoveAnimation = mMoveAnimation;
-            cout << CFrame::mMoveAnimation << endl;
-        }
-
-        const CPoint &getMRotateAnimation() const {
-            return mRotateAnimation;
-        }
-
-        void setMRotateAnimation(const CPoint &mRotateAnimation) {
-            CFrame::mRotateAnimation = mRotateAnimation;
-        }
     };
     class CAnimation {
     private:
         coord_t mDuration = 300; //in ticks
         int mTicksPerSecond = 30;
         std::vector<CFrame> mFrames = {};
+
 //        std::vector<CModel> mModels = {};
 //        std::vector<CPoint> mScaleAnim = {};
 //        std::vector<CPoint> mMoveAnim = {};
@@ -91,11 +66,11 @@ namespace vivid
         inline void SetDuration(const coord_t &arDuration) { mDuration = arDuration; }
 
 
-        inline std::vector<CFrame> GetFrames() const{ return mFrames; }
+        inline std::vector<CFrame>& GetFrames() { return mFrames; }
         inline void SetFrames(const std::vector<CFrame> &arFrames) { mFrames = arFrames; }
 
         inline int GetTicksPerSecond() const {return mTicksPerSecond;}
-        inline void SetTicksPerSecond(int aTicksPerSecond){CAnimation::mTicksPerSecond = aTicksPerSecond;}
+        inline void SetTicksPerSecond(const int aTicksPerSecond){CAnimation::mTicksPerSecond = aTicksPerSecond;}
 
 
         inline size_t GetNumMeshes() const{

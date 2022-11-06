@@ -68,7 +68,7 @@ namespace pybind11 {
 
                 py::array ret = py::cast(shape);
 
-                ret.inc_ref();
+                //ret.inc_ref();
 
                 return ret.release();
             }

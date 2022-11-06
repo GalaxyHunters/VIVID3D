@@ -91,7 +91,6 @@ files : list[bytes]
                  "Constructor for point",
                  py::arg("3d_vector"));
 
-    m.def("point", [](CPoint point){return point;}, "return cpoint");
     py::class_<CMaterial>(m, "Material", R"mydelimiter(
 Simplified PBR Material for physically based rendering of Meshes
 
@@ -164,7 +163,7 @@ export(output_file: str, file_type='glb2') -> BlobData or None
     .def(py::init<const CModelComponent&> (),
         "Copy Constructor for BaseMesh",
         py::arg("model_component"))
-    .def_property("label", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
+    .def_property("name", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
     .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount, "# of polygons")
     .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount, "# of vertices")
     .def_property("material", &CModelComponent::GetMaterial, &CModelComponent::SetMaterial, "The material instance used by 3D renderers")
@@ -627,17 +626,17 @@ html : str or IPython.display.HTML
         ----------
         model : vivid3d.Model
             frame model
-        move_animation : Point
+        move_animation : Point3D
             movement animation for this frame
-        rotate_animation : Point
+        rotate_animation : Point3D
             rotate animation for this frame
-        scale_animation : Point
+        scale_animation : Point3D
             scale animation for this frame
 
         )mydelimiter")
-        .def_property("move_animation", &CFrame::getMMoveAnimation, &CFrame::setMMoveAnimation)
-        .def_property("rotate_animation", &CFrame::getMRotateAnimation, &CFrame::setMRotateAnimation)
-        .def_property("scale_animation", &CFrame::getMScaleAnimation, &CFrame::setMScaleAnimation)
+        .def_readwrite("move_animation", &CFrame::mMoveAnimation)
+        .def_readwrite("rotate_animation", &CFrame::mRotateAnimation)
+        .def_readwrite("scale_animation", &CFrame::mScaleAnimation)
         .def_readwrite("model", &CFrame::mModel);
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(

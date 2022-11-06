@@ -334,7 +334,7 @@ namespace vivid {
 
 
 
-        aiScene *GenerateScene(const vivid::CModel &model) {
+        aiScene *GenerateScene(vivid::CModel &model) {
             //setup scene
             auto *scene = new aiScene();
             scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;

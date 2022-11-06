@@ -26,7 +26,7 @@ namespace vivid
         //remove Mesh by label maybe?
         //List of meshes by label?
         inline size_t GetNumMeshes() const { return mMeshes.size(); }
-        inline vector<CModelComponent> GetMeshes() const {return mMeshes;}
+        inline const vector<CModelComponent>& GetMeshes() const {return mMeshes;}
         inline size_t GetNumVertices() const {
             size_t count = 0;
             for (const auto& mesh : mMeshes) {

@@ -37,13 +37,13 @@ Now lets add some animation to the cubes:
    animation.ticks_per_second = 30
    
    #set animation to each model by index and animation type
-   animation.set_move_animation(0, [3,3,3]) #movement vector, 0 is stay still
-   animation.set_move_animation(4, [0,10,3])
-   animation.set_move_animation(7, [0,0,3])
-   animation.set_rotate_animation(1, [2.3,2.3,2.3]) # in anguler angles
-   animation.set_rotate_animation(6, [0, 2.3, 1])
-   animation.set_scale_animation(3, [0.5,0.5,0.5]) #1 is basic size, 0 is non-existence
-   animation.set_scale_animation(5, [3,3,3])
+   animation.frames[0].move_animation(0, [3,3,3]) #movement vector, 0 is no movement.
+   animation.frames[4].move_animation = [0,10,3]
+   animation.frames[7].move_animation = [0,0,3]
+   animation.frames[1].rotate_animation = [2.3,2.3,2.3] # in anguler angles
+   animation.frames[6].rotate_animation = [0, 2.3, 1]
+   animation.frames[3].scale_animation = [0.5,0.5,0.5] #1 is basic size, 0 is non-existence
+   animation.frames[5].scale_animation = [3,3,3]
 
    #export
    animation.export(path+"/CubeAnimation", "gltf2")

@@ -9,13 +9,12 @@ using namespace std;
 namespace vivid {
     class CMaterial {
     private:
-        string mLabel = "defaultMaterial";
-        normal_float mOpacity = 1.0;
-        normal_float mRoughness = 0.5;
-        normal_float mMetalness = 0.5
-        positive_float mEmissionStrength = 0;
+        string mLabel;
+        normal_float mOpacity;
+        normal_float mRoughness;
+        normal_float mMetalness;
+        positive_float mEmissionStrength ;
     public:
-        CMaterial() {}
         CMaterial(normal_float aOpacity = 1.0, normal_float aMetalness = 0.5, normal_float aRoughness = 0.5, positive_float aEmissionStrength = 0.0, const string& arLabel = "defaultMaterial")
                 : mOpacity(AssertNormalize(aOpacity)), mMetalness(AssertNormalize(aMetalness)), mRoughness(AssertNormalize(aRoughness)), mEmissionStrength(AssertPositive(aEmissionStrength)), mLabel(arLabel) {}
 

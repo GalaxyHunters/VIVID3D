@@ -99,29 +99,27 @@ Attributes
 ----------
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-shininess : (0.0-1.0), default: 0.1
-    Shininess affects the reflectivity of a mesh.
-emission_strength : (0.0-1.0), default: 0.0
+metalness : (0.0-1.0), default: 0.5
+    Float in the range of 0.0 - 1.0 indicating the reflectiveness quality of the material, where 0 is completely non-reflective and 1 is completely reflective. This variable is affected by the roughness parameter as well.
+roughness : (0.0-1.0), default: 0.5
+    Float in the range of 0.0 - 1.0 indicating the surface texture quality of the material, where 0 is completely smooth and 1 is completely rough. This variable affects the look of the reflection of a surface.
+emission_strength : Positive Float, default: 0.0
     Float in the range of 0.0 - 1.0 indicating the self-illumination strength of the material.
-
-emission_color : str, default: "black"
-    The color of self-illumination. See https://htmlcolorcodes.com/color-names/ for list of all available colors."
-name : str, default: "defaultMaterial"
+label : str, default: "defaultMaterial"
     Optional name of the object, not required to be unique.
 
     )mydelimiter")
-        .def(py::init<normal_float, normal_float, float, const string&, const string&  >(),
-            py::arg("opacity")=1, py::arg("shininess")=0.1, py::arg("emission_strength")=0, 
-            py::arg("emission_color")="black", py::arg("name")="defaultMaterial")
-        .def_property("name", &CMaterial::GetLabel, &CMaterial::SetLabel, "Name: string")
+        .def(py::init<normal_float, normal_float, normal_float, float, const string&  >(),
+            py::arg("opacity")=1, py::arg("metalness")=0.5, py::arg("roughness")=0.5, py::arg("emission_strength")=0, py::arg("name")="defaultMaterial")
+        .def_property("label", &CMaterial::GetLabel, &CMaterial::SetLabel, "Name: string")
         .def_property("opacity", &CMaterial::GetOpacity, &CMaterial::SetOpacity,
             "Opacity (0.0-1.0)")
-        .def_property("shininess", &CMaterial::GetShininess, &CMaterial::SetShininess,
-            "Shininess (0.0-1.0)")
+        .def_property("metalness", &CMaterial::GetMetalness, &CMaterial::SetMetalness,
+            "Metalness (0.0-1.0)")
+        .def_property("roughness", &CMaterial::GetRoughness, &CMaterial::SetRoughness,
+            "Metalness (0.0-1.0)")
         .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
-            "Emission Strength : PositiveFloat")
-        .def_property("emission_color", &CMaterial::GetEmissionColor, &CMaterial::SetEmissionColor,
-            "Emission Color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.");
+            "Emission Strength : PositiveFloat");
 
     py::class_<CModelComponent> (m, "BaseMesh", R"mydelimiter(
 Inheritable parent class for : vivid3d.Mesh, vivid3d.PointCloud, vivid3d.Lines

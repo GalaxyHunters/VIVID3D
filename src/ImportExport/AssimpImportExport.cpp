@@ -268,34 +268,36 @@ namespace vivid {
 
         aiMaterial *GenerateMaterial(const vivid::CModelComponent& arMesh, const string& aTextureName, size_t mat_index) {
             auto arMaterial = arMesh.GetMaterial();
-            auto arCmap = arMesh.GetColormap();
+            auto cmap = arMesh.GetColorMap().GetColorMap();
             auto *material = new aiMaterial();
             // name
             const aiString *name = new aiString(arMaterial.GetLabel() + "_mat"+ to_string(mat_index));
             material->AddProperty(name, AI_MATKEY_NAME);
 
             // base color
-            if (arModel.GetColormap().size() == 1) {
-                const auto base_color = arModel.GetColormap()[0];
-                const aiColor4D *diffuse_color = new aiColor4D(base_color[0], base_color[1], base_color[2], 1);
+            aiColor4D *diffuse_color;
+            if (cmap.size() == 1) {
+                const auto base_color = ToNormalRGB(cmap[0]);
+                diffuse_color = new aiColor4D(base_color[0], base_color[1], base_color[2], 1);
             } else {
-                const aiColor4D *diffuse_color = new aiColor4D(1, 1, 1, 1);
+                diffuse_color = new aiColor4D(1, 1, 1, 1);
             }
-            material->AddProperty(diffuse_color, 3, AI_MATKEY_COLOR_DIFFUSE);
+            material->AddProperty(diffuse_color, 4, AI_MATKEY_COLOR_DIFFUSE);
 
             // emissive color
             const auto emission_factor = arMaterial.GetEmissionStrength();
-            const auto emission_color = min(emission_factor, 1);
-            if (arModel.GetColormap().size() == 1) {
-                const auto base_color = arModel.GetColormap()[0];
-                const aiColor4D *emissive_color = new aiColor3D(base_color[0] * emission_color, base_color[1] * emission_color, base_color[2] * emission_color);
+            const auto emission_color = min(emission_factor, 1.0f);
+            aiColor3D *emissive_color;
+            if (cmap.size() == 1) {
+                const auto base_color = ToNormalRGB(cmap[0]);
+                emissive_color = new aiColor3D(base_color[0] * emission_color, base_color[1] * emission_color, base_color[2] * emission_color);
             } else {
-                const aiColor3D *emissive_color = new aiColor3D(emission_color, emission_color, emission_color);
+                emissive_color = new aiColor3D(emission_color, emission_color, emission_color);
             }
             material->AddProperty(emissive_color, 3,AI_MATKEY_COLOR_EMISSIVE);
 
             // emissive strength
-            const float *emissive_intensity = new float(max(emission_factor, 1.0));
+            const float *emissive_intensity = new float(max(emission_factor, 1.0f));
             material->AddProperty(emissive_intensity, 1, AI_MATKEY_EMISSIVE_INTENSITY);
 
             // metalness

@@ -15,7 +15,7 @@ Interactive Demo
 
     <iframe
         title="Material Editor" width="100%" height="800px"
-        src='../resources/material_viewer.html'></iframe>
+        src='../_static/material_viewer.html'></iframe>
 
 Good examples for each material would be :
 

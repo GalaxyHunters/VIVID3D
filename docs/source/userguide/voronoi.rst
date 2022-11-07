@@ -79,11 +79,13 @@ For the second method, we will use a mask and utilize some other abilities of th
     mesh1 = voronoi.iso_surface(mask1, "Mesh", 0.5)
     mesh2 = voronoi.iso_surface(mask2, "Mesh", 1)
     mesh1.smooth()
-    mesh1.show()
+    
+    #make a grid
+    grid = vivid3d.create_grid(20,20,20)
     #make a model with our two meshes
-    #model = vivid3d.Model([mesh1,mesh2])
-    #model.show()
-    # export
+    model = vivid3d.Model([mesh1,mesh2,grid[0],grid[1]])
+    model.show()
+    # if we want to export to file it will look like this:
     # model.export(path+"/MyModel", "gltf2")
 
 Now we have a cool model.

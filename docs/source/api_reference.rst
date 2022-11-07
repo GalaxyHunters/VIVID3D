@@ -1,6 +1,14 @@
 Core API
 ========
 
+One liner function
+------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    generated/vivid3d.Make_Model
+
 Meshes and Models
 -----------------
 

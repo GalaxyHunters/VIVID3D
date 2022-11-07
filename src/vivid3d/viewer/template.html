@@ -140,7 +140,13 @@
       width: 30px;
       height: 30px;
       color: #fff;
+	  pointer-events: none;
+	  user-select: none;
     }
+
+	input[type=range] {
+		cursor: pointer;
+	}
 
     .slider {
       margin: 0 20px;
@@ -150,6 +156,8 @@
     .control-label {
       color: #fff;
       width: 50px;
+	  pointer-events: none;
+	  user-select: none;
     }
 
 	.play,
@@ -196,6 +204,7 @@
     .disabled {
       opacity: 0.3;
       cursor: default;
+	  pointer-events: none;
     }
 
     .hidden {
@@ -235,8 +244,7 @@
   </model-viewer>
   <div class='right-container'>
     <a class='title-bar' href='https://galaxyhuntersil.wixsite.com/website/vivid' target='_blank'>
-		VIV<span style='color:#4682B4'>I</span>D3D
-	</a>
+		VIV<span style='color:#4682B4'>I</span>D3D</a>
     <hr class='solid'>
     <div class='control-panel'>
       <button id='toggleRot' class='dropdown'>
@@ -338,6 +346,12 @@
   <script>
     const modelViewer = document.querySelector('model-viewer#modelviewer');
 
+    const openControls = (e, controls, icon) => {
+		controls.classList.toggle('show');
+		icon.classList.toggle('fa-chevron-down');
+		icon.classList.toggle('fa-chevron-up');
+	  }
+
     /* ------------------ROTATION------------------ */
 
     const toggleRot = document.querySelector('#toggleRot');
@@ -352,11 +366,6 @@
     const yawV = document.querySelector('#yawV');
     const formRot = document.querySelector('#formRot');
     formRot.reset();
-    const openControls = (e, controls, icon) => {
-      controls.classList.toggle('show');
-      icon.classList.toggle('fa-chevron-down');
-      icon.classList.toggle('fa-chevron-up');
-    }
 
     const updateOrientation = () => {
       modelViewer.orientation = `${rollS.value}deg ${pitchS.value}deg ${yawS.value}deg`;
@@ -400,7 +409,6 @@
       xV.innerHTML = xS.value / 10;
       yV.innerHTML = yS.value / 10;
       zV.innerHTML = zS.value / 10;
-      //modelViewerTransform.updateFraming();
     };
     toggleScale.addEventListener('click', (e) => {
       openControls(e, controlsScale, toggleScaleIcon);
@@ -416,6 +424,7 @@
     });
     formScale.addEventListener('reset', () => {
       setTimeout(updateScale);
+      setTimeout(() => modelViewer.updateFraming());
     });
 
     /* ------------------ANIMATION------------------ */
@@ -448,6 +457,10 @@
           animations.appendChild(option);
         })
 		setAnimation();
+		setInterval(() => {
+			playbackS.value = modelViewer.currentTime * 100
+      		playbackV.innerHTML = parseFloat(playbackS.value / 100).toFixed(1);
+		}, 10);
       } else {
         toggleAnimation.classList.add('disabled');
         const toggleIcon = toggleAnimation.querySelectorAll('i')[0];
@@ -490,7 +503,7 @@
 
     const updateFrame = () => {
       modelViewer.currentTime = playbackS.value / 100
-      playbackV.innerHTML = playbackS.value / 100;
+      //playbackV.innerHTML = playbackS.value / 100;
     };
 
     play.addEventListener('click', togglePlay);

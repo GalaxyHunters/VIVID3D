@@ -6,17 +6,17 @@ vector<double> GetParticlesVolume(const CVoronoiVolume &arSurf) {
     return arSurf.GetVoronoiData().mData.GetAllVolumes();
 } //CalcCellCMVolume
 
-vector<double> GetParticlesDensity(const CVoronoiVolume &arSurf, const std::vector<double> &arMassField) {
+vector<coord_t> GetParticlesDensity(const CVoronoiVolume &arSurf, const std::vector<double> &arMassField) {
     vector<double> volumes = GetParticlesVolume(arSurf);
 
-    vector<double> densities (arMassField.size());
+    vector<coord_t> densities (arMassField.size());
     for (int i = 0; i < arMassField.size(); i++) {
         densities[i] = arMassField[i]/volumes[i];
     }
     return densities;
 }
 
-vector<double> GetSurfaceAreas(const CVoronoiVolume &arSurf)
+vector<coord_t> GetSurfaceAreas(const CVoronoiVolume &arSurf)
 {
     // Face Area Calculation by Triangles as in Mesh
     vector<coord_t> face_areas;
@@ -44,10 +44,10 @@ vector<double> GetSurfaceAreas(const CVoronoiVolume &arSurf)
 }
 
 
-vector<double> CalculateFlux(const CVoronoiVolume &arSurf, const CPoint &arField) {
+vector<coord_t> CalculateFlux(const CVoronoiVolume &arSurf, const CPoint &arField) {
     vector<CSurfaceFace> faces = arSurf.GetFaces();
-    vector<double> flux (faces.size());
-    vector<double> areas = GetSurfaceAreas(arSurf);
+    vector<coord_t> flux (faces.size());
+    vector<coord_t> areas = GetSurfaceAreas(arSurf);
     vector<CPoint> input_points = arSurf.GetInputPoints();
     for (int i = 0; i<flux.size(); i++) {
         // Face Normal Calculate

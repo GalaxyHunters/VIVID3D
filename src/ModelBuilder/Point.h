@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-typedef double coord_t;
+typedef float coord_t;
 
 constexpr coord_t POINT_SIMILARITY_THRESHOLD = 0.0001;
 

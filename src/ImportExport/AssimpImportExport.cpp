@@ -162,7 +162,7 @@ namespace vivid {
         }
 
         string GenerateTexturePNG(CColorMap &arMeshTexture, std::string &arOutputPath) {
-            string textureName = arOutputPath + arMeshTexture.GetName() + "_texture.png";
+            string textureName = arOutputPath +"_"+ arMeshTexture.GetName() + "_texture.png";
             vector<unsigned char> ClmBuffer = arMeshTexture.GetColorTexture();
             vivid::encodePNG(textureName, ClmBuffer, 1,
                              ClmBuffer.size() / 4);
@@ -229,11 +229,14 @@ namespace vivid {
 
             /*
                 color flow in vivid works by face. in most 3d formats (and assimp) texture cords are by vertices
-                in this segments we get the average color of each vertice.
+                in this segment we get the average color of each vertice.
             */
-            OutMesh->mTextureCoords[0] = new aiVector3D [vVertices.size()];
-            OutMesh->mNumUVComponents[0] = 2;
-            //OutMesh->mTextureCoords[0][it - vTriangles.begin()] = aiVector3D(0, it->GetQuan(), 0);
+            //if clm is one color dont write UVs
+            bool clm_is_texture = apMesh->GetColorMap().GetColorMap().size() > 1;
+            if(clm_is_texture) {
+                OutMesh->mTextureCoords[0] = new aiVector3D[vVertices.size()];
+                OutMesh->mNumUVComponents[0] = 2;
+            }
 
 
             //assign faces and find average UVcoord per point
@@ -245,7 +248,7 @@ namespace vivid {
                 face.mIndices = new unsigned int[indexes.size()];
                 for (int i = 0; i < indexes.size(); i++) {
                     face.mIndices[i] = indexes[i];
-                    vetUVcoord[indexes[i]].insert(it->GetUVcoord());
+                    if(clm_is_texture) vetUVcoord[indexes[i]].insert(it->GetUVcoord()); //dont write uv cords if the clm is only one color
                 }
             }
 
@@ -253,10 +256,11 @@ namespace vivid {
             double tempAvr, val;
             for (int j = 0; j < vVertices.size(); j++) {
                 OutMesh->mVertices[j] = aiVector3D(vVertices[j].X(), vVertices[j].Y(), vVertices[j].Z());
+                if(!clm_is_texture) continue; //dont write uv cords if the clm is only one color
                 if (!vetUVcoord[j].empty()) { //uv coords
                     tempAvr = 0;
-                    for (auto it = vetUVcoord[j].begin(); it != vetUVcoord[j].end(); ++it) {
-                        tempAvr += *it;
+                    for (auto it : vetUVcoord[j]) {
+                        tempAvr += it;
                     }
                     val = max(0.01, min(1 - tempAvr / vetUVcoord[j].size(), 1.0));
                     OutMesh->mTextureCoords[0][j] = aiVector3D(0, val, 0);
@@ -268,7 +272,7 @@ namespace vivid {
         }
 
         aiMaterial *GenerateMaterial(const vivid::CModelComponent& arMesh, const string& aTextureName, size_t mat_index) {
-            auto arMaterial = arMesh.GetMaterial();
+            const auto arMaterial = arMesh.GetMaterial();
             auto cmap = arMesh.GetColorMap().GetColorMap();
             auto *material = new aiMaterial();
             // name
@@ -316,7 +320,7 @@ namespace vivid {
             material->AddProperty(opacity, 1, AI_MATKEY_OPACITY);
 
             // textures
-            if(!cmap.size() == 1) { //one color
+            if(cmap.size() > 1) { //one color
                 const int *uvwsrc = new int(0);
                 material->AddProperty(uvwsrc, 1, AI_MATKEY_UVWSRC_AMBIENT(0));
 

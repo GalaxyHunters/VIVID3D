@@ -10,11 +10,11 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
 {
     //check input valdilty
     if( aVerticlePercent < 0 || aVerticlePercent > 1){
-        aVerticlePercent = max(0.05, min(aVerticlePercent, .9));
+        aVerticlePercent = max((coord_t)0.05, min(aVerticlePercent, (coord_t).9));
         Log(LOG_WARNING, INVALID_ALPHA_VALUE);
     }
     if( aMaxError < 0 || aMaxError > 1){
-        aMaxError = max(0.05, min(aMaxError, .9));
+        aMaxError = max((coord_t)0.05, min(aMaxError, (coord_t).9));
         Log(LOG_WARNING, INVALID_ALPHA_VALUE);
     }
     if (!mFacesAreTriangles) { TriangulizeFaces(); }

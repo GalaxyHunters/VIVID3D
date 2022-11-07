@@ -154,4 +154,4 @@ This example writes using the default *file_type = glb* to the blob_data instanc
 
 .. code-block:: python
 
-    blob_data = model.export()
+    blob_data = model.export_to_blob()

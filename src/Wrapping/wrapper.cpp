@@ -27,10 +27,10 @@ namespace py = pybind11;
 using namespace py::literals;
 constexpr auto DEFAULT_COLOR_SHAPES = "lightgray";
 
-py::array_t<double> make_cpoint(const double aValue) {
-    py::array_t<double> array (3);
+py::array_t<coord_t> make_cpoint(const coord_t aValue) {
+    py::array_t<coord_t> array (3);
     py::buffer_info buffer = array.request();
-    auto ptr = static_cast<double *>(buffer.ptr);
+    auto ptr = static_cast<coord_t *>(buffer.ptr);
     for (int i = 0; i < 3; i++) {
         ptr[i] = aValue;
     }
@@ -87,7 +87,7 @@ files : list[bytes]
         .def(py::init<coord_t, coord_t, coord_t>(),
              "Constructor for point",
              py::arg("x"), py::arg("y"), py::arg("z"))
-        .def(py::init<std::vector<double>>(),
+        .def(py::init<std::vector<coord_t>>(),
                  "Constructor for point",
                  py::arg("3d_vector"));
 
@@ -778,7 +778,7 @@ html : str or IPython.display.HTML
 
     )mydelimiter")
         .def(py::init<> (), "default constructor for StopMotionAnimation")
-        .def(py::init<const CModel &, double> (),
+        .def(py::init<const CModel &, coord_t> (),
         R"mydelimiter(
             constructor for StopMotionAnimation from a single Model.
 
@@ -790,7 +790,7 @@ html : str or IPython.display.HTML
                 seconds for frame
         )mydelimiter",
             py::arg("model"), py::arg("seconds_per_frame") = 2) //py::arg("model"), py::arg("mSecondsPerFrame")
-        .def(py::init<const vector<CModel> &, double> (),
+        .def(py::init<const vector<CModel> &, coord_t> (),
         R"mydelimiter(
             constructor for StopMotionAnimation from a list of Models.
 
@@ -802,7 +802,7 @@ html : str or IPython.display.HTML
                 seconds for frame
         )mydelimiter",
             py::arg("models"), py::arg("seconds_per_frame") = 2) //py::arg("models"), py::arg("mSecondsPerFrame")
-        .def(py::init<const CAnimation &, double> (),
+        .def(py::init<const CAnimation &, coord_t> (),
         R"mydelimiter(
             constructor for StopMotionAnimation from animation
 

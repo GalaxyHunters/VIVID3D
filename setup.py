@@ -23,7 +23,7 @@ setup(
     cmake_install_dir='src/vivid3d',
     author='GalaxyHuntersIL',
     author_email='galaxyhuntersil@gmail.com',
-    url='https://galaxyhuntersil.wixsite.com/labs/vivid',
+    url='https://galaxyhuntersil.wixsite.com/website/vivid',
     project_urls={
         "Documentation": "https://vivid.readthedocs.io/en/latest/",
         "Bug Tracker": "https://github.com/GalaxyHunters/Vivid/issues",

@@ -1,6 +1,6 @@
 """
 IPython 2D 3-Axis Volumetric Viewer
--------------
+----------------------------------
 """
 
 from matplotlib import animation
@@ -28,6 +28,7 @@ class VolumetricViewer(object):
     %matplotlib inline
     And the following magic to properly display the animation:
     %matplotlib notebook
+
     """
 
     def __init__(self, volume, cmap="viridis"):
@@ -49,6 +50,7 @@ class VolumetricViewer(object):
         -----
         Many IPython environments require the following magic to properly display the plots:
         %matplotlib inline
+
         """
         from ipywidgets import widgets, AppLayout, interactive_output
         from IPython.display import display
@@ -113,6 +115,7 @@ class VolumetricViewer(object):
         -----
         Many IPython environments require the following magic to properly display the animation:
         %matplotlib notebook
+
         """
         if cmap: self.cmap = cmap
         fig, images = self.__base_plots()

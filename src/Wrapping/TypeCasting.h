@@ -31,11 +31,11 @@ namespace pybind11 {
                 if (!src)
                     return false;
 
-                if (!convert and !py::array_t<double>::check_(src))
+                if (!convert and !py::array_t<coord_t>::check_(src))
                     return false;
 
                 //auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
-                py::buffer_info buffer = py::array_t<double>::ensure(src).request();
+                py::buffer_info buffer = py::array_t<coord_t>::ensure(src).request();
 
                 auto dims = buffer.ndim;
                 if (dims != 1)
@@ -51,7 +51,6 @@ namespace pybind11 {
                 auto *ptr = (coord_t *) buffer.ptr;
 
                 point = CPoint(ptr[0], ptr[1], ptr[2]);
-
                 // This is what's pushed to the function
                 value = point;
 
@@ -61,7 +60,7 @@ namespace pybind11 {
             //Conversion part 2 (C++ -> Python)
             static py::handle cast(const CPoint& src, py::return_value_policy policy, py::handle parent)
             {
-                std::vector<double> shape (3);
+                std::vector<coord_t> shape (3);
 
                 shape[0] = src.X();
                 shape[1] = src.Y();
@@ -69,7 +68,9 @@ namespace pybind11 {
 
                 py::array ret = py::cast(shape);
 
-                return ret;
+                //ret.inc_ref();
+
+                return ret.release();
             }
         };
 
@@ -83,14 +84,14 @@ namespace pybind11 {
             // Conversion part 1 (Python -> C++)
             bool load(py::handle src, bool convert)
             {
-                if ( !convert and !py::array_t<double>::check_(src) )
+                if ( !convert and !py::array_t<coord_t>::check_(src) )
                     return false;
 
                 if ( !src )
                     return false;
 
         //            auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
-                py::buffer_info buffer = py::array_t<double>::ensure(src).request();
+                py::buffer_info buffer = py::array_t<coord_t>::ensure(src).request();
 
                 auto dims = buffer.ndim;
 
@@ -117,20 +118,21 @@ namespace pybind11 {
                 return true;
             }
 
-//            //Conversion part 2 (C++ -> Python)
-//            static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
-//            {
-//                std::vector<std::vector<double>> shape (src.size());
-//
-//                for ( int i = 0 ; i < src.size() ; i++ ) {
-//                    shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
-//                }
-//
-//                py::array ret = py::cast(shape);
-//
-//                return ret;
-//
-//            }
+            //Conversion part 2 (C++ -> Python)
+            static py::handle cast(const std::vector<CPoint>& src, py::return_value_policy policy, py::handle parent)
+            {
+                std::vector<std::vector<coord_t>> shape (src.size());
+
+                for ( int i = 0 ; i < src.size() ; i++ ) {
+                    shape[i] = {src[i].X(), src[i].Y(), src[i].Z() };
+                }
+
+                py::array ret = py::cast(shape);
+
+                ret.inc_ref();
+                return ret.release();
+
+            }
         };
         /* ------------------------------------------------- COLORMAP -------------------------------------------------*/
         template <> struct type_caster<CColorMap>

@@ -12,18 +12,22 @@
 #
 import os
 import sys
-# sys.path.insert(0, os.path.abspath('.'))
+#sys.path.insert(0, os.path.abspath('.'))
 
-
+import vivid3d
+dir(vivid3d)
+dir(vivid3d.viewer)
 # -- Project information -----------------------------------------------------
 
-project = 'vivid3d'
+project = 'VIVID3D'
 copyright = '2022, GalaxyHuntersIL'
 author = 'GalaxyHuntersIL'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.2'
+release = vivid3d.__version__
 
+#package_path = os.path.abspath('../..')
+#os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
 
 # -- General configuration ---------------------------------------------------
 
@@ -33,13 +37,40 @@ release = '0.3.2'
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.autosummary",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
-    "sphinx_mdinclude"
+    "sphinx_mdinclude",
+    'nbsphinx',
+    "jupyter_sphinx",
 ]
-
-autosummary_generate = True
+autodoc_typehints_format = 'fully-qualified'
+autodoc_member_order = 'bysource'
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 3
 napoleon_numpy_docstring = True
+napoleon_use_rtype = False
+
+import re
+
+def autodoc_skip_properties(app, what, name, obj, skip, options):
+    if isinstance(obj, property):
+        return True
+    return None
+
+def autodoc_remove_init_methods(app, what, name, obj, options, lines):
+    if what == "class":
+        remove = len(lines)
+        for i, line in enumerate(lines):
+            if line.count(".. method::"):
+                remove = i
+                break
+
+        del lines[remove:]
+    return None
+
+def setup(app):
+    app.connect('autodoc-process-docstring', autodoc_remove_init_methods)
+    app.connect('autodoc-skip-member', autodoc_skip_properties)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -51,7 +82,7 @@ exclude_patterns = []
 
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+#pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
@@ -66,4 +97,21 @@ html_theme = 'furo'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['_static', 'resources']
+html_css_files = [
+    "styles.css",
+]
+
+
+# Intersphinx mapping
+# NOTE: if these are changed, then doc/intersphinx/update.sh
+# must be changed accordingly to keep auto-updated mappings working
+# intersphinx_mapping = {
+#     'python': ('https://docs.python.org/3', (None, 'intersphinx/python-objects.inv')),
+#     'numpy': ('https://numpy.org/doc/stable', (None, 'intersphinx/numpy-objects.inv')),
+#     'matplotlib': ('https://matplotlib.org/stable', (None, 'intersphinx/matplotlib-objects.inv')),
+#     'pandas': (
+#         'https://pandas.pydata.org/pandas-docs/stable',
+#         (None, 'intersphinx/pandas-objects.inv'),
+#     ),
+# }

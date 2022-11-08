@@ -43,8 +43,9 @@ int ShapesTest()
     model.AddMeshes({cube, cube1});
     pair<CLines, CLines> grid = CreateGrid(100, 10);
     vector<CModelComponent> list = {sphere, arrow_x, box, cube, grid.first, grid.second};
-//    model.AddMeshes(list);
-    model.Export(TEST_OUTPUT_PATH + "Shapes"); // /test_models/
+    model.AddMeshes(list);
+    //model.ExportToObj(TEST_OUTPUT_PATH + "ShapesVivid3D");
+    model.Export(TEST_OUTPUT_PATH + "ShapesNoUV", "glb"); // /test_models/
 
     return EXIT_SUCCESS;
 }
@@ -116,7 +117,7 @@ int CubeSurfTests()
     for (int i = 2; i >= -2; i -= 2) { // make the vornoi input points, a 3d grid for all combination optionts for 2, 0, -2
         for (int j = 2; j >= -2; j -= 2) {
             for (int k = 2; k >= -2; k -= 2) {
-                points.push_back( {(double)i, (double)j, (double)k} );
+                points.push_back( {(float)i, (float)j, (float)k} );
                 quan.push_back(j);
                 mask.push_back(false);
                 if (i == j && j == k && k == 0) {
@@ -160,12 +161,12 @@ int PyramidSmoothTest()
     vector<bool> mask;
     vector<normal_float> quan;
     coord_t Vmin, Vmax;
-    vector<double> temp;
+    vector<float> temp;
     int a = 0;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
         for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
             for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-                temp = vector<double>(3);
+                temp = vector<float>(3);
                 temp[0] = i ; temp[1] = j; temp[2] = z;
                 points.push_back(temp);
                 if (z >= 0 && HEIGHT >= z) {
@@ -224,7 +225,8 @@ int PyramidSmoothTest()
     auto cube = CreateCubeMesh({0,0,0}, 50, "yellow", 0.3, "cube");
     model.AddMesh(cube);
     cout << "export" << endl;
-    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "gltf");
+    model.Export(TEST_OUTPUT_PATH + "PyramidVoronoiVolumeTest", "glb");
+    //model.ExportToObj(TEST_OUTPUT_PATH + "PyramidcolorTest");
     return EXIT_SUCCESS;
 
 }
@@ -239,7 +241,7 @@ int RunMedicaneTest()
     vector<CPoint> points (nova.points.size());
     for (int j = 0; j < nova.quan.size(); j++) {
         nova.quan[j] = 0.5;
-        points[j] = nova.points[j];
+        points[j] = CPoint(nova.points[j][0],nova.points[j][1],nova.points[j][2]);
     }
     CVoronoiVolume surf = CVoronoiVolume(points, nova.quan, -15.1, 1.51);
     //surf.Smooth(false, 1);
@@ -283,16 +285,17 @@ int CubeAnimationTest()
     //CStopMotionAnimation anim = CStopMotionAnimation(models, 3);
     CAnimation anim = CAnimation(models);
     anim.SetDuration(150);
-    anim.SetRotateAnim(0, CPoint(2.3,0,1));
-    anim.SetRotateAnim(3, CPoint(0,2.3,1));
-    anim.SetRotateAnim(2, CPoint(2.3,0,1));
-    anim.SetRotateAnim(5, CPoint(2.3,2.3,0));
-    anim.SetMoveAnim(2,CPoint(3,3,3));
-    anim.SetMoveAnim(5,CPoint(3,3,3));
-    anim.SetScaleAnim(6, CPoint(2,2,2));
-    anim.SetScaleAnim(1, CPoint(5,0,0));
+    anim[0].mMoveAnimation = CPoint(2.3,0,1);
+    anim[3].mRotateAnimation = CPoint(0,2.3,1);
+    anim[2].mRotateAnimation = CPoint(2.3,0,1);
+    anim[5].mRotateAnimation = CPoint(2.3,2.3,0);
+    anim[2].mMoveAnimation = CPoint(3,3,3);
+    anim[5].mMoveAnimation = CPoint(3,3,3);
+    anim[6].mScaleAnimation = CPoint(2,2,2);
+    anim[1].mScaleAnimation = CPoint(5,0,0);
+    cout << anim[5].mScaleAnimation << endl;
     CStopMotionAnimation SManim = CStopMotionAnimation(anim, 2);
-    SManim.Export( TEST_OUTPUT_PATH + "/CubeAnimationTest", "gltf2");
+    anim.Export( TEST_OUTPUT_PATH + "/CubeAnimationTest", "gltf");
     //AssimpExport::AnimationExporter(anim, "gltf2", TEST_OUTPUT_PATH + "/CubeAnimationTest");
     return EXIT_SUCCESS;
 }
@@ -301,11 +304,11 @@ int make_model_test(){
     vector<float> distance;
     vector<bool> mask;
     vector<normal_float> quan;
-    vector<double> temp;
+    vector<float> temp;
     for (int i = -BOX_SIZE; i < BOX_SIZE; i += 2) {
         for (int j = -BOX_SIZE; j < BOX_SIZE; j += 2) {
             for (int z = -BOX_SIZE; z < BOX_SIZE; z += 2) {
-                temp = vector<double>(3);
+                temp = vector<float>(3);
                 temp[0] = i ; temp[1] = j; temp[2] = z;
                 points.push_back(temp);
                 distance.push_back(sqrt(pow(i - 0, 2) + pow(j - 0, 2) + pow(z - 0, 2)));
@@ -353,7 +356,7 @@ int main()
 //    if ( EXIT_SUCCESS != ret_value) return ret_value;
     Log(LOG_INFO, "Pyramid");
     ret_value = PyramidSmoothTest();
-    if ( EXIT_SUCCESS != ret_value ) return ret_value;
+//    if ( EXIT_SUCCESS != ret_value ) return ret_value;
 //    cout << "Cube Animation" << endl;
 //    ret_value = CubeAnimationTest();
 //    if ( EXIT_SUCCESS != ret_value ) return ret_value;

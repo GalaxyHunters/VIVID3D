@@ -10,16 +10,13 @@ namespace vivid {
     }
 
     void CAnimation::AddModels(const std::vector<CModel> &arModels) {
-        mModels.insert(mModels.end(), arModels.begin(), arModels.end());
-        for (int i = 0; i != arModels.size(); i++) {
-            mScaleAnim.push_back(CPoint());
-            mMoveAnim.push_back(CPoint());
-            mRotateAnim.push_back(CPoint());
+        for (auto model: arModels) {
+            mFrames.emplace_back(CFrame(model));
         }
     }
 
-    void CAnimation::AddModels(const CModel &arModels) {
-        AddModels(vector<CModel>(1, arModels));
+    void CAnimation::AddModel(const CModel &arModel) {
+        mFrames.emplace_back(CFrame(arModel));
     }
 
 }

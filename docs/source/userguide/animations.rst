@@ -21,7 +21,7 @@ First, we make a few cubes to animate:
     colors = ["Red", "Blue", "Green", "Purple", "Yellow", "Cyan", "White", "Black"]
     loc = [[0,0,0], [2,0,0], [4,0,0],[0,0,2],[2,0,2],[4,0,2],[0,0,4],[2,0,4]]
     for i in range(8):
-        box = vivid3d.create_cube(position=loc[i], size=0.5, color=colors[i], name=colors[i])
+        box = vivid3d.create_cube(position=loc[i], size=0.5, color=colors[i], label=colors[i])
         models.append(vivid3d.Model([box]))
 
 Animated Models

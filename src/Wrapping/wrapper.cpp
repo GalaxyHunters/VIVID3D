@@ -103,29 +103,45 @@ metalness : (0.0-1.0), default: 0.5
 roughness : (0.0-1.0), default: 0.5
     Float in the range of 0.0 - 1.0 indicating the surface texture quality of the material, where 0 is completely smooth and 1 is completely rough. This variable affects the look of the reflection of a surface.
 emission_strength : Positive Float, default: 0.0
-    Float in the range of 0.0 - 1.0 indicating the self-illumination strength of the material.
+    Positive Float indicating the self-illumination strength of the material.
 label : str, default: "defaultMaterial"
     Optional name of the object, not required to be unique.
 
     )mydelimiter")
         .def(py::init<normal_float, normal_float, normal_float, float, const string&  >(),
-            py::arg("opacity")=1, py::arg("metalness")=0.5, py::arg("roughness")=0.5, py::arg("emission_strength")=0, py::arg("name")="defaultMaterial")
-        .def_property("label", &CMaterial::GetLabel, &CMaterial::SetLabel, "Name: string")
-        .def_property("opacity", &CMaterial::GetOpacity, &CMaterial::SetOpacity,
-            "Opacity (0.0-1.0)")
-        .def_property("metalness", &CMaterial::GetMetalness, &CMaterial::SetMetalness,
-            "Metalness (0.0-1.0)")
-        .def_property("roughness", &CMaterial::GetRoughness, &CMaterial::SetRoughness,
-            "Metalness (0.0-1.0)")
-        .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength,
-            "Emission Strength : PositiveFloat");
+            py::arg("opacity")=1, py::arg("metalness")=0.5, py::arg("roughness")=0.5, py::arg("emission_strength")=0, py::arg("label")="defaultMaterial")
+        .def_property("label", &CMaterial::GetLabel, &CMaterial::SetLabel, R"mydelimiter(
+            label : str
+                Optional name of the object, not required to be unique.
+
+                )mydelimiter")
+        .def_property("opacity", &CMaterial::GetOpacity, &CMaterial::SetOpacity, R"mydelimiter(
+            opacity (0.0-1.0)
+                Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+
+                )mydelimiter")
+        .def_property("metalness", &CMaterial::GetMetalness, &CMaterial::SetMetalness, R"mydelimiter(
+            roughness : (0.0-1.0)
+                Float in the range of 0.0 - 1.0 indicating the surface texture quality of the material, where 0 is completely smooth and 1 is completely rough. This variable affects the look of the reflection of a surface.
+   
+                )mydelimiter")
+        .def_property("roughness", &CMaterial::GetRoughness, &CMaterial::SetRoughness, R"mydelimiter(
+            metalness : (0.0-1.0)
+                Float in the range of 0.0 - 1.0 indicating the reflectiveness quality of the material, where 0 is completely non-reflective and 1 is completely reflective. This variable is affected by the roughness parameter as well.
+                
+                )mydelimiter")
+        .def_property("emission_strength", &CMaterial::GetEmissionStrength, &CMaterial::SetEmissionStrength, R"mydelimiter(
+            emission_strength : Positive Float
+                Positive Float indicating the self-illumination strength of the material.
+    
+                )mydelimiter");
 
     py::class_<CModelComponent> (m, "BaseMesh", R"mydelimiter(
 Inheritable parent class for : vivid3d.Mesh, vivid3d.PointCloud, vivid3d.Lines
 
 Attributes
 ----------
-name : str
+label : str
     Optional name of the object, not required to be unique.
 n_polygons : number
     # of vertices
@@ -133,7 +149,7 @@ n_vertices : number
     # of vertices
 material : vivid3d.Material
     The material instance used by 3D renderers
-colormap : matplotlib.colors.ColorMap
+colormap : matplotlib.colors.ColorMap, default: "plasma"
     The Colormap instance used to map scalar data to colors.
     See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
 opacity : number
@@ -151,17 +167,18 @@ scale(scale_vec: Point3D)
     Scale the Mesh by scale_ved
 move(direction_vec: Point3D)
     Move the Mesh by direction_vec
-show(height=600) -> IPython.display.HTML or str
+show(height=600) -> IPython.display.HTML or None
     Render and view the mesh in a viewer window.
-export(output_file: str, file_type='glb2') -> BlobData or None
-    Writes Component to output_file with given file format. See __reference__ for list of all supported file formats.
-    If no output_file provided, this function will return a blob file in the given file format.
+export(output_file: str, file_type='glb')
+    Writes BaseMesh to output_file with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
+export_to_blob(file_type='glb') -> vivid3d.BlobData
+    Writes BaseMesh to vivid3d.BlobData with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
 
 )mydelimiter")
     .def(py::init<const CModelComponent&> (),
         "Copy Constructor for BaseMesh",
         py::arg("model_component"))
-    .def_property("name", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
+    .def_property("label", &CModelComponent::GetLabel, &CModelComponent::SetLabel)
     .def_property_readonly("n_polygons", &CModelComponent::GetFacesCount, "# of polygons")
     .def_property_readonly("n_vertices", &CModelComponent::GetPointsCount, "# of vertices")
     .def_property("material", &CModelComponent::GetMaterial, &CModelComponent::SetMaterial, "The material instance used by 3D renderers")
@@ -213,7 +230,7 @@ scale : Point3D
 
         )mydelimiter", py::arg("scale"))
     .def("export", &CModelComponent::Export, R"mydelimiter(
-        Writes Mesh to output_file with given file_type format. For full list of supported file formats, see: __reference__
+        Exports Mesh to output_file with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
         Parameters
         -------------
@@ -225,7 +242,7 @@ scale : Point3D
             )mydelimiter",
     py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
     .def("export_to_blob", &CModelComponent::ExportToBlob, R"mydelimiter(
-            Writes Mesh to Blob with given file_type format. For full list of supported file formats, see: __reference__
+            Exports Mesh to Blob with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
             Parameters
             ----------
@@ -256,15 +273,48 @@ html : str or IPython.display.HTML
 
         )mydelimiter", py::arg("height")=600)
     .def("__str__", [](const CModelComponent& arSelf) {
-        return "vivid3d.BaseMesh\nName: " + arSelf.GetLabel() + "\nVertices: " + to_string(arSelf.GetPointsCount()) + "\nFaces: " + to_string(arSelf.GetFacesCount());
+        return "vivid3d.BaseMesh\nlabel: " + arSelf.GetLabel() + "\nVertices: " + to_string(arSelf.GetPointsCount()) + "\nFaces: " + to_string(arSelf.GetFacesCount());
     });
 
 // Main Classes
     py::class_<CMesh, CModelComponent>(m, "Mesh", R"mydelimiter(
 Triangular Mesh class that holds polygonal surfaces.
 
+
+Attributes
+----------
+label : str
+    Optional name of the object, not required to be unique.
+n_polygons : number
+    # of vertices
+n_vertices : number
+    # of vertices
+material : vivid3d.Material
+    The material instance used by 3D renderers
+colormap : matplotlib.colors.ColorMap, default: "plasma"
+    The Colormap instance used to map scalar data to colors.
+    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
+opacity : number
+    Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+
 Methods
 -------
+set_color(color: string)
+    Set the mesh texture to a single color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.
+transform(matrix: ndarray(3,3))
+    Transform the Mesh by matrix
+rotate(norm_vec: Point3D, radians_angle: float)
+    Rotate the Mesh around the norm_vec by radians_angle
+scale(scale_vec: Point3D)
+    Scale the Mesh by scale_ved
+move(direction_vec: Point3D)
+    Move the Mesh by direction_vec
+show(height=600) -> IPython.display.HTML or None
+    Render and view the mesh in a viewer window.
+export(output_file: str, file_type='glb')
+    Writes BaseMesh to output_file with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
+export_to_blob(file_type='glb') -> vivid3d.BlobData
+    Writes BaseMesh to vivid3d.BlobData with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
 smooth(n_iterations=5, opacity_weight=0.7, beta_weight=0.0)
     Smooths the surface by HC Laplacian Algorithm. 
     See http://informatikbuero.com/downloads/Improved_Laplacian_Smoothing_of_Noisy_Surface_Meshes.pdf for reference.
@@ -316,8 +366,40 @@ Lines class that holds 3d lines
 
 Useful for plotting vector fields or trajectories.
 
+Attributes
+----------
+label : str
+    Optional name of the object, not required to be unique.
+n_polygons : number
+    # of vertices
+n_vertices : number
+    # of vertices
+material : vivid3d.Material
+    The material instance used by 3D renderers
+colormap : matplotlib.colors.ColorMap, default: "plasma"
+    The Colormap instance used to map scalar data to colors.
+    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
+opacity : number
+    Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+
 Methods
 -------
+set_color(color: string)
+    Set the mesh texture to a single color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.
+transform(matrix: ndarray(3,3))
+    Transform the Mesh by matrix
+rotate(norm_vec: Point3D, radians_angle: float)
+    Rotate the Mesh around the norm_vec by radians_angle
+scale(scale_vec: Point3D)
+    Scale the Mesh by scale_ved
+move(direction_vec: Point3D)
+    Move the Mesh by direction_vec
+show(height=600) -> IPython.display.HTML or None
+    Render and view the mesh in a viewer window.
+export(output_file: str, file_type='glb')
+    Writes BaseMesh to output_file with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
+export_to_blob(file_type='glb') -> vivid3d.BlobData
+    Writes BaseMesh to vivid3d.BlobData with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
 add_line(line: Point3DArray)
     Add a new line
 
@@ -329,10 +411,10 @@ Parameters
 ----------
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: "defaultMaterial"
+label : str, default: "defaultMaterial"
     Optional name of the object, not required to be unique.
 
-        )mydelimiter", py::arg("opacity")=1., py::arg("name")="")
+        )mydelimiter", py::arg("opacity")=1., py::arg("label")="")
 //    .def(py::init<const vector<CPoint>&, const normal_float, const string& >(), R"mydelimiter(
 //Lines Constructor
 //
@@ -341,12 +423,12 @@ name : str, default: "defaultMaterial"
 //line : Point3DArray
 //opacity : normalized float, default: 1.0
 //Opacity of Component
-//name : str, default: ""
+//label : str, default: ""
 //Label of Component
-//        )mydelimiter", py::arg("line"), py::arg("opacity")=1., py::arg("name")="")
+//        )mydelimiter", py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
 ////            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
 ////                 "Constructor for Lines",
-////                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("name")="")
+////                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
     .def(py::init<const CLines&>(),
          "Copy Constructor for Lines",
          py::arg("Lines"))
@@ -400,7 +482,7 @@ Parameters
 mask : array_like(n)[bool]
     An (n, 1) shaped boolean array for creating the iso-surface.
     Only faces between a True and False point will be included in the final mesh.
-name : str, default: "isosurface"
+label : str, default: "isosurface"
     Optional name of the object, not required to be unique.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
@@ -410,7 +492,7 @@ Returns
 vivid3d.Mesh
     The resulting iso-surface
 
-        )mydelimiter", py::arg("mask"), py::arg("name") = "isosurface", py::arg("opacity") = 1);
+        )mydelimiter", py::arg("mask"), py::arg("label") = "isosurface", py::arg("opacity") = 1);
 
 
     py::class_<CPointCloud, CModelComponent>(m, "PointCloud", R"mydelimiter(
@@ -418,8 +500,41 @@ PointCloud class for both surface and volumetric point clouds.
 
 Can be analyzed with 3D Voronoi for iso-surface extraction.
 
+
+Attributes
+----------
+label : str
+    Optional name of the object, not required to be unique.
+n_polygons : number
+    # of vertices
+n_vertices : number
+    # of vertices
+material : vivid3d.Material
+    The material instance used by 3D renderers
+colormap : matplotlib.colors.ColorMap, default: "plasma"
+    The Colormap instance used to map scalar data to colors.
+    See https://matplotlib.org/stable/gallery/color/colormap_reference for list of all supported colormaps.
+opacity : number
+    Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
+
 Methods
 -------
+set_color(color: string)
+    Set the mesh texture to a single color. See https://htmlcolorcodes.com/color-names/ for list of all available colors.
+transform(matrix: ndarray(3,3))
+    Transform the Mesh by matrix
+rotate(norm_vec: Point3D, radians_angle: float)
+    Rotate the Mesh around the norm_vec by radians_angle
+scale(scale_vec: Point3D)
+    Scale the Mesh by scale_ved
+move(direction_vec: Point3D)
+    Move the Mesh by direction_vec
+show(height=600) -> IPython.display.HTML or None
+    Render and view the mesh in a viewer window.
+export(output_file: str, file_type='glb')
+    Writes BaseMesh to output_file with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
+export_to_blob(file_type='glb') -> vivid3d.BlobData
+    Writes BaseMesh to vivid3d.BlobData with given file format. See https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types for list of all supported file formats.
 add_points(points: Point3DArray(n,3), color_field: array_like(n), color_field_min=0, color_field_max=0)
     Append the points to the existing point cloud.
 add_noise(max_displacement: float)
@@ -430,7 +545,7 @@ to_volume(noise_displacement=0)
         )mydelimiter")
     .def(py::init<normal_float, const std::string&>(),
         "Empty constructor for PointCloud",
-        py::arg("opacity") = 1, py::arg("name")= "VIVID_POINT_CLOUD")
+        py::arg("opacity") = 1, py::arg("label")= "VIVID_POINT_CLOUD")
     .def(py::init<const std::vector<CPoint>&, const std::string&, normal_float, const std::string&>(),  R"mydelimiter(
 PointCloud constructor from points and scalar color_field
 
@@ -442,9 +557,9 @@ color : str, default: 'white'
     Color to apply to all the points.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'pointCloud'
+label : str, default: 'pointCloud'
     Optional name of the object, not required to be unique.
-        )mydelimiter", py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("name")= "pointCloud")
+        )mydelimiter", py::arg("points"), py::arg("color")="white", py::arg("opacity") = 1, py::arg("label")= "pointCloud")
     .def(py::init<const std::vector<CPoint>&, vector<normal_float>&, normal_float, normal_float, normal_float, const std::string&>(), R"mydelimiter(
 PointCloud constructor from points and scalar color_field
 
@@ -460,10 +575,10 @@ color_field_max : float, default: 0.0
     Values above this will be clamped to this maximum. If null the maximum is automatically calculated
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'pointCloud'
+label : str, default: 'pointCloud'
     Optional name of the object, not required to be unique.
             )mydelimiter", py::arg("points"), py::arg("color_field") = vector<normal_float>(0),
-        py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("opacity") = 1, py::arg("name")= "pointCloud")
+        py::arg("color_field_min") = 0, py::arg("color_field_max") = 0, py::arg("opacity") = 1, py::arg("label")= "pointCloud")
     .def(py::init<const CPointCloud&>(),
         "Copy Constructor for Point Cloud",
         py::arg("point_cloud"))
@@ -519,7 +634,7 @@ add_mesh(mesh: vivid3d.BaseMesh)
 add_meshes(mesh: vivid3d.BaseMesh)
     Add Meshes, PointCloud's, or Lines objects to model
 export(output_file='', file_type='glb')
-    Default exporter supporting most common 3D file types. For full list of supported file formats see: __reference__
+    Default exporter supporting most common 3D file types. For full list of supported file formats see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
     Returns vivid3d.BlobData if output_file is empty.
 export_to_obj(output_file: str, with_texture=True)
     Backup exporter if the main export() function fails.
@@ -573,7 +688,7 @@ File Directory to export to
 
         )mydelimiter", py::arg("output_file"), py::arg("with_texture") = 1)
     .def("export", &CModel::Export, R"mydelimiter(
-    Writes Model to output_file with given file_type format. For full list of supported file formats, see: __reference__
+    Exports Model to output_file with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
     Parameters
     -------------
@@ -585,7 +700,7 @@ File Directory to export to
         )mydelimiter",
         py::arg("output_file")="Vivid3dModel", py::arg("file_type") = "glb")
     .def("export_to_blob", &CModel::ExportToBlob, R"mydelimiter(
-        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
+        Exports Model to Blob with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
         Parameters
         ----------
@@ -724,7 +839,7 @@ html : str or IPython.display.HTML
 
         )mydelimiter", py::arg("height")=600)
     .def("export_to_blob", &CAnimation::ExportToBlob, R"mydelimiter(
-        Writes Model to Blob with given file_type format. For full list of supported file formats, see: __reference__
+        Exports Animation to Blob with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
         Parameters
         ----------
@@ -739,7 +854,7 @@ html : str or IPython.display.HTML
     py::arg("file_type") = "glb")
     .def("export", &CAnimation::Export,
          R"mydelimiter(
-    Writes animation to output_file with given file_type format. For full list of supported file formats, see: __reference__
+    Exports Animation to output_file with given file_type format. For full list of supported file formats, see: https://vivid.readthedocs.io/en/latest/userguide/basics.html#supported-file-types
 
     Parameters
     -------------
@@ -852,7 +967,7 @@ html : str or IPython.display.HTML
 //     color_field_max : float, optional
 //         Set max value for color_field, anything below will be set to color_field_max
 //         If left empty will be set to max(color_field)
-//     name : str, default: "VIVID_MODEL"
+//     label : str, default: "VIVID_MODEL"
 //         Optional name of the object, not required to be unique.
 //     opacity : float, default: 1
 //         Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
@@ -878,7 +993,7 @@ html : str or IPython.display.HTML
 //         py::arg("color_field") = vector<normal_float>(0),
 //         py::arg("color_field_min") = 0,
 //         py::arg("color_field_max") = 0,
-//         py::arg("name")= "VIVID_MODEL",
+//         py::arg("label")= "VIVID_MODEL",
 //         py::arg("opacity") = 1,
 //         py::arg("file_type") = "gltf2",
 //         py::arg("noise_displacement") = 0.001);
@@ -898,7 +1013,7 @@ html : str or IPython.display.HTML
 //        py::arg("color_field") = vector<normal_float>(0),
 //        py::arg("color_field_min") = 0,
 //        py::arg("color_field_max") = 0,
-//        py::arg("name")= "VIVID_MODEL",
+//        py::arg("label")= "VIVID_MODEL",
 //        py::arg("opacity") = 1,
 //        py::arg("file_type") = "gltf2",
 //        py::arg("noise_displacement") = 0.001);
@@ -927,7 +1042,7 @@ color_field_min : float, optional
 color_field_max : float, optional
     Set max value for color_field, anything below will be set to color_field_max
     If left empty will be set to max(color_field)
-name : str, default: "VIVID_MODEL"
+label : str, default: "VIVID_MODEL"
     Optional name of the object, not required to be unique.
 opacity : array[float], default: []
     Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
@@ -948,7 +1063,7 @@ vivid3d.Model
        py::arg("color_field") = vector<normal_float>(0),
        py::arg("color_field_min") = 0,
        py::arg("color_field_max") = 0,
-       py::arg("name")= "VIVID_MODEL",
+       py::arg("label")= "VIVID_MODEL",
        py::arg("opacity") = vector<normal_float>(0),
        py::arg("file_type") = "gltf2",
        py::arg("noise_displacement") = 0.001);
@@ -980,7 +1095,7 @@ color_field_min : float, optional
 color_field_max : float, optional
     Set max value for color_field, anything below will be set to color_field_max
     If left empty will be set to max(color_field)
-name : str, default: "VIVID_MODEL"
+label : str, default: "VIVID_MODEL"
     Optional name of the object, not required to be unique.
 opacity : array[float], default: []
     Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
@@ -1002,7 +1117,7 @@ vivid3d.Model
        py::arg("color_field") = vector<normal_float>(0),
        py::arg("color_field_min") = 0,
        py::arg("color_field_max") = 0,
-       py::arg("name")= "VIVID_MODEL",
+       py::arg("label")= "VIVID_MODEL",
        py::arg("opacity") = vector<normal_float>(0),
        py::arg("file_type") = "gltf2",
        py::arg("noise_displacement") = 0.001);
@@ -1022,7 +1137,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'plane'
+label : str, default: 'plane'
     Optional name of the object, not required to be unique. 
 
 Returns
@@ -1031,7 +1146,7 @@ mesh : vivid3d.Mesh
     The 2D Plane mesh
 
         )mydelimiter", py::arg("position") = make_cpoint(0), py::arg("size") = 1,
-        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1., py::arg("name")="plane");
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1., py::arg("label")="plane");
     m.def("create_cube", &CreateCubeMesh, R"mydelimiter(
 Create a Cube mesh
 
@@ -1045,7 +1160,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'cube'
+label : str, default: 'cube'
     Optional name of the object, not required to be unique.
 
 Returns
@@ -1054,7 +1169,7 @@ mesh : vivid3d.Mesh
     The cube mesh
 
         )mydelimiter", py::arg("position") = make_cpoint(0), py::arg("size") = 1, py::arg("color")=DEFAULT_COLOR_SHAPES, 
-        py::arg("opacity") = 1., py::arg("name")="cube");
+        py::arg("opacity") = 1., py::arg("label")="cube");
     m.def("create_box", &CreateBoxMesh, R"mydelimiter(
 Create a Box mesh
 
@@ -1068,7 +1183,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'box'
+label : str, default: 'box'
     Optional name of the object, not required to be unique.
 
 Returns
@@ -1077,7 +1192,7 @@ mesh : vivid3d.Mesh
     The box mesh
 
         )mydelimiter", py::arg("position") = make_cpoint(0), py::arg("size") = make_cpoint(1),
-          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1., py::arg("name")="box");
+          py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1., py::arg("label")="box");
     m.def("create_sphere", &CreateSphereMesh, R"mydelimiter(
 Create a Sphere mesh
 
@@ -1095,7 +1210,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'sphere'
+label : str, default: 'sphere'
     Optional name of the object, not required to be unique.
 
 Returns
@@ -1104,7 +1219,7 @@ mesh : vivid3d.Mesh
     The sphere mesh
 
         )mydelimiter", py::arg("position")=make_cpoint(0),py::arg("radius")=1,py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
-        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity")=1., py::arg("name")="sphere");
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity")=1., py::arg("label")="sphere");
     m.def("create_ellipsoid", &CreateEllipsoidMesh, R"mydelimiter(
 Create an Ellipsoid mesh
 
@@ -1128,7 +1243,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'ellipsoid'
+label : str, default: 'ellipsoid'
     Optional name of the object, not required to be unique.
 
 Returns
@@ -1138,7 +1253,7 @@ mesh : vivid3d.Mesh
 
         )mydelimiter", py::arg("position")=make_cpoint(0),py::arg("radii"),py::arg("num_of_meridians")=20,py::arg("num_of_parallels")=20,
         py::arg("major_axis"), py::arg("middle_axis"), py::arg("minor_axis"),
-        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity")=1., py::arg("name")="ellipsoid");
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity")=1., py::arg("label")="ellipsoid");
     m.def("create_arrow", &CreateArrowMesh, R"mydelimiter(
 Create an Arrow mesh
 
@@ -1156,7 +1271,7 @@ color : str, default: 'lightgray'
     The color of the resulting mesh.
 opacity : (0.0-1.0), default: 1.0
     Float in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-name : str, default: 'arrow'
+label : str, default: 'arrow'
     Optional name of the object, not required to be unique.
 
 Returns
@@ -1165,7 +1280,7 @@ mesh : vivid3d.Mesh
     The arrow mesh
 
         )mydelimiter", py::arg("position")=make_cpoint(0), py::arg("direction"),py::arg("width")=0.5, py::arg("pointer_chest_ratio")=0.4,
-        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1, py::arg("name")="arrow");
+        py::arg("color")=DEFAULT_COLOR_SHAPES, py::arg("opacity") = 1, py::arg("label")="arrow");
     m.def("create_grid", &CreateGrid,R"mydelimiter(
 Create a Grid mesh, origin is at [0,0,0]
 
@@ -1207,7 +1322,7 @@ log_level : vivid3d.LogCode, default: LOG_VIVID
     Log all messages above or at this log level.
 write_to_file : bool, default: false
     Write all Logging output to file.
-log_file_name : str, default: 'VIVID_LOG.txt'
+log_file_label : str, default: 'VIVID_LOG.txt'
     File name for Logging.
 
         )mydelimiter", py::arg("write_to_console") = true, py::arg("log_level") = LOG_VIVID, 

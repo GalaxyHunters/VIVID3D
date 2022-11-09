@@ -1,5 +1,5 @@
-#ifndef COLORMAP
-#define COLORMAP
+#ifndef VIVID_COLORMAP_H
+#define VIVID_COLORMAP_H
 
 #include <vector>
 #include "Plasma.h"

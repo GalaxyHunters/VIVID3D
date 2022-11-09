@@ -37,17 +37,6 @@ py::array_t<coord_t> make_cpoint(const coord_t aValue) {
     return array;
 }
 
-py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
-    py::array_t<unsigned char> array (3);
-    py::buffer_info buffer = array.request();
-    auto ptr = static_cast<unsigned char *>(buffer.ptr);
-    for (int i = 0; i < 3; i++) {
-        ptr[i] = aValue;
-    }
-    return array;
-}
-
-
 PYBIND11_MODULE(_core, m) {
     m.doc() = R"mydelimitter(
 Core Module

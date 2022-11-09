@@ -59,8 +59,12 @@ Viewer
 """
 
 from .viewer import *
-from ._core import *
+from .visual import *
+from .utilities import *
+from .core import *
+from .utilities.geometry import *
+from .utilities.logging import *
+from .oneline import *
 from ._details import __version__
-from ._core import __doc__
 
-__all__ = ['_core', 'viewer']
+__all__ = ['visual','core','utilities','oneline','viewer']

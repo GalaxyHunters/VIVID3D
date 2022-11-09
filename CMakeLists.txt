@@ -146,41 +146,57 @@ if(DEFINED SKBUILD)
     add_subdirectory(pybind11)
     include_directories(pybind11/include)
     set(PYBIND11_FINDPYTHON ON)
-#    set(PYBIND11_PYTHON_VERSION 3.7)
     add_definitions(-DPYTHON)
 
-#    set(Python3_FIND_STRATEGY VERSION)
-#    find_package(Python3 COMPONENTS Interpreter Development)
     include_directories(${PYTHON_INCLUDE_DIRS})
     target_link_libraries(vivid ${PYTHON_LIBRARIES})
 
-    pybind11_add_module(_core
-            ${VIVID_SRC_DIR}/Wrapping/wrapper.cpp
+    pybind11_add_module(visual
+            ${VIVID_SRC_DIR}/Wrapping/Modules/visual.cpp
             ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
-            )
-
-#    target_include_directories(vivid_py PUBLIC
-#            $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ModelBuilder>
-#            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
-#            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-#            )
-
-    target_link_libraries(_core PRIVATE vivid)
+            )   
+    pybind11_add_module(core
+        ${VIVID_SRC_DIR}/Wrapping/Modules/core.cpp
+        ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
+        )   
+    pybind11_add_module(utilities
+        ${VIVID_SRC_DIR}/Wrapping/Modules/core.cpp
+        ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
+        )   
+    pybind11_add_module(animation
+        ${VIVID_SRC_DIR}/Wrapping/Modules/animations.cpp
+        ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
+        )   
+    pybind11_add_module(oneline
+        ${VIVID_SRC_DIR}/Wrapping/Modules/oneline.cpp
+        ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
+        )   
+    
+    target_link_libraries(visual PRIVATE vivid)
+    target_link_libraries(core PRIVATE vivid)
+    target_link_libraries(animation PRIVATE vivid)
+    target_link_libraries(utilities PRIVATE vivid)
+    target_link_libraries(oneline PRIVATE vivid)
 
     # Installing the extension module to the root of the package
-    install(TARGETS _core DESTINATION .)
-
-#    configure_file("${VIVID_SRC_DIR}/vivid_py/__main__.py.in"
-#            "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py")
-#
-#    install(FILES "${PROJECT_BINARY_DIR}/src/vivid_py/__main__.py" DESTINATION .)
+    install(TARGETS visual DESTINATION .)
+    install(TARGETS core DESTINATION .)
+    install(TARGETS animation DESTINATION .)
+    install(TARGETS utilities DESTINATION .)
+    install(TARGETS oneline DESTINATION .)
 
     if(APPLE)
-        set_target_properties(
-                _core PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(visual PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(core PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(utilities PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(animation PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(oneline PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
     else()
-        set_target_properties(_core PROPERTIES INSTALL_RPATH
-                "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(visual PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(core PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(utilities PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(animation PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+        set_target_properties(oneline PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
     endif()
 else()
     add_executable(vivid_main

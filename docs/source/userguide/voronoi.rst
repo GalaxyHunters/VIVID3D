@@ -30,7 +30,9 @@ The Voronoi Algorithm
 
 The Voronoi algorithm is a cousin of the `Delaunay Triangulation <https://en.wikipedia.org/wiki/Delaunay_triangulation>`_ method.
 
-The
+.. raw:: html
+
+    <iframe title="Voronoi 3D Example" width="100%" height="500px" src='../_static/voronoi_3d_example.html'></iframe>
 
 .. image:: ../resources/voronoi_diagram.jpg
    :width: 400

@@ -336,7 +336,7 @@ namespace vivid {
                 material->AddProperty(texIndex, AI_MATKEY_TEXTURE_EMISSIVE(0));
             }
             // twosided
-            const int *twosided = new int(0);
+            const int *twosided = new int(1);
             material->AddProperty(twosided, 1, AI_MATKEY_TWOSIDED);
 
             // obj specific things

@@ -160,7 +160,9 @@ if(DEFINED SKBUILD)
         ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
         )   
     pybind11_add_module(utilities
-        ${VIVID_SRC_DIR}/Wrapping/Modules/core.cpp
+        ${VIVID_SRC_DIR}/Wrapping/Modules/utilities.cpp
+        ${VIVID_SRC_DIR}/Wrapping/Modules/logging.cpp
+        ${VIVID_SRC_DIR}/Wrapping/Modules/geometry.cpp
         ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
         )   
     pybind11_add_module(animation

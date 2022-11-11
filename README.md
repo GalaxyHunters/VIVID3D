@@ -47,8 +47,8 @@ Learn the fundamentals and advanced model creation examples with the [User Guide
 **Project Leads**
 - [Tomer Nussbaum](https://github.com/tussbaum)
 - [Naftali Deutsch](https://github.com/rslanis)
-- [Zohar Milman](https://github.com/ZoharMilman)
 - [Adam Beili](https://github.com/Beilinson)
+- [Zohar Milman](https://github.com/ZoharMilman)
 
 **Special Thanks**
 - [Raphael Buzaglo](https://github.com/raphae2118)

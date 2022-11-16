@@ -27,7 +27,7 @@ Scale
   
   cube = vivid3d.create_cube(color='red', opacity=0.4)
   transformed_cube = cube.scale([1.5, 0.5, 2])
-  vivid3d.Model([starting_cube, moved_cube]).show()
+  vivid3d.Model([starting_cube, transformed_cube]).show()
 
 Rotate
 --------
@@ -35,6 +35,6 @@ Rotate
 .. jupyter-block::
   
   cube = vivid3d.create_cube(color='red', opacity=0.4)
-  transformed_cube = cube.rotate([1, 0, 0], 0.785)
-  vivid3d.Model([starting_cube, moved_cube]).show()
+  rotated_cube = cube.rotate([1, 0, 0], 0.785)
+  vivid3d.Model([starting_cube, rotated_cube]).show()
   

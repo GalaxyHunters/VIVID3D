@@ -14,7 +14,7 @@ For the purposes of this tutorial we will use a cube primitive, the original wil
 Move
 ----
 
-.. jupyter-block::
+.. jupyter-execute::
   
   cube = vivid3d.create_cube(color='red', opacity=0.4)
   moved_cube = cube.move([2, 1, 3])
@@ -23,7 +23,7 @@ Move
 Scale
 -------
 
-.. jupyter-block::
+.. jupyter-execute::
   
   cube = vivid3d.create_cube(color='red', opacity=0.4)
   transformed_cube = cube.scale([1.5, 0.5, 2])
@@ -32,7 +32,7 @@ Scale
 Rotate
 --------
 
-.. jupyter-block::
+.. jupyter-execute::
   
   cube = vivid3d.create_cube(color='red', opacity=0.4)
   rotated_cube = cube.rotate([1, 0, 0], 0.785)

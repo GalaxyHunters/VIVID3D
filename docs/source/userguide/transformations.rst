@@ -1,7 +1,7 @@
 Transformations
 ===============
 
-All VIVID3D :doc:`BaseMeshes<../generated/vivid3d.BaseMesh>` contain methods for basic transformations.
+All VIVID3D :doc:`BaseMesh<../generated/vivid3d.BaseMesh>` derived classes contain methods for basic transformations.
 
 For the purposes of this tutorial we will use a cube primitive, the original will be left in its starting position and shown in blue, while the transformed cube will be shown in red.
 

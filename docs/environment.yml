@@ -13,6 +13,7 @@ dependencies:
   - navigator-updater
   - python-devtools
   - numpy
+  - pandas
   - matplotlib
   - pip>=22.1  # pip is needed as dependency
   - pip:

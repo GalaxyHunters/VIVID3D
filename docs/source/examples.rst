@@ -30,6 +30,7 @@ cases with a variety of real datasets.
 .. toctree::
     :maxdepth: 1
 
+    userguide/solar_system
     notebooks/GalaxyStarsEnzo.ipynb
     notebooks/BrainCTScan.ipynb
 

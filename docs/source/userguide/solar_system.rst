@@ -10,7 +10,7 @@ Data for radii, orbital distances and orbital speeds is obtained from NASA, and 
     
     import vivid3d
     import numpy as np
-    imprt pandas as pd
+    import pandas as pd
 
     # Making the Base Data
     names     = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupyter', 'Saturn', 'Uranus', 'Neptune']

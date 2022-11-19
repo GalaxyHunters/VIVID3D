@@ -2,7 +2,7 @@ Solar System
 ============
 
 This tutorial makes use of :doc:`Geometries<./geometries>` and :doc:`Animations<./animations>` to create an animated
-model of the Solar System, with the sun and planets represented as :ref:`Spheres</generated/geometries:create_sphere>` and the asteroid belts with :doc:`PointClouds<./point_cloud>`
+model of the Solar System, with the sun and planets represented as spheres and the asteroid belts with :doc:`PointClouds<./point_cloud>`.
 
 Data for radii, orbital distances and orbital speeds is obtained from NASA, and scaled appropriately in order to visualize with maximal fidelity.
 
@@ -11,24 +11,25 @@ Data for radii, orbital distances and orbital speeds is obtained from NASA, and 
     import vivid3d
     import numpy as np
     import pandas as pd
+    import math
 
     # Making the Base Data
     names     = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupyter', 'Saturn', 'Uranus', 'Neptune']
     distances = [0, 1.8, 2, 2.4, 3, 7.4, 12.6, 24.2, 38]
     radii     = [1, 0.05, 0.125, 0.128, 0.07, 0.35, 0.3, 0.255, 0.255]
-    colors    = ['orange', 'coral', 'green', 'blue', 'red', 'tan', 'yellow', 'blue', 'skyblue']
+    colors    = ['orange', 'coral', 'yellowgreen', 'royalblue', 'brown', 'tan', 'yellow', 'turquoise', 'cyan']
 
     data = pd.DataFrame(list(zip(names, distances, radii, colors)), columns=['name', 'orbit', 'radius', 'color'])
-    display(data)
+    data
     
 We'll define a helper functions to help create the objects, and populate our `solar_system` `Animation` object with them:
 
 .. jupyter-execute::
 
-    planet_material = vivid3d.Material(1, 0, 1) # Planets are mostly rough surfaces with non-conductive (non-metal surfaces)
+    planet_material = vivid3d.Material(1, 1, 0.9) # Planets are mostly rough surfaces
 
     def create_solar_object(orbit, radius, color, name):
-        sphere = vivid3d.create_sphere([0,0,0], radius, 50, 50, color, name) # creating the planetary object
+        sphere = vivid3d.create_sphere([0,0,0], radius, 50, 50, color, 1, name) # creating the planetary object
         a = 2 * math.pi * np.random.normal();
         sphere.move([orbit * math.cos(a), 0, orbit * math.sin(a)]) # placing it randomly along its orbit
         sphere.material = planet_material # setting the material
@@ -43,14 +44,14 @@ We'll define a helper functions to help create the objects, and populate our `so
     solar_system.frames[0].model.meshes[0].material.emission_strength = 5
 
 Our Solar System also has two asteroid belts:
-    - The first is located between Mars and Jupyter, and is called `The Asteroid Belt<https://en.wikipedia.org/wiki/Asteroid_belt>`
-    - The second is located beyond Neptune, and is called `The Kuiper Belt<https://en.wikipedia.org/wiki/Kuiper_belt>`
+    - The first is located between Mars and Jupyter, and is called `The Asteroid Belt <https://en.wikipedia.org/wiki/Asteroid_belt>`_
+    - The second is located beyond Neptune, and is called `The Kuiper Belt <https://en.wikipedia.org/wiki/Kuiper_belt>`_
 
 We will model the asteroids as a circular PointCloud:
 
 .. jupyter-execute::
 
-    asteroid_material = vivid3d.Material(1, 1, 0.7) # Asteroids are primarily heavy metallic elements, with a rough semi-reflective texture
+    asteroid_material = vivid3d.Material(1, .8, 0.7) # Asteroids are primarily heavy metallic elements, with a rough semi-reflective texture
 
     def create_asteroid_field(distance, scale, count):
         points = []

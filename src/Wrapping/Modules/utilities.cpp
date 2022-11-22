@@ -70,7 +70,7 @@ files : list[bytes]
     // submodule SurfByFunc:
 
     // submodule Logging:
-    y::module logging = m.def_submodule("logging", R"mydelimiter(
+    py::module logging = m.def_submodule("logging", R"mydelimiter(
         Logging
         ========
 

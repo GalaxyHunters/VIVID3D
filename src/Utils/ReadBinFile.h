@@ -11,7 +11,7 @@
 
 using namespace std;
 
-struct ModelData { // TODO: code repetition!
+struct ModelData {
 	vector<vector<double >> points;
 	vector<bool> mask;
 	vector<normal_float> quan;
@@ -24,7 +24,7 @@ struct ModelDataMultipleMasks {
 };
 
 
-// TODO: why inline #facepalm^100
+
 static ModelData ReadBin(string file_loc) {
 	ifstream binFile(file_loc, ios::in | ios::binary);
 	if (!binFile.is_open()) {

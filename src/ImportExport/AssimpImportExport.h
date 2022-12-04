@@ -42,7 +42,6 @@ namespace vivid {
          */
         void AnimationExporter(vivid::CAnimation &arAnimation, const std::string &arFileType, std::string aOutputPath);
 
-        // TODO: CModel AssimpImport(const std::string &arInputPath)
     };
 }
 

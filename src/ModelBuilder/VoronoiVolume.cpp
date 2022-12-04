@@ -126,7 +126,7 @@ vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints
 {
     vector<shared_ptr<CPoint> > new_vec;
     for (const auto & arVornPoint : arVornPoints) {
-        new_vec.push_back(shared_ptr<CPoint>(new CPoint(arVornPoint.x, arVornPoint.y, arVornPoint.z))); //TODO y not copy c~tor?
+        new_vec.push_back(shared_ptr<CPoint>(new CPoint(arVornPoint.x, arVornPoint.y, arVornPoint.z)));
     }
     return new_vec;
 }

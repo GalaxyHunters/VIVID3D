@@ -241,7 +241,7 @@ void CVoronoiSmoothing::CleanDoublePointsVorn(vector<CPoint>& arNewPoints, vecto
 void CVoronoiSmoothing::MakeMask()
 {
     vector<bool> new_mask;
-    for (size_t i = 0; i < mOutPoints.size(); i++) { //TODO might be faster using fill or something similar in vector
+    for (size_t i = 0; i < mOutPoints.size(); i++) {
         new_mask.push_back(false);
 
     }

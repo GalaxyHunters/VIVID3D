@@ -5,16 +5,12 @@
 
 #include <string>
 
-//TODO (TOMER) this file has many repetitions inside. This spaghetti code should be rewritten
 
-// GENERAL MESSAGE:
-//TODO MAGIC STRINGS, SHOULD BE included in a special define header
-//TODO also:  to_string(aColor.R), int2str(*apMtlCounter) is a very bad practice. CPP is not python. and file formatting should be exact
 
 using namespace std;
 
 namespace vivid
-{  // TODO temp fix most of the functions here should be rewritten or become out of scope
+{
 
     map<FACE_TYPE, char> ELEMENT_TYPE {{POLYGONS, 'f'}, {TRIANGLES, 'f'}, {LINES, 'l'}, {POINTS, 'p'}};
 
@@ -34,7 +30,6 @@ namespace vivid
 
     void WriteNewMtl(ofstream& aOBJFile, ofstream& aMTLFile, size_t * apMtlCounter, color_t aColor, coord_t aAlpha)
     {
-        // TODO talk to tomer about line endings, unix vs windows.
         aMTLFile << "newmtl surf_%07d" << (*apMtlCounter) <<endl;
         aMTLFile << "Ns 96.078\nKa 1.000 1.000 1.000\n";
         aMTLFile << "Kd " + to_string(aColor[0]) + " " + to_string(aColor[1]) + " " + to_string(aColor[2]) + "\n";
@@ -56,7 +51,7 @@ namespace vivid
         vector<size_t> face_points = aFace.GetPoints();
         for (vector<size_t>::iterator ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
         {
-            aOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + " "; //TODO formatting
+            aOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + " ";
         }
         aOBJFile << "\n";
     }
@@ -113,7 +108,6 @@ namespace vivid
         }
 
         string lines;
-        //TODO BAD!!! Y NOT STD????
 #if defined(_WIN32)
         lines = '\\';
 #elif defined(__linux__)
@@ -122,9 +116,8 @@ namespace vivid
         lines = '/';
 #endif
 
-        ofstream OBJFile (aOutput + ".obj"); // obj file  //TODO naming
+        ofstream OBJFile (aOutput + ".obj"); // obj file
         ofstream MTLObj  (aOutput + ".mtl");  // mtl file
-//  TODO if (OBJFile.is_open())  MTLObj.is_open()  https://www.cplusplus.com/doc/tutorial/files/
 
         string mtl = aOutput;
         while (mtl.find(lines) != string::npos) {
@@ -156,7 +149,7 @@ namespace vivid
         size_t VT = apMesh->GetColorMap().GetColorIndex(aFace.GetUVcoord()) + 1;
         for (auto ItPoint = face_points.begin(); ItPoint != face_points.end(); ItPoint++)
         {
-            arOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + "/" + to_string(VT) + " "; //TODO formatting
+            arOBJFile << to_string(*ItPoint + 1 + aPointsCounter) + "/" + to_string(VT) + " ";
         }
         arOBJFile << "\n";
     }
@@ -207,7 +200,7 @@ namespace vivid
             aOutput.erase(aOutput.length() - 4, 4);
         }
         string lines;
-#if defined(_WIN32)                                     //TODO this is ugly, change this
+#if defined(_WIN32)
         lines = '\\';
 #elif defined(__linux__)
         lines = '/';

@@ -360,7 +360,6 @@ beta_weight : (0.0-1.0), default: 0.0
 
         )mydelimiter", py::arg("n_iterations") = 5, py::arg("alpha_weight") = 0.7, py::arg("beta_weight") = 0.0);
 
-    // TODO: Add color_field support to lines as in points.
     py::class_<CLines, CModelComponent>(m, "Lines", R"mydelimiter(
 Lines class that holds 3d lines
 
@@ -415,20 +414,6 @@ label : str, default: "defaultMaterial"
     Optional name of the object, not required to be unique.
 
         )mydelimiter", py::arg("opacity")=1., py::arg("label")="")
-//    .def(py::init<const vector<CPoint>&, const normal_float, const string& >(), R"mydelimiter(
-//Lines Constructor
-//
-//Parameters
-//----------------
-//line : Point3DArray
-//opacity : normalized float, default: 1.0
-//Opacity of Component
-//label : str, default: ""
-//Label of Component
-//        )mydelimiter", py::arg("line"), py::arg("opacity")=1., py::arg("label")="")
-////            .def(py::init<const vector<vector<CLines>>&, const coord_t, const string&>(),
-////                 "Constructor for Lines",
-////                 py::arg("array_of_lines"), py::arg("opacity")=1., py::arg("label")="")
     .def(py::init<const CLines&>(),
          "Copy Constructor for Lines",
          py::arg("Lines"))
@@ -439,7 +424,7 @@ label : str, default: "defaultMaterial"
 //                 "Add array of lines",
 //                 py::arg("points_matrix"));
 
-//TODO: Add VoronoiVolume analysis shit here.
+
 py::class_<CVoronoiVolume>(m, "VoronoiVolume", R"mydelimiter(
 VoronoiVolume class for Volumetric analysis and iso-surface extraction.
 
@@ -970,7 +955,7 @@ label : str, default: "VIVID_MODEL"
     Optional name of the object, not required to be unique.
 opacity : array[float], default: []
     Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-file_type : str, default: "gltf2"
+file_type : str, default: "glb"
     File format for export, out of Assimp supported formats
 noise_displacement : float, default: 0.001
     The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
@@ -989,7 +974,7 @@ vivid3d.Model
        py::arg("color_field_max") = 0,
        py::arg("label")= "VIVID_MODEL",
        py::arg("opacity") = vector<normal_float>(0),
-       py::arg("file_type") = "gltf2",
+       py::arg("file_type") = "glb",
        py::arg("noise_displacement") = 0.001);
 
 
@@ -1023,7 +1008,7 @@ label : str, default: "VIVID_MODEL"
     Optional name of the object, not required to be unique.
 opacity : array[float], default: []
     Array of Floats in the range of 0.0 - 1.0 indicating how transparent the material is. A value of 0.0 indicates fully transparent, 1.0 is fully opaque.
-file_type : str, default: "gltf2"
+file_type : str, default: "glb"
     File format for export, out of Assimp supported formats
 noise_displacement : float, default: 0.001
     The Voronoi algorithm struggles with equidistant point data, a small noise displacement improves algorithm speed
@@ -1043,7 +1028,7 @@ vivid3d.Model
        py::arg("color_field_max") = 0,
        py::arg("label")= "VIVID_MODEL",
        py::arg("opacity") = vector<normal_float>(0),
-       py::arg("file_type") = "gltf2",
+       py::arg("file_type") = "glb",
        py::arg("noise_displacement") = 0.001);
 
 

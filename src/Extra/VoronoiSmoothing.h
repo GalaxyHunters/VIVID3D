@@ -31,7 +31,7 @@ namespace vivid
         // Part 2
         void UpdatePoutPin();
         void Stage2ModifyPoints();
-        // TODO: Way too many fucking arguments, at least clean it up a bit by making them class variables. Rename the supersmooth functions as well just for better readability
+
         void FindPairPoints(size_t aCPoint1, size_t aCPoint2, std::vector<size_t> &arPIn, std::vector<size_t> &arPOut, size_t aPOutSize, size_t aPInSize,
                             const CSurfaceFace &arFace, std::vector<CPoint> &arNewPoints, std::vector<normal_float> &arNewQuan, size_t &arIndex);
         void AddPointsAlt(std::vector<size_t> &arPVec, std::vector<CPoint> &arNewPoints, std::vector<normal_float> &arNewQuan,

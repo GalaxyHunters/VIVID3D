@@ -191,7 +191,6 @@ namespace pybind11 {
         };
 
         /* -------------------------------------------- MATRIX<CPOINT> --------------------------------------------*/
-        // TODO: FIgure out how to do this, if the np 3d matrix has different lengths then its ndim is 1 and impossible to parse using the current strategy
         // SOLUTION 1: Only accept proper np matrix
         // SOLUTION 2: Just take the whole buffer (flattened) and read 3 values at a time
         //    template <> struct type_caster<std::vector<std::vector<<CPoint>>>

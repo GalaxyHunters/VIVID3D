@@ -8,9 +8,6 @@
 
 namespace vivid
 {
-//TODO **explanation**
-
-//TODO Typedef has to be by const ref
     struct CSurfacePoint
     { // used to sort and clean the mVoronoi input points
         CPoint mPoint = {};

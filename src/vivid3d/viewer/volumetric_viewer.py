@@ -9,7 +9,7 @@ import numpy as np
 from .. import utils
 
 
-# Todo: fix timesteps - 3 different animations trying to get them all to sync up?
+
 class VolumetricViewer(object):
     """
     Utility Class for volumetric data pre-visualization. **IPython Required For View**

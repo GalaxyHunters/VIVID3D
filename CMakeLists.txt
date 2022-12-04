@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 
 project(vivid
-        VERSION "0.9.9")
+        VERSION "1.0.0")
 
 
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
@@ -165,9 +165,4 @@ if(DEFINED SKBUILD)
         set_target_properties(_core PROPERTIES INSTALL_RPATH
                 "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
     endif()
-else()
-    add_executable(vivid_main
-            #main
-            ${VIVID_SRC_DIR}/main.cpp)
-    target_link_libraries(vivid_main vivid)
 endif()

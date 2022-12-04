@@ -21,7 +21,6 @@ namespace vivid
         inline size_t operator[](size_t I) {return mPoints[I];}
         inline normal_float GetUVcoord() const { return mUVcoord; }
 
-        // todo: is this needed?
         inline void SetUVcoord(const coord_t aColor) { mUVcoord = aColor; }
         inline void SetPoints(const std::vector<size_t> &arPoints) { mPoints = arPoints; }
     };

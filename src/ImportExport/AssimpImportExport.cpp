@@ -346,8 +346,6 @@ namespace vivid {
             const int *illum = new int(0);
             material->AddProperty(illum, 1, "$mat.illum", 4, 0);  // going around assimp system
 
-            // TODO: Are the rest of these needed?
-
             const aiColor3D *specular_color = new aiColor3D(0, 0, 0);
             material->AddProperty(specular_color, 3, AI_MATKEY_COLOR_SPECULAR);
 

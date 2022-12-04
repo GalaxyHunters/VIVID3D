@@ -26,8 +26,6 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
     mFaces = get<1>(temp);
 }
 
-// TODO: Fix similar methods, fix RemovePointyFaces
-
 void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)
 {
     if(!mFacesAreTriangles) { TriangulizeFaces(); }

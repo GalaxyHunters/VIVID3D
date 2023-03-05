@@ -18,6 +18,8 @@ namespace vivid
         POINTS = 1, LINES = 2, TRIANGLES = 3, POLYGONS = 4,
     };
 
+    /* CBox Dimensions, first value is {minX,minY,minZ}, second value is {maxX,maxY,maxZ} */
+    typedef std::pair<CPoint, CPoint> CBoundingBox;
     /* FTrans_t is a function that changes CPoint to another CPoint */
     typedef std::function<const CPoint(const CPoint)> FTrans_t; // Note: no ref use here to avoid unpredictable behavior.
 
@@ -27,6 +29,9 @@ namespace vivid
     protected:
         vector<CPoint> mPoints = {};
         vector<CFace> mFaces = {};
+        CPoint mCenter;
+        CBoundingBox mBoundingBox;
+
         FACE_TYPE mElementType = POLYGONS;
         std::string mLabel = "";
         CColorMap mCmap;
@@ -35,18 +40,22 @@ namespace vivid
         CModelComponent(){}
         CModelComponent(const FACE_TYPE aElementType) : mElementType(aElementType) {}
         CModelComponent(const normal_float aAlpha, const std::string &arLabel, const FACE_TYPE aObjType)
-            : mLabel(arLabel), mElementType(aObjType), mCmap(), mMaterial() { SetOpacity(aAlpha); }
+            : mLabel(arLabel), mElementType(aObjType), mCmap(), mMaterial() { SetOpacity(aAlpha); SetDimensions(); }
+        
+        void SetDimensions();
     public:
         CModelComponent(const CModelComponent &arModel) : mPoints(arModel.mPoints), mFaces(arModel.mFaces), mLabel(arModel.mLabel), mElementType(arModel.mElementType), mCmap(arModel.mCmap), mMaterial(arModel.mMaterial) {}
         virtual ~CModelComponent() = default;;
 
         // Operator=
         inline CModelComponent& operator= (const CModelComponent& arModel) { mPoints=arModel.mPoints; mFaces=arModel.mFaces;
-            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mCmap=arModel.mCmap; mMaterial=arModel.mMaterial; return *this; }
+            mLabel=arModel.mLabel; mElementType=arModel.mElementType; mCmap=arModel.mCmap; mMaterial=arModel.mMaterial; mCenter=arModel.mCenter;mBoundingBox=arModel.mBoundingBox;return *this; }
 
         // Getters, Setters
         inline std::vector<CPoint> GetPoints() const { return mPoints; }
         inline size_t GetPointsCount() const { return mPoints.size(); }
+        inline const CBoundingBox& GetBoundingBox() const { return mBoundingBox; } 
+        inline const CPoint& GetCenter() const { return mCenter; } 
         inline std::vector<CFace> GetFaces() const { return mFaces; }
         inline size_t GetFacesCount() const { return mFaces.size(); }
         inline std::string GetLabel() const { return mLabel; }
@@ -55,7 +64,7 @@ namespace vivid
         inline const CMaterial& GetMaterial() const { return mMaterial; }
         inline FACE_TYPE GetObjType() const { return mElementType; }
 
-        inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; }
+        inline void SetPoints(std::vector<CPoint> &arPoints) { mPoints = arPoints; SetDimensions(); }
         inline void SetFaces(std::vector<CFace> &arFaces) { mFaces = arFaces; }
         inline void SetLabel(const std::string &arLabel) { mLabel = arLabel; }
         inline void SetOpacity(normal_float aOpacity) { mMaterial.SetOpacity(aOpacity); }
@@ -78,7 +87,14 @@ namespace vivid
          * @param[in] arNormVec the x,y.z normal to rotate around.
          * @param[in] aRadAngel the angel to rotate by (in radians).
          */
-        void RotateMesh(const CPoint &arNormVec, double aRadAngel);
+        void RotateMesh(const CPoint &arNormVec, float aRadAngel);
+        /**
+         * Rotate the CMesh points by yaw, pitch, roll in degrees
+         * @param[in] yaw angle in degrees to rotate around x axis
+         * @param[in] pitch angle in degrees to rotate around y axis
+         * @param[in] roll angle in degrees to rotate around z axis
+         */
+        void RotateMesh(float yaw, float pitch, float roll);
         /**
          * Change CMesh points location by addition of x,y,z.
          * @param[in] arDirectionVec the x,y.z direction to move by it.

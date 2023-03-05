@@ -41,6 +41,8 @@ namespace vivid
             }
             return count;
         }
+
+        // TODO: Decide how to handle transforms (recursively apply per component, or based on 0,0,0 of model)
         // Add Importers
         // void ImportModel(const std::string &arInputFilePath)
         /**

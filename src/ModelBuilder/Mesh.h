@@ -2,9 +2,7 @@
 #define VIVID_MESH_H
 
 #include "ModelComponent.h"
-
 #include "Point.h"
-//#include "LogFile.h"
 #include "Face.h"
 #include "Decimate.h"
 #include "ColorMap.h"
@@ -29,8 +27,7 @@ namespace vivid
     public:
         CMesh() {};
         CMesh(const std::vector<CPoint> &arPoints, const std::vector<CFace> &arFaces, normal_float aOpacity = 1, const std::string &arLabel = "") :
-                CModelComponent(aOpacity, arLabel, TRIANGLES) {
-            mPoints = arPoints; mFaces = arFaces;
+                mPoints(arPoints); mFaces(arFaces); CModelComponent(aOpacity, arLabel, TRIANGLES) {
             TriangulizeFaces();
             CalculatePointsNeighbours();
         }

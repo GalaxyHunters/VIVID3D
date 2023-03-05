@@ -18,8 +18,6 @@ public:
     // operator=
     // set get
 
-    //inline void SetData(const Voronoi3D &arData) { mData = arData; }
-
     std::vector<Vector3D> ConvertToVorn(const std::vector<CPoint>& arInputPoints);
     void ComputeVoronoi(const std::vector<CPoint>& arInputPoints, std::pair<CPoint,CPoint> Box);
     std::vector<std::vector<size_t>> GetFaces();

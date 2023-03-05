@@ -12,6 +12,7 @@ CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, const std::string&
     for (size_t i = 0; i < arPoints.size(); i++){
         mFaces.push_back(CFace({i}, 0));
     }
+    SetDimensions();
 }
 
 CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_float> &arQuan, normal_float aFieldMin, normal_float aFieldMax, const normal_float aOpacity, const std::string& arLabel)
@@ -22,6 +23,7 @@ CPointCloud::CPointCloud(const std::vector<CPoint> &arPoints, vector<normal_floa
     for (size_t i = 0; i < arPoints.size(); i++){
         mFaces.push_back(CFace({i}, arQuan[i]));
     }
+    SetDimensions();
 }
 
 void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_float> &arColorField, normal_float aFieldMin, normal_float aFieldMax)
@@ -34,6 +36,7 @@ void CPointCloud::AddPoints(const std::vector<CPoint> &arPoints, vector<normal_f
         mFaces.push_back(CFace({size+i}, arColorField[i]));
     }
     mPoints.insert(mPoints.end(), arPoints.begin(), arPoints.end());
+    SetDimensions();
 }
 
 CVoronoiVolume CPointCloud::CreateVoronoiVolume(coord_t aNoiseDisplacement) {

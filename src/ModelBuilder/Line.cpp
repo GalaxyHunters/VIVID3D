@@ -6,6 +6,7 @@ using namespace std;
 CLines::CLines(const std::vector<CPoint> &arLine, normal_float aOpacity, const std::string &arLabel) : CModelComponent(aOpacity, arLabel, LINES)
 {
     AddLine(arLine);
+    SetDimensions();
     SetColor(DEFAULT_COLOR);
 }
 
@@ -14,6 +15,7 @@ CLines::CLines(const std::vector<std::vector<CPoint>> &arLines, normal_float aOp
     for (const auto & line : arLines) {
         AddLine(line);
     }
+    SetDimensions();
     SetColor(DEFAULT_COLOR);
 }
 
@@ -30,12 +32,14 @@ void CLines::AddLine(const vector<CPoint> &arLine)
     for (auto &pairPoints : formatted_line) {
         mFaces.emplace_back(pairPoints, 0);
     }
+    SetDimensions();
 }
 
 void CLines::AddLines(const vector<vector<CPoint>> &arLines) {
     for (auto & line : arLines) {
         AddLine(line);
     }
+    SetDimensions();
 }
 
 vector<vector<size_t>> CLines::FormatPairPoints(const vector<size_t>& arLine)

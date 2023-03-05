@@ -33,7 +33,7 @@ namespace vivid
         ~CSurfaceFace() {};
     };
 
-    class CVoronoiVolume
+    class CVoronoiVolume // TODO : public CModelComponent
     {
     private:
         CVoronoi mVoronoi;                       // CVoronoi class for running Voronoi Surfacing algorithm

@@ -161,6 +161,7 @@ void CVoronoiVolume::RunVorn()
     }
 
     mSurfFaces = new_faces;
+    delete mVoronoi;
 
     Log(LOG_VIVID, "Completed Voronoi Computation");
 }
@@ -322,7 +323,7 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
 bool sortPoints(const shared_ptr<CPoint>& arobj1, const shared_ptr<CPoint>& arobj2) {
     return (*arobj1.get() < *arobj2.get());
 }
-void CVoronoiVolume::CleanDoublePoints()
+void CVoronoiVolume::CleanDoublePoints() 
 {
     //sort the array
     sort(mVertices.begin(), mVertices.end(), sortPoints);

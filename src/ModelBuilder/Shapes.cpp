@@ -12,10 +12,10 @@ namespace vivid
 {
 
 CMesh CreatePlaneMesh(const CPoint &arCenter, coord_t aSize, const string& arColor, normal_float aOpacity, const std::string &arLabel) {
-    vector<CPoint> points= { CPoint(-1, -1, 0),
-                             CPoint(-1, 1, 0),
-                             CPoint(1, -1, 0),
-                             CPoint(1, 1, 0)     };
+    vector<CPoint> points= { CPoint(-0.5, -0.5, 0),
+                             CPoint(-0.5, 0.5, 0),
+                             CPoint(0.5, 0.5, 0),
+                             CPoint(0.5, -0.5, 0)     };
 
     vector<CFace> faces = {CFace({0, 1, 2, 3}, 0)};
 
@@ -36,14 +36,14 @@ CMesh CreateCubeMesh(const CPoint &arCenter, coord_t aSize, const string& arColo
 
 CMesh CreateBoxMesh(const CPoint &arCenter, const CPoint &arSize, const string& arColor, normal_float aOpacity, const string &arLabel)
 {
-    vector<CPoint> points= { CPoint(-1, -1, -1),
-                             CPoint(-1, -1, +1),
-                             CPoint(-1, +1, -1),
-                             CPoint(-1, +1, +1),
-                             CPoint(+1, -1, -1),
-                             CPoint(+1, -1, +1),
-                             CPoint(+1, +1, -1),
-                             CPoint(+1, +1, +1)      };
+    vector<CPoint> points= { CPoint(-0.5, -0.5, -0.5),
+                             CPoint(-0.5, -0.5, +0.5),
+                             CPoint(-0.5, +0.5, -0.5),
+                             CPoint(-0.5, +0.5, +0.5),
+                             CPoint(+0.5, -0.5, -0.5),
+                             CPoint(+0.5, -0.5, +0.5),
+                             CPoint(+0.5, +0.5, -0.5),
+                             CPoint(+0.5, +0.5, +0.5)      };
 
     vector<CFace> faces = {CFace(vector<size_t>{3, 2, 6, 7}, 0),
                            CFace(vector<size_t>{6, 2, 0, 4}, 0),

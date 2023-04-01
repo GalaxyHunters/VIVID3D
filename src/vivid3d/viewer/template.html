@@ -40,6 +40,17 @@
       margin: 0;
     }
 
+    input[type='color'] {
+      appearance: none;
+      --webkit-appearance: none;
+      --moz-appearance: none;
+      border: none;
+      cursor: pointer;
+      margin: 0;
+      margin-left: 15px;
+      background: none;
+    }
+
     hr {
       align-self: center;
       width: 95%;
@@ -56,15 +67,12 @@
     }
 
     .slider-container,
-    .container {
+    .container,
+    .toggle-container {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .slider-container.center {
-      justify-content: space-evenly;
     }
 
     body {
@@ -75,29 +83,36 @@
 
     model-viewer {
       min-height: 500px;
+      box-shadow: inset 0 0 100px 5px rgba(0,0,0,0.2);
+    }
+    
+    #vividEditor {
+      right: 0;
+      background: #222;
     }
 
     .right-container {
+      overflow-y: scroll;
       font-family: Roboto, Helvetica, Arial, sans-serif;
-
       display: flex;
       flex-direction: column;
-      background-color: #222;
       color: #fff;
       height: 100%;
-      min-width: 360px;
-      max-width: 360px;
+      min-width: 300px;
+      max-width: 300px;
     }
 
     .title-bar {
+      pointer-events: auto;
       padding: 5px 0px;
-      background-color: #222;
+      background-color: transparent;
       text-align: center;
+      text-shadow: 0 2px 4px #222;
       font-family: Helvetica, sans-serif;
       font-size: 3em;
       letter-spacing: 10px;
       font-weight: bolder;
-      color: #fff;
+      color: white;
       text-decoration: none;
     }
 
@@ -142,7 +157,6 @@
       flex-direction: column;
       height: 100%;
       overflow-x: hidden;
-      overflow-y: scroll;
     }
 
     .dropdown {
@@ -155,13 +169,25 @@
       border: none;
       cursor: pointer;
       width: 100%;
+      height: 55px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
     }
 
     .controls {
-      padding: 20px;
+      padding: 15px;
       background-color: #333;
+    }
+
+    .hotspot {
+      display: block;
+      border-radius: 5px;
+      border: none;
+      background-color: blue;
+      box-sizing: border-box;
+      pointer-events: none;
     }
 
     form {
@@ -170,18 +196,24 @@
     }
 
     .slider-container {
-      height: 40px;
-      margin: 0 5px;
+      min-height: 30px;
+      margin: 0.5vh 0;
     }
-    
+
+    select,
+    button {
+      height: 100%;
+    }
+
     button[type=reset] {
       background-color: #444;
       color: white;
       font-size: 1.1em;
       border: none;
-      border-radius: 3px;
+      border-radius: 5px;
       padding: 5px;
       width: 100%;
+      height: 35px;
       cursor: pointer;
       margin-top: 15px;
     }
@@ -191,13 +223,13 @@
     }
 
     .value-container {
-      border-radius: 3px;
+      border-radius: 5px;
       background-color: #444;
       border: none;
       font-size: 0.9em;
       text-align: center;
       line-height: 30px;
-      width: 30px;
+      width: 35px;
       height: 30px;
       color: #fff;
       pointer-events: none;
@@ -209,13 +241,14 @@
     }
 
     .slider {
-      margin: 0 20px;
+      margin: 0 10px;
       flex-grow: 1;
     }
 
     .control-label {
       color: #fff;
-      width: 50px;
+      min-width: 20px;
+      font-size: 0.9em;
       pointer-events: none;
       user-select: none;
     }
@@ -227,18 +260,29 @@
       color: white;
       border: none;
       border-radius: 5px;
+      height: 30px;
       font-size: 1em;
-      padding: 12px 5px;
       width: 110px;
       position: relative;
     }
 
+    .eye-dropper {
+      background-color: #444;
+      border-radius: 5px;
+      padding: 5px;
+      width: 35px;
+      height: 35px;
+      font-size: 1.3em;
+    }
+
+    .eye-dropper.selected,
     .play.selected {
       background-color: #4682B4;
     }
 
     .play:not(.selected):hover,
-    select:hover {
+    select:hover,
+    .eye-dropper:hover {
       background-color: #666;
     }
 
@@ -255,6 +299,8 @@
     .download {
       margin: 30px 60px;
       padding: 10px 0;
+      height: 40px;
+      line-height: 20px;
       border: none;
       border-radius: 5px;
       background-color: #555;
@@ -279,8 +325,6 @@
   </style>
   <!-- The following libraries and polyfills are recommended to maximize browser support -->
   <!-- NOTE: you must adjust the paths as appropriate for your project -->
-  <!-- ES-Shims for older browsers -->
-  <script type="module" async src="https://ga.jspm.io/npm:es-module-shims@1.6.3/dist/es-module-shims.js"></script>
 
   <!-- Import Three.js using an import-map -->
   <script type="importmap">
@@ -290,6 +334,9 @@
       }
     }
   </script>
+  <!-- ES-Shims for older browsers -->
+  <script type="module" async src="https://ga.jspm.io/npm:es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
 
   <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
   <script src='https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js'></script>
@@ -318,220 +365,299 @@
       alt='Vivid3D Model' camera-controls auto-rotate autoplay max-field-of-view='120deg'>
       <!-- src='data:text/plain;base64,$B64GLTF' -->
       <effect-composer id="effectComposer" render-mode="quality">
-        <smaa-effect></smaa-effect>
-        <glitch-effect></glitch-effect>
-        <color-grade contrast="0.2" hue="2"></color-grade>
-        <bloom-effect></bloom-effect>
+        <!-- <smaa-effect></smaa-effect>
+        <bloom-effect strength="1" threshold="0.85" radius="0.85" smoothing="0.1"></bloom-effect>
+        <color-grade-effect></color-grade-effect> -->
       </effect-composer>
     </model-viewer>
-    <div class='right-container'>
-      <a class='title-bar' href='https://galaxyhuntersil.wixsite.com/labs/vivid' target='_blank'>
-        VIV<span style='color:#4682B4'>I</span>D3D</a>
-      <hr class='solid'>
-      <div class="pages">
-        <button class="page selected" id="controls-editor" onclick='selectPage(this, `#controls-page`)'>
-          <i class='fa-solid fa-pen'></i>
-        </button>
-        <div class='vl'></div>
-        <button class="page" id="materials-editor" onclick="selectPage(this, `#materials-page`)">
-          <i class='fa-solid fa-palette'></i>
-        </button>
-        <div class='vl'></div>
-        <button class="page" id="post-processing-editor" onclick="selectPage(this, `#effects-page`)">
-          <i class='fa-solid fa-star'></i>
-        </button>
-        <div class='vl'></div>
-        <button class="page" id="annotations" onclick="selectPage(this)">
-          <i class="fa-solid fa-location-dot"></i>
-        </button>
-      </div>
-      <hr class='solid'>
-      <div class='panel' id="controls-page">
-        <button id='toggleRot' class='dropdown'>
-          <span>Rotation Controls</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id='controlsRot' class='controls hidden'>
-          <form id='formRot'>
-            <div class='slider-container'>
-              <div class='control-label'>Roll</div>
-              <input type='range' min='0' max='360' value='0' class='slider' id='rollS' />
-              <div class='value-container' id='rollV'>0</div>
-            </div>
-            <div class='slider-container'>
-              <div class='control-label'>Pitch</div>
-              <input type='range' min='0' max='360' value='0' class='slider' id='pitchS' />
-              <div class='value-container' id='pitchV'>0</div>
-            </div>
-            <div class='slider-container'>
-              <div class='control-label'>Yaw</div>
-              <input type='range' min='0' max='360' value='0' class='slider' id='yawS' />
-              <div class='value-container' id='yawV'>0</div>
-            </div>
-            <button type='reset' id='resetRot'>Reset</button>
-          </form>
-        </div>
-        <button id='toggleScale' class='dropdown'>
-          <span>Scale Controls</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id='controlsScale' class='controls hidden'>
-          <form id='formScale'>
-            <div class='slider-container'>
-              <div class='control-label'>X</div>
-              <input type='range' min='1' max='50' value='10' class='slider' id='xS' />
-              <div class='value-container' id='xV'>1</div>
-            </div>
-            <div class='slider-container'>
-              <div class='control-label'>Y</div>
-              <input type='range' min='1' max='50' value='10' class='slider' id='yS' />
-              <div class='value-container' id='yV'>1</div>
-            </div>
-            <div class='slider-container'>
-              <div class='control-label'>Z</div>
-              <input type='range' min='1' max='50' value='10' class='slider' id='zS' />
-              <div class='value-container' id='zV'>1</div>
-            </div>
-            <button type='reset' id='resetScale'>Reset</button>
-          </form>
-        </div>
-        <button id='toggleAnimations' class='dropdown'>
-          <span>Animations</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id='controlsAnimations' class='controls hidden'>
-          <form id='formAnimations'>
-            <div class='slider-container' style='margin-bottom: 10px;'>
-              <select name='animations' id='animations'>
-              </select>
-              <button type='button' class='play' id='play'>
-                <div class='button-text hidden' id='pressPlay'>
-                  <span>Play</span>
-                  <i class='fa-solid fa-play'></i>
-                </div>
-                <div class='button-text' id='pressPause'>
-                  <span>Pause</span>
-                  <i class='fa-solid fa-pause'></i>
-                </div>
-              </button>
-            </div>
-            <div class='slider-container disabled' id='speed'>
-              <div class='control-label'>Speed</div>
-              <input type='range' min='1' max='20' value='10' class='slider' id='speedS' />
-              <div class='value-container' id='speedV'>1</div>
-            </div>
-            <div class='slider-container' id='playback'>
-              <div class='control-label'>Playback</div>
-              <input type='range' min='0' max='100' value='0' class='slider' id='pbS' />
-              <div class='value-container' id='pbV'>0</div>
-            </div>
-            <button type='reset' id='resetAnimation'>Reset</button>
-          </form>
-        </div>
-      </div>
-      <div class='panel hidden' id="materials-page">
-        <div class="slider-container" style="margin: 20px 30px;">
-          <select name='materials' id='materials' style="width: 200px" onchange="selectMaterial(this.value)"></select>
-          <button onclick="selectMaterial()" id="material-eyedropper">
-            <i class="fa-solid fa-eye-dropper"></i>
+    <div class='right-container' id="vividEditor">
+      <a class='title-bar' id='title' href='https://galaxyhuntersil.wixsite.com/labs/vivid' target='_blank'>
+        VIV<span style='color:#4682B4'>I</span>D3D
+      </a>
+      <div id="editor" class="right-container">
+        <hr class='solid'>
+        <div class="pages">
+          <button class="page selected" id="controls-editor" onclick='selectPage(this, `#controls-page`)'>
+            <i class='fa-solid fa-pen'></i>
+          </button>
+          <div class='vl'></div>
+          <button class="page" id="materials-editor" onclick="selectPage(this, `#materials-page`)">
+            <i class='fa-solid fa-palette'></i>
+          </button>
+          <div class='vl'></div>
+          <button class="page" id="post-processing-editor" onclick="selectPage(this, `#effects-page`)">
+            <i class='fa-solid fa-star'></i>
+          </button>
+          <div class='vl'></div>
+          <button class="page" id="annotations" onclick="selectPage(this, `#annotations-page`)">
+            <i class="fa-solid fa-location-dot"></i>
           </button>
         </div>
-        <button id='toggleColor' class='dropdown'>
-          <span>Color</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id='editColor' class='controls'>
-          <form id='formColors'>
-            <div class='slider-container' id='color'>
-              <div class='control-label'>Base Color</div>
-              <input type='color' class='slider' id='baseColor' />
-            </div>
-            <button type='reset' id='resetColor'>Reset</button>
-          </form>
+        <hr class='solid'>
+        <div class='panel' id="controls-page">
+          <button id='toggleRot' class='dropdown'>
+            <span>Rotation Controls</span>
+            <i class='fa-solid fa-chevron-down'></i>
+          </button>
+          <div id='controlsRot' class='controls hidden'>
+            <form id='formRot'>
+              <div class='slider-container'>
+                <div class='control-label' style="width: 40px">Roll</div>
+                <input type='range' min='0' max='360' value='0' class='slider' id='rollS' />
+                <div class='value-container' id='rollV'>0</div>
+              </div>
+              <div class='slider-container'>
+                <div class='control-label' style="width: 40px">Pitch</div>
+                <input type='range' min='0' max='360' value='0' class='slider' id='pitchS' />
+                <div class='value-container' id='pitchV'>0</div>
+              </div>
+              <div class='slider-container'>
+                <div class='control-label' style="width: 40px">Yaw</div>
+                <input type='range' min='0' max='360' value='0' class='slider' id='yawS' />
+                <div class='value-container' id='yawV'>0</div>
+              </div>
+              <button type='reset' id='resetRot'>Reset</button>
+            </form>
+          </div>
+          <button id='toggleScale' class='dropdown'>
+            <span>Scale Controls</span>
+            <i class='fa-solid fa-chevron-down'></i>
+          </button>
+          <div id='controlsScale' class='controls hidden'>
+            <form id='formScale'>
+              <div class='slider-container'>
+                <div class='control-label'>X</div>
+                <input type='range' min='1' max='50' value='10' class='slider' id='xS' />
+                <div class='value-container' id='xV'>1</div>
+              </div>
+              <div class='slider-container'>
+                <div class='control-label'>Y</div>
+                <input type='range' min='1' max='50' value='10' class='slider' id='yS' />
+                <div class='value-container' id='yV'>1</div>
+              </div>
+              <div class='slider-container'>
+                <div class='control-label'>Z</div>
+                <input type='range' min='1' max='50' value='10' class='slider' id='zS' />
+                <div class='value-container' id='zV'>1</div>
+              </div>
+              <button type='reset' id='resetScale'>Reset</button>
+            </form>
+          </div>
+          <button id='toggleAnimations' class='dropdown'>
+            <span>Animations</span>
+            <i class='fa-solid fa-chevron-down'></i>
+          </button>
+          <div id='controlsAnimations' class='controls hidden'>
+            <form id='formAnimations'>
+              <div class='slider-container'>
+                <select name='animations' id='animations'>
+                </select>
+                <button type='button' class='play slider-container' style="padding: 0 10px; width: 90px" id='play'>
+                  <div style="display: flex; flex: 1">Pause</div>
+                  <i class='fa-solid fa-stop'></i>
+                </button>
+              </div>
+              <div class='slider-container disabled' id='speed'>
+                <div class='control-label' style="width: 50px">Speed</div>
+                <input type='range' min='1' max='20' value='10' class='slider' id='speedS' />
+                <div class='value-container' id='speedV'>1</div>
+              </div>
+              <div class='slider-container' id='playback'>
+                <div class='control-label' style="width: 50px">Playback</div>
+                <input type='range' min='0' max='100' value='0' class='slider' id='pbS' />
+                <div class='value-container' id='pbV'>0</div>
+              </div>
+              <button type='reset' id='resetAnimation'>Reset</button>
+            </form>
+          </div>
         </div>
-        <button id='toggleColor' class='dropdown'>
-          <span>PBR</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id="editPbr" class="controls">
-          <form id="formPbr">
-            <div class="slider-container">
-              <div class="control-label">Metalness</div>
-              <input type="range" min="0" max="100" value="50" class="slider" id="metalnessS" />
-              <div class="value-container" id="metalnessV">0.5</div>
-            </div>
-            <div class="slider-container">
-              <div class="control-label">Roughness</div>
-              <input type="range" min="0" max="100" value="50" class="slider" id="roughnessS" />
-              <div class="value-container" id="roughnessV">0.5</div>
-            </div>
-            <div class="slider-container">
-              <div class="control-label">Opacity</div>
-              <input type="range" min="0" max="100" value="100" class="slider" id="opacityS" />
-              <div class="value-container" id="opacityV">1.0</div>
-            </div>
-            <div class="slider-container">
-              <div class="control-label">Emissive Strength</div>
-              <input type="range" min="0" max="200" value="0" class="slider" id="emissiveS" />
-              <div class="value-container" id="emissiveV">0.0</div>
-            </div>
-            <button type="reset" id="resetRot">Reset</button>
-          </form>
+        <div class='panel hidden' id="materials-page">
+          <div class="dropdown" style="cursor: default; font-size: 0.9em; padding: 10px 20px">
+            <select name='materials' id='materials' style="width: 200px" onchange="selectMaterial(this.value)"></select>
+            <button class='eye-dropper' onclick="selectMaterial()" id="material-eyedropper">
+              <i class="fa-solid fa-eye-dropper"></i>
+            </button>
+          </div>
+          <div id="editPbr" class="controls">
+            <form id="formPbr">
+              <div class='slider-container'>
+                <div class='control-label' style="width: 75px">Base Color</div>
+                <input type='color' class='slider' id='baseColor' onchange="updateBaseColor(this)" />
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 75px">Metalness</div>
+                <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="metalnessS" />
+                <div class="value-container" id="metalnessV">.5</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 75px">Roughness</div>
+                <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="roughnessS" />
+                <div class="value-container" id="roughnessV">.5</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 75px">Opacity</div>
+                <input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="opacityS" />
+                <div class="value-container" id="opacityV">1.0</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 75px">Emissive Strength</div>
+                <input type="range" min="0" max="5" value="0" step="0.01" class="slider" id="emissiveS" />
+                <div class="value-container" id="emissiveV">.0</div>
+              </div>
+              <div class="slider-container">
+                <button type='button' class='play' style="height: 30px" id='solo'>Solo</button>
+                <button type='button' class='play' style="height: 30px" id='double-sided'>Double Sided</button>
+              </div>
+              <button type="reset" id="resetRot">Reset</button>
+            </form>
+          </div>
         </div>
+        <div class='panel hidden' id="effects-page">
+          <div class="dropdown" style="cursor: default; padding: 10px 20px">
+            Post Processing
+            <button type='button' class='play selected' id='enable-effects'>Enabled</button>
+          </div>
+          <button id='toggleColorGrade' class='dropdown'>
+            <span>Color Grading</span>
+            <i class='fa-solid fa-chevron-down'></i>
+          </button>
+          <div id="controlsColorGrade" class="controls hidden">
+            <form id="formColorGrade">
+              <div class="slider-container">
+                <div class="control-label" style="width: 70px">Brightness</div>
+                <input type="range" min="-1" max="1" value="0" step="0.01" class="slider" id="brightnessS" />
+                <div class="value-container" id="brightnessV">0</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 70px">Contrast</div>
+                <input type="range" min="-1" max="1" value="0" step="0.01" class="slider" id="contrastS" />
+                <div class="value-container" id="contrastV">0</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 70px">Saturation</div>
+                <input type="range" min="-1" max="1" value="0" step="0.01" class="slider" id="saturationS" />
+                <div class="value-container" id="saturationV">0</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 70px">Hue</div>
+                <input type="range" min="0" max="6.28" value="0" step="0.01" class="slider" id="hueS" />
+                <div class="value-container" id="hueV">0</div>
+              </div>
+              <button type="reset" id="resetColorGrade">Reset</button>
+            </form>
+          </div>
+          <button id='toggleBloom' class='dropdown'>
+            <span>Bloom Effect</span>
+            <i class='fa-solid fa-chevron-down'></i>
+          </button>
+          <div id="controlsBloom" class="controls hidden">
+            <form id="formBloom">
+              <div class="slider-container">
+                <div class="control-label" style="width: 60px">Strength</div>
+                <input type="range" min="0" max="5" value="1" step="0.01" class="slider" id="strengthS" />
+                <div class="value-container" id="strengthV">1</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 60px">Threshold</div>
+                <input type="range" min="0" max="1" value=".85" step="0.01" class="slider" id="thresholdS" />
+                <div class="value-container" id="thresholdV">.85</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 60px">Radius</div>
+                <input type="range" min="0" max="1" value=".85" step="0.01" class="slider" id="radiusS" />
+                <div class="value-container" id="radiusV">.85</div>
+              </div>
+              <div class="slider-container">
+                <div class="control-label" style="width: 60px">Smoothing</div>
+                <input type="range" min="0" max="1" value=".1" step="0.01" class="slider" id="smoothingS" />
+                <div class="value-container" id="smoothingV">.1</div>
+              </div>
+              <div class="slider-container center">
+                <button type='button' class='play selected' id='emissive-only' onclick="toggleEmissiveOnly()">Emissive
+                  Only</button>
+              </div>
+              <button type="reset" id="resetBloom">Reset</button>
+            </form>
+          </div>
+        </div>
+        <div class='panel hidden' id="annotations-page">
+          <div class="dropdown" style="cursor: default; padding: 10px 20px">
+            Annotations
+            <button type='button' class='play selected' id='addAnnotation'>Add</button>
+          </div>
+          <div id="annotations" class="controls">
+            <form id="annotationsForm">
+              <button type="reset" id="resetAnnotations">Reset</button>
+            </form>
+          </div>
+        </div>
+        <button class='download' id='download'>Export GLB</button>
       </div>
-      <div class='panel hidden' id="effects-page">
-        <div class="slider-container center" style="margin: 20px 30px">
-          <button type='button' class='play selected' id='enable-effects' onclick="toggleEffects(this)">Enabled</button>
-        </div>
-        <button id='toggleBloom' class='dropdown'>
-          <span>Bloom Effect</span>
-          <i class='fa-solid fa-chevron-down'></i>
-        </button>
-        <div id="controlsBloom" class="controls hidden">
-          <form id="formBloom">
-            <div class="slider-container">
-              <div class="control-label">Strength</div>
-              <input type="range" min="0" max="5" value="1" step="0.01" class="slider" id="strengthS" oninput="updateStrength()" />
-              <div class="value-container" id="strengthV">1</div>
-            </div>
-            <div class="slider-container">
-              <div class="control-label">Threshold</div>
-              <input type="range" min="0" max="1" value=".80" step="0.01" class="slider" id="thresholdS" oninput="updateThreshold()" />
-              <div class="value-container" id="thresholdV">0.5</div>
-            </div>
-            <div class="slider-container center">
-              <button type='button' class='play selected' id='emissive-only' onclick="toggleEmissiveOnly()">Emissive Only</button>
-            </div>
-            <button type="reset" id="resetRot">Reset</button>
-          </form>
-        </div>
-      </div>
-      <button class='download' id='download'>Export GLB</button>
     </div>
 
 
     <script>
+      /*------------RESPONSIVE-DESIGN-----------*/ {
+        const vividEditor = document.querySelector('#vividEditor');
+        const editor = document.querySelector('#editor');
+        const title = document.querySelector('.title-bar');
+        
+        let isMobile = false;
+        (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) isMobile = true;})(navigator.userAgent||navigator.vendor||window.opera);
+        
+        const resize = () => {
+          if (window.innerWidth < 350) {
+            title.style.fontSize = '2em';
+          } else {
+            title.style.fontSize = '3em';
+          }
+          if (window.innerWidth < 550 || isMobile) {
+            vividEditor.style.position = 'absolute';
+            vividEditor.style.background = 'transparent';
+            vividEditor.style.pointerEvents = 'none';
+            vividEditor.style.width = '100%';
+            vividEditor.style.minWidth = 'unset';
+            vividEditor.style.maxWidth = 'unset';
+            editor.style.display = 'none';
+            title.style.position = 'absolute';
+            title.style.bottom = 0;
+            title.style.left = '5vw';
+          } else {
+            vividEditor.style.position = 'relative';
+            vividEditor.style.background = '#222';
+            vividEditor.style.pointerEvents = 'auto';
+            vividEditor.style.width = 'unset';
+            vividEditor.style.minWidth = '300px';
+            vividEditor.style.maxWidth = '300px';
+            editor.style.display = 'flex';
+            title.style.position = 'relative';
+            title.style.bottom = 'unset';
+            title.style.left = 'unset';
+          }
+        }
+        resize();
+        window.addEventListener('resize', resize);
+      }
       const modelViewer = document.querySelector('model-viewer#modelviewer');
 
-      /* ---------------PAGES---------------- */
-
-      let currentIcon = document.querySelector("#controls-editor");
-      let currentPage = document.querySelector("#controls-page");
-      let currentMenu;
-      let currentMenuIcon;
-      function selectPage(e, pageId) {
-        if (e === currentIcon) return;
-        currentIcon.classList.remove('selected');
-        currentIcon = e;
-        e.classList.add('selected');
-        if (currentPage) {
-          currentPage.classList.add('hidden');
+      /* ---------------PAGES---------------- */ {
+        let currentIcon = document.querySelector("#controls-editor");
+        let currentPage = document.querySelector("#controls-page");
+        function selectPage(e, pageId) {
+          if (e === currentIcon) return;
+          currentIcon.classList.remove('selected');
+          currentIcon = e;
+          e.classList.add('selected');
+          if (currentPage) {
+            currentPage.classList.add('hidden');
+          }
+          currentPage = document.querySelector(pageId);
+          currentPage.classList.remove('hidden')
         }
-        currentPage = document.querySelector(pageId);
-        currentPage.classList.remove('hidden')
       }
 
-
+      let currentMenu;
+      let currentMenuIcon;
       const openControls = (e, controls, icon) => {
         /*controls.classList.toggle('hidden');
         icon.classList.toggle('fa-chevron-down');
@@ -553,340 +679,481 @@
         }
       }
 
-      /* ------------------ROTATION------------------ */
-
-      const toggleRot = document.querySelector('#toggleRot');
-      const toggleRotIcon = toggleRot.querySelector('i');
-      const controlsRot = document.querySelector('#controlsRot');
-
-      const rollS = document.querySelector('#rollS');
-      const pitchS = document.querySelector('#pitchS');
-      const yawS = document.querySelector('#yawS');
-      const rollV = document.querySelector('#rollV');
-      const pitchV = document.querySelector('#pitchV');
-      const yawV = document.querySelector('#yawV');
-      const formRot = document.querySelector('#formRot');
-      formRot.reset();
-
-      const updateOrientation = () => {
-        modelViewer.orientation = `${rollS.value}deg ${pitchS.value}deg ${yawS.value}deg`;
-        rollV.innerHTML = rollS.value;
-        pitchV.innerHTML = pitchS.value;
-        yawV.innerHTML = yawS.value;
-        modelViewer.updateFraming();
-      };
-      toggleRot.addEventListener('click', (e) => {
-        openControls(e, controlsRot, toggleRotIcon);
-      });
-      rollS.addEventListener('input', () => {
-        updateOrientation();
-      });
-      pitchS.addEventListener('input', () => {
-        updateOrientation();
-      });
-      yawS.addEventListener('input', () => {
-        updateOrientation();
-      });
-      formRot.addEventListener('reset', () => {
-        setTimeout(updateOrientation);
-      });
-
-      /* ------------------SCALE------------------ */
-
-      const toggleScale = document.querySelector('#toggleScale');
-      const toggleScaleIcon = toggleScale.querySelector('i');
-      const controlsScale = document.querySelector('#controlsScale');
-      const xS = document.querySelector('#xS');
-      const yS = document.querySelector('#yS');
-      const zS = document.querySelector('#zS');
-      const xV = document.querySelector('#xV');
-      const yV = document.querySelector('#yV');
-      const zV = document.querySelector('#zV');
-      const formScale = document.querySelector('#formScale');
-      formScale.reset();
-
-      const updateScale = () => {
-        modelViewer.scale = `${xS.value / 10} ${yS.value / 10} ${zS.value / 10}`;
-        xV.innerHTML = xS.value / 10;
-        yV.innerHTML = yS.value / 10;
-        zV.innerHTML = zS.value / 10;
-      };
-      toggleScale.addEventListener('click', (e) => {
-        openControls(e, controlsScale, toggleScaleIcon);
-      });
-      xS.addEventListener('input', () => {
-        updateScale();
-      });
-      yS.addEventListener('input', () => {
-        updateScale();
-      });
-      zS.addEventListener('input', () => {
-        updateScale();
-      });
-      formScale.addEventListener('reset', () => {
-        setTimeout(updateScale);
-        setTimeout(() => modelViewer.updateFraming());
-      });
-
-      /* ------------------ANIMATION------------------ */
-      const toggleAnimation = document.querySelector('#toggleAnimations');
-      const toggleAnimationsIcon = toggleAnimation.querySelector('i');
-      const controlsAnimation = document.querySelector('#controlsAnimations');
-
-      const animations = document.querySelector('#animations');
-      const playback = document.querySelector('#playback');
-      const play = document.querySelector('#play');
-      const pressPlay = document.querySelector('#pressPlay');
-      const pressPause = document.querySelector('#pressPause');
-      const speed = document.querySelector('#speed');
-      const speedS = document.querySelector('#speedS');
-      const playbackS = document.querySelector('#pbS');
-      const speedV = document.querySelector('#speedV');
-      const playbackV = document.querySelector('#pbV');
-      const formAnimation = document.querySelector('#formAnimations');
-
-      const initAnimations = () => {
-        if (modelViewer.availableAnimations.length) {
-          toggleAnimation.classList.remove('disabled');
-          toggleAnimation.addEventListener('click', (e) => {
-            openControls(e, controlsAnimation, toggleAnimationsIcon);
-          });
-          modelViewer.availableAnimations.forEach((name) => {
-            const option = document.createElement('option');
-            option.value = name;
-            option.innerHTML = name;
-            animations.appendChild(option);
-          })
-          setAnimation();
-          setInterval(() => {
-            playbackS.value = modelViewer.currentTime * 100
-            playbackV.innerHTML = parseFloat(playbackS.value / 100).toFixed(1);
-          }, 10);
-        } else {
-          toggleAnimation.classList.add('disabled');
-          const toggleIcon = toggleAnimation.querySelector('i');
-          toggleIcon.classList.add('hidden');
-        }
-      };
-      modelViewer.addEventListener('load', initAnimations);
-
-      const setAnimation = () => {
-        modelViewer.animationName = animations.value;
-        playbackS.setAttribute('max', modelViewer.duration * 100);
-      };
-
-      const updateSpeed = () => {
-        modelViewer.timeScale = speedS.value / 10;
-        speedV.innerHTML = speedS.value / 10;
-      };
-
-      const togglePlay = () => {
-        if (modelViewer.paused) {
-          updateSpeed();
-          pressPlay.classList.toggle('hidden');
-          pressPause.classList.toggle('hidden');
-          modelViewer.play();
-        } else {
-          modelViewer.pause();
-          modelViewer.timeScale = 1;
-          pressPlay.classList.toggle('hidden');
-          pressPause.classList.toggle('hidden');
-        }
-      };
-
-      const togglePlayback = () => {
-        speed.classList.toggle('disabled');
-        playback.classList.toggle('disabled');
-        playbackS.value = modelViewer.currentTime * 100
-        playbackV.innerHTML = playbackS.value / 100;
-      };
-
-      const updateFrame = () => {
-        modelViewer.currentTime = playbackS.value / 100
-        //playbackV.innerHTML = playbackS.value / 100;
-      };
-
-      play.addEventListener('click', togglePlay);
-      modelViewer.addEventListener('pause', togglePlayback);
-      modelViewer.addEventListener('play', togglePlayback);
-      animations.addEventListener('change', setAnimation);
-      speedS.addEventListener('input', updateSpeed);
-      playbackS.addEventListener('input', updateFrame);
-
-      formAnimation.addEventListener('reset', () => {
-        setTimeout(updateSpeed);
-        playbackS.value = 0;
-        modelViewer.currentTime = playbackS.value / 100
-        playbackV.innerHTML = playbackS.value / 100;
-      });
-
-      /* ------------------Materials-------------------*/
-      const materials = document.querySelector('#materials');
-      const initMaterials = () => {
-        if (modelViewer.model.materials.length) {
-          selectedMaterial = modelViewer.model.materials[0];
-          formPbr.reset();
-          modelViewer.model.materials.forEach((material) => {
-            const option = document.createElement('option');
-            option.value = material.name;
-            option.innerHTML = material.name;
-            materials.appendChild(option);
-          })
-          setPbrValues();
-        }
-      };
-      modelViewer.addEventListener('load', initMaterials);
-
-      const color = document.querySelector('#baseColor')
-      const metallnessS = document.querySelector('#metalnessS');
-      const metallnessV = document.querySelector('#metalnessV');
-
-      const roughnessS = document.querySelector('#roughnessS');
-      const roughnessV = document.querySelector('#roughnessV');
-
-      const opacityS = document.querySelector('#opacityS');
-      const opacityV = document.querySelector('#opacityV');
-
-      const emissiveS = document.querySelector('#emissiveS');
-      const emissiveV = document.querySelector('#emissiveV');
-
-      const formPbr = document.querySelector('#formPbr');
-
-      const materialEyeDropper = document.querySelector('#material-eyedropper');
-      let selectedMaterial;
-
-      function selectMaterial(name) {
-        if (name) {
-          selectedMaterial = modelViewer.model.materials.find((material) => material.name === name);
-          highlightMaterial();
-          setPbrValues();
-        } else {
-          modelViewer.shadowRoot.querySelector('.userInput').style.cursor = `copy`;
-          modelViewer.addEventListener('click', getMaterialFromPoint);
-        }
-      }
-
-      const getMaterialFromPoint = (e) => {
-        const material = modelViewer.materialFromPoint(event.clientX, event.clientY);
-        if (material) {
-          selectedMaterial = material;
-          materials.value = material.name;
-          highlightMaterial();
-          setPbrValues();
-          modelViewer.removeEventListener('click', getMaterialFromPoint);
-          modelViewer.shadowRoot.querySelector('.userInput').style.cursor = 'grab';
-        }
-      }
-
-      function highlightMaterial() {
-        const baseColorFactor = selectedMaterial.pbrMetallicRoughness.baseColorFactor;
-        let i = 0;
-        const t = setInterval(() => {
-          if (i >= 1) {
-            selectedMaterial.pbrMetallicRoughness.setBaseColorFactor(baseColorFactor);
-            clearInterval(t);
-            return;
-          }
-          selectedMaterial.pbrMetallicRoughness.setBaseColorFactor([1 - i, 1 - i, 1 - i, 1]);
-          i += 0.1;
-        }, 5);
-      }
-
-      const setPbrValues = () => {
-        const metalness = selectedMaterial.pbrMetallicRoughness.metallicFactor;
-        metallnessS.value = metalness * 100;
-        metallnessV.textContent = metalness;
-
-        const roughness = selectedMaterial.pbrMetallicRoughness.roughnessFactor;
-        roughnessS.value = roughness * 100;
-        roughnessV.textContent = roughness;
-
-        const opacity = selectedMaterial.pbrMetallicRoughness.baseColorFactor[3];
-        opacityS.value = opacity * 100;
-        opacityV.textContent = opacity;
-      }
-
-      const updateMetalness = () => {
-        const amount = metallnessS.value / 100;
-        selectedMaterial.pbrMetallicRoughness.setMetallicFactor(amount);
-        metalnessV.textContent = amount;
-      }
-
-      const updateRoughness = () => {
-        const amount = roughnessS.value / 100;
-        selectedMaterial.pbrMetallicRoughness.setRoughnessFactor(amount);
-        roughnessV.textContent = amount;
-      }
-
-      const updateOpacity = () => {
-        const amount = opacityS.value / 100;
-        const baseColorFactor = selectedMaterial.pbrMetallicRoughness.baseColorFactor;
-        selectedMaterial.pbrMetallicRoughness.setBaseColorFactor([baseColorFactor[0], baseColorFactor[1], baseColorFactor[2], amount]);
-        if (amount == 1) {
-          selectedMaterial.setAlphaMode('OPAQUE');
-        } else {
-          selectedMaterial.setAlphaMode('BLEND');
-        }
-        opacityV.textContent = amount;
-      }
-
-      const updateEmissive = () => {
-        const amount = emissiveS.value / 50;
-        const color = selectedMaterial.pbrMetallicRoughness.baseColorFactor;
-        selectedMaterial.setEmissiveFactor([color[0] * amount, color[1] * amount, color[2] * amount]);
-        emissiveV.textContent = amount;
-      }
-
-      metallnessS.addEventListener('input', updateMetalness);
-      roughnessS.addEventListener('input', updateRoughness);
-      opacityS.addEventListener('input', updateOpacity);
-      emissiveS.addEventListener('input', updateEmissive);
-      formPbr.addEventListener('reset', () => {
-        setTimeout(() => {
-          updateMetalness(); updateRoughness(); updateOpacity(); updateEmissive();
+      /* ------------------ROTATION------------------ */ {
+        const toggleRot = document.querySelector('#toggleRot');
+        const toggleRotIcon = toggleRot.querySelector('i');
+        const controlsRot = document.querySelector('#controlsRot');
+        toggleRot.addEventListener('click', (e) => {
+          openControls(e, controlsRot, toggleRotIcon);
         });
-      });
 
-      /* ------------------ANNOTATIONS------------------ */
-      /* ------------------POSTPROCESSING----------------*/
-      const composer = modelViewer.querySelector('#effectComposer');
-      const toggleButton = document.querySelector('#enable-effects');
-      function toggleEffects(button) {
-        const e = composer[Object.getOwnPropertySymbols(composer).find(s => s.description === 'effectComposer')];
-        if (!button.classList.contains('selected')) {
-          modelViewer.registerEffectsComposer(e);
-          toggleButton.innerHTML = 'Enabled';
-        } else {
-          modelViewer.unregisterEffectsComposer(e);
-          toggleButton.innerHTML = 'Disabled';
+        const rollS = document.querySelector('#rollS');
+        const pitchS = document.querySelector('#pitchS');
+        const yawS = document.querySelector('#yawS');
+        const rollV = document.querySelector('#rollV');
+        const pitchV = document.querySelector('#pitchV');
+        const yawV = document.querySelector('#yawV');
+        const formRot = document.querySelector('#formRot');
+        formRot.reset();
+
+        const updateOrientation = () => {
+          modelViewer.orientation = `${rollS.value}deg ${pitchS.value}deg ${yawS.value}deg`;
+          rollV.innerHTML = rollS.value;
+          pitchV.innerHTML = pitchS.value;
+          yawV.innerHTML = yawS.value;
+          modelViewer.updateFraming();
+        };
+
+        rollS.addEventListener('input', updateOrientation);
+        pitchS.addEventListener('input', updateOrientation);
+        yawS.addEventListener('input', updateOrientation);
+        formRot.addEventListener('reset', () => setTimeout(updateOrientation));
+      }
+
+      /* ------------------SCALE------------------ */ {
+        const toggleScale = document.querySelector('#toggleScale');
+        const toggleScaleIcon = toggleScale.querySelector('i');
+        const controlsScale = document.querySelector('#controlsScale');
+        toggleScale.addEventListener('click', (e) => {
+          openControls(e, controlsScale, toggleScaleIcon);
+        });
+
+        const formScale = document.querySelector('#formScale');
+        const xS = document.querySelector('#xS');
+        const yS = document.querySelector('#yS');
+        const zS = document.querySelector('#zS');
+        const xV = document.querySelector('#xV');
+        const yV = document.querySelector('#yV');
+        const zV = document.querySelector('#zV');
+
+        const updateScale = () => {
+          modelViewer.scale = `${xS.value / 10} ${yS.value / 10} ${zS.value / 10}`;
+          xV.innerHTML = xS.value / 10;
+          yV.innerHTML = yS.value / 10;
+          zV.innerHTML = zS.value / 10;
+        };
+        formScale.addEventListener('reset', () => {
+          setTimeout(updateScale);
+          setTimeout(() => modelViewer.updateFraming());
+        });
+        formScale.reset();
+
+        [xS, yS, zS].forEach(e => e.addEventListener('input', updateScale));
+      }
+
+
+      /* ------------------ANIMATION------------------ */ {
+        const toggleAnimation = document.querySelector('#toggleAnimations');
+        const toggleAnimationsIcon = toggleAnimation.querySelector('i');
+        const controlsAnimation = document.querySelector('#controlsAnimations');
+
+        const animations = document.querySelector('#animations');
+        const playback = document.querySelector('#playback');
+        const play = document.querySelector('#play');
+        const speed = document.querySelector('#speed');
+        const speedS = document.querySelector('#speedS');
+        const playbackS = document.querySelector('#pbS');
+        const speedV = document.querySelector('#speedV');
+        const playbackV = document.querySelector('#pbV');
+        const formAnimation = document.querySelector('#formAnimations');
+
+        const initAnimations = () => {
+          if (modelViewer.availableAnimations.length) {
+            toggleAnimation.classList.remove('disabled');
+            toggleAnimation.addEventListener('click', (e) => {
+              openControls(e, controlsAnimation, toggleAnimationsIcon);
+            });
+            modelViewer.availableAnimations.forEach((name) => {
+              const option = document.createElement('option');
+              option.value = name;
+              option.innerHTML = name;
+              animations.appendChild(option);
+            })
+            setAnimation();
+            setInterval(() => {
+              playbackS.value = modelViewer.currentTime * 100
+              playbackV.innerHTML = parseFloat(playbackS.value / 100).toFixed(1);
+            }, 10);
+          } else {
+            toggleAnimation.classList.add('disabled');
+            const toggleIcon = toggleAnimation.querySelector('i');
+            toggleIcon.classList.add('hidden');
+          }
+        };
+        modelViewer.addEventListener('load', initAnimations);
+
+        const setAnimation = () => {
+          modelViewer.animationName = animations.value;
+          playbackS.setAttribute('max', modelViewer.duration * 100);
+        };
+
+        const updateSpeed = () => {
+          modelViewer.timeScale = speedS.value / 10;
+          speedV.innerHTML = speedS.value / 10;
+        };
+
+        const togglePlay = () => {
+          const icon = play.querySelector('i');
+          icon.classList.toggle('fa-stop');
+          icon.classList.toggle('fa-play');
+          const text = play.querySelector('div');
+          if (modelViewer.paused) {
+            text.textContent = 'Pause';
+            updateSpeed();
+            modelViewer.play();
+          } else {
+            text.textContent = 'Play';
+            modelViewer.pause();
+            modelViewer.timeScale = 1;
+          }
+        };
+
+        const togglePlayback = () => {
+          speed.classList.toggle('disabled');
+          playback.classList.toggle('disabled');
+          playbackS.value = modelViewer.currentTime * 100
+          playbackV.innerHTML = playbackS.value / 100;
+        };
+
+        const updateFrame = () => {
+          modelViewer.currentTime = playbackS.value / 100
+          //playbackV.innerHTML = playbackS.value / 100;
+        };
+
+        play.addEventListener('click', togglePlay);
+        modelViewer.addEventListener('pause', togglePlayback);
+        modelViewer.addEventListener('play', togglePlayback);
+        animations.addEventListener('change', setAnimation);
+        speedS.addEventListener('input', updateSpeed);
+        playbackS.addEventListener('input', updateFrame);
+
+        formAnimation.addEventListener('reset', () => {
+          setTimeout(updateSpeed);
+          playbackS.value = 0;
+          modelViewer.currentTime = playbackS.value / 100
+          playbackV.innerHTML = playbackS.value / 100;
+        });
+      }
+
+      /* ------------------Materials-------------------*/ {
+        const materials = document.querySelector('#materials');
+        const initMaterials = () => {
+          if (modelViewer.model.materials.length) {
+            selectedMaterial = modelViewer.model.materials[0];
+            formPbr.reset();
+            modelViewer.model.materials.forEach((material) => {
+              const option = document.createElement('option');
+              option.value = material.name;
+              option.innerHTML = material.name;
+              materials.appendChild(option);
+            })
+            setMaterialInputs();
+          }
+        };
+        modelViewer.addEventListener('load', initMaterials);
+
+        const color = document.querySelector('#baseColor')
+        const metallnessS = document.querySelector('#metalnessS');
+        const metallnessV = document.querySelector('#metalnessV');
+
+        const roughnessS = document.querySelector('#roughnessS');
+        const roughnessV = document.querySelector('#roughnessV');
+
+        const opacityS = document.querySelector('#opacityS');
+        const opacityV = document.querySelector('#opacityV');
+
+        const emissiveS = document.querySelector('#emissiveS');
+        const emissiveV = document.querySelector('#emissiveV');
+
+        const solo = document.querySelector('#solo');
+        solo.addEventListener('click', () => {
+          solo.classList.toggle('selected');
+          const isSelected = solo.classList.contains('selected');
+          modelViewer.model.materials.forEach((material) => {
+            if (material !== selectedMaterial) {
+              if (isSelected) {
+                material.prevOpacity = material.pbrMetallicRoughness.baseColorFactor[3];
+                updateOpacity(material, 0.01);
+              } else {
+                updateOpacity(material, material.prevOpacity);
+              }
+            }
+          })
+        })
+        const doubleSided = document.querySelector('#double-sided');
+        doubleSided.addEventListener('click', () => {
+          doubleSided.classList.toggle('selected');
+          selectedMaterial.setDoubleSided(!selectedMaterial.getDoubleSided());
+        });
+
+        const formPbr = document.querySelector('#formPbr');
+
+        const materialEyeDropper = document.querySelector('#material-eyedropper');
+        let selectedMaterial;
+        let eyeDropperActive = false;
+
+        function selectMaterial(name) {
+          if (name) {
+            selectedMaterial = modelViewer.model.materials.find((material) => material.name === name);
+            highlightMaterial();
+            setMaterialInputs();
+            eyeDropperActive = false;
+          } else if (!eyeDropperActive) {
+            eyeDropperActive = true;
+            materialEyeDropper.querySelector('i').classList.add('hidden');
+            materialEyeDropper.classList.add('selected');
+            modelViewer.shadowRoot.querySelector('.userInput').style.cursor = `copy`;
+            modelViewer.addEventListener('click', getMaterialFromPoint);
+          }
+          if (!eyeDropperActive) {
+            materialEyeDropper.querySelector('i').classList.remove('hidden');
+            materialEyeDropper.classList.remove('selected');
+            modelViewer.removeEventListener('click', getMaterialFromPoint);
+            modelViewer.shadowRoot.querySelector('.userInput').style.cursor = 'grab';
+          }
         }
-        button.classList.toggle('selected');
+
+        const getMaterialFromPoint = (e) => {
+          const material = modelViewer.materialFromPoint(event.clientX, event.clientY);
+          eyeDropperActive = false;
+          selectMaterial(material?.name);
+        }
+
+        function highlightMaterial() {
+          const baseColorFactor = selectedMaterial.pbrMetallicRoughness.baseColorFactor;
+          let i = 0;
+          const t = setInterval(() => {
+            if (i >= 1) {
+              selectedMaterial.pbrMetallicRoughness.setBaseColorFactor(baseColorFactor);
+              clearInterval(t);
+              return;
+            }
+            selectedMaterial.pbrMetallicRoughness.setBaseColorFactor([1 - i, 1 - i, 1 - i, 1]);
+            i += 0.1;
+          }, 5);
+        }
+
+        function updateBaseColor(input) {
+          selectedMaterial.pbrMetallicRoughness.setBaseColorFactor([...hexToRgb(input.value).map((v) => v / 255), opacityS.value]);
+          selectedMaterial.defaultEmissiveFactor = selectedMaterial.pbrMetallicRoughness.baseColorFactor.slice(0, 3);
+        }
+
+        function hexToRgb(h) { return ['0x' + h[1] + h[2] | 0, '0x' + h[3] + h[4] | 0, '0x' + h[5] + h[6] | 0] }
+        function rgbToHex(r, g, b) { return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1); }
+
+        const setMaterialInputs = () => {
+          if (solo.classList.contains('selected')) {
+            solo.classList.remove('selected');
+            modelViewer.model.materials.forEach((material) => updateOpacity(material, material.prevOpacity));
+          }
+
+          selectedMaterial.getDoubleSided() ? doubleSided.classList.add('selected') : doubleSided.classList.remove('selected');
+
+          const metalness = selectedMaterial.pbrMetallicRoughness.metallicFactor;
+          metallnessS.value = metalness;
+          metallnessV.textContent = metalness;
+
+          const roughness = selectedMaterial.pbrMetallicRoughness.roughnessFactor;
+          roughnessS.value = roughness;
+          roughnessV.textContent = roughness;
+
+          const opacity = selectedMaterial.pbrMetallicRoughness.baseColorFactor[3];
+          opacityS.value = opacity;
+          opacityV.textContent = opacity;
+
+          const srcMat = selectedMaterial[Object.getOwnPropertySymbols(selectedMaterial).find(s => s.description === 'correlatedObjects')].values().next().value;
+          let emissiveIntensity;
+          if (srcMat.emissiveIntensity > 1) {
+            emissiveIntensity = srcMat.emissiveIntensity;
+          } else {
+            emissiveIntensity = Math.max(...selectedMaterial.emissiveFactor);
+          }
+          emissiveS.value = emissiveIntensity;
+          emissiveV.textContent = emissiveIntensity;
+
+          const baseColor = selectedMaterial.pbrMetallicRoughness.baseColorFactor;
+          color.value = rgbToHex(baseColor[0] * 255, baseColor[1] * 255, baseColor[2] * 255);
+        }
+
+        const updateMetalness = () => {
+          const amount = metallnessS.value;
+          selectedMaterial.pbrMetallicRoughness.setMetallicFactor(amount);
+          metalnessV.textContent = amount;
+        }
+
+        const updateRoughness = () => {
+          const amount = roughnessS.value;
+          selectedMaterial.pbrMetallicRoughness.setRoughnessFactor(amount);
+          roughnessV.textContent = amount;
+        }
+
+        const updateOpacity = (material, amount) => {
+          if (amount === undefined) amount = opacityS.value;
+          if (material === undefined) material = selectedMaterial;
+          const baseColorFactor = material.pbrMetallicRoughness.baseColorFactor;
+          material.pbrMetallicRoughness.setBaseColorFactor([baseColorFactor[0], baseColorFactor[1], baseColorFactor[2], amount]);
+          if (amount == 1) {
+            material.setAlphaMode('OPAQUE');
+          } else {
+            material.setAlphaMode('BLEND');
+          }
+          opacityV.textContent = amount;
+        }
+
+        const updateEmissive = () => {
+          const srcMat = selectedMaterial[Object.getOwnPropertySymbols(selectedMaterial).find(s => s.description === 'correlatedObjects')].values().next().value;
+          emissiveV.textContent = emissiveS.value;
+          if (selectedMaterial.emissiveFactor.every(v => v == 0)) {
+            selectedMaterial.setEmissiveFactor(selectedMaterial.pbrMetallicRoughness.baseColorFactor.slice(0, 3));
+          }
+          if (!selectedMaterial.defaultEmissiveFactor) selectedMaterial.defaultEmissiveFactor = selectedMaterial.emissiveFactor;
+          if (emissiveS.value >= 1) {
+            srcMat.emissiveIntensity = emissiveS.value;
+          } else {
+            selectedMaterial.setEmissiveFactor(selectedMaterial.defaultEmissiveFactor.map(v => v * emissiveS.value));
+          }
+        }
+
+        metallnessS.addEventListener('input', updateMetalness);
+        roughnessS.addEventListener('input', updateRoughness);
+        opacityS.addEventListener('input', () => updateOpacity());
+        emissiveS.addEventListener('input', updateEmissive);
+        formPbr.addEventListener('reset', () => {
+          setTimeout(() => {
+            updateMetalness(); updateRoughness(); updateOpacity(); updateEmissive();
+          });
+        });
       }
 
-      const bloomEffect = document.querySelector('bloom-effect');
-      const toggleBloom = document.querySelector('#toggleBloom');
-      const toggleBloomIcon = toggleScale.querySelector('i');
-      const controlsBloom = document.querySelector('#controlsBloom');
-      const strengthS = document.querySelector('#strengthS');
-      const thresholdS = document.querySelector('#thresholdS');
-      const strengthV = document.querySelector('#strengthV');
-      const thresholdV = document.querySelector('#thresholdV');
-      const formBloom = document.querySelector('#formBloom');
-      formBloom.reset();
+      /* ------------------ANNOTATIONS------------------ */ {
+        const annotationsForm = document.querySelector('#annotationsForm');
+        const annotationsFormReset = annotationsForm.querySelector('button[type=reset]');
 
-      function updateStrength() {
-        bloomEffect.strength = strengthS.value;
-        strengthV.innerHTML = strengthS.value;
+        const addAnnotation = document.querySelector('#addAnnotation');
+        let addingAnnotation = false;
+        function addHotspot() {
+          if (!addingAnnotation) {
+            addingAnnotation = true;
+            modelViewer.shadowRoot.querySelector('.userInput').style.cursor = `copy`;
+            modelViewer.addEventListener('click', selectHotspot);
+          }
+        }
+
+        function selectHotspot(event) {
+          const a = modelViewer.surfaceFromPoint(event.clientX, event.clientY)
+          if (!a) return;
+          modelViewer.removeEventListener('click', selectHotspot);
+          modelViewer.shadowRoot.querySelector('.userInput').style.cursor = `grab`;
+          addingAnnotation = false;
+          const label = document.createElement('div');
+          label.dataSurface = a;
+          label.slot = "hotspot";
+          label.innerHTML = 'New Hotspot';
+          annotationsForm.insertBefore(label, annotationsFormReset);
+        }
+
+        addAnnotation.addEventListener('click', addHotspot);
       }
 
-      function updateThreshold() {
-        bloomEffect.threshold = thresholdS.value;
-        thresholdV.innerHTML = thresholdS.value;
-      }
+      /* ------------------POSTPROCESSING----------------*/ {
+        const composer = modelViewer.querySelector('#effectComposer');
+        const effectsPage = document.querySelector('#effects-page');
+        document.querySelector('#enable-effects').addEventListener('click', (event) => {
+          const e = composer[Object.getOwnPropertySymbols(composer).find(s => s.description === 'effectComposer')];
+          if (!event.target.classList.contains('selected')) {
+            modelViewer.registerEffectsComposer(e);
+            event.target.innerHTML = 'Enabled';
+          } else {
+            modelViewer.unregisterEffectsComposer(e);
+            event.target.innerHTML = 'Disabled';
+          }
+          event.target.classList.toggle('selected');
+          effectsPage.querySelectorAll('.dropdown').forEach((toggle, i) => {
+            if (i == 0) return;
+            if (!toggle.parentNode.querySelectorAll('.controls')[i - 1].classList.contains('hidden')) toggle.click();
+            toggle.classList.toggle('disabled');
+          })
+        });
 
-      toggleBloom.addEventListener('click', (e) => {
-        openControls(e, controlsBloom, toggleBloomIcon);
-      });
+        /* ------------------BLOOM----------------*/ {
+          const bloomEffect = document.querySelector('bloom-effect');
+          const toggleBloom = document.querySelector('#toggleBloom');
+          const toggleBloomIcon = toggleBloom.querySelector('i');
+          const controlsBloom = document.querySelector('#controlsBloom');
+
+          toggleBloom.addEventListener('click', (e) => {
+            openControls(e, controlsBloom, toggleBloomIcon);
+          });
+
+          const strengthS = document.querySelector('#strengthS');
+          const thresholdS = document.querySelector('#thresholdS');
+          const radiusS = document.querySelector('#radiusS');
+          const smoothingS = document.querySelector('#smoothingS');
+          const strengthV = document.querySelector('#strengthV');
+          const thresholdV = document.querySelector('#thresholdV');
+          const radiusV = document.querySelector('#radiusV');
+          const smoothingV = document.querySelector('#smoothingV');
+          const formBloom = document.querySelector('#formBloom');
+          formBloom.reset();
+
+          const updateBloomProp = (prop, value, display) => {
+            bloomEffect[prop] = value;
+            display.textContent = value;
+          }
+
+          const resetBloom = () => {
+            setTimeout(() => {
+              updateBloomProp('strength', strengthS.value, strengthV);
+              updateBloomProp('threshold', thresholdS.value, thresholdV);
+              updateBloomProp('radius', radiusS.value, radiusV);
+              updateBloomProp('smoothing', smoothingS.value, smoothingV);
+            });
+          }
+
+          strengthS.addEventListener('input', () => updateBloomProp('strength', strengthS.value, strengthV));
+          thresholdS.addEventListener('input', () => updateBloomProp('threshold', thresholdS.value, thresholdV));
+          radiusS.addEventListener('input', () => updateBloomProp('radius', radiusS.value, radiusV));
+          smoothingS.addEventListener('input', () => updateBloomProp('smoothing', smoothingS.value, smoothingV));
+          formBloom.addEventListener('reset', resetBloom);
+        }
+
+        /* ------------------COLOR-GRADE----------------*/ {
+          const colorGradeEffect = document.querySelector('color-grade-effect');
+          const toggleColorGrade = document.querySelector('#toggleColorGrade');
+          const toggleColorGradeIcon = toggleBloom.querySelector('i');
+          const controlsColorGrade = document.querySelector('#controlsColorGrade');
+
+          toggleColorGrade.addEventListener('click', (e) => {
+            openControls(e, controlsColorGrade, toggleColorGradeIcon);
+          });
+
+          const brightnessS = document.querySelector('#brightnessS');
+          const contrastS = document.querySelector('#contrastS');
+          const saturationS = document.querySelector('#saturationS');
+          const hueS = document.querySelector('#hueS');
+          const brightnessV = document.querySelector('#brightnessV');
+          const contrastV = document.querySelector('#contrastV');
+          const saturationV = document.querySelector('#saturationV');
+          const hueV = document.querySelector('#hueV');
+
+          const formColorGrade = document.querySelector('#formColorGrade');
+
+          const updateColorGrade = () => {
+            colorGradeEffect.brightness = brightnessS.value;
+            brightnessV.textContent = brightnessS.value;
+            colorGradeEffect.contrast = contrastS.value;
+            contrastV.textContent = contrastS.value;
+            colorGradeEffect.saturation = saturationS.value;
+            saturationV.textContent = saturationS.value;
+            colorGradeEffect.hue = hueS.value;
+            hueV.textContent = hueS.value;
+          }
+          formColorGrade.addEventListener('reset', () => setTimeout(updateColorGrade));
+          formColorGrade.reset();
+
+          [brightnessS, contrastS, saturationS, hueS].forEach((el) => el.addEventListener('input', updateColorGrade));
+        }
+      }
 
       /* ------------------DOWNLOAD------------------ */
       const download = document.querySelector('#download');

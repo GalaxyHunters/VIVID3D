@@ -24,6 +24,27 @@ VIVID3D was tested in our cosmology research group by producing models from simu
 - **Interactive 3D Viewer**
 - **Scientific Analysis of Meshes**
 
+## What's new in 1.1.0
+A modernization release: the build, the dependencies and the packaging were rebuilt, and several long-standing
+install and compatibility problems were fixed. Exported models are unchanged: every step was checked against a
+regression baseline (glb / obj / fbx, structurally compared) on Linux and Windows.
+
+- **Platforms and Python** - Windows (MSVC) is now supported alongside Linux, and Python 3.10 - 3.14 are tested
+  (previously `>= 3.7` was claimed but untested).
+- **Modern build** - one `pyproject.toml` built with [scikit-build-core](https://github.com/scikit-build/scikit-build-core)
+  replaces `setup.py` / `MANIFEST.in`; the version lives in a single place.
+- **Smaller and faster to build** - the compiled package is one native binary: the wheel shrank from 12.8 MB to about
+  2 MB, a clean source build takes roughly half as long, and the repository's source went from 217 MB to 80 MB.
+- **Dependencies** - assimp 6.0.6 (an installed copy, or a pinned and checksum-verified download) replaces a
+  patched, vendored 5.2.5; pybind11 now comes from PyPI instead of a vendored snapshot. The local assimp patches
+  were replaced by code in VIVID3D itself, so transparency and materials in glTF exports are preserved.
+- **Fixes** - `pip install vivid3d` now installs numpy and matplotlib (a bare install used to fail on import);
+  naming a colormap (`mesh.colormap = "viridis"`) works with matplotlib 3.9+ and a memory-safety bug behind it is
+  fixed; a compile clash with Python 3.10 is fixed; the library no longer links `libpython` or leaks internal
+  symbols into the host process.
+
+Runtime performance and memory work (profiling, mesh decimation, leak fixes) is the next step.
+
 ## Highlights
 View the [Model Gallery](https://vivid.readthedocs.io/en/latest/gallery.html) to see what VIVID3D is capable of. 
 

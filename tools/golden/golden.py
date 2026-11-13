@@ -303,6 +303,61 @@ def cmd_compare(args):
     return 1 if fails else 0
 
 
+def cmd_verify(args):
+    """Check an ALREADY INSTALLED vivid3d, however it got there (pip install from PyPI/TestPyPI, from an sdist,
+    from a wheel): run the flow and the functional checks with `--python` and compare the exported models
+    with the baseline. This tests what a user really gets, as opposed to `run`, which builds it itself."""
+    out = os.path.join(os.path.expanduser(args.root), args.label)
+    shutil.rmtree(out, ignore_errors=True)
+    os.makedirs(out)
+    py, tmp = args.python, tempfile.gettempdir()
+    # warm up once (see cmd_run): first-run costs must not distort anything
+    subprocess.run([py, "-c", "import vivid3d; s = vivid3d.create_sphere(); s.colormap = 'viridis'"],
+                   capture_output=True, cwd=tmp)
+    ident = subprocess.run([py, "-c", "import sys, vivid3d; print(vivid3d.__version__, sys.version.split()[0], "
+                            "vivid3d.__file__)"], capture_output=True, text=True, cwd=tmp)
+    if ident.returncode != 0:
+        print("IMPORT FAILED:\n" + (ident.stderr or ident.stdout)[-1200:])
+        return 1
+    print("testing:", ident.stdout.strip())
+    exports = os.path.join(out, "exports")
+    subprocess.run([py, os.path.join(HERE, "flow.py"), exports], capture_output=True, text=True, cwd=tmp)
+    checks_dir = os.path.join(out, "checks")
+    subprocess.run([py, os.path.join(HERE, "checks.py"), checks_dir], capture_output=True, text=True, cwd=tmp)
+
+    fails = []
+    fm = os.path.join(exports, "flow_metrics.json")
+    flow = json.load(open(fm)) if os.path.exists(fm) else {}
+    if not flow:
+        fails.append("the flow did not run to completion (no flow_metrics.json)")
+    for stage, v in flow.get("stages", {}).items():
+        if not v["ok"]:
+            fails.append(f"flow stage {stage} failed: {v.get('error')}")
+    cj = os.path.join(checks_dir, "checks.json")
+    checks = json.load(open(cj)) if os.path.exists(cj) else {}
+    if not checks:
+        fails.append("the functional checks did not run to completion")
+    for name, res in checks.items():
+        if not res["ok"]:
+            fails.append(f"check '{name}' failed: {res.get('error')}")
+    baseline = json.load(open(args.baseline))["exports"]
+    candidate = analyze.analyze_dir(exports) if os.path.isdir(exports) else {}
+    for name in sorted(set(baseline) | set(candidate)):
+        if name not in baseline or name not in candidate:
+            fails.append(f"export {name}: only in {'candidate' if name in candidate else 'baseline'}")
+            continue
+        x, y = dict(baseline[name]), dict(candidate[name])
+        x.pop("size_bytes", None)
+        y.pop("size_bytes", None)
+        diff(x, y, name, fails, args.rtol, args.atol)
+    n_ok = sum(v["ok"] for v in flow.get("stages", {}).values())
+    print(f"flow {n_ok}/{len(flow.get('stages', {}))}  checks {sum(v['ok'] for v in checks.values())}/{len(checks)}")
+    for f in fails:
+        print("  FAIL", f)
+    print(f"\n{'PASS' if not fails else 'FAIL'}: {len(fails)} problem(s)")
+    return 1 if fails else 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -322,8 +377,15 @@ def main():
     c.add_argument("candidate")
     c.add_argument("--rtol", type=float, default=1e-3)
     c.add_argument("--atol", type=float, default=1e-3)
+    v = sub.add_parser("verify", help="check an already installed vivid3d (e.g. from PyPI) against the baseline")
+    v.add_argument("--python", required=True, help="python executable of the environment that has vivid3d installed")
+    v.add_argument("--baseline", default=os.path.join(HERE, "baselines", "baseline-vendored.json"))
+    v.add_argument("--label", default="verify")
+    v.add_argument("--root", default="~/work/golden")
+    v.add_argument("--rtol", type=float, default=1e-3)
+    v.add_argument("--atol", type=float, default=1e-3)
     a = ap.parse_args()
-    sys.exit(cmd_run(a) if a.cmd == "run" else cmd_compare(a))
+    sys.exit({"run": cmd_run, "compare": cmd_compare, "verify": cmd_verify}[a.cmd](a))
 
 
 if __name__ == "__main__":

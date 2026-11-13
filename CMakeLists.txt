@@ -12,10 +12,11 @@
 cmake_minimum_required(VERSION 3.15)
 
 # The version has a single source of truth: src/vivid3d/_details.py (pyproject.toml reads it too).
+# A pre-release suffix is allowed ("1.1.0rc1", "1.1.0.dev3"); CMake's project(VERSION) only takes X.Y.Z.
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/src/vivid3d/_details.py" _vivid_version_line REGEX "^__version__ *=")
-string(REGEX MATCH "\"([0-9]+\\.[0-9]+\\.[0-9]+)\"" _vivid_version_match "${_vivid_version_line}")
+string(REGEX MATCH "\"([0-9]+\\.[0-9]+\\.[0-9]+)[^\"]*\"" _vivid_version_match "${_vivid_version_line}")
 if(NOT _vivid_version_match)
-    message(FATAL_ERROR "Cannot read __version__ (\"X.Y.Z\") from src/vivid3d/_details.py")
+    message(FATAL_ERROR "Cannot read __version__ (\"X.Y.Z\" plus an optional suffix) from src/vivid3d/_details.py")
 endif()
 project(vivid VERSION ${CMAKE_MATCH_1} LANGUAGES CXX)
 

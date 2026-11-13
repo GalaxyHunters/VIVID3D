@@ -32,7 +32,7 @@ namespace pybind11 {
                 if (!src)
                     return false;
 
-                if (!convert and !py::array_t<coord_t>::check_(src))
+                if (!convert && !py::array_t<coord_t>::check_(src))
                     return false;
 
                 //auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
@@ -85,7 +85,7 @@ namespace pybind11 {
             // Conversion part 1 (Python -> C++)
             bool load(py::handle src, bool convert)
             {
-                if ( !convert and !py::array_t<coord_t>::check_(src) )
+                if ( !convert && !py::array_t<coord_t>::check_(src) )
                     return false;
 
                 if ( !src )

@@ -32,12 +32,12 @@ Our Documentation is hosted at [Read The Docs](https://vivid.readthedocs.io/en/l
 
 # Installation and Usage
 ## Installation
-VIVID3D can be installed from PyPI using pip on `Python >= 3.7`
+VIVID3D can be installed from PyPI using pip on `Python >= 3.10`
 
 ```
 pip install vivid3d
 ```
-This might take a few minutes, and is only tested on linux as of now.
+Installing builds the C++ core from source, which needs a C++17 compiler (GCC/Clang on Linux and macOS, the Visual Studio 2022 Build Tools with the "Desktop development with C++" workload on Windows) and an internet connection (assimp is downloaded and built); expect a few minutes. It is tested on Linux and Windows with Python 3.10 - 3.14.
 
 ## Usage
 Learn the fundamentals and advanced model creation examples with the [User Guide](https://vivid.readthedocs.io/en/latest/examples.html).

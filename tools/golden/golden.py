@@ -42,12 +42,51 @@ def sh(cmd, **kw):
     return subprocess.run(cmd, check=True, text=True, **kw)
 
 
+WINDOWS = os.name == "nt"
+
+
 def venv(path):
     shutil.rmtree(path, ignore_errors=True)
     sh([sys.executable, "-m", "venv", path])
-    py = os.path.join(path, "bin", "python")
+    py = os.path.join(path, "Scripts", "python.exe") if WINDOWS else os.path.join(path, "bin", "python")
     sh([py, "-m", "pip", "install", "-q", "-U", "pip"])
     return py
+
+
+def msvc_env():
+    """Windows: the environment of a 'x64 Native Tools' prompt (cl.exe, link.exe, SDK paths), taken from the
+    newest Visual Studio / Build Tools that has the C++ tools. Returns os.environ unchanged elsewhere."""
+    env = dict(os.environ)
+    if not WINDOWS:
+        return env
+    vswhere = os.path.join(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)"),
+                           "Microsoft Visual Studio", "Installer", "vswhere.exe")
+    root = subprocess.run([vswhere, "-latest", "-products", "*", "-requires",
+                           "Microsoft.VisualStudio.Component.VC.Tools.x86.x64", "-property", "installationPath"],
+                          capture_output=True, text=True).stdout.strip()
+    if not root:
+        sys.exit("no Visual Studio / Build Tools with the C++ x64 tools found (see CLAUDE.md, Windows)")
+    bat = os.path.join(root, "VC", "Auxiliary", "Build", "vcvars64.bat")
+    dump = subprocess.run(f'cmd /c ""{bat}" >nul 2>&1 && set"', shell=True, capture_output=True, text=True).stdout
+    for line in dump.splitlines():
+        if "=" in line:
+            k, v = line.split("=", 1)
+            # Windows variable names are case-insensitive but a dict is not: vcvars prints "Path" while
+            # os.environ has "PATH". Upper-case (as os.environ does) so the MSVC value replaces the old one
+            # instead of becoming a second, ambiguous entry.
+            env[k.upper()] = v
+    return env
+
+
+def linked_libs(path, env):
+    """Shared libraries a native file depends on (ldd on Linux, dumpbin /dependents on Windows)."""
+    if WINDOWS:
+        # on Windows the executable is looked up in this process's PATH, not in env, so resolve it first
+        dumpbin = shutil.which("dumpbin", path=env.get("PATH")) or "dumpbin"
+        out = subprocess.run([dumpbin, "/dependents", path], capture_output=True, text=True, env=env).stdout
+        return sorted(l.strip() for l in out.splitlines() if l.strip().lower().endswith(".dll"))
+    out = subprocess.run(["ldd", path], capture_output=True, text=True).stdout
+    return sorted(l.split()[0] for l in out.splitlines() if "=>" in l)
 
 
 def cmd_run(args):
@@ -64,7 +103,7 @@ def cmd_run(args):
         shutil.rmtree(os.path.join(args.repo, stale), ignore_errors=True)
     wheel_dir = os.path.join(out, "wheel")
     log = os.path.join(out, "build.log")
-    env = dict(os.environ)
+    env = msvc_env()
     if args.cmake_arg:  # picked up by scikit-build-core, e.g. --cmake-arg=-DVIVID_ASSIMP=SYSTEM
         env["CMAKE_ARGS"] = " ".join(args.cmake_arg)
 
@@ -112,6 +151,11 @@ def cmd_run(args):
     # the wheel's own install_requires decide what is installed unless --run-dep pins something,
     # e.g. --run-dep=numpy==1.21.6 --run-dep=matplotlib==3.5.3 to test the declared lower bounds
     sh([rpy, "-m", "pip", "install", "-q", whl] + args.run_dep)
+    # Warm up once, untimed. The first run in a brand-new venv pays one-off costs (Python compiling
+    # numpy/matplotlib, virus scanners checking every new file): ~30 s on Windows, which would drown out
+    # the timings below. Touch the colormap path too, it imports matplotlib lazily.
+    subprocess.run([rpy, "-c", "import vivid3d; s = vivid3d.create_sphere(); s.colormap = 'viridis'"],
+                   capture_output=True, cwd=tempfile.gettempdir())
     times = []
     for _ in range(5):
         r = sh([rpy, "-c", "import time; t=time.perf_counter(); import vivid3d; "
@@ -120,9 +164,10 @@ def cmd_run(args):
     site = sh([rpy, "-c", "import vivid3d,os; print(os.path.dirname(vivid3d.__file__))"],
               capture_output=True, cwd=tempfile.gettempdir()).stdout.strip()
     needed = {}
-    for so in glob.glob(os.path.join(site, "**", "*.so*"), recursive=True):
-        ldd = subprocess.run(["ldd", so], capture_output=True, text=True).stdout
-        needed[os.path.relpath(so, site)] = sorted(l.split()[0] for l in ldd.splitlines() if "=>" in l)
+    patterns = ("*.pyd", "*.dll") if WINDOWS else ("*.so*",)
+    for pattern in patterns:
+        for lib in glob.glob(os.path.join(site, "**", pattern), recursive=True):
+            needed[os.path.relpath(lib, site).replace("\\", "/")] = linked_libs(lib, env)
     info["import"] = {"ok": True, "median_seconds": round(statistics.median(times), 3),
                       "location": site, "linked_libs": needed}
 
@@ -211,7 +256,7 @@ def cmd_compare(args):
     for key in ("wheel_bytes", "unpacked_bytes", "n_files"):
         print(f"  package {key:14}:", ratio(A["package"][key], B["package"][key]))
     print("  import seconds:", ratio(A["import"]["median_seconds"], B["import"]["median_seconds"]))
-    print("  peak RSS MB   :", ratio(A["flow"].get("peak_rss_mb", 0), B["flow"].get("peak_rss_mb", 0)))
+    print("  peak RSS MB   :", ratio(A["flow"].get("peak_rss_mb") or 0, B["flow"].get("peak_rss_mb") or 0))
     print("  total flow s  :", ratio(A["flow"].get("total_seconds", 0), B["flow"].get("total_seconds", 0)))
     for lib in sorted(set(A["package"]["native_files"]) | set(B["package"]["native_files"])):
         print(f"  native {lib}:", A["package"]["native_files"].get(lib), "->", B["package"]["native_files"].get(lib))

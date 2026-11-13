@@ -7,7 +7,6 @@ Errors are recorded rather than raised so a broken exporter shows up in the diff
 """
 import json
 import os
-import resource
 import sys
 import time
 
@@ -15,6 +14,35 @@ import numpy as np
 import vivid3d
 
 FORMATS = ("glb", "obj", "fbx")
+
+
+def peak_rss_mb():
+    """Peak resident memory of this process in MB (Linux: getrusage, Windows: peak working set)."""
+    if sys.platform == "win32":
+        import ctypes
+        from ctypes import wintypes
+
+        class Counters(ctypes.Structure):
+            _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD),
+                        ("PeakWorkingSetSize", ctypes.c_size_t), ("WorkingSetSize", ctypes.c_size_t),
+                        ("QuotaPeakPagedPoolUsage", ctypes.c_size_t), ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t), ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                        ("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t)]
+
+        # The argument types must be declared: GetCurrentProcess() returns the pseudo-handle -1, which
+        # ctypes would otherwise pass as a 32-bit int (invalid handle, the call fails and returns zeros).
+        kernel32 = ctypes.WinDLL("kernel32")
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        psapi = ctypes.WinDLL("psapi")
+        psapi.GetProcessMemoryInfo.argtypes = [wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD]
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
+        counters = Counters()
+        counters.cb = ctypes.sizeof(Counters)
+        if not psapi.GetProcessMemoryInfo(kernel32.GetCurrentProcess(), ctypes.byref(counters), counters.cb):
+            return None
+        return round(counters.PeakWorkingSetSize / 1048576, 1)
+    import resource
+    return round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
 
 
 def build_scene():
@@ -90,7 +118,7 @@ def main(out_dir):
           metrics["stages"])
 
     metrics["total_seconds"] = round(time.perf_counter() - t0, 4)
-    metrics["peak_rss_mb"] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+    metrics["peak_rss_mb"] = peak_rss_mb()
     with open(os.path.join(out_dir, "flow_metrics.json"), "w") as fh:
         json.dump(metrics, fh, indent=2, sort_keys=True)
     failed = [k for k, v in metrics["stages"].items() if not v["ok"]]

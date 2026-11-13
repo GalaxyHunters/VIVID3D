@@ -1,9 +1,89 @@
 [build-system]
+# scikit-build-core adds cmake / ninja to the build environment itself, only when the system has no
+# suitable ones. pybind11 is located by CMake through `python -m pybind11 --cmakedir`.
 requires = [
-    "setuptools>=61.0",
-    "scikit-build>=0.15.0",
-    "cmake>=3.24.1.1",
+    "scikit-build-core>=0.11",
     "pybind11>=3.0.1",
-    "ninja>=1.10.2.4; platform_system!='Windows'"
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "vivid3d"
+dynamic = ["version"]   # single source: src/vivid3d/_details.py (CMake reads it from there too)
+description = "A 3D visualisation tool for simulations"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "GalaxyHuntersIL", email = "galaxyhuntersil@gmail.com" }]
+keywords = ["3d", "mesh", "visualization", "simulation", "particles"]
+# Tested with tools/golden on CPython 3.10 - 3.14 (3.10 also with the minimum numpy/matplotlib).
+# Older versions are end-of-life and untested.
+requires-python = ">=3.10"
+# Needed at import time: the compiled module imports numpy, and the viewers import matplotlib (also
+# used for colormaps; matplotlib.colormaps needs >= 3.5). Without them `import vivid3d` fails.
+dependencies = [
+    "numpy>=1.21.3",
+    "matplotlib>=3.5",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Typing :: Typed",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+
+[project.optional-dependencies]
+notebook = ["ipywidgets", "ipython"]   # only for the in-notebook viewers (imported lazily)
+test = ["pytest>=6.0"]
+# everything needed to build the documentation (also needs the `pandoc` program, see .readthedocs.yaml)
+docs = ["sphinx", "furo", "sphinx-mdinclude", "nbsphinx", "jupyter-sphinx", "ipywidgets", "ipython", "pandas"]
+
+[project.urls]
+Homepage = "https://galaxyhuntersil.wixsite.com/website/vivid"
+Documentation = "https://vivid.readthedocs.io/en/latest/"
+"Bug Tracker" = "https://github.com/GalaxyHunters/Vivid/issues"
+"Source Code" = "https://github.com/GalaxyHunters/Vivid"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+cmake.version = ">=3.15"
+# CMake installs into <wheel>/vivid3d/ : the extension module at its top level, helper libraries in lib/
+wheel.packages = ["src/vivid3d"]
+wheel.install-dir = "vivid3d"
+
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "src/vivid3d/_details.py"
+
+[tool.scikit-build.sdist]
+# Keep the source distribution to what a build needs. (The Voronoi library's tests, examples and
+# convergence runs, the docs, the golden tooling and the CI/IDE files are not needed to compile.)
+exclude = [
+    "/docs",
+    "/tests",
+    "/tools",
+    "/.github",
+    "/.idea",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/analytic",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/convergence",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/examples",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/profiling",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/refactoring_tools",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/runs",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/tests",
+    "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/visualisation",
+]

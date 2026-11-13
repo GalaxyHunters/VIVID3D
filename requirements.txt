@@ -1,7 +1,0 @@
-setuptools>=61.0
-scikit-build>=0.15.0
-cmake>=3.24.1.1
-ninja>=1.10.2.4; platform_system!='Windows'
-numpy>=1.21.3
-ipywidgets
-matplotlib>=3.5

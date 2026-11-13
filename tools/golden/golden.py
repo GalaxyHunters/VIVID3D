@@ -29,12 +29,13 @@ sys.path.insert(0, HERE)
 import analyze  # noqa: E402
 
 def build_deps(repo):
-    """Build requirements straight from the project's pyproject.toml (no second copy to keep in sync),
-    plus `wheel` for pip's no-isolation builds. Platform markers are left for pip to evaluate."""
+    """Build requirements straight from the project's pyproject.toml (no second copy to keep in sync).
+    scikit-build-core adds cmake/ninja on its own only for isolated builds; this tool builds without
+    isolation (so the timing is compile time only), hence cmake and ninja are installed explicitly."""
     import re
     text = open(os.path.join(repo, "pyproject.toml"), encoding="utf-8").read()
     block = re.search(r"requires\s*=\s*\[(.*?)\]\s*\n", text, re.S).group(1)
-    return re.findall(r'"([^"]+)"', block) + ["wheel"]
+    return re.findall(r'"([^"]+)"', block) + ["cmake>=3.15", "ninja"]
 
 
 def sh(cmd, **kw):
@@ -64,12 +65,32 @@ def cmd_run(args):
     wheel_dir = os.path.join(out, "wheel")
     log = os.path.join(out, "build.log")
     env = dict(os.environ)
-    if args.cmake_arg:  # picked up by scikit-build, e.g. --cmake-arg=-DVIVID_ASSIMP=SYSTEM
-        env["SKBUILD_CONFIGURE_OPTIONS"] = " ".join(args.cmake_arg)
+    if args.cmake_arg:  # picked up by scikit-build-core, e.g. --cmake-arg=-DVIVID_ASSIMP=SYSTEM
+        env["CMAKE_ARGS"] = " ".join(args.cmake_arg)
+
+    source = args.repo
+    if args.via_sdist:
+        # build the source distribution first, then build the wheel FROM it: proves the sdist is complete
+        sh([bpy, "-m", "pip", "install", "-q", "build"])
+        sdist_dir = os.path.join(out, "sdist")
+        sr = subprocess.run([bpy, "-m", "build", "--sdist", "--no-isolation", "--outdir", sdist_dir, args.repo],
+                            capture_output=True, text=True, env=env)
+        sdists = glob.glob(os.path.join(sdist_dir, "*.tar.gz"))
+        if sr.returncode != 0 or not sdists:
+            print("SDIST BUILD FAILED:\n" + (sr.stdout + sr.stderr)[-1500:])
+            info["sdist"] = {"ok": False}
+            return finish(out, info, 1)
+        import tarfile
+        with tarfile.open(sdists[0]) as tf:
+            names = tf.getnames()
+        info["sdist"] = {"ok": True, "bytes": os.path.getsize(sdists[0]), "n_files": len(names),
+                         "top_dirs": sorted({n.split("/")[1] for n in names if n.count("/") >= 1})}
+        source = sdists[0]
+
     t = time.perf_counter()
     with open(log, "w") as fh:
         rc = subprocess.run([bpy, "-m", "pip", "wheel", "-v", "--no-build-isolation", "--no-deps",
-                             "-w", wheel_dir, args.repo], stdout=fh, stderr=subprocess.STDOUT, env=env).returncode
+                             "-w", wheel_dir, source], stdout=fh, stderr=subprocess.STDOUT, env=env).returncode
     with open(log, errors="replace") as fh:
         assimp_lines = sorted({l.split("-- ", 1)[1].strip() for l in fh if "-- assimp:" in l})
     info["build"] = {"ok": rc == 0, "seconds": round(time.perf_counter() - t, 1), "log": log,
@@ -245,6 +266,8 @@ def main():
     r.add_argument("--label", required=True)
     r.add_argument("--root", default="~/work/golden")
     r.add_argument("--cmake-arg", action="append", default=[], help="extra CMake option, repeatable")
+    r.add_argument("--via-sdist", action="store_true",
+                   help="build an sdist first and build the wheel from it (verifies the sdist is complete)")
     r.add_argument("--build-dep", action="append", default=[],
                    help="extra/pinned build requirement appended to the pyproject list, e.g. pybind11==3.0.1")
     r.add_argument("--run-dep", action="append", default=[],

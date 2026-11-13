@@ -18,7 +18,7 @@ namespace vivid
         inline ~CFace(){}
 
         inline std::vector<size_t> GetPoints()const  { return mPoints; }
-        inline size_t operator[](size_t I) {return mPoints[I];}
+        inline size_t operator[](size_t I) const {return mPoints[I];}
         inline normal_float GetUVcoord() const { return mUVcoord; }
 
         inline void SetUVcoord(const coord_t aColor) { mUVcoord = aColor; }

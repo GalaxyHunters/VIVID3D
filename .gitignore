@@ -20,3 +20,15 @@ vivid_main
 !/src/vivid3d/viewer
 !/pybind11/pybind11/__init__.py
 /.vscode/
+
+# CMake in-tree build outputs (generated; never commit)
+/Makefile
+/cmake_install.cmake
+/CMakeCache.txt
+/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/Makefile
+/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/cmake_install.cmake
+/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/CMakeCache.txt
+*.so
+
+# Test/golden outputs
+/test_models/

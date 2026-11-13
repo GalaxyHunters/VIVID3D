@@ -1,5 +1,7 @@
 #include "VoronoiVolume.h"
-#include <map>
+#include <algorithm>
+#include <numeric>
+#include <stdexcept>
 #include "Noisify.h"
 
 using namespace vivid;
@@ -23,92 +25,118 @@ CVoronoiVolume::CVoronoiVolume(const vector<CPoint> &arInputPoints, vector<norma
     for (int i = 0; i < arInputPoints.size(); i++) {
         points.emplace_back(CSurfacePoint(CPoint(arInputPoints[i]), normal_field[i], false), i);
     }
+    mNumCallerPoints = arInputPoints.size();
     mInputPoints = arInputPoints;
     PreProcessPoints(points, aNoiseDisplacement);
     CreateSurface();
 }
 
-CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf)
-{
-    mInputPoints = surf.mInputPoints;
-    mCreationMask = surf.mCreationMask;
-    mInputOutputMap = surf.mInputOutputMap;
-    mUVcoords = surf.mUVcoords;
-    mCenVector = surf.mCenVector;
-    mBoxPair = surf.mBoxPair;
-    mScale = surf.mScale;
-
-    map <shared_ptr<CPoint>, shared_ptr<CPoint>> old_to_new_Points;
-    mVertices.clear();
-    size_t counter = 0;
-    map < shared_ptr<CPoint>, size_t> indexes;
-    for (const auto & mVecPoint : surf.mVertices) {
-        mVertices.push_back(shared_ptr<CPoint>(new CPoint(*mVecPoint)));
-        indexes[mVecPoint] = counter;
-        counter++;
-    }
-    mSurfFaces.clear();
-    CSurfaceFace temp;
-    for (const auto & mVecFace : surf.mSurfFaces) {
-        temp = CSurfaceFace();
-        temp.mUVcoord = mVecFace.mUVcoord;
-        temp.mPairPoints = mVecFace.mPairPoints;
-        temp.mVertices.clear();
-        for (const auto & mPoint : mVecFace.mVertices){
-            temp.mVertices.push_back(mVertices[indexes[mPoint]]);
-        }
-        mSurfFaces.push_back(temp);
-    }
-}
+// Member-wise copy (the Voronoi tessellation object itself is not copied, as before).
+CVoronoiVolume::CVoronoiVolume(const CVoronoiVolume &surf) = default;
 
 /* ------------------------------------------------ Public Methods ---------------------------------------------------- */
 
-CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity)
+CMesh CVoronoiVolume::MaskMesh(const vector<bool> &arMask, const string& arLabel, normal_float aOpacity) const
 {
     Log(LOG_DEBUG, "Mask Input Size: " + to_string(arMask.size()));
     if( (find(arMask.begin(),arMask.end(),true) == arMask.end()) || find(arMask.begin(), arMask.end(), false) == arMask.end() ){
         Log(LOG_ERROR, MISSING_BOOLEAN_VALUES);
     }
-    // duplicating data, masking
-    vector<bool> new_mask;
-    for (auto pair : mInputOutputMap) {
-        new_mask.push_back(arMask[pair.second]);
+    if (arMask.size() != mNumCallerPoints) {
+        Log(LOG_ERROR, ARRAYS_NOT_EQUAL);
     }
-    Log(LOG_DEBUG, "Mask New Size: " + to_string(new_mask.size()));
-    CVoronoiVolume copy = CVoronoiVolume(*this);
-    Log(LOG_DEBUG, "Setting Mask");
-    copy.SetMask(new_mask);
-    Log(LOG_DEBUG, "MASKING");
-    copy.CleanFaces();
-    copy.CleanPoints();
-    Log(LOG_DEBUG, "Converting To Mesh");
-    return copy.ToMesh(arLabel, aOpacity);
-}
+    // the mask of the points the Voronoi was computed on (duplicate input points were merged)
+    vector<char> point_mask(mInputOutputMap.size());
+    for (size_t i = 0; i < mInputOutputMap.size(); i++) {
+        point_mask[i] = arMask[mInputOutputMap[i]];
+    }
 
-CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) {
-    vector<CPoint> points;
-    size_t counter = 0;
-    map < shared_ptr<CPoint>, size_t> indexes;
-    for (const auto & mVecPoint : mVertices) {
-        points.push_back((*mVecPoint * mScale) + mCenVector);
-        indexes[mVecPoint] = counter;
-        counter++;
+    // 1. Keep the faces that separate a true point from a false point, split into triangles (fan from the first
+    //    corner) and oriented from true to false. Only these faces are ever touched: everything else is skipped.
+    vector<uint32_t> tris;               // 3 vertex ids per triangle
+    vector<coord_t> tri_uv;              // colour of each triangle
+    vector<char> used(mVertices.size(), 0);
+    for (size_t f = 0; f < mSurfFaces.Size(); f++) {
+        const pair<uint32_t, uint32_t> pr = mSurfFaces.mPairs[f];
+        if (point_mask[pr.first] == point_mask[pr.second]) {
+            continue;
+        }
+        const uint32_t* v = mSurfFaces.Vertices(f);
+        const size_t nv = mSurfFaces.VertexCount(f);
+        // direction of the normal: from the true point to the false point
+        const CPoint &p1 = mInputPoints[pr.first], &p2 = mInputPoints[pr.second];
+        CPoint true_normal = point_mask[pr.first] ? (p2 - p1).Normalize() : (p1 - p2).Normalize();
+        for (size_t i = 1; i + 1 < nv; i++) {
+            uint32_t a = v[0], b = v[i], c = v[i + 1];
+            CPoint face_normal = ((mVertices[b] - mVertices[a]).Cross(mVertices[c] - mVertices[a])).Normalize();
+            CPoint oriented = true_normal;
+            oriented *= face_normal;
+            if (oriented.Dot({1, 1, 1}) < 0) {
+                std::swap(b, c);
+            }
+            tris.push_back(a); tris.push_back(b); tris.push_back(c);
+            tri_uv.push_back(mSurfFaces.mUVcoords[f]);
+            used[a] = used[b] = used[c] = 1;
+        }
     }
+
+    // 2. The corners the surviving triangles use, in their original order; sort them (the same comparison and the same
+    //    sequence as ever, so the same order) and merge corners that are on the same place.
+    vector<uint32_t> order;
+    for (uint32_t i = 0; i < used.size(); i++) {
+        if (used[i]) order.push_back(i);
+    }
+    sort(order.begin(), order.end(), [this](uint32_t a, uint32_t b) { return mVertices[a] < mVertices[b]; });
+    vector<uint32_t> new_id(mVertices.size(), 0);    // old vertex id -> index in the mesh
+    vector<CPoint> points;
+    points.reserve(order.size());
+    for (size_t i = 0; i < order.size(); i++) {
+        const CPoint &base = mVertices[order[i]];
+        new_id[order[i]] = static_cast<uint32_t>(points.size());
+        points.push_back((base * mScale) + mCenVector);
+        size_t j = i + 1;
+        while (j < order.size() && base.Dist(mVertices[order[j]]) <= POINT_SIMILARITY_THRESHOLD) {
+            new_id[order[j]] = static_cast<uint32_t>(points.size() - 1);
+            j++;
+        }
+        i = j - 1;
+    }
+
+    // 3. The faces of the mesh: corners that were merged into one appear once.
     vector<CFace> faces;
-    vector<size_t> face_points;
-    set<size_t> set_points;
-    for (const auto & mVecFace : mSurfFaces) {
-        for (const auto & mPoint : mVecFace.mVertices) {
-            if (set_points.count(indexes[mPoint]) == 0) {
-                face_points.push_back(indexes[mPoint]);
-                set_points.insert(indexes[mPoint]);
+    faces.reserve(tri_uv.size());
+    for (size_t t = 0; t < tri_uv.size(); t++) {
+        vector<size_t> face_points;
+        for (int k = 0; k < 3; k++) {
+            size_t id = new_id[tris[3 * t + k]];
+            if (find(face_points.begin(), face_points.end(), id) == face_points.end()) {
+                face_points.push_back(id);
             }
         }
-        faces.emplace_back(face_points, mVecFace.mUVcoord);
-        face_points = vector<size_t>();
-        set_points.clear();
+        faces.emplace_back(face_points, tri_uv[t]);
     }
+    Log(LOG_DEBUG, "Converting To Mesh");
+    return CMesh(points, faces, aOpacity, arLabel);
+}
 
+CMesh CVoronoiVolume::ToMesh(const string& arLabel, normal_float aOpacity) const {
+    vector<CPoint> points;
+    points.reserve(mVertices.size());
+    for (const auto & vertex : mVertices) {
+        points.push_back((vertex * mScale) + mCenVector);
+    }
+    vector<CFace> faces;
+    faces.reserve(mSurfFaces.Size());
+    for (size_t f = 0; f < mSurfFaces.Size(); f++) {
+        vector<size_t> face_points;
+        const uint32_t* v = mSurfFaces.Vertices(f);
+        for (size_t i = 0; i < mSurfFaces.VertexCount(f); i++) {
+            if (find(face_points.begin(), face_points.end(), v[i]) == face_points.end()) {
+                face_points.push_back(v[i]);
+            }
+        }
+        faces.emplace_back(face_points, mSurfFaces.mUVcoords[f]);
+    }
     return CMesh(points, faces, aOpacity, arLabel);
 }
 
@@ -122,45 +150,44 @@ void CVoronoiVolume::CreateSurface()
 
 /* ---------------------------------------------- Handle RunVorn Methods ---------------------------------------------*/
 
-vector<shared_ptr<CPoint> > ConvertFromVorn(const vector<Vector3D>& arVornPoints)
-{
-    vector<shared_ptr<CPoint> > new_vec;
-    for (const auto & arVornPoint : arVornPoints) {
-        new_vec.push_back(shared_ptr<CPoint>(new CPoint(arVornPoint.x, arVornPoint.y, arVornPoint.z)));
-    }
-    return new_vec;
-}
-
 void CVoronoiVolume::RunVorn()
 {
     Log(LOG_VIVID, "Begin Compute Voronoi with "  + to_string(mInputPoints.size()) + " points");
     mVoronoi.ComputeVoronoi(mInputPoints, mBoxPair);
     //set the points
-    mVertices = ConvertFromVorn(mVoronoi.mData.GetFacePoints());
+    {
+        const vector<Vector3D> corners = mVoronoi.mData.GetFacePoints();
+        mVertices.clear();
+        mVertices.reserve(corners.size());
+        for (const auto & corner : corners) {
+            mVertices.emplace_back(corner.x, corner.y, corner.z);
+        }
+    }
     //set the faces
     vector<vector<size_t> > vorn_faces = mVoronoi.GetFaces();
-    vector<CSurfaceFace> new_faces;
-    vector<vector<size_t>> points_map;
-    points_map.resize(mVoronoi.mData.GetTotalPointNumber(), vector<size_t>(0));
-    size_t c_point1, c_point2;
-    normal_float UVcoord;
-    vector<shared_ptr<CPoint>> face_points;
+    if (mVertices.size() >= UINT32_MAX || mInputPoints.size() >= UINT32_MAX) {
+        Log(LOG_ERROR, "Too many points: more than 4 billion vertices are not supported");
+    }
+    mSurfFaces.Clear();
+    mSurfFaces.mPairs.reserve(vorn_faces.size());
+    mSurfFaces.mUVcoords.reserve(vorn_faces.size());
+    mSurfFaces.mOffsets.reserve(vorn_faces.size() + 1);
+    size_t total = 0;
+    for (const auto & vorn_face : vorn_faces) total += vorn_face.size() - 2;
+    mSurfFaces.mIndices.reserve(total);
 
     for (auto & vorn_face : vorn_faces) {
-        c_point1 = vorn_face.back();
-        vorn_face.pop_back();
-        c_point2 = vorn_face.back();
-        vorn_face.pop_back();
-        UVcoord = 0; //UVcoord will be defined later in the program(clean faces) so for now this will be a placeholder
-        face_points = vector<shared_ptr<CPoint> >();
-
-        for (size_t & point : vorn_face) {
-            face_points.push_back(mVertices[point]);
+        // the last two numbers of every face are the two input points it lies between, the others are its corners
+        const size_t c_point1 = vorn_face[vorn_face.size() - 1];
+        const size_t c_point2 = vorn_face[vorn_face.size() - 2];
+        for (size_t i = 0; i + 2 < vorn_face.size(); i++) {
+            mSurfFaces.mIndices.push_back(static_cast<uint32_t>(vorn_face[i]));
         }
-        new_faces.emplace_back(face_points, UVcoord, pair<size_t, size_t>(c_point1, c_point2));
+        mSurfFaces.mOffsets.push_back(static_cast<uint32_t>(mSurfFaces.mIndices.size()));
+        mSurfFaces.mPairs.emplace_back(static_cast<uint32_t>(c_point1), static_cast<uint32_t>(c_point2));
+        mSurfFaces.mUVcoords.push_back(0);     // defined later in the program (CleanEdges), this is a placeholder
+        vector<size_t>().swap(vorn_face);      // free it now, not when the whole list goes out of scope
     }
-
-    mSurfFaces = new_faces;
 
     Log(LOG_VIVID, "Completed Voronoi Computation");
 }
@@ -196,95 +223,40 @@ void CVoronoiVolume::CleanEdges()
     Log(LOG_DEBUG, "Cleaning Edges");
     coord_t clean_by = 0.35;
     size_t points_size = mInputPoints.size();
-    vector<CSurfaceFace> new_faces;
-    for (auto & mVecFace : mSurfFaces) {
-        if (points_size > mVecFace.mPairPoints.first && points_size > mVecFace.mPairPoints.second) { //the indexs are both in range and not a part of the box
+    // compact the faces in place: the ones that stay keep their order
+    size_t out_face = 0, out_index = 0;
+    for (size_t f = 0; f < mSurfFaces.Size(); f++) {
+        const pair<uint32_t, uint32_t> pr = mSurfFaces.mPairs[f];
+        if (points_size > pr.first && points_size > pr.second) { //the indexs are both in range and not a part of the box
+            const uint32_t* v = mSurfFaces.Vertices(f);
+            const size_t nv = mSurfFaces.VertexCount(f);
             bool is_out_of_radius = false;
-            for (auto & mPoint : mVecFace.mVertices) {
-                if (abs((*mPoint).X()) > (mBoxPair.second.X() * clean_by) || abs((*mPoint).Y()) > (mBoxPair.second.Y() * clean_by) || abs((*mPoint).Z()) > (mBoxPair.second.Z() * clean_by)) {
+            for (size_t i = 0; i < nv; i++) {
+                const CPoint &point = mVertices[v[i]];
+                if (abs(point.X()) > (mBoxPair.second.X() * clean_by) || abs(point.Y()) > (mBoxPair.second.Y() * clean_by) || abs(point.Z()) > (mBoxPair.second.Z() * clean_by)) {
                     is_out_of_radius = true;
                 }
             }
             if (!is_out_of_radius) { //the face is inside the box Radius and should be kept
-                mVecFace.mUVcoord = mUVcoords[mVecFace.mPairPoints.first] * 0.5 + mUVcoords[mVecFace.mPairPoints.second] * 0.5;
-                new_faces.push_back(mVecFace);
+                const coord_t uv = mUVcoords[pr.first] * 0.5 + mUVcoords[pr.second] * 0.5;
+                const size_t begin = mSurfFaces.mOffsets[f];
+                for (size_t i = 0; i < nv; i++) {      // out_index <= the read position, so this never overwrites unread data
+                    mSurfFaces.mIndices[out_index++] = mSurfFaces.mIndices[begin + i];
+                }
+                mSurfFaces.mOffsets[out_face + 1] = static_cast<uint32_t>(out_index);
+                mSurfFaces.mPairs[out_face] = pr;
+                mSurfFaces.mUVcoords[out_face] = uv;
+                out_face++;
             }
         }
     }
-    mSurfFaces = new_faces;
+    mSurfFaces.mOffsets.resize(out_face + 1);
+    mSurfFaces.mIndices.resize(out_index);
+    mSurfFaces.mPairs.resize(out_face);
+    mSurfFaces.mUVcoords.resize(out_face);
+    mSurfFaces.mIndices.shrink_to_fit();
     Log(LOG_DEBUG, "Cleaned Edges");
 }
-
-// takes the data from mVoronoi and using the mask cleans it so that only the wanted surface is left
-void CVoronoiVolume::CleanFaces()
-{
-    vector<CSurfaceFace> new_faces;
-    for (auto & mVecFace : mSurfFaces) {
-        if (mCreationMask[mVecFace.mPairPoints.first] != mCreationMask[mVecFace.mPairPoints.second]) { //the face is a part of the surf
-            vector<CSurfaceFace> triangulized_faces = TriangulizeFace(mVecFace);
-            for (auto & mTriangleFace : triangulized_faces) {
-                new_faces.push_back(mTriangleFace);
-            }
-        }
-    }
-    mSurfFaces = new_faces;
-}
-
-vector<CSurfaceFace> CVoronoiVolume::TriangulizeFace(const CSurfaceFace &arFace)
-{
-    vector<CSurfaceFace> triangulized_faces;
-    for (size_t i = 1; i < arFace.mVertices.size()-1; i++) {
-        CSurfaceFace triangle = CSurfaceFace(
-                {arFace.mVertices[0], arFace.mVertices[i], arFace.mVertices[i + 1]},
-                arFace.mUVcoord,
-                arFace.mPairPoints);
-        NormalizeFace(triangle);
-        triangulized_faces.push_back(triangle);
-    }
-    return triangulized_faces;
-}
-
-void CVoronoiVolume::NormalizeFace(CSurfaceFace& arTriangleFace)
-{
-    bool c_point1_mask = mCreationMask[arTriangleFace.mPairPoints.first];
-    bool c_point2_mask = mCreationMask[arTriangleFace.mPairPoints.second];
-    CPoint c_point1 = mInputPoints[arTriangleFace.mPairPoints.first];
-    CPoint c_point2 = mInputPoints[arTriangleFace.mPairPoints.second];
-
-    // assumption 1
-    // true -> false is normal direction
-    CPoint true_normal;
-    if (c_point1_mask) {
-        true_normal = (c_point2 - c_point1).Normalize();
-    } else {
-        true_normal = (c_point1 - c_point2).Normalize();
-    }
-    // assumption 2
-    // vectors used to calculate normal is: (p2 - p1) x (p3 - p1).
-    // In order to switch direction, switch either p1<->p3, or p2<->p3 (preferred with the above assumption
-    CPoint face_normal = ((*arTriangleFace.mVertices[1] - *arTriangleFace.mVertices[0]).Cross(*arTriangleFace.mVertices[2] - *arTriangleFace.mVertices[0])).Normalize();
-    true_normal *= face_normal;
-    // if the direction is opposite
-    if (true_normal.Dot({1,1,1}) < 0) {
-        arTriangleFace.mVertices = {arTriangleFace.mVertices[0], arTriangleFace.mVertices[2], arTriangleFace.mVertices[1]};
-    }
-}
-
-// Do to the removal of many unneeded faces in CVoronoiVolume::CleanFaces there are plenty of unused points in the data, there are also double points (two points on the exact same place),
-// this function cleans both
-void CVoronoiVolume::CleanPoints()
-{
-    vector<shared_ptr<CPoint> > new_points;
-    for (auto & mVecPoint : mVertices) {
-        if (mVecPoint.use_count() > 1) { // the points is also being called from another obj, other then this vector
-            new_points.push_back(mVecPoint);
-        }
-    }
-    mVertices = new_points;
-    CleanDoublePoints();
-}
-
-//----------------------------------------remove double points (two points on the exact same place) functions ----------------------------------------------------------------------
 
 bool sortPair(const pair<CSurfacePoint, size_t>& arobj1, const pair<CSurfacePoint, size_t>& arobj2) {
     return (arobj1.first < arobj2.first);
@@ -297,9 +269,10 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
 
     vector<CSurfacePoint> new_points;
 
-    map<size_t, size_t> map;
+    vector<size_t> map;
+    map.reserve(arPoints.size());
     for (int i = 0; i < arPoints.size(); i++) {
-        map.insert({new_points.size(), arPoints[i].second});
+        map.push_back(arPoints[i].second);
         new_points.push_back(arPoints[i].first);
         if (i != arPoints.size() - 1) {
             while (arPoints[i].first.mPoint.Dist(arPoints[i + 1].first.mPoint) <= POINT_SIMILARITY_THRESHOLD) {
@@ -307,7 +280,7 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
             }
         }
     }
-    mInputOutputMap = map;
+    mInputOutputMap = std::move(map);
     Log(LOG_DEBUG, "n_output_points: " + to_string(new_points.size()));
     mInputPoints.clear();
     mUVcoords.clear();
@@ -319,42 +292,6 @@ void CVoronoiVolume::CleanDoubleInputPoints(vector<pair<CSurfacePoint, size_t>> 
 }
 
 
-bool sortPoints(const shared_ptr<CPoint>& arobj1, const shared_ptr<CPoint>& arobj2) {
-    return (*arobj1.get() < *arobj2.get());
-}
-void CVoronoiVolume::CleanDoublePoints()
-{
-    //sort the array
-    sort(mVertices.begin(), mVertices.end(), sortPoints);
-    map < shared_ptr<CPoint>, shared_ptr<CPoint> > old_new_points; // will hold the new pointer fitting to each point
-    vector<shared_ptr<CPoint> > cleaned_points;
-    size_t j;
-    for (size_t i = 0; i < mVertices.size(); i++) {
-        j = i + 1;
-        cleaned_points.push_back(mVertices[i]); // push the point to the cleaned data
-        old_new_points[mVertices[i]] = mVertices[i];
-        if (j >= mVertices.size())
-        {
-            break;
-        }
-        while ((*mVertices[i]).Dist((*mVertices[j])) <= POINT_SIMILARITY_THRESHOLD) { //check if the point has duplicates that we need to skip
-            old_new_points[mVertices[j]] = mVertices[i];
-            j += 1;
-            if (j >= mVertices.size())
-            {
-                break;
-            }
-        }
-        i = j - 1; //set i to the last a duplicate (ot to i if there were no duplicates).
-    }
-    // change the points ptrs within the faces
-    for (auto faceIt = mSurfFaces.begin(); faceIt != mSurfFaces.end(); faceIt++) {
-        for (auto pointIt = faceIt->mVertices.begin(); pointIt != faceIt->mVertices.end(); pointIt++) {
-            (*pointIt) = old_new_points[*pointIt];
-        }
-    }
-    mVertices = cleaned_points;
-}
 
 /*-------------------------------------------- Handle-Input Sub-Methods -------------------------------------------*/
 

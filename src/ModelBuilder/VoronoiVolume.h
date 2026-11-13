@@ -5,6 +5,8 @@
 #include "Mesh.h"
 #include "LogFile.h"
 #include <memory>
+#include <cstdint>
+#include <map>
 
 namespace vivid
 {
@@ -19,18 +21,19 @@ namespace vivid
         inline bool operator < (const CSurfacePoint &arObj) const {return mPoint < arObj.mPoint;}
     };
 
-// For the cleaning stage
-    struct CSurfaceFace
+    // All faces of the Voronoi volume in flat arrays (no allocation per face, no per-vertex objects).
+    // Face f owns the vertex ids mIndices[mOffsets[f] .. mOffsets[f+1]) and lies between the two input points mPairs[f].
+    struct CSurfaceFaces
     {
-    public:
-        std::vector<std::shared_ptr<CPoint> > mVertices = {};
-        std::pair<size_t, size_t> mPairPoints = {};
-        coord_t mUVcoord = 0;
+        std::vector<uint32_t> mOffsets = {0};
+        std::vector<uint32_t> mIndices = {};
+        std::vector<std::pair<uint32_t, uint32_t>> mPairs = {};
+        std::vector<coord_t> mUVcoords = {};
 
-        CSurfaceFace(const std::vector<std::shared_ptr<CPoint>> &arPoints, coord_t aColorField, const std::pair<size_t, size_t> &arPairPoints) :
-                mVertices(arPoints), mUVcoord(aColorField), mPairPoints(arPairPoints){};
-        CSurfaceFace() {};
-        ~CSurfaceFace() {};
+        inline size_t Size() const { return mPairs.size(); }
+        inline size_t VertexCount(size_t aFace) const { return mOffsets[aFace + 1] - mOffsets[aFace]; }
+        inline const uint32_t* Vertices(size_t aFace) const { return mIndices.data() + mOffsets[aFace]; }
+        inline void Clear() { mOffsets.assign(1, 0); mIndices.clear(); mPairs.clear(); mUVcoords.clear(); }
     };
 
     class CVoronoiVolume
@@ -40,7 +43,8 @@ namespace vivid
 
         // Input Data:
         std::vector<CPoint> mInputPoints = {};
-        std::map<size_t, size_t> mInputOutputMap = {};
+        std::vector<size_t> mInputOutputMap = {}; // deduplicated point index -> index in the caller's input array
+        size_t mNumCallerPoints = 0;              // size of the caller's input array (the mask must have this size)
         std::vector<bool> mCreationMask = {};
         std::vector<normal_float> mUVcoords = {};
 
@@ -50,8 +54,8 @@ namespace vivid
         coord_t mScale = 0;                      // holds value for scaling to original scale upon export to mesh
 
         // Voronoi Data
-        std::vector<std::shared_ptr<CPoint> > mVertices = {};
-        std::vector<CSurfaceFace> mSurfFaces = {};
+        std::vector<CPoint> mVertices = {};      // Voronoi cell corners (vertex ids index this array)
+        CSurfaceFaces mSurfFaces = {};
 
 
         // Centralization Sub-Methods
@@ -70,12 +74,7 @@ namespace vivid
         void RunVorn();
 
         // Cleaning Sub-Methods
-        void CleanFaces();        // clean the unneeded faces(by mCreationMask)
-        vector<CSurfaceFace> TriangulizeFace(const CSurfaceFace &arFace);
-        void NormalizeFace(CSurfaceFace& arTriangleFace); // normalize face to face correct direction
-        void CleanPoints();       // removes all the unused points
         void CleanEdges();        // cleans faces that are out of the box radius (happens as a result of too little points as input)
-        void CleanDoublePoints(); // remove all the double face points from the model
     public:
         /**
          * CVoronoiVolume Constructor
@@ -93,21 +92,25 @@ namespace vivid
         CVoronoiVolume(const CVoronoiVolume &surf);
 
         /**
-         * Convert the CVoronoiVolume object to CMesh object
-         * @param[in] arMask a boolean mask of true and false points
+         * Extract the iso-surface between the true and the false points of a mask as a CMesh.
+         * Read-only: the volume is not copied or changed, so several masks can be extracted from one volume
+         * (even concurrently). The cost depends on the size of the surface, not of the volume.
+         * @param[in] arMask a boolean mask of true and false points, one entry per point given to the constructor
          * @param[in] arLabel the label to assign to the new mesh
-         * @param[in] aAlpha the alpha to assign to the new mesh
+         * @param[in] aOpacity the opacity to assign to the new mesh
          * @returns CMesh converted mesh
          */
-        CMesh MaskMesh(const std::vector<bool> &arMask, const string& arLabel, normal_float aOpacity);
-        CMesh ToMesh(const std::string& arLabel, normal_float aOpacity);
+        CMesh MaskMesh(const std::vector<bool> &arMask, const string& arLabel, normal_float aOpacity) const;
+        /** Convert every face of the volume (no mask) to a CMesh. */
+        CMesh ToMesh(const std::string& arLabel, normal_float aOpacity) const;
 
         // Getters, Setters
         // Used primarily in deprecated smoothing
         inline const std::vector<CPoint>& GetInputPoints() const { return mInputPoints; }
         inline const std::vector<bool>& GetMask() { return mCreationMask; }
         inline const std::vector<normal_float>& GetUVcoords() { return mUVcoords; }
-        inline const std::vector<CSurfaceFace>& GetFaces() const { return mSurfFaces; }
+        inline const CSurfaceFaces& GetFaces() const { return mSurfFaces; }
+        inline const std::vector<CPoint>& GetVertices() const { return mVertices; }
         inline const CVoronoi& GetVoronoiData() const { return mVoronoi; }
 
         inline void SetInputPoints(const std::vector<CPoint> &arPoints) { mInputPoints = arPoints; }

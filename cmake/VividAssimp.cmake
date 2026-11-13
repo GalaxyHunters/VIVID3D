@@ -9,7 +9,10 @@
 
 set(VIVID_ASSIMP "AUTO" CACHE STRING "assimp source: AUTO, SYSTEM, FETCH or VENDORED")
 set_property(CACHE VIVID_ASSIMP PROPERTY STRINGS AUTO SYSTEM FETCH VENDORED)
-set(VIVID_ASSIMP_MIN_VERSION "5.2.5" CACHE STRING
+# 6.0.6 is the version tools/golden has verified (static fetch and shared system build both give
+# output identical to the old vendored 5.2.5 baseline). Older versions are not tested; assimp's
+# exporters changed behaviour across releases, so lower this only after running tools/golden.
+set(VIVID_ASSIMP_MIN_VERSION "6.0.6" CACHE STRING
     "Oldest installed assimp accepted for SYSTEM/AUTO (checked against assimp_VERSION)")
 # Installed versions that must not be used even though they are newer than the minimum.
 #   6.0.3, 6.0.4: FBXExporter dereferences an end() iterator when writing a texture whose path is not

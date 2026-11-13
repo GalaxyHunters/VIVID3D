@@ -45,7 +45,11 @@ regression baseline (glb / obj / fbx, structurally compared) on Linux and Window
   fixed; a compile clash with Python 3.10 is fixed; the library no longer links `libpython` or leaks internal
   symbols into the host process.
 
-Runtime performance and memory work (profiling, mesh decimation, leak fixes) is the next step.
+**Runtime** - building a model is about 2.7 - 3.6 times faster and needs about 40% less memory at one million points
+and more (iso-surface extraction and mesh decimation were rewritten to stop copying and allocating; the exported
+models are byte-identical to before). On a synthetic galaxy of 3 million points the whole pipeline went from 17 min
+and 21.8 GB to under 5 min and 12.3 GB. Details, the benchmark tool and the list of further ideas are in
+[tools/bench](tools/bench/README.md).
 
 ## Highlights
 View the [Model Gallery](https://vivid.readthedocs.io/en/latest/gallery.html) to see what VIVID3D is capable of. 

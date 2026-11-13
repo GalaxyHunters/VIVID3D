@@ -21,6 +21,8 @@ set(VIVID_ASSIMP_MIN_VERSION "6.0.6" CACHE STRING
 #   whenever it exports a model with an embedded colormap texture to FBX. Ubuntu 26.04 ships 6.0.4.
 set(VIVID_ASSIMP_EXCLUDED_VERSIONS "6.0.3;6.0.4" CACHE STRING
     "Installed assimp versions rejected as known-bad (list)")
+option(VIVID_ASSIMP_BUILD_IMPORTERS
+       "FETCH only: also build assimp's importers (Vivid itself only exports, so they are off by default)" OFF)
 set(VIVID_ASSIMP_FETCH_VERSION "6.0.6" CACHE STRING "assimp release downloaded by FETCH")
 set(VIVID_ASSIMP_FETCH_SHA256
     "5f7ed412b76575621df0525a762b31da5874afff352b3a890c6308db4ac7204c" CACHE STRING
@@ -81,6 +83,9 @@ if(_vivid_assimp_source STREQUAL "FETCH")
     set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE INTERNAL "")
     set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "")
     set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
+    # Vivid only ever exports through assimp, so skip compiling its ~50 importers: much faster build
+    # and a smaller libvivid. Exporters stay enabled.
+    set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT ${VIVID_ASSIMP_BUILD_IMPORTERS} CACHE INTERNAL "")
     # assimp is linked statically into the shared libvivid, so it must be position independent.
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 

@@ -82,7 +82,9 @@ def cmd_run(args):
 
     # --- install + import
     rpy = venv(os.path.join(out, "runvenv"))
-    sh([rpy, "-m", "pip", "install", "-q", whl, "numpy", "matplotlib"])
+    # the wheel's own install_requires decide what is installed unless --run-dep pins something,
+    # e.g. --run-dep=numpy==1.21.6 --run-dep=matplotlib==3.5.3 to test the declared lower bounds
+    sh([rpy, "-m", "pip", "install", "-q", whl] + args.run_dep)
     times = []
     for _ in range(5):
         r = sh([rpy, "-c", "import time; t=time.perf_counter(); import vivid3d; "
@@ -108,6 +110,14 @@ def cmd_run(args):
     fm = os.path.join(exports, "flow_metrics.json")
     info["flow"] = json.load(open(fm)) if os.path.exists(fm) else {}
     info["exports"] = analyze.analyze_dir(exports) if os.path.isdir(exports) else {}
+
+    # functional checks (behaviour the flow does not touch; every check must pass)
+    checks_dir = os.path.join(out, "checks")
+    cr = subprocess.run([rpy, os.path.join(HERE, "checks.py"), checks_dir], capture_output=True, text=True,
+                        cwd=tempfile.gettempdir())
+    cj = os.path.join(checks_dir, "checks.json")
+    info["checks"] = json.load(open(cj)) if os.path.exists(cj) else {
+        "checks.py crashed": {"ok": False, "error": (cr.stderr or cr.stdout)[-300:]}}
     return finish(out, info, 0 if r.returncode == 0 else 2)
 
 
@@ -125,6 +135,11 @@ def finish(out, info, code):
     if f:
         bad = [k for k, v in f.get("stages", {}).items() if not v["ok"]]
         print(f"  flow    : {info['flow_stdout']}  peak RSS {f.get('peak_rss_mb')} MB")
+    if "checks" in info:
+        failed = [k for k, v in info["checks"].items() if not v["ok"]]
+        print(f"  checks  : {len(info['checks']) - len(failed)} ok, {len(failed)} failed {failed}")
+        if failed and code == 0:
+            code = 3
     return code
 
 
@@ -190,6 +205,12 @@ def cmd_compare(args):
         w = B["flow"].get("stages", {}).get(stage)
         if w is None or v["ok"] != w["ok"]:
             fails.append(f"flow stage {stage}: ok {v['ok']} -> {w and w['ok']}")
+    # functional checks are absolute (they have no baseline): each must pass in the candidate
+    for name, res in B.get("checks", {}).items():
+        if not res["ok"]:
+            fails.append(f"check '{name}' failed: {res.get('error')}")
+    if "checks" not in B:
+        print("  note: candidate has no functional checks (run with a newer tools/golden)")
     ea, eb = A["exports"], B["exports"]
     for name in sorted(set(ea) | set(eb)):
         if name not in ea or name not in eb:
@@ -218,6 +239,8 @@ def main():
     r.add_argument("--label", required=True)
     r.add_argument("--root", default="~/work/golden")
     r.add_argument("--cmake-arg", action="append", default=[], help="extra CMake option, repeatable")
+    r.add_argument("--run-dep", action="append", default=[],
+                   help="pin a runtime dependency for the test venv, repeatable (default: whatever the wheel requires)")
     c = sub.add_parser("compare")
     c.add_argument("baseline")
     c.add_argument("candidate")

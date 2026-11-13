@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+# 3.15: FetchContent_MakeAvailable needs 3.14, and 3.15 is what current distro/CI CMake packages
+# provide at minimum (Ubuntu 20.04: 3.16). pip builds additionally require cmake>=3.24 (pyproject.toml).
+cmake_minimum_required(VERSION 3.15)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -142,9 +144,12 @@ install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
 if(DEFINED SKBUILD)
     set(ignoreMe "${SKBUILD}")
 
+    # Must be set BEFORE pybind11 is added: it selects the modern FindPython module. (It used to be set
+    # afterwards, which had no effect, so pybind11 used the legacy FindPythonInterp/FindPythonLibs that
+    # CMake has deprecated, policy CMP0148.)
+    set(PYBIND11_FINDPYTHON ON)
     add_subdirectory(pybind11)
     include_directories(pybind11/include)
-    set(PYBIND11_FINDPYTHON ON)
 
     # NOTE: libvivid itself must not depend on Python (no PYTHON define, no libpython). Only the
     # _core extension module does; it hooks Python's stdout into the library's logger at import.

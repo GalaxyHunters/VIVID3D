@@ -90,9 +90,14 @@ if(_vivid_assimp_source STREQUAL "FETCH")
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
     include(FetchContent)
+    set(_vivid_fetch_extra "")
+    if(NOT CMAKE_VERSION VERSION_LESS 3.24)
+        set(_vivid_fetch_extra DOWNLOAD_EXTRACT_TIMESTAMP TRUE)   # silences policy CMP0135
+    endif()
     FetchContent_Declare(assimp
         URL "https://github.com/assimp/assimp/archive/refs/tags/v${VIVID_ASSIMP_FETCH_VERSION}.tar.gz"
-        URL_HASH "SHA256=${VIVID_ASSIMP_FETCH_SHA256}")
+        URL_HASH "SHA256=${VIVID_ASSIMP_FETCH_SHA256}"
+        ${_vivid_fetch_extra})
     FetchContent_MakeAvailable(assimp)
 endif()
 

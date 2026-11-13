@@ -148,11 +148,15 @@ namespace pybind11 {
                 std::string name;
                 std::vector<std::array<float, 3>> clm;
                 std::string obj_type = GetTypeString(arObj);
-                auto colormap = arObj;
+                // Must own a reference: a colormap looked up by name below is a new object (matplotlib
+                // returns a copy), and a non-owning py::handle would dangle once the temporary dies.
+                py::object colormap = py::reinterpret_borrow<py::object>(arObj);
                 // std::cout<<obj_type<<std::endl;
                 if (obj_type == STR) {
-                    auto cm = py::module_::import("matplotlib.cm");
-                    colormap = cm.attr("get_cmap")(arObj);
+                    // matplotlib.cm.get_cmap was removed in matplotlib 3.9; the colormap registry
+                    // (matplotlib.colormaps) exists since 3.5. An unknown name raises KeyError.
+                    auto registry = py::module_::import("matplotlib").attr("colormaps");
+                    colormap = registry[arObj];
                     obj_type = GetTypeString(colormap);
                     // std::cout<<obj_type<<std::endl;
                 }

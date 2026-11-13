@@ -33,7 +33,15 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     zip_safe=False,
-    extras_require={"test": ["pytest>=6.0"]},
+    # Needed at import time: the compiled module imports numpy, and the viewers import matplotlib
+    # (also used for colormaps; matplotlib.colormaps needs >= 3.5). Without these `import vivid3d`
+    # fails with "ImportError: initialization failed".
+    install_requires=["numpy>=1.21.3", "matplotlib>=3.5"],
+    extras_require={
+        # only needed for the in-notebook viewers (imported lazily)
+        "notebook": ["ipywidgets", "ipython"],
+        "test": ["pytest>=6.0"],
+    },
     python_requires=">=3.7",
     keywords=["3d", "mesh", "visualization", "simulation", "particles"],
     classifiers=[

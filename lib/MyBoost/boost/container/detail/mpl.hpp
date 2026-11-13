@@ -63,6 +63,22 @@ using boost::move_detail::enable_if_or;
 using boost::move_detail::disable_if_or;
 using boost::move_detail::remove_const;
 
+//Equivalent to C++20 std::type_identity. Its only purpose is to put its
+//template argument in a non-deduced context. It is used for the allocator
+//argument of allocator-extended copy/move constructors so that class template
+//argument deduction is driven by the source container and not by the allocator
+//argument.
+template<typename T>
+struct type_identity
+{
+   typedef T type;
+};
+
+#if !defined(BOOST_NO_CXX11_TEMPLATE_ALIASES)
+template<typename T>
+using type_identity_t = typename type_identity<T>::type;
+#endif
+
 template <class FirstType>
 struct select1st
 {
@@ -84,13 +100,13 @@ struct void_t { typedef void type; };
 template <class T, class=void>
 struct is_transparent_base
 {
-   static const bool value = false;
+   BOOST_STATIC_CONSTEXPR bool value = false;
 };
 
 template <class T>
 struct is_transparent_base<T, typename void_t<typename T::is_transparent>::type>
 {
-   static const bool value = true;
+   BOOST_STATIC_CONSTEXPR bool value = true;
 };
 
 template <class T>
@@ -112,7 +128,7 @@ template<typename...> using variadic_void_t = void;
 template<typename Allocator, typename = void>
 struct is_allocator
 {
-   static const bool value = false;
+   BOOST_STATIC_CONSTEXPR bool value = false;
 };
 
 template <typename T>
@@ -123,7 +139,7 @@ struct is_allocator < Allocator,
    variadic_void_t< typename Allocator::value_type
                   , decltype(ctad_declval<Allocator&>().allocate(size_t{})) >>
 {
-   static const bool value = true;
+   BOOST_STATIC_CONSTEXPR bool value = true;
 };
 
 template<class T>

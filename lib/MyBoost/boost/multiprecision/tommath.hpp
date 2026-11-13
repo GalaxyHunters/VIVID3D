@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright 2011 John Maddock. 
+//  Copyright 2011 John Maddock.
 //  Copyright 2021 Matt Borland. Distributed under the Boost
 //  Software License, Version 1.0. (See accompanying file
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -45,8 +45,6 @@ inline void check_tommath_result(ErrType v)
 
 } // namespace detail
 
-struct tommath_int;
-
 void eval_multiply(tommath_int& t, const tommath_int& o);
 void eval_add(tommath_int& t, const tommath_int& o);
 
@@ -77,7 +75,7 @@ struct tommath_int
    }
    tommath_int& operator=(const tommath_int& o)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       if (o.m_data.dp)
          detail::check_tommath_result(mp_copy(const_cast< ::mp_int*>(&o.m_data), &m_data));
@@ -87,7 +85,7 @@ struct tommath_int
    // Pick off 32 bit chunks for mp_set_int:
    tommath_int& operator=(unsigned long long i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       unsigned long long mask = ((1uLL << 32) - 1);
       unsigned shift = 0;
@@ -110,7 +108,7 @@ struct tommath_int
    // Pick off 64 bit chunks for mp_set_u64:
    tommath_int& operator=(unsigned long long i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       if(sizeof(unsigned long long) * CHAR_BIT == 64)
       {
@@ -137,7 +135,7 @@ struct tommath_int
 #else
    tommath_int& operator=(unsigned long long i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       mp_set_u64(&m_data, i);
       return *this;
@@ -145,7 +143,7 @@ struct tommath_int
 #endif
    tommath_int& operator=(long long i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       bool neg = i < 0;
       *this    = boost::multiprecision::detail::unsigned_abs(i);
@@ -157,7 +155,7 @@ struct tommath_int
    // Pick off 64 bit chunks for mp_set_u64:
    tommath_int& operator=(uint128_type i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
 
       int128_type  mask  = ((static_cast<uint128_type>(1u) << 64) - 1);
@@ -183,7 +181,7 @@ struct tommath_int
    }
    tommath_int& operator=(int128_type i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       bool neg = i < 0;
       *this    = boost::multiprecision::detail::unsigned_abs(i);
@@ -199,7 +197,7 @@ struct tommath_int
    //
    tommath_int& operator=(std::uint32_t i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
 #ifndef mp_get_u32
       detail::check_tommath_result((mp_set_int(&m_data, i)));
@@ -210,7 +208,7 @@ struct tommath_int
    }
    tommath_int& operator=(std::int32_t i)
    {
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       bool neg = i < 0;
       *this    = boost::multiprecision::detail::unsigned_abs(i);
@@ -223,7 +221,7 @@ struct tommath_int
    {
       BOOST_MP_FLOAT128_USING using std::floor; using std::frexp; using std::ldexp;
 
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
 
       if (a == 0)
@@ -321,7 +319,7 @@ struct tommath_int
       //
       // We don't use libtommath's own routine because it doesn't error check the input :-(
       //
-      if (m_data.dp == 0)
+      if (m_data.dp == nullptr)
          detail::check_tommath_result(mp_init(&m_data));
       std::size_t n  = s ? std::strlen(s) : 0;
       *this          = static_cast<std::uint32_t>(0u);
@@ -441,9 +439,15 @@ struct tommath_int
       //
       if ((base != 10) && m_data.sign)
          BOOST_MP_THROW_EXCEPTION(std::runtime_error("Formatted output in bases 8 or 16 is only available for positive numbers"));
-      
+
+      // Check against known removed macro that was removed around the same time as type was changed
+      #ifdef mp_tobinary
       int s;
+      #else
+      size_t s;
+      #endif
       detail::check_tommath_result(mp_radix_size(const_cast< ::mp_int*>(&m_data), base, &s));
+
       std::unique_ptr<char[]> a(new char[s + 1]);
 #ifndef mp_to_binary
       detail::check_tommath_result(mp_toradix_n(const_cast< ::mp_int*>(&m_data), a.get(), base, s + 1));
@@ -695,8 +699,8 @@ inline void eval_complement(tommath_int& result, const tommath_int& u)
    //
    unsigned shift = result.data().used * DIGIT_BIT;    // How many bits we're actually using
    // How many bits we actually need, reduced by one to account for a mythical sign bit:
-   int padding = result.data().used * std::numeric_limits<mp_digit>::digits - shift - 1; 
-   while(padding >= std::numeric_limits<mp_digit>::digits) 
+   int padding = result.data().used * std::numeric_limits<mp_digit>::digits - shift - 1;
+   while(padding >= std::numeric_limits<mp_digit>::digits)
       padding -= std::numeric_limits<mp_digit>::digits;
 
    // Create a mask providing the extra bits we need and add to result:
@@ -907,15 +911,10 @@ inline std::size_t hash_value(const tommath_int& val)
 
 } // namespace backends
 
-using boost::multiprecision::backends::tommath_int;
-
 template <>
 struct number_category<tommath_int> : public std::integral_constant<int, number_kind_integer>
 {};
 
-using tom_int = number<tommath_int>          ;
-using tommath_rational = rational_adaptor<tommath_int>;
-using tom_rational = number<tommath_rational>     ;
 }
 } // namespace boost::multiprecision
 
@@ -957,8 +956,20 @@ class numeric_limits<boost::multiprecision::number<boost::multiprecision::tommat
    static constexpr bool               has_infinity      = false;
    static constexpr bool               has_quiet_NaN     = false;
    static constexpr bool               has_signaling_NaN = false;
-   static constexpr float_denorm_style has_denorm        = denorm_absent;
-   static constexpr bool               has_denorm_loss   = false;
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable : 4996)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic push
+#  pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+   static constexpr float_denorm_style       has_denorm      = denorm_absent;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic pop
+#endif
+   static constexpr bool                     has_denorm_loss = false;
    static number_type                        infinity() { return number_type(); }
    static number_type                        quiet_NaN() { return number_type(); }
    static number_type                        signaling_NaN() { return number_type(); }
@@ -999,8 +1010,20 @@ template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr bool numeric_limits<boost::multiprecision::number<boost::multiprecision::tommath_int, ExpressionTemplates> >::has_quiet_NaN;
 template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr bool numeric_limits<boost::multiprecision::number<boost::multiprecision::tommath_int, ExpressionTemplates> >::has_signaling_NaN;
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable : 4996)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic push
+#  pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
 template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr float_denorm_style numeric_limits<boost::multiprecision::number<boost::multiprecision::tommath_int, ExpressionTemplates> >::has_denorm;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic pop
+#endif
 template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr bool numeric_limits<boost::multiprecision::number<boost::multiprecision::tommath_int, ExpressionTemplates> >::has_denorm_loss;
 template <boost::multiprecision::expression_template_option ExpressionTemplates>

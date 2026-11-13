@@ -119,6 +119,8 @@ def child(a):
             vol = vivid3d.VoronoiVolume(p, m)
         for mi, mk in enumerate(masks):
             mk = mk if idx is None else mk[idx]
+            if mk.all() or not mk.any():          # this chunk has no surface for this density cut (the library needs both values)
+                continue
             with stage("iso_surface", chunk=ci, mask=mi):
                 mesh = vol.iso_surface(mk, "mask%d_c%d" % (mi, ci), 1.0 - 0.3 * mi)
             polys0 = mesh.n_polygons

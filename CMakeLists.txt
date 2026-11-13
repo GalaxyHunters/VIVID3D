@@ -34,6 +34,12 @@ set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
 
 set(ASSIMP_DIR ${PROJECT_LIB_DIR}/ImportExport/assimp)
 
+# TEMPORARY: vendored assimp 5.2.4 uses uint8_t without including <cstdint>, which
+# fails on GCC 13+. Remove once assimp is consumed as an external dependency.
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include cstdint")
+endif()
+
 add_subdirectory(${ASSIMP_DIR})
 include_directories(${ASSIMP_DIR}/include)
 

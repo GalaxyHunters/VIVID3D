@@ -3,7 +3,6 @@ requires = [
     "setuptools>=61.0",
     "scikit-build>=0.15.0",
     "cmake>=3.24.1.1",
-    "ninja>=1.10.2.4; platform_system!='Windows'",
-    "python-dev-tools>=2022.5.27"
+    "ninja>=1.10.2.4; platform_system!='Windows'"
 ]
 build-backend = "setuptools.build_meta"

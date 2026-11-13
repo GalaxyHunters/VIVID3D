@@ -12,6 +12,7 @@
 #include <array>
 #include "Vivify.h"
 #include "BlobData.h"
+#include "LogFile.h"
 /*#include "./ImportAndExport/FBXImportExport.h"*/
 
 #include <pybind11/pybind11.h>
@@ -49,6 +50,10 @@ py::array_t<unsigned char> make_color_t(const unsigned char aValue) {
 
 
 PYBIND11_MODULE(_core, m) {
+    // The C++ library has no Python dependency; send its console log lines through Python's
+    // sys.stdout so notebooks and stdout redirection capture them.
+    vivid::SetConsoleSink([](const std::string &arLogLine) { py::print(arLogLine); });
+
     m.doc() = R"mydelimitter(
 Core Module
 ===========

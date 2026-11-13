@@ -101,6 +101,14 @@ else()
 endif()
 
 
+# libvivid and libvoronoi are installed side by side: let libvivid find its neighbours itself instead
+# of relying on the loader inheriting the RPATH of whoever loaded it (_core).
+if(APPLE)
+    set_target_properties(vivid PROPERTIES INSTALL_RPATH "@loader_path")
+else()
+    set_target_properties(vivid PROPERTIES INSTALL_RPATH "$ORIGIN")
+endif()
+
 install(
         TARGETS vivid
         EXPORT vividTargets
@@ -137,11 +145,11 @@ if(DEFINED SKBUILD)
     add_subdirectory(pybind11)
     include_directories(pybind11/include)
     set(PYBIND11_FINDPYTHON ON)
-    add_definitions(-DPYTHON)
 
-    include_directories(${PYTHON_INCLUDE_DIRS})
-    target_link_libraries(vivid ${PYTHON_LIBRARIES})
-
+    # NOTE: libvivid itself must not depend on Python (no PYTHON define, no libpython). Only the
+    # _core extension module does; it hooks Python's stdout into the library's logger at import.
+    # Linking libpython into a shared library makes the wheel depend on one exact interpreter build
+    # and is not allowed in manylinux wheels.
     pybind11_add_module(_core
             ${VIVID_SRC_DIR}/Wrapping/wrapper.cpp
             ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h

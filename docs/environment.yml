@@ -33,7 +33,6 @@ dependencies:
     - more-itertools==9.0.0
     - pep517==0.13.0
     - pooch==1.6.0
-    - pybind11==2.10.0
     - readme-renderer==36.0
     - requests-toolbelt==0.9.1
     - rfc3986==2.0.0

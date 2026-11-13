@@ -11,7 +11,8 @@ using namespace vivid;
 namespace py = pybind11;
 
 inline std::string GetTypeString(const py::handle arObj) {
-    std::string type = py::str(arObj.get_type()).cast<std::string>();
+    // handle::get_type() is deprecated since pybind11 3.0; py::type::handle_of() is the replacement.
+    std::string type = py::str(py::type::handle_of(arObj)).cast<std::string>();
     return type.substr(8, type.size() - 10);
 }
 constexpr auto STR = "str";

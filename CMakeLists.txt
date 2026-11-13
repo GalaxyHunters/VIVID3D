@@ -86,7 +86,6 @@ target_include_directories(vivid PUBLIC
         $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
         $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport/lodepng>
         $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
@@ -144,12 +143,20 @@ install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
 if(DEFINED SKBUILD)
     set(ignoreMe "${SKBUILD}")
 
-    # Must be set BEFORE pybind11 is added: it selects the modern FindPython module. (It used to be set
-    # afterwards, which had no effect, so pybind11 used the legacy FindPythonInterp/FindPythonLibs that
-    # CMake has deprecated, policy CMP0148.)
+    # pybind11 is an external build dependency (pyproject.toml: build-system.requires), no longer a
+    # vendored copy. Ask the interpreter that is building where its pybind11 lives, so this works with
+    # any build frontend/backend (pip isolation, scikit-build, scikit-build-core, plain cmake).
     set(PYBIND11_FINDPYTHON ON)
-    add_subdirectory(pybind11)
-    include_directories(pybind11/include)
+    find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+    execute_process(
+        COMMAND "${Python_EXECUTABLE}" -m pybind11 --cmakedir
+        OUTPUT_VARIABLE _vivid_pybind11_dir OUTPUT_STRIP_TRAILING_WHITESPACE RESULT_VARIABLE _vivid_pybind11_rc)
+    if(_vivid_pybind11_rc EQUAL 0)
+        list(APPEND CMAKE_PREFIX_PATH "${_vivid_pybind11_dir}")
+    endif()
+    set(VIVID_PYBIND11_MIN_VERSION "3.0.1" CACHE STRING "Oldest pybind11 accepted (tested with tools/golden)")
+    find_package(pybind11 ${VIVID_PYBIND11_MIN_VERSION} CONFIG REQUIRED)
+    message(STATUS "pybind11: ${pybind11_VERSION} (${pybind11_DIR})")
 
     # NOTE: libvivid itself must not depend on Python (no PYTHON define, no libpython). Only the
     # _core extension module does; it hooks Python's stdout into the library's logger at import.

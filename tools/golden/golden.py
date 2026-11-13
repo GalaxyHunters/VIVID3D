@@ -28,7 +28,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import analyze  # noqa: E402
 
-BUILD_DEPS = ["setuptools>=61", "scikit-build>=0.15", "cmake>=3.24.1.1", "ninja", "wheel"]
+def build_deps(repo):
+    """Build requirements straight from the project's pyproject.toml (no second copy to keep in sync),
+    plus `wheel` for pip's no-isolation builds. Platform markers are left for pip to evaluate."""
+    import re
+    text = open(os.path.join(repo, "pyproject.toml"), encoding="utf-8").read()
+    block = re.search(r"requires\s*=\s*\[(.*?)\]\s*\n", text, re.S).group(1)
+    return re.findall(r'"([^"]+)"', block) + ["wheel"]
 
 
 def sh(cmd, **kw):
@@ -52,7 +58,7 @@ def cmd_run(args):
 
     # --- build
     bpy = venv(os.path.join(out, "buildvenv"))
-    sh([bpy, "-m", "pip", "install", "-q"] + BUILD_DEPS)
+    sh([bpy, "-m", "pip", "install", "-q"] + build_deps(args.repo) + args.build_dep)
     for stale in ("_skbuild", "dist_golden"):
         shutil.rmtree(os.path.join(args.repo, stale), ignore_errors=True)
     wheel_dir = os.path.join(out, "wheel")
@@ -239,6 +245,8 @@ def main():
     r.add_argument("--label", required=True)
     r.add_argument("--root", default="~/work/golden")
     r.add_argument("--cmake-arg", action="append", default=[], help="extra CMake option, repeatable")
+    r.add_argument("--build-dep", action="append", default=[],
+                   help="extra/pinned build requirement appended to the pyproject list, e.g. pybind11==3.0.1")
     r.add_argument("--run-dep", action="append", default=[],
                    help="pin a runtime dependency for the test venv, repeatable (default: whatever the wheel requires)")
     c = sub.add_parser("compare")

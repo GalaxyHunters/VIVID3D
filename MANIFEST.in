@@ -1,5 +1,3 @@
-recursive-include pybind11 *
-graft pybind11
 graft cmake
 recursive-include src *
 recursive-include lib *
@@ -8,8 +6,5 @@ recursive-exclude lib/SurfacingAlgorithms/huji-rich-Elad3DFast *
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/*
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/*
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/*
-recursive-exclude pybind11/tests *
-recursive-exclude pybind11/.github *
-recursive-exclude pybind11/docs *
 include *.md *.png CMakeLists.txt
 include src/vivid3d/viewer/template.html

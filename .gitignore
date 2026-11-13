@@ -18,7 +18,6 @@ vivid_main
 !/src/vivid3d/viewer/__init__.py
 !/src/vivid3d
 !/src/vivid3d/viewer
-!/pybind11/pybind11/__init__.py
 /.vscode/
 
 # CMake in-tree build outputs (generated; never commit)

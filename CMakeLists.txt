@@ -23,25 +23,8 @@ include(GNUInstallDirs)
 add_subdirectory(${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast)
 
 
-set(ASSIMP_INSTALL OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL  "")
-set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL  "")
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "")
-set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "")
-set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
-
-set(ASSIMP_DIR ${PROJECT_LIB_DIR}/ImportExport/assimp)
-
-# TEMPORARY: vendored assimp 5.2.4 uses uint8_t without including <cstdint>, which
-# fails on GCC 13+. Remove once assimp is consumed as an external dependency.
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include cstdint")
-endif()
-
-add_subdirectory(${ASSIMP_DIR})
-include_directories(${ASSIMP_DIR}/include)
+# assimp: installed copy, fetched release, or the legacy vendored copy (see cmake/VividAssimp.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/VividAssimp.cmake)
 
 
 #define used cpp packages
@@ -108,7 +91,14 @@ target_include_directories(vivid PUBLIC
 message("VIVID SHARED BUILD")
 
 target_link_libraries(vivid voronoi)
-target_link_libraries(vivid assimp::assimp)
+if(VIVID_ASSIMP_RESOLVED STREQUAL "SYSTEM")
+    target_link_libraries(vivid assimp::assimp)
+else()
+    # assimp is built inside this project and linked statically (FETCH / VENDORED). It is an
+    # implementation detail, so keep it out of the exported vividTargets (install(EXPORT) would
+    # otherwise fail because assimp's own install rules are disabled).
+    target_link_libraries(vivid $<BUILD_INTERFACE:assimp::assimp>)
+endif()
 
 
 install(

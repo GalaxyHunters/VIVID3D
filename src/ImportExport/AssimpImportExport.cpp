@@ -4,6 +4,92 @@
 namespace vivid {
     namespace {
         constexpr float MAX_ROUGHNESS = 1000;
+
+        // assimp's "verbose" format: no vertex is shared between faces. A scene that does share
+        // vertices must carry AI_SCENE_FLAGS_NON_VERBOSE_FORMAT; a verbose one must NOT carry it.
+        // Stock Exporter::Export() trusts the flag: with it missing on an indexed scene it skips the
+        // MakeVerboseFormat step that post-processing (JoinIdenticalVertices, GenSmoothNormals) relies
+        // on, and with it set on a verbose scene (point clouds, lines) GenVertexNormals throws. Older
+        // Vivid versions patched assimp's Exporter.cpp to do this check itself; this is the same check
+        // (assimp's MakeVerboseFormatProcess::IsVerboseFormat) done on our side so stock assimp works.
+        bool IsVerboseFormat(const aiScene *apScene) {
+            for (unsigned int m = 0; m < apScene->mNumMeshes; ++m) {
+                const aiMesh *mesh = apScene->mMeshes[m];
+                std::vector<unsigned char> seen(mesh->mNumVertices, 0);
+                for (unsigned int f = 0; f < mesh->mNumFaces; ++f) {
+                    const aiFace &face = mesh->mFaces[f];
+                    for (unsigned int i = 0; i < face.mNumIndices; ++i) {
+                        if (seen[face.mIndices[i]]++) {
+                            return false;   // vertex used twice: shared (indexed) vertices
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Call once all meshes of the scene are attached.
+        void SetSceneFlags(aiScene *apScene) {
+            apScene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;
+            if (!IsVerboseFormat(apScene)) {
+                apScene->mFlags |= AI_SCENE_FLAGS_NON_VERBOSE_FORMAT;
+            }
+        }
+
+        // Format-specific material fix-up, applied to the generated scene right before export.
+        //
+        // Vivid gives every material a black specular colour (needed for OBJ/FBX: "Ks 0 0 0"). Stock
+        // assimp (5.3+) turns ANY specular colour on a material into a KHR_materials_specular extension,
+        // here with colour (0,0,0), which switches specular reflection off in glTF viewers, and (6.x)
+        // then re-reads the diffuse colour into baseColorFactor, discarding the alpha that was just
+        // applied from the material opacity: translucent materials come out opaque. The vendored assimp
+        // of older Vivid versions skipped the extension for all-zero values. glTF defaults already give
+        // the intended look, so for glTF/GLB simply don't hand over the specular colour.
+        //
+        // FBX: assimp 6.x writes all meshes of a node into ONE FBX geometry (materials per polygon).
+        // Vivid puts every mesh under a single node, so the model would arrive in Blender/Maya as a
+        // single merged object instead of one object per mesh (5.x behaviour). Give each mesh its own
+        // child node so each is exported as a separate geometry again.
+        void SplitMultiMeshNodes(const aiScene *apScene, aiNode *apNode) {
+            for (unsigned int c = 0; c < apNode->mNumChildren; ++c) {
+                SplitMultiMeshNodes(apScene, apNode->mChildren[c]);
+            }
+            if (apNode->mNumMeshes <= 1) {
+                return;
+            }
+            const unsigned int old_children = apNode->mNumChildren;
+            const unsigned int new_children = apNode->mNumMeshes;
+            auto **children = new aiNode *[old_children + new_children];
+            std::copy(apNode->mChildren, apNode->mChildren + old_children, children);
+            for (unsigned int i = 0; i < new_children; ++i) {
+                const unsigned int mesh_index = apNode->mMeshes[i];
+                aiString name = apScene->mMeshes[mesh_index]->mName;
+                if (name.length == 0) {
+                    name = aiString(std::string(apNode->mName.C_Str()) + "_mesh" + std::to_string(i));
+                }
+                auto *child = new aiNode(std::string(name.C_Str()));
+                child->mParent = apNode;
+                child->mNumMeshes = 1;
+                child->mMeshes = new unsigned int[1]{mesh_index};
+                children[old_children + i] = child;
+            }
+            delete[] apNode->mChildren;     // the child nodes themselves were moved, not freed
+            apNode->mChildren = children;
+            apNode->mNumChildren = old_children + new_children;
+            delete[] apNode->mMeshes;
+            apNode->mMeshes = nullptr;
+            apNode->mNumMeshes = 0;
+        }
+
+        void PrepareSceneForFormat(aiScene *apScene, const std::string &arFileType) {
+            if (arFileType == "fbx") {
+                SplitMultiMeshNodes(apScene, apScene->mRootNode);
+            } else if (arFileType == "glb" || arFileType == "gltf") {
+                for (unsigned int i = 0; i < apScene->mNumMaterials; ++i) {
+                    apScene->mMaterials[i]->RemoveProperty(AI_MATKEY_COLOR_SPECULAR);
+                }
+            }
+        }
         // matches assimp file formats to actual file endings
         const std::map<std::string, std::string> FILE_FORMATS =
             {
@@ -366,7 +452,7 @@ namespace vivid {
         aiScene *GenerateScene(vivid::CModel &model) {
             //setup scene
             auto *scene = new aiScene();
-            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;
+            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;   // finalized by SetSceneFlags()
             scene->mRootNode = new aiNode();
             scene->mRootNode->mName = aiString("root_node");
 
@@ -398,6 +484,7 @@ namespace vivid {
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
             }
+            SetSceneFlags(scene);   // after all meshes are attached
             return scene;
         }
 
@@ -445,7 +532,7 @@ namespace vivid {
         aiScene *GenerateAnimationScene(CAnimation &arAnimation) {
             //setup scene
             auto *scene = new aiScene();
-            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;
+            scene->mFlags = AI_SCENE_FLAGS_ALLOW_SHARED;   // finalized by SetSceneFlags()
             scene->mRootNode = new aiNode();
             scene->mRootNode->mName = aiString("root_node");
 
@@ -499,6 +586,7 @@ namespace vivid {
                 scene->mTextures = new aiTexture * [EmbeddedTextures.size()];
                 for(int i = 0; i != EmbeddedTextures.size(); i++){scene->mTextures[i] = EmbeddedTextures[i];}
             }
+            SetSceneFlags(scene);   // after all meshes are attached
             return scene;
         }
 
@@ -511,6 +599,7 @@ namespace vivid {
             EmbeddedTexture = true;
 
             aiScene *scene = GenerateScene(arModel);
+            PrepareSceneForFormat(scene, arFileType);
             auto blob = exp.ExportToBlob(scene, RenameGLTF_GLB(arFileType),
                                    aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
@@ -531,6 +620,7 @@ namespace vivid {
             EmbeddedTexture = true;
 
             aiScene *scene = GenerateAnimationScene(arAnimation);
+            PrepareSceneForFormat(scene, arFileType);
             auto blob = exp.ExportToBlob(scene, RenameGLTF_GLB(arFileType),
                                          aiProcess_JoinIdenticalVertices | aiProcess_FixInfacingNormals | aiProcess_GenSmoothNormals);
 
@@ -550,6 +640,7 @@ namespace vivid {
             Assimp::Exporter exp;
             OutputPath = aOutputPath;
             aiScene *scene = GenerateScene(arModel);
+            PrepareSceneForFormat(scene, arFileType);
 
             //clean aOutputPath
             //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
@@ -570,6 +661,7 @@ namespace vivid {
             Assimp::Exporter exp;
             OutputPath = aOutputPath;
             aiScene *scene = GenerateAnimationScene(arAnimation);
+            PrepareSceneForFormat(scene, arFileType);
 
             //if(aOutputPath.find('.')) aOutputPath = aOutputPath.substr(0, aOutputPath.find('.'));
             aOutputPath += FILE_FORMATS.at(arFileType);

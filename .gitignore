@@ -32,3 +32,4 @@ vivid_main
 
 # Test/golden outputs
 /test_models/
+__pycache__/

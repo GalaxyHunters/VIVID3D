@@ -57,11 +57,17 @@ def cmd_run(args):
         shutil.rmtree(os.path.join(args.repo, stale), ignore_errors=True)
     wheel_dir = os.path.join(out, "wheel")
     log = os.path.join(out, "build.log")
+    env = dict(os.environ)
+    if args.cmake_arg:  # picked up by scikit-build, e.g. --cmake-arg=-DVIVID_ASSIMP=SYSTEM
+        env["SKBUILD_CONFIGURE_OPTIONS"] = " ".join(args.cmake_arg)
     t = time.perf_counter()
     with open(log, "w") as fh:
         rc = subprocess.run([bpy, "-m", "pip", "wheel", "-v", "--no-build-isolation", "--no-deps",
-                             "-w", wheel_dir, args.repo], stdout=fh, stderr=subprocess.STDOUT).returncode
-    info["build"] = {"ok": rc == 0, "seconds": round(time.perf_counter() - t, 1), "log": log}
+                             "-w", wheel_dir, args.repo], stdout=fh, stderr=subprocess.STDOUT, env=env).returncode
+    with open(log, errors="replace") as fh:
+        assimp_lines = sorted({l.split("-- ", 1)[1].strip() for l in fh if "-- assimp:" in l})
+    info["build"] = {"ok": rc == 0, "seconds": round(time.perf_counter() - t, 1), "log": log,
+                     "cmake_args": args.cmake_arg, "assimp": assimp_lines}
     wheels = glob.glob(os.path.join(wheel_dir, "*.whl"))
     if rc != 0 or not wheels:
         print("BUILD FAILED, see", log)
@@ -158,6 +164,8 @@ def cmd_compare(args):
     print("== informational (never fails) ==")
     print("  build seconds :", ratio(A["build"]["seconds"], B["build"]["seconds"]),
           "(cpus %s -> %s)" % (A["cpus"], B["cpus"]))
+    print("  assimp source :", A["build"].get("assimp") or "n/a (pre-option baseline)", "->",
+          B["build"].get("assimp") or "n/a", "| cmake args:", B["build"].get("cmake_args") or [])
     for key in ("wheel_bytes", "unpacked_bytes", "n_files"):
         print(f"  package {key:14}:", ratio(A["package"][key], B["package"][key]))
     print("  import seconds:", ratio(A["import"]["median_seconds"], B["import"]["median_seconds"]))
@@ -209,6 +217,7 @@ def main():
     r.add_argument("--repo", required=True)
     r.add_argument("--label", required=True)
     r.add_argument("--root", default="~/work/golden")
+    r.add_argument("--cmake-arg", action="append", default=[], help="extra CMake option, repeatable")
     c = sub.add_parser("compare")
     c.add_argument("baseline")
     c.add_argument("candidate")

@@ -94,7 +94,7 @@ target_link_libraries(vivid voronoi)
 if(VIVID_ASSIMP_RESOLVED STREQUAL "SYSTEM")
     target_link_libraries(vivid assimp::assimp)
 else()
-    # assimp is built inside this project and linked statically (FETCH / VENDORED). It is an
+    # assimp is built inside this project and linked statically (FETCH). It is an
     # implementation detail, so keep it out of the exported vividTargets (install(EXPORT) would
     # otherwise fail because assimp's own install rules are disabled).
     target_link_libraries(vivid $<BUILD_INTERFACE:assimp::assimp>)

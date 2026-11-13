@@ -8,12 +8,6 @@ recursive-exclude lib/SurfacingAlgorithms/huji-rich-Elad3DFast *
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/*
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon/*
 include lib/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc/*
-recursive-exclude lib/ImportExport/assimp/.github *
-recursive-exclude lib/ImportExport/assimp/test *
-recursive-exclude lib/ImportExport/assimp/samples *
-recursive-exclude lib/ImportExport/assimp/port *
-recursive-exclude lib/ImportExport/assimp/doc *
-recursive-exclude lib/ImportExport/assimp/tools *
 recursive-exclude pybind11/tests *
 recursive-exclude pybind11/.github *
 recursive-exclude pybind11/docs *

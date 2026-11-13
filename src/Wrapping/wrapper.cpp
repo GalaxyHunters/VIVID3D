@@ -722,7 +722,10 @@ html : str or IPython.display.HTML
         )mydelimiter", py::arg("height")=600)
     .def("__str__", [](const CModel &arSelf){ return "vivid3d.Model\nn_meshes: " + to_string(arSelf.GetNumMeshes()) + "\nn_polygons: " + to_string(arSelf.GetNumPolygons()) + "\nn_vertices: " + to_string(arSelf.GetNumVertices()); });
 
-    py::class_<CFrame>(m, "Frame", R"mydelimiter(
+    // vivid::CFrame is qualified on purpose: CPython 3.10's headers define a global type named
+    // CFrame (an interpreter-internal struct), so with `using namespace vivid` the bare name is
+    // ambiguous and the wrapper fails to compile on Python 3.10.
+    py::class_<vivid::CFrame>(m, "Frame", R"mydelimiter(
 Basic Frame struct, capable of move, rotate and scale.
 
 Attributes
@@ -737,10 +740,10 @@ scale_animation : Point3D
     scale animation for this frame
 
         )mydelimiter")
-        .def_readwrite("move_animation", &CFrame::mMoveAnimation)
-        .def_readwrite("rotate_animation", &CFrame::mRotateAnimation)
-        .def_readwrite("scale_animation", &CFrame::mScaleAnimation)
-        .def_readwrite("model", &CFrame::mModel);
+        .def_readwrite("move_animation", &vivid::CFrame::mMoveAnimation)
+        .def_readwrite("rotate_animation", &vivid::CFrame::mRotateAnimation)
+        .def_readwrite("scale_animation", &vivid::CFrame::mScaleAnimation)
+        .def_readwrite("model", &vivid::CFrame::mModel);
 
     py::class_<CAnimation> Animation(m,"Animation", R"mydelimiter(
 Basic Animation class, capable of move, rotate and scale.

@@ -42,7 +42,10 @@ setup(
         "notebook": ["ipywidgets", "ipython"],
         "test": ["pytest>=6.0"],
     },
-    python_requires=">=3.7",
+    # Tested with tools/golden on CPython 3.10 - 3.14 (3.10 also with the minimum numpy/matplotlib).
+    # Older versions are end-of-life and untested; 3.10 needed a fix (CPython 3.10's headers define a
+    # global `CFrame` that clashed with vivid::CFrame in the wrapper).
+    python_requires=">=3.10",
     keywords=["3d", "mesh", "visualization", "simulation", "particles"],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -50,11 +53,11 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Programming Language :: C++",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Software Development",
         "Topic :: Scientific/Engineering",

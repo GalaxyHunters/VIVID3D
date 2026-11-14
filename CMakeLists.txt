@@ -46,6 +46,11 @@ set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 if(MSVC)
     # <cmath> only defines M_PI & co. on MSVC when this is set (the sources use them, as on Linux/macOS)
     add_compile_definitions(_USE_MATH_DEFINES)
+else()
+    # The Voronoi library's exact predicates and the decimator's float cost arithmetic assume plain IEEE multiply and add.
+    # ARM compilers fuse a*b+c by default (the x86-64 baseline has no FMA), which changes results in the last bit and,
+    # through the decimator's priority queue, the mesh. Same results on every CPU.
+    add_compile_options(-ffp-contract=off)
 endif()
 
 # The Vivid core library. Sources and include paths are added by the CMakeLists.txt of each directory.

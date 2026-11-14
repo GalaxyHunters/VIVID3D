@@ -18,7 +18,9 @@
 #include "../../misc/int2str.hpp"
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/container/static_vector.hpp>
-#include <omp.h>
+#ifdef _OPENMP
+#include <omp.h>   // (nothing here calls OpenMP; Apple's clang has no omp.h)
+#endif
 
 
 bool PointInPoly(Tessellation3D const& tess, Vector3D const& point, std::size_t index)

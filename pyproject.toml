@@ -96,7 +96,7 @@ skip = "*-win32 *-musllinux_* *_i686"
 build-verbosity = 1
 # Every wheel is installed into a clean environment and put through the same regression check as a local build:
 # 14 export stages (glb / obj / fbx), 6 functional checks and a structural comparison against the baseline.
-test-command = "python {project}/tools/golden/golden.py verify --python python --label wheel-test --root {project}/wheel-test-out"
+test-command = "python {project}/tools/golden/golden.py verify --python current --label wheel-test --root {project}/wheel-test-out"
 
 [tool.cibuildwheel.environment]
 # assimp is downloaded (pinned, SHA-256 verified) and linked statically, Boost is the vendored copy:

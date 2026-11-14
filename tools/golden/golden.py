@@ -310,7 +310,10 @@ def cmd_verify(args):
     out = os.path.join(os.path.expanduser(args.root), args.label)
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(out)
-    py, tmp = args.python, tempfile.gettempdir()
+    # "current" = the interpreter that runs this script (a bare "python" can resolve to another one on Windows,
+    # where a venv's python.exe is only a launcher for the base interpreter)
+    py = sys.executable if args.python == "current" else args.python
+    tmp = tempfile.gettempdir()
     # warm up once (see cmd_run): first-run costs must not distort anything
     subprocess.run([py, "-c", "import vivid3d; s = vivid3d.create_sphere(); s.colormap = 'viridis'"],
                    capture_output=True, cwd=tmp)
@@ -378,7 +381,7 @@ def main():
     c.add_argument("--rtol", type=float, default=1e-3)
     c.add_argument("--atol", type=float, default=1e-3)
     v = sub.add_parser("verify", help="check an already installed vivid3d (e.g. from PyPI) against the baseline")
-    v.add_argument("--python", required=True, help="python executable of the environment that has vivid3d installed")
+    v.add_argument("--python", required=True, help="python executable of the environment that has vivid3d installed ('current' = the interpreter running this script)")
     v.add_argument("--baseline", default=os.path.join(HERE, "baselines", "baseline-vendored.json"))
     v.add_argument("--label", default="verify")
     v.add_argument("--root", default="~/work/golden")

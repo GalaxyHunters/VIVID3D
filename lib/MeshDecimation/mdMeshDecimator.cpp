@@ -56,7 +56,7 @@ namespace MeshDecimation
         m_nPoints           = nVertices;
         m_triangles         = triangles;
         m_trianglesTags     = new bool[m_nTriangles];
-        m_edges.reserve(3*m_nTriangles);
+        m_edges.reserve(2*m_nTriangles);       // ~1.5 edges per triangle in a real mesh (it grows if needed)
         m_vertices.resize(m_nVertices);
         for(size_t v = 0; v < m_nVertices; ++v)
         {
@@ -525,7 +525,7 @@ namespace MeshDecimation
     }
     bool MeshDecimator::ManifoldConstraint(size_t v1, size_t v2) const
     {
-        std::set<size_t> vertices;
+        SArray<size_t, 64> vertices;           // the distinct vertices around the edge (a std::set allocated on every call)
         size_t a, b;
         size_t idEdge1;
         size_t idEdge2;
@@ -534,14 +534,14 @@ namespace MeshDecimation
         {
             idEdge1 = m_vertices[v1].m_edges[itE1];
             a = (m_edges[idEdge1].m_v1 == v1) ? m_edges[idEdge1].m_v2 : m_edges[idEdge1].m_v1;
-            vertices.insert(a);
+            vertices.Insert(a);
             if (a != v2)
             {
                 for(size_t itE2 = 0; itE2 < m_vertices[v2].m_edges.Size(); ++itE2)
                 {
                     idEdge2 = m_vertices[v2].m_edges[itE2];
                     b = (m_edges[idEdge2].m_v1 == v2) ? m_edges[idEdge2].m_v2 : m_edges[idEdge2].m_v1;
-                    vertices.insert(b);
+                    vertices.Insert(b);
                     if ( a==b )
                     {
                         if (GetTriangle(v1, v2, a) == -1)
@@ -556,7 +556,7 @@ namespace MeshDecimation
                 idEdgeV1V2 = idEdge1;
             }
         }
-        if (vertices.size() <= 4 || ( m_vertices[v1].m_onBoundary && m_vertices[v2].m_onBoundary && !m_edges[idEdgeV1V2].m_onBoundary)) // 
+        if (vertices.Size() <= 4 || ( m_vertices[v1].m_onBoundary && m_vertices[v2].m_onBoundary && !m_edges[idEdgeV1V2].m_onBoundary)) // 
         {
             return false;
         }

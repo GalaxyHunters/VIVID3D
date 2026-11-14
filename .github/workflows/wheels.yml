@@ -1,0 +1,89 @@
+name: wheels
+
+# Builds the source distribution and the wheels (CPython 3.10 - 3.14) on Linux x86_64 / aarch64, Windows and macOS,
+# and runs the golden regression check (tools/golden verify) against every installed wheel. It never publishes:
+# publishing is a separate, manually approved workflow (release.yml), which calls this one so that a release is
+# built exactly like CI builds.
+#
+# Actions are pinned to a commit SHA (the tag is in the comment); Dependabot can keep them current.
+
+on:
+  push:
+    branches: [master, "ci/**"]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:          # used by release.yml (a tag push runs release.yml, which calls this)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sdist:
+    name: sdist (build, twine check, install, golden verify)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.13"
+      - name: Build the sdist and check its metadata
+        run: |
+          python -m pip install build twine
+          python -m build --sdist
+          python -m twine check dist/*
+      - name: Install the sdist in a clean venv (what `pip install vivid3d` does without a wheel) and verify it
+        run: |
+          python -m venv /tmp/sdist-venv
+          /tmp/sdist-venv/bin/python -m pip install dist/*.tar.gz
+          python tools/golden/golden.py verify --python /tmp/sdist-venv/bin/python --label sdist --root "$RUNNER_TEMP/golden"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+          if-no-files-found: error
+
+  wheels:
+    name: wheels (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false          # one platform failing must not hide the others
+      matrix:
+        include:
+          - {name: linux-x86_64,  os: ubuntu-24.04}
+          - {name: linux-aarch64, os: ubuntu-24.04-arm}
+          - {name: windows-amd64, os: windows-2025}
+          - {name: macos-arm64,   os: macos-15}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pypa/cibuildwheel@f9b966cfadf4109556cadc5bb39ddb72d0ce664e  # v4.3.5
+        # configuration (Pythons, environment, the golden test command) lives in pyproject.toml [tool.cibuildwheel]
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wheels-${{ matrix.name }}
+          path: wheelhouse/*.whl
+          if-no-files-found: error
+
+  check-dist:
+    name: all distributions pass twine check
+    needs: [sdist, wheels]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.13"
+      - run: |
+          python -m pip install twine
+          ls -l dist
+          python -m twine check dist/*

@@ -11,7 +11,8 @@ using namespace vivid;
 namespace py = pybind11;
 
 inline std::string GetTypeString(const py::handle arObj) {
-    std::string type = py::str(arObj.get_type()).cast<std::string>();
+    // handle::get_type() is deprecated since pybind11 3.0; py::type::handle_of() is the replacement.
+    std::string type = py::str(py::type::handle_of(arObj)).cast<std::string>();
     return type.substr(8, type.size() - 10);
 }
 constexpr auto STR = "str";
@@ -31,7 +32,7 @@ namespace pybind11 {
                 if (!src)
                     return false;
 
-                if (!convert and !py::array_t<coord_t>::check_(src))
+                if (!convert && !py::array_t<coord_t>::check_(src))
                     return false;
 
                 //auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
@@ -84,7 +85,7 @@ namespace pybind11 {
             // Conversion part 1 (Python -> C++)
             bool load(py::handle src, bool convert)
             {
-                if ( !convert and !py::array_t<coord_t>::check_(src) )
+                if ( !convert && !py::array_t<coord_t>::check_(src) )
                     return false;
 
                 if ( !src )
@@ -148,11 +149,15 @@ namespace pybind11 {
                 std::string name;
                 std::vector<std::array<float, 3>> clm;
                 std::string obj_type = GetTypeString(arObj);
-                auto colormap = arObj;
+                // Must own a reference: a colormap looked up by name below is a new object (matplotlib
+                // returns a copy), and a non-owning py::handle would dangle once the temporary dies.
+                py::object colormap = py::reinterpret_borrow<py::object>(arObj);
                 // std::cout<<obj_type<<std::endl;
                 if (obj_type == STR) {
-                    auto cm = py::module_::import("matplotlib.cm");
-                    colormap = cm.attr("get_cmap")(arObj);
+                    // matplotlib.cm.get_cmap was removed in matplotlib 3.9; the colormap registry
+                    // (matplotlib.colormaps) exists since 3.5. An unknown name raises KeyError.
+                    auto registry = py::module_::import("matplotlib").attr("colormaps");
+                    colormap = registry[arObj];
                     obj_type = GetTypeString(colormap);
                     // std::cout<<obj_type<<std::endl;
                 }

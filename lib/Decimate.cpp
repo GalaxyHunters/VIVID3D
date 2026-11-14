@@ -10,45 +10,44 @@ namespace vivid
         cout << msg; //TODO should be log
     }
 
-    pair<vector<CPoint>, vector<CFace> > DecimateMesh(vector<CPoint>& aPoints, vector<CFace> aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) { //TODO: aFaces is not by reference
+    void DecimateMesh(vector<CPoint>& aPoints, vector<CFace>& aFaces, int aTargetVerticesN, int aTargetTrianglesN, float aMaxError) {
         //write the data to vec3 format
         vector< Vec3<float> > vertices;
         vector< Vec3<size_t> > triangles;
-        Vec3<size_t> temp_triangle;
-        for (auto & aFace : aFaces) {
-            temp_triangle = Vec3<size_t>(aFace[0], aFace[1], aFace[2], aFace.GetUVcoord());
-            triangles.push_back(temp_triangle); //, fIt->GetUVcoords()
+        vertices.reserve(aPoints.size());
+        triangles.reserve(aFaces.size());
+        for (const auto & aFace : aFaces) {
+            triangles.emplace_back(aFace[0], aFace[1], aFace[2], aFace.GetUVcoord());
         }
-        for (auto & aPoint : aPoints) {
-            vertices.push_back(Vec3<float>(aPoint.X(), aPoint.Y(), aPoint.Z(), 0));
+        for (const auto & aPoint : aPoints) {
+            vertices.emplace_back(aPoint.X(), aPoint.Y(), aPoint.Z(), 0);
         }
-        //decimate model
-        MeshDecimator myMDecimator;
-        myMDecimator.SetCallBack(&CallBack);
-        myMDecimator.Initialize(vertices.size(), triangles.size(), &vertices[0], &triangles[0]);
-        myMDecimator.Decimate(aTargetVerticesN, aTargetTrianglesN, aMaxError);
+        // the mesh's own copy is not needed while decimating
+        vector<CPoint>().swap(aPoints);
+        vector<CFace>().swap(aFaces);
 
-        //get decimated data
+        //decimate model
         vector< Vec3<Float> > decimated_points;
         vector< Vec3<size_t> > decimated_triangles;
-        decimated_points.clear();
-        decimated_triangles.clear();
-
-        myMDecimator.GetMeshData(&decimated_points, &decimated_triangles);
+        {
+            MeshDecimator myMDecimator;
+            myMDecimator.SetCallBack(&CallBack);
+            myMDecimator.Initialize(vertices.size(), triangles.size(), &vertices[0], &triangles[0]);
+            myMDecimator.Decimate(aTargetVerticesN, aTargetTrianglesN, aMaxError);
+            myMDecimator.GetMeshData(&decimated_points, &decimated_triangles);
+        }   // the decimator (the biggest consumer of memory) is gone before the output is built
+        vector< Vec3<float> >().swap(vertices);
+        vector< Vec3<size_t> >().swap(triangles);
 
         //write the data to Mesh format
-        vector<CPoint> out_points;
-        out_points.clear();
-        vector<CFace> out_faces;
-        out_faces.clear();
-        for (auto & decimated_point : decimated_points) {
-            out_points.push_back(CPoint(decimated_point.X(), decimated_point.Y(), decimated_point.Z()));
+        aPoints.reserve(decimated_points.size());
+        for (const auto & decimated_point : decimated_points) {
+            aPoints.emplace_back(decimated_point.X(), decimated_point.Y(), decimated_point.Z());
         }
-        for (auto & decimated_triangle : decimated_triangles) {
-            out_faces.push_back(CFace({decimated_triangle[0], decimated_triangle[1], decimated_triangle[2]}, decimated_triangle.mQuan)); //, fIt->quan
+        aFaces.reserve(decimated_triangles.size());
+        for (const auto & decimated_triangle : decimated_triangles) {
+            aFaces.emplace_back(vector<size_t>{decimated_triangle[0], decimated_triangle[1], decimated_triangle[2]}, decimated_triangle.mQuan);
         }
-        pair<vector<CPoint>, vector<CFace> > output(out_points, out_faces);
-        return output;
     }
 
 } // namespace vivid

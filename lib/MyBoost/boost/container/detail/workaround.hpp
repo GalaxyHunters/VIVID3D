@@ -98,12 +98,11 @@
    #define BOOST_CONTAINER_FORCEINLINE inline
 #elif defined(BOOST_CONTAINER_FORCEINLINE_IS_BOOST_FORCELINE)
    #define BOOST_CONTAINER_FORCEINLINE BOOST_FORCEINLINE
-#elif defined(BOOST_MSVC) && (_MSC_VER < 1900 || defined(_DEBUG))
+#elif defined(BOOST_MSVC) && (_MSC_VER <= 1900 || defined(_DEBUG))
    //"__forceinline" and MSVC seems to have some bugs in old versions and in debug mode
    #define BOOST_CONTAINER_FORCEINLINE inline
-//#elif defined(__GNUC__) && ((__GNUC__ < 4) || (__GNUC__ == 4 && (__GNUC_MINOR__ < 5)))
-#elif defined(__GNUC__) && (__GNUC__ <= 5)
-   //Older GCCs have problems with forceinline
+#elif defined(BOOST_GCC) && (__GNUC__ <= 5)
+   //Older GCCs and MinGw have problems with forceinline
    #define BOOST_CONTAINER_FORCEINLINE inline
 #else
    #define BOOST_CONTAINER_FORCEINLINE BOOST_FORCEINLINE
@@ -135,14 +134,14 @@
 #endif
 
 #if defined(BOOST_CONTAINER_DISABLE_ATTRIBUTE_NODISCARD)
-   #define BOOST_CONTAINER_ATTRIBUTE_NODISCARD
+   #define BOOST_CONTAINER_NODISCARD
 #else
    #if   defined(BOOST_GCC) && ((BOOST_GCC < 100000) || (__cplusplus < 201703L))
       //Avoid using it in C++ < 17 and GCC < 10 because it warns in SFINAE contexts
       //(see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=89070)
-      #define BOOST_CONTAINER_ATTRIBUTE_NODISCARD
+      #define BOOST_CONTAINER_NODISCARD
    #else
-      #define BOOST_CONTAINER_ATTRIBUTE_NODISCARD BOOST_ATTRIBUTE_NODISCARD
+      #define BOOST_CONTAINER_NODISCARD BOOST_ATTRIBUTE_NODISCARD
    #endif
 #endif
 
@@ -153,6 +152,196 @@
 //#define BOOST_CONTAINER_USE_STD_EXCEPTIONS
 
 
+namespace boost {
+namespace container {
 
+template <typename T1>
+BOOST_FORCEINLINE BOOST_CXX14_CONSTEXPR void ignore(T1 const&)
+{}
+
+}} //namespace boost::container {
+
+#if !(defined BOOST_NO_EXCEPTIONS)
+#    define BOOST_CONTAINER_TRY { try
+#    define BOOST_CONTAINER_CATCH(x) catch(x)
+#    define BOOST_CONTAINER_RETHROW throw;
+#    define BOOST_CONTAINER_CATCH_END }
+#else
+#    if !defined(BOOST_MSVC) || BOOST_MSVC >= 1900
+#        define BOOST_CONTAINER_TRY { if (true)
+#        define BOOST_CONTAINER_CATCH(x) else if (false)
+#    else
+// warning C4127: conditional expression is constant
+#        define BOOST_CONTAINER_TRY { \
+             __pragma(warning(push)) \
+             __pragma(warning(disable: 4127)) \
+             if (true) \
+             __pragma(warning(pop))
+#        define BOOST_CONTAINER_CATCH(x) else \
+             __pragma(warning(push)) \
+             __pragma(warning(disable: 4127)) \
+             if (false) \
+             __pragma(warning(pop))
+#    endif
+#    define BOOST_CONTAINER_RETHROW
+#    define BOOST_CONTAINER_CATCH_END }
+#endif
+
+#ifndef BOOST_NO_CXX11_STATIC_ASSERT
+#  ifndef BOOST_NO_CXX11_VARIADIC_MACROS
+#     define BOOST_CONTAINER_STATIC_ASSERT( ... ) static_assert(__VA_ARGS__, #__VA_ARGS__)
+#  else
+#     define BOOST_CONTAINER_STATIC_ASSERT( B ) static_assert(B, #B)
+#  endif
+#else
+namespace boost {
+   namespace container {
+      namespace dtl {
+
+         template<bool B>
+         struct STATIC_ASSERTION_FAILURE;
+
+         template<>
+         struct STATIC_ASSERTION_FAILURE<true> {};
+
+         template<unsigned> struct static_assert_test {};
+
+      }
+   }
+}
+
+#define BOOST_CONTAINER_STATIC_ASSERT(B) \
+         typedef ::boost::container::dtl::static_assert_test<\
+            (unsigned)sizeof(::boost::container::dtl::STATIC_ASSERTION_FAILURE<bool(B)>)>\
+               BOOST_JOIN(boost_container_static_assert_typedef_, __LINE__) BOOST_ATTRIBUTE_UNUSED
+
+#endif
+
+#ifndef BOOST_NO_CXX11_STATIC_ASSERT
+#  ifndef BOOST_NO_CXX11_VARIADIC_MACROS
+#     define BOOST_CONTAINER_STATIC_ASSERT_MSG( ... ) static_assert(__VA_ARGS__)
+#  else
+#     define BOOST_CONTAINER_STATIC_ASSERT_MSG( B, Msg ) static_assert( B, Msg )
+#  endif
+#else
+#     define BOOST_CONTAINER_STATIC_ASSERT_MSG( B, Msg ) BOOST_CONTAINER_STATIC_ASSERT( B )
+#endif
+
+#if !defined(BOOST_NO_CXX17_INLINE_VARIABLES)
+#  define BOOST_CONTAINER_CONSTANT_VAR BOOST_INLINE_CONSTEXPR
+#else
+#  define BOOST_CONTAINER_CONSTANT_VAR static BOOST_CONSTEXPR_OR_CONST
+#endif
+
+#if defined(__GNUC__) && ((__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) >= 40600)
+#define BOOST_CONTAINER_GCC_COMPATIBLE_HAS_DIAGNOSTIC_IGNORED
+#elif defined(__clang__)
+#define BOOST_CONTAINER_GCC_COMPATIBLE_HAS_DIAGNOSTIC_IGNORED
+#endif
+
+#if defined(__cpp_concepts) && (__cpp_concepts >= 202002L)
+#  define BOOST_CONTAINER_CONCEPTS_BASED_OVERLOADING
+#endif
+
+#ifdef _MSC_VER
+    #define BOOST_CONTAINER_NOVTABLE __declspec(novtable)
+#else
+    #define BOOST_CONTAINER_NOVTABLE
+#endif
+
+#if defined(BOOST_CLANG) && defined(BOOST_CLANG_VERSION) && (BOOST_CLANG_VERSION >= 30600)
+
+  #define BOOST_CONTAINER_UNROLL_PRAGMA(x) _Pragma(#x)
+  #define BOOST_CONTAINER_UNROLL(n) BOOST_CONTAINER_UNROLL_PRAGMA(unroll n)
+  // Enable unrolling but let the compiler's cost model choose the factor.
+  #define BOOST_CONTAINER_AUTO_UNROLL BOOST_CONTAINER_UNROLL_PRAGMA(clang loop unroll(enable))
+
+#elif defined(BOOST_GCC) && defined(BOOST_GCC_VERSION) && (BOOST_GCC_VERSION >= 150000)
+  // GCC < 15 emits an unsuppressible "ignoring loop annotation" warning
+  // when the optimizer decides it cannot unroll a loop (complex iterators,
+  // unknown trip count, etc.). This was fixed in GCC 15.
+  #define BOOST_CONTAINER_UNROLL_PRAGMA(x) _Pragma(#x)
+  #define BOOST_CONTAINER_UNROLL(n) BOOST_CONTAINER_UNROLL_PRAGMA(GCC unroll n)
+  // GCC has no count-less "compiler chooses" unroll pragma, so use a fixed factor.
+  #define BOOST_CONTAINER_AUTO_UNROLL BOOST_CONTAINER_UNROLL_PRAGMA(GCC unroll 8)
+
+#elif defined(_MSC_VER) && _MSC_VER >= 1920
+  #define BOOST_CONTAINER_UNROLL(n)   __pragma(warning(suppress: 4081)) __pragma(loop(unroll))
+  #define BOOST_CONTAINER_AUTO_UNROLL __pragma(warning(suppress: 4081)) __pragma(loop(unroll))
+
+#else
+  #define BOOST_CONTAINER_UNROLL(n)
+  #define BOOST_CONTAINER_AUTO_UNROLL
+#endif
+
+#ifdef __has_builtin
+#define BOOST_CONTAINER_HAS_BUILTIN(x) __has_builtin(x)
+#else
+#define BOOST_CONTAINER_HAS_BUILTIN(x) 0
+#endif
+
+#if !defined(NDEBUG)
+#define BOOST_CONTAINER_ASSUME(cond) BOOST_ASSERT(cond)
+#elif BOOST_CONTAINER_HAS_BUILTIN(__builtin_assume)
+#define BOOST_CONTAINER_ASSUME(cond) __builtin_assume(cond)
+#elif defined(__GNUC__) || \
+      BOOST_CONTAINER_HAS_BUILTIN(__builtin_unreachable)
+#define BOOST_CONTAINER_ASSUME(cond) \
+  do{                                    \
+    if(!(cond)) __builtin_unreachable(); \
+  } while(0)
+#elif defined(_MSC_VER)
+#define BOOST_CONTAINER_ASSUME(cond) __assume(cond)
+#else
+#define BOOST_CONTAINER_ASSUME(cond) \
+  do{                                    \
+    static_cast<void>(false && (cond));  \
+  } while(0)
+#endif
+
+//Marks a pointer-returning function as never returning null, so callers can
+//elide the implicit null check (e.g. the one a new-expression performs on the
+//result of a custom placement operator new). No-op on compilers lacking the
+//attribute (e.g. MSVC, where BOOST_CONTAINER_ASSUME is used instead).
+#if defined(__has_attribute)
+#  if __has_attribute(returns_nonnull)
+#     define BOOST_CONTAINER_RETURNS_NONNULL __attribute__((returns_nonnull))
+#  endif
+#endif
+#ifndef BOOST_CONTAINER_RETURNS_NONNULL
+#  define BOOST_CONTAINER_RETURNS_NONNULL
+#endif
+
+//Marks the listed (1-based) pointer parameters as never null, allowing the
+//compiler to assume so at call sites and warn if a null literal is passed.
+//No-op on compilers lacking the attribute (e.g. MSVC).
+#if defined(__has_attribute)
+#  if __has_attribute(nonnull)
+#     define BOOST_CONTAINER_NONNULL(...) __attribute__((nonnull(__VA_ARGS__)))
+#  endif
+#endif
+#ifndef BOOST_CONTAINER_NONNULL
+#  define BOOST_CONTAINER_NONNULL(...)
+#endif
+
+//Software prefetch hint for a raw pointer 'p' (no fancy-pointer support).
+//Implemented as a macro rather than a function because of
+//https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109985
+#if defined(__GNUC__) || defined(__clang__)
+#  define BOOST_CONTAINER_PREFETCH(p) \
+      __builtin_prefetch(static_cast<const char*>(static_cast<const void*>(p)))
+#elif defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_X64))
+//_mm_prefetch / _MM_HINT_T0 live in the lightweight SSE header <xmmintrin.h>
+//(shipped with MSVC since VC++ 7.0 / Visual Studio .NET 2002), so there is no
+//need to pull in the heavy <intrin.h> umbrella.
+#  include <xmmintrin.h>
+#  define BOOST_CONTAINER_PREFETCH(p) \
+      _mm_prefetch(static_cast<const char*>(static_cast<const void*>(p)), _MM_HINT_T0)
+#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64))
+//ARM/ARM64 MSVC: __prefetch (PLD on ARM, PRFM PLDL1KEEP on ARM64)
+#  define BOOST_CONTAINER_PREFETCH(p) __prefetch(static_cast<const void*>(p))
+#else
+#  define BOOST_CONTAINER_PREFETCH(p) ((void)(p))
+#endif
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_WORKAROUND_HPP

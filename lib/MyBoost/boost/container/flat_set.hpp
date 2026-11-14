@@ -28,6 +28,7 @@
 // container/detail
 #include <boost/container/detail/flat_tree.hpp>
 #include <boost/container/detail/mpl.hpp>
+#include <boost/container/detail/algorithm.hpp>
 // move
 #include <boost/move/traits.hpp>
 #include <boost/move/utility_core.hpp>
@@ -108,7 +109,7 @@ class flat_set
    typedef Key                                                                      value_type;
    typedef typename BOOST_CONTAINER_IMPDEF(tree_t::sequence_type)                   sequence_type;
    typedef typename sequence_type::allocator_type                                   allocator_type;
-   typedef ::boost::container::allocator_traits<allocator_type>                     allocator_traits_type;
+   typedef boost::container::allocator_traits<allocator_type>                     allocator_traits_type;
    typedef typename sequence_type::pointer                                          pointer;
    typedef typename sequence_type::const_pointer                                    const_pointer;
    typedef typename sequence_type::reference                                        reference;
@@ -133,7 +134,7 @@ class flat_set
    //! <b>Effects</b>: Default constructs an empty container.
    //!
    //! <b>Complexity</b>: Constant.
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set() BOOST_NOEXCEPT_IF(dtl::is_nothrow_default_constructible<AllocatorOrContainer>::value &&
                                 dtl::is_nothrow_default_constructible<Compare>::value)
       : tree_t()
@@ -143,7 +144,7 @@ class flat_set
    //! comparison object.
    //!
    //! <b>Complexity</b>: Constant.
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    explicit flat_set(const Compare& comp)
       : tree_t(comp)
    {}
@@ -151,7 +152,7 @@ class flat_set
    //! <b>Effects</b>: Constructs an empty container using the specified allocator.
    //!
    //! <b>Complexity</b>: Constant.
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    explicit flat_set(const allocator_type& a)
       : tree_t(a)
    {}
@@ -160,7 +161,7 @@ class flat_set
    //! comparison object and allocator.
    //!
    //! <b>Complexity</b>: Constant.
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(const Compare& comp, const allocator_type& a)
       : tree_t(comp, a)
    {}
@@ -171,7 +172,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N if the range [first ,last ) is already sorted using
    //! comp and otherwise N logN, where N is last - first.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(InputIterator first, InputIterator last)
       : tree_t(true, first, last)
    {}
@@ -182,7 +183,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N if the range [first ,last ) is already sorted using
    //! comp and otherwise N logN, where N is last - first.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(InputIterator first, InputIterator last, const allocator_type& a)
       : tree_t(true, first, last, a)
    {}
@@ -193,7 +194,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N if the range [first ,last ) is already sorted using
    //! comp and otherwise N logN, where N is last - first.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(InputIterator first, InputIterator last, const Compare& comp)
       : tree_t(true, first, last, comp)
    {}
@@ -204,7 +205,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N if the range [first ,last ) is already sorted using
    //! comp and otherwise N logN, where N is last - first.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
       : tree_t(true, first, last, comp, a)
    {}
@@ -220,7 +221,7 @@ class flat_set
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(ordered_unique_range_t, InputIterator first, InputIterator last)
       : tree_t(ordered_unique_range, first, last)
    {}
@@ -236,7 +237,7 @@ class flat_set
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(ordered_unique_range_t, InputIterator first, InputIterator last, const Compare& comp)
       : tree_t(ordered_unique_range, first, last, comp)
    {}
@@ -252,7 +253,7 @@ class flat_set
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
    flat_set(ordered_unique_range_t, InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
       : tree_t(ordered_unique_range, first, last, comp, a)
    {}
@@ -268,7 +269,7 @@ class flat_set
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE
+   inline
       flat_set(ordered_unique_range_t, InputIterator first, InputIterator last, const allocator_type& a)
       : tree_t(ordered_unique_range, first, last, Compare(), a)
    {}
@@ -279,7 +280,7 @@ class flat_set
    //!
    //! <b>Complexity</b>: Linear in N if the range [il.begin(), il.end()) is already sorted using
    //! comp and otherwise N logN, where N is il.begin() - il.end().
-   BOOST_CONTAINER_FORCEINLINE flat_set(std::initializer_list<value_type> il)
+   inline flat_set(std::initializer_list<value_type> il)
       : tree_t(true, il.begin(), il.end())
    {}
 
@@ -288,7 +289,7 @@ class flat_set
    //!
    //! <b>Complexity</b>: Linear in N if the range [il.begin(), il.end()) is already sorted using
    //! comp and otherwise N logN, where N is il.begin() - il.end().
-   BOOST_CONTAINER_FORCEINLINE flat_set(std::initializer_list<value_type> il, const allocator_type& a)
+   inline flat_set(std::initializer_list<value_type> il, const allocator_type& a)
       : tree_t(true, il.begin(), il.end(), a)
    {}
 
@@ -297,7 +298,7 @@ class flat_set
    //!
    //! <b>Complexity</b>: Linear in N if the range [il.begin(), il.end()) is already sorted using
    //! comp and otherwise N logN, where N is il.begin() - il.end().
-   BOOST_CONTAINER_FORCEINLINE flat_set(std::initializer_list<value_type> il, const Compare& comp)
+   inline flat_set(std::initializer_list<value_type> il, const Compare& comp)
       : tree_t(true, il.begin(), il.end(), comp)
    {}
 
@@ -306,7 +307,7 @@ class flat_set
    //!
    //! <b>Complexity</b>: Linear in N if the range [il.begin(), il.end()) is already sorted using
    //! comp and otherwise N logN, where N is il.begin() - il.end().
-   BOOST_CONTAINER_FORCEINLINE flat_set(std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
+   inline flat_set(std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
       : tree_t(true, il.begin(), il.end(), comp, a)
    {}
 
@@ -320,7 +321,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_set(ordered_unique_range_t, std::initializer_list<value_type> il)
+   inline flat_set(ordered_unique_range_t, std::initializer_list<value_type> il)
       : tree_t(ordered_unique_range, il.begin(), il.end())
    {}
 
@@ -334,7 +335,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_set(ordered_unique_range_t, std::initializer_list<value_type> il, const Compare& comp)
+   inline flat_set(ordered_unique_range_t, std::initializer_list<value_type> il, const Compare& comp)
       : tree_t(ordered_unique_range, il.begin(), il.end(), comp)
    {}
 
@@ -348,7 +349,7 @@ class flat_set
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_set(ordered_unique_range_t, std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
+   inline flat_set(ordered_unique_range_t, std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
       : tree_t(ordered_unique_range, il.begin(), il.end(), comp, a)
    {}
 #endif
@@ -356,7 +357,7 @@ class flat_set
    //! <b>Effects</b>: Copy constructs the container.
    //!
    //! <b>Complexity</b>: Linear in x.size().
-   BOOST_CONTAINER_FORCEINLINE flat_set(const flat_set& x)
+   inline flat_set(const flat_set& x)
       : tree_t(static_cast<const tree_t&>(x))
    {}
 
@@ -365,7 +366,7 @@ class flat_set
    //! <b>Complexity</b>: Constant.
    //!
    //! <b>Postcondition</b>: x is emptied.
-   BOOST_CONTAINER_FORCEINLINE flat_set(BOOST_RV_REF(flat_set) x)
+   inline flat_set(BOOST_RV_REF(flat_set) x)
       BOOST_NOEXCEPT_IF(boost::container::dtl::is_nothrow_move_constructible<Compare>::value)
       : tree_t(BOOST_MOVE_BASE(tree_t, x))
    {}
@@ -373,7 +374,7 @@ class flat_set
    //! <b>Effects</b>: Copy constructs a container using the specified allocator.
    //!
    //! <b>Complexity</b>: Linear in x.size().
-   BOOST_CONTAINER_FORCEINLINE flat_set(const flat_set& x, const allocator_type &a)
+   inline flat_set(const flat_set& x, const BOOST_CONTAINER_DOC1ST(allocator_type, typename dtl::type_identity<allocator_type>::type) &a)
       : tree_t(static_cast<const tree_t&>(x), a)
    {}
 
@@ -381,14 +382,14 @@ class flat_set
    //!                 Constructs *this using x's resources.
    //!
    //! <b>Complexity</b>: Constant if a == x.get_allocator(), linear otherwise
-   BOOST_CONTAINER_FORCEINLINE flat_set(BOOST_RV_REF(flat_set) x, const allocator_type &a)
+   inline flat_set(BOOST_RV_REF(flat_set) x, const BOOST_CONTAINER_DOC1ST(allocator_type, typename dtl::type_identity<allocator_type>::type) &a)
       : tree_t(BOOST_MOVE_BASE(tree_t, x), a)
    {}
 
    //! <b>Effects</b>: Makes *this a copy of x.
    //!
    //! <b>Complexity</b>: Linear in x.size().
-   BOOST_CONTAINER_FORCEINLINE flat_set& operator=(BOOST_COPY_ASSIGN_REF(flat_set) x)
+   inline flat_set& operator=(BOOST_COPY_ASSIGN_REF(flat_set) x)
    {  return static_cast<flat_set&>(this->tree_t::operator=(static_cast<const tree_t&>(x)));  }
 
    //! <b>Throws</b>: If allocator_traits_type::propagate_on_container_move_assignment
@@ -397,7 +398,7 @@ class flat_set
    //! <b>Complexity</b>: Constant if allocator_traits_type::
    //!   propagate_on_container_move_assignment is true or
    //!   this->get>allocator() == x.get_allocator(). Linear otherwise.
-   BOOST_CONTAINER_FORCEINLINE flat_set& operator=(BOOST_RV_REF(flat_set) x)
+   inline flat_set& operator=(BOOST_RV_REF(flat_set) x)
       BOOST_NOEXCEPT_IF( (allocator_traits_type::propagate_on_container_move_assignment::value ||
                           allocator_traits_type::is_always_equal::value) &&
                            boost::container::dtl::is_nothrow_move_assignable<Compare>::value)
@@ -410,7 +411,7 @@ class flat_set
    flat_set& operator=(std::initializer_list<value_type> il)
    {
        this->clear();
-       this->insert(il.begin(), il.end());
+       this->tree_t::insert_unique_range(il.begin(), il.end());
        return *this;
    }
 #endif
@@ -602,7 +603,7 @@ class flat_set
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class... Args>
-   BOOST_CONTAINER_FORCEINLINE std::pair<iterator,bool> emplace(BOOST_FWD_REF(Args)... args)
+   inline std::pair<iterator,bool> emplace(BOOST_FWD_REF(Args)... args)
    {  return this->tree_t::emplace_unique(boost::forward<Args>(args)...); }
 
    //! <b>Effects</b>: Inserts an object of type Key constructed with
@@ -618,18 +619,18 @@ class flat_set
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class... Args>
-   BOOST_CONTAINER_FORCEINLINE iterator emplace_hint(const_iterator p, BOOST_FWD_REF(Args)... args)
+   inline iterator emplace_hint(const_iterator p, BOOST_FWD_REF(Args)... args)
    {  return this->tree_t::emplace_hint_unique(p, boost::forward<Args>(args)...); }
 
    #else // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
    #define BOOST_CONTAINER_FLAT_SET_EMPLACE_CODE(N) \
    BOOST_MOVE_TMPL_LT##N BOOST_MOVE_CLASS##N BOOST_MOVE_GT##N \
-   BOOST_CONTAINER_FORCEINLINE std::pair<iterator,bool> emplace(BOOST_MOVE_UREF##N)\
+   inline std::pair<iterator,bool> emplace(BOOST_MOVE_UREF##N)\
    {  return this->tree_t::emplace_unique(BOOST_MOVE_FWD##N);  }\
    \
    BOOST_MOVE_TMPL_LT##N BOOST_MOVE_CLASS##N BOOST_MOVE_GT##N \
-   BOOST_CONTAINER_FORCEINLINE iterator emplace_hint(const_iterator hint BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
+   inline iterator emplace_hint(const_iterator hint BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
    {  return this->tree_t::emplace_hint_unique(hint BOOST_MOVE_I##N BOOST_MOVE_FWD##N); }\
    //
    BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_FLAT_SET_EMPLACE_CODE)
@@ -637,7 +638,7 @@ class flat_set
 
    #endif   // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
-   #if defined(BOOST_CONTAINER_DOXYGEN_INVOKED)
+   #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) || defined(BOOST_CONTAINER_DOXYGEN_INVOKED)
    //! <b>Effects</b>: Inserts x if and only if there is no element in the container
    //!   with key equivalent to the key of x.
    //!
@@ -649,7 +650,8 @@ class flat_set
    //!   to the elements with bigger keys than x.
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   std::pair<iterator, bool> insert(const value_type &x);
+   std::pair<iterator, bool> insert(const value_type &x)
+   {  return this->tree_t::insert_unique(x); }
 
    //! <b>Effects</b>: Inserts a new value_type move constructed from the pair if and
    //! only if there is no element in the container with key equivalent to the key of x.
@@ -662,15 +664,35 @@ class flat_set
    //!   to the elements with bigger keys than x.
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   std::pair<iterator, bool> insert(value_type &&x);
-   #else
-   private:
-   typedef std::pair<iterator, bool> insert_return_pair;
-   public:
-   BOOST_MOVE_CONVERSION_AWARE_CATCH(insert, value_type, insert_return_pair, this->tree_t::insert_unique)
-   #endif
+   std::pair<iterator, bool> insert(value_type &&x)
+   {  return this->tree_t::insert_unique(boost::move(x)); }
 
-   #if defined(BOOST_CONTAINER_DOXYGEN_INVOKED)
+   //! <b>Requires</b>: This overload is available only if
+   //! key_compare::is_transparent exists.
+   //!
+   //! <b>Effects</b>: Inserts a new value_type move constructed from the pair if and
+   //! only if there is no element in the container with key equivalent to the key of x.
+   //!
+   //! <b>Returns</b>: The bool component of the returned pair is true if and only
+   //!   if the insertion takes place, and the iterator component of the pair
+   //!   points to the element with key equivalent to the key of x.
+   //!
+   //! <b>Complexity</b>: Logarithmic search time plus linear insertion
+   //!   to the elements with bigger keys than x.
+   //!
+   //! <b>Note</b>: If an element is inserted it might invalidate elements.
+   template <class K>
+   inline BOOST_CONTAINER_DOC1ST
+      (std::pair<iterator BOOST_MOVE_I bool>
+         , typename dtl::enable_if_c<
+         dtl::is_transparent<key_compare>::value &&                  //transparent
+         !dtl::is_convertible<K BOOST_MOVE_I iterator>::value &&     //not convertible to iterator
+         !dtl::is_convertible<K BOOST_MOVE_I const_iterator>::value  //not convertible to const_iterator
+         BOOST_MOVE_I std::pair<iterator BOOST_MOVE_I bool>
+       >::type)
+      insert(K &&x)
+   {  return this->tree_t::insert_unique(boost::forward<K>(x)); }
+
    //! <b>Effects</b>: Inserts a copy of x in the container if and only if there is
    //!   no element in the container with key equivalent to the key of x.
    //!   p is a hint pointing to where the insert should start to search.
@@ -682,9 +704,11 @@ class flat_set
    //!   right before p) plus insertion linear to the elements with bigger keys than x.
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   iterator insert(const_iterator p, const value_type &x);
+   iterator insert(const_iterator p, const value_type &x)
+   {  return this->tree_t::insert_unique(p, x); }
 
-   //! <b>Effects</b>: Inserts an element move constructed from x in the container.
+   //! <b>Effects</b>: Move-inserts x in the container if and only if there is
+   //!   no element in the container with key equivalent to the key of x.
    //!   p is a hint pointing to where the insert should start to search.
    //!
    //! <b>Returns</b>: An iterator pointing to the element with key equivalent to the key of x.
@@ -693,8 +717,40 @@ class flat_set
    //!   right before p) plus insertion linear to the elements with bigger keys than x.
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   iterator insert(const_iterator p, value_type &&x);
+   iterator insert(const_iterator p, value_type &&x)
+   {  return this->tree_t::insert_unique(p, boost::move(x)); }
+
+   //! <b>Requires</b>: This overload is available only if
+   //! key_compare::is_transparent exists.
+   //!
+   //! <b>Effects</b>: Forward-inserts x in the container if and only if there is
+   //!   no element in the container with key equivalent to the key of x.
+   //!   p is a hint pointing to where the insert should start to search.
+   //!
+   //! <b>Returns</b>: An iterator pointing to the element with key equivalent
+   //!   to the key of x.
+   //!
+   //! <b>Complexity</b>: Logarithmic search time (constant if x is inserted
+   //!   right before p) plus insertion linear to the elements with bigger keys than x.
+   //!
+   //! <b>Note</b>: If an element is inserted it might invalidate elements.
+   template <class K>
+   inline BOOST_CONTAINER_DOC1ST
+      ( iterator
+         , typename dtl::enable_if_c<
+            dtl::is_transparent<key_compare>::value &&                  //transparent
+            !dtl::is_convertible<K BOOST_MOVE_I iterator>::value &&     //not convertible to iterator
+            !dtl::is_convertible<K BOOST_MOVE_I const_iterator>::value  //not convertible to const_iterator
+            BOOST_MOVE_I iterator
+       >::type)
+      insert(const_iterator p, K &&x)
+   {  return this->tree_t::insert_unique(p, boost::forward<K>(x)); }
+
    #else
+   private:
+   typedef std::pair<iterator, bool> insert_return_pair;
+   public:
+   BOOST_MOVE_CONVERSION_AWARE_CATCH(insert, value_type, insert_return_pair, this->tree_t::insert_unique)
    BOOST_MOVE_CONVERSION_AWARE_CATCH_1ARG(insert, value_type, iterator, this->tree_t::insert_unique, const_iterator, const_iterator)
    #endif
 
@@ -707,8 +763,8 @@ class flat_set
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE void insert(InputIterator first, InputIterator last)
-      {  this->tree_t::insert_unique(first, last);  }
+   inline void insert(InputIterator first, InputIterator last)
+      {  this->tree_t::insert_unique_range(first, last);  }
 
    //! <b>Requires</b>: first, last are not iterators into *this and
    //! must be ordered according to the predicate and must be
@@ -721,8 +777,8 @@ class flat_set
    //!
    //! <b>Note</b>: Non-standard extension. If an element is inserted it might invalidate elements.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE void insert(ordered_unique_range_t, InputIterator first, InputIterator last)
-      {  this->tree_t::insert_unique(ordered_unique_range, first, last);  }
+   inline void insert(ordered_unique_range_t, InputIterator first, InputIterator last)
+      {  this->tree_t::insert_unique_range(ordered_unique_range, first, last);  }
 
 #if !defined(BOOST_NO_CXX11_HDR_INITIALIZER_LIST)
    //! <b>Effects</b>: inserts each element from the range [il.begin(), il.end()) if and only
@@ -731,8 +787,8 @@ class flat_set
    //! <b>Complexity</b>: N log(N).
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   BOOST_CONTAINER_FORCEINLINE void insert(std::initializer_list<value_type> il)
-   {  this->tree_t::insert_unique(il.begin(), il.end()); }
+   inline void insert(std::initializer_list<value_type> il)
+   {  this->tree_t::insert_unique_range(il.begin(), il.end()); }
 
    //! <b>Requires</b>: Range [il.begin(), il.end()) must be ordered according to the predicate
    //! and must be unique values.
@@ -743,37 +799,37 @@ class flat_set
    //! <b>Complexity</b>: Linear.
    //!
    //! <b>Note</b>: Non-standard extension. If an element is inserted it might invalidate elements.
-   BOOST_CONTAINER_FORCEINLINE void insert(ordered_unique_range_t, std::initializer_list<value_type> il)
-   {  this->tree_t::insert_unique(ordered_unique_range, il.begin(), il.end()); }
+   inline void insert(ordered_unique_range_t, std::initializer_list<value_type> il)
+   {  this->tree_t::insert_unique_range(ordered_unique_range, il.begin(), il.end()); }
 #endif
 
    //! @copydoc ::boost::container::flat_map::merge(flat_map<Key, T, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(flat_set<Key, C2, AllocatorOrContainer>& source)
+   inline void merge(flat_set<Key, C2, AllocatorOrContainer>& source)
    {  this->tree_t::merge_unique(source.tree());   }
 
    //! @copydoc ::boost::container::flat_set::merge(flat_set<Key, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(BOOST_RV_REF_BEG flat_set<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
+   inline void merge(BOOST_RV_REF_BEG flat_set<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
    {  return this->merge(static_cast<flat_set<Key, C2, AllocatorOrContainer>&>(source));   }
 
    //! @copydoc ::boost::container::flat_map::merge(flat_multimap<Key, T, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(flat_multiset<Key, C2, AllocatorOrContainer>& source)
+   inline void merge(flat_multiset<Key, C2, AllocatorOrContainer>& source)
    {  this->tree_t::merge_unique(source.tree());   }
 
    //! @copydoc ::boost::container::flat_set::merge(flat_multiset<Key, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(BOOST_RV_REF_BEG flat_multiset<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
+   inline void merge(BOOST_RV_REF_BEG flat_multiset<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
    {  return this->merge(static_cast<flat_multiset<Key, C2, AllocatorOrContainer>&>(source));   }
 
    //! <b>Effects</b>: If present, erases the element in the container with key equivalent to x.
    //!
-   //! <b>Returns</b>: Returns the number of erased elements (0/1).
+   //! <b>Returns</b>: Returns the number of erased elements.
    //!
    //! <b>Complexity</b>: Logarithmic search time plus erasure time
    //!   linear to the elements with bigger keys.
-   BOOST_CONTAINER_FORCEINLINE size_type erase(const key_type& x)
+   inline size_type erase(const key_type& x)
    {  return this->tree_t::erase_unique(x);   }
 
    #if defined(BOOST_CONTAINER_DOXYGEN_INVOKED)
@@ -799,6 +855,15 @@ class flat_set
    //! <b>Complexity</b>: Logarithmic search time plus erasure time
    //!   linear to the elements with bigger keys.
    iterator erase(const_iterator first, const_iterator last);
+
+   //! <b>Requires</b>: This overload is available only if
+   //! key_compare::is_transparent exists.
+   //!
+   //! <b>Effects</b>: If present, erases the element in the container with key equivalent to x.
+   //!
+   //! <b>Returns</b>: Returns the number of erased elements.
+   template<class K>
+   size_type erase(K && k);
 
    //! <b>Effects</b>: Swaps the contents of *this and x.
    //!
@@ -917,7 +982,7 @@ class flat_set
    //! <b>Returns</b>: The number of elements with key equivalent to x.
    //!
    //! <b>Complexity</b>: log(size())+count(k)
-   BOOST_CONTAINER_FORCEINLINE size_type count(const key_type& x) const
+   inline size_type count(const key_type& x) const
    {  return static_cast<size_type>(this->tree_t::find(x) != this->tree_t::cend());  }
 
    //! <b>Requires</b>: This overload is available only if
@@ -927,7 +992,7 @@ class flat_set
    //!
    //! <b>Complexity</b>: log(size())+count(k)
    template<typename K>
-   BOOST_CONTAINER_FORCEINLINE size_type count(const K& x) const
+   inline size_type count(const K& x) const
       //Don't use find() != end optimization here as transparent comparators with key K might
       //return a different range than key_type (which can only return a single element range)
    {  return this->tree_t::count(x);  }
@@ -1019,13 +1084,13 @@ class flat_set
    //! <b>Effects</b>: Equivalent to std::make_pair(this->lower_bound(k), this->upper_bound(k)).
    //!
    //! <b>Complexity</b>: Logarithmic
-   BOOST_CONTAINER_FORCEINLINE std::pair<const_iterator, const_iterator> equal_range(const key_type& x) const
+   inline std::pair<const_iterator, const_iterator> equal_range(const key_type& x) const
    {  return this->tree_t::lower_bound_range(x);  }
 
    //! <b>Effects</b>: Equivalent to std::make_pair(this->lower_bound(k), this->upper_bound(k)).
    //!
    //! <b>Complexity</b>: Logarithmic
-   BOOST_CONTAINER_FORCEINLINE std::pair<iterator,iterator> equal_range(const key_type& x)
+   inline std::pair<iterator,iterator> equal_range(const key_type& x)
    {  return this->tree_t::lower_bound_range(x);  }
 
    //! <b>Requires</b>: This overload is available only if
@@ -1097,7 +1162,7 @@ class flat_set
    //!
    //! <b>Postcondition</b>: this->empty()
    //!
-   //! <b>Throws</b>: If secuence_type's move constructor throws 
+   //! <b>Throws</b>: If sequence_type's move constructor throws 
    sequence_type extract_sequence();
 
    #endif   //#ifdef BOOST_CONTAINER_DOXYGEN_INVOKED
@@ -1108,7 +1173,7 @@ class flat_set
    //! <b>Complexity</b>: Assuming O(1) move assignment, O(NlogN) with N = seq.size()
    //!
    //! <b>Throws</b>: If the comparison or the move constructor throws
-   BOOST_CONTAINER_FORCEINLINE void adopt_sequence(BOOST_RV_REF(sequence_type) seq)
+   inline void adopt_sequence(BOOST_RV_REF(sequence_type) seq)
    {  this->tree_t::adopt_sequence_unique(boost::move(seq));  }
 
    //! <b>Requires</b>: seq shall be ordered according to this->compare()
@@ -1120,7 +1185,7 @@ class flat_set
    //! <b>Complexity</b>: Assuming O(1) move assignment, O(1)
    //!
    //! <b>Throws</b>: If the move assignment throws
-   BOOST_CONTAINER_FORCEINLINE void adopt_sequence(ordered_unique_range_t, BOOST_RV_REF(sequence_type) seq)
+   inline void adopt_sequence(ordered_unique_range_t, BOOST_RV_REF(sequence_type) seq)
    {  this->tree_t::adopt_sequence_unique(ordered_unique_range_t(), boost::move(seq));  }
 
    //! <b>Effects</b>: Returns a const view of the underlying sequence.
@@ -1128,16 +1193,32 @@ class flat_set
    //! <b>Complexity</b>: Constant
    //!
    //! <b>Throws</b>: Nothing
-   BOOST_CONTAINER_FORCEINLINE const sequence_type & sequence() const BOOST_NOEXCEPT
+   inline const sequence_type & sequence() const BOOST_NOEXCEPT
    {  return this->get_sequence_cref();  }
 };
 
+//! <b>Effects</b>: Erases all elements that satisfy the predicate pred from the container c.
+//!
+//! <b>Complexity</b>: Linear.
+template <class K, class C, class A, class Pred>
+inline typename flat_set<K, C, A>::size_type erase_if(flat_set<K, C, A>& c, Pred pred)
+{
+   return container_erase_if(c, pred);
+}
+
 #ifndef BOOST_CONTAINER_NO_CXX17_CTAD
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from the iterator
+//! range <code>[first, last)</code>, deducing the key type from the value type of
+//! `InputIterator` and using the default comparator and allocator.
 template <typename InputIterator>
 flat_set(InputIterator, InputIterator) ->
    flat_set< it_based_value_type_t<InputIterator> >;
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from the iterator
+//! range <code>[first, last)</code>, deducing the key type from `InputIterator`. The
+//! trailing argument is used as the allocator if it is an allocator type, otherwise
+//! it is used as the comparator.
 template < typename InputIterator, typename AllocatorOrCompare>
     flat_set(InputIterator, InputIterator, AllocatorOrCompare const&) ->
     flat_set< it_based_value_type_t<InputIterator>
@@ -1153,6 +1234,9 @@ template < typename InputIterator, typename AllocatorOrCompare>
                 >::type
             >;
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from the iterator
+//! range <code>[first, last)</code>, deducing the key type from `InputIterator` and
+//! taking the comparator and allocator types from the supplied arguments.
 template < typename InputIterator, typename Compare, typename Allocator
          , typename = dtl::require_nonallocator_t<Compare>
          , typename = dtl::require_allocator_t<Allocator>>
@@ -1161,11 +1245,18 @@ flat_set(InputIterator, InputIterator, Compare const&, Allocator const&) ->
            , Compare
            , Allocator>;
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from an already
+//! ordered, unique iterator range <code>[first, last)</code>, deducing the key type
+//! from `InputIterator` and using the default comparator and allocator.
 template <typename InputIterator>
 flat_set(ordered_unique_range_t, InputIterator, InputIterator) ->
    flat_set< it_based_value_type_t<InputIterator>>;
 
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from an already
+//! ordered, unique iterator range <code>[first, last)</code>, deducing the key type
+//! from `InputIterator`. The trailing argument is used as the allocator if it is an
+//! allocator type, otherwise it is used as the comparator.
 template < typename InputIterator, typename AllocatorOrCompare>
     flat_set(ordered_unique_range_t, InputIterator, InputIterator, AllocatorOrCompare const&) ->
     flat_set< it_based_value_type_t<InputIterator>
@@ -1181,6 +1272,10 @@ template < typename InputIterator, typename AllocatorOrCompare>
                 >::type
             >;
 
+//! <b>Deduction guide</b>: allows a `flat_set` to be constructed from an already
+//! ordered, unique iterator range <code>[first, last)</code>, deducing the key type
+//! from `InputIterator` and taking the comparator and allocator types from the
+//! supplied arguments.
 template < typename InputIterator, typename Compare, typename Allocator
          , typename = dtl::require_nonallocator_t<Compare>
          , typename = dtl::require_allocator_t<Allocator>>
@@ -1201,7 +1296,7 @@ template <class Key, class Compare, class AllocatorOrContainer>
 struct has_trivial_destructor_after_move<boost::container::flat_set<Key, Compare, AllocatorOrContainer> >
 {
    typedef ::boost::container::dtl::flat_tree<Key, ::boost::container::dtl::identity<Key>, Compare, AllocatorOrContainer> tree;
-   static const bool value = ::boost::has_trivial_destructor_after_move<tree>::value;
+   BOOST_STATIC_CONSTEXPR bool value = ::boost::has_trivial_destructor_after_move<tree>::value;
 };
 
 namespace container {
@@ -1263,7 +1358,7 @@ class flat_multiset
    typedef Key                                                                      value_type;
    typedef typename BOOST_CONTAINER_IMPDEF(tree_t::sequence_type)                   sequence_type;
    typedef typename sequence_type::allocator_type                                   allocator_type;
-   typedef ::boost::container::allocator_traits<allocator_type>                     allocator_traits_type;
+   typedef boost::container::allocator_traits<allocator_type>                     allocator_traits_type;
    typedef typename sequence_type::pointer                                          pointer;
    typedef typename sequence_type::const_pointer                                    const_pointer;
    typedef typename sequence_type::reference                                        reference;
@@ -1279,47 +1374,47 @@ class flat_multiset
    typedef typename sequence_type::const_reverse_iterator                           const_reverse_iterator;
 
    //! @copydoc ::boost::container::flat_set::flat_set()
-   BOOST_CONTAINER_FORCEINLINE flat_multiset() BOOST_NOEXCEPT_IF(dtl::is_nothrow_default_constructible<AllocatorOrContainer>::value &&
+   inline flat_multiset() BOOST_NOEXCEPT_IF(dtl::is_nothrow_default_constructible<AllocatorOrContainer>::value &&
                                                                  dtl::is_nothrow_default_constructible<Compare>::value)
       : tree_t()
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(const Compare&)
-   BOOST_CONTAINER_FORCEINLINE explicit flat_multiset(const Compare& comp)
+   inline explicit flat_multiset(const Compare& comp)
       : tree_t(comp)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(const allocator_type&)
-   BOOST_CONTAINER_FORCEINLINE explicit flat_multiset(const allocator_type& a)
+   inline explicit flat_multiset(const allocator_type& a)
       : tree_t(a)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(const Compare&, const allocator_type&)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(const Compare& comp, const allocator_type& a)
+   inline flat_multiset(const Compare& comp, const allocator_type& a)
       : tree_t(comp, a)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(InputIterator, InputIterator)
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(InputIterator first, InputIterator last)
+   inline flat_multiset(InputIterator first, InputIterator last)
       : tree_t(false, first, last)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(InputIterator, InputIterator, const allocator_type&)
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(InputIterator first, InputIterator last, const allocator_type& a)
+   inline flat_multiset(InputIterator first, InputIterator last, const allocator_type& a)
       : tree_t(false, first, last, a)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(InputIterator, InputIterator, const Compare& comp)
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(InputIterator first, InputIterator last, const Compare& comp)
+   inline flat_multiset(InputIterator first, InputIterator last, const Compare& comp)
       : tree_t(false, first, last, comp)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(InputIterator, InputIterator, const Compare& comp, const allocator_type&)
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
+   inline flat_multiset(InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
       : tree_t(false, first, last, comp, a)
    {}
 
@@ -1333,7 +1428,7 @@ class flat_multiset
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, InputIterator first, InputIterator last)
+   inline flat_multiset(ordered_range_t, InputIterator first, InputIterator last)
       : tree_t(ordered_range, first, last)
    {}
 
@@ -1347,7 +1442,7 @@ class flat_multiset
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const Compare& comp)
+   inline flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const Compare& comp)
       : tree_t(ordered_range, first, last, comp)
    {}
 
@@ -1361,7 +1456,7 @@ class flat_multiset
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
+   inline flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const Compare& comp, const allocator_type& a)
       : tree_t(ordered_range, first, last, comp, a)
    {}
 
@@ -1375,28 +1470,28 @@ class flat_multiset
    //!
    //! <b>Note</b>: Non-standard extension.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const allocator_type &a)
+   inline flat_multiset(ordered_range_t, InputIterator first, InputIterator last, const allocator_type &a)
       : tree_t(ordered_range, first, last, Compare(), a)
    {}
 
 #if !defined(BOOST_NO_CXX11_HDR_INITIALIZER_LIST)
    //! @copydoc ::boost::container::flat_set::flat_set(std::initializer_list<value_type)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(std::initializer_list<value_type> il)
+   inline flat_multiset(std::initializer_list<value_type> il)
       : tree_t(false, il.begin(), il.end())
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(std::initializer_list<value_type>, const allocator_type&)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(std::initializer_list<value_type> il, const allocator_type& a)
+   inline flat_multiset(std::initializer_list<value_type> il, const allocator_type& a)
       : tree_t(false, il.begin(), il.end(), a)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(std::initializer_list<value_type>, const Compare& comp)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(std::initializer_list<value_type> il, const Compare& comp)
+   inline flat_multiset(std::initializer_list<value_type> il, const Compare& comp)
       : tree_t(false, il.begin(), il.end(), comp)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(std::initializer_list<value_type>, const Compare& comp, const allocator_type&)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
+   inline flat_multiset(std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
       : tree_t(false, il.begin(), il.end(), comp, a)
    {}
 
@@ -1409,7 +1504,7 @@ class flat_multiset
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, std::initializer_list<value_type> il)
+   inline flat_multiset(ordered_range_t, std::initializer_list<value_type> il)
       : tree_t(ordered_range, il.begin(), il.end())
    {}
 
@@ -1422,7 +1517,7 @@ class flat_multiset
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, std::initializer_list<value_type> il, const Compare& comp)
+   inline flat_multiset(ordered_range_t, std::initializer_list<value_type> il, const Compare& comp)
       : tree_t(ordered_range, il.begin(), il.end(), comp)
    {}
 
@@ -1435,38 +1530,38 @@ class flat_multiset
    //! <b>Complexity</b>: Linear in N.
    //!
    //! <b>Note</b>: Non-standard extension.
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(ordered_range_t, std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
+   inline flat_multiset(ordered_range_t, std::initializer_list<value_type> il, const Compare& comp, const allocator_type& a)
       : tree_t(ordered_range, il.begin(), il.end(), comp, a)
    {}
 #endif
 
    //! @copydoc ::boost::container::flat_set::flat_set(const flat_set &)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(const flat_multiset& x)
+   inline flat_multiset(const flat_multiset& x)
       : tree_t(static_cast<const tree_t&>(x))
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(flat_set &&)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(BOOST_RV_REF(flat_multiset) x)
+   inline flat_multiset(BOOST_RV_REF(flat_multiset) x)
       BOOST_NOEXCEPT_IF(boost::container::dtl::is_nothrow_move_constructible<Compare>::value)
       : tree_t(boost::move(static_cast<tree_t&>(x)))
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(const flat_set &, const allocator_type &)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(const flat_multiset& x, const allocator_type &a)
+   inline flat_multiset(const flat_multiset& x, const BOOST_CONTAINER_DOC1ST(allocator_type, typename dtl::type_identity<allocator_type>::type) &a)
       : tree_t(static_cast<const tree_t&>(x), a)
    {}
 
    //! @copydoc ::boost::container::flat_set::flat_set(flat_set &&, const allocator_type &)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset(BOOST_RV_REF(flat_multiset) x, const allocator_type &a)
+   inline flat_multiset(BOOST_RV_REF(flat_multiset) x, const BOOST_CONTAINER_DOC1ST(allocator_type, typename dtl::type_identity<allocator_type>::type) &a)
       : tree_t(BOOST_MOVE_BASE(tree_t, x), a)
    {}
 
    //! @copydoc ::boost::container::flat_set::operator=(const flat_set &)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset& operator=(BOOST_COPY_ASSIGN_REF(flat_multiset) x)
+   inline flat_multiset& operator=(BOOST_COPY_ASSIGN_REF(flat_multiset) x)
    {  return static_cast<flat_multiset&>(this->tree_t::operator=(static_cast<const tree_t&>(x)));  }
 
    //! @copydoc ::boost::container::flat_set::operator=(flat_set &&)
-   BOOST_CONTAINER_FORCEINLINE flat_multiset& operator=(BOOST_RV_REF(flat_multiset) x)
+   inline flat_multiset& operator=(BOOST_RV_REF(flat_multiset) x)
       BOOST_NOEXCEPT_IF( (allocator_traits_type::propagate_on_container_move_assignment::value ||
                           allocator_traits_type::is_always_equal::value) &&
                            boost::container::dtl::is_nothrow_move_assignable<Compare>::value)
@@ -1477,7 +1572,7 @@ class flat_multiset
    flat_multiset& operator=(std::initializer_list<value_type> il)
    {
        this->clear();
-       this->insert(il.begin(), il.end());
+       this->tree_t::insert_equal_range(il.begin(), il.end());
        return *this;
    }
 #endif
@@ -1566,7 +1661,7 @@ class flat_multiset
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class... Args>
-   BOOST_CONTAINER_FORCEINLINE iterator emplace(BOOST_FWD_REF(Args)... args)
+   inline iterator emplace(BOOST_FWD_REF(Args)... args)
    {  return this->tree_t::emplace_equal(boost::forward<Args>(args)...); }
 
    //! <b>Effects</b>: Inserts an object of type Key constructed with
@@ -1581,18 +1676,18 @@ class flat_multiset
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class... Args>
-   BOOST_CONTAINER_FORCEINLINE iterator emplace_hint(const_iterator p, BOOST_FWD_REF(Args)... args)
+   inline iterator emplace_hint(const_iterator p, BOOST_FWD_REF(Args)... args)
    {  return this->tree_t::emplace_hint_equal(p, boost::forward<Args>(args)...); }
 
    #else // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
    #define BOOST_CONTAINER_FLAT_MULTISET_EMPLACE_CODE(N) \
    BOOST_MOVE_TMPL_LT##N BOOST_MOVE_CLASS##N BOOST_MOVE_GT##N \
-   BOOST_CONTAINER_FORCEINLINE iterator emplace(BOOST_MOVE_UREF##N)\
+   inline iterator emplace(BOOST_MOVE_UREF##N)\
    {  return this->tree_t::emplace_equal(BOOST_MOVE_FWD##N);  }\
    \
    BOOST_MOVE_TMPL_LT##N BOOST_MOVE_CLASS##N BOOST_MOVE_GT##N \
-   BOOST_CONTAINER_FORCEINLINE iterator emplace_hint(const_iterator hint BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
+   inline iterator emplace_hint(const_iterator hint BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
    {  return this->tree_t::emplace_hint_equal(hint BOOST_MOVE_I##N BOOST_MOVE_FWD##N); }\
    //
    BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_FLAT_MULTISET_EMPLACE_CODE)
@@ -1658,8 +1753,8 @@ class flat_multiset
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE void insert(InputIterator first, InputIterator last)
-      {  this->tree_t::insert_equal(first, last);  }
+   inline void insert(InputIterator first, InputIterator last)
+      {  this->tree_t::insert_equal_range(first, last);  }
 
    //! <b>Requires</b>: first, last are not iterators into *this and
    //! must be ordered according to the predicate.
@@ -1671,8 +1766,8 @@ class flat_multiset
    //!
    //! <b>Note</b>: Non-standard extension. If an element is inserted it might invalidate elements.
    template <class InputIterator>
-   BOOST_CONTAINER_FORCEINLINE void insert(ordered_range_t, InputIterator first, InputIterator last)
-      {  this->tree_t::insert_equal(ordered_range, first, last);  }
+   inline void insert(ordered_range_t, InputIterator first, InputIterator last)
+      {  this->tree_t::insert_equal_range(ordered_range, first, last);  }
 
 #if !defined(BOOST_NO_CXX11_HDR_INITIALIZER_LIST)
    //! <b>Effects</b>: inserts each element from the range [il.begin(), il.end()).
@@ -1680,8 +1775,8 @@ class flat_multiset
    //! <b>Complexity</b>: N log(N).
    //!
    //! <b>Note</b>: If an element is inserted it might invalidate elements.
-   BOOST_CONTAINER_FORCEINLINE void insert(std::initializer_list<value_type> il)
-   {  this->tree_t::insert_equal(il.begin(), il.end()); }
+   inline void insert(std::initializer_list<value_type> il)
+   {  this->tree_t::insert_equal_range(il.begin(), il.end()); }
 
    //! <b>Requires</b>: Range [il.begin(), il.end()) must be ordered according to the predicate.
    //!
@@ -1691,28 +1786,28 @@ class flat_multiset
    //! <b>Complexity</b>: Linear.
    //!
    //! <b>Note</b>: Non-standard extension. If an element is inserted it might invalidate elements.
-   BOOST_CONTAINER_FORCEINLINE void insert(ordered_range_t, std::initializer_list<value_type> il)
-   {  this->tree_t::insert_equal(ordered_range, il.begin(), il.end()); }
+   inline void insert(ordered_range_t, std::initializer_list<value_type> il)
+   {  this->tree_t::insert_equal_range(ordered_range, il.begin(), il.end()); }
 #endif
 
    //! @copydoc ::boost::container::flat_multimap::merge(flat_multimap<Key, T, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(flat_multiset<Key, C2, AllocatorOrContainer>& source)
+   inline void merge(flat_multiset<Key, C2, AllocatorOrContainer>& source)
    {  this->tree_t::merge_equal(source.tree());   }
 
    //! @copydoc ::boost::container::flat_multiset::merge(flat_multiset<Key, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(BOOST_RV_REF_BEG flat_multiset<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
+   inline void merge(BOOST_RV_REF_BEG flat_multiset<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
    {  return this->merge(static_cast<flat_multiset<Key, C2, AllocatorOrContainer>&>(source));   }
 
    //! @copydoc ::boost::container::flat_multimap::merge(flat_map<Key, T, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(flat_set<Key, C2, AllocatorOrContainer>& source)
+   inline void merge(flat_set<Key, C2, AllocatorOrContainer>& source)
    {  this->tree_t::merge_equal(source.tree());   }
 
    //! @copydoc ::boost::container::flat_multiset::merge(flat_set<Key, C2, AllocatorOrContainer>&)
    template<class C2>
-   BOOST_CONTAINER_FORCEINLINE void merge(BOOST_RV_REF_BEG flat_set<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
+   inline void merge(BOOST_RV_REF_BEG flat_set<Key, C2, AllocatorOrContainer> BOOST_RV_REF_END source)
    {  return this->merge(static_cast<flat_set<Key, C2, AllocatorOrContainer>&>(source));   }
 
    #if defined(BOOST_CONTAINER_DOXYGEN_INVOKED)
@@ -1725,6 +1820,10 @@ class flat_multiset
 
    //! @copydoc ::boost::container::flat_set::erase(const_iterator,const_iterator)
    iterator erase(const_iterator first, const_iterator last);
+
+   //! @copydoc ::boost::container::flat_set::erase(K&&)
+   template<class K>
+   size_type erase(K && k);
 
    //! @copydoc ::boost::container::flat_set::swap
    void swap(flat_multiset& x)
@@ -1840,7 +1939,7 @@ class flat_multiset
    //! <b>Complexity</b>: Assuming O(1) move assignment, O(NlogN) with N = seq.size()
    //!
    //! <b>Throws</b>: If the comparison or the move constructor throws
-   BOOST_CONTAINER_FORCEINLINE void adopt_sequence(BOOST_RV_REF(sequence_type) seq)
+   inline void adopt_sequence(BOOST_RV_REF(sequence_type) seq)
    {  this->tree_t::adopt_sequence_equal(boost::move(seq));  }
 
    //! <b>Requires</b>: seq shall be ordered according to this->compare()
@@ -1851,7 +1950,7 @@ class flat_multiset
    //! <b>Complexity</b>: Assuming O(1) move assignment, O(1)
    //!
    //! <b>Throws</b>: If the move assignment throws
-   BOOST_CONTAINER_FORCEINLINE void adopt_sequence(ordered_range_t, BOOST_RV_REF(sequence_type) seq)
+   inline void adopt_sequence(ordered_range_t, BOOST_RV_REF(sequence_type) seq)
    {  this->tree_t::adopt_sequence_equal(ordered_range_t(), boost::move(seq));  }
 
    //! <b>Effects</b>: Returns a const view of the underlying sequence.
@@ -1859,17 +1958,33 @@ class flat_multiset
    //! <b>Complexity</b>: Constant
    //!
    //! <b>Throws</b>: Nothing
-   BOOST_CONTAINER_FORCEINLINE const sequence_type & sequence() const BOOST_NOEXCEPT
+   inline const sequence_type & sequence() const BOOST_NOEXCEPT
    {  return this->get_sequence_cref();  }
 };
 
+//! <b>Effects</b>: Erases all elements that satisfy the predicate pred from the container c.
+//!
+//! <b>Complexity</b>: Linear.
+template <class K, class C, class A, class Pred>
+inline typename flat_multiset<K, C, A>::size_type erase_if(flat_multiset<K, C, A>& c, Pred pred)
+{
+   return container_erase_if(c, pred);
+}
+
 #ifndef BOOST_CONTAINER_NO_CXX17_CTAD
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from the
+//! iterator range <code>[first, last)</code>, deducing the key type from the value
+//! type of `InputIterator` and using the default comparator and allocator.
 template <typename InputIterator>
 flat_multiset(InputIterator, InputIterator) ->
    flat_multiset< it_based_value_type_t<InputIterator> >;
 
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from the
+//! iterator range <code>[first, last)</code>, deducing the key type from
+//! `InputIterator`. The trailing argument is used as the allocator if it is an
+//! allocator type, otherwise it is used as the comparator.
 template < typename InputIterator, typename AllocatorOrCompare>
 flat_multiset(InputIterator, InputIterator, AllocatorOrCompare const&) ->
     flat_multiset < it_based_value_type_t<InputIterator>
@@ -1885,6 +2000,10 @@ flat_multiset(InputIterator, InputIterator, AllocatorOrCompare const&) ->
                       >::type
                   >;
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from the
+//! iterator range <code>[first, last)</code>, deducing the key type from
+//! `InputIterator` and taking the comparator and allocator types from the supplied
+//! arguments.
 template < typename InputIterator, typename Compare, typename Allocator
          , typename = dtl::require_nonallocator_t<Compare>
          , typename = dtl::require_allocator_t<Allocator>>
@@ -1893,10 +2012,17 @@ flat_multiset(InputIterator, InputIterator, Compare const&, Allocator const&) ->
            , Compare
            , Allocator>;
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from an already
+//! ordered iterator range <code>[first, last)</code>, deducing the key type from
+//! `InputIterator` and using the default comparator and allocator.
 template <typename InputIterator>
 flat_multiset(ordered_range_t, InputIterator, InputIterator) ->
    flat_multiset< it_based_value_type_t<InputIterator>>;
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from an already
+//! ordered iterator range <code>[first, last)</code>, deducing the key type from
+//! `InputIterator`. The trailing argument is used as the allocator if it is an
+//! allocator type, otherwise it is used as the comparator.
 template < typename InputIterator, typename AllocatorOrCompare>
 flat_multiset(ordered_range_t, InputIterator, InputIterator, AllocatorOrCompare const&) ->
     flat_multiset < it_based_value_type_t<InputIterator>
@@ -1912,6 +2038,10 @@ flat_multiset(ordered_range_t, InputIterator, InputIterator, AllocatorOrCompare 
                       >::type
                   >;
 
+//! <b>Deduction guide</b>: allows a `flat_multiset` to be constructed from an already
+//! ordered iterator range <code>[first, last)</code>, deducing the key type from
+//! `InputIterator` and taking the comparator and allocator types from the supplied
+//! arguments.
 template < typename InputIterator, typename Compare, typename Allocator
          , typename = dtl::require_nonallocator_t<Compare>
          , typename = dtl::require_allocator_t<Allocator>>
@@ -1932,7 +2062,7 @@ template <class Key, class Compare, class AllocatorOrContainer>
 struct has_trivial_destructor_after_move<boost::container::flat_multiset<Key, Compare, AllocatorOrContainer> >
 {
    typedef ::boost::container::dtl::flat_tree<Key, ::boost::container::dtl::identity<Key>, Compare, AllocatorOrContainer> tree;
-   static const bool value = ::boost::has_trivial_destructor_after_move<tree>::value;
+   BOOST_STATIC_CONSTEXPR bool value = ::boost::has_trivial_destructor_after_move<tree>::value;
 };
 
 namespace container {

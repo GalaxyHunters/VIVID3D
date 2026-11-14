@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Model Viewer</title>
+<style>
+  :root { --bg:#14161a; --panel:#1d2025; --fg:#e6e8eb; --muted:#8b93a0; --line:#2c3036; --accent:#6aa9ff; }
+  @media (prefers-color-scheme: light) { :root { --bg:#eef0f3; --panel:#fff; --fg:#1c1f24; --muted:#5d6672; --line:#d5d9df; --accent:#1f6feb; } }
+  * { box-sizing: border-box; }
+  html, body { height:100%; margin:0; background:var(--bg); color:var(--fg); font:14px/1.4 system-ui, sans-serif; }
+  body { display:flex; flex-direction:column; }
+  header { display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; padding:10px 16px; background:var(--panel); border-bottom:1px solid var(--line); }
+  label { display:flex; align-items:center; gap:6px; color:var(--muted); }
+  select, input { background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:5px 8px; font:inherit; }
+  input[type=text] { width:12em; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:6px 12px; font:inherit; cursor:pointer; }
+  main { flex:1; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); min-height:0; }
+  .pane { position:relative; background:var(--bg); min-height:0; }
+  .pane canvas { width:100%; height:100%; display:block; }
+  .tag { position:absolute; top:8px; left:10px; padding:2px 8px; border-radius:5px; background:var(--panel); border:1px solid var(--line); font-weight:600; }
+  .info { position:absolute; bottom:8px; left:10px; right:10px; color:var(--muted); font-size:12px; white-space:pre-wrap; }
+  @media (max-width:700px) { main { grid-template-columns:1fr; grid-template-rows:1fr 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <label>Model <select id="file"></select></label>
+  <label>A <input id="runA" type="text" value="baseline-vendored"></label>
+  <label>B <input id="runB" type="text" value="baseline-vendored"></label>
+  <label><input id="wire" type="checkbox"> wireframe</label>
+  <button id="reload">Reload</button>
+  <span style="color:var(--muted)">Runs live in <code>golden/&lt;run&gt;/exports/</code>. Orbit either pane; both follow.</span>
+</header>
+<main>
+  <div class="pane"><canvas id="cA"></canvas><div class="tag" id="tagA">A</div><div class="info" id="infoA"></div></div>
+  <div class="pane"><canvas id="cB"></canvas><div class="tag" id="tagB">B</div><div class="info" id="infoB"></div></div>
+</main>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const ROOT = '../../../../golden/';          // page is at VIVID3D/tools/golden/viewer/
+const NAMES = ['model', 'outer', 'cloud', 'lines'];
+const EXTS = ['glb', 'obj', 'fbx'];
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+if (params.get('a')) $('runA').value = params.get('a');
+if (params.get('b')) $('runB').value = params.get('b');
+
+for (const n of NAMES) for (const e of EXTS) $('file').add(new Option(`${n}.${e}`, `${n}.${e}`));
+if (params.get('file')) $('file').value = params.get('file');
+
+function makePane(canvasId, infoId) {
+  const canvas = $(canvasId);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(devicePixelRatio);
+  const scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x444455, 0.6));
+  const dir = new THREE.DirectionalLight(0xffffff, 1.2); dir.position.set(5, 10, 7); scene.add(dir);
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100000);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = false;
+  return { canvas, renderer, scene, camera, controls, info: $(infoId), model: null };
+}
+const A = makePane('cA', 'infoA'), B = makePane('cB', 'infoB');
+let syncing = false;
+function follow(src, dst) {
+  src.controls.addEventListener('change', () => {
+    if (syncing) return; syncing = true;
+    dst.camera.position.copy(src.camera.position);
+    dst.camera.quaternion.copy(src.camera.quaternion);
+    dst.controls.target.copy(src.controls.target);
+    dst.controls.update(); syncing = false;
+  });
+}
+follow(A, B); follow(B, A);
+
+function load(path, dir, name, ext) {
+  return new Promise((resolve, reject) => {
+    if (ext === 'glb') return new GLTFLoader().load(path, g => resolve(g.scene), undefined, reject);
+    if (ext === 'fbx') return new FBXLoader().load(path, resolve, undefined, reject);
+    const objLoader = new OBJLoader();
+    new MTLLoader().setPath(dir).load(name + '.mtl',
+      m => { m.preload(); objLoader.setMaterials(m); objLoader.load(path, resolve, undefined, reject); },
+      undefined, () => objLoader.load(path, resolve, undefined, reject));   // no/bad mtl: plain OBJ
+  });
+}
+
+// Viewer-side fixes only; the exported files are never modified.
+//  * FBX has no native points/lines: assimp writes them as 1- and 2-vertex polygons, which
+//    three's FBXLoader turns into NaN positions. A NaN geometry would blank the whole pane
+//    (NaN bounding box -> NaN camera), so such objects are dropped and reported.
+//  * three draws points 1 world-unit wide by default (huge squares); use small fixed-size dots.
+function sanitize(obj) {
+  const bad = [];
+  obj.traverse(o => {
+    const pos = o.geometry && o.geometry.attributes.position;
+    if (!pos) return;
+    const a = pos.array;
+    for (let i = 0; i < a.length; i++) if (!Number.isFinite(a[i])) { bad.push(o); return; }
+  });
+  for (const o of bad) o.parent && o.parent.remove(o);
+  obj.traverse(o => {
+    if (o.isPoints) { const m = [].concat(o.material); m.forEach(x => { x.sizeAttenuation = false; x.size = 4; x.needsUpdate = true; }); }
+  });
+  return bad.length;
+}
+
+function describe(obj) {
+  let meshes = 0, tris = 0, points = 0, lines = 0;
+  const box = new THREE.Box3().setFromObject(obj);
+  obj.traverse(o => {
+    const g = o.geometry; if (!g) return;
+    const n = g.index ? g.index.count : g.attributes.position.count;
+    if (o.isPoints) points += n; else if (o.isLine || o.isLineSegments) lines += n / 2;
+    else { meshes++; tris += n / 3; }
+  });
+  const s = box.getSize(new THREE.Vector3());
+  return { box, text: `meshes ${meshes}  triangles ${Math.round(tris)}  points ${points}  line segs ${Math.round(lines)}\nsize ${s.x.toFixed(1)} x ${s.y.toFixed(1)} x ${s.z.toFixed(1)}` };
+}
+
+async function show(pane, tagId, run, file) {
+  const [name, ext] = file.split('.');
+  const dir = `${ROOT}${run}/exports/`;
+  $(tagId).textContent = `${tagId.slice(-1)}: ${run}`;
+  if (pane.model) { pane.scene.remove(pane.model); pane.model = null; }
+  try {
+    const obj = await load(dir + file, dir, name, ext);
+    const dropped = sanitize(obj);
+    pane.scene.add(obj); pane.model = obj;
+    const d = describe(obj);
+    pane.info.textContent = d.text + (dropped ? `\n(${dropped} point/line object(s) not drawable from FBX, skipped)` : '');
+    pane.box = d.box;
+  } catch (e) { pane.info.textContent = `failed to load ${dir + file}\n${e.message || e}`; }
+  applyWire();
+}
+function applyWire() {
+  for (const p of [A, B]) p.model?.traverse(o => { if (o.material) [].concat(o.material).forEach(m => m.wireframe = $('wire').checked); });
+}
+function frame() {
+  const box = [A.box, B.box].find(b => b && !b.isEmpty()); if (!box) return;
+  const c = box.getCenter(new THREE.Vector3()), r = Math.max(box.getSize(new THREE.Vector3()).length() / 2, 1e-3);
+  for (const p of [A, B]) {
+    p.camera.position.copy(c).add(new THREE.Vector3(1, 0.7, 1).normalize().multiplyScalar(r * 2.4));
+    p.camera.near = r / 1000; p.camera.far = r * 100; p.camera.updateProjectionMatrix();
+    p.controls.target.copy(c); p.controls.update();
+  }
+}
+async function reload() {
+  history.replaceState(null, '', `?a=${$('runA').value}&b=${$('runB').value}&file=${$('file').value}`);
+  A.box = B.box = null;
+  await Promise.all([show(A, 'tagA', $('runA').value, $('file').value), show(B, 'tagB', $('runB').value, $('file').value)]);
+  frame();
+}
+$('reload').onclick = reload; $('file').onchange = reload; $('wire').onchange = applyWire;
+
+function resize() {
+  for (const p of [A, B]) {
+    const r = p.canvas.parentElement.getBoundingClientRect();
+    p.renderer.setSize(r.width, r.height, false);
+    p.camera.aspect = r.width / r.height; p.camera.updateProjectionMatrix();
+  }
+}
+addEventListener('resize', resize); resize();
+(function loop() { for (const p of [A, B]) p.renderer.render(p.scene, p.camera); requestAnimationFrame(loop); })();
+reload();
+</script>
+</body>
+</html>

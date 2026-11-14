@@ -51,7 +51,7 @@ class number
    static constexpr expression_template_option et = ExpressionTemplates;
 
    BOOST_MP_FORCEINLINE constexpr number() noexcept(noexcept(Backend())) {}
-   BOOST_MP_FORCEINLINE constexpr number(const number& e) noexcept(noexcept(Backend(std::declval<Backend const&>()))) : m_backend(e.m_backend) {}
+   BOOST_MP_FORCEINLINE constexpr number(const number& e) noexcept(noexcept(Backend(std::declval<Backend const&>()))) = default;
    template <class V>
    BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number(const V& v, 
       typename std::enable_if<
@@ -372,11 +372,7 @@ class number
    }
 
    BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number& operator=(const number& e)
-       noexcept(noexcept(std::declval<Backend&>() = std::declval<Backend const&>()))
-   {
-      m_backend = e.m_backend;
-      return *this;
-   }
+       noexcept(noexcept(std::declval<Backend&>() = std::declval<Backend const&>())) = default;
 
    template <class V>
    BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR typename std::enable_if<std::is_convertible<V, self_type>::value, number<Backend, ExpressionTemplates>&>::type
@@ -451,14 +447,9 @@ class number
 
    // rvalues:
    BOOST_MP_FORCEINLINE constexpr number(number&& r)
-       noexcept(noexcept(Backend(std::declval<Backend>())))
-       : m_backend(static_cast<Backend&&>(r.m_backend))
-   {}
-   BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number& operator=(number&& r) noexcept(noexcept(std::declval<Backend&>() = std::declval<Backend>()))
-   {
-      m_backend = static_cast<Backend&&>(r.m_backend);
-      return *this;
-   }
+       noexcept(noexcept(Backend(std::declval<Backend>()))) = default;
+   BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number& operator=(number&& r) noexcept(noexcept(std::declval<Backend&>() = std::declval<Backend>())) = default;
+
    template <class Other, expression_template_option ET>
    BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number(number<Other, ET>&& val,
                                                         typename std::enable_if<(std::is_convertible<Other, Backend>::value && !detail::is_restricted_conversion<Other, Backend>::value)>::type* = nullptr)
@@ -1121,6 +1112,7 @@ class number
    static BOOST_MP_CXX14_CONSTEXPR void default_variable_precision_options(variable_precision_options opts)
    {
       Backend::default_variable_precision_options(opts);
+      Backend::thread_default_variable_precision_options(opts);
    }
    static BOOST_MP_CXX14_CONSTEXPR void thread_default_variable_precision_options(variable_precision_options opts)
    {
@@ -2173,6 +2165,15 @@ class number
       using child1_type = typename Exp::middle_type;
       using child2_type = typename Exp::right_type ;
       return contains_self(e.left(), typename child0_type::arity()) || contains_self(e.middle(), typename child1_type::arity()) || contains_self(e.right(), typename child2_type::arity());
+   }
+   template <class Exp>
+   BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR bool contains_self(const Exp& e, std::integral_constant<int, 4> const&) const noexcept
+   {
+      using child0_type = typename Exp::left_type;
+      using child1_type = typename Exp::left_middle_type;
+      using child2_type = typename Exp::right_middle_type;
+      using child3_type = typename Exp::right_type;
+      return contains_self(e.left(), typename child0_type::arity()) || contains_self(e.left_middle(), typename child1_type::arity()) || contains_self(e.right_middle(), typename child2_type::arity()) || contains_self(e.right(), typename child3_type::arity());
    }
 
    // Test if the expression is a reference to *this:

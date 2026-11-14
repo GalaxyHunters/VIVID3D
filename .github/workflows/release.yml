@@ -1,0 +1,65 @@
+name: release
+
+# Publishes to PyPI. Triggered only by pushing a version tag (v1.1.0rc1, v1.1.0, ...).
+#
+#   1. builds the sdist and all wheels with exactly the same workflow CI uses (wheels.yml), every wheel golden-verified;
+#   2. waits for a manual approval (the `pypi` GitHub environment has a required reviewer);
+#   3. checks that the tag is the package version and that the tagged commit is on master;
+#   4. uploads with PyPI Trusted Publishing (OIDC): no token or password exists anywhere. PyPI trusts this repository,
+#      this workflow file (release.yml) and the `pypi` environment, and attaches build attestations (PEP 740).
+#
+# To release: set __version__ in src/vivid3d/_details.py (a pre-release such as 1.1.0rc1 is fine), merge to master,
+# then `git tag v1.1.0rc1 && git push origin v1.1.0rc1` and approve the `publish` job when it waits.
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/wheels.yml
+
+  publish:
+    name: publish to PyPI (needs approval)
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/vivid3d
+    permissions:
+      id-token: write           # Trusted Publishing: the job proves its identity to PyPI, only here
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: The tagged commit must be on master
+        run: |
+          git fetch origin master
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+            echo "::error::tag $GITHUB_REF_NAME points to a commit that is not on master; merge first, then tag"
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: The tag must be the package version
+        run: |
+          ls -l dist
+          sdist=$(ls dist/vivid3d-*.tar.gz)
+          version=${sdist#dist/vivid3d-}; version=${version%.tar.gz}
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match the built version $version (src/vivid3d/_details.py)"
+            exit 1
+          fi
+          echo "releasing vivid3d $version: $(ls dist/*.whl | wc -l) wheels + 1 sdist"
+
+      - uses: pypa/gh-action-pypi-publish@aef6c9b6e301dc803e1bc9133e9ce67ae9b0906b  # v1.14.3

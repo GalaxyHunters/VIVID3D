@@ -20,6 +20,7 @@
 #include <cfloat>
 #include <tuple>
 #include <cstring>
+#include <complex>
 #include <boost/multiprecision/detail/standalone_config.hpp>
 #include <boost/multiprecision/number.hpp>
 #include <boost/multiprecision/detail/hash.hpp>
@@ -138,14 +139,6 @@ struct bits_of<float128_type>
 
 #endif
 
-namespace backends {
-
-struct float128_backend;
-
-}
-
-using backends::float128_backend;
-
 template <>
 struct number_category<backends::float128_backend> : public std::integral_constant<int, number_kind_floating_point>
 {};
@@ -154,8 +147,6 @@ template <>
 struct number_category<float128_type> : public std::integral_constant<int, number_kind_floating_point>
 {};
 #endif
-
-using float128 = number<float128_backend, et_off>;
 
 namespace quad_constants {
 constexpr float128_type quad_min = static_cast<float128_type>(1) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) * static_cast<float128_type>(DBL_MIN) / 1073741824;
@@ -186,14 +177,11 @@ struct float128_backend
 
  public:
    constexpr   float128_backend() noexcept : m_value(0) {}
-   constexpr   float128_backend(const float128_backend& o) noexcept : m_value(o.m_value) {}
-   BOOST_MP_CXX14_CONSTEXPR float128_backend& operator=(const float128_backend& o) noexcept
-   {
-      m_value = o.m_value;
-      return *this;
-   }
+   constexpr   float128_backend(const float128_backend& o) noexcept = default;
+   BOOST_MP_CXX14_CONSTEXPR float128_backend& operator=(const float128_backend& o) noexcept = default;
+
    template <class T>
-   constexpr float128_backend(const T& i, const typename std::enable_if<std::is_convertible<T, float128_type>::value>::type* = 0) noexcept(noexcept(std::declval<float128_type&>() = std::declval<const T&>()))
+   constexpr float128_backend(const T& i, const typename std::enable_if<std::is_convertible<T, float128_type>::value>::type* = nullptr) noexcept(noexcept(std::declval<float128_type&>() = std::declval<const T&>()))
        : m_value(i) {}
    template <class T>
    BOOST_MP_CXX14_CONSTEXPR typename std::enable_if<boost::multiprecision::detail::is_arithmetic<T>::value || std::is_convertible<T, float128_type>::value, float128_backend&>::type operator=(const T& i) noexcept(noexcept(std::declval<float128_type&>() = std::declval<const T&>()))
@@ -203,8 +191,10 @@ struct float128_backend
    }
    BOOST_MP_CXX14_CONSTEXPR float128_backend(long double const& f) : m_value(f)
    {
-      if (::fabsl(f) > LDBL_MAX)
-         m_value = (f < 0) ? -static_cast<float128_type>(HUGE_VAL) : static_cast<float128_type>(HUGE_VAL);
+      if (f > LDBL_MAX)
+         m_value = static_cast<float128_type>(HUGE_VAL);
+      else if (-f > LDBL_MAX)
+         m_value = -static_cast<float128_type>(HUGE_VAL);
    }
    BOOST_MP_CXX14_CONSTEXPR float128_backend& operator=(long double const& f)
    {
@@ -273,7 +263,7 @@ struct float128_backend
          int                       v_max = v;
          std::unique_ptr<char[]>   buf2;
          buf2.reset(new char[v + 3]);
-         v = quadmath_snprintf(&buf2[0], v_max + 3, format.c_str(), digits, m_value);
+         v = quadmath_snprintf(&buf2[0], static_cast<std::size_t>(v_max + 3), format.c_str(), digits, m_value);
          if (v >= v_max + 3)
          {
             BOOST_MP_THROW_EXCEPTION(std::runtime_error("Formatting of float128_type failed."));
@@ -305,6 +295,14 @@ struct float128_backend
    BOOST_MP_CXX14_CONSTEXPR const float128_type& value() const
    {
       return m_value;
+   }
+   BOOST_MP_CXX14_CONSTEXPR float128_type& data()
+   {
+       return m_value;
+   }
+   BOOST_MP_CXX14_CONSTEXPR const float128_type& data() const
+   {
+       return m_value;
    }
 };
 
@@ -440,7 +438,7 @@ inline void eval_rsqrt(float128_backend& result, const float128_backend& arg)
 #endif
 }
 #ifndef BOOST_MP_NO_CONSTEXPR_DETECTION
-inline BOOST_MP_CXX14_CONSTEXPR 
+inline BOOST_MP_CXX14_CONSTEXPR
 #else
 inline
 #endif
@@ -556,7 +554,7 @@ inline void eval_trunc(float128_backend& result, const float128_backend& arg)
    result.value() = truncq(arg.value());
 }
 /*
-// 
+//
 // This doesn't actually work... rely on our own default version instead.
 //
 inline void eval_round(float128_backend& result, const float128_backend& arg)
@@ -564,9 +562,9 @@ inline void eval_round(float128_backend& result, const float128_backend& arg)
    if(isnanq(arg.value()) || isinf(arg.value()))
    {
       result = boost::math::policies::raise_rounding_error(
-            "boost::multiprecision::trunc<%1%>(%1%)", 0, 
-            number<float128_backend, et_off>(arg), 
-            number<float128_backend, et_off>(arg), 
+            "boost::multiprecision::trunc<%1%>(%1%)", nullptr,
+            number<float128_backend, et_off>(arg),
+            number<float128_backend, et_off>(arg),
             boost::math::policies::policy<>()).backend();
       return;
    }
@@ -721,6 +719,29 @@ inline boost::multiprecision::number<float128_backend, ExpressionTemplates> rsqr
    return res;
 }
 
+// The default std::abs(std::complex<>) implementation normalizes by max(|re|, |im|),
+// which yields NaN when an input is infinite (inf/inf).
+// Per IEEE 754, the result must be +infinity if either component is infinite, even if the other is NaN.
+template <boost::multiprecision::expression_template_option ExpressionTemplates>
+inline boost::multiprecision::number<float128_backend, ExpressionTemplates>
+abs BOOST_PREVENT_MACRO_SUBSTITUTION(const std::complex<boost::multiprecision::number<float128_backend, ExpressionTemplates>>& z)
+{
+   using number_type = boost::multiprecision::number<float128_backend, ExpressionTemplates>;
+   const float128_type re_v = z.real().backend().value();
+   const float128_type im_v = z.imag().backend().value();
+#ifdef BOOST_MP_USE_FLOAT128
+   return number_type(::hypotq(re_v, im_v));
+#else
+   if (isinfq(re_v) || isinfq(im_v))
+   {
+      return std::numeric_limits<number_type>::infinity();
+   }
+   const float128_type re_abs = re_v < 0 ? -re_v : re_v;
+   const float128_type im_abs = im_v < 0 ? -im_v : im_v;
+   return number_type(sqrtq(re_abs * re_abs + im_abs * im_abs));
+#endif
+}
+
 #ifndef BOOST_MP_USE_QUAD
 template <multiprecision::expression_template_option ExpressionTemplates>
 inline boost::multiprecision::number<boost::multiprecision::backends::float128_backend, ExpressionTemplates> copysign BOOST_PREVENT_MACRO_SUBSTITUTION(const boost::multiprecision::number<boost::multiprecision::backends::float128_backend, ExpressionTemplates>& a, const boost::multiprecision::number<boost::multiprecision::backends::float128_backend, ExpressionTemplates>& b)
@@ -843,8 +864,20 @@ class numeric_limits<boost::multiprecision::number<boost::multiprecision::backen
    static constexpr bool has_infinity                  = true;
    static constexpr bool has_quiet_NaN                 = true;
    static constexpr bool has_signaling_NaN             = false;
-   static constexpr float_denorm_style has_denorm      = denorm_present;
-   static constexpr bool               has_denorm_loss = true;
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable : 4996)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic push
+#  pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+   static constexpr float_denorm_style                                has_denorm      = denorm_present;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic pop
+#endif
+   static constexpr bool                                              has_denorm_loss = true;
    static BOOST_MP_CXX14_CONSTEXPR number_type                        infinity() { return HUGE_VAL; /* conversion from double infinity OK */ }
    static BOOST_MP_CXX14_CONSTEXPR number_type                        quiet_NaN() { return number_type(NAN); }
    static BOOST_MP_CXX14_CONSTEXPR number_type                        signaling_NaN() { return 0; }
@@ -906,8 +939,21 @@ constexpr bool numeric_limits<boost::multiprecision::number<boost::multiprecisio
 
 template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr float_round_style numeric_limits<boost::multiprecision::number<boost::multiprecision::backends::float128_backend, ExpressionTemplates> >::round_style;
+
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable : 4996)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic push
+#  pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
 template <boost::multiprecision::expression_template_option ExpressionTemplates>
 constexpr float_denorm_style numeric_limits<boost::multiprecision::number<boost::multiprecision::backends::float128_backend, ExpressionTemplates> >::has_denorm;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#elif (defined(__clang__) && (__clang_major__ >= 17))
+#  pragma clang diagnostic pop
+#endif
 
 } // namespace std
 

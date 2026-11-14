@@ -1,6 +1,7 @@
 #ifndef VIVID_COLORDEFS_H
 #define VIVID_COLORDEFS_H
 
+#include <array>
 #include <functional>
 #include <map>
 #include "ConstrainedNumbers.h"

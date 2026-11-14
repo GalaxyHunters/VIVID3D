@@ -1,168 +1,67 @@
-cmake_minimum_required(VERSION 3.5)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+# Vivid: the C++ core library and the `_core` Python extension module.
+#
+# Normally built through pip (scikit-build-core, see pyproject.toml). Direct use:
+#   cmake -S . -B build                            # core library + Python extension (needs pybind11)
+#   cmake -S . -B build -DVIVID_BUILD_PYTHON=OFF   # C++ library only
+#
+# Layout: lib/ holds third-party and independent code (one target per directory), src/ holds Vivid's own
+# code (every directory adds its sources to the single `vivid` target), src/Wrapping builds the module.
+#
+# 3.15: FetchContent_MakeAvailable needs 3.14, and 3.15 is what current distro/CI CMake packages
+# provide at minimum (Ubuntu 20.04: 3.16). pip builds get a recent CMake through scikit-build-core.
+cmake_minimum_required(VERSION 3.15)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
-
-
-project(vivid
-        VERSION "1.0.0")
-
-
-set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
-set(PROJECT_LIB_DIR  ${PROJECT_SOURCE_DIR}/lib)
-set(VIVID_SRC_DIR  ${PROJECT_SOURCE_DIR}/src)
-message("${PROJECT_SOURCE_DIR}")
-
-
-include(GNUInstallDirs)
-
-
-
-add_subdirectory(${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast)
-
-
-set(ASSIMP_INSTALL OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL  "")
-set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL  "")
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL  "")
-set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "")
-set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "")
-set(ASSIMP_INSTALL_PDB OFF CACHE INTERNAL "")
-
-set(ASSIMP_DIR ${PROJECT_LIB_DIR}/ImportExport/assimp)
-
-add_subdirectory(${ASSIMP_DIR})
-include_directories(${ASSIMP_DIR}/include)
-
-
-#define used cpp packages
-
-add_library(vivid SHARED
-        #external
-        "${PROJECT_LIB_DIR}/Decimate.cpp"
-        "${PROJECT_LIB_DIR}/SurfacingAlgorithms/Voronoi.cpp"
-        "${PROJECT_LIB_DIR}/MeshDecimation/mdMeshDecimator.cpp"
-        "${VIVID_SRC_DIR}/ImportExport/ColorMapToPng.cpp"
-        "${PROJECT_LIB_DIR}/ImportExport/lodepng/lodepng.cpp"
-        "${VIVID_SRC_DIR}/ImportExport/ObjImportExport.cpp"
-        "${VIVID_SRC_DIR}/ImportExport/AssimpImportExport.cpp"
-        "${VIVID_SRC_DIR}/ImportExport/BlobData.cpp"
-        #vivid
-        "${VIVID_SRC_DIR}/ModelBuilder/Vivify.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Model.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/ModelComponent.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Mesh.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Line.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/PointCloud.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/VoronoiVolume.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/MarchingCubesSurface.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Shapes.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Animation.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/StopMotionAnimation.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/SurfByFunc.cpp"
-        "${VIVID_SRC_DIR}/ModelBuilder/Vivify.cpp"
-
-        "${VIVID_SRC_DIR}/Textures/ColorMap.h"
-        "${VIVID_SRC_DIR}/Textures/ColorDefs.cpp"
-        "${VIVID_SRC_DIR}/Textures/Plasma.h"
-        "${VIVID_SRC_DIR}/Textures/Material.h"
-
-        "${VIVID_SRC_DIR}/Utils/Logging/ProgressBar.cpp"
-        "${VIVID_SRC_DIR}/Utils/Logging/Errors.h"
-        "${VIVID_SRC_DIR}/Utils/Logging/LogFile.cpp"
-
-        "${VIVID_SRC_DIR}/Utils/ConstrainedNumbers.cpp"
-        "${VIVID_SRC_DIR}/Utils/Noisify.cpp"
-
-        "${VIVID_SRC_DIR}/Extra/Analysis.cpp")
-
-
-target_include_directories(vivid PUBLIC
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ImportExport>
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/ModelBuilder>
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Utils>
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Textures>
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Utils/Logging>
-        $<BUILD_INTERFACE:${VIVID_SRC_DIR}/Wrapping>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/MeshDecimation>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/MyBoost>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/3D/GeometryCommon>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/SurfacingAlgorithms/huji-rich-Elad3DFast/source/misc>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport/lodepng>
-        $<BUILD_INTERFACE:${PROJECT_LIB_DIR}/ImportExport>
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/pybind11/include/pybind11>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-
-
-message("VIVID SHARED BUILD")
-
-target_link_libraries(vivid voronoi)
-target_link_libraries(vivid assimp::assimp)
-
-
-install(
-        TARGETS vivid
-        EXPORT vividTargets
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-
-set(VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR "lib/cmake/vivid")   #"share/vivid/cmake"
-
-install(
-        EXPORT vividTargets
-        NAMESPACE vivid::
-        DESTINATION ${VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR})
-
-
-include(CMakePackageConfigHelpers)
-
-write_basic_package_version_file(
-        vividConfigVersion.cmake
-        VERSION ${PROJECT_VERSION}
-        COMPATIBILITY SameMinorVersion)
-
-configure_package_config_file(
-        "${PROJECT_SOURCE_DIR}/cmake/vividConfig.cmake.in" vividConfig.cmake
-        INSTALL_DESTINATION ${VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR})
-
-install(FILES "${PROJECT_BINARY_DIR}/vividConfig.cmake"
-        "${PROJECT_BINARY_DIR}/vividConfigVersion.cmake"
-        DESTINATION ${VIVID_CMAKE_PACKAGE_INSTALL_SUBDIR})
-
-
-if(DEFINED SKBUILD)
-    set(ignoreMe "${SKBUILD}")
-
-    add_subdirectory(pybind11)
-    include_directories(pybind11/include)
-    set(PYBIND11_FINDPYTHON ON)
-    add_definitions(-DPYTHON)
-
-    include_directories(${PYTHON_INCLUDE_DIRS})
-    target_link_libraries(vivid ${PYTHON_LIBRARIES})
-
-    pybind11_add_module(_core
-            ${VIVID_SRC_DIR}/Wrapping/wrapper.cpp
-            ${VIVID_SRC_DIR}/Wrapping/TypeCasting.h
-            )
-
-
-    target_link_libraries(_core PRIVATE vivid)
-
-    # Installing the extension module to the root of the package
-    install(TARGETS _core DESTINATION .)
-
-
-    if(APPLE)
-        set_target_properties(
-                _core PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
-    else()
-        set_target_properties(_core PROPERTIES INSTALL_RPATH
-                "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
-    endif()
+# The version has a single source of truth: src/vivid3d/_details.py (pyproject.toml reads it too).
+# A pre-release suffix is allowed ("1.1.0rc1", "1.1.0.dev3"); CMake's project(VERSION) only takes X.Y.Z.
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/src/vivid3d/_details.py" _vivid_version_line REGEX "^__version__ *=")
+string(REGEX MATCH "\"([0-9]+\\.[0-9]+\\.[0-9]+)[^\"]*\"" _vivid_version_match "${_vivid_version_line}")
+if(NOT _vivid_version_match)
+    message(FATAL_ERROR "Cannot read __version__ (\"X.Y.Z\" plus an optional suffix) from src/vivid3d/_details.py")
 endif()
+project(vivid VERSION ${CMAKE_MATCH_1} LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# A hand-run `cmake` without a build type compiles with no optimisation at all, which is very slow for a
+# numerical library. (pip builds already pass Release.)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+option(VIVID_BUILD_PYTHON "Build the _core Python extension module" ON)
+
+# Everything is linked into one shared object (the Python extension), so the static libraries below
+# must be position independent.
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+# ... and none of their symbols may leak out of it. pybind11 only hides the symbols of the module's own
+# source file; without this the extension would export everything from the static libraries (assimp's
+# bundled zlib: adler32, crc32, ...; Boost; Vivid itself) into the Python process, where it can clash with
+# the real zlib and other libraries loaded by other extension modules. Only PyInit__core is exported.
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_C_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+
+if(MSVC)
+    # <cmath> only defines M_PI & co. on MSVC when this is set (the sources use them, as on Linux/macOS)
+    add_compile_definitions(_USE_MATH_DEFINES)
+else()
+    # The Voronoi library's exact predicates and the decimator's float cost arithmetic assume plain IEEE multiply and add.
+    # ARM compilers fuse a*b+c by default (the x86-64 baseline has no FMA), which changes results in the last bit and,
+    # through the decimator's priority queue, the mesh. Same results on every CPU.
+    add_compile_options(-ffp-contract=off)
+endif()
+
+# The Vivid core library. Sources and include paths are added by the CMakeLists.txt of each directory.
+add_library(vivid STATIC)
+
+add_subdirectory(lib)    # Boost::headers, lodepng, meshdecimation, voronoi (+ the Vivid glue sources)
+
+# assimp: installed copy or a pinned release download, see cmake/VividAssimp.cmake (target: assimp::assimp)
+include(${PROJECT_SOURCE_DIR}/cmake/VividAssimp.cmake)
+
+add_subdirectory(src)    # Vivid's own sources, and the Python module
+
+# assimp is linked dynamically when an installed copy is used, statically when it was fetched
+target_link_libraries(vivid PUBLIC voronoi lodepng meshdecimation Boost::headers assimp::assimp)

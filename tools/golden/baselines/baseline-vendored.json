@@ -1,0 +1,1418 @@
+{
+  "build": {
+    "log": "/home/naftalid/work/golden/baseline-vendored/build.log",
+    "ok": true,
+    "seconds": 156.3
+  },
+  "cpus": 2,
+  "exports": {
+    "backup.obj": {
+      "bbox": [
+        [
+          -63.0,
+          -9.9374,
+          -9.9991
+        ],
+        [
+          83.9708,
+          10.0,
+          9.932
+        ]
+      ],
+      "counts": {
+        "f": 1380,
+        "l": 20,
+        "p": 300,
+        "v": 1022,
+        "vn": 0,
+        "vt": 516
+      },
+      "face_styles": [
+        "f:#/#",
+        "p:#/#"
+      ],
+      "materials": {
+        "texture_0": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "0.400000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backupplasma_texture.png",
+          "map_Kd": "backupplasma_texture.png"
+        },
+        "texture_1": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "0.500000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backupcrimson_texture.png",
+          "map_Kd": "backupcrimson_texture.png"
+        },
+        "texture_2": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "1.000000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backupgold_texture.png",
+          "map_Kd": "backupgold_texture.png"
+        },
+        "texture_3": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "1.000000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backuplightgray_texture.png",
+          "map_Kd": "backuplightgray_texture.png"
+        },
+        "texture_4": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "1.000000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backupwhite_texture.png",
+          "map_Kd": "backupwhite_texture.png"
+        },
+        "texture_5": {
+          "Ka": "1.000 1.000 1.000",
+          "Kd": "1.000 1.000 1.000",
+          "Ks": "0.000 0.000 0.000",
+          "Ni": "1.000000",
+          "Ns": "96.078",
+          "d": "1.000000",
+          "em": "0.000000",
+          "illum": "0",
+          "map_Ka": "backupplasma_texture.png",
+          "map_Kd": "backupplasma_texture.png"
+        }
+      },
+      "n_usemtl": 6,
+      "size_bytes": 74191
+    },
+    "cloud.fbx": {
+      "geometries": [
+        {
+          "bbox": [
+            [
+              -9.9586,
+              -9.9374,
+              -9.9991
+            ],
+            [
+              9.9263,
+              9.9827,
+              9.932
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial"
+          ],
+          "polygon_indices": 300,
+          "polygons": 300,
+          "vertices": 300
+        }
+      ],
+      "materials": [
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat0"
+        }
+      ],
+      "object_types": {
+        "Geometry": 1,
+        "Material": 1,
+        "Model": 1
+      },
+      "size_bytes": 22784,
+      "version": 7500
+    },
+    "cloud.glb": {
+      "bbox": [
+        [
+          -9.959,
+          -9.937,
+          -9.999
+        ],
+        [
+          9.926,
+          9.983,
+          9.932
+        ]
+      ],
+      "extensionsUsed": [
+        "FB_ngon_encoding",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_ior",
+        "KHR_materials_volume"
+      ],
+      "materials": [
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat0",
+          "pbrMetallicRoughness": {
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        }
+      ],
+      "n_images": 0,
+      "n_meshes": 1,
+      "n_nodes": 2,
+      "n_textures": 0,
+      "primitives": [
+        {
+          "attributes": [
+            "POSITION"
+          ],
+          "indices": 300,
+          "material": 0,
+          "mode": 0,
+          "vertices": 300
+        }
+      ],
+      "size_bytes": 5984,
+      "version": 2
+    },
+    "cloud.obj": {
+      "bbox": [
+        [
+          -9.9586,
+          -9.9374,
+          -9.9991
+        ],
+        [
+          9.9263,
+          9.9827,
+          9.932
+        ]
+      ],
+      "counts": {
+        "f": 0,
+        "l": 0,
+        "p": 300,
+        "v": 300,
+        "vn": 0,
+        "vt": 0
+      },
+      "face_styles": [
+        "p:#"
+      ],
+      "materials": {
+        "defaultMaterial_mat0": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1"
+        }
+      },
+      "n_usemtl": 1,
+      "size_bytes": 13187
+    },
+    "lines.fbx": {
+      "geometries": [
+        {
+          "bbox": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              3.0,
+              10.0,
+              3.0
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementUV"
+          ],
+          "polygon_indices": 40,
+          "polygons": 20,
+          "vertices": 24
+        }
+      ],
+      "materials": [
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat0"
+        }
+      ],
+      "object_types": {
+        "Geometry": 1,
+        "Material": 1,
+        "Model": 1,
+        "Texture": 3,
+        "Video": 1
+      },
+      "size_bytes": 22016,
+      "version": 7500
+    },
+    "lines.glb": {
+      "bbox": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          10.0,
+          3.0
+        ]
+      ],
+      "extensionsUsed": [
+        "FB_ngon_encoding",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_ior",
+        "KHR_materials_volume"
+      ],
+      "materials": [
+        {
+          "doubleSided": true,
+          "emissiveTexture": {
+            "index": 0
+          },
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat0",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        }
+      ],
+      "n_images": 1,
+      "n_meshes": 1,
+      "n_nodes": 2,
+      "n_textures": 1,
+      "primitives": [
+        {
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0"
+          ],
+          "indices": 40,
+          "material": 0,
+          "mode": 1,
+          "vertices": 24
+        }
+      ],
+      "size_bytes": 2084,
+      "version": 2
+    },
+    "lines.obj": {
+      "bbox": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          10.0,
+          3.0
+        ]
+      ],
+      "counts": {
+        "f": 0,
+        "l": 20,
+        "p": 0,
+        "v": 24,
+        "vn": 0,
+        "vt": 1
+      },
+      "face_styles": [],
+      "materials": {
+        "defaultMaterial_mat0": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1",
+          "map_Ka": "lines_plasma_texture.png",
+          "map_Kd": "lines_plasma_texture.png"
+        }
+      },
+      "n_usemtl": 1,
+      "size_bytes": 810
+    },
+    "model.fbx": {
+      "geometries": [
+        {
+          "bbox": [
+            [
+              -63.0,
+              -2.0,
+              -1.0
+            ],
+            [
+              -57.0,
+              2.0,
+              1.0
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementNormal"
+          ],
+          "polygon_indices": 36,
+          "polygons": 12,
+          "vertices": 8
+        },
+        {
+          "bbox": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              3.0,
+              10.0,
+              3.0
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementUV"
+          ],
+          "polygon_indices": 40,
+          "polygons": 20,
+          "vertices": 24
+        },
+        {
+          "bbox": [
+            [
+              -5.0,
+              -5.0,
+              -5.0
+            ],
+            [
+              5.0,
+              5.0,
+              5.0
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementNormal"
+          ],
+          "polygon_indices": 756,
+          "polygons": 252,
+          "vertices": 128
+        },
+        {
+          "bbox": [
+            [
+              76.0292,
+              -3.9708,
+              -4.0
+            ],
+            [
+              83.9708,
+              3.9708,
+              4.0
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementNormal"
+          ],
+          "polygon_indices": 864,
+          "polygons": 288,
+          "vertices": 146
+        },
+        {
+          "bbox": [
+            [
+              -9.9586,
+              -9.9374,
+              -9.9991
+            ],
+            [
+              9.9263,
+              9.9827,
+              9.932
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial"
+          ],
+          "polygon_indices": 300,
+          "polygons": 300,
+          "vertices": 300
+        },
+        {
+          "bbox": [
+            [
+              -8.1,
+              -8.1151,
+              -8.2377
+            ],
+            [
+              8.0679,
+              8.0861,
+              8.1283
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementNormal",
+            "LayerElementUV"
+          ],
+          "polygon_indices": 2484,
+          "polygons": 828,
+          "vertices": 416
+        }
+      ],
+      "materials": [
+        {
+          "Ambient": [
+            1.0,
+            0.8431,
+            0.0
+          ],
+          "AmbientColor": [
+            1.0,
+            0.8431,
+            0.0
+          ],
+          "Diffuse": [
+            1.0,
+            0.8431,
+            0.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            0.8431,
+            0.0
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat2"
+        },
+        {
+          "Ambient": [
+            0.8275,
+            0.8275,
+            0.8275
+          ],
+          "AmbientColor": [
+            0.8275,
+            0.8275,
+            0.8275
+          ],
+          "Diffuse": [
+            0.8275,
+            0.8275,
+            0.8275
+          ],
+          "DiffuseColor": [
+            0.8275,
+            0.8275,
+            0.8275
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat3"
+        },
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat4"
+        },
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            1.0
+          ],
+          "name": "defaultMaterial_mat5"
+        },
+        {
+          "Ambient": [
+            0.8627,
+            0.0784,
+            0.2353
+          ],
+          "AmbientColor": [
+            0.8627,
+            0.0784,
+            0.2353
+          ],
+          "Diffuse": [
+            0.8627,
+            0.0784,
+            0.2353
+          ],
+          "DiffuseColor": [
+            0.8627,
+            0.0784,
+            0.2353
+          ],
+          "Emissive": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Opacity": [
+            0.5
+          ],
+          "name": "matte_glass_mat1"
+        },
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Opacity": [
+            0.4
+          ],
+          "name": "metal_emissive_mat0"
+        }
+      ],
+      "object_types": {
+        "Geometry": 6,
+        "Material": 6,
+        "Model": 7,
+        "Texture": 6,
+        "Video": 1
+      },
+      "size_bytes": 191136,
+      "version": 7500
+    },
+    "model.glb": {
+      "bbox": [
+        [
+          -63.0,
+          -9.937,
+          -9.999
+        ],
+        [
+          83.971,
+          10.0,
+          9.932
+        ]
+      ],
+      "extensionsUsed": [
+        "FB_ngon_encoding",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_ior",
+        "KHR_materials_volume"
+      ],
+      "materials": [
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "emissiveFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "emissiveTexture": {
+            "index": 0
+          },
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 2.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "metal_emissive_mat0",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              0.4000000059604645
+            ],
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0.800000011920929,
+            "roughnessFactor": 0.30000001192092896
+          }
+        },
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "matte_glass_mat1",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.8627451062202454,
+              0.0784313753247261,
+              0.23529411852359772,
+              0.5
+            ],
+            "metallicFactor": 0.10000000149011612,
+            "roughnessFactor": 0.8999999761581421
+          }
+        },
+        {
+          "doubleSided": true,
+          "emissiveTexture": {
+            "index": 0
+          },
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat5",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        },
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat2",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              0.843137264251709,
+              0.0,
+              1.0
+            ],
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        },
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat3",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.8274509906768799,
+              0.8274509906768799,
+              0.8274509906768799,
+              1.0
+            ],
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        },
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 1.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "defaultMaterial_mat4",
+          "pbrMetallicRoughness": {
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5
+          }
+        }
+      ],
+      "n_images": 1,
+      "n_meshes": 1,
+      "n_nodes": 2,
+      "n_textures": 1,
+      "primitives": [
+        {
+          "attributes": [
+            "POSITION"
+          ],
+          "indices": 300,
+          "material": 4,
+          "mode": 0,
+          "vertices": 300
+        },
+        {
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0"
+          ],
+          "indices": 40,
+          "material": 5,
+          "mode": 1,
+          "vertices": 24
+        },
+        {
+          "attributes": [
+            "NORMAL",
+            "POSITION"
+          ],
+          "indices": 36,
+          "material": 3,
+          "mode": 4,
+          "vertices": 8
+        },
+        {
+          "attributes": [
+            "NORMAL",
+            "POSITION"
+          ],
+          "indices": 756,
+          "material": 1,
+          "mode": 4,
+          "vertices": 128
+        },
+        {
+          "attributes": [
+            "NORMAL",
+            "POSITION"
+          ],
+          "indices": 864,
+          "material": 2,
+          "mode": 4,
+          "vertices": 146
+        },
+        {
+          "attributes": [
+            "NORMAL",
+            "POSITION",
+            "TEXCOORD_0"
+          ],
+          "indices": 2484,
+          "material": 0,
+          "mode": 4,
+          "vertices": 416
+        }
+      ],
+      "size_bytes": 48680,
+      "version": 2
+    },
+    "model.obj": {
+      "bbox": [
+        [
+          -63.0,
+          -9.9374,
+          -9.9991
+        ],
+        [
+          83.9708,
+          10.0,
+          9.932
+        ]
+      ],
+      "counts": {
+        "f": 1380,
+        "l": 20,
+        "p": 300,
+        "v": 1022,
+        "vn": 652,
+        "vt": 27
+      },
+      "face_styles": [
+        "f:#/#/#",
+        "f:#//#",
+        "p:#"
+      ],
+      "materials": {
+        "defaultMaterial_mat2": {
+          "Ka": "1 0.843137264 0",
+          "Kd": "1 0.843137264 0",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1"
+        },
+        "defaultMaterial_mat3": {
+          "Ka": "0.827450991 0.827450991 0.827450991",
+          "Kd": "0.827450991 0.827450991 0.827450991",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1"
+        },
+        "defaultMaterial_mat4": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1"
+        },
+        "defaultMaterial_mat5": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "1",
+          "illum": "1",
+          "map_Ka": "model_plasma_texture.png",
+          "map_Kd": "model_plasma_texture.png"
+        },
+        "matte_glass_mat1": {
+          "Ka": "0.862745106 0.0784313753 0.235294119",
+          "Kd": "0.862745106 0.0784313753 0.235294119",
+          "Ke": "0 0 0",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "0.5",
+          "illum": "1"
+        },
+        "metal_emissive_mat0": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "1 1 1",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "0.400000006",
+          "illum": "1",
+          "map_Ka": "model_plasma_texture.png",
+          "map_Kd": "model_plasma_texture.png"
+        }
+      },
+      "n_usemtl": 6,
+      "size_bytes": 105899
+    },
+    "outer.fbx": {
+      "geometries": [
+        {
+          "bbox": [
+            [
+              -8.1,
+              -8.1151,
+              -8.2377
+            ],
+            [
+              8.0679,
+              8.0861,
+              8.1283
+            ]
+          ],
+          "layers": [
+            "Layer",
+            "LayerElementMaterial",
+            "LayerElementNormal",
+            "LayerElementUV"
+          ],
+          "polygon_indices": 2484,
+          "polygons": 828,
+          "vertices": 416
+        }
+      ],
+      "materials": [
+        {
+          "Ambient": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "AmbientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Diffuse": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "DiffuseColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Emissive": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Opacity": [
+            0.4
+          ],
+          "name": "metal_emissive_mat0"
+        }
+      ],
+      "object_types": {
+        "Geometry": 1,
+        "Material": 1,
+        "Model": 1,
+        "Texture": 3,
+        "Video": 1
+      },
+      "size_bytes": 111280,
+      "version": 7500
+    },
+    "outer.glb": {
+      "bbox": [
+        [
+          -8.1,
+          -8.115,
+          -8.238
+        ],
+        [
+          8.068,
+          8.086,
+          8.128
+        ]
+      ],
+      "extensionsUsed": [
+        "FB_ngon_encoding",
+        "KHR_materials_emissive_strength",
+        "KHR_materials_ior",
+        "KHR_materials_volume"
+      ],
+      "materials": [
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "emissiveFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "emissiveTexture": {
+            "index": 0
+          },
+          "extensions": {
+            "KHR_materials_emissive_strength": {
+              "emissiveStrength": 2.0
+            },
+            "KHR_materials_ior": {
+              "ior": 1.0
+            }
+          },
+          "name": "metal_emissive_mat0",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              0.4000000059604645
+            ],
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0.800000011920929,
+            "roughnessFactor": 0.30000001192092896
+          }
+        }
+      ],
+      "n_images": 1,
+      "n_meshes": 1,
+      "n_nodes": 2,
+      "n_textures": 1,
+      "primitives": [
+        {
+          "attributes": [
+            "NORMAL",
+            "POSITION",
+            "TEXCOORD_0"
+          ],
+          "indices": 2484,
+          "material": 0,
+          "mode": 4,
+          "vertices": 416
+        }
+      ],
+      "size_bytes": 25240,
+      "version": 2
+    },
+    "outer.obj": {
+      "bbox": [
+        [
+          -8.1,
+          -8.1151,
+          -8.2377
+        ],
+        [
+          8.0679,
+          8.0861,
+          8.1283
+        ]
+      ],
+      "counts": {
+        "f": 828,
+        "l": 0,
+        "p": 0,
+        "v": 416,
+        "vn": 416,
+        "vt": 26
+      },
+      "face_styles": [
+        "f:#/#/#"
+      ],
+      "materials": {
+        "metal_emissive_mat0": {
+          "Ka": "1 1 1",
+          "Kd": "1 1 1",
+          "Ke": "1 1 1",
+          "Ks": "0 0 0",
+          "Ni": "1",
+          "d": "0.400000006",
+          "illum": "1",
+          "map_Ka": "outer_plasma_texture.png",
+          "map_Kd": "outer_plasma_texture.png"
+        }
+      },
+      "n_usemtl": 1,
+      "size_bytes": 60251
+    }
+  },
+  "flow": {
+    "blob_glb_attrs": [
+      "files",
+      "n_files",
+      "names"
+    ],
+    "peak_rss_mb": 101.9,
+    "scene_build_seconds": 0.1607,
+    "scene_counts": {
+      "box": [
+        8,
+        12
+      ],
+      "cloud": [
+        300,
+        300
+      ],
+      "inner": [
+        128,
+        252
+      ],
+      "lines": [
+        24,
+        20
+      ],
+      "outer": [
+        416,
+        828
+      ],
+      "sphere": [
+        146,
+        288
+      ]
+    },
+    "stages": {
+      "cloud.fbx": {
+        "ok": true,
+        "seconds": 0.0016
+      },
+      "cloud.glb": {
+        "ok": true,
+        "seconds": 0.0002
+      },
+      "cloud.obj": {
+        "ok": true,
+        "seconds": 0.0003
+      },
+      "lines.fbx": {
+        "ok": true,
+        "seconds": 0.0025
+      },
+      "lines.glb": {
+        "ok": true,
+        "seconds": 0.0002
+      },
+      "lines.obj": {
+        "ok": true,
+        "seconds": 0.0003
+      },
+      "model.export_to_blob.glb": {
+        "ok": true,
+        "seconds": 0.0013
+      },
+      "model.export_to_obj": {
+        "ok": true,
+        "seconds": 0.0012
+      },
+      "model.fbx": {
+        "ok": true,
+        "seconds": 0.0063
+      },
+      "model.glb": {
+        "ok": true,
+        "seconds": 0.0015
+      },
+      "model.obj": {
+        "ok": true,
+        "seconds": 0.003
+      },
+      "outer.fbx": {
+        "ok": true,
+        "seconds": 0.0032
+      },
+      "outer.glb": {
+        "ok": true,
+        "seconds": 0.0008
+      },
+      "outer.obj": {
+        "ok": true,
+        "seconds": 0.0016
+      }
+    },
+    "total_seconds": 0.1849,
+    "vivid3d_file": "/home/naftalid/work/golden/baseline-vendored/runvenv/lib/python3.14/site-packages/vivid3d/__init__.py"
+  },
+  "flow_returncode": 0,
+  "flow_stdout": "13-11-2026 09:30:35 - VIVID:   Preprocessing Data\n13-11-2026 09:30:35 - VIVID:   Begin Compute Voronoi with 3375 points\n13-11-2026 09:30:35 - VIVID:   Completed Voronoi Computation\nflow done: 14 ok, 0 failed []",
+  "import": {
+    "linked_libs": {
+      "_core.cpython-314-x86_64-linux-gnu.so": [
+        "libc.so.6",
+        "libexpat.so.1",
+        "libgcc_s.so.1",
+        "libm.so.6",
+        "libpython3.14.so.1.0",
+        "libstdc++.so.6",
+        "libvivid.so",
+        "libvoronoi.so",
+        "libz.so.1"
+      ],
+      "lib/libvivid.so": [
+        "libc.so.6",
+        "libexpat.so.1",
+        "libgcc_s.so.1",
+        "libm.so.6",
+        "libpython3.14.so.1.0",
+        "libstdc++.so.6",
+        "libvoronoi.so",
+        "libz.so.1"
+      ],
+      "lib/libvoronoi.so": [
+        "libc.so.6",
+        "libgcc_s.so.1",
+        "libm.so.6",
+        "libstdc++.so.6"
+      ]
+    },
+    "location": "/home/naftalid/work/golden/baseline-vendored/runvenv/lib/python3.14/site-packages/vivid3d",
+    "median_seconds": 0.196,
+    "ok": true
+  },
+  "label": "baseline-vendored",
+  "package": {
+    "n_files": 116,
+    "native_files": {
+      "vivid3d/_core.cpython-314-x86_64-linux-gnu.so": 495448,
+      "vivid3d/lib/libvivid.so": 14896680,
+      "vivid3d/lib/libvoronoi.so": 425768
+    },
+    "unpacked_bytes": 49166791,
+    "wheel": "vivid3d-1.0.0-cp314-cp314-linux_x86_64.whl",
+    "wheel_bytes": 12842083
+  },
+  "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "python": "3.14.4"
+}

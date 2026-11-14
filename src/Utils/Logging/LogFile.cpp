@@ -1,10 +1,5 @@
 #include "LogFile.h"
 
-#ifdef PYTHON
-#include <pybind11/pybind11.h>
-namespace py = pybind11;
-#endif
-
 using namespace std;
 
 namespace vivid {
@@ -14,6 +9,7 @@ namespace vivid {
         ELogCode mLogLevel = LOG_VIVID;
         bool mWriteToLog = false;
         bool mWriteToConsole = true;
+        ConsoleSink mConsoleSink;   // empty = write to std::cout / std::cerr
 
         void WriteLog(const ELogCode aCode, const string& arMsg) {
             if (aCode <= mLogLevel) {
@@ -27,15 +23,13 @@ namespace vivid {
 
                 auto log_string = time_string + " - " + code + arMsg;
                 if (mWriteToConsole) {
-#ifdef PYTHON
-                    py::print(log_string);
-#else
-                    if (aCode == ELogCode::LOG_ERROR) {
+                    if (mConsoleSink) {
+                        mConsoleSink(log_string);
+                    } else if (aCode == ELogCode::LOG_ERROR) {
                         cerr << log_string << endl;
                     } else {
                         cout << log_string << endl;
                     }
-#endif
                 }
                 if (mWriteToLog) {
                     mLogFile.open(mFilePath, ios::app);
@@ -55,6 +49,10 @@ namespace vivid {
     }
     void Log(const ELogCode aCode, const string& arMsg) {
         return WriteLog(aCode, arMsg);
+    }
+
+    void SetConsoleSink(ConsoleSink aSink) {
+        mConsoleSink = std::move(aSink);
     }
 
     void ConfigLogging(bool aWriteToConsole, const ELogCode aLogLevel, bool aWriteToFile, const string& arLogFileName) {

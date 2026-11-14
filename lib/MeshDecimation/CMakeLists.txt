@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
-
-project(MeshSimplification)
-
-file(GLOB_RECURSE HEADER_FILES "*.h" "*.hpp" "*.inl" "*.pch")
-file(GLOB_RECURSE SOURCE_FILES "*.c" "*.cpp")
-
-add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
+# Mesh simplification (third-party, self-contained: only standard headers).
+# main.cpp in this directory is a stand-alone demo program and is not built.
+add_library(meshdecimation STATIC mdMeshDecimator.cpp)
+target_include_directories(meshdecimation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

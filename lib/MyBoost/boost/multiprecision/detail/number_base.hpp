@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <tuple>
 #include <boost/multiprecision/detail/standalone_config.hpp>
+#include <boost/multiprecision/fwd.hpp>
 #include <boost/multiprecision/traits/transcendental_reduction_type.hpp>
 #include <boost/multiprecision/traits/std_integer_traits.hpp>
 #include <boost/multiprecision/detail/no_exceptions_support.hpp>
@@ -94,27 +95,6 @@
 #  define BOOST_MP_NO_CONSTEXPR_DETECTION
 #endif
 
-#define BOOST_MP_CXX14_CONSTEXPR BOOST_CXX14_CONSTEXPR
-//
-// Early compiler versions trip over the constexpr code:
-//
-#if defined(__clang__) && (__clang_major__ < 5)
-#undef BOOST_MP_CXX14_CONSTEXPR
-#define BOOST_MP_CXX14_CONSTEXPR
-#endif
-#if defined(__apple_build_version__) && (__clang_major__ < 9)
-#undef BOOST_MP_CXX14_CONSTEXPR
-#define BOOST_MP_CXX14_CONSTEXPR
-#endif
-#if defined(BOOST_GCC) && (__GNUC__ < 6)
-#undef BOOST_MP_CXX14_CONSTEXPR
-#define BOOST_MP_CXX14_CONSTEXPR
-#endif
-#if defined(BOOST_INTEL)
-#undef BOOST_MP_CXX14_CONSTEXPR
-#define BOOST_MP_CXX14_CONSTEXPR
-#define BOOST_MP_NO_CONSTEXPR_DETECTION
-#endif
 
 #ifdef BOOST_MP_NO_CONSTEXPR_DETECTION
 #  define BOOST_CXX14_CONSTEXPR_IF_DETECTION
@@ -130,11 +110,6 @@
 namespace boost {
 namespace multiprecision {
 
-enum expression_template_option
-{
-   et_off = 0,
-   et_on  = 1
-};
 
 enum struct variable_precision_options : signed char
 {
@@ -150,23 +125,6 @@ inline constexpr bool operator==(variable_precision_options a, variable_precisio
 {
    return static_cast<unsigned>(a) == static_cast<unsigned>(b);
 }
-
-template <class Backend>
-struct expression_template_default
-{
-   static constexpr expression_template_option value = et_on;
-};
-
-template <class Backend, expression_template_option ExpressionTemplates = expression_template_default<Backend>::value>
-class number;
-
-template <class T>
-struct is_number : public std::integral_constant<bool, false>
-{};
-
-template <class Backend, expression_template_option ExpressionTemplates>
-struct is_number<number<Backend, ExpressionTemplates> > : public std::integral_constant<bool, true>
-{};
 
 template <class T>
 struct is_et_number : public std::integral_constant<bool, false>
@@ -184,14 +142,6 @@ template <class Backend>
 struct is_no_et_number<number<Backend, et_off> > : public std::integral_constant<bool, true>
 {};
 
-namespace detail {
-
-// Forward-declare an expression wrapper
-template <class tag, class Arg1 = void, class Arg2 = void, class Arg3 = void, class Arg4 = void>
-struct expression;
-
-} // namespace detail
-
 template <class T>
 struct is_number_expression : public std::integral_constant<bool, false>
 {};
@@ -200,10 +150,17 @@ template <class tag, class Arg1, class Arg2, class Arg3, class Arg4>
 struct is_number_expression<detail::expression<tag, Arg1, Arg2, Arg3, Arg4> > : public std::integral_constant<bool, true>
 {};
 
+namespace detail {
+template <class Val, class Backend>
+struct canonical;
+}
+
 template <class T, class Num>
 struct is_compatible_arithmetic_type
     : public std::integral_constant<bool, 
-          std::is_convertible<T, Num>::value && !std::is_same<T, Num>::value && !is_number_expression<T>::value>
+          std::is_convertible<T, Num>::value && !std::is_same<T, Num>::value && !is_number_expression<T>::value
+          && (std::is_constructible<typename Num::backend_type, typename detail::canonical<T, typename Num::backend_type>::type>::value 
+             || std::is_assignable<typename Num::backend_type, typename detail::canonical<T, typename Num::backend_type>::type>::value || is_number<T>::value || is_number_expression<T>::value)>
 {};
 
 namespace detail {
@@ -249,7 +206,7 @@ struct bits_of
                                               : sizeof(T) * CHAR_BIT - (boost::multiprecision::detail::is_signed<T>::value ? 1 : 0);
 };
 
-#if defined(_GLIBCXX_USE_FLOAT128) && defined(BOOST_GCC) && !defined(__STRICT_ANSI__)
+#if defined(_GLIBCXX_USE_FLOAT128) && defined(BOOST_GCC) && !defined(__STRICT_ANSI__) && !defined(__PGI)
 #define BOOST_MP_BITS_OF_FLOAT128_DEFINED
 template <>
 struct bits_of<float128_type>
@@ -500,7 +457,7 @@ struct expression_storage_base<T, true>
 };
 
 template <class T>
-struct expression_storage : public expression_storage_base<T, boost::multiprecision::detail::is_arithmetic<T>::value>
+struct expression_storage : public expression_storage_base<T, boost::multiprecision::detail::is_arithmetic<T>::value || std::is_empty<T>::value>
 {};
 
 template <class T>
@@ -1577,6 +1534,11 @@ struct number_category<number<Backend, ExpressionTemplates> > : public number_ca
 template <class tag, class A1, class A2, class A3, class A4>
 struct number_category<detail::expression<tag, A1, A2, A3, A4> > : public number_category<typename detail::expression<tag, A1, A2, A3, A4>::result_type>
 {};
+#if defined(__SIZEOF_FLOAT128__) || defined(BOOST_HAS_FLOAT128)
+template <>
+struct number_category<__float128> : public std::integral_constant<int, number_kind_floating_point> {};
+#endif
+
 //
 // Specializations for types which do not always have numberic_limits specializations:
 //
@@ -1586,11 +1548,6 @@ struct number_category<boost::multiprecision::int128_type> : public std::integra
 {};
 template <>
 struct number_category<boost::multiprecision::uint128_type> : public std::integral_constant<int, number_kind_integer>
-{};
-#endif
-#ifdef BOOST_HAS_FLOAT128
-template <>
-struct number_category<boost::multiprecision::float128_type> : public std::integral_constant<int, number_kind_floating_point>
 {};
 #endif
 

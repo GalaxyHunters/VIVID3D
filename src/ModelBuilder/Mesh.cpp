@@ -21,9 +21,7 @@ void CMesh::Reduce(coord_t aVerticlePercent, coord_t aMaxError)
     //call decimation from External
     int targetVerticesN = int(aVerticlePercent * mPoints.size());
     int targetTrianglesN = int(aVerticlePercent * mFaces.size());
-    auto temp = DecimateMesh(mPoints, mFaces, targetVerticesN, targetTrianglesN, aMaxError);
-    mPoints = get<0>(temp);
-    mFaces = get<1>(temp);
+    DecimateMesh(mPoints, mFaces, targetVerticesN, targetTrianglesN, aMaxError);  // replaces mPoints and mFaces in place
 }
 
 void CMesh::SubdivideLargeFaces(coord_t aAboveAverageThreshold)

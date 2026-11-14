@@ -2,16 +2,17 @@ name: wheels
 
 # Builds the source distribution and the wheels (CPython 3.10 - 3.14) on Linux x86_64 / aarch64, Windows and macOS,
 # and runs the golden regression check (tools/golden verify) against every installed wheel. It never publishes:
-# publishing is a separate, manually approved workflow (release.yml).
+# publishing is a separate, manually approved workflow (release.yml), which calls this one so that a release is
+# built exactly like CI builds.
 #
 # Actions are pinned to a commit SHA (the tag is in the comment); Dependabot can keep them current.
 
 on:
   push:
     branches: [master, "ci/**"]
-    tags: ["v*"]
   pull_request:
   workflow_dispatch:
+  workflow_call:          # used by release.yml (a tag push runs release.yml, which calls this)
 
 permissions:
   contents: read

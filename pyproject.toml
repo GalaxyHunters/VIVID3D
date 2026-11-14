@@ -87,3 +87,22 @@ exclude = [
     "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/tests",
     "/lib/SurfacingAlgorithms/huji-rich-Elad3DFast/visualisation",
 ]
+
+[tool.cibuildwheel]
+# Wheels for exactly what tools/golden has verified: CPython 3.10 - 3.14, 64-bit, glibc Linux. (cibuildwheel would
+# also build free-threaded 3.14t, 3.15, 32-bit Windows and musl Linux: none of those is tested, so none is shipped.)
+build = "cp310-* cp311-* cp312-* cp313-* cp314-*"
+skip = "*-win32 *-musllinux_* *_i686"
+build-verbosity = 1
+# Every wheel is installed into a clean environment and put through the same regression check as a local build:
+# 14 export stages (glb / obj / fbx), 6 functional checks and a structural comparison against the baseline.
+test-command = "python {project}/tools/golden/golden.py verify --python python --label wheel-test --root {project}/wheel-test-out"
+
+[tool.cibuildwheel.environment]
+# assimp is downloaded (pinned, SHA-256 verified) and linked statically, Boost is the vendored copy:
+# the wheel needs nothing from the system.
+CMAKE_ARGS = "-DVIVID_ASSIMP=FETCH -DVIVID_BOOST=VENDORED"
+
+[tool.cibuildwheel.macos.environment]
+CMAKE_ARGS = "-DVIVID_ASSIMP=FETCH -DVIVID_BOOST=VENDORED"
+MACOSX_DEPLOYMENT_TARGET = "11.0"
